@@ -1,0 +1,123 @@
+@import 'summernote/dist/summernote-lite.css';
+
+.note-editor {
+	width:100% !important;
+}
+
+.note-editing-area { 
+    background-color: rgba(0,0,0, 0.10) !important;
+    
+}
+
+.note-editable {
+    color: #b7b7b7;
+}
+
+.note-statusbar {
+    display: none;
+}
+
+.note-frame {
+    border-radius: 0px !important;
+}
+
+.note-toolbar {
+    background-color:  rgba(0,0,0, 0.10) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
+
+.note-style,
+.note-font,
+.note-fontname,
+.note-para,
+.note-color,
+.note-table,
+.note-view,
+.note-insert button:first-child,
+.note-insert button:last-child {
+    display:none !important;
+}
+
+.note-insert button {
+    background-color: transparent !important;
+    border: 0px !important;
+    outline: 0px !important;
+    box-shadow: none !important;
+
+    .note-icon-picture {
+        color: #b7b7b7 !important;
+    }
+}
+
+.note-editor{
+    border:0px !important;
+}
+
+.note-modal-content {
+    background-color: #2b324e !important;
+}
+
+.note-modal-title,
+.note-form-label {
+    color: #b7b7b7 !important;
+    box-sizing:border-box;
+    margin-bottom:0px !important
+}
+
+.note-form-label {
+    font-size:13px !important;
+    margin-bottom: 5px !important;
+}
+
+.note-input {
+    font-size:12px !important;
+    padding:5px 10px !important;
+    border:0px !important;
+    height:30px !important;
+    background-color:rgba(0,0,0, 0.15) !important;
+    color: #b7b7b7 !important;
+}
+
+.note-modal-footer .note-btn {
+    float:none !important;
+}
+
+.note-modal-footer {
+    height:50px !important;
+    display:flex;
+    justify-content: flex-end;
+    padding: 10px 30px !important;
+    margin-bottom: 10px;
+    input {
+        height: 100%;
+        width: auto;
+        border: 0 !important;
+    }
+}
+
+.note-modal-footer {
+
+}
+
+button.close {
+    color:#ffd400 !important;
+}
+
+.note-modal-header {
+    .close {
+        opacity: .7;
+        &:hover {
+            opacity: 1 !important;
+        }
+    }
+}
+
+.note-modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
