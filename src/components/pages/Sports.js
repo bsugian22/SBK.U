@@ -76,7 +76,7 @@ const Sports = (props) => {
       })
    }
 
-   const setDetail = async(item) => {
+   const setDetail = async (item) => {
       if (sports.detail === item.id && context.state.detailMenu === true) {
          context.actions.setdetailMenu(false)
          setSports({
@@ -85,7 +85,9 @@ const Sports = (props) => {
             detail_data: null,
          })
       } else {
-         const { data: { data: data } } = await model.show(item.id)
+         const {
+            data: { data: data },
+         } = await model.show(item.id)
 
          context.actions.setdetailMenu(true)
          setSports({
@@ -106,9 +108,7 @@ const Sports = (props) => {
             </div>
             <div
                class={
-                  context.state.detailMenu
-                     ? 'prematch-wrap prematch-content-desktop border-top flex-row flex-inherit view-detail'
-                     : 'prematch-wrap prematch-content-desktop border-top flex-row flex-inherit'
+                  sports.detail_data ? 'prematch-wrap prematch-content-desktop border-top flex-row flex-inherit view-detail' : 'prematch-wrap prematch-content-desktop border-top flex-row flex-inherit'
                }
             >
                <div class="prematch-content flex-column">
@@ -235,9 +235,7 @@ const Sports = (props) => {
                                                <div class="flex flex-inherit align-items-center-inherit padding-2">이 곳은 배당영역</div>
                                                <div class="flex justify-content-center-inherit align-items-center-inherit padding-vertical-2 padding-left-0 padding-right-2 market-count">
                                                   <div class="flex market-detail widthp-50 margin-right-2" data-id="0" onClick={() => setDetail(match)}>
-                                                     <button className={match.id === sports.detail ? 'color-green' : 'color-grey'}>
-                                                        +{match.markets}
-                                                     </button>
+                                                     <button className={match.id === sports.detail ? 'color-green' : 'color-grey'}>+{match.markets}</button>
                                                   </div>
                                                   <div class="flex bookmark widthp-50">
                                                      <span class="color-grey">
@@ -309,48 +307,48 @@ const Sports = (props) => {
                            </div>
                         </div>
                         <div class="market-list flex-inherit flex-column scrollable-auto">
-                           {sports.detail_data.markets.length > 0 ? 
-                              sports.detail_data.markets.map((market, market_index) => {
-                                 var rows = []
+                           {sports.detail_data.markets.length > 0
+                              ? sports.detail_data.markets.map((market, market_index) => {
+                                   var rows = []
 
-                                 rows.push(
-                                    <div class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center border-bottom shrink-0" key={market_index}>
-                                       <span class="color-grey">{market.title.marketName.ko}</span>
-                                    </div>
-                                 )
+                                   rows.push(
+                                      <div class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center border-bottom shrink-0" key={market_index}>
+                                         <span class="color-grey">{market.title.marketName.ko}</span>
+                                      </div>
+                                   )
 
-                                 rows.push(
-                                    <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
-                                       <div class="height-40 data active flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
-                                          <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                             <span class="color-grey text-ellipsis">1</span>
-                                          </div>
-                                          <div class="shrink-0">
-                                             <span class="color-grey">1.75</span>
-                                          </div>
-                                       </div>
-                                       <div class="height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-left-white border-top-white1 border-bottom-white1 border-right-white">
-                                          <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                             <span class="color-grey text-ellipsis">무승부</span>
-                                          </div>
-                                          <div class="shrink-0">
-                                             <span class="color-grey">2.83</span>
-                                          </div>
-                                       </div>
-                                       <div class="height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
-                                          <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                             <span class="color-grey text-ellipsis">2</span>
-                                          </div>
-                                          <div class="shrink-0">
-                                             <span class="color-grey">2.10</span>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 )
+                                   rows.push(
+                                      <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
+                                         <div class="height-40 data active flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
+                                            <div class="grow-2 text-ellipsis padding-horizontal-2">
+                                               <span class="color-grey text-ellipsis">1</span>
+                                            </div>
+                                            <div class="shrink-0">
+                                               <span class="color-grey">1.75</span>
+                                            </div>
+                                         </div>
+                                         <div class="height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-left-white border-top-white1 border-bottom-white1 border-right-white">
+                                            <div class="grow-2 text-ellipsis padding-horizontal-2">
+                                               <span class="color-grey text-ellipsis">무승부</span>
+                                            </div>
+                                            <div class="shrink-0">
+                                               <span class="color-grey">2.83</span>
+                                            </div>
+                                         </div>
+                                         <div class="height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
+                                            <div class="grow-2 text-ellipsis padding-horizontal-2">
+                                               <span class="color-grey text-ellipsis">2</span>
+                                            </div>
+                                            <div class="shrink-0">
+                                               <span class="color-grey">2.10</span>
+                                            </div>
+                                         </div>
+                                      </div>
+                                   )
 
-                                 return rows
-                              })
-                           : '없음'}
+                                   return rows
+                                })
+                              : '없음'}
                         </div>
                      </Fragment>
                   ) : (
@@ -392,292 +390,213 @@ const Sports = (props) => {
                </NavLink>
             </div>
          </div>
-         <div class={context.state.detailMenu ? 'prematch-content-mobile view-detail-off' : 'prematch-wrap prematch-content-mobile flex-inherit flex-column'}>
+         <div class={sports.detail_data ? 'prematch-content-mobile view-detail-off' : 'prematch-wrap prematch-content-mobile flex-inherit flex-column'}>
             <div class="widthp-100 height-40 align-items-center-inherit border-bottom">
                <div class="flex pi-title">
                   <span class="color-white padding-left-15">PREMATCHES</span>
                </div>
             </div>
+            <div class="widthp-100 height-40 align-items-center-inherit border-bottom">
+               <div class="flex pi-title green grow-2">
+                  <span class="color-white padding-left-15">SOCCER</span>
+               </div>
+               <div class="flex">
+                  <span class="color-white padding-horizontal-15">
+                     <em class="color-green">1225</em> Matches
+                  </span>
+               </div>
+            </div>
             <div class="prematch-list border-bottom grow-2 flex-column">
-               <div class="flex widthp-100 height-40 align-items-center-inherit border-bottom">
-                  <div class="flex pi-title orange border-right grow-2">
-                     <span class="color-white padding-left-15 grow-2">2021-01-03 수요일</span>
+               {sports.data.length > 0
+                  ? sports.data.map((matches, index) => {
+                       var rows = []
+                       rows.push(
+                          <Fragment>
+                             <div class="flex widthp-100 height-40 align-items-center-inherit border-bottom">
+                                <div class="flex pi-title orange border-right grow-2">
+                                   <span class="color-white padding-left-15 grow-2">{moment(matches.startAt).format('YY-MM-DD')} 수요일</span>
+                                </div>
+                                <div class="flex border-left">
+                                   <button type="button" class="color-white heightp-100 align-items-center padding-horizontal-15">
+                                      <i class="fal fa-angle-up"></i>
+                                   </button>
+                                </div>
+                             </div>
+
+                             <div class="flex pi-title orange background-transparent-b-20 border-bottom height-40 align-items-center-inherit">
+                                <div class="flex padding-horizontal-15 widthp-55 heightp-100">
+                                   <span class="color-white">tournament Name 출력</span>
+                                </div>
+                                <div class="flex widthp-45">
+                                   <div class="flex widthp-100 title-info">
+                                      <div class="flex widthp-100 flex-inherit align-items-center-inherit justify-content-center-inherit">
+                                         <div class="widthp-33 padding-5">
+                                            <div class="flex">
+                                               <span class="color-white">1</span>
+                                            </div>
+                                         </div>
+                                         <div class="widthp-33 padding-5 margin-horizontal-2">
+                                            <div class="flex">
+                                               <span class="color-white">x</span>
+                                            </div>
+                                         </div>
+                                         <div class="widthp-33 padding-5">
+                                            <div class="flex">
+                                               <span class="color-white">2</span>
+                                            </div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </Fragment>
+                       )
+
+                       rows.push(
+                          matches.matches.map((match, key) => {
+                             return (
+                                <div class="flex list border-bottom align-items-center-inherit" data-type="" data-id="" data-home-competitor="" data-away-competitor="">
+                                   <div class="flex widthp-55">
+                                      <div class="flex detail widthp-100 flex-column padding-horizontal-15 padding-vertical-10">
+                                         <div class="flex">
+                                            <span class="color-white">{match.homeTeam.name['ko']}</span>
+                                         </div>
+                                         <div class="flex">
+                                            <span class="color-white">{match.awayTeam.name['ko']}</span>
+                                         </div>
+                                         <div class="flex padding-top-5">
+                                            <span class="color-yellow">{moment(match.startAt).format('HH:mm')}</span>
+                                            <span class="color-blue padding-left-5" onClick={() => setDetail(match)}>
+                                               <button className={match.id === sports.detail ? 'color-green padding-0' : 'color-blue padding-0'}>
+                                                  +{match.markets}
+                                                  <span class="color-grey padding-left-5">
+                                                     <i class="fal fa-angle-double-right"></i>
+                                                  </span>
+                                               </button>
+                                            </span>
+                                         </div>
+                                      </div>
+                                   </div>
+                                   <div class="flex widthp-45 background-transparent-b-20">
+                                      <div class="flex widthp-100 title-info heightp-100 align-items-center">
+                                         <div class="flex flex-inherit market-default align-items-center-inherit justify-content-center-inherit heightp-100">
+                                            <div class="flex flex-inherit align-items-center-inherit"></div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                             )
+                          })
+                       )
+
+                       return rows
+                    })
+                  : '없음'}
+            </div>
+
+            <div class="bottom-wrap border-top flex flex-inherit height-60 padding-10 align-items-center-inherit0">
+               <div class="pagination widthp-100 flex-inherit justify-content-end">
+                  <div class="flex selectBox">
+                     <Select
+                        className="select-container select-position"
+                        classNamePrefix="select-box"
+                        value={{ label: sports.page, value: sports.page }}
+                        onChange={setPage}
+                        options={((rows, i, len) => {
+                           while (++i <= len) {
+                              rows.push({ value: i, label: i })
+                           }
+                           return rows
+                        })([], 0, sports.last_page)}
+                     />
                   </div>
-                  <div class="flex border-left">
-                     <button type="button" class="color-white heightp-100 align-items-center padding-horizontal-15">
-                        <i class="fal fa-angle-up"></i>
+                  <div class="grow-2"></div>
+                  <div class="flex page">
+                     <button class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5" onClick={prev} disabled={1 >= sports.page}>
+                        <i class="fas fa-chevron-left margin-0 color-white"></i>
                      </button>
-                  </div>
-               </div>
-
-               <div class="flex pi-title orange background-transparent-b-20 border-bottom height-40 align-items-center-inherit">
-                  <div class="flex padding-horizontal-15 widthp-55 heightp-100">
-                     <span class="color-white">temp_data->name->ko</span>
-                  </div>
-                  <div class="flex widthp-45">
-                     <div class="flex widthp-100 title-info">
-                        <div class="flex widthp-100 flex-inherit align-items-center-inherit justify-content-center-inherit">
-                           <div class="widthp-33 padding-5">
-                              <div class="flex">
-                                 <span class="color-white">1</span>
-                              </div>
-                           </div>
-                           <div class="widthp-33 padding-5 margin-horizontal-2">
-                              <div class="flex">
-                                 <span class="color-white">x</span>
-                              </div>
-                           </div>
-                           <div class="widthp-33 padding-5">
-                              <div class="flex">
-                                 <span class="color-white">2</span>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-               <div class="flex list border-bottom align-items-center-inherit" data-type="" data-id="" data-home-competitor="" data-away-competitor="">
-                  <div class="flex widthp-55">
-                     <div class="flex detail widthp-100 flex-column padding-horizontal-15 padding-vertical-10">
-                        <div class="flex">
-                           <span class="color-white">$home_competitor->name->ko</span>
-                        </div>
-                        <div class="flex">
-                           <span class="color-white">$away_competitor->name->ko</span>
-                        </div>
-                        <div class="flex padding-top-5">
-                           <span class="color-yellow">start_at</span>
-                           <span class="color-blue padding-left-5">
-                              <button class="color-blue" onClick={() => context.actions.setdetailMenu(true)}>
-                                 +112
-                                 <span class="color-grey padding-left-5">
-                                    <i class="fal fa-angle-double-right"></i>
-                                 </span>
-                              </button>
-                           </span>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="flex widthp-45 background-transparent-b-20">
-                     <div class="flex widthp-100 title-info heightp-100 align-items-center">
-                        <div class="flex flex-inherit market-default align-items-center-inherit justify-content-center-inherit heightp-100">
-                           <div class="flex flex-inherit align-items-center-inherit"></div>
-                        </div>
-                     </div>
+                     <button class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center" onClick={next} disabled={sports.last_page <= sports.page}>
+                        <i class="fas fa-chevron-right margin-0 color-white"></i>
+                     </button>
                   </div>
                </div>
             </div>
          </div>
          <div class={context.state.detailMenu ? 'odds-detail-wrap flex-inherit flex-column widthp-100 view-detail' : 'odds-detail-wrap'}>
-            <div class="odds-detail-league-title widthp-100 height-40 align-items-center-inherit border-bottom">
-               <div class="flex pi-title green grow-2 border-right">
-                  <span class="color-white padding-left-15">
-                     SOCCER - <strong>European U21 Championship</strong>
-                  </span>
-               </div>
-               <div class="flex">
-                  <button class="color-white padding-horizontal-15 flex align-items-center heightp-100" onClick={() => context.actions.setdetailMenu(false)}>
-                     <i class="fal fa-angle-double-left"></i>
-                  </button>
-               </div>
-            </div>
-            <div class="odds-detail-team border-bottom padding-15 flex-column">
-               <div class="flex">
-                  <span class="datetime color-yellow">
-                     <strong>2020.11.01 22:00</strong>
-                  </span>
-               </div>
-               <div class="flex">
-                  <span class="color-white">AI Naser SC</span>
-                  <span class="color-grey padding-horizontal-5">VS</span>
-                  <span class="color-white">AI Arbi SC</span>
-               </div>
-            </div>
+            {sports.detail_data ? (
+               <Fragment>
+                  <div class="odds-detail-league-title widthp-100 height-40 align-items-center-inherit border-bottom">
+                     <div class="flex pi-title green grow-2 border-right">
+                        <span class="color-white padding-left-15">
+                           SOCCER - <strong>European U21 Championship</strong>
+                        </span>
+                     </div>
+                     <div class="flex">
+                        <button class="color-white padding-horizontal-15 flex align-items-center heightp-100" onClick={() => setDetail(sports.detail_data)}>
+                           <i class="fal fa-angle-double-left"></i>
+                        </button>
+                     </div>
+                  </div>
+                  <div class="odds-detail-team border-bottom padding-15 flex-column">
+                     <div class="flex">
+                        <span class="datetime color-yellow">
+                           <strong>{moment(sports.detail_data.startAt).format('MM / DD HH:mm')}</strong>
+                        </span>
+                     </div>
+                     <div class="flex">
+                        <span class="color-white">{sports.detail_data.homeTeam.name.ko || sports.detail_data.homeTeam.name.en}</span>
+                        <span class="color-grey padding-horizontal-5">VS</span>
+                        <span class="color-white">{sports.detail_data.awayTeam.name.ko || sports.detail_data.awayTeam.name.en}</span>
+                     </div>
+                  </div>
+                  <div class="market-list flex-inherit flex-column scrollable-auto">
+                     {sports.detail_data.markets.length > 0
+                        ? sports.detail_data.markets.map((market, market_index) => {
+                             var rows = []
 
-            <div class="odds-detail-tab" id="swiper_odds_tab">
-               <div class="flex odds-arrow swiper-button-prev border-right justify-content-center align-items-center background-transparent-b-20">
-                  <button type="button" class="odds-tab-left">
-                     <i class="fal fa-angle-left"></i>
-                  </button>
-               </div>
-               <ul class="swiper-wrapper flex align-items-center widthp-100">
-                  <li>
-                     <NavLink activeClassName="active" to="/#">
-                        모두보기
-                     </NavLink>
-                  </li>
-                  <li>
-                     <NavLink activeClassName="active" to="#">
-                        승무패
-                     </NavLink>
-                  </li>
-                  <li>
-                     <NavLink activeClassName="active" to="#">
-                        핸디캡
-                     </NavLink>
-                  </li>
-                  <li>
-                     <NavLink activeClassName="active" to="#">
-                        오버/언더
-                     </NavLink>
-                  </li>
-                  <li>
-                     <NavLink activeClassName="active" to="#">
-                        test2
-                     </NavLink>
-                  </li>
-                  <li>
-                     <NavLink activeClassName="active" to="#">
-                        test3
-                     </NavLink>
-                  </li>
-                  <li>
-                     <NavLink activeClassName="active" to="#">
-                        test4
-                     </NavLink>
-                  </li>
-                  <li>
-                     <NavLink activeClassName="active" to="#">
-                        test5
-                     </NavLink>
-                  </li>
-               </ul>
-               <div class="flex odds-arrow swiper-button-next justify-content-center align-items-center background-transparent-b-20">
-                  <button type="button" class="odds-tab-right">
-                     <i class="fal fa-angle-right"></i>
-                  </button>
-               </div>
-            </div>
-            <div class="odds-detail-wwl-titleist height-40 align-items-center-inherit border-bottom background-transparent-b-20">
-               <div class="flex pi-title">
-                  <span class="color-white padding-left-15">승무패</span>
-               </div>
-            </div>
-            <div class="odds-detail-wwl-cs align-items-center-inherite border-bottom flex-inherit justify-content-center-inherit heightp-100">
-               <div class="widthp-33 border-right padding-vertical-10">
-                  <span class="color-white">AI Naser SC</span>
-               </div>
-               <div class="widthp-33 border-right padding-vertical-10">
-                  <span class="color-white">무승부</span>
-               </div>
-               <div class="widthp-33 padding-vertical-10">
-                  <span class="color-white">AI Arbi SC</span>
-               </div>
-            </div>
-            <div class="odds-detail-wwl-content border-bottom flex-inherit justify-content-center-inherit">
-               <div class="widthp-33 border-right padding-vertical-10">
-                  <span class="color-green">2.14</span>
-               </div>
-               <div class="widthp-33 border-right padding-vertical-10">
-                  <span class="color-green">3.30</span>
-               </div>
-               <div class="widthp-33 padding-vertical-10">
-                  <span class="color-green">3.45</span>
-               </div>
-            </div>
+                             rows.push(
+                                <div class="odds-detail-wwl-titleist height-40 align-items-center-inherit border-bottom background-transparent-b-20">
+                                   <div class="flex pi-title">
+                                      <span class="color-white padding-left-15">{market.title.marketName.ko}</span>
+                                   </div>
+                                </div>
+                             )
 
-            <div class="odds-detail-wwl-titleist height-40 align-items-center-inherit border-bottom background-transparent-b-20">
-               <div class="flex pi-title">
-                  <span class="color-white padding-left-15">승무패 핸디캡</span>
-               </div>
-            </div>
+                             rows.push(
+                                <Fragment>
+                                   <div class="odds-detail-wwl-cs align-items-center-inherite border-bottom flex-inherit justify-content-center-inherit heightp-100">
+                                      <div class="widthp-33 border-right padding-vertical-10">
+                                         <span class="color-white">AI Naser SC</span>
+                                      </div>
+                                      <div class="widthp-33 border-right padding-vertical-10">
+                                         <span class="color-white">무승부</span>
+                                      </div>
+                                      <div class="widthp-33 padding-vertical-10">
+                                         <span class="color-white">AI Arbi SC</span>
+                                      </div>
+                                   </div>
+                                   <div class="odds-detail-wwl-content border-bottom flex-inherit justify-content-center-inherit">
+                                      <div class="widthp-33 border-right padding-vertical-10">
+                                         <span class="color-green">2.14</span>
+                                      </div>
+                                      <div class="widthp-33 border-right padding-vertical-10">
+                                         <span class="color-green">3.30</span>
+                                      </div>
+                                      <div class="widthp-33 padding-vertical-10">
+                                         <span class="color-green">3.45</span>
+                                      </div>
+                                   </div>
+                                </Fragment>
+                             )
 
-            <div class="odds-detail-wwl-cs align-items-center-inherite border-bottom flex-inherit justify-content-center-inherit heightp-100">
-               <div class="widthp-33 border-right padding-vertical-10">
-                  <span class="color-white">AI Naser SC</span>
-               </div>
-               <div class="widthp-33 border-right padding-vertical-10">
-                  <span class="color-white">무승부</span>
-               </div>
-               <div class="widthp-33 padding-vertical-10">
-                  <span class="color-white">AI Arbi SC</span>
-               </div>
-            </div>
-
-            <div class="odds-detail-wwl-content border-bottom flex-inherit justify-content-center-inherit">
-               <div class="widthp-33 border-right padding-vertical-10">
-                  <span class="color-white grow-2">0:1</span>
-                  <span class="color-green">1.11</span>
-               </div>
-               <div class="widthp-33 border-right padding-vertical-10">
-                  <span class="color-white grow-2">0:1</span>
-                  <span class="color-green">4.50</span>
-               </div>
-               <div class="widthp-33 padding-vertical-10">
-                  <span class="color-white grow-2">0:1</span>
-                  <span class="color-green">9.50</span>
-               </div>
-            </div>
-
-            <div class="odds-detail-wwl-content border-bottom flex-inherit justify-content-center-inherit">
-               <div class="widthp-33 border-right padding-vertical-10">
-                  <span class="color-white grow-2">0:2</span>
-                  <span class="color-green">8.13</span>
-               </div>
-               <div class="widthp-33 border-right padding-vertical-10 active">
-                  <span class="color-white grow-2">0:2</span>
-                  <span class="color-green">9.50</span>
-               </div>
-               <div class="widthp-33 padding-vertical-10">
-                  <span class="color-white grow-2">0:2</span>
-                  <span class="color-green">30.00</span>
-               </div>
-            </div>
-
-            <div class="odds-detail-wwl-titleist height-40 align-items-center-inherit border-bottom background-transparent-b-20">
-               <div class="flex pi-title">
-                  <span class="color-white padding-left-15">아시안 오버 / 언더</span>
-               </div>
-            </div>
-
-            <div class="odds-detail-wwl-cs align-items-center-inherite border-bottom flex-inherit justify-content-center-inherit heightp-100">
-               <div class="widthp-50 border-right padding-vertical-10">
-                  <span class="color-white">오버</span>
-               </div>
-               <div class="widthp-50 border-right padding-vertical-10">
-                  <span class="color-white">언더</span>
-               </div>
-            </div>
-
-            <div class="odds-detail-wwl-content border-bottom flex-inherit justify-content-center-inherit">
-               <div class="widthp-50 border-right padding-vertical-10">
-                  <span class="color-white grow-2">2.5</span>
-                  <span class="color-green">1.11</span>
-               </div>
-               <div class="widthp-50 border-right padding-vertical-10">
-                  <span class="color-white grow-2">2.5</span>
-                  <span class="color-green">9.50</span>
-               </div>
-            </div>
-
-            <div class="odds-detail-wwl-content border-bottom flex-inherit justify-content-center-inherit">
-               <div class="widthp-50 border-right padding-vertical-10">
-                  <span class="color-white grow-2">3.5</span>
-                  <span class="color-green">8.13</span>
-               </div>
-               <div class="widthp-50 border-right padding-vertical-10">
-                  <span class="color-white grow-2">3.5</span>
-                  <span class="color-green">30.00</span>
-               </div>
-            </div>
-
-            <div class="odds-detail-wwl-titleist height-40 align-items-center-inherit border-bottom background-transparent-b-20">
-               <div class="flex pi-title">
-                  <span class="color-white padding-left-15">전반 스코어 홀/짝</span>
-               </div>
-            </div>
-
-            <div class="odds-detail-wwl-content border-bottom flex-inherit justify-content-center-inherit">
-               <div class="widthp-50 border-right padding-vertical-10">
-                  <span class="color-white grow-2">홀</span>
-                  <span class="color-green">1.11</span>
-               </div>
-               <div class="widthp-50 border-right padding-vertical-10">
-                  <span class="color-white grow-2">짝</span>
-                  <span class="color-green">9.50</span>
-               </div>
-            </div>
+                             return rows
+                          })
+                        : '없음'}
+                  </div>
+               </Fragment>
+            ) : (
+               ''
+            )}
          </div>
       </Fragment>
    )
