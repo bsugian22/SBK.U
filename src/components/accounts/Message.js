@@ -81,6 +81,18 @@ const Messages = (props) => {
       setLevel(level);
     };
 
+    const deleteMessage = async () => {
+      await model.delete(toDeleteMessageList);
+      fetch();
+      toDeleteMessageList.messages.id = [];
+      setToDeleteMessageList({
+        ...toDeleteMessageList,
+        messages: toDeleteMessageList.messages,
+      });
+
+      await model.delete();
+    };
+    
     let messageId = 689;
 
    const getMessage = async () => {
