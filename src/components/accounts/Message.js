@@ -14,6 +14,10 @@ const Messages = (props) => {
   const model = new messagesModel();
   const [checkAll, setCheckAll] = useState([]);
   let [level, setLevel] = useState("ID");
+  let [toDeleteMessageList, setToDeleteMessageList] = useState({
+   messages: [],
+  });
+
 
   const [messages, getMessages] = useState({
     data: [],
@@ -23,6 +27,14 @@ const Messages = (props) => {
     page: null,
     last_page: null
   });
+
+  const [message, showMessage] = useState({
+   message: null,
+   exception: null,
+   file: null,
+   line: null,
+   trace: []
+ });
 
   useEffect(() => {
     isSubscribed = true;
@@ -69,8 +81,39 @@ const Messages = (props) => {
       setLevel(level);
     };
 
-    
+    let messageId = 689;
 
+   const getMessage = async () => {
+      const {
+         data: { message: message, exception, file, line, trace },
+       } = await model.show(messageId);
+      if (isSubscribed) {
+         showMessage({
+          ...message,
+          data: data.map((d) => {
+            if (checkAll == true) {
+              return {
+                isChecked: true,
+                ...d,
+              };
+            } else {
+              return {
+                isChecked: false,
+                ...d,
+              };
+            }
+          }),
+          message: message,
+          exception: exception,
+          file: file,
+          line: line,
+          trace: trace,
+        });
+      }
+      level = "ID";
+      setLevel(level);
+      console.log(data);
+   };
 
    return (
       <Fragment>
