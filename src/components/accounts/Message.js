@@ -1,7 +1,77 @@
-import React, { Fragment } from 'react'
-import MessagePost from './MessagePost'
-import { Link } from 'react-router-dom'
-export default function Message() {
+import React, { useState, useEffect, Fragment } from "react";
+import MessagePost from './MessagePost';
+import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
+import { mapStateToProps, mapDispatchProps } from "../../helpers/store";
+import messagesModel from "../../models/messagesModel";
+import Moment from "moment";
+import Logo from "../layouts/Logo";
+
+
+const Messages = (props) => {
+
+  let isSubscribed = true;
+  const model = new messagesModel();
+  const [checkAll, setCheckAll] = useState([]);
+  let [level, setLevel] = useState("ID");
+
+  const [messages, getMessages] = useState({
+    data: [],
+    total: null,
+    count: null,
+    per_page: null,
+    page: null,
+    last_page: null
+  });
+
+  useEffect(() => {
+    isSubscribed = true;
+    fetch();
+   //  setPages();
+    return () => {
+      isSubscribed = false;
+    };
+  }, [messages.page, messages.status, messages.search, checkAll]);
+
+   //fetch messages
+   const fetch = async () => {
+      const {
+        data: { data: data, total, count, per_page, page, last_page },
+      } = await model.index({
+        page: messages.page,
+        per_page: messages.per_page,
+      });
+  
+      if (isSubscribed) {
+         getMessages({
+          ...messages,
+          data: data.map((d) => {
+            if (checkAll == true) {
+              return {
+                isChecked: true,
+                ...d,
+              };
+            } else {
+              return {
+                isChecked: false,
+                ...d,
+              };
+            }
+          }),
+          total: total,
+          count: count,
+          per_page: per_page,
+          page: page,
+          last_page: last_page,
+        });
+      }
+      level = "ID";
+      setLevel(level);
+    };
+
+    
+
+
    return (
       <Fragment>
          <div class="content account-continer flex flex-inherit grow-2 flex-column">
@@ -160,5 +230,10 @@ export default function Message() {
             </div>
          </div>
       </Fragment>
-   )
-}
+   );
+
+   
+
+};
+
+export default connect(mapStateToProps, mapDispatchProps)(Messages);
