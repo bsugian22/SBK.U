@@ -28,13 +28,13 @@ const Messages = (props) => {
     last_page: null
   });
 
-  const [message, showMessage] = useState({
-   message: null,
-   exception: null,
-   file: null,
-   line: null,
-   trace: []
- });
+//   const [message, showMessage] = useState({
+//    message: null,
+//    exception: null,
+//    file: null,
+//    line: null,
+//    trace: []
+//  });
 
   useEffect(() => {
     isSubscribed = true;
@@ -74,11 +74,16 @@ const Messages = (props) => {
           count: count,
           per_page: per_page,
           page: page,
-          last_page: last_page,
+          last_page: last_page
         });
       }
       level = "ID";
       setLevel(level);
+      console.log(total, count, per_page, page, last_page);
+      // var pages = [];
+      // for (let index = 1; index < pages.length; index++) {
+      //    pages.push(index)
+      // }
     };
 
     const deleteMessage = async () => {
@@ -93,7 +98,7 @@ const Messages = (props) => {
       await model.delete();
     };
     
-    let messageId = 689;
+    let messageId = 1;
 
    const getMessage = async () => {
       const {
@@ -127,6 +132,24 @@ const Messages = (props) => {
       console.log(data);
    };
 
+   const prevPage = (e) => {
+      var page_number = messages.page;
+      var first_page = messages.list_pages[0];
+      if (first_page <= page_number - 1) {
+        requestData(page_number - 1);
+      }
+    };
+  
+    const nextPage = (e) => {
+      var page_number = messages.page;
+      var last_page = messages.list_pages[messages.list_pages.length - 1];
+      if (last_page >= page_number + 1) {
+        requestData(page_number + 1);
+      }
+    };
+
+   const length = messages.per_page;
+
    return (
       <Fragment>
          <div class="content account-continer flex flex-inherit grow-2 flex-column">
@@ -138,44 +161,54 @@ const Messages = (props) => {
             <div class="message-wrap message-content-desktop account border-top flex-inherit flex-row">
                <div class="message-left flex-inherit flex-column account-height widthp-40 border-right">
                   <div class="message flex-column flex-inherit grow-2 padding-10 scrollable-auto">
-                     <Link className="flex" to="0">
-                        <div class="flex-column flex-inherit message-list min-height-100 widthp-100 padding-10 background-transparent-b-10 color-grey border-bottom-white active">
-                           <div class="heightp-100 flex-inherit flex-column">
-                              <div class="flex-inherit heightp-50">
-                                 <div class="checkbox width-30 heightp-100 justify-content-center align-items-center">
-                                    <input type="checkbox" id="post-id[]" value="0" />
+                    
+                     {messages.data.length > 0 ? (
+                        messages.data.map((message, index) => {
+                           return (
+                              <Link className="flex" to="0" key={index}>
+                                 <div class="flex-column flex-inherit message-list min-height-100 widthp-100 padding-10 background-transparent-b-10 color-grey border-bottom-white active">
+                                    <div class="heightp-100 flex-inherit flex-column">
+                                       <div class="flex-inherit heightp-50">
+                                          <div class="checkbox width-30 heightp-100 justify-content-center align-items-center">
+                                             <input type="checkbox" id="post-id[]" value="0" />
+                                          </div>
+                                          <div class="padding-10">
+                                             {message.read_at != null ? (<span class="color-green">읽음</span>) : (<span class="color-red">읽지않음</span>)} 
+                                          </div>
+                                          <div class="padding-10 grow-2 justify-content-end">
+                                             <span class="color-grey">{Moment(message.created_at).format("YY-MM-DD HH:mm ")}</span>
+                                          </div>
+                                       </div>
+                                       <div class="flex-inherit heightp-50 align-items-center">
+                                          <div class="padding-10 text-ellipsis">
+                                             <span class="color-white text-ellipsis">{message.title}</span>
+                                          </div>
+                                       </div>
+                                    </div>
                                  </div>
-                                 <div class="padding-10">
-                                    <span class="color-green">읽음</span>
-                                    <span class="color-red">읽지않음</span>
-                                 </div>
-                                 <div class="padding-10 grow-2 justify-content-end">
-                                    <span class="color-grey">0</span>
-                                 </div>
-                              </div>
-                              <div class="flex-inherit heightp-50 align-items-center">
-                                 <div class="padding-10 text-ellipsis">
-                                    <span class="color-white text-ellipsis">0</span>
-                                 </div>
-                              </div>
-                           </div>
+                              </Link>
+                           )
+                        })
+                     ) : 
+                     (
+                        <div class="noArticle color-grey padding-10 background-transparent-b-10 justify-content-center">
+                           <span>게시글이 없습니다.</span>
                         </div>
-                     </Link>
-                     <div class="noArticle color-grey padding-10 background-transparent-b-10 justify-content-center">
-                        <span>게시글이 없습니다.</span>
-                     </div>
+                     )
+                     }
                   </div>
                   <div class="flex-inherit message-page-bottom border-top-white height-60 background-transparent-b-15 padding-10 color-grey">
                      <div class="pagination flex-inherit widthp-100 heightp-100">
                         <div class="select">
+
                            <select name="slct" id="slct">
-                              <option value="">1</option>
-                              <option value="">2</option>
-                              <option value="">3</option>
-                              <option value="">4</option>
-                              <option value="">5</option>
-                              <option value="">6</option>
-                              <option value="">7</option>
+                             
+                              {/* {pages.length > 0 ? (
+                                 pages.map((data, index) =>{
+                                    <option key={index} value={data}>{data}</option>
+                                 })
+                              ) : (<option value="1">1</option>)} */}
+
                            </select>
                         </div>
                         <div class="flex margin-left-5 page grow-2 justify-content-end">

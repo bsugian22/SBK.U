@@ -17,6 +17,11 @@ class messagesModel
         })
     }
 
+    async showMessage(id) 
+    {
+        return camelize(await axios.get(`/api/messages/`+id))
+    }
+
     async delete(params) {
         return camelize(
           await axios.delete(`/api/admin/messages`, { data: params })
