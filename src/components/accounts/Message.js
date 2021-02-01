@@ -23,37 +23,41 @@ const Messages = (props) => {
     data: [],
     total: null,
     count: null,
-    per_page: null,
+    perPage: null,
     page: null,
-    last_page: null
+    lastPage: null,
+    post: { id : 0},
   });
 
-//   const [message, showMessage] = useState({
-//    message: null,
-//    exception: null,
-//    file: null,
-//    line: null,
-//    trace: []
-//  });
+  const [message, showMessage] = useState({
+   id: null,
+   title: null,
+   content: null,
+   readAt: null,
+   createdAt: null
+ });
+
+
+ var pageNumber = [];
 
   useEffect(() => {
     isSubscribed = true;
+
     fetch();
-   //  setPages();
+
     return () => {
       isSubscribed = false;
     };
-  }, [messages.page, messages.status, messages.search, checkAll]);
+  }, [messages.page, messages.post]);
 
    //fetch messages
    const fetch = async () => {
       const {
-        data: { data: data, total, count, per_page, page, last_page },
+        data: { data: data, total, count, perPage, page, lastPage },
       } = await model.index({
-        page: messages.page,
-        per_page: messages.per_page,
+        page: messages.page
       });
-  
+
       if (isSubscribed) {
          getMessages({
           ...messages,
@@ -72,18 +76,14 @@ const Messages = (props) => {
           }),
           total: total,
           count: count,
-          per_page: per_page,
+          perPage: perPage,
           page: page,
-          last_page: last_page
+          lastPage: lastPage
         });
       }
       level = "ID";
       setLevel(level);
-      console.log(total, count, per_page, page, last_page);
-      // var pages = [];
-      // for (let index = 1; index < pages.length; index++) {
-      //    pages.push(index)
-      // }
+
     };
 
     const deleteMessage = async () => {
@@ -97,58 +97,59 @@ const Messages = (props) => {
 
       await model.delete();
     };
-    
-    let messageId = 1;
 
-   const getMessage = async () => {
+   const getMessage = async (messageId) => {
       const {
-         data: { message: message, exception, file, line, trace },
-       } = await model.show(messageId);
+         data: { data: {id, category, title, content, readAt, createdAt }},
+       } = await model.showMessage(messageId);
       if (isSubscribed) {
          showMessage({
           ...message,
-          data: data.map((d) => {
-            if (checkAll == true) {
-              return {
-                isChecked: true,
-                ...d,
-              };
-            } else {
-              return {
-                isChecked: false,
-                ...d,
-              };
-            }
-          }),
-          message: message,
-          exception: exception,
-          file: file,
-          line: line,
-          trace: trace,
+          id: id,
+          category: category,
+          title: title,
+          content: content,
+          readAt: readAt,
+          createdAt: createdAt
         });
       }
       level = "ID";
       setLevel(level);
-      console.log(data);
    };
 
-   const prevPage = (e) => {
-      var page_number = messages.page;
-      var first_page = messages.list_pages[0];
-      if (first_page <= page_number - 1) {
-        requestData(page_number - 1);
-      }
-    };
-  
-    const nextPage = (e) => {
-      var page_number = messages.page;
-      var last_page = messages.list_pages[messages.list_pages.length - 1];
-      if (last_page >= page_number + 1) {
-        requestData(page_number + 1);
-      }
-    };
 
-   const length = messages.per_page;
+   for (let index = 1  ; index <= messages.perPage; index++) {
+      pageNumber.push(index);
+   }
+
+   const view = async (id) => {
+      const data = messages.data.find((data) => data.id == id)
+      getMessages({
+         ...messages,
+         post: data
+      })
+   }
+
+   const prev = () => {
+      setNotice({
+         ...messages,
+         page: messages.page - 1,
+      })
+   }
+
+   const next = () => {
+      setNotice({
+         ...messages,
+         page: messages.page + 1,
+      })
+   }
+
+   const setPage = (e) => {
+      getMessages({
+         ...messages,
+         page: e.value,
+      })
+   }
 
    return (
       <Fragment>
@@ -163,30 +164,33 @@ const Messages = (props) => {
                   <div class="message flex-column flex-inherit grow-2 padding-10 scrollable-auto">
                     
                      {messages.data.length > 0 ? (
-                        messages.data.map((message, index) => {
+                        messages.data.map((value, index) => {
                            return (
-                              <Link className="flex" to="0" key={index}>
-                                 <div class="flex-column flex-inherit message-list min-height-100 widthp-100 padding-10 background-transparent-b-10 color-grey border-bottom-white active">
-                                    <div class="heightp-100 flex-inherit flex-column">
-                                       <div class="flex-inherit heightp-50">
-                                          <div class="checkbox width-30 heightp-100 justify-content-center align-items-center">
-                                             <input type="checkbox" id="post-id[]" value="0" />
-                                          </div>
-                                          <div class="padding-10">
-                                             {message.read_at != null ? (<span class="color-green">읽음</span>) : (<span class="color-red">읽지않음</span>)} 
-                                          </div>
-                                          <div class="padding-10 grow-2 justify-content-end">
-                                             <span class="color-grey">{Moment(message.created_at).format("YY-MM-DD HH:mm ")}</span>
-                                          </div>
+                              <button type="button" class="flex-inherit" onClick={() => view(value.id)} key={index}>
+                              <div class={`flex-column flex-inherit message-list min-height-100 widthp-100 padding-10 background-transparent-b-10 color-grey border-bottom-white${messages.post.id == value.id ? ' active' : ''}`}>
+                                 <div class="heightp-100 flex-inherit flex-column">
+                                    <div class="flex-inherit heightp-50">
+                                       <div class="checkbox width-30 heightp-100 justify-content-center align-items-center">
+                                          <input type="checkbox" id={`post-id[`+value.id+`]`} value={value.id} />
                                        </div>
-                                       <div class="flex-inherit heightp-50 align-items-center">
-                                          <div class="padding-10 text-ellipsis">
-                                             <span class="color-white text-ellipsis">{message.title}</span>
-                                          </div>
+                                       <div class="padding-10 background-transparent-b-10">
+                                          <span class="color-grey">{value.title}</span>
+                                       </div>
+                                       <div class="padding-10">
+                                          {message.read_at != null ? (<span class="color-green">읽음</span>) : (<span class="color-red">읽지않음</span>)} 
+                                       </div>
+                                       <div class="padding-10 grow-2 justify-content-end">
+                                          <span class="color-grey">{Moment(value.created_at).format('MM / DD HH:mm')}</span>
+                                       </div>
+                                    </div>
+                                    <div class="flex-inherit heightp-50 align-items-center">
+                                       <div class="padding-10 text-ellipsis">
+                                          <span class="color-white text-ellipsis">{value.title}</span>
                                        </div>
                                     </div>
                                  </div>
-                              </Link>
+                              </div>
+                           </button>
                            )
                         })
                      ) : 
@@ -200,15 +204,15 @@ const Messages = (props) => {
                   <div class="flex-inherit message-page-bottom border-top-white height-60 background-transparent-b-15 padding-10 color-grey">
                      <div class="pagination flex-inherit widthp-100 heightp-100">
                         <div class="select">
-
-                           <select name="slct" id="slct">
-                             
-                              {/* {pages.length > 0 ? (
-                                 pages.map((data, index) =>{
-                                    <option key={index} value={data}>{data}</option>
+                           <select name="slct" id="slct" onChange={setPage}>
+                              {pageNumber.length > 0 ? (
+                                 pageNumber.map((data, index) =>{
+                                    return (
+                                       <option key={index} value={data}>{data}</option>
+                                    )
                                  })
-                              ) : (<option value="1">1</option>)} */}
-
+                              ) : 
+                              (<option value="1">1</option>)}
                            </select>
                         </div>
                         <div class="flex margin-left-5 page grow-2 justify-content-end">
@@ -240,7 +244,28 @@ const Messages = (props) => {
                   </div>
                </div>
                <div class="message-read border-left flex-inherit flex-column account-height widthp-60 padding-10 scrollable-auto">
-                  <MessagePost />
+                  {messages.post.id ? (
+                     <div class="message-read-header flex-inherit flex-column align-items-center-inherit">
+                        <div class="title flex-inherit grow-2 background-transparent-b-20 widthp-100 padding-15">
+                            <span class="flex color-grey align-items-center text-ellipsis">
+                                <span class="margin-left-5 color-white text-ellipsis">{messages.post.title}</span>
+                            </span>
+                        </div>
+                        <div class="date flex-inherit grow-2 margin-bottom-10 background-transparent-b-10 widthp-100 padding-15">
+                            <span class="color-grey margin-right-15 align-items-center"><i class="fal fa-calendar-alt margin-right-5"></i>{Moment(messages.post.createdAt).format('MM / DD HH:mm')}</span>
+                            <span class="color-grey align-items-center"><i class="far fa-user-alt margin-right-5"></i>관리자</span>
+                        </div>
+                        <div class="flex-column message-read-content min-height-150 padding-10 background-transparent-b-10 color-grey">
+                            <div class="text">  
+                                <p>{messages.post.content}</p>
+                            </div>  
+                        </div>
+                    </div>
+                  ) : (
+                        <MessagePost />
+                  )}
+                  
+                  
                </div>
             </div>
          </div>
@@ -288,32 +313,30 @@ const Messages = (props) => {
             </div>
             <div class="flex-column interload-account">
                <div class="widthp-100 flex-column">
-                  <div class="list-row flex pi-title updowntoggle notice notice-list padding-vertical-10 padding-horizontal-15 flex-inherit margin-bottom-1 background-transparent-b-20">
-                     <Link className="flex-inherit" to="#">
-                        <div class="flex widthp-100 flex-column">
-                           <div class="flex">
-                              <span class="color-grey">제목이 출력됩니다.</span>
-                           </div>
-                           <div class="flex">
-                              <span class="color-grey grow-2">날짜가 출력됩니다.</span>
-                              {/*
-                                color-green : 읽음
-                                color-red : 읽지않음
-                                */}
-                              <span class="color-green">읽음</span>
-                           </div>
-                        </div>
-                     </Link>
-                  </div>
-                  <div class="list-row detail-view flex padding-vertical-10 padding-horizontal-15 flex-column flex-inherit margin-bottom-1 background-transparent-b-20 color-white display-none">
+               {message.data != null? (
+                     message.data.map((value, index) => {
+                        return (
+                           <Fragment key={index}>
+                              <div class="list-row flex pi-title updowntoggle notice notice-list padding-vertical-10 padding-horizontal-15 flex-inherit margin-bottom-1 background-transparent-b-20">
+                                 <button type="button" class="flex-inherit">
+                                    <div class="flex widthp-100 flex-column ">
+                                       <div class="flex">
+                                          <span class="color-grey">{value.title}</span>
+                                       </div>
+                                       <div class="flex">
+                                          <span class="color-grey grow-2">{Moment(value.createdAt).format('MM / DD HH:mm')}</span>
+                                       </div>
+                                    </div>
+                                 </button>
+                              </div>
+                           </Fragment>
+                        )
+                     })
+                  ) : (
+                     <div class="list-row detail-view flex padding-vertical-10 padding-horizontal-15 flex-column flex-inherit margin-bottom-1 background-transparent-b-20 color-white display-none">
                      쪽지 내용이 출력됩니다.
                   </div>
-                  {/*
-        
-		<div class="list-row flex pi-title padding-vertical-10 padding-horizontal-15 color-white">
-			등록된 게시물이 없습니다.
-		</div>
-            */}
+                  )}
                </div>
             </div>
          </div>
