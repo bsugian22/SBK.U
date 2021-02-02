@@ -1,8 +1,8 @@
 import {
-  FETCH_WITHDRAWALS_REQUEST,
-  FETCH_WITHDRAWALS_SUCCESS,
-  FETCH_WITHDRAWALS_FAILURE,
-} from "./withdrawalTypes";
+  FETCH_MAINS_REQUEST,
+  FETCH_MAINS_SUCCESS,
+  FETCH_MAINS_FAILURE,
+} from "./mainTypes";
 
 const initialState = {
   loading: false,
@@ -10,21 +10,21 @@ const initialState = {
   error: "",
 };
 
-const withdrawalReducer = (state = initialState, action) => {
+const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-
-    case FETCH_WITHDRAWALS_REQUEST:
+    
+    case FETCH_MAINS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_WITHDRAWALS_SUCCESS:
+    case FETCH_MAINS_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_WITHDRAWALS_FAILURE:
+    case FETCH_MAINS_FAILURE:
       return {
         loading: false,
         data: [],
@@ -36,4 +36,4 @@ const withdrawalReducer = (state = initialState, action) => {
   }
 };
 
-export default withdrawalReducer;
+export default mainReducer;

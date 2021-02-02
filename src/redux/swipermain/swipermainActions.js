@@ -2,7 +2,7 @@ import {
   FETCH_WITHDRAWALS_REQUEST,
   FETCH_WITHDRAWALS_SUCCESS,
   FETCH_WITHDRAWALS_FAILURE,
-} from "./withdrawalTypes";
+} from "./swipermainTypes";
 import axios from "axios";
 
 export const fetchWithdrawalsRequest = () => {

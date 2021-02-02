@@ -1,8 +1,8 @@
 import {
-  FETCH_MAINS_REQUEST,
-  FETCH_MAINS_SUCCESS,
-  FETCH_MAINS_FAILURE,
-} from "./mainTypes";
+  FETCH_NOTICES_REQUEST,
+  FETCH_NOTICES_SUCCESS,
+  FETCH_NOTICES_FAILURE,
+} from "./noticeTypes";
 
 const initialState = {
   loading: false,
@@ -10,21 +10,21 @@ const initialState = {
   error: "",
 };
 
-const mainReducer = (state = initialState, action) => {
+const noticeReducer = (state = initialState, action) => {
   switch (action.type) {
     
-    case FETCH_MAINS_REQUEST:
+    case FETCH_NOTICES_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_MAINS_SUCCESS:
+    case FETCH_NOTICES_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_MAINS_FAILURE:
+    case FETCH_NOTICES_FAILURE:
       return {
         loading: false,
         data: [],
@@ -36,4 +36,4 @@ const mainReducer = (state = initialState, action) => {
   }
 };
 
-export default mainReducer;
+export default noticeReducer;

@@ -1,8 +1,8 @@
 import {
-  FETCH_NOTICES_REQUEST,
-  FETCH_NOTICES_SUCCESS,
-  FETCH_NOTICES_FAILURE,
-} from "./noticeTypes";
+  FETCH_WITHDRAWALS_REQUEST,
+  FETCH_WITHDRAWALS_SUCCESS,
+  FETCH_WITHDRAWALS_FAILURE,
+} from "./swipermainTypes";
 
 const initialState = {
   loading: false,
@@ -10,21 +10,21 @@ const initialState = {
   error: "",
 };
 
-const noticeReducer = (state = initialState, action) => {
+const withdrawalReducer = (state = initialState, action) => {
   switch (action.type) {
-    
-    case FETCH_NOTICES_REQUEST:
+
+    case FETCH_WITHDRAWALS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_NOTICES_SUCCESS:
+    case FETCH_WITHDRAWALS_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_NOTICES_FAILURE:
+    case FETCH_WITHDRAWALS_FAILURE:
       return {
         loading: false,
         data: [],
@@ -36,4 +36,4 @@ const noticeReducer = (state = initialState, action) => {
   }
 };
 
-export default noticeReducer;
+export default withdrawalReducer;

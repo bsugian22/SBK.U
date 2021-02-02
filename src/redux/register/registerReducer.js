@@ -2,7 +2,7 @@ import {
   FETCH_PREFERENCES_REQUEST,
   FETCH_PREFERENCES_SUCCESS,
   FETCH_PREFERENCES_FAILURE,
-} from "./preferenceTypes";
+} from "./registerTypes";
 
 const initialState = {
   loading: false,

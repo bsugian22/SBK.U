@@ -1,59 +1,19 @@
-import {
-  LOGIN_USER_REQUEST,
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAILURE,
-  FETCH_USERS_REQUEST,
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE,
-} from "./loginTypes";
+import { READ_MESSAGE } from "./messageTypes";
 
 const initialState = {
-  loading: false,
-  data: [],
-  error: "",
+  isRead: false,
 };
 
-const userReducer = (state = initialState, action) => {
+const messageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_USER_REQUEST:
+    case READ_MESSAGE:
       return {
         ...state,
-        loading: true,
+        isRead: !state.isRead,
       };
-    case LOGIN_USER_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: "",
-      };
-    case LOGIN_USER_FAILURE:
-      return {
-        loading: false,
-        data: [],
-        error: action.payload,
-      };
-
-    case FETCH_USERS_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case FETCH_USERS_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: "",
-      };
-    case FETCH_USERS_FAILURE:
-      return {
-        loading: false,
-        data: [],
-        error: action.payload,
-      };
-
     default:
       return state;
   }
 };
 
-export default userReducer;
+export default messageReducer;
