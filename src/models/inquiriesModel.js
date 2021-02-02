@@ -12,9 +12,7 @@ class inquiriesModel
 
     async show(id) 
     {
-        return camelize(await axios.get(`api/inquiries/${id}`), {
-            params: snakelize(params)
-        })
+        return camelize(await axios.get(`/api/inquiries/`+id))
     }
 
     async create(params) {
