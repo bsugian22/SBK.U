@@ -1,11 +1,20 @@
 import {
-  LOGIN_USER_REQUEST,
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAILURE,
-  FETCH_USERS_REQUEST,
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE,
-} from "./loginTypes";
+  FETCH_INPLAYS_REQUEST,
+  FETCH_INPLAYS_SUCCESS,
+  FETCH_INPLAYS_FAILURE,
+  FETCH_INPLAY_REQUEST,
+  FETCH_INPLAY_SUCCESS,
+  FETCH_INPLAY_FAILURE,
+  CREATE_INPLAY_REQUEST,
+  CREATE_INPLAY_SUCCESS,
+  CREATE_INPLAY_FAILURE,
+  UPDATE_INPLAY_REQUEST,
+  UPDATE_INPLAY_SUCCESS,
+  UPDATE_INPLAY_FAILURE,
+  DELETE_INPLAYS_REQUEST,
+  DELETE_INPLAYS_SUCCESS,
+  DELETE_INPLAYS_FAILURE,
+} from "./inplayTypes";
 
 const initialState = {
   loading: false,
@@ -13,38 +22,93 @@ const initialState = {
   error: "",
 };
 
-const userReducer = (state = initialState, action) => {
+const inplayReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_USER_REQUEST:
+    
+    case FETCH_INPLAYS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case LOGIN_USER_SUCCESS:
+    case FETCH_INPLAYS_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case LOGIN_USER_FAILURE:
+    case FETCH_INPLAYS_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case FETCH_USERS_REQUEST:
+    case FETCH_INPLAY_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_USERS_SUCCESS:
+    case FETCH_INPLAY_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_USERS_FAILURE:
+    case FETCH_INPLAY_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+
+    case CREATE_INPLAY_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CREATE_INPLAY_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case CREATE_INPLAY_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+
+    case UPDATE_INPLAY_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UPDATE_INPLAY_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case UPDATE_INPLAY_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+
+    case DELETE_INPLAYS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_INPLAYS_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case DELETE_INPLAYS_FAILURE:
       return {
         loading: false,
         data: [],
@@ -56,4 +120,4 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
-export default userReducer;
+export default inplayReducer;

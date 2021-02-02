@@ -25,18 +25,90 @@ const initialState = {
 const esportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case FETCH_CASHES_REQUEST:
+    case FETCH_ESPORTSDETAILS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_CASHES_SUCCESS:
+    case FETCH_ESPORTSDETAILS_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_CASHES_FAILURE:
+    case FETCH_ESPORTSDETAILS_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+
+    case FETCH_ESPORTSDETAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_ESPORTSDETAIL_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case FETCH_ESPORTSDETAIL_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+
+    case CREATE_ESPORTSDETAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CREATE_ESPORTSDETAIL_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case CREATE_ESPORTSDETAIL_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+
+    case UPDATE_ESPORTSDETAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UPDATE_ESPORTSDETAIL_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case UPDATE_ESPORTSDETAIL_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+
+    case DELETE_ESPORTSDETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_ESPORTSDETAILS_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case DELETE_ESPORTSDETAILS_FAILURE:
       return {
         loading: false,
         data: [],
@@ -48,4 +120,4 @@ const esportsdetailReducer = (state = initialState, action) => {
   }
 };
 
-export default cashReducer;
+export default esportsdetailReducer;
