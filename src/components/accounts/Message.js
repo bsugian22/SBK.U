@@ -88,7 +88,7 @@ const Messages = (props) => {
 
    const deleteMessage = async () => {
 
-      await model.delete(toDeleteMessageList.messages).then((response) => {
+      await model.delete(toDeleteMessageList).then((response) => {
          console.log(response);
          fetch();
       });
@@ -99,7 +99,7 @@ const Messages = (props) => {
       var checked = e.target.checked;
       var id = e.target.value;
       if (checked) {
-         toDeleteMessageList.messages.push({ "id": e.target.value })
+         toDeleteMessageList.messages.push({ "id": id })
       } else {
          toDeleteMessageList.messages.map((value, index) => {
             if (value.id == id) {
