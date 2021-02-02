@@ -14,39 +14,175 @@ import {
   DELETE_ESPORTS_REQUEST,
   DELETE_ESPORTS_SUCCESS,
   DELETE_ESPORTS_FAILURE,
-} from "./branchTypes";
+} from "./esportTypes";
 import axios from "axios";
 
-export const fetchBranchesRequest = () => {
+export const fetchEsportsRequest = () => {
   return {
-    type: FETCH_BRANCHES_REQUEST,
+    type: FETCH_ESPORTS_REQUEST,
   };
 };
 
-export const fetchBranchesSuccess = (cashes) => {
+export const fetchEsportsSuccess = (esports) => {
   return {
-    type: FETCH_BRANCHES_SUCCESS,
-    payload: branches,
+    type: FETCH_ESPORTS_SUCCESS,
+    payload: esports,
   };
 };
 
-export const fetchBranchesFailure = (error) => {
+export const fetchEsportsFailure = (error) => {
   return {
-    type: FETCH_BRANCHES_FAILURE,
+    type: FETCH_ESPORTS_FAILURE,
     payload: error,
   };
-  };
+};
 
-export const fetchBranches = () => {
+export const fetchEsportRequest = () => {
+  return {
+    type: FETCH_ESPORT_REQUEST,
+  };
+};
+
+export const fetchEsportSuccess = (esport) => {
+  return {
+    type: FETCH_ESPORT_SUCCESS,
+    payload: esport,
+  };
+};
+
+export const fetchEsportFailure = (error) => {
+  return {
+    type: FETCH_ESPORT_FAILURE,
+    payload: error,
+  };
+};
+
+export const createEsportRequest = () => {
+  return {
+    type: CREATE_ESPORT_REQUEST,
+  };
+};
+
+export const createEsportSuccess = (esport) => {
+  return {
+    type: CREATE_ESPORT_SUCCESS,
+    payload: esport,
+  };
+};
+
+export const createEsportFailure = (error) => {
+  return {
+    type: CREATE_ESPORT_FAILURE,
+    payload: error,
+  };
+};
+
+export const createEsportRequest = () => {
+  return {
+    type: UPDATE_ESPORT_REQUEST,
+  };
+};
+
+export const createEsportSuccess = (esport) => {
+  return {
+    type: UPDATE_ESPORT_SUCCESS,
+    payload: esport,
+  };
+};
+
+export const createEsportFailure = (error) => {
+  return {
+    type: UPDATE_ESPORT_FAILURE,
+    payload: error,
+  };
+};
+
+export const deleteEsportsRequest = () => {
+  return {
+    type: DELETE_ESPORTS_REQUEST,
+  };
+};
+
+export const deleteEsportsSuccess = (esports) => {
+  return {
+    type: DELETE_ESPORTS_SUCCESS,
+    payload: esports,
+  };
+};
+
+export const deleteEsportsFailure = (error) => {
+  return {
+    type: DELETE_ESPORTS_FAILURE,
+    payload: error,
+  };
+};
+
+export const fetchEsports = () => {
     return (dispatch) => {
-      dispatch(fetchBranchesRequest);
+      dispatch(fetchEsportsRequest);
       await axios.get(`/api/admin/branches`)
                   .then(response => {
                     const branches = response.data;
-                    dispatch(fetchBranchesSuccess(branches))
+                    dispatch(fetchEsportsSuccess(branches))
               }).catch(error => {
                     const errorMsg = error.message;
-                    dispatch(fetchBranchesFailure(errorMsg))
+                    dispatch(fetchEsportsFailure(errorMsg))
               })
       };
+};
+
+export const fetchEsport = () => {
+  return (dispatch) => {
+    dispatch(fetchEsportRequest);
+    await axios.get(`/api/admin/branches`)
+                .then(response => {
+                  const branches = response.data;
+                  dispatch(fetchEsportSuccess(branches))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(fetchEsportFailure(errorMsg))
+            })
+    };
+};
+
+export const createEsport = () => {
+  return (dispatch) => {
+    dispatch(createEsportRequest);
+    await axios.get(`/api/admin/branches`)
+                .then(response => {
+                  const branches = response.data;
+                  dispatch(createEsportSuccess(branches))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(createEsportFailure(errorMsg))
+            })
+    };
+};
+
+export const updateEsport = () => {
+  return (dispatch) => {
+    dispatch(updateEsportRequest);
+    await axios.get(`/api/admin/branches`)
+                .then(response => {
+                  const branches = response.data;
+                  dispatch(updateEsportSuccess(branches))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(updateEsportFailure(errorMsg))
+            })
+    };
+};
+
+export const deleteEsports = () => {
+  return (dispatch) => {
+    dispatch(deleteEsportsRequest);
+    await axios.get(`/api/admin/branches`)
+                .then(response => {
+                  const branches = response.data;
+                  dispatch(deleteEsportsSuccess(branches))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(deleteEsportsFailure(errorMsg))
+            })
+    };
 };

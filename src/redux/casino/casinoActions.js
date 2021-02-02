@@ -14,7 +14,7 @@ import {
   DELETE_CASINOS_REQUEST,
   DELETE_CASINOS_SUCCESS,
   DELETE_CASINOS_FAILURE,
-} from "./bettingTypes";
+} from "./casinoTypes";
 import axios from "axios";
 
 export const fetchCasinosRequest = () => {
@@ -129,4 +129,60 @@ export const fetchCasinos = () => {
                     dispatch(fetchCasinosFailure(errorMsg))
               })
       };
+};
+
+export const fetchCasino = () => {
+  return (dispatch) => {
+    dispatch(fetchCasinoRequest);
+    await axios.get(`/api/casino`)
+                .then(response => {
+                  const casino = response.data;
+                  dispatch(fetchCasinoSuccess(casino))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(fetchCasinoFailure(errorMsg))
+            })
+    };
+};
+
+export const createCasino = () => {
+  return (dispatch) => {
+    dispatch(createCasinoRequest);
+    await axios.get(`/api/casino`)
+                .then(response => {
+                  const casino = response.data;
+                  dispatch(createCasinoSuccess(casino))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(createCasinoFailure(errorMsg))
+            })
+    };
+};
+
+export const updateCasino = () => {
+  return (dispatch) => {
+    dispatch(updateCasinoRequest);
+    await axios.get(`/api/casino`)
+                .then(response => {
+                  const casino = response.data;
+                  dispatch(updateCasinoSuccess(casino))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(updateCasinoFailure(errorMsg))
+            })
+    };
+};
+
+export const deleteCasinos = () => {
+  return (dispatch) => {
+    dispatch(deleteCasinosRequest);
+    await axios.get(`/api/casino`)
+                .then(response => {
+                  const casinos = response.data;
+                  dispatch(deleteCasinosSuccess(casinos))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(deleteCasinosFailure(errorMsg))
+            })
+    };
 };

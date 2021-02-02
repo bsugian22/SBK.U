@@ -1,40 +1,189 @@
 import {
-  FETCH_SALES_REQUEST,
-  FETCH_SALES_SUCCESS,
-  FETCH_SALES_FAILURE,
-} from "./saleTypes";
+  FETCH_SPORTS_REQUEST,
+  FETCH_SPORTS_SUCCESS,
+  FETCH_SPORTS_FAILURE,
+  FETCH_SPORT_REQUEST,
+  FETCH_SPORT_SUCCESS,
+  FETCH_SPORT_FAILURE,
+  CREATE_SPORT_REQUEST,
+  CREATE_SPORT_SUCCESS,
+  CREATE_SPORT_FAILURE,
+  UPDATE_SPORT_REQUEST,
+  UPDATE_SPORT_SUCCESS,
+  UPDATE_SPORT_FAILURE,
+  DELETE_SPORTS_REQUEST,
+  DELETE_SPORTS_SUCCESS,
+  DELETE_SPORTS_FAILURE,
+} from "./sportTypes";
 import axios from "axios";
 
-export const fetchSalesRequest = () => {
+export const fetchSportsRequest = () => {
   return {
-    type: FETCH_SALES_REQUEST,
+    type: FETCH_SPORTS_REQUEST,
   };
 };
 
-export const fetchSalesSuccess = (sales) => {
+export const fetchSportsSuccess = (sports) => {
   return {
-    type: FETCH_SALES_SUCCESS,
-    payload: sales,
+    type: FETCH_SPORTS_SUCCESS,
+    payload: sports,
   };
 };
 
-export const fetchSalesFailure = (error) => {
+export const fetchSportsFailure = (error) => {
   return {
-    type: FETCH_SALES_FAILURE,
+    type: FETCH_SPORTS_FAILURE,
     payload: error,
   };
-  };
+};
 
-export const fetchSales = () => {
+export const fetchSportRequest = () => {
+  return {
+    type: FETCH_SPORT_REQUEST,
+  };
+};
+
+export const fetchSportSuccess = (sport) => {
+  return {
+    type: FETCH_SPORT_SUCCESS,
+    payload: sport,
+  };
+};
+
+export const fetchSportFailure = (error) => {
+  return {
+    type: FETCH_SPORT_FAILURE,
+    payload: error,
+  };
+};
+
+export const createSportRequest = () => {
+  return {
+    type: CREATE_SPORT_REQUEST,
+  };
+};
+
+export const createSportSuccess = (sport) => {
+  return {
+    type: CREATE_SPORT_SUCCESS,
+    payload: sport,
+  };
+};
+
+export const createSportFailure = (error) => {
+  return {
+    type: CREATE_SPORT_FAILURE,
+    payload: error,
+  };
+};
+
+export const updateSportRequest = () => {
+  return {
+    type: UPDATE_SPORT_REQUEST,
+  };
+};
+
+export const updateSportSuccess = (sport) => {
+  return {
+    type: UPDATE_SPORT_SUCCESS,
+    payload: sport,
+  };
+};
+
+export const updateSportFailure = (error) => {
+  return {
+    type: UPDATE_SPORT_FAILURE,
+    payload: error,
+  };
+};
+
+export const deleteSportsRequest = () => {
+  return {
+    type: DELETE_SPORTS_REQUEST,
+  };
+};
+
+export const deleteSportsSuccess = (sports) => {
+  return {
+    type: DELETE_SPORTS_SUCCESS,
+    payload: sports,
+  };
+};
+
+export const deleteSportsFailure = (error) => {
+  return {
+    type: DELETE_SPORTS_FAILURE,
+    payload: error,
+  };
+};
+
+
+export const fetchSports = () => {
     return (dispatch) => {
-      dispatch(fetchSalesRequest);
-      await axios.get(`/api/admin/sales`)
+      dispatch(fetchSportsRequest);
+      await axios.get(`/api/feed/sports`)
                   .then(response => {
-                    const sales = response.data;
-                    dispatch(fetchSalesSuccess(sales))
+                    const sports = response.data;
+                    dispatch(fetchSportsSuccess(sports))
               }).catch(error => {
                     const errorMsg = error.message;
-                    dispatch(fetchSalesFailure(errorMsg))
+                    dispatch(fetchSportsFailure(errorMsg))
               })
       };
+};
+
+export const fetchSport = () => {
+  return (dispatch) => {
+    dispatch(fetchSportRequest);
+    await axios.get(`/api/feed/sports`)
+                .then(response => {
+                  const sport = response.data;
+                  dispatch(fetchSportsSuccess(sport))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(fetchSportFailure(errorMsg))
+            })
+    };
+};
+
+export const createSport = () => {
+  return (dispatch) => {
+    dispatch(createSportRequest);
+    await axios.get(`/api/feed/sports`)
+                .then(response => {
+                  const sport = response.data;
+                  dispatch(createSportsSuccess(sport))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(createSportFailure(errorMsg))
+            })
+    };
+};
+
+export const updateSport = () => {
+  return (dispatch) => {
+    dispatch(updateSportRequest);
+    await axios.get(`/api/feed/sports`)
+                .then(response => {
+                  const sport = response.data;
+                  dispatch(updateSportsSuccess(sport))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(updateSportFailure(errorMsg))
+            })
+    };
+};
+
+export const deleteSports = () => {
+  return (dispatch) => {
+    dispatch(deleteSportsRequest);
+    await axios.get(`/api/feed/sports`)
+                .then(response => {
+                  const sports = response.data;
+                  dispatch(deleteSportsSuccess(sports))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(deleteSportsFailure(errorMsg))
+            })
+    };
 };
