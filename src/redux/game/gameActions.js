@@ -120,7 +120,7 @@ export const deleteGamesFailure = (error) => {
 export const fetchGames = () => {
     return (dispatch) => {
       dispatch(fetchGamesRequest);
-      await axios.get(`/api/admin/exchange`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const games = response.data;
                     dispatch(fetchGamesSuccess(games))
@@ -134,7 +134,7 @@ export const fetchGames = () => {
 export const fetchGame = () => {
   return (dispatch) => {
     dispatch(fetchGameRequest);
-    await axios.get(`/api/admin/exchange`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const game = response.data;
                   dispatch(fetchGameSuccess(game))
@@ -148,7 +148,7 @@ export const fetchGame = () => {
 export const createGame = () => {
   return (dispatch) => {
     dispatch(createGameRequest);
-    await axios.get(`/api/admin/exchange`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const game = response.data;
                   dispatch(createGameSuccess(game))
@@ -162,7 +162,7 @@ export const createGame = () => {
 export const updateGame = () => {
   return (dispatch) => {
     dispatch(updateGameRequest);
-    await axios.get(`/api/admin/exchange`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const game = response.data;
                   dispatch(updateGameSuccess(game))
@@ -176,7 +176,7 @@ export const updateGame = () => {
 export const deleteGames = () => {
   return (dispatch) => {
     dispatch(deleteGamesRequest);
-    await axios.get(`/api/admin/exchange`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const games = response.data;
                   dispatch(deleteGamesSuccess(games))

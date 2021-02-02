@@ -1,11 +1,20 @@
 import {
-  LOGIN_USER_REQUEST,
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAILURE,
-  FETCH_USERS_REQUEST,
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE,
-} from "./userTypes";
+  FETCH_SPORTSDETAILS_REQUEST,
+  FETCH_SPORTSDETAILS_SUCCESS,
+  FETCH_SPORTSDETAILS_FAILURE,
+  FETCH_SPORTSDETAIL_REQUEST,
+  FETCH_SPORTSDETAIL_SUCCESS,
+  FETCH_SPORTSDETAIL_FAILURE,
+  CREATE_SPORTSDETAIL_REQUEST,
+  CREATE_SPORTSDETAIL_SUCCESS,
+  CREATE_SPORTSDETAIL_FAILURE,
+  UPDATE_SPORTSDETAIL_REQUEST,
+  UPDATE_SPORTSDETAIL_SUCCESS,
+  UPDATE_SPORTSDETAIL_FAILURE,
+  DELETE_SPORTSDETAILS_REQUEST,
+  DELETE_SPORTSDETAILS_SUCCESS,
+  DELETE_SPORTSDETAILS_FAILURE,
+} from "./sportsdetailTypes";
 
 const initialState = {
   loading: false,
@@ -13,38 +22,92 @@ const initialState = {
   error: "",
 };
 
-const userReducer = (state = initialState, action) => {
+const sportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_USER_REQUEST:
+    case FETCH_SPORTSDETAILS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case LOGIN_USER_SUCCESS:
+    case FETCH_SPORTSDETAILS_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case LOGIN_USER_FAILURE:
+    case FETCH_SPORTSDETAILS_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case FETCH_USERS_REQUEST:
+    case FETCH_SPORTSDETAIL_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_USERS_SUCCESS:
+    case FETCH_SPORTSDETAIL_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_USERS_FAILURE:
+    case FETCH_SPORTSDETAIL_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+
+    case CREATE_SPORTSDETAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CREATE_SPORTSDETAIL_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case CREATE_SPORTSDETAIL_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+
+    case UPDATE_SPORTSDETAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UPDATE_SPORTSDETAIL_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case UPDATE_SPORTSDETAIL_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
+
+    case DELETE_SPORTSDETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_SPORTSDETAILS_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case DELETE_SPORTSDETAILS_FAILURE:
       return {
         loading: false,
         data: [],
@@ -56,4 +119,4 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
-export default userReducer;
+export default sportsdetailReducer;

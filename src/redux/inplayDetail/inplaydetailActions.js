@@ -57,132 +57,132 @@ export const fetchInplaydetailFailure = (error) => {
   };
 };
 
-export const createInplayRequest = () => {
+export const createInplaydetailRequest = () => {
   return {
-    type: CREATE_INPLAY_REQUEST,
+    type: CREATE_INPLAYDETAIL_REQUEST,
   };
 };
 
-export const createInplaySuccess = (inplay) => {
+export const createInplaydetailSuccess = (inplaydetail) => {
   return {
-    type: CREATE_INPLAY_SUCCESS,
-    payload: inplay,
+    type: CREATE_INPLAYDETAIL_SUCCESS,
+    payload: inplaydetail,
   };
 };
 
-export const createInplayFailure = (error) => {
+export const createInplaydetailFailure = (error) => {
   return {
-    type: CREATE_INPLAY_FAILURE,
+    type: CREATE_INPLAYDETAIL_FAILURE,
     payload: error,
   };
 };
 
-export const updateInplayRequest = () => {
+export const updateInplaydetailRequest = () => {
   return {
-    type: UPDATE_INPLAY_REQUEST,
+    type: UPDATE_INPLAYDETAIL_REQUEST,
   };
 };
 
-export const updateInplaySuccess = (inplay) => {
+export const updateInplaydetailSuccess = (inplaydetail) => {
   return {
-    type: UPDATE_INPLAY_SUCCESS,
-    payload: inplay,
+    type: UPDATE_INPLAYDETAIL_SUCCESS,
+    payload: inplaydetail,
   };
 };
 
-export const updateInplayFailure = (error) => {
+export const updateInplaydetailFailure = (error) => {
   return {
-    type: UPDATE_INPLAY_FAILURE,
+    type: UPDATE_INPLAYDETAIL_FAILURE,
     payload: error,
   };
 };
 
-export const deleteInplaysRequest = () => {
+export const deleteInplaydetailsRequest = () => {
   return {
-    type: DELETE_INPLAYS_REQUEST,
+    type: DELETE_INPLAYDETAILS_REQUEST,
   };
 };
 
-export const deleteInplaysSuccess = (inplays) => {
+export const deleteInplaydetailsSuccess = (inplaysdetails) => {
   return {
-    type: DELETE_INPLAYS_SUCCESS,
-    payload: inplays,
+    type: DELETE_INPLAYDETAILS_SUCCESS,
+    payload: inplaydetails,
   };
 };
 
-export const deleteInplaysFailure = (error) => {
+export const deleteInplaydetailsFailure = (error) => {
   return {
-    type: DELETE_INPLAYS_FAILURE,
+    type: DELETE_INPLAYDETAILS_FAILURE,
     payload: error,
   };
 };
 
-export const fetchInplays = () => {
+export const fetchInplaydetails = () => {
     return (dispatch) => {
-      dispatch(fetchInplaysRequest);
-      await axios.get(`/api/admin/deposit`)
+      dispatch(fetchInplaydetailsRequest);
+      await axios.get(`/api/`)
                   .then(response => {
-                    const finds = response.data;
-                    dispatch(fetchInplaysSuccess(finds))
+                    const inplaydetails = response.data;
+                    dispatch(fetchInplaydetailsSuccess(inplaydetails))
               }).catch(error => {
                     const errorMsg = error.message;
-                    dispatch(fetchInplaysFailure(errorMsg))
+                    dispatch(fetchInplaydetailsFailure(errorMsg))
               })
       };
 };
 
-export const fetchInplay = () => {
+export const fetchInplaydetail = () => {
   return (dispatch) => {
-    dispatch(fetchInplayRequest);
-    await axios.get(`/api/admin/deposit`)
+    dispatch(fetchInplaydetailRequest);
+    await axios.get(`/api/`)
                 .then(response => {
-                  const find = response.data;
-                  dispatch(fetchInplaySuccess(find))
+                  const inplaydetail = response.data;
+                  dispatch(fetchInplaydetailSuccess(inplaydetail))
             }).catch(error => {
                   const errorMsg = error.message;
-                  dispatch(fetchInplayFailure(errorMsg))
+                  dispatch(fetchInplaydetailFailure(errorMsg))
             })
     };
 };
 
-export const createInplay = () => {
+export const createInplaydetail = () => {
   return (dispatch) => {
-    dispatch(createInplayRequest);
-    await axios.get(`/api/admin/deposit`)
+    dispatch(createInplaydetailRequest);
+    await axios.get(`/api/`)
                 .then(response => {
-                  const find = response.data;
-                  dispatch(createInplaySuccess(find))
+                  const inplaydetail = response.data;
+                  dispatch(createInplaydetailSuccess(inplaydetail))
             }).catch(error => {
                   const errorMsg = error.message;
-                  dispatch(createInplayFailure(errorMsg))
+                  dispatch(createInplaydetailFailure(errorMsg))
             })
     };
 };
 
-export const updateInplay = () => {
+export const updateInplaydetail = () => {
   return (dispatch) => {
-    dispatch(updateInplayRequest);
-    await axios.get(`/api/admin/deposit`)
+    dispatch(updateInplaydetailRequest);
+    await axios.get(`/api/`)
                 .then(response => {
-                  const find = response.data;
-                  dispatch(updateInplaySuccess(find))
+                  const inplaydetail = response.data;
+                  dispatch(updateInplaydetailSuccess(inplaydetail))
             }).catch(error => {
                   const errorMsg = error.message;
-                  dispatch(updateInplayFailure(errorMsg))
+                  dispatch(updateInplaydetailFailure(errorMsg))
             })
     };
 };
 
-export const deleteInplays = () => {
+export const deleteInplaydetails = () => {
   return (dispatch) => {
-    dispatch(deleteInplaysRequest);
-    await axios.get(`/api/admin/deposit`)
+    dispatch(deleteInplaydetailsRequest);
+    await axios.get(`/api/`)
                 .then(response => {
-                  const finds = response.data;
-                  dispatch(deleteInplaysSuccess(finds))
+                  const inplaydetails = response.data;
+                  dispatch(deleteInplaydetailsSuccess(inplaydetails))
             }).catch(error => {
                   const errorMsg = error.message;
-                  dispatch(deleteInplaysFailure(errorMsg))
+                  dispatch(deleteInplaydetailsFailure(errorMsg))
             })
     };
 };

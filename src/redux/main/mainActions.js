@@ -1,40 +1,188 @@
 import {
-  FETCH_NOTICES_REQUEST,
-  FETCH_NOTICES_SUCCESS,
-  FETCH_NOTICES_FAILURE,
-} from "./noticeTypes";
+  FETCH_MAINS_REQUEST,
+  FETCH_MAINS_SUCCESS,
+  FETCH_MAINS_FAILURE,
+  FETCH_MAIN_REQUEST,
+  FETCH_MAIN_SUCCESS,
+  FETCH_MAIN_FAILURE,
+  CREATE_MAIN_REQUEST,
+  CREATE_MAIN_SUCCESS,
+  CREATE_MAIN_FAILURE,
+  UPDATE_MAIN_REQUEST,
+  UPDATE_MAIN_SUCCESS,
+  UPDATE_MAIN_FAILURE,
+  DELETE_MAINS_REQUEST,
+  DELETE_MAINS_SUCCESS,
+  DELETE_MAINS_FAILURE,
+} from "./mainTypes";
 import axios from "axios";
 
-export const fetchNoticesRequest = () => {
+export const fetchMainsRequest = () => {
   return {
-    type: FETCH_NOTICES_REQUEST,
+    type: FETCH_MAINS_REQUEST,
   };
 };
 
-export const fetchNoticesSuccess = (notices) => {
+export const fetchMainsSuccess = (mains) => {
   return {
-    type: FETCH_NOTICES_SUCCESS,
-    payload: notices,
+    type: FETCH_MAINS_SUCCESS,
+    payload: mains,
   };
 };
 
-export const fetchNoticesFailure = (error) => {
+export const fetchMainsFailure = (error) => {
   return {
-    type: FETCH_NOTICES_FAILURE,
+    type: FETCH_MAINS_FAILURE,
     payload: error,
   };
-  };
+};
 
-export const fetchNotices = () => {
+export const fetchMainRequest = () => {
+  return {
+    type: FETCH_MAIN_REQUEST,
+  };
+};
+
+export const fetchMainSuccess = (main) => {
+  return {
+    type: FETCH_MAIN_SUCCESS,
+    payload: main,
+  };
+};
+
+export const fetchMainFailure = (error) => {
+  return {
+    type: FETCH_MAIN_FAILURE,
+    payload: error,
+  };
+};
+
+export const createMainRequest = () => {
+  return {
+    type: CREATE_MAIN_REQUEST,
+  };
+};
+
+export const createMainSuccess = (main) => {
+  return {
+    type: CREATE_MAIN_SUCCESS,
+    payload: main,
+  };
+};
+
+export const createMainFailure = (error) => {
+  return {
+    type: CREATE_MAIN_FAILURE,
+    payload: error,
+  };
+};
+
+export const updateMainRequest = () => {
+  return {
+    type: UPDATE_MAIN_REQUEST,
+  };
+};
+
+export const updateMainSuccess = (main) => {
+  return {
+    type: UPDATE_MAIN_SUCCESS,
+    payload: main,
+  };
+};
+
+export const updateMainFailure = (error) => {
+  return {
+    type: UPDATE_MAIN_FAILURE,
+    payload: error,
+  };
+};
+
+export const deleteMainsRequest = () => {
+  return {
+    type: DELETE_MAINS_REQUEST,
+  };
+};
+
+export const deleteMainsSuccess = (mains) => {
+  return {
+    type: DELETE_MAINS_SUCCESS,
+    payload: mains,
+  };
+};
+
+export const deleteMainsFailure = (error) => {
+  return {
+    type: DELETE_MAINS_FAILURE,
+    payload: error,
+  };
+};
+
+export const fetchMains = () => {
     return (dispatch) => {
-      dispatch(fetchNoticesRequest);
-      await axios.get(`/api/admin/notices`)
+      dispatch(fetchMainsRequest);
+      await axios.get(`/api/`)
                   .then(response => {
-                    const notices = response.data;
-                    dispatch(fetchNoticesSuccess(notices))
+                    const mains = response.data;
+                    dispatch(fetchMainsSuccess(mains))
               }).catch(error => {
                     const errorMsg = error.message;
-                    dispatch(fetchNoticesFailure(errorMsg))
+                    dispatch(fetchMainsFailure(errorMsg))
               })
       };
+};
+
+export const fetchMain = () => {
+  return (dispatch) => {
+    dispatch(fetchMainRequest);
+    await axios.get(`/api/`)
+                .then(response => {
+                  const main = response.data;
+                  dispatch(fetchMainSuccess(main))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(fetchMainFailure(errorMsg))
+            })
+    };
+};
+
+export const createMain = () => {
+  return (dispatch) => {
+    dispatch(createMainRequest);
+    await axios.get(`/api/`)
+                .then(response => {
+                  const main = response.data;
+                  dispatch(createMainSuccess(main))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(createMainFailure(errorMsg))
+            })
+    };
+};
+
+export const updateMain = () => {
+  return (dispatch) => {
+    dispatch(updateMainRequest);
+    await axios.get(`/api/`)
+                .then(response => {
+                  const main = response.data;
+                  dispatch(updateMainSuccess(main))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(updateMainFailure(errorMsg))
+            })
+    };
+};
+
+export const deleteMains = () => {
+  return (dispatch) => {
+    dispatch(deleteMainsRequest);
+    await axios.get(`/api/`)
+                .then(response => {
+                  const mains = response.data;
+                  dispatch(deleteMainsSuccess(mains))
+            }).catch(error => {
+                  const errorMsg = error.message;
+                  dispatch(deleteMainsFailure(errorMsg))
+            })
+    };
 };

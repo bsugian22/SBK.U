@@ -120,7 +120,7 @@ export const deleteFindsFailure = (error) => {
 export const fetchFinds = () => {
     return (dispatch) => {
       dispatch(fetchFindsRequest);
-      await axios.get(`/api/admin/deposit`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const finds = response.data;
                     dispatch(fetchFindsSuccess(finds))
@@ -134,7 +134,7 @@ export const fetchFinds = () => {
 export const fetchFind = () => {
   return (dispatch) => {
     dispatch(fetchFindRequest);
-    await axios.get(`/api/admin/deposit`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const find = response.data;
                   dispatch(fetchFindSuccess(find))
@@ -148,7 +148,7 @@ export const fetchFind = () => {
 export const createFind = () => {
   return (dispatch) => {
     dispatch(createFindRequest);
-    await axios.get(`/api/admin/deposit`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const find = response.data;
                   dispatch(createFindSuccess(find))
@@ -162,7 +162,7 @@ export const createFind = () => {
 export const updateFind = () => {
   return (dispatch) => {
     dispatch(updateFindRequest);
-    await axios.get(`/api/admin/deposit`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const find = response.data;
                   dispatch(updateFindSuccess(find))
@@ -176,7 +176,7 @@ export const updateFind = () => {
 export const deleteFinds = () => {
   return (dispatch) => {
     dispatch(deleteFindsRequest);
-    await axios.get(`/api/admin/deposit`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const finds = response.data;
                   dispatch(deleteFindsSuccess(finds))

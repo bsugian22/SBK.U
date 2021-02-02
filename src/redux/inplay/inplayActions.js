@@ -120,10 +120,10 @@ import {
   export const fetchInplays = () => {
       return (dispatch) => {
         dispatch(fetchInplaysRequest);
-        await axios.get(`/api/admin/deposit`)
+        await axios.get(`/api/`)
                     .then(response => {
-                      const finds = response.data;
-                      dispatch(fetchInplaysSuccess(finds))
+                      const inplays = response.data;
+                      dispatch(fetchInplaysSuccess(inplays))
                 }).catch(error => {
                       const errorMsg = error.message;
                       dispatch(fetchInplaysFailure(errorMsg))
@@ -134,10 +134,10 @@ import {
   export const fetchInplay = () => {
     return (dispatch) => {
       dispatch(fetchInplayRequest);
-      await axios.get(`/api/admin/deposit`)
+      await axios.get(`/api/`)
                   .then(response => {
-                    const find = response.data;
-                    dispatch(fetchInplaySuccess(find))
+                    const inplay = response.data;
+                    dispatch(fetchInplaySuccess(inplay))
               }).catch(error => {
                     const errorMsg = error.message;
                     dispatch(fetchInplayFailure(errorMsg))
@@ -148,10 +148,10 @@ import {
   export const createInplay = () => {
     return (dispatch) => {
       dispatch(createInplayRequest);
-      await axios.get(`/api/admin/deposit`)
+      await axios.get(`/api/`)
                   .then(response => {
-                    const find = response.data;
-                    dispatch(createInplaySuccess(find))
+                    const inplay = response.data;
+                    dispatch(createInplaySuccess(inplay))
               }).catch(error => {
                     const errorMsg = error.message;
                     dispatch(createInplayFailure(errorMsg))
@@ -162,10 +162,10 @@ import {
   export const updateInplay = () => {
     return (dispatch) => {
       dispatch(updateInplayRequest);
-      await axios.get(`/api/admin/deposit`)
+      await axios.get(`/api/`)
                   .then(response => {
-                    const find = response.data;
-                    dispatch(updateInplaySuccess(find))
+                    const inplay = response.data;
+                    dispatch(updateInplaySuccess(inplay))
               }).catch(error => {
                     const errorMsg = error.message;
                     dispatch(updateInplayFailure(errorMsg))
@@ -176,10 +176,10 @@ import {
   export const deleteInplays = () => {
     return (dispatch) => {
       dispatch(deleteInplaysRequest);
-      await axios.get(`/api/admin/deposit`)
+      await axios.get(`/api/`)
                   .then(response => {
-                    const finds = response.data;
-                    dispatch(deleteInplaysSuccess(finds))
+                    const inplays = response.data;
+                    dispatch(deleteInplaysSuccess(inplays))
               }).catch(error => {
                     const errorMsg = error.message;
                     dispatch(deleteInplaysFailure(errorMsg))

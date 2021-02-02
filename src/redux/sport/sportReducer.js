@@ -22,7 +22,7 @@ const initialState = {
   error: "",
 };
 
-const saleReducer = (state = initialState, action) => {
+const sportReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_SPORTS_REQUEST:
       return {
@@ -119,4 +119,4 @@ const saleReducer = (state = initialState, action) => {
   }
 };
 
-export default saleReducer;
+export default sportReducer;

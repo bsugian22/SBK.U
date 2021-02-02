@@ -117,10 +117,10 @@ export const deleteEsportsdetailsFailure = (error) => {
   };
 };
 
-export const fetchEsportdetails = () => {
+export const fetchEsportsdetails = () => {
     return (dispatch) => {
       dispatch(fetchEsportsdetailsRequest);
-      await axios.get(`/api/admin/cash`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const esportsdetails = response.data;
                     dispatch(fetchEsportsdetailsSuccess(esportsdetails))
@@ -131,10 +131,10 @@ export const fetchEsportdetails = () => {
       };
 };
 
-export const fetchEsportdetail = () => {
+export const fetchEsportsdetail = () => {
   return (dispatch) => {
     dispatch(fetchEsportsdetailRequest);
-    await axios.get(`/api/admin/cash`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const esportsdetail = response.data;
                   dispatch(fetchEsportsdetailSuccess(esportsdetail))
@@ -145,10 +145,10 @@ export const fetchEsportdetail = () => {
     };
 };
 
-export const createEsportdetail = () => {
+export const createEsportsdetail = () => {
   return (dispatch) => {
     dispatch(createEsportsdetailRequest);
-    await axios.get(`/api/admin/cash`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const esportsdetail = response.data;
                   dispatch(createEsportsdetailSuccess(esportsdetail))
@@ -159,10 +159,10 @@ export const createEsportdetail = () => {
     };
 };
 
-export const updateEsportdetail = () => {
+export const updateEsportsdetail = () => {
   return (dispatch) => {
     dispatch(updateEsportsdetailRequest);
-    await axios.get(`/api/admin/cash`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const esportsdetail = response.data;
                   dispatch(updateEsportsdetailSuccess(esportsdetail))
@@ -173,10 +173,10 @@ export const updateEsportdetail = () => {
     };
 };
 
-export const deleteEsportdetails = () => {
+export const deleteEsportsdetails = () => {
   return (dispatch) => {
     dispatch(deleteEsportsdetailsRequest);
-    await axios.get(`/api/admin/cash`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const esportsdetails = response.data;
                   dispatch(deleteEsportsdetailsSuccess(esportsdetails))

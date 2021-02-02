@@ -138,7 +138,7 @@ export const fetchSport = () => {
     await axios.get(`/api/feed/sports`)
                 .then(response => {
                   const sport = response.data;
-                  dispatch(fetchSportsSuccess(sport))
+                  dispatch(fetchSportSuccess(sport))
             }).catch(error => {
                   const errorMsg = error.message;
                   dispatch(fetchSportFailure(errorMsg))
@@ -152,7 +152,7 @@ export const createSport = () => {
     await axios.get(`/api/feed/sports`)
                 .then(response => {
                   const sport = response.data;
-                  dispatch(createSportsSuccess(sport))
+                  dispatch(createSportSuccess(sport))
             }).catch(error => {
                   const errorMsg = error.message;
                   dispatch(createSportFailure(errorMsg))
@@ -166,7 +166,7 @@ export const updateSport = () => {
     await axios.get(`/api/feed/sports`)
                 .then(response => {
                   const sport = response.data;
-                  dispatch(updateSportsSuccess(sport))
+                  dispatch(updateSportSuccess(sport))
             }).catch(error => {
                   const errorMsg = error.message;
                   dispatch(updateSportFailure(errorMsg))
