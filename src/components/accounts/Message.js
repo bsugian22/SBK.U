@@ -87,16 +87,27 @@ const Messages = (props) => {
     };
 
     const deleteMessage = async () => {
-      await model.delete(toDeleteMessageList);
-      fetch();
-      toDeleteMessageList.messages.id = [];
-      setToDeleteMessageList({
-        ...toDeleteMessageList,
-        messages: toDeleteMessageList.messages,
+       
+      await model.delete(toDeleteMessageList.messages).then((response)=>{
+         console.log(response);
+         fetch();
       });
-
-      await model.delete();
+      
     };
+
+    const checkToDelete = async (e) => {
+      var checked = e.target.checked;
+      var id = e.target.value;
+      if(checked){
+         toDeleteMessageList.messages.push({"id":e.target.value})
+      }else {
+         toDeleteMessageList.messages.map((value, index) => {
+            if(value.id == id){
+               toDeleteMessageList.messages.splice(index,1)
+            }
+         })
+      }
+   };
 
    const getMessage = async (messageId) => {
       const {
@@ -171,7 +182,7 @@ const Messages = (props) => {
                                  <div class="heightp-100 flex-inherit flex-column">
                                     <div class="flex-inherit heightp-50">
                                        <div class="checkbox width-30 heightp-100 justify-content-center align-items-center">
-                                          <input type="checkbox" id={`post-id[`+value.id+`]`} value={value.id} />
+                                          <input type="checkbox" id={`post-id[`+value.id+`]`} value={value.id} onChange={ checkToDelete }  />
                                        </div>
                                        <div class="padding-10 background-transparent-b-10">
                                           <span class="color-grey">{value.title}</span>
@@ -231,7 +242,7 @@ const Messages = (props) => {
                   </div>
                   <div class="flex-inherit message-bottom border-top-white height-60 background-transparent-b-15 padding-vertical-5 color-grey">
                      <div class="padding-10 delete-message">
-                        <button type="button" class="btn-0 padding-horizontal-15 background-red color-white">
+                        <button type="button" class="btn-0 padding-horizontal-15 background-red color-white" onClick={deleteMessage}>
                            <i class="far fa-eraser margin-right-5"></i>선택메세지 삭제
                         </button>
                      </div>
