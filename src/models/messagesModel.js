@@ -24,7 +24,7 @@ class messagesModel
 
     async delete(params) {
         return camelize(
-          await axios.delete(`/api/messages`, { messages: params })
+          await axios.delete(`/api/messages` , { data: params })
         );
     }
 }
