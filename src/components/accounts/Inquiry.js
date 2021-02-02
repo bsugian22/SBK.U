@@ -114,6 +114,12 @@ const Inquiries = (props) => {
       setLevel(level);
    };
 
+   const setPage = (e) => {
+      showInquiries({
+         ...inquiries,
+         page: e.target.value,
+      })
+   }
 
    return (
       <Fragment>
@@ -167,7 +173,7 @@ const Inquiries = (props) => {
                   <div class="flex-inherit inquiry-page-bottom border-top-white height-60 background-transparent-b-15 padding-10 color-grey">
                      <div class="pagination flex-inherit widthp-100 heightp-100">
                         <div class="select">
-                           <select name="slct" id="slct">
+                           <select name="slct" id="slct" onChange={setPage}>
                               {pageNumber.length > 0 ? (
                                  pageNumber.map((data, index) =>{
                                     return (
