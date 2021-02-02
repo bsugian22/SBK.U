@@ -121,6 +121,22 @@ const Inquiries = (props) => {
       })
    }
 
+   const prev = () => {
+      showInquiries({
+         ...inquiries,
+         page: inquiries.page - 1,
+      })
+      document.querySelector("#slct").value = inquiries.page - 1;
+   }
+
+   const next = () => {
+      showInquiries({
+         ...inquiries,
+         page: inquiries.page + 1,
+      })
+      document.querySelector("#slct").value = inquiries.page + 1;
+   }
+
    return (
       <Fragment>
          <div class="content account-continer flex flex-inherit grow-2 flex-column">
@@ -185,16 +201,14 @@ const Inquiries = (props) => {
                            </select>
                         </div>
                         <div class="flex margin-left-5 page grow-2 justify-content-end">
-                           <Link to="/sports?offset=-100">
-                              <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5">
-                                 <i class="fas fa-chevron-left margin-0 color-grey"></i>
-                              </button>
-                           </Link>
-                           <Link to="/sports?offset=100">
-                              <button class="page-right width-40 heightp-100 background-transparent-b-20">
-                                 <i class="fas fa-chevron-right margin-0 color-grey"></i>
-                              </button>
-                           </Link>
+
+                           <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5" onClick={() => prev()}>
+                              <i class="fas fa-chevron-left margin-0 color-grey"></i>
+                           </button>
+
+                           <button class="page-right width-40 heightp-100 background-transparent-b-20" onClick={() => next()}>
+                              <i class="fas fa-chevron-right margin-0 color-grey"></i>
+                           </button>
                         </div>
                      </div>
                   </div>
