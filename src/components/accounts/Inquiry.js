@@ -14,7 +14,7 @@ const Inquiries = (props) => {
   const [checkAll, setCheckAll] = useState([]);
   let [level, setLevel] = useState("ID");
   let [toDeleteInquiryList, setToDeleteInquiryList] = useState({
-   messages: [],
+   inquiries: [],
   });
   let pageNumber = [];
 
@@ -52,7 +52,7 @@ const Inquiries = (props) => {
          isSubscribed = false;
       };
 
-   }, [inquiries.page]);
+   }, [inquiries.page, checkAll]);
 
    const fetch = async () => {
       const {
@@ -137,6 +137,39 @@ const Inquiries = (props) => {
       document.querySelector("#slct").value = inquiries.page + 1;
    }
 
+   // const deleteInquiry= async () => {
+   //    await model.delete(toDeleteInquiryList);
+   //    fetch();
+   //    toDeleteInquiryList.inquiries.id = [];
+   //    setToDeleteInquiryList({
+   //      ...toDeleteInquiryList,
+   //      inquiries: toDeleteInquiryList.inquiries,
+   //    });
+   //  };
+
+    const deleteInquiry = async () => {
+       
+      await model.delete(toDeleteInquiryList.inquiries).then((response)=>{
+         console.log(response);
+         fetch();
+      });
+      
+    };
+
+    const checkToDelete = async (e) => {
+      var checked = e.target.checked;
+      var id = e.target.value;
+      if(checked){
+         toDeleteInquiryList.inquiries.push({"id":e.target.value})
+      }else {
+         toDeleteInquiryList.inquiries.map((value, index) => {
+            if(value.id == id){
+               toDeleteInquiryList.inquiries.splice(index,1)
+            }
+         })
+      }
+   };
+
    return (
       <Fragment>
          <div class="content account-continer flex flex-inherit grow-2 flex-column">
@@ -150,28 +183,28 @@ const Inquiries = (props) => {
                   <div class="inquiry flex-column flex-inherit scrollable-auto grow-2 padding-10">
 
                      {inquiries.data.length > 0 ? (
-                        inquiries.data.map((data, index) => {
+                        inquiries.data.map((value, index) => {
                            return (
-                              <button type="button" class="flex-inherit" onClick={() => show(data.id)} key={index}>
-                                 <div class={`flex-column flex-inherit inquiry-list min-height-100 widthp-100 padding-10 background-transparent-b-10 color-grey border-bottom-white${inquiry.id == data.id ? ' active' : ''}`}>
+                              <button type="button" class="flex-inherit" onClick={() => show(value.id)} key={index}>
+                                 <div class={`flex-column flex-inherit inquiry-list min-height-100 widthp-100 padding-10 background-transparent-b-10 color-grey border-bottom-white${inquiry.id == value.id ? ' active' : ''}`}>
                                     <div class="heightp-100 flex-inherit flex-column">
                                        <div class="flex-inherit heightp-50">
                                           <div class="checkbox width-30 justify-content-center align-items-center">
-                                             <input type="checkbox" id={`post-id[`+data.id+`]`} value={data.id} />
+                                             <input type="checkbox" id={`post-id[`+value.id+`]`} value={value.id} onChange={ checkToDelete }  />
                                           </div>
                                           <div class="padding-10 background-transparent-b-10">
-                                             <span class="color-grey">{data.title}</span>
+                                             <span class="color-grey">{value.title}</span>
                                           </div>
                                           <div class="padding-10">
-                                             {data.readAt != null ? (<span class="color-green">읽음</span>) : (<span class="color-red">읽지않음</span>)} 
+                                             {value.readAt != null ? (<span class="color-green">읽음</span>) : (<span class="color-red">읽지않음</span>)} 
                                           </div>
                                           <div class="padding-10 grow-2 justify-content-end">
-                                             <span class="color-grey">{Moment(data.createdAt).format('MM / DD HH:mm')}</span>
+                                             <span class="color-grey">{Moment(value.createdAt).format('MM / DD HH:mm')}</span>
                                           </div>
                                        </div>
                                        <div class="flex-inherit heightp-50 align-items-center">
                                           <div class="padding-10 text-ellipsis">
-                                             <span class="color-white text-ellipsis">{data.content}</span>
+                                             <span class="color-white text-ellipsis">{value.content}</span>
                                           </div>
                                        </div>
                                     </div>
@@ -214,7 +247,7 @@ const Inquiries = (props) => {
                   </div>
                   <div class="flex-inherit inquiry-bottom border-top-white height-60 background-transparent-b-15 padding-vertical-5 color-grey">
                      <div class="padding-10 delete-inquiry">
-                        <button type="button" class="btn-0 padding-horizontal-15 background-red color-white">
+                        <button type="button" class="btn-0 padding-horizontal-15 background-red color-white" onClick={deleteInquiry}>
                            <i class="far fa-eraser margin-right-5"></i>선택 글 삭제
                         </button>
                      </div>
