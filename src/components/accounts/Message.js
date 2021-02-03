@@ -87,12 +87,9 @@ const Messages = (props) => {
    };
 
    const deleteMessage = async () => {
-
       await model.delete(toDeleteMessageList).then((response) => {
-         console.log(response);
          fetch();
       });
-
    };
 
    const checkToDelete = async (e) => {
@@ -142,23 +139,28 @@ const Messages = (props) => {
    }
 
    const prev = () => {
-      setNotice({
+      getMessages({
          ...messages,
          page: messages.page - 1,
+         post: messages.post.id
       })
+      document.querySelector("#slct").value = messages.page - 1;
    }
 
    const next = () => {
-      setNotice({
+      getMessages({
          ...messages,
          page: messages.page + 1,
+         post: messages.post.id
       })
+      document.querySelector("#slct").value = messages.page + 1;
    }
 
    const setPage = (e) => {
       getMessages({
          ...messages,
-         page: e.value,
+         page: e.target.value,
+         post: messages.post.id
       })
    }
 
@@ -177,11 +179,11 @@ const Messages = (props) => {
                      {messages.data.length > 0 ? (
                         messages.data.map((value, index) => {
                            return (
-                              <button type="button" class="flex-inherit" onClick={() => view(value.id)} key={index}>
-                                 <div class={`flex-column flex-inherit message-list min-height-100 widthp-100 padding-10 background-transparent-b-10 color-grey border-bottom-white${messages.post.id == value.id ? ' active' : ''}`}>
+                              <button type="button" class="flex-inherit" onClick={() => getMessage(value.id)} key={index}>
+                                 <div class={`flex-column flex-inherit message-list min-height-100 widthp-100 padding-10 background-transparent-b-10 color-grey border-bottom-white${message.id == value.id ? ' active' : ''}`}>
                                     <div class="heightp-100 flex-inherit flex-column">
                                        <div class="flex-inherit heightp-50">
-                                          <div class="checkbox width-30 heightp-100 justify-content-center align-items-center">
+                                          <div class="checkbox width-30 justify-content-center align-items-center">
                                              <input type="checkbox" id={`post-id[` + value.id + `]`} value={value.id} onChange={checkToDelete} />
                                           </div>
                                           <div class="padding-10 background-transparent-b-10">
@@ -227,16 +229,15 @@ const Messages = (props) => {
                            </select>
                         </div>
                         <div class="flex margin-left-5 page grow-2 justify-content-end">
-                           <Link to="/sports?offset=-100">
-                              <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5">
+
+                              <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5" onClick={() => prev()}>
                                  <i class="fas fa-chevron-left margin-0 color-grey"></i>
                               </button>
-                           </Link>
-                           <Link to="/sports?offset=100">
-                              <button class="page-right width-40 heightp-100 background-transparent-b-20">
+
+                              <button class="page-right width-40 heightp-100 background-transparent-b-20" onClick={() => next()}>
                                  <i class="fas fa-chevron-right margin-0 color-grey"></i>
                               </button>
-                           </Link>
+
                         </div>
                      </div>
                   </div>
@@ -255,20 +256,20 @@ const Messages = (props) => {
                   </div>
                </div>
                <div class="message-read border-left flex-inherit flex-column account-height widthp-60 padding-10 scrollable-auto">
-                  {messages.post.id ? (
+                  {message.id ? (
                      <div class="message-read-header flex-inherit flex-column align-items-center-inherit">
                         <div class="title flex-inherit grow-2 background-transparent-b-20 widthp-100 padding-15">
                            <span class="flex color-grey align-items-center text-ellipsis">
-                              <span class="margin-left-5 color-white text-ellipsis">{messages.post.title}</span>
+                              <span class="margin-left-5 color-white text-ellipsis">{message.title}</span>
                            </span>
                         </div>
                         <div class="date flex-inherit grow-2 margin-bottom-10 background-transparent-b-10 widthp-100 padding-15">
-                           <span class="color-grey margin-right-15 align-items-center"><i class="fal fa-calendar-alt margin-right-5"></i>{Moment(messages.post.createdAt).format('MM / DD HH:mm')}</span>
+                           <span class="color-grey margin-right-15 align-items-center"><i class="fal fa-calendar-alt margin-right-5"></i>{Moment(message.createdAt).format('MM / DD HH:mm')}</span>
                            <span class="color-grey align-items-center"><i class="far fa-user-alt margin-right-5"></i>관리자</span>
                         </div>
                         <div class="flex-column message-read-content min-height-150 padding-10 background-transparent-b-10 color-grey">
                            <div class="text">
-                              <p>{messages.post.content}</p>
+                              <p>{message.content}</p>
                            </div>
                         </div>
                      </div>
