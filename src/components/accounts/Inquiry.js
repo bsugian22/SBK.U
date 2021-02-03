@@ -137,20 +137,8 @@ const Inquiries = (props) => {
       document.querySelector("#slct").value = inquiries.page + 1;
    }
 
-   // const deleteInquiry= async () => {
-   //    await model.delete(toDeleteInquiryList);
-   //    fetch();
-   //    toDeleteInquiryList.inquiries.id = [];
-   //    setToDeleteInquiryList({
-   //      ...toDeleteInquiryList,
-   //      inquiries: toDeleteInquiryList.inquiries,
-   //    });
-   //  };
-
     const deleteInquiry = async () => {
-       
-      await model.delete(toDeleteInquiryList.inquiries).then((response)=>{
-         console.log(response);
+      await model.delete(toDeleteInquiryList).then((response)=>{
          fetch();
       });
       
