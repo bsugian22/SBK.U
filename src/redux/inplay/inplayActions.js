@@ -15,7 +15,7 @@ import {
     DELETE_INPLAYS_SUCCESS,
     DELETE_INPLAYS_FAILURE,
   } from "./inplayTypes";
-  import axios from "../../plugins/axios";
+  import axios from "axios";
   
   export const fetchInplaysRequest = () => {
     return {
@@ -120,7 +120,7 @@ import {
   export const fetchInplays = () => {
       return (dispatch) => {
         dispatch(fetchInplaysRequest);
-        axios.get(`/api/`)
+        await axios.get(`/api/`)
                     .then(response => {
                       const inplays = response.data;
                       dispatch(fetchInplaysSuccess(inplays))
@@ -134,7 +134,7 @@ import {
   export const fetchInplay = () => {
     return (dispatch) => {
       dispatch(fetchInplayRequest);
-      axios.get(`/api/`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const inplay = response.data;
                     dispatch(fetchInplaySuccess(inplay))
@@ -148,7 +148,7 @@ import {
   export const createInplay = () => {
     return (dispatch) => {
       dispatch(createInplayRequest);
-      axios.get(`/api/`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const inplay = response.data;
                     dispatch(createInplaySuccess(inplay))
@@ -162,7 +162,7 @@ import {
   export const updateInplay = () => {
     return (dispatch) => {
       dispatch(updateInplayRequest);
-      axios.get(`/api/`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const inplay = response.data;
                     dispatch(updateInplaySuccess(inplay))
@@ -176,7 +176,7 @@ import {
   export const deleteInplays = () => {
     return (dispatch) => {
       dispatch(deleteInplaysRequest);
-      axios.get(`/api/`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const inplays = response.data;
                     dispatch(deleteInplaysSuccess(inplays))

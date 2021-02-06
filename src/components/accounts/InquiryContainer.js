@@ -3,7 +3,7 @@ import InquiryPost from './InquiryPost'
 import InquiryWrite from './InquiryWrite'
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import { mapStateToProps, mapDispatchProps } from "../../redux/store";
+import { mapStateToProps, mapDispatchProps } from "../../helpers/store";
 import inquiriesModel from "../../models/inquiriesModel";
 import Moment from "moment";
 

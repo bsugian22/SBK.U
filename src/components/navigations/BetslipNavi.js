@@ -144,6 +144,7 @@ export default function BetslipNavi(props) {
                 name="skeyword"
                 placeholder="금액을 입력하세요"
                 required=""
+                value=""
               />
             </div>
           </div>

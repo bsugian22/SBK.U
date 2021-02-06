@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { mapStateToProps, mapDispatchProps } from '../../redux/store'
+import { mapStateToProps, mapDispatchProps } from '../../helpers/store'
 
 const Pagination = (props) =>
 {

@@ -15,7 +15,7 @@ import {
   DELETE_REGISTERS_SUCCESS,
   DELETE_REGISTERS_FAILURE,
 } from "./registerTypes";
-import axios from "../../plugins/axios";
+import axios from "axios";
 
 export const fetchRegistersRequest = () => {
   return {
@@ -120,7 +120,7 @@ export const deleteRegistersFailure = (error) => {
 export const fetchRegisters = () => {
     return (dispatch) => {
       dispatch(fetchRegistersRequest);
-      axios.get(`/api/`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const registers = response.data;
                     dispatch(fetchRegistersSuccess(registers))
@@ -134,7 +134,7 @@ export const fetchRegisters = () => {
 export const fetchRegister = () => {
   return (dispatch) => {
     dispatch(fetchRegisterRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const register = response.data;
                   dispatch(fetchRegisterSuccess(register))
@@ -148,7 +148,7 @@ export const fetchRegister = () => {
 export const createRegister = () => {
   return (dispatch) => {
     dispatch(createRegisterRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const register = response.data;
                   dispatch(createRegisterSuccess(register))
@@ -162,7 +162,7 @@ export const createRegister = () => {
 export const updateRegister = () => {
   return (dispatch) => {
     dispatch(updateRegisterRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const register = response.data;
                   dispatch(updateRegisterSuccess(register))
@@ -176,7 +176,7 @@ export const updateRegister = () => {
 export const deleteRegisters = () => {
   return (dispatch) => {
     dispatch(deleteRegistersRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const registers = response.data;
                   dispatch(deleteRegistersSuccess(registers))

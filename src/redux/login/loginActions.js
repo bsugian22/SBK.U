@@ -18,7 +18,7 @@ import {
   DELETE_USERS_SUCCESS,
   DELETE_USERS_FAILURE,
 } from "./loginTypes";
-import axios from "../../plugins/axios";
+import axios from "axios";
 
 export const loginUserRequest = () => {
   return {
@@ -135,7 +135,7 @@ export const deleteUsersFailure = (error) => {
 export const loginUser = () => {
     return (dispatch) => {
       dispatch(loginUserRequest);
-      axios.get(`/api/users`)
+      await axios.get(`/api/users`)
                   .then(response => {
                     const user = response.data;
                     dispatch(loginUserSuccess(user))
@@ -149,7 +149,7 @@ export const loginUser = () => {
 export const fetchUsers = () => {
     return (dispatch) => {
       dispatch(fetchUsersRequest);
-      axios.get(`/api/users`)
+      await axios.get(`/api/users`)
                   .then(response => {
                     const users = response.data;
                     dispatch(fetchUsersSuccess(users))
@@ -163,7 +163,7 @@ export const fetchUsers = () => {
 export const fetchUser = () => {
   return (dispatch) => {
     dispatch(fetchUserRequest);
-    axios.get(`/api/users`)
+    await axios.get(`/api/users`)
                 .then(response => {
                   const user = response.data;
                   dispatch(fetchUserSuccess(user))
@@ -177,7 +177,7 @@ export const fetchUser = () => {
 export const createUser = () => {
   return (dispatch) => {
     dispatch(createUserRequest);
-    axios.get(`/api/users`)
+    await axios.get(`/api/users`)
                 .then(response => {
                   const user = response.data;
                   dispatch(createUserSuccess(user))
@@ -191,7 +191,7 @@ export const createUser = () => {
 export const updateUser = () => {
   return (dispatch) => {
     dispatch(updateUserRequest);
-    axios.get(`/api/users`)
+    await axios.get(`/api/users`)
                 .then(response => {
                   const user = response.data;
                   dispatch(updateUserSuccess(user))
@@ -205,7 +205,7 @@ export const updateUser = () => {
 export const deleteUsers = () => {
   return (dispatch) => {
     dispatch(deleteUsersRequest);
-    axios.get(`/api/users`)
+    await axios.get(`/api/users`)
                 .then(response => {
                   const users = response.data;
                   dispatch(deleteUsersSuccess(users))

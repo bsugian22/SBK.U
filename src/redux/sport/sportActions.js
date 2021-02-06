@@ -15,7 +15,7 @@ import {
   DELETE_SPORTS_SUCCESS,
   DELETE_SPORTS_FAILURE,
 } from "./sportTypes";
-import axios from "../../plugins/axios";
+import axios from "axios";
 
 export const fetchSportsRequest = () => {
   return {
@@ -121,7 +121,7 @@ export const deleteSportsFailure = (error) => {
 export const fetchSports = () => {
     return (dispatch) => {
       dispatch(fetchSportsRequest);
-      axios.get(`/api/feed/sports`)
+      await axios.get(`/api/feed/sports`)
                   .then(response => {
                     const sports = response.data;
                     dispatch(fetchSportsSuccess(sports))
@@ -135,7 +135,7 @@ export const fetchSports = () => {
 export const fetchSport = () => {
   return (dispatch) => {
     dispatch(fetchSportRequest);
-    axios.get(`/api/feed/sports`)
+    await axios.get(`/api/feed/sports`)
                 .then(response => {
                   const sport = response.data;
                   dispatch(fetchSportSuccess(sport))
@@ -149,7 +149,7 @@ export const fetchSport = () => {
 export const createSport = () => {
   return (dispatch) => {
     dispatch(createSportRequest);
-    axios.get(`/api/feed/sports`)
+    await axios.get(`/api/feed/sports`)
                 .then(response => {
                   const sport = response.data;
                   dispatch(createSportSuccess(sport))
@@ -163,7 +163,7 @@ export const createSport = () => {
 export const updateSport = () => {
   return (dispatch) => {
     dispatch(updateSportRequest);
-    axios.get(`/api/feed/sports`)
+    await axios.get(`/api/feed/sports`)
                 .then(response => {
                   const sport = response.data;
                   dispatch(updateSportSuccess(sport))
@@ -177,7 +177,7 @@ export const updateSport = () => {
 export const deleteSports = () => {
   return (dispatch) => {
     dispatch(deleteSportsRequest);
-    axios.get(`/api/feed/sports`)
+    await axios.get(`/api/feed/sports`)
                 .then(response => {
                   const sports = response.data;
                   dispatch(deleteSportsSuccess(sports))

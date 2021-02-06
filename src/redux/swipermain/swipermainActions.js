@@ -15,7 +15,7 @@ import {
   DELETE_SWIPERMAINS_SUCCESS,
   DELETE_SWIPERMAINS_FAILURE,
 } from "./swipermainTypes";
-import axios from "../../plugins/axios";
+import axios from "axios";
 
 export const fetchSwipermainsRequest = () => {
   return {
@@ -120,7 +120,7 @@ export const deleteSwipermainsFailure = (error) => {
 export const fetchSwipermains = () => {
     return (dispatch) => {
       dispatch(fetchSwipermainsRequest);
-      axios.get(`/api/`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const swipermains = response.data;
                     dispatch(fetchSwipermainsSuccess(swipermains))
@@ -134,7 +134,7 @@ export const fetchSwipermains = () => {
 export const fetchSwipermain = () => {
   return (dispatch) => {
     dispatch(fetchSwipermainRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const swipermain = response.data;
                   dispatch(fetchSwipermainSuccess(swipermain))
@@ -148,7 +148,7 @@ export const fetchSwipermain = () => {
 export const createSwipermain = () => {
   return (dispatch) => {
     dispatch(createSwipermainRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const swipermain = response.data;
                   dispatch(createSwipermainSuccess(swipermain))
@@ -162,7 +162,7 @@ export const createSwipermain = () => {
 export const updateSwipermain = () => {
   return (dispatch) => {
     dispatch(updateSwipermainRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const swipermain = response.data;
                   dispatch(updateSwipermainSuccess(swipermain))
@@ -176,7 +176,7 @@ export const updateSwipermain = () => {
 export const deleteSwipermains = () => {
   return (dispatch) => {
     dispatch(deleteSwipermainsRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const swipermains = response.data;
                   dispatch(deleteSwipermainsSuccess(swipermains))

@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState, useContext } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import Select from 'react-select'
-import { mapStateToProps, mapDispatchProps } from '../../redux/store'
+import { mapStateToProps, mapDispatchProps } from '../../helpers/store'
 import sweetalert from '../../plugins/sweetalert'
 import depositModel from '../../models/depositModel'
 import echo from '../../plugins/echo'
@@ -171,299 +171,272 @@ const Deposit = (props) => {
    return (
       <Fragment>
          <div class="content account-continer flex flex-inherit grow-2 flex-column">
-            <div class="deposit-header-desktop content-header shrink-0 border-bottom height-50 align-items-center padding-horizontal-10 background-transparent-b-25 border-left">
-               <span class="color-grey">
-                  <i class="fas fa-hand-holding-usd"></i>DEPOSIT
-               </span>
-            </div>
-            <div class="deposit-wrap deposit-content-desktop account border-top flex-inherit flex-row">
-               <div class="deposit-left border-right flex-inherit flex-column account-height widthp-50 padding-10 scrollable-auto">
-                  <form class="flex-column" onSubmit={submit}>
-                     <div class="notice flex-column flex-inherit">
-                        <div class="notice-header height-40 padding-10 align-items-center background-transparent-b-30">
-                           <span class="color-white">
-                              <i class="far fa-exclamation-triangle color-yellow"></i>입금신청서 작성 전 꼭 읽어보세요
-                           </span>
+            <div class="deposit-wrap account deposit-content-desktop flex-inherit padding-10">
+               <div class="deposit-left-content account-height widthp-50 flex-inherit flex-column margin-right-10 scrollable-auto">
+                  <div class="widthp-100 deposit-notice flex-inherit flex-column margin-bottom-20">
+                     <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
+                        <span class="color-white">충전신청 주의사항</span>
+                     </div>
+                     <div class="ac-comment-header-content padding-15 background-transparent-b-5 flex-inherit flex-column">
+                        <p class="color-grey">예금주명과 입금자명이 다를 시 입금처리가 되지않습니다</p>
+                        <p class="color-grey">입금금액과 입금금액이 다를 시 입금처리가 되지않습니다</p>
+                        <p class="color-grey">선 입금 후 입금신청 부탁드립니다</p>
+                        <p class="color-grey">입금 최소 금액은 1만원 이상 1천원 단위로 가능합니다</p>
+                        <p class="color-grey">입금 계좌가 변경 될 경우 회원님들께 쪽지로 안내해드립니다</p>
+                     </div>
+                  </div>
+                  <div class="deposit-payment flex-column flex-inherit">
+                     <div class="flex-column flex-inherit widthp-100">
+                        <div class="red-shadow deposit-payment-apply height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                           <span class="color-white grow-2">충전신청 주의사항</span>
+                           <div class="padding-right-15 align-items-center">
+                              <i class="far fa-exclamation-triangle color-yellow"></i>
+                              <span class="color-grey">선입금 후 신청서를 작성해주세요.</span>
+                           </div>
                         </div>
-                        <div class="flex-column notice-contents min-height-150 padding-10 background-transparent-b-15 color-grey">
-                           <div class="text">
-                              <p>예금주명과 입금자명이 다를 시 입금처리가 되지않습니다</p>
-                              <p>입금금액과 입금금액이 다를 시 입금처리가 되지않습니다</p>
-                              <p>선 입금 후 입금신청 부탁드립니다</p>
-                              <p>입금 최소 금액은 1만원 이상 1천원 단위로 가능합니다</p>
-                              <br />
-                              <p>입금 계좌가 변경 될 경우 회원님들께 쪽지로 안내해드립니다</p>
+                        <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                           <span class="color-white">결제 방법 선택</span>
+                        </div>
+                        <div class="ac-payment-pbp flex-inherit align-items-center align-items-center-inherit justify-content-center-inherit">
+                           <div class="widthp-33 border-right border-bottom height-45 color-green background-transparent-b-5">
+                              <span class="color-green">
+                                 <i class="far fa-wallet"></i>현금
+                              </span>
+                           </div>
+                           <div class="widthp-33 border-right border-bottom height-45 color-green background-transparent-b-5">
+                              <span class="color-grey">
+                                 <i class="fab fa-paypal"></i>페이팔
+                              </span>
+                           </div>
+                           <div class="widthp-33  border-bottom height-45 color-green background-transparent-b-5">
+                              <span class="color-grey">
+                                 <i class="fab fa-bitcoin"></i>비트코인
+                              </span>
                            </div>
                         </div>
                      </div>
-                     <div class="flex-column flex-inherit form margin-top-10">
-                        <div class="form-header height-40 padding-10 align-items-center background-transparent-b-30">
-                           <span class="color-grey">
-                              <i class="fal fa-pencil"></i>입금신청서
-                           </span>
+                     <div class="flex-column flex-inherit widthp-100">
+                        <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                           <span class="color-white">입금자 및 충전액</span>
                         </div>
-                        <div class="form-data flex-inherit background-transparent-b-15 padding-10 flex-column">
-                           <div class="guide-text margin-bottom-10">
-                              <span class="color-grey">1. 입금 방법 선택</span>
-                           </div>
-                           <div class="payment height-40 justify-content-center-inherit align-items-center-inherit">
-                              <button type="button" class="flex widthp-33 background-transparent-b-10 active">
-                                 <span class="color-grey">
-                                    <i class="far fa-wallet"></i>현금
-                                 </span>
-                              </button>
-                              <button type="button" class="flex btn-0 widthp-33 margin-horizontal-5 background-transparent-b-10" disabled>
-                                 <span class="color-grey">
-                                    <i class="fab fa-paypal"></i>페이팔
-                                 </span>
-                              </button>
-                              <button type="button" class="flex btn-0 widthp-33 background-transparent-b-10" disabled>
-                                 <span class="color-grey">
-                                    <i class="fab fa-bitcoin"></i>비트코인
-                                 </span>
-                              </button>
-                           </div>
-                           <div class="guide-text margin-vertical-10">
-                              <span class="color-grey">2. 입금 계좌 확인</span>
-                           </div>
-                           <div class="flex-column background-transparent-b-10">
-                              <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex">
-                                 <div class="flex widthp-33 background-transparent-b-10">
-                                    <span class="color-white">은행명</span>
-                                 </div>
-                                 <div class="flex widthp-33 background-transparent-b-10">
-                                    <span class="color-white">예금주</span>
-                                 </div>
-                                 <div class="flex widthp-33 background-transparent-b-10">
-                                    <span class="color-white">계좌번호</span>
-                                 </div>
+                        <div class="account-form-data flex-column flex-inherit">
+                           <div class="form-rows flex-inherit">
+                              <div class="widthp-33 border-right form-title height-45 border-bottom align-items-center justify-content-center">
+                                 <span class="color-grey">입금자명</span>
                               </div>
-                              <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex deposit-account">
-                                 <div class="flex widthp-33 bank">
-                                    <span class="color-grey">-</span>
-                                 </div>
-                                 <div class="flex widthp-33 holder">
-                                    <span class="color-grey">-</span>
-                                 </div>
-                                 <div class="flex widthp-33 number">
-                                    <span class="color-grey">-</span>
-                                 </div>
+                              <div class="widthp-67 form-content height-45 border-bottom">
+                                 <input type="text" name="" class="padding-left-10 input-form" placeholder="입금자명을 입력해주세요" />
                               </div>
                            </div>
-                           <div class="guide-text margin-vertical-10">
-                              <span class="color-grey">3. 입금자명 및 입금금액</span>
-                           </div>
-                           <div class="flex-column">
-                              <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                                 <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                                    <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                       <span class="color-white">입금자명</span>
-                                    </div>
-                                    <div class="flex widthp-60 heightp-100">
-                                       <span class="color-grey">이름</span>
-                                    </div>
-                                 </div>
-                                 <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit deposit-amount-wrap">
-                                    <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                       <span class="color-white">입금금액</span>
-                                    </div>
-                                    <div class="flex widthp-60 heightp-100">
-                                       <input type="text" class="input-form widthp-200" name="amount" placeholder="0" value={deposit.form.amount.toLocaleString()} onChange={amountChange} required />
-                                    </div>
-                                 </div>
+                           <div class="form-rows flex-inherit">
+                              <div class="widthp-33 border-right form-title heightp-100 border-bottom align-items-center justify-content-center padding-vertical-15">
+                                 <span class="color-grey">충전액</span>
                               </div>
-                              <div class="money-btn height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex">
-                                 <div class="flex widthp-100 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                                    <div class="flex widthp-20 heightp-100 background-transparent-b-10">
-                                       <span class="color-white">빠른입력</span>
+                              <div class="widthp-67 form-content border-bottom flex-inherit flex-column">
+                                 <div class="amount-box flex-inherit border-bottom padding-vertical-15">
+                                    <div class="grow-2">
+                                       <input
+                                          type="text"
+                                          class="input-form padding-left-10"
+                                          name="amount"
+                                          placeholder="0"
+                                          value={deposit.form.amount.toLocaleString()}
+                                          onChange={amountChange}
+                                          required
+                                       />
                                     </div>
-                                    <div class="flex widthp-80 heightp-100 padding-5 deposit-input-wrap">
-                                       <button
-                                          type="button"
-                                          class="flex justify-content-center align-items-center background-transparent-b-10 widthp-20 margin-right-2 heightp-100 color-grey"
-                                          data-amount="30000"
-                                          onClick={QuickInput}
-                                       >
-                                          30,000
+                                    <div>
+                                       <button type="button">
+                                          <i class="far fa-plus color-grey"></i>
                                        </button>
-                                       <button
-                                          type="button"
-                                          class="flex justify-content-center align-items-center background-transparent-b-10 widthp-20 margin-right-2 heightp-100 color-grey"
-                                          data-amount="50000"
-                                          onClick={QuickInput}
-                                       >
-                                          50,000
-                                       </button>
-                                       <button
-                                          type="button"
-                                          class="flex justify-content-center align-items-center background-transparent-b-10 widthp-20 margin-right-2 heightp-100 color-grey"
-                                          data-amount="100000"
-                                          onClick={QuickInput}
-                                       >
-                                          100,000
-                                       </button>
-                                       <button
-                                          type="button"
-                                          class="flex justify-content-center align-items-center background-transparent-b-10 widthp-20 margin-right-2 heightp-100 color-grey"
-                                          data-amount="500000"
-                                          onClick={QuickInput}
-                                       >
-                                          500,000
-                                       </button>
-                                       <button
-                                          type="button"
-                                          class="flex justify-content-center align-items-center background-transparent-b-10 widthp-20 heightp-100 color-grey"
-                                          data-amount="1000000"
-                                          onClick={QuickInput}
-                                       >
-                                          1,000,000
+                                       <button type="button">
+                                          <i class="far fa-minus color-grey"></i>
                                        </button>
                                     </div>
                                  </div>
-                              </div>
-                           </div>
-                           <div class="guide-text margin-vertical-10">
-                              <span class="color-grey">4. 보너스정보</span>
-                           </div>
-                           <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                              <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                                 <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                    <span class="color-white">충전보너스</span>
-                                 </div>
-                                 <div class="flex widthp-60 heightp-100">
-                                    <span class="color-grey deposit-bonus-rate"></span>
-                                 </div>
-                              </div>
-                              <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                                 <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                    <span class="color-white">보너스여부</span>
-                                 </div>
-                                 <div class="flex widthp-60 heightp-100">
-                                    <label class="switch-toggle inner rect">
-                                       <input type="checkbox" name="dep_bonus" value="1" />
-                                       <div></div>
-                                    </label>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="flex-column background-transparent-b-10">
-                              <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex">
-                                 <div class="flex widthp-25 background-transparent-b-10">
-                                    <span class="color-white">스포츠싱글</span>
-                                 </div>
-                                 <div class="flex widthp-25 background-transparent-b-10">
-                                    <span class="color-white">실시간싱글</span>
-                                 </div>
-                                 <div class="flex widthp-25 background-transparent-b-10">
-                                    <span class="color-white">미니게임</span>
-                                 </div>
-                                 <div class="flex widthp-25 background-transparent-b-10">
-                                    <span class="color-white">카지노</span>
-                                 </div>
-                              </div>
-                              <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex">
-                                 <div class="flex widthp-25">
-                                    <span class="color-grey single-rolling-rate"></span>
-                                 </div>
-                                 <div class="flex widthp-25">
-                                    <span class="color-grey single-inplay-rolling-rate"></span>
-                                 </div>
-                                 <div class="flex widthp-25">
-                                    <span class="color-grey minigame-rolling-rate"></span>
-                                 </div>
-                                 <div class="flex widthp-25">
-                                    <span class="color-grey casino-rolling-rate">이용불가</span>
+                                 <div class="amount-quick-box flex-inherit height-40">
+                                    <button
+                                       type="button"
+                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       data-amount="30000"
+                                       onClick={QuickInput}
+                                    >
+                                       30,000
+                                    </button>
+                                    <button
+                                       type="button"
+                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       data-amount="50000"
+                                       onClick={QuickInput}
+                                    >
+                                       50,000
+                                    </button>
+                                    <button
+                                       type="button"
+                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       data-amount="100000"
+                                       onClick={QuickInput}
+                                    >
+                                       100,000
+                                    </button>
+                                    <button
+                                       type="button"
+                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       data-amount="500000"
+                                       onClick={QuickInput}
+                                    >
+                                       500,000
+                                    </button>
+                                    <button
+                                       type="button"
+                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 heightp-100 color-grey"
+                                       data-amount="1000000"
+                                       onClick={QuickInput}
+                                    >
+                                       1,000,000
+                                    </button>
                                  </div>
                               </div>
                            </div>
                         </div>
-                        <div class="form-bottom height-40 padding-horizontal-10 align-items-center background-transparent-b-30">
-                           <div class="flex grow-2 heightp-100 padding-vertical-5 justify-content-end">
-                              <button class="btn-0 heightp-100 width-120 background-green" type="submit">
-                                 <span class="color-white">
-                                    <i class="fas fa-check"></i>입금신청
-                                 </span>
+                     </div>
+                     <div class="flex-column flex-inherit widthp-100">
+                        <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                           <span class="color-white">결제 계좌 확인</span>
+                        </div>
+                        <div class="deposit-payment-confirm-data flex-column flex-inherit">
+                           <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom align-items-center-inherit">
+                              <div class="widthp-33 border-right">
+                                 <span class="color-grey">은행명</span>
+                              </div>
+                              <div class="widthp-33 border-right">
+                                 <span class="color-grey">예금주</span>
+                              </div>
+                              <div class="widthp-33">
+                                 <span class="color-grey">결제 계좌</span>
+                              </div>
+                           </div>
+                           <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom align-items-center-inherit">
+                              <div class="widthp-33 border-right">
+                                 <span class="color-white">농협</span>
+                              </div>
+                              <div class="widthp-33 border-right">
+                                 <span class="color-white">주식회사 웨스트몰</span>
+                              </div>
+                              <div class="widthp-33">
+                                 <span class="color-white">301-0252-3577-31</span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="deposit-payment-confirm-btn padding-top-20 flex-inherit">
+                           <div class="grow-2">
+                              <button type="button" class="padding-15 background-transparent-b-10 color-white">
+                                 초기화
+                              </button>
+                           </div>
+                           <div>
+                              <button type="button" class="padding-15 background-green color-white">
+                                 충전신청
                               </button>
                            </div>
                         </div>
                      </div>
-                  </form>
+                  </div>
                </div>
-               <div class="deposit-right border-left flex-inherit flex-column account-height widthp-50 padding-10 scrollable-auto">
-                  <div class="list-header flex-inherit align-items-center padding-15 background-transparent-b-30">
-                     <div class="date flex-inherit grow-2">
-                        <span class="flex color-grey align-items-center">
-                           <i class="fal fa-sticky-note color-yellow margin-top-2"></i>충전내역목록
-                        </span>
-                     </div>
+               <div class="deposit-right-content account-height widthp-50 flex-inherit flex-column scrollable-auto">
+                  <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
+                     <span class="color-white">충전신청 내역</span>
                   </div>
-                  <div class="list-wrap flex-inherit background-transparent-b-20 flex-column">
-                     {deposit.depositActivities.length > 0 ? (
-                        deposit.depositActivities.map((value, index) => {
-                           return (
-                              <div class="list flex-inherit padding-vertical-15 align-items-center border-top justify-content-center-inherit" key={index}>
-                                 <div class="grow-2">
-                                    <input type="checkbox" onClick={(e) => checkbox(e, value.id)} />
-                                 </div>
-                                 <div class="grow-2 color-grey">{moment(value.createdAt).format('MM / DD HH:mm')}</div>
-                                 <div class="grow-2 color-grey">{value.method == 'BITCOIN' ? '비트코인' : value.method == 'CASH' ? '현금' : value.method == 'PAYPAL' ? '페이팔' : '알 수 없음'}</div>
-                                 <div class="grow-2 color-green">{value.amount.toLocaleString()}원</div>
-                                 {value.status == 'PENDING' ? (
-                                    <div class="grow-2 color-grey">대기</div>
-                                 ) : value.status == 'ACCEPTED' ? (
-                                    <div class="grow-2 color-blue">완료</div>
-                                 ) : value.status == 'REJECTED' ? (
-                                    <div class="grow-2 color-red">취소</div>
-                                 ) : value.status == 'RECALLED' ? (
-                                    <div class="grow-2 color-red">회수</div>
-                                 ) : (
-                                    ''
-                                 )}
-                              </div>
-                           )
-                        })
-                     ) : (
-                        <div class="flex justify-content-center color-grey height-50 align-items-center">입금내역이 없습니다.</div>
-                     )}
-                  </div>
-                  <div class="list-bottom flex-inherit align-items-center padding-15 background-transparent-b-30">
-                     <div class="delete flex-inherit grow-2">
-                        <button type="button" class="btn-0 background-transparent color-white align-items-center deposit-delete-btn" onClick={destroy}>
-                           <i class="far fa-eraser color-red margin-top-2"></i>선택내역삭제
-                        </button>
+                  <div class="widthp-100 deposit-history-content flex-inherit flex-column">
+                     <div class="history-item">
+                        <table>
+                           <thead>
+                              <tr class="thead">
+                                 <th class="height-45 background-transparent-b-10 color-grey">전체 선택</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey">신청 시간</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey">종류</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey">금액</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey">상태</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr class="rows">
+                                 <td class="height-45 border-top">
+                                    <input type="checkbox" name="" value="1" />
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <span class="color-grey">2020-11-12 22:11:34</span>
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <span class="color-grey">현금</span>
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <span class="color-grey">1,000,000원</span>
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <span class="color-red">대기</span>
+                                 </td>
+                              </tr>
+                              <tr class="rows">
+                                 <td class="height-45 border-top">
+                                    <input type="checkbox" name="" value="1" />
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <span class="color-grey">2020-11-12 22:11:34</span>
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <span class="color-grey">비트코인</span>
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <span class="color-grey">0.5BTC</span>
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <span class="color-green">완료</span>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
                      </div>
-                     <div class="total flex-inherit">
-                        <div class="margin-right-10">
-                           <span class="color-grey">누적충전액</span>
+                     <div class="history-item-footer flex-inherit border-top padding-vertical-10 align-items-center background-transparent-b-5">
+                        <div class="grow-2 padding-left-10">
+                           <button type="button" class="color-grey padding-10 background-transparent-b-10">
+                              <i class="fal fa-trash-alt"></i>
+                              선택 삭제
+                           </button>
                         </div>
-                        <div class="color-grey">
-                           <span class="color-green">{deposit.amount.toLocaleString()}원</span>
+                        <div class="padding-right-10">
+                           <span class="color-grey">
+                              누적 총 잔액
+                              <strong class="color-red padding-left-5">12,500,000원</strong>
+                           </span>
                         </div>
                      </div>
-                  </div>
-                  <div class="pagination flex-inherit widthp-100 height-40 justify-content-end margin-top-5">
-                     <div class="flex selectBox">
-                        <Select
-                           className="select-container"
-                           classNamePrefix="select-box"
-                           value={{ label: deposit.page, value: deposit.page }}
-                           onChange={setPage}
-                           options={((rows, i, len) => {
-                              while (++i <= len) {
-                                 rows.push({ value: i, label: i })
-                              }
-                              return rows
-                           })([], 0, deposit.lastPage)}
-                        />
-                     </div>
-                     <div class="grow-2"></div>
-                     <div class="flex page">
-                        <button class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5" onClick={prev} disabled={1 >= deposit.page}>
-                           <i class="fas fa-chevron-left margin-0 color-white"></i>
-                        </button>
-                        <button class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center" onClick={next} disabled={deposit.lastPage <= deposit.page}>
-                           <i class="fas fa-chevron-right margin-0 color-white"></i>
-                        </button>
+                     <div class="padding-vertical-10 flex-inherit border-top-white height-60 color-grey">
+                        <div class="pagination flex-inherit widthp-100 heightp-100">
+                           <div class="select">
+                              <select name="slct" id="slct">
+                                 <option value="">1</option>
+                                 <option value="">2</option>
+                                 <option value="">3</option>
+                                 <option value="">4</option>
+                                 <option value="">5</option>
+                                 <option value="">6</option>
+                                 <option value="">7</option>
+                              </select>
+                           </div>
+                           <div class="flex margin-left-5 page grow-2 justify-content-end">
+                              <Link to="#">
+                                 <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5">
+                                    <i class="fas fa-chevron-left margin-0 color-grey"></i>
+                                 </button>
+                              </Link>
+                              <Link to="#">
+                                 <button class="page-right width-40 heightp-100 background-transparent-b-20">
+                                    <i class="fas fa-chevron-right margin-0 color-grey"></i>
+                                 </button>
+                              </Link>
+                           </div>
+                        </div>
                      </div>
                   </div>
                </div>

@@ -15,7 +15,7 @@ import {
   DELETE_ESPORTSLIVES_SUCCESS,
   DELETE_ESPORTSLIVES_FAILURE,
 } from "./esportsliveTypes";
-import axios from "../../plugins/axios";
+import axios from "axios";
 
 export const fetchEsportslivesRequest = () => {
   return {
@@ -120,7 +120,7 @@ export const deleteEsportslivesFailure = (error) => {
 export const fetchEsportslives = () => {
     return (dispatch) => {
       dispatch(fetchEsportslivesRequest);
-      axios.get(`/api/`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const esportslives = response.data;
                     dispatch(fetchEsportslivesSuccess(esportslives))
@@ -134,7 +134,7 @@ export const fetchEsportslives = () => {
 export const fetchEsportslive = () => {
   return (dispatch) => {
     dispatch(fetchEsportsliveRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const esportslive = response.data;
                   dispatch(fetchEsportsliveSuccess(esportslive))
@@ -148,7 +148,7 @@ export const fetchEsportslive = () => {
 export const createEsportslive = () => {
   return (dispatch) => {
     dispatch(createEsportsliveRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const esportslive = response.data;
                   dispatch(createEsportsliveSuccess(esportslive))
@@ -162,7 +162,7 @@ export const createEsportslive = () => {
 export const updateEsportslive = () => {
   return (dispatch) => {
     dispatch(updateEsportsliveRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const esportslive = response.data;
                   dispatch(updateEsportsliveSuccess(esportslive))
@@ -176,7 +176,7 @@ export const updateEsportslive = () => {
 export const deleteEsportslives = () => {
   return (dispatch) => {
     dispatch(deleteEsportslivesRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const esportslives = response.data;
                   dispatch(deleteEsportslivesSuccess(esportslives))

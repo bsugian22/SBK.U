@@ -15,7 +15,7 @@ import {
   DELETE_PROMOS_SUCCESS,
   DELETE_PROMOS_FAILURE,
 } from "./promoTypes";
-import axios from "../../plugins/axios";
+import axios from "axios";
 
 export const fetchPromosRequest = () => {
   return {
@@ -121,7 +121,7 @@ export const deletePromosFailure = (error) => {
 export const fetchPromos = () => {
     return (dispatch) => {
       dispatch(fetchPromosRequest);
-      axios.get(`/api/promos`)
+      await axios.get(`/api/promos`)
                   .then(response => {
                     const promos = response.data;
                     dispatch(fetchPromosSuccess(promos))
@@ -135,7 +135,7 @@ export const fetchPromos = () => {
 export const fetchPromo = () => {
   return (dispatch) => {
     dispatch(fetchPromoRequest);
-    axios.get(`/api/promos`)
+    await axios.get(`/api/promos`)
                 .then(response => {
                   const promo = response.data;
                   dispatch(fetchPromoSuccess(promo))
@@ -149,7 +149,7 @@ export const fetchPromo = () => {
 export const createPromo = () => {
   return (dispatch) => {
     dispatch(createPromoRequest);
-    axios.get(`/api/promos`)
+    await axios.get(`/api/promos`)
                 .then(response => {
                   const promo = response.data;
                   dispatch(createPromoSuccess(promo))
@@ -163,7 +163,7 @@ export const createPromo = () => {
 export const updatePromo = () => {
   return (dispatch) => {
     dispatch(updatePromoRequest);
-    axios.get(`/api/promos`)
+    await axios.get(`/api/promos`)
                 .then(response => {
                   const promo = response.data;
                   dispatch(updatePromoSuccess(promo))
@@ -177,7 +177,7 @@ export const updatePromo = () => {
 export const deletePromos = () => {
   return (dispatch) => {
     dispatch(deletePromosRequest);
-    axios.get(`/api/promos`)
+    await axios.get(`/api/promos`)
                 .then(response => {
                   const promos = response.data;
                   dispatch(deletePromosSuccess(promos))

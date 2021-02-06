@@ -6,346 +6,289 @@ export default function Settings() {
    return (
       <Fragment>
          <div class="content account-continer flex flex-inherit grow-2 flex-column">
-            <div class="settings-header-desktop content-header shrink-0 border-bottom height-50 align-items-center padding-horizontal-10 background-transparent-b-25 border-left">
-               <span class="color-grey">
-                  <i class="fad fa-user-cog color-grey"></i>SETTINGS
-               </span>
-            </div>
-            <div class="deposit-wrap settings-content-desktop account border-top flex-inherit flex-row">
-               <div class="deposit-left border-right flex-inherit flex-column account-height widthp-50 padding-10 scrollable-auto">
-                  <form action="/mypage/update" method="post" id="fmyinfo">
-                     <div class="notice flex-column flex-inherit widthp-100">
-                        <div class="notice-header height-40 padding-10 align-items-center background-transparent-b-30">
-                           <span class="color-grey">
-                              <i class="far fa-shield-check"></i>비밀번호변경
-                           </span>
+            <div class="settings-wrap account settings-content-desktop flex-inherit padding-10">
+               <div class="settings-left-content account-height widthp-50 flex-inherit flex-column margin-right-10 scrollable-auto">
+                  <div class="flex-inherit flex-column margin-bottom-20">
+                     <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
+                        <span class="color-white">계정</span>
+                     </div>
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">아이디</span>
                         </div>
-                        <div class="flex-column notice-contents padding-10 background-transparent-b-15 color-grey">
-                           <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                              <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                                 <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                    <span class="color-white">아이디</span>
-                                 </div>
-                                 <div class="flex widthp-60 heightp-100">
-                                    <span class="color-grey">0</span>
-                                 </div>
-                              </div>
-                              <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                                 <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                    <span class="color-white">레벨</span>
-                                 </div>
-                                 <div class="flex widthp-60 heightp-100">
-                                    <span class="color-grey">0</span>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                              <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                                 <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                    <span class="color-white">새 비밀번호</span>
-                                 </div>
-                                 <div class="flex widthp-60 heightp-100">
-                                    <input type="password" class="input-form-2 widthp-200" name="mem_password_new" placeholder="새 비밀번호" required />
-                                 </div>
-                              </div>
-                              <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                                 <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                    <span class="color-white">재입력</span>
-                                 </div>
-                                 <div class="flex widthp-60 heightp-100">
-                                    <input type="password" class="input-form-2 widthp-200" name="mem_password_re" placeholder="새 비밀번호 재입력" required />
-                                 </div>
-                              </div>
-                           </div>
+                        <div class="widthp-25 border-bottom border-right height-45">
+                           <span class="color-white">okok012984</span>
                         </div>
-                        <div class="form-bottom height-40 padding-horizontal-10 align-items-center background-transparent-b-30">
-                           <div class="flex grow-2 heightp-100 padding-vertical-5 justify-content-end">
-                              <input
-                                 type="password"
-                                 class="width-170 margin-right-5 heightp-100 background-transparent-b-10 padding-horizontal-10 color-grey"
-                                 name="mem_password_cur"
-                                 placeholder="현재비밀번호를 입력하세요"
-                                 required
-                              />
-                              <button class="btn-0 heightp-100 width-120 background-green">
-                                 <span class="color-white">
-                                    <i class="fas fa-check"></i>변경확인
-                                 </span>
-                              </button>
-                           </div>
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">레벨</span>
+                        </div>
+                        <div class="widthp-25 border-bottom height-45">
+                           <span class="color-white">12</span>
                         </div>
                      </div>
-                  </form>
-                  <div class="flex-column flex-inherit form margin-top-10">
-                     <div class="form-header height-40 padding-10 align-items-center background-transparent-b-30">
-                        <span class="color-grey">
-                           <i class="far fa-user"></i>기본회원정보
-                        </span>
+                  </div>
+
+                  <div class="flex-inherit flex-column margin-bottom-20">
+                     <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
+                        <span class="color-white">비밀번호 변경</span>
                      </div>
-                     <div class="form-data flex-inherit background-transparent-b-15 padding-10 flex-column">
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">닉네임</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-grey">0</span>
-                              </div>
-                           </div>
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">생년월일</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-grey">TODO</span>
-                              </div>
-                           </div>
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">새 비밀번호</span>
                         </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">휴대폰</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-grey">0</span>
-                              </div>
-                           </div>
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">이메일</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-grey">TODO</span>
-                              </div>
-                           </div>
+                        <div class="widthp-25 border-bottom border-right height-45">
+                           <input type="password" name="" placeholder="비밀번호를 입력해주세요" class="input-form color-white" />
                         </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-100 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-20 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">접속정보</span>
-                              </div>
-                              <div class="flex widthp-80 heightp-100">
-                                 <span class="color-grey">TODO</span>
-                              </div>
-                           </div>
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">새 비밀번호 재입력</span>
                         </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">은행명</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-grey">0</span>
-                              </div>
-                           </div>
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">예금주</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-grey">0</span>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-100 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-20 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">계좌번호</span>
-                              </div>
-                              <div class="flex widthp-80 heightp-100">
-                                 <span class="color-grey">0</span>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex">
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">비트코인주소</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-grey">TODO</span>
-                              </div>
-                           </div>
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">텔레그램</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-grey">TODO</span>
-                              </div>
-                           </div>
+                        <div class="widthp-25 border-bottom height-45">
+                           <input type="password" name="" placeholder="비밀번호를 재입력해주세요" class="input-form color-white" />
                         </div>
                      </div>
-                     <div class="form-bottom height-40 padding-horizontal-10 align-items-center background-transparent-b-30">
-                        <div class="flex grow-2 heightp-100 padding-vertical-5 justify-content-end">
-                           <button type="button" class="btn-0 heightp-100 width-120 background-green btn-change1">
-                              <span class="color-white">
-                                 <i class="fal fa-pencil"></i>변경문의
-                              </span>
+
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">현재 비밀번호</span>
+                        </div>
+                        <div class="wd-416 border-bottom border-right height-45">
+                           <input type="password" name="" placeholder="현재 비밀번호를 입력해주세요" class="input-form color-white" />
+                        </div>
+                        <div class="widthp-33 height-45 background-transparent-b-5">
+                           <button type="button" class="widthp-100 heightp-100 background-green color-white">
+                              비밀번호 저장
                            </button>
                         </div>
                      </div>
                   </div>
-               </div>
-               <div class="deposit-right border-left flex-inherit flex-column account-height widthp-50 padding-10 scrollable-auto">
-                  <div class="notice flex-column flex-inherit">
-                     <div class="notice-header height-40 padding-10 align-items-center background-transparent-b-30">
-                        <span class="color-grey">
-                           <i class="far fa-calculator"></i>이용한도 및 포인트
-                        </span>
+
+                  <div class="flex-inherit flex-column margin-bottom-20">
+                     <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                        <span class="color-white grow-2">기본정보</span>
+                        <Link to="#" class="color-grey padding-right-15">
+                           수정
+                        </Link>
                      </div>
-                     <div class="flex-column notice-contents padding-10 background-transparent-b-15 color-grey">
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-100 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex justify-content-center widthp-100 heightp-100">
-                                 <span class="color-grey">싱글베팅</span>
-                              </div>
-                           </div>
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">이름</span>
                         </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">최소 베팅</span>
+                        <div class="widthp-25 border-bottom border-right height-45">
+                           <span class="color-white">홍길동</span>
+                        </div>
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">생년월일</span>
+                        </div>
+                        <div class="widthp-25 border-bottom height-45">
+                           <span class="color-white">1988-08-08</span>
+                        </div>
+                     </div>
+
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">휴대폰</span>
+                        </div>
+                        <div class="widthp-25 border-bottom border-right height-45">
+                           <span class="color-white">010-1234-1234</span>
+                        </div>
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">이메일</span>
+                        </div>
+                        <div class="widthp-25 border-bottom height-45">
+                           <span class="color-white">test@test.com</span>
+                        </div>
+                     </div>
+
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">접속정보</span>
+                        </div>
+                        <div class="widthp-75 border-bottom  padding-left-15 height-45">
+                           <span class="color-white">South Korea KO-KR 123.123.123.123</span>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="flex-inherit flex-column margin-bottom-20">
+                     <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                        <span class="color-white grow-2">계좌정보</span>
+                        <Link to="#" class="color-green padding-right-15">
+                           저장
+                        </Link>
+                     </div>
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">은행명</span>
+                        </div>
+                        <div class="widthp-25 border-bottom border-right height-45">
+                           <span class="color-white">국민은행</span>
+                        </div>
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">예금주</span>
+                        </div>
+                        <div class="widthp-25 border-bottom height-45">
+                           <span class="color-white">홍길동</span>
+                        </div>
+                     </div>
+
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">계좌번호</span>
+                        </div>
+                        <div class="widthp-75 border-bottom  height-45">
+                           <span class="color-white">123452-12-1234567</span>
+                        </div>
+                     </div>
+
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">페이팔 계정</span>
+                        </div>
+                        <div class="widthp-75 border-bottom  height-45">
+                           <span class="color-white">test@test.com</span>
+                        </div>
+                     </div>
+
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">비트코인 지갑</span>
+                        </div>
+                        <div class="widthp-75 border-bottom  height-45">
+                           <span class="color-white">bc1qjxhcg4sy0nz96kxlpngdfhuz5ppe0trzsnmds5</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="settings-right-content account-height widthp-50 flex-inherit flex-column scrollable-auto">
+                  <div class="flex-inherit flex-column margin-bottom-20">
+                     <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                        <span class="color-white grow-2">이용한도</span>
+                        <Link to="#" className="color-grey padding-right-15">
+                           이용한도 상향신청
+                        </Link>
+                     </div>
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-30 padding-vertical-15 border-right border-bottom">
+                           <span class="color-grey">싱글</span>
+                        </div>
+                        <div class="widthp-70 flex-inherit flex-column">
+                           <div class="widthp-100 heightp-100 rows-item flex-inherit align-items-center-inherit ">
+                              <div class="sub-title widthp-30 height-50 background-transparent-b-5 border-right justify-content-center border-bottom">
+                                 <span class="color-grey">최소배팅</span>
                               </div>
-                              <div class="flex widthp-60 heightp-100">
+                              <div class="pr-title widthp-70 border-bottom padding-left-15">
                                  <span class="color-green">
-                                    <i class="fas fa-won-sign mr-2"></i>5,000
+                                    <i class="far fa-won-sign"></i>
+                                    5,000
                                  </span>
                               </div>
                            </div>
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">최대 베팅</span>
+                           <div class="widthp-100 heightp-100 rows-item flex-inherit align-items-center-inherit ">
+                              <div class="sub-title widthp-30 height-50 background-transparent-b-5 border-right justify-content-center border-bottom">
+                                 <span class="color-grey">최대배팅</span>
                               </div>
-                              <div class="flex widthp-60 heightp-100">
+                              <div class="pr-title widthp-70 border-bottom padding-left-15">
                                  <span class="color-green">
-                                    <i class="fas fa-won-sign mr-2"></i>0
+                                    <i class="far fa-won-sign"></i>
+                                    1,000,000
                                  </span>
                               </div>
                            </div>
-                        </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">최대 당첨금</span>
+                           <div class="widthp-100 heightp-100 rows-item flex-inherit align-items-center-inherit ">
+                              <div class="sub-title widthp-30 height-50 background-transparent-b-5 border-right justify-content-center border-bottom">
+                                 <span class="color-grey">최대 당첨금</span>
                               </div>
-                              <div class="flex widthp-60 heightp-100">
+                              <div class="pr-title widthp-70 border-bottom padding-left-15">
                                  <span class="color-green">
-                                    <i class="fas fa-won-sign mr-2"></i>0
+                                    <i class="far fa-won-sign"></i>
+                                    3,000,000
                                  </span>
                               </div>
                            </div>
                         </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-100 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex justify-content-center widthp-100 heightp-100">
-                                 <span class="color-grey">멀티베팅</span>
-                              </div>
-                           </div>
+                     </div>
+
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-30 padding-vertical-15 border-right border-bottom">
+                           <span class="color-grey">콤보</span>
                         </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">최소 베팅</span>
+                        <div class="widthp-70 flex-inherit flex-column">
+                           <div class="widthp-100 heightp-100 rows-item flex-inherit align-items-center-inherit ">
+                              <div class="sub-title widthp-30 height-50 background-transparent-b-5 border-right justify-content-center border-bottom">
+                                 <span class="color-grey">최소배팅</span>
                               </div>
-                              <div class="flex widthp-60 heightp-100">
+                              <div class="pr-title widthp-70 border-bottom padding-left-15">
                                  <span class="color-green">
-                                    <i class="fas fa-won-sign mr-2"></i>5,000
+                                    <i class="far fa-won-sign"></i>
+                                    5,000
                                  </span>
                               </div>
                            </div>
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">최대 베팅</span>
+                           <div class="widthp-100 heightp-100 rows-item flex-inherit align-items-center-inherit ">
+                              <div class="sub-title widthp-30 height-50 background-transparent-b-5 border-right justify-content-center border-bottom">
+                                 <span class="color-grey">최대배팅</span>
                               </div>
-                              <div class="flex widthp-60 heightp-100">
+                              <div class="pr-title widthp-70 border-bottom padding-left-15">
                                  <span class="color-green">
-                                    <i class="fas fa-won-sign mr-2"></i>0
+                                    <i class="far fa-won-sign"></i>
+                                    2,000,000
                                  </span>
                               </div>
                            </div>
-                        </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">최대 당첨금</span>
+                           <div class="widthp-100 heightp-100 rows-item flex-inherit align-items-center-inherit ">
+                              <div class="sub-title widthp-30 height-50 background-transparent-b-5 border-right justify-content-center border-bottom">
+                                 <span class="color-grey">최대 당첨금</span>
                               </div>
-                              <div class="flex widthp-60 heightp-100">
+                              <div class="pr-title widthp-70 border-bottom padding-left-15">
                                  <span class="color-green">
-                                    <i class="fas fa-won-sign mr-2"></i>0
+                                    <i class="far fa-won-sign"></i>
+                                    5,000,000
                                  </span>
                               </div>
                            </div>
                         </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-100 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex justify-content-center widthp-100 heightp-100">
-                                 <span class="color-grey">보너스포인트</span>
-                              </div>
-                           </div>
+                     </div>
+                  </div>
+
+                  <div class="flex-inherit flex-column margin-bottom-20">
+                     <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
+                        <span class="color-white">보너스 포인트</span>
+                     </div>
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">회원낙첨 포인트</span>
                         </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">본인낙첨</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-green">0%</span>
-                              </div>
-                           </div>
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">추천인낙첨</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-green">0%</span>
-                              </div>
-                           </div>
+                        <div class="widthp-25 border-bottom border-right height-45">
+                           <span class="color-green">1%</span>
                         </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">첫 충전</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-green">TODO%</span>
-                              </div>
-                           </div>
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">매 충전</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-green">TODO%</span>
-                              </div>
-                           </div>
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">추천인 낙첨 포인트</span>
                         </div>
-                        <div class="height-40 justify-content-center-inherit align-items-center-inherit widthp-100 flex margin-bottom-5">
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">최대추천인</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-green">TODO</span>
-                              </div>
-                           </div>
-                           <div class="flex widthp-50 background-transparent-b-10 heightp-100 justify-content-center-inherit align-items-center-inherit">
-                              <div class="flex widthp-40 heightp-100 background-transparent-b-10">
-                                 <span class="color-white">현재추천인</span>
-                              </div>
-                              <div class="flex widthp-60 heightp-100">
-                                 <span class="color-green">TODO</span>
-                              </div>
-                           </div>
+                        <div class="widthp-25 border-bottom height-45">
+                           <span class="color-green">1%</span>
                         </div>
-                        <div class="form-bottom height-40 padding-horizontal-10 align-items-center background-transparent">
-                           <div class="flex grow-2 heightp-100 margin-top-5 padding-vertical-5 justify-content-end">
-                              <button type="button" class="btn-0 heightp-100 width-120 background-green btn-change2">
-                                 <span class="color-white">
-                                    <i class="fal fa-pencil"></i>한도상향문의
-                                 </span>
-                              </button>
-                           </div>
+                     </div>
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">첫 충전 포인트</span>
+                        </div>
+                        <div class="widthp-25 border-bottom border-right height-45">
+                           <span class="color-green">10%</span>
+                        </div>
+                     </div>
+
+                     <div class="account-info-content flex-inherit align-items-center-inherit justify-content-center-inherit">
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">최대 추천인 수</span>
+                        </div>
+                        <div class="widthp-25 border-bottom border-right height-45">
+                           <span class="color-green">100</span>
+                        </div>
+                        <div class="widthp-25 border-bottom border-right height-45 background-transparent-b-5">
+                           <span class="color-grey">현재 추천인 수</span>
+                        </div>
+                        <div class="widthp-25 border-bottom height-45">
+                           <span class="color-green">0</span>
                         </div>
                      </div>
                   </div>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 import Select from 'react-select'
 import parse from 'html-react-parser'
-import { mapStateToProps, mapDispatchProps } from '../../redux/store'
+import { mapStateToProps, mapDispatchProps } from '../../helpers/store'
 import noticeModel from '../../models/noticeModel'
 import Logo from '../layouts/Logo'
 
@@ -19,8 +19,8 @@ const Notice = (props) => {
       perPage: null,
       data: [],
       post: {
-         id: 0
-      }
+         id: 0,
+      },
    })
 
    useEffect(() => {
@@ -59,7 +59,7 @@ const Notice = (props) => {
       console.log(data)
       setNotice({
          ...notice,
-         post: data
+         post: data,
       })
    }
 
@@ -99,7 +99,11 @@ const Notice = (props) => {
                         notice.data.map((value, index) => {
                            return (
                               <button type="button" class="flex-inherit" onClick={() => view(value.id)} key={index}>
-                                 <div class={`flex-column flex-inherit widthp-100 notice-list min-height-100 padding-10 background-transparent-b-10 color-grey border-bottom-white${notice.post.id == value.id ? ' active' : ''}`}>
+                                 <div
+                                    class={`flex-column flex-inherit widthp-100 notice-list min-height-100 padding-10 background-transparent-b-10 color-grey border-bottom-white${
+                                       notice.post.id == value.id ? ' active' : ''
+                                    }`}
+                                 >
                                     <div class="heightp-100 flex-inherit flex-column">
                                        <div class="flex-inherit heightp-50">
                                           <div class="padding-10 background-transparent-b-10">
@@ -155,24 +159,27 @@ const Notice = (props) => {
                </div>
                <div class="notice-read border-left flex-inherit flex-column account-height widthp-60 padding-10 scrollable-auto">
                   {notice.post.id ? (
-                  <div class="message-read-header flex-inherit flex-column align-items-center-inherit">
-                     <div class="title flex-inherit grow-2 background-transparent-b-20 widthp-100 padding-15">
-                        <span class="flex color-grey align-items-center text-ellipsis">
-                           <span class="margin-left-5 color-white text-ellipsis">{notice.post.title}</span>
-                        </span>
+                     <div class="message-read-header flex-inherit flex-column align-items-center-inherit">
+                        <div class="title flex-inherit grow-2 background-transparent-b-20 widthp-100 padding-15">
+                           <span class="flex color-grey align-items-center text-ellipsis">
+                              <span class="margin-left-5 color-white text-ellipsis">{notice.post.title}</span>
+                           </span>
+                        </div>
+                        <div class="date flex-inherit grow-2 margin-bottom-10 background-transparent-b-10 widthp-100 padding-15">
+                           <span class="color-grey margin-right-15 align-items-center">
+                              <i class="fal fa-calendar-alt margin-right-5"></i>
+                              {moment(notice.post.createdAt).format('MM / DD HH:mm')}
+                           </span>
+                           <span class="color-grey align-items-center">
+                              <i class="far fa-user-alt margin-right-5"></i>관리자
+                           </span>
+                        </div>
+                        <div class="flex-column message-read-content min-height-150 padding-10 background-transparent-b-10 color-grey">
+                           <div class="text">{parse(notice.post.content)}</div>
+                        </div>
                      </div>
-                     <div class="date flex-inherit grow-2 margin-bottom-10 background-transparent-b-10 widthp-100 padding-15">
-                        <span class="color-grey margin-right-15 align-items-center"><i class="fal fa-calendar-alt margin-right-5"></i>{moment(notice.post.createdAt).format('MM / DD HH:mm')}</span>
-                        <span class="color-grey align-items-center"><i class="far fa-user-alt margin-right-5"></i>관리자</span>
-                     </div>
-                     <div class="flex-column message-read-content min-height-150 padding-10 background-transparent-b-10 color-grey">
-                        <div class="text">  
-                           {parse(notice.post.content)}
-                        </div>  
-                     </div>
-                  </div>
                   ) : (
-                     <div><Logo width="130" height="20" /></div>
+                     <div></div>
                   )}
                </div>
             </div>

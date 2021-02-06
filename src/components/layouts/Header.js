@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { mapStateToProps, mapDispatchProps } from '../../redux/store'
+import { mapStateToProps, mapDispatchProps } from '../../helpers/store'
 import { addBodyClass, removeBodyClass } from '../../helpers/class'
 import Logo from './Logo'
 import Outlogin from './Outlogin'

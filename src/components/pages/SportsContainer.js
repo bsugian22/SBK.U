@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { chain } from "lodash";
 import moment from "moment";
 import Select from "react-select";
-import { mapStateToProps, mapDispatchProps } from "../../redux/store";
+import { mapStateToProps, mapDispatchProps } from "../../helpers/store";
 import sportsModel from "../../models/sportsModel";
 import MenuContext from "../../contexts/Menu.context";
 const Sports = (props) => {
@@ -479,8 +479,8 @@ const Sports = (props) => {
             ? sports.data.map((matches, index) => {
                 var rows = [];
                 rows.push(
-                  <Fragment>
-                    <div class="flex widthp-100 height-40 align-items-center-inherit border-bottom">
+                  <Fragment key={index}>
+                    <div class="flex widthp-100 height-40 align-items-center-inherit border-bottom" >
                       <div class="flex pi-title orange border-right grow-2">
                         <span class="color-white padding-left-15 grow-2">
                           {moment(matches.startAt).format("YY-MM-DD")} 수요일
@@ -534,6 +534,7 @@ const Sports = (props) => {
                         data-id=""
                         data-home-competitor=""
                         data-away-competitor=""
+                        key={key}
                       >
                         <div class="flex widthp-55">
                           <div class="flex detail widthp-100 flex-column padding-horizontal-15 padding-vertical-10">
@@ -674,7 +675,7 @@ const Sports = (props) => {
                     var rows = [];
 
                     rows.push(
-                      <div class="odds-detail-wwl-titleist height-40 align-items-center-inherit border-bottom background-transparent-b-20">
+                      <div class="odds-detail-wwl-titleist height-40 align-items-center-inherit border-bottom background-transparent-b-20" key={market_index}>
                         <div class="flex pi-title">
                           <span class="color-white padding-left-15">
                             {market.title.marketName.ko}
@@ -685,7 +686,7 @@ const Sports = (props) => {
 
                     rows.push(
                       <Fragment>
-                        <div class="odds-detail-wwl-cs align-items-center-inherite border-bottom flex-inherit justify-content-center-inherit heightp-100">
+                        <div class="odds-detail-wwl-cs align-items-center-inherite border-bottom flex-inherit justify-content-center-inherit heightp-100" key={market_index}>
                           <div class="widthp-33 border-right padding-vertical-10">
                             <span class="color-white">AI Naser SC</span>
                           </div>

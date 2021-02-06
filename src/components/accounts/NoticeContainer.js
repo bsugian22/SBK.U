@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 import Select from 'react-select'
 import parse from 'html-react-parser'
-import { mapStateToProps, mapDispatchProps } from '../../redux/store'
+import { mapStateToProps, mapDispatchProps } from '../../helpers/store'
 import noticeModel from '../../models/noticeModel'
 import Logo from '../layouts/Logo'
 

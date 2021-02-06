@@ -5,7 +5,7 @@ import userModel from '../../models/userModel'
 import Signin from '../dialogs/Signin'
 import Signup from '../dialogs/Signup'
 import sweetalert from '../../plugins/sweetalert'
-import { mapStateToProps, mapDispatchProps } from '../../redux/store'
+import { mapStateToProps, mapDispatchProps } from '../../helpers/store'
 import echo from '../../plugins/echo'
 
 const Outlogin = (props) => {

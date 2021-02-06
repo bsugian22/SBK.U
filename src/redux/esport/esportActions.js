@@ -15,7 +15,7 @@ import {
   DELETE_ESPORTS_SUCCESS,
   DELETE_ESPORTS_FAILURE,
 } from "./esportTypes";
-import axios from "../../plugins/axios";
+import axios from "axios";
 
 export const fetchEsportsRequest = () => {
   return {
@@ -77,20 +77,20 @@ export const createEsportFailure = (error) => {
   };
 };
 
-export const updateEsportRequest = () => {
+export const createEsportRequest = () => {
   return {
     type: UPDATE_ESPORT_REQUEST,
   };
 };
 
-export const updateEsportSuccess = (esport) => {
+export const createEsportSuccess = (esport) => {
   return {
     type: UPDATE_ESPORT_SUCCESS,
     payload: esport,
   };
 };
 
-export const updateEsportFailure = (error) => {
+export const createEsportFailure = (error) => {
   return {
     type: UPDATE_ESPORT_FAILURE,
     payload: error,
@@ -120,7 +120,7 @@ export const deleteEsportsFailure = (error) => {
 export const fetchEsports = () => {
     return (dispatch) => {
       dispatch(fetchEsportsRequest);
-      axios.get(`/api/`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const branches = response.data;
                     dispatch(fetchEsportsSuccess(branches))
@@ -134,7 +134,7 @@ export const fetchEsports = () => {
 export const fetchEsport = () => {
   return (dispatch) => {
     dispatch(fetchEsportRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const branches = response.data;
                   dispatch(fetchEsportSuccess(branches))
@@ -148,7 +148,7 @@ export const fetchEsport = () => {
 export const createEsport = () => {
   return (dispatch) => {
     dispatch(createEsportRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const branches = response.data;
                   dispatch(createEsportSuccess(branches))
@@ -162,7 +162,7 @@ export const createEsport = () => {
 export const updateEsport = () => {
   return (dispatch) => {
     dispatch(updateEsportRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const branches = response.data;
                   dispatch(updateEsportSuccess(branches))
@@ -176,7 +176,7 @@ export const updateEsport = () => {
 export const deleteEsports = () => {
   return (dispatch) => {
     dispatch(deleteEsportsRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const branches = response.data;
                   dispatch(deleteEsportsSuccess(branches))

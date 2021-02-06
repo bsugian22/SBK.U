@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom'
 import { Router, Switch } from 'react-router-dom'
 import history from './plugins/history'
 import { Provider } from 'react-redux'
-import store from "./redux/store";
+import store from "./helpers/store";
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import App from './App'

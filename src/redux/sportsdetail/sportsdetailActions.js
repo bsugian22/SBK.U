@@ -15,7 +15,7 @@ import {
   DELETE_SPORTSDETAILS_SUCCESS,
   DELETE_SPORTSDETAILS_FAILURE,
 } from "./sportsdetailTypes";
-import axios from "../../plugins/axios";
+import axios from "axios";
 
 export const fetchSportsdetailsRequest = () => {
   return {
@@ -121,7 +121,7 @@ export const deleteSportsdetailsFailure = (error) => {
 export const fetchSportsdetails = () => {
     return (dispatch) => {
       dispatch(fetchSportsdetailsRequest);
-      axios.get(`/api/`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const sportsdetails = response.data;
                     dispatch(fetchSportsdetailsSuccess(sportsdetails))
@@ -135,7 +135,7 @@ export const fetchSportsdetails = () => {
 export const fetchSportsdetail = () => {
   return (dispatch) => {
     dispatch(fetchSportsdetailRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const sportsdetail = response.data;
                   dispatch(fetchSportsdetailSuccess(sportsdetail))
@@ -149,7 +149,7 @@ export const fetchSportsdetail = () => {
 export const createSportsdetail = () => {
   return (dispatch) => {
     dispatch(createSportsdetailRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const sportsdetail = response.data;
                   dispatch(createSportsdetailSuccess(sportsdetail))
@@ -163,7 +163,7 @@ export const createSportsdetail = () => {
 export const updateSportsdetail = () => {
   return (dispatch) => {
     dispatch(updateSportsdetailRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const sportsdetail = response.data;
                   dispatch(updateSportsdetailSuccess(sportsdetail))
@@ -177,7 +177,7 @@ export const updateSportsdetail = () => {
 export const deleteSportsdetails = () => {
   return (dispatch) => {
     dispatch(deleteSportsdetailsRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const sportsdetails = response.data;
                   dispatch(deleteSportsdetailsSuccess(sportsdetails))

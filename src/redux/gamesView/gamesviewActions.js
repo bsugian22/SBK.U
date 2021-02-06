@@ -15,7 +15,7 @@ import {
   DELETE_GAMESVIEWS_SUCCESS,
   DELETE_GAMESVIEWS_FAILURE,
 } from "./gamesviewTypes";
-import axios from "../../plugins/axios";
+import axios from "axios";
 
 export const fetchGamesviewsRequest = () => {
   return {
@@ -120,7 +120,7 @@ export const deleteGamesviewsFailure = (error) => {
 export const fetchGamesviews = () => {
     return (dispatch) => {
       dispatch(fetchGamesviewsRequest);
-      axios.get(`/api/`)
+      await axios.get(`/api/`)
                   .then(response => {
                     const gamesviews = response.data;
                     dispatch(fetchGamesviewsSuccess(gamesviews))
@@ -134,7 +134,7 @@ export const fetchGamesviews = () => {
 export const fetchGamesview = () => {
   return (dispatch) => {
     dispatch(fetchGamesviewRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const gamesview = response.data;
                   dispatch(fetchGamesviewSuccess(gamesview))
@@ -148,7 +148,7 @@ export const fetchGamesview = () => {
 export const createGamesview = () => {
   return (dispatch) => {
     dispatch(createGamesviewRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const gamesview = response.data;
                   dispatch(createGamesviewSuccess(gamesview))
@@ -162,7 +162,7 @@ export const createGamesview = () => {
 export const updateGamesview = () => {
   return (dispatch) => {
     dispatch(updateGamesviewRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const gamesview = response.data;
                   dispatch(updateGamesviewSuccess(gamesview))
@@ -176,7 +176,7 @@ export const updateGamesview = () => {
 export const deleteGamesviews = () => {
   return (dispatch) => {
     dispatch(deleteGamesviewsRequest);
-    axios.get(`/api/`)
+    await axios.get(`/api/`)
                 .then(response => {
                   const gamesviews = response.data;
                   dispatch(deleteGamesviewsSuccess(gamesviews))
