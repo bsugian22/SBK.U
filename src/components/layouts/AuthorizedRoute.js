@@ -6,7 +6,7 @@ import BookNavi from '../navigations/BookNavi'
 import GameNavi from '../navigations/GameNavi'
 import BetslipNavi from '../navigations/BetslipNavi'
 import sweetalert from '../../plugins/sweetalert'
-import { mapStateToProps, mapDispatchProps } from '../../helpers/store'
+import { mapStateToProps, mapDispatchProps } from '../../redux/store'
 
 const AuthorizedRoute = (props) =>
 {

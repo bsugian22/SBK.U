@@ -3,7 +3,7 @@ import { Link, Redirect, NavLink } from 'react-router-dom'
 import MenuContext from '../../contexts/Menu.context'
 import { connect } from 'react-redux'
 
-import { mapStateToProps, mapDispatchProps } from '../../helpers/store'
+import { mapStateToProps, mapDispatchProps } from '../../redux/store'
 
 const UserNaviBtn = (props) => {
    const { user } = props

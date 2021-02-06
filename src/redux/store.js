@@ -1,8 +1,47 @@
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import rootReducer from "./rootReducer";
+import { createStore } from "redux";
+
 import { composeWithDevTools } from "redux-devtools-extension";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import rootReducer from "./rootReducer";
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+import * as userActions from "./user/userActions";
+import * as preferencesActions from "./preference/preferenceActions";
 
-export default store;
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const enhancedReducer = persistReducer(persistConfig, rootReducer);
+
+export const mapStateToProps = (state) => {
+  return {
+    preferences: state.preference.preferences,
+    user: state.user.user,
+  };
+};
+
+export const mapDispatchProps = (dispatch) => {
+  return {
+    setUser: (payload) => {
+      dispatch(userActions.setUser(payload));
+    },
+    setAccessToken: (payload) => {
+      localStorage.setItem("ACCESS_TOKEN", payload.access_token);
+      dispatch(userActions.setAccessToken(payload));
+    },
+    setLogout: () => {
+      localStorage.removeItem("ACCESS_TOKEN");
+      dispatch(userActions.setLogout());
+    },
+    setPreferences: (payload) => {
+      dispatch(preferencesActions.setPreferences(payload));
+    },
+    setDarkmode: (toggle) => {
+      dispatch(preferencesActions.setDarkmode(toggle));
+    },
+  };
+};
+
+export default createStore(enhancedReducer, composeWithDevTools());

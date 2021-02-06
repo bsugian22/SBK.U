@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import AuthorizedRoute from './AuthorizedRoute'
 import { routes } from '../../routes'
 import preferencesModel from '../../models/preferencesModel'
-import { mapStateToProps, mapDispatchProps } from '../../helpers/store'
+import { mapStateToProps, mapDispatchProps } from '../../redux/store'
 
 const Container = (props) =>
 {

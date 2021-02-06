@@ -15,7 +15,7 @@ import {
   DELETE_PROMOPOSTS_SUCCESS,
   DELETE_PROMOPOSTS_FAILURE,
 } from "./promopostTypes";
-import axios from "axios";
+import axios from "../../plugins/axios";
 
 export const fetchPromopostsRequest = () => {
   return {
@@ -120,7 +120,7 @@ export const deletePromopostsFailure = (error) => {
 export const fetchPromoposts = () => {
     return (dispatch) => {
       dispatch(fetchPromopostsRequest);
-      await axios.get(`/api/`)
+      axios.get(`/api/`)
                   .then(response => {
                     const promoposts = response.data;
                     dispatch(fetchPromopostsSuccess(promoposts))
@@ -134,7 +134,7 @@ export const fetchPromoposts = () => {
 export const fetchPromopost = () => {
   return (dispatch) => {
     dispatch(fetchPromopostRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const promopost = response.data;
                   dispatch(fetchPromopostSuccess(promopost))
@@ -148,7 +148,7 @@ export const fetchPromopost = () => {
 export const createPromopost = () => {
   return (dispatch) => {
     dispatch(createPromopostRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const promopost = response.data;
                   dispatch(createPromopostSuccess(promopost))
@@ -162,7 +162,7 @@ export const createPromopost = () => {
 export const updatePromopost = () => {
   return (dispatch) => {
     dispatch(updatePromopostRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const promopost = response.data;
                   dispatch(updatePromopostSuccess(promopost))
@@ -176,7 +176,7 @@ export const updatePromopost = () => {
 export const deletePromoposts = () => {
   return (dispatch) => {
     dispatch(deletePromopostsRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const promoposts = response.data;
                   dispatch(deletePromopostsSuccess(promoposts))

@@ -15,7 +15,7 @@ import {
   DELETE_MAINS_SUCCESS,
   DELETE_MAINS_FAILURE,
 } from "./mainTypes";
-import axios from "axios";
+import axios from "../../plugins/axios";
 
 export const fetchMainsRequest = () => {
   return {
@@ -120,7 +120,7 @@ export const deleteMainsFailure = (error) => {
 export const fetchMains = () => {
     return (dispatch) => {
       dispatch(fetchMainsRequest);
-      await axios.get(`/api/`)
+      axios.get(`/api/`)
                   .then(response => {
                     const mains = response.data;
                     dispatch(fetchMainsSuccess(mains))
@@ -134,7 +134,7 @@ export const fetchMains = () => {
 export const fetchMain = () => {
   return (dispatch) => {
     dispatch(fetchMainRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const main = response.data;
                   dispatch(fetchMainSuccess(main))
@@ -148,7 +148,7 @@ export const fetchMain = () => {
 export const createMain = () => {
   return (dispatch) => {
     dispatch(createMainRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const main = response.data;
                   dispatch(createMainSuccess(main))
@@ -162,7 +162,7 @@ export const createMain = () => {
 export const updateMain = () => {
   return (dispatch) => {
     dispatch(updateMainRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const main = response.data;
                   dispatch(updateMainSuccess(main))
@@ -176,7 +176,7 @@ export const updateMain = () => {
 export const deleteMains = () => {
   return (dispatch) => {
     dispatch(deleteMainsRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const mains = response.data;
                   dispatch(deleteMainsSuccess(mains))

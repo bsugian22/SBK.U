@@ -15,7 +15,7 @@ import {
   DELETE_INPLAYDETAILS_SUCCESS,
   DELETE_INPLAYDETAILS_FAILURE,
 } from "./inplaydetailTypes";
-import axios from "axios";
+import axios from "../../plugins/axios";
 
 export const fetchInplaydetailsRequest = () => {
   return {
@@ -120,7 +120,7 @@ export const deleteInplaydetailsFailure = (error) => {
 export const fetchInplaydetails = () => {
     return (dispatch) => {
       dispatch(fetchInplaydetailsRequest);
-      await axios.get(`/api/`)
+      axios.get(`/api/`)
                   .then(response => {
                     const inplaydetails = response.data;
                     dispatch(fetchInplaydetailsSuccess(inplaydetails))
@@ -134,7 +134,7 @@ export const fetchInplaydetails = () => {
 export const fetchInplaydetail = () => {
   return (dispatch) => {
     dispatch(fetchInplaydetailRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const inplaydetail = response.data;
                   dispatch(fetchInplaydetailSuccess(inplaydetail))
@@ -148,7 +148,7 @@ export const fetchInplaydetail = () => {
 export const createInplaydetail = () => {
   return (dispatch) => {
     dispatch(createInplaydetailRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const inplaydetail = response.data;
                   dispatch(createInplaydetailSuccess(inplaydetail))
@@ -162,7 +162,7 @@ export const createInplaydetail = () => {
 export const updateInplaydetail = () => {
   return (dispatch) => {
     dispatch(updateInplaydetailRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const inplaydetail = response.data;
                   dispatch(updateInplaydetailSuccess(inplaydetail))
@@ -176,7 +176,7 @@ export const updateInplaydetail = () => {
 export const deleteInplaydetails = () => {
   return (dispatch) => {
     dispatch(deleteInplaydetailsRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const inplaydetails = response.data;
                   dispatch(deleteInplaydetailsSuccess(inplaydetails))

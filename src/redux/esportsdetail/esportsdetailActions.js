@@ -15,7 +15,7 @@ import {
   DELETE_ESPORTSDETAILS_SUCCESS,
   DELETE_ESPORTSDETAILS_FAILURE,
 } from "./esportsdetailTypes";
-import axios from "axios";
+import axios from "../../plugins/axios";
 
 export const fetchEsportsdetailsRequest = () => {
   return {
@@ -120,7 +120,7 @@ export const deleteEsportsdetailsFailure = (error) => {
 export const fetchEsportsdetails = () => {
     return (dispatch) => {
       dispatch(fetchEsportsdetailsRequest);
-      await axios.get(`/api/`)
+      axios.get(`/api/`)
                   .then(response => {
                     const esportsdetails = response.data;
                     dispatch(fetchEsportsdetailsSuccess(esportsdetails))
@@ -134,7 +134,7 @@ export const fetchEsportsdetails = () => {
 export const fetchEsportsdetail = () => {
   return (dispatch) => {
     dispatch(fetchEsportsdetailRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const esportsdetail = response.data;
                   dispatch(fetchEsportsdetailSuccess(esportsdetail))
@@ -148,7 +148,7 @@ export const fetchEsportsdetail = () => {
 export const createEsportsdetail = () => {
   return (dispatch) => {
     dispatch(createEsportsdetailRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const esportsdetail = response.data;
                   dispatch(createEsportsdetailSuccess(esportsdetail))
@@ -162,7 +162,7 @@ export const createEsportsdetail = () => {
 export const updateEsportsdetail = () => {
   return (dispatch) => {
     dispatch(updateEsportsdetailRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const esportsdetail = response.data;
                   dispatch(updateEsportsdetailSuccess(esportsdetail))
@@ -176,7 +176,7 @@ export const updateEsportsdetail = () => {
 export const deleteEsportsdetails = () => {
   return (dispatch) => {
     dispatch(deleteEsportsdetailsRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const esportsdetails = response.data;
                   dispatch(deleteEsportsdetailsSuccess(esportsdetails))

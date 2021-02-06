@@ -15,7 +15,7 @@ import {
   DELETE_CASINOS_SUCCESS,
   DELETE_CASINOS_FAILURE,
 } from "./casinoTypes";
-import axios from "axios";
+import axios from "../../plugins/axios";
 
 export const fetchCasinosRequest = () => {
   return {
@@ -120,7 +120,7 @@ export const deleteCasinosFailure = (error) => {
 export const fetchCasinos = () => {
     return (dispatch) => {
       dispatch(fetchCasinosRequest);
-      await axios.get(`/api/`)
+      axios.get(`/api/`)
                   .then(response => {
                     const casinos = response.data;
                     dispatch(fetchCasinosSuccess(casinos))
@@ -134,7 +134,7 @@ export const fetchCasinos = () => {
 export const fetchCasino = () => {
   return (dispatch) => {
     dispatch(fetchCasinoRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const casino = response.data;
                   dispatch(fetchCasinoSuccess(casino))
@@ -148,7 +148,7 @@ export const fetchCasino = () => {
 export const createCasino = () => {
   return (dispatch) => {
     dispatch(createCasinoRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const casino = response.data;
                   dispatch(createCasinoSuccess(casino))
@@ -162,7 +162,7 @@ export const createCasino = () => {
 export const updateCasino = () => {
   return (dispatch) => {
     dispatch(updateCasinoRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const casino = response.data;
                   dispatch(updateCasinoSuccess(casino))
@@ -176,7 +176,7 @@ export const updateCasino = () => {
 export const deleteCasinos = () => {
   return (dispatch) => {
     dispatch(deleteCasinosRequest);
-    await axios.get(`/api/`)
+    axios.get(`/api/`)
                 .then(response => {
                   const casinos = response.data;
                   dispatch(deleteCasinosSuccess(casinos))
