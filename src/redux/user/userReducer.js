@@ -1,26 +1,4 @@
-import {
-  SET_USER,
-  SET_ACCESS_TOKEN,
-  SET_LOGOUT,
-  LOGIN_USER_REQUEST,
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAILURE,
-  FETCH_USERS_REQUEST,
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE,
-  FETCH_USER_REQUEST,
-  FETCH_USER_SUCCESS,
-  FETCH_USER_FAILURE,
-  CREATE_USER_REQUEST,
-  CREATE_USER_SUCCESS,
-  CREATE_USER_FAILURE,
-  UPDATE_USER_REQUEST,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILURE,
-  DELETE_USERS_REQUEST,
-  DELETE_USERS_SUCCESS,
-  DELETE_USERS_FAILURE,
-} from "./userTypes";
+import * as types from "./userActions";
 
 const initialState = {
   user: {
@@ -53,20 +31,24 @@ const initialState = {
       unread_messages: 0,
     },
   },
+  loading: false,
+  error: "",
+  users: [],
+  status: "",
 };
 
-const userReducer = (state = initialState, action) => {
+function userStore(state = initialState, action) {
   const { user } = state;
 
   switch (action.type) {
-    case SET_USER:
+    case types.SET_USER:
       return {
         user: {
           ...user,
           member: action.payload,
         },
       };
-    case SET_ACCESS_TOKEN:
+    case types.SET_ACCESS_TOKEN:
       return {
         user: {
           ...user,
@@ -77,7 +59,7 @@ const userReducer = (state = initialState, action) => {
           isAuth: action.payload.isAuth,
         },
       };
-    case SET_LOGOUT:
+    case types.SET_LOGOUT:
       return {
         user: {
           isAuth: false,
@@ -110,118 +92,31 @@ const userReducer = (state = initialState, action) => {
           },
         },
       };
-
-    // case LOGIN_USER_REQUEST:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-    // case LOGIN_USER_SUCCESS:
-    //   return {
-    //     loading: false,
-    //     data: action.payload,
-    //     error: "",
-    //   };
-    // case LOGIN_USER_FAILURE:
-    //   return {
-    //     loading: false,
-    //     data: [],
-    //     error: action.payload,
-    //   };
-
-    // case FETCH_USERS_REQUEST:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-    // case FETCH_USERS_SUCCESS:
-    //   return {
-    //     loading: false,
-    //     data: action.payload,
-    //     error: "",
-    //   };
-    // case FETCH_USERS_FAILURE:
-    //   return {
-    //     loading: false,
-    //     data: [],
-    //     error: action.payload,
-    //   };
-
-    // case FETCH_USER_REQUEST:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-    // case FETCH_USER_SUCCESS:
-    //   return {
-    //     loading: false,
-    //     data: action.payload,
-    //     error: "",
-    //   };
-    // case FETCH_USER_FAILURE:
-    //   return {
-    //     loading: false,
-    //     data: [],
-    //     error: action.payload,
-    //   };
-
-    // case CREATE_USER_REQUEST:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-    // case CREATE_USER_SUCCESS:
-    //   return {
-    //     loading: false,
-    //     data: action.payload,
-    //     error: "",
-    //   };
-    // case CREATE_USER_FAILURE:
-    //   return {
-    //     loading: false,
-    //     data: [],
-    //     error: action.payload,
-    //   };
-
-    // case UPDATE_USER_REQUEST:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-    // case UPDATE_USER_SUCCESS:
-    //   return {
-    //     loading: false,
-    //     data: action.payload,
-    //     error: "",
-    //   };
-    // case UPDATE_USER_FAILURE:
-    //   return {
-    //     loading: false,
-    //     data: [],
-    //     error: action.payload,
-    //   };
-
-    // case DELETE_USERS_REQUEST:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-    // case DELETE_USERS_SUCCESS:
-    //   return {
-    //     loading: false,
-    //     data: action.payload,
-    //     error: "",
-    //   };
-    // case DELETE_USERS_FAILURE:
-    //   return {
-    //     loading: false,
-    //     data: [],
-    //     error: action.payload,
-    //   };
-
+    case types.FETCH_USERS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        users: [],
+      };
+    case types.FETCH_USERS_SUCCESS:
+      return { ...state, loading: false, users: action.payload, error: "" };
+    case types.FETCH_USERS_FAILURE:
+      return {
+        loading: false,
+        users: [],
+        error: action.payload,
+      };
+    case types.SET_USER_STATUS:
+      let stat = "";
+      if (action.payload == "all") {
+        stat = null;
+      } else {
+        stat = action.payload;
+      }
+      return { ...state, loading: false, error: "", status: stat };
     default:
       return state;
   }
-};
+}
 
-export default userReducer;
+export default userStore;

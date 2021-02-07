@@ -2451,3 +2451,42 @@ select {
       }
    }
 }
+
+
+.send-message {
+	.message-content {
+		width: 60% !important;
+	}
+	.send-body {
+		.recipient {
+			.tab {
+				div {
+					button {
+						background-color: rgba(0,0,0,0.20);
+
+					}
+				}
+				.active {
+					button {
+						background-color: rgba(0,0,0,0.40) !important;
+					}
+				}
+			}
+		}
+		.contents {
+			.tab {
+				div {
+					button {
+						background-color: rgba(0,0,0,0.20);
+
+					}
+				}
+				.active {
+					button {
+						background-color: rgba(0,0,0,0.40) !important;
+					}
+				}
+			}
+		}
+	}
+}
