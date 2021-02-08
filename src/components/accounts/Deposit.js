@@ -91,7 +91,7 @@ const Deposit = (props) => {
 
    const submit = async (e) => {
       e.preventDefault()
-      swal.confirm('충전신청을 하시겠습니까?', async (r) => {
+      swal.confirm('입금신청을 하시겠습니까?', async (r) => {
          if (r.value) {
             const f = new FormData(e.target)
             try {
@@ -125,7 +125,7 @@ const Deposit = (props) => {
    }
 
    const destroy = async () => {
-      swal.confirm('정말로 선택된 충전내역을 삭제하시겠습니까?', async (r) => {
+      swal.confirm('정말로 선택된 입금내역을 삭제하시겠습니까?', async (r) => {
          if (r.value) {
             try {
                const filtered = deposit.depositActivities.filter((depositActivities) => depositActivities.isSelected)
@@ -172,43 +172,43 @@ const Deposit = (props) => {
       <Fragment>
          <div class="content account-continer flex flex-inherit grow-2 flex-column">
             <div class="deposit-wrap account deposit-content-desktop flex-inherit padding-10">
-               <div class="deposit-left-content account-height widthp-50 flex-inherit flex-column margin-right-10 scrollable-auto">
+               <div class="deposit-left-content account-height widthp-50 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
                   <div class="widthp-100 deposit-notice flex-inherit flex-column margin-bottom-20">
-                     <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
-                        <span class="color-white">충전신청 주의사항</span>
+                     <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
+                        <span class="color-white">입금신청 주의사항</span>
                      </div>
-                     <div class="ac-comment-header-content padding-15 background-transparent-b-5 flex-inherit flex-column">
+                     <div class="ac-comment-header-content padding-15 background-transparent-b-5 flex-inherit flex-column border-top">
                         <p class="color-grey">예금주명과 입금자명이 다를 시 입금처리가 되지않습니다</p>
-                        <p class="color-grey">입금금액과 입금금액이 다를 시 입금처리가 되지않습니다</p>
-                        <p class="color-grey">선 입금 후 입금신청 부탁드립니다</p>
+                        <p class="color-grey">입금신청금액과 입금금액이 다를 시 입금처리가 되지않습니다</p>
+                        <p class="color-grey">선 입금 후 입금신청서작성을 부탁드립니다</p>
                         <p class="color-grey">입금 최소 금액은 1만원 이상 1천원 단위로 가능합니다</p>
                         <p class="color-grey">입금 계좌가 변경 될 경우 회원님들께 쪽지로 안내해드립니다</p>
                      </div>
                   </div>
                   <div class="deposit-payment flex-column flex-inherit">
                      <div class="flex-column flex-inherit widthp-100">
-                        <div class="red-shadow deposit-payment-apply height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
-                           <span class="color-white grow-2">충전신청 주의사항</span>
+                        <div class="red-shadow deposit-payment-apply height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
+                           <span class="color-white grow-2">입금신청서</span>
                            <div class="padding-right-15 align-items-center">
                               <i class="far fa-exclamation-triangle color-yellow"></i>
-                              <span class="color-grey">선입금 후 신청서를 작성해주세요.</span>
+                              <span class="color-grey">선 입금 후 입금신청서를 작성해주세요.</span>
                            </div>
                         </div>
-                        <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                        <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb border-top flex-inherit">
                            <span class="color-white">결제 방법 선택</span>
                         </div>
                         <div class="ac-payment-pbp flex-inherit align-items-center align-items-center-inherit justify-content-center-inherit">
-                           <div class="widthp-33 border-right border-bottom height-45 color-green background-transparent-b-5">
+                           <div class="widthp-33 border-right-rb border-bottom-rb height-45 color-green background-transparent-b-10 border-top">
                               <span class="color-green">
                                  <i class="far fa-wallet"></i>현금
                               </span>
                            </div>
-                           <div class="widthp-33 border-right border-bottom height-45 color-green background-transparent-b-5">
+                           <div class="widthp-33 border-right-rb border-bottom-rb border-left-rw height-45 color-green background-transparent-b-5 not-allowed border-top">
                               <span class="color-grey">
                                  <i class="fab fa-paypal"></i>페이팔
                               </span>
                            </div>
-                           <div class="widthp-33  border-bottom height-45 color-green background-transparent-b-5">
+                           <div class="widthp-33 border-bottom-rb border-left-rw height-45 color-green background-transparent-b-5 not-allowed border-top">
                               <span class="color-grey">
                                  <i class="fab fa-bitcoin"></i>비트코인
                               </span>
@@ -216,24 +216,24 @@ const Deposit = (props) => {
                         </div>
                      </div>
                      <div class="flex-column flex-inherit widthp-100">
-                        <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
-                           <span class="color-white">입금자 및 충전액</span>
+                        <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit border-top">
+                           <span class="color-white">입금자 및 입금액</span>
                         </div>
                         <div class="account-form-data flex-column flex-inherit">
                            <div class="form-rows flex-inherit">
-                              <div class="widthp-33 border-right form-title height-45 border-bottom align-items-center justify-content-center">
+                              <div class="widthp-33 border-right-rb form-title height-45 border-bottom-rb align-items-center justify-content-center background-transparent-b-10 border-top">
                                  <span class="color-grey">입금자명</span>
                               </div>
-                              <div class="widthp-67 form-content height-45 border-bottom">
-                                 <input type="text" name="" class="padding-left-10 input-form" placeholder="입금자명을 입력해주세요" />
+                              <div class="widthp-67 form-content height-45 border-bottom-rb border-left-rw align-items-center justify-content-end padding-horizontal-10 center background-transparent-b-5 border-top">
+                                 <span class="color-green">관리자</span>
                               </div>
                            </div>
                            <div class="form-rows flex-inherit">
-                              <div class="widthp-33 border-right form-title heightp-100 border-bottom align-items-center justify-content-center padding-vertical-15">
-                                 <span class="color-grey">충전액</span>
+                              <div class="widthp-33 border-right-rb form-title heightp-100 border-bottom-rb align-items-center justify-content-center padding-vertical-15 background-transparent-b-10 border-top">
+                                 <span class="color-grey">입금금액</span>
                               </div>
-                              <div class="widthp-67 form-content border-bottom flex-inherit flex-column">
-                                 <div class="amount-box flex-inherit border-bottom padding-vertical-15">
+                              <div class="widthp-67 form-content border-bottom-rb flex-inherit flex-column background-transparent-b-5 border-top">
+                                 <div class="amount-box flex-inherit border-bottom-rb border-left-rw padding-vertical-15">
                                     <div class="grow-2">
                                        <input
                                           type="text"
@@ -257,7 +257,7 @@ const Deposit = (props) => {
                                  <div class="amount-quick-box flex-inherit height-40">
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                                        data-amount="30000"
                                        onClick={QuickInput}
                                     >
@@ -265,7 +265,7 @@ const Deposit = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                                        data-amount="50000"
                                        onClick={QuickInput}
                                     >
@@ -273,7 +273,7 @@ const Deposit = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                                        data-amount="100000"
                                        onClick={QuickInput}
                                     >
@@ -281,7 +281,7 @@ const Deposit = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                                        data-amount="500000"
                                        onClick={QuickInput}
                                     >
@@ -289,7 +289,7 @@ const Deposit = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 heightp-100 color-grey border-top border-left-rw"
                                        data-amount="1000000"
                                        onClick={QuickInput}
                                     >
@@ -301,34 +301,34 @@ const Deposit = (props) => {
                         </div>
                      </div>
                      <div class="flex-column flex-inherit widthp-100">
-                        <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
-                           <span class="color-white">결제 계좌 확인</span>
+                        <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit border-top">
+                           <span class="color-white">입금 계좌 확인</span>
                         </div>
                         <div class="deposit-payment-confirm-data flex-column flex-inherit">
-                           <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom align-items-center-inherit">
-                              <div class="widthp-33 border-right">
+                           <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom-rb align-items-center-inherit background-transparent-b-10 border-top">
+                              <div class="widthp-33 border-right-rb">
                                  <span class="color-grey">은행명</span>
                               </div>
-                              <div class="widthp-33 border-right">
+                              <div class="widthp-33 border-right-rb border-left-rw">
                                  <span class="color-grey">예금주</span>
                               </div>
-                              <div class="widthp-33">
+                              <div class="widthp-33 border-left-rw">
                                  <span class="color-grey">결제 계좌</span>
                               </div>
                            </div>
-                           <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom align-items-center-inherit">
-                              <div class="widthp-33 border-right">
+                           <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom-rb align-items-center-inherit background-transparent-b-5 border-top">
+                              <div class="widthp-33 border-right-rb">
                                  <span class="color-white">농협</span>
                               </div>
-                              <div class="widthp-33 border-right">
+                              <div class="widthp-33 border-right-rb border-left-rw">
                                  <span class="color-white">주식회사 웨스트몰</span>
                               </div>
-                              <div class="widthp-33">
+                              <div class="widthp-33 border-left-rw">
                                  <span class="color-white">301-0252-3577-31</span>
                               </div>
                            </div>
                         </div>
-                        <div class="deposit-payment-confirm-btn padding-top-20 flex-inherit">
+                        <div class="deposit-payment-confirm-btn padding-top-10 flex-inherit">
                            <div class="grow-2">
                               <button type="button" class="padding-15 background-transparent-b-10 color-white">
                                  초기화
@@ -336,22 +336,22 @@ const Deposit = (props) => {
                            </div>
                            <div>
                               <button type="button" class="padding-15 background-green color-white">
-                                 충전신청
+                                 입금신청
                               </button>
                            </div>
                         </div>
                      </div>
                   </div>
                </div>
-               <div class="deposit-right-content account-height widthp-50 flex-inherit flex-column scrollable-auto">
-                  <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
-                     <span class="color-white">충전신청 내역</span>
+               <div class="deposit-right-content account-height widthp-50 flex-inherit padding-left-5 border-left flex-column scrollable-auto">
+                  <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
+                     <span class="color-white">입금신청 내역</span>
                   </div>
                   <div class="widthp-100 deposit-history-content flex-inherit flex-column">
                      <div class="history-item">
                         <table>
                            <thead>
-                              <tr class="thead">
+                              <tr class="thead border-top border-bottom-rb">
                                  <th class="height-45 background-transparent-b-10 color-grey">전체 선택</th>
                                  <th class="height-45 background-transparent-b-10 color-grey">신청 시간</th>
                                  <th class="height-45 background-transparent-b-10 color-grey">종류</th>
@@ -359,7 +359,7 @@ const Deposit = (props) => {
                                  <th class="height-45 background-transparent-b-10 color-grey">상태</th>
                               </tr>
                            </thead>
-                           <tbody>
+                           <tbody class="background-transparent-b-5">
                               <tr class="rows">
                                  <td class="height-45 border-top">
                                     <input type="checkbox" name="" value="1" />
@@ -397,7 +397,7 @@ const Deposit = (props) => {
                            </tbody>
                         </table>
                      </div>
-                     <div class="history-item-footer flex-inherit border-top padding-vertical-10 align-items-center background-transparent-b-5">
+                     <div class="history-item-footer flex-inherit border-top padding-vertical-10 align-items-center background-transparent-b-10 border-bottom-rb">
                         <div class="grow-2 padding-left-10">
                            <button type="button" class="color-grey padding-10 background-transparent-b-10">
                               <i class="fal fa-trash-alt"></i>
@@ -411,7 +411,7 @@ const Deposit = (props) => {
                            </span>
                         </div>
                      </div>
-                     <div class="padding-vertical-10 flex-inherit border-top-white height-60 color-grey">
+                     <div class="padding-vertical-10 flex-inherit height-60 color-grey">
                         <div class="pagination flex-inherit widthp-100 heightp-100">
                            <div class="select">
                               <select name="slct" id="slct">
@@ -486,12 +486,12 @@ const Deposit = (props) => {
             <div class="interload-tab height-50 border-bottom">
                <div class="flex widthp-50">
                   <button type="button" id="tab-1" class={context.state.interMenu === 'inter-tab-1' ? 'active' : ''} onClick={() => context.actions.setinterMenu('inter-tab-1')}>
-                     충전신청
+                     입금신청
                   </button>
                </div>
                <div class="flex widthp-50">
                   <button type="button" id="tab-2" class={context.state.interMenu === 'inter-tab-2' ? 'active' : ''} onClick={() => context.actions.setinterMenu('inter-tab-2')}>
-                     충전내역
+                     입금내역
                   </button>
                </div>
             </div>
@@ -500,23 +500,23 @@ const Deposit = (props) => {
                   <div class="flex-column flex-inherit padding-horizontal-15 widthp-100">
                      <div class="flex-column">
                         <div class="interload-list padding-vertical-10">
-                           <h1>충전안내</h1>
+                           <h1>입금안내</h1>
                         </div>
                         <div class="interload-list interload-notice-comment flex flex-column">
-                           <p>입금시 예금주명과 입금자명이 다른 경우 충전 처리가 되지않습니다.</p>
+                           <p>입금시 예금주명과 입금자명이 다른 경우 입금 처리가 되지않습니다.</p>
 
-                           <p>충전 신청 금액과 입금 금액이 다른 경우 충전 처리가 되지않습니다.</p>
+                           <p>입금 신청 금액과 입금 금액이 다른 경우 입금 처리가 되지않습니다.</p>
 
-                           <p>선입금 후 충전 신청을 부탁드립니다.</p>
+                           <p>선입금 후 입금 신청을 부탁드립니다.</p>
 
-                           <p>최소 충전 금액은 1만원이상 1천원 단위로 가능합니다.</p>
+                           <p>최소 입금 금액은 1만원이상 1천원 단위로 가능합니다.</p>
 
                            <p>입금 계좌가 변경될 경우 회원님께 쪽지로 안내해드립니다.</p>
                         </div>
                      </div>
                      <div class="flex-column flex-inherit">
                         <div class="interload-list padding-vertical-10">
-                           <h1>충전 신청서</h1>
+                           <h1>입금 신청서</h1>
                         </div>
 
                         <div class="interload-list align-items-center-inherit">
@@ -540,7 +540,7 @@ const Deposit = (props) => {
                         </div>
 
                         <div class="interload-list align-items-center-inherit deposit-amount-wrap">
-                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right border-bottom ">충전금액</div>
+                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right border-bottom ">입금금액</div>
                            <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom">
                               <input type="text" name="amount" placeholder="0" value={deposit.form.amount.toLocaleString()} onChange={amountChange} required />
                            </div>
@@ -598,7 +598,7 @@ const Deposit = (props) => {
                      <div class="flex-column">
                         <div class="interload-list">
                            <button type="submit" class="widthp-100 background-green color-white height-40 justify-content-center">
-                              충전신청
+                              입금신청
                            </button>
                         </div>
                      </div>

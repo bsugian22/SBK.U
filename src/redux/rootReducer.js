@@ -16,12 +16,8 @@ import registerReducer from "./register/registerReducer";
 import sportReducer from "./sport/sportReducer";
 import sportsdetailReducer from "./sportsdetail/sportsdetailReducer";
 import swipermainReducer from "./swipermain/swipermainReducer";
-import preferencesStore from "./preference/preferenceReducer";
-import userStore from "./user/userReducer";
-import positionReducer from "./accounts/position/positionReducer";
+
 const rootReducer = combineReducers({
-  preferencesStore,
-  userStore,
   casino: casinoReducer,
   esport: esportReducer,
   esportsdetail: esportsdetailReducer,
@@ -39,7 +35,6 @@ const rootReducer = combineReducers({
   sport: sportReducer,
   sportsdetail: sportsdetailReducer,
   swipermain: swipermainReducer,
-  position: positionReducer,
 });
 
 export default rootReducer;

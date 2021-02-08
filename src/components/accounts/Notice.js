@@ -87,106 +87,115 @@ const Notice = (props) => {
    return (
       <Fragment>
          <div class="content account-continer flex flex-inherit grow-2 flex-column">
-            <div class="content-header notice-header-desktop shrink-0 border-bottom height-50 align-items-center padding-horizontal-10 background-transparent-b-25 border-left">
-               <span class="color-grey">
-                  <i class="fad fa-megaphone"></i>NOTICE
-               </span>
-            </div>
-            <div class="notice-wrap account notice-content-desktop border-top flex-inherit flex-row">
-               <div class="notice-left flex-inherit flex-column account-height widthp-40 border-right ">
-                  <div class="notice flex-column grow-2 flex-inherit padding-10 scrollable-auto">
-                     {notice.data.length > 0 ? (
-                        notice.data.map((value, index) => {
-                           return (
-                              <button type="button" class="flex-inherit" onClick={() => view(value.id)} key={index}>
-                                 <div
-                                    class={`flex-column flex-inherit widthp-100 notice-list min-height-100 padding-10 background-transparent-b-10 color-grey border-bottom-white${
-                                       notice.post.id == value.id ? ' active' : ''
-                                    }`}
-                                 >
-                                    <div class="heightp-100 flex-inherit flex-column">
-                                       <div class="flex-inherit heightp-50">
-                                          <div class="padding-10 background-transparent-b-10">
-                                             <span class="color-grey">{value.category}</span>
-                                          </div>
-                                          <div class="padding-10 grow-2 justify-content-end">
-                                             <span class="color-grey">{moment(value.createdAt).format('MM / DD HH:mm')}</span>
-                                          </div>
-                                       </div>
-                                       <div class="flex-inherit heightp-50 align-items-center">
-                                          <div class="padding-10 text-ellipsis">
-                                             <span class="color-white text-ellipsis">{value.title}</span>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </button>
-                           )
-                        })
-                     ) : (
-                        <div class="noArticle color-grey padding-10 background-transparent-b-10 justify-content-center">
-                           <span>게시글이 없습니다.</span>
-                        </div>
-                     )}
+            <div class="message-wrap account message-content-desktop flex-inherit padding-10">
+               <div class="message-left-content account-height widthp-50 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
+                  <div class="flex-inherit flex-column">
+                     <div class="red-shadow message-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
+                        <span class="color-white">공지사항</span>
+                     </div>
                   </div>
-                  <div class="flex-inherit notice-page-bottom border-top-white height-60 background-transparent-b-15 padding-10 color-grey">
-                     <div class="pagination flex-inherit widthp-100 justify-content-end margin-top-5">
-                        <div class="flex selectBox">
-                           <Select
-                              className="select-container"
-                              classNamePrefix="select-box"
-                              value={{ label: notice.page, value: notice.page }}
-                              onChange={setPage}
-                              options={((rows, i, len) => {
-                                 while (++i <= len) {
-                                    rows.push({ value: i, label: i })
-                                 }
-                                 return rows
-                              })([], 0, notice.lastPage)}
-                           />
-                        </div>
-                        <div class="grow-2"></div>
-                        <div class="flex page">
-                           <button class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5" onClick={prev} disabled={1 >= notice.page}>
-                              <i class="fas fa-chevron-left margin-0 color-white"></i>
-                           </button>
-                           <button class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center" onClick={next} disabled={notice.lastPage <= notice.page}>
-                              <i class="fas fa-chevron-right margin-0 color-white"></i>
-                           </button>
+                  <div class="widthp-100 message-content flex-inherit flex-column">
+                     <div class="message-item">
+                        <table>
+                           <thead class="background-transparent-b-10">
+                              <tr class="thead">
+                                 <th class="height-45 color-grey border-top">구분</th>
+                                 <th class="height-45 color-grey border-top">내용</th>
+                                 <th class="height-45 color-grey border-top">작성시간</th>
+                              </tr>
+                           </thead>
+                           <tbody class="background-transparent-b-5">
+                              <tr class="rows">
+                                 <td class="height-45 border-top">
+                                    <span class="color-grey">점검</span>
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <Link to="#" className="color-white">
+                                       도메인 주소 변경안내
+                                    </Link>
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <span class="color-grey">20/11/12 22:11:29</span>
+                                 </td>
+                              </tr>
+
+                              <tr class="rows">
+                                 <td class="height-45 border-top">
+                                    <span class="color-grey">점검</span>
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <Link to="#" className="color-white">
+                                       계좌 긴급 변경안내
+                                    </Link>
+                                 </td>
+                                 <td class="height-45 border-top">
+                                    <span class="color-grey">20/11/12 22:11:29</span>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                     <div class="padding-vertical-10 flex-inherit height-60 color-grey">
+                        <div class="pagination flex-inherit widthp-100 heightp-100">
+                           <div class="select">
+                              <select name="slct" id="slct">
+                                 <option value="">1</option>
+                                 <option value="">2</option>
+                                 <option value="">3</option>
+                                 <option value="">4</option>
+                                 <option value="">5</option>
+                                 <option value="">6</option>
+                                 <option value="">7</option>
+                              </select>
+                           </div>
+                           <div class="flex margin-left-5 page grow-2 justify-content-end">
+                              <Link to="#">
+                                 <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5">
+                                    <i class="fas fa-chevron-left margin-0 color-grey"></i>
+                                 </button>
+                              </Link>
+                              <Link to="#">
+                                 <button class="page-right width-40 heightp-100 background-transparent-b-20">
+                                    <i class="fas fa-chevron-right margin-0 color-grey"></i>
+                                 </button>
+                              </Link>
+                           </div>
                         </div>
                      </div>
                   </div>
                </div>
-               <div class="notice-read border-left flex-inherit flex-column account-height widthp-60 padding-10 scrollable-auto">
-                  {notice.post.id ? (
-                     <div class="message-read-header flex-inherit flex-column align-items-center-inherit">
-                        <div class="title flex-inherit grow-2 background-transparent-b-20 widthp-100 padding-15">
-                           <span class="flex color-grey align-items-center text-ellipsis">
-                              <span class="margin-left-5 color-white text-ellipsis">{notice.post.title}</span>
+               <div class="message-right-content account-height widthp-50 flex-inherit flex-column padding-left-5 border-left scrollable-auto">
+                  <div class="flex-inherit flex-column">
+                     <div class="message-read-header-title red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
+                        <span class="color-white grow-2">
+                           <i class="fal fa-paperclip color-grey"></i>
+                           점검
+                        </span>
+                        <div>
+                           <span class="color-grey padding-right-10">
+                              <i class="fal fa-calendar-week"></i>
+                              20/10/28 07:00:30
                            </span>
-                        </div>
-                        <div class="date flex-inherit grow-2 margin-bottom-10 background-transparent-b-10 widthp-100 padding-15">
-                           <span class="color-grey margin-right-15 align-items-center">
-                              <i class="fal fa-calendar-alt margin-right-5"></i>
-                              {moment(notice.post.createdAt).format('MM / DD HH:mm')}
+                           <span class="color-grey padding-right-15">
+                              <i class="fal fa-user"></i>
+                              운영팀
                            </span>
-                           <span class="color-grey align-items-center">
-                              <i class="far fa-user-alt margin-right-5"></i>관리자
-                           </span>
-                        </div>
-                        <div class="flex-column message-read-content min-height-150 padding-10 background-transparent-b-10 color-grey">
-                           <div class="text">{parse(notice.post.content)}</div>
                         </div>
                      </div>
-                  ) : (
-                     <div></div>
-                  )}
+                  </div>
+                  <div class="flex-inherit flex-column">
+                     <div class="message-read-header-title  background-transparent-b-5 align-items-center-inherit padding-left-15 flex-column border-top">
+                        <p class="color-grey">* BET365KOR *</p>
+                        <p class="color-grey">안녕하세요. "BET365KOR" 운영팀입니다.</p>
+                        <p class="color-grey">전용계좌가 변경되었으니 입금시 항시 계좌 확인 후 입금해주시기 바랍니다.</p>
+                        <p class="color-grey">항상 저희 BET365KOR 를 이용해주셔서 대단히 고맙습니다.</p>
+                     </div>
+                  </div>
                </div>
             </div>
          </div>
-
          <div class="widthp-100 interload-panel-mobile flex-column flex-inherit flex">
-            <div class="height-40 align-items-center-inherit border-bottom">
+            <div class="height-40 align-items-center-inherit border-bottom-rb">
                <div class="flex pi-title grow-2">
                   <span class="color-white padding-left-15">NOTICE</span>
                </div>
@@ -198,7 +207,7 @@ const Notice = (props) => {
                </div>
             </div>
 
-            <div class="member-information height-40 align-items-center-inherit border-bottom">
+            <div class="member-information height-40 align-items-center-inherit border-bottom-rb">
                <div class="flex pi-title green grow-2">
                   <span class="color-white padding-left-15">안녕하세요. {user.member.nickname} 회원님</span>
                </div>
@@ -207,7 +216,7 @@ const Notice = (props) => {
                </div>
             </div>
 
-            <div class="money-information border-bottom flex-inherit">
+            <div class="money-information border-bottom-rb flex-inherit">
                <div class="widthp-33 border-right padding-left-15 padding-vertical-15">
                   <div class="flex flex-column">
                      <span class="color-white">예치금</span>

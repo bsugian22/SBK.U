@@ -21,7 +21,7 @@ export default function AccountStatusNavi(props) {
                   </div>
                </div>
                <div class="balance-status-content flex-inherit flex-column ">
-                  <div class="widthp-100 rows flex-inherit padding-horizontal-15 height-45 border-top border-bottom align-items-center-inherit">
+                  <div class="widthp-100 rows flex-inherit padding-horizontal-15 height-40 border-top border-bottom align-items-center-inherit">
                      <div class="grow-2">
                         <i class="far fa-won-sign color-grey"></i>
                         <span class="color-white padding-left-3">현금</span>
@@ -31,7 +31,7 @@ export default function AccountStatusNavi(props) {
                      </div>
                   </div>
 
-                  <div class="widthp-100 rows flex-inherit padding-horizontal-15 height-45 border-top border-bottom align-items-center-inherit">
+                  <div class="widthp-100 rows flex-inherit padding-horizontal-15 height-40 border-top border-bottom align-items-center-inherit">
                      <div class="grow-2">
                         <i class="fab fa-product-hunt color-grey"></i>
                         <span class="color-white padding-left-3">포인트</span>
@@ -41,7 +41,7 @@ export default function AccountStatusNavi(props) {
                      </div>
                   </div>
 
-                  <div class="widthp-100 rows flex-inherit padding-horizontal-15 height-45 border-top border-bottom align-items-center-inherit">
+                  <div class="widthp-100 rows flex-inherit padding-horizontal-15 height-40 border-top border-bottom align-items-center-inherit">
                      <div class="grow-2">
                         <i class="far fa-won-sign color-grey"></i>
                         <span class="color-white padding-left-3">카지노머니</span>
@@ -66,66 +66,66 @@ export default function AccountStatusNavi(props) {
                   </div>
                </div>
                <div class="dw-status-content flex-inherit flex-column ">
-                  <div class="widthp-100 border-top  ">
+                  <div class="widthp-100 border-top">
                      <table>
                         <thead>
-                           <tr>
-                              <th class="color-grey height-45 border-bottom">구분</th>
-                              <th class="color-grey height-45 border-bottom">신청일시</th>
-                              <th class="color-grey height-45 border-bottom">신청금액</th>
-                              <th class="color-grey height-45 border-bottom"></th>
+                           <tr class="background-transparent-b-10">
+                              <th class="color-grey height-40 border-bottom">구분</th>
+                              <th class="color-grey height-40 border-bottom">신청일시</th>
+                              <th class="color-grey height-40 border-bottom">신청금액</th>
+                              <th class="color-grey height-40 border-bottom"></th>
                            </tr>
                         </thead>
                         <tbody>
                            <tr>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-grey">입금</span>
                                  </div>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-grey">21/01/02 11:00</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-green">5,000,000원</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-grey">대기</span>
                                  </div>
                               </td>
                            </tr>
                            <tr>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-grey">입금</span>
                                  </div>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-grey">21/01/02 11:00</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-green">5,000,000원</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-grey">대기</span>
                                  </div>
                               </td>
                            </tr>
                            <tr>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-grey">입금</span>
                                  </div>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-grey">21/01/02 11:00</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-green">5,000,000원</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-red">취소</span>
                                  </div>
@@ -153,63 +153,63 @@ export default function AccountStatusNavi(props) {
                   <div class="widthp-100 border-top  ">
                      <table>
                         <thead>
-                           <tr>
-                              <th class="color-grey height-45 border-bottom">배팅일시</th>
-                              <th class="color-grey height-45 border-bottom">배당</th>
-                              <th class="color-grey height-45 border-bottom">배팅금액</th>
-                              <th class="color-grey height-45 border-bottom"></th>
+                           <tr class="background-transparent-b-10">
+                              <th class="color-grey height-40 border-bottom">배팅일시</th>
+                              <th class="color-grey height-40 border-bottom">배당</th>
+                              <th class="color-grey height-40 border-bottom">배팅금액</th>
+                              <th class="color-grey height-40 border-bottom"></th>
                            </tr>
                         </thead>
                         <tbody>
                            <tr>
-                              <td class="border-bottom">
+                              <td>
                                  <div>
                                     <span class="color-grey">21/01/02 11:00</span>
                                  </div>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-red">254.12</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-green">10,000원</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-green">적중</span>
                                  </div>
                               </td>
                            </tr>
                            <tr>
-                              <td class="border-bottom">
+                              <td>
                                  <div>
                                     <span class="color-grey">21/01/02 11:00</span>
                                  </div>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-red">2.12</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-green">10,000원</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-red">낙첨</span>
                                  </div>
                               </td>
                            </tr>
                            <tr>
-                              <td class="border-bottom">
+                              <td>
                                  <div>
                                     <span class="color-grey">21/01/02 11:00</span>
                                  </div>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-red">1.22</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <span class="color-green">2,000,000원</span>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-green">대기</span>
                                  </div>
@@ -237,24 +237,25 @@ export default function AccountStatusNavi(props) {
                   <div class="widthp-100 border-top">
                      <table>
                         <thead>
-                           <tr>
-                              <th class="color-grey height-45 border-bottom">작성일</th>
-                              <th class="color-grey height-45 border-bottom">제목</th>
+                           <tr class="background-transparent-b-10">
+                              <th class="color-grey height-40 border-bottom">작성일</th>
+                              <th class="color-grey height-40 border-bottom">제목</th>
+                              <th class="color-grey height-40 border-bottom"></th>
                            </tr>
                         </thead>
                         <tbody>
                            <tr>
-                              <td class="border-bottom">
+                              <td>
                                  <div>
                                     <span class="color-grey">21/01/02 11:00</span>
                                  </div>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <Link to="#" className="color-grey">
                                     입금문의
                                  </Link>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-grey">답변대기</span>
                                  </div>
@@ -262,17 +263,17 @@ export default function AccountStatusNavi(props) {
                            </tr>
 
                            <tr>
-                              <td class="border-bottom">
+                              <td>
                                  <div>
                                     <span class="color-grey">21/01/02 11:00</span>
                                  </div>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <Link to="#" className="color-grey">
                                     입금문의
                                  </Link>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-green">답변완료</span>
                                  </div>
@@ -280,17 +281,17 @@ export default function AccountStatusNavi(props) {
                            </tr>
 
                            <tr>
-                              <td class="border-bottom">
+                              <td>
                                  <div>
                                     <span class="color-grey">21/01/02 11:00</span>
                                  </div>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <Link to="#" className="color-grey">
                                     입금문의
                                  </Link>
                               </td>
-                              <td class="border-bottom">
+                              <td>
                                  <div class="background-transparent-b-10 padding-5 margin-5">
                                     <span class="color-green">답변완료</span>
                                  </div>

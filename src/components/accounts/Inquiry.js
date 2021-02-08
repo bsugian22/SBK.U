@@ -7,24 +7,24 @@ export default function Inquiry() {
       <Fragment>
          <div class="content account-continer flex flex-inherit grow-2 flex-column">
             <div class="message-wrap account message-content-desktop flex-inherit padding-10">
-               <div class="message-left-content account-height widthp-50 flex-inherit flex-column margin-right-10 scrollable-auto">
+               <div class="message-left-content account-height widthp-50 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
                   <div class="flex-inherit flex-column">
-                     <div class="red-shadow message-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
+                     <div class="red-shadow message-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
                         <span class="color-white">1:1문의</span>
                      </div>
                   </div>
                   <div class="widthp-100 message-content flex-inherit flex-column">
                      <div class="message-item">
                         <table>
-                           <thead>
+                           <thead class="background-transparent-b-10">
                               <tr class="thead">
-                                 <th class="height-45 background-transparent-b-10 color-grey">전체선택</th>
-                                 <th class="height-45 background-transparent-b-10 color-grey">구분</th>
-                                 <th class="height-45 background-transparent-b-10 color-grey">내용</th>
-                                 <th class="height-45 background-transparent-b-10 color-grey">수신시간</th>
+                                 <th class="height-45 color-grey border-top">전체선택</th>
+                                 <th class="height-45 color-grey border-top">구분</th>
+                                 <th class="height-45 color-grey border-top">내용</th>
+                                 <th class="height-45 color-grey border-top">수신시간</th>
                               </tr>
                            </thead>
-                           <tbody>
+                           <tbody class="background-transparent-b-5">
                               <tr class="rows">
                                  <td class="height-45 border-top">
                                     <input type="checkbox" name="" value="1" />
@@ -34,7 +34,7 @@ export default function Inquiry() {
                                  </td>
                                  <td class="height-45 border-top">
                                     <Link to="#" className="color-white">
-                                       아니 환전 언제해주나요 ㅡㅡ?
+                                       안녕하세요
                                     </Link>
                                     <span class="color-red padding-5 margin-left-5 background-transparent-b-15">답변대기</span>
                                  </td>
@@ -63,7 +63,7 @@ export default function Inquiry() {
                            </tbody>
                         </table>
                      </div>
-                     <div class="message-item-footer flex-inherit border-top padding-vertical-10 align-items-center background-transparent-b-5">
+                     <div class="message-item-footer flex-inherit border-top border-bottom-rb padding-vertical-10 align-items-center background-transparent-b-10">
                         <div class="grow-2 padding-left-10">
                            <button type="button" class="color-grey padding-10 background-transparent-b-10">
                               <i class="fal fa-trash-alt"></i>
@@ -71,7 +71,7 @@ export default function Inquiry() {
                            </button>
                         </div>
                      </div>
-                     <div class="padding-vertical-10 flex-inherit border-top-white height-60 color-grey">
+                     <div class="padding-vertical-10 flex-inherit height-60 color-grey">
                         <div class="pagination flex-inherit widthp-100 heightp-100">
                            <div class="select">
                               <select name="slct" id="slct">
@@ -105,13 +105,16 @@ export default function Inquiry() {
                      </div>
                   </div>
                </div>
-               <div class="message-right-content account-height widthp-50 flex-inherit flex-column margin-right-10 scrollable-auto">
+               <div class="message-right-content account-height widthp-50 flex-inherit flex-column padding-left-5 border-left scrollable-auto">
                   <div class="flex-inherit flex-column">
-                     <div class="red-shadow message-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
+                     <div class="red-shadow message-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
                         <span class="color-white">문의하기</span>
                      </div>
-                     <div class="message-form-write flex-column flex-inherit margin-top-20">
-                        <textarea class="background-transparent-b-10 padding-10 height-200" placeholder="문의하실 내용을 입력해주세요"></textarea>
+                     <div class="message-title-write flex-column flex-inherit">
+                        <input type="text" class="widthp-100 border-top border-bottom-rb background-transparent-b-5 padding-10 height-45 color-grey" placeholder="제목을 입력해주세요" />
+                     </div>
+                     <div class="message-form-write flex-column flex-inherit">
+                        <textarea class="background-transparent-b-5 padding-10 border-top height-200 color-grey" placeholder="내용을 입력해주세요"></textarea>
                      </div>
                      <div class="message-form-btn margin-top-10 flex-inherit">
                         <div class="grow-2">
@@ -137,7 +140,7 @@ export default function Inquiry() {
             </div>
          </div>
          <div class="widthp-100 interload-panel-mobile flex-column flex-inherit flex">
-            <div class="height-40 align-items-center-inherit border-bottom">
+            <div class="height-40 align-items-center-inherit border-bottom-rb">
                <div class="flex pi-title grow-2">
                   <span class="color-white padding-left-15">1:1고객문의</span>
                </div>
@@ -149,7 +152,7 @@ export default function Inquiry() {
                </div>
             </div>
 
-            <div class="member-information height-40 align-items-center-inherit border-bottom">
+            <div class="member-information height-40 align-items-center-inherit border-bottom-rb">
                <div class="flex pi-title green grow-2">
                   <span class="color-white padding-left-15">안녕하세요. - 회원님</span>
                </div>
@@ -158,14 +161,14 @@ export default function Inquiry() {
                </div>
             </div>
 
-            <div class="money-information border-bottom flex-inherit">
-               <div class="widthp-33 border-right padding-left-15 padding-vertical-15">
+            <div class="money-information border-bottom-rb flex-inherit">
+               <div class="widthp-33 border-right-rb padding-left-15 padding-vertical-15">
                   <div class="flex flex-column">
                      <span class="color-white">예치금</span>
                      <span class="color-green">-</span>
                   </div>
                </div>
-               <div class="widthp-33 border-right padding-left-15 padding-vertical-15">
+               <div class="widthp-33 border-right-rb padding-left-15 padding-vertical-15">
                   <div class="flex flex-column">
                      <span class="color-white">게임머니</span>
                      <span class="color-green">100,000,000</span>

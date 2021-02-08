@@ -189,21 +189,21 @@ const Exchange = (props) => {
       <Fragment>
          <div class="content account-continer flex flex-inherit grow-2 flex-column">
             <div class="exchange-wrap account exchange-content-desktop flex-inherit padding-10">
-               <div class="exchange-left-content account-height widthp-50 flex-inherit flex-column margin-right-10 scrollable-auto">
+               <div class="exchange-left-content account-height padding-right-5 border-right widthp-50 flex-inherit flex-column scrollable-auto">
                   <div class="exchange-payment flex-column flex-inherit">
                      <div class="flex-column flex-inherit widthp-100">
-                        <div class="red-shadow exchange-payment-apply height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                        <div class="red-shadow exchange-payment-apply height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
                            <span class="color-white grow-2">게임머니 전환</span>
                         </div>
-                        <div class="green-shadow exchange-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                        <div class="green-shadow exchange-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb border-top flex-inherit">
                            <span class="color-white">보유금액 확인</span>
                         </div>
                         <div class="check-money flex-inherit flex-column">
                            <div class="rows flex-inherit align-items-center-inherit">
-                              <div class="widthp-33 height-45 background-transparent-b-5 justify-content-center border-right border-bottom">
+                              <div class="widthp-33 height-45 background-transparent-b-10 justify-content-center border-right-rb border-bottom-rb border-top">
                                  <span class="color-grey">현금</span>
                               </div>
-                              <div class="widthp-67 form-content height-45 border-bottom align-items-center padding-right-15 justify-content-end">
+                              <div class="widthp-67 form-content height-45 background-transparent-b-5 border-bottom-rb border-top align-items-center padding-right-15 justify-content-end border-left-rw">
                                  <span class="color-green">
                                     <i class="far fa-won-sign"></i>
                                     24,000,000원
@@ -212,10 +212,10 @@ const Exchange = (props) => {
                            </div>
 
                            <div class="rows flex-inherit align-items-center-inherit">
-                              <div class="widthp-33 height-45 background-transparent-b-5 justify-content-center border-right border-bottom">
+                              <div class="widthp-33 height-45 background-transparent-b-10 justify-content-center border-right-rb border-bottom-rb border-top">
                                  <span class="color-grey">카지노 머니</span>
                               </div>
-                              <div class="widthp-67 form-content height-45 border-bottom align-items-center padding-right-15 justify-content-end">
+                              <div class="widthp-67 form-content height-45 background-transparent-b-5 border-bottom-rb border-top align-items-center padding-right-15 justify-content-end border-left-rw">
                                  <span class="color-green">
                                     <i class="far fa-won-sign"></i>
                                     120,000원
@@ -225,32 +225,32 @@ const Exchange = (props) => {
                         </div>
                      </div>
                      <div class="flex-column flex-inherit widthp-100">
-                        <div class="green-shadow exchange-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                        <div class="green-shadow exchange-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb border-top flex-inherit">
                            <span class="color-white">전환 방법 및 금액 설정</span>
                         </div>
                         <div class="account-form-data flex-column flex-inherit">
                            <div class="ac-payment-pbp flex-inherit align-items-center align-items-center-inherit justify-content-center-inherit">
-                              <div class="widthp-50 border-right border-bottom height-45 color-green background-transparent-b-5">
+                              <div class="widthp-50 border-right-rb border-bottom-rb border-top height-45 color-green background-transparent-b-5 active">
                                  <span class="color-green">보유금액 -&gt; CASINO</span>
                               </div>
-                              <div class="widthp-50 border-right border-bottom height-45 color-green background-transparent-b-5">
+                              <div class="widthp-50 border-bottom-rb border-top height-45 color-green background-transparent-b-5 border-left-rw">
                                  <span class="color-grey">CASINO -&gt; 보유금액</span>
                               </div>
                            </div>
                            <div class="form-rows flex-inherit">
-                              <div class="widthp-33 border-right form-title height-45 border-bottom align-items-center justify-content-center">
+                              <div class="widthp-33 border-right-rb form-title height-45 border-bottom-rb border-top align-items-center justify-content-center background-transparent-b-10">
                                  <span class="color-grey">출금 가능액</span>
                               </div>
-                              <div class="widthp-67 form-content height-45 border-bottom align-items-center padding-right-15 justify-content-end">
+                              <div class="widthp-67 form-content height-45 border-bottom-rb border-top align-items-center padding-right-15 justify-content-end background-transparent-b-5 border-left-rw">
                                  <span class="color-green">23,000,000원</span>
                               </div>
                            </div>
                            <div class="form-rows flex-inherit">
-                              <div class="widthp-33 border-right form-title heightp-100 border-bottom align-items-center justify-content-center padding-vertical-15">
+                              <div class="widthp-33 border-right-rb form-title heightp-100 border-bottom-rb border-top align-items-center justify-content-center padding-vertical-15 background-transparent-b-10">
                                  <span class="color-grey">신청금액</span>
                               </div>
-                              <div class="widthp-67 form-content border-bottom flex-inherit flex-column">
-                                 <div class="amount-box flex-inherit border-bottom padding-vertical-15">
+                              <div class="widthp-67 form-content border-bottom-rb border-top flex-inherit flex-column background-transparent-b-5">
+                                 <div class="amount-box flex-inherit border-bottom-rb padding-vertical-15 border-left-rw">
                                     <div class="grow-2">
                                        <input
                                           type="text"
@@ -274,7 +274,7 @@ const Exchange = (props) => {
                                  <div class="amount-quick-box flex-inherit height-40">
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb border-top heightp-100 color-grey border-left-rw"
                                        data-amount="30000"
                                        onClick={QuickInput}
                                     >
@@ -282,7 +282,7 @@ const Exchange = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb border-top heightp-100 color-grey border-left-rw"
                                        data-amount="50000"
                                        onClick={QuickInput}
                                     >
@@ -290,7 +290,7 @@ const Exchange = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb border-top heightp-100 color-grey border-left-rw"
                                        data-amount="100000"
                                        onClick={QuickInput}
                                     >
@@ -298,7 +298,7 @@ const Exchange = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb border-top heightp-100 color-grey border-left-rw"
                                        data-amount="500000"
                                        onClick={QuickInput}
                                     >
@@ -306,7 +306,7 @@ const Exchange = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-top heightp-100 color-grey border-left-rw"
                                        data-amount="1000000"
                                        onClick={QuickInput}
                                     >
@@ -316,7 +316,7 @@ const Exchange = (props) => {
                               </div>
                            </div>
                         </div>
-                        <div class="exchange-payment-confirm-btn padding-top-20 flex-inherit">
+                        <div class="exchange-payment-confirm-btn padding-top-10 flex-inherit">
                            <div class="grow-2">
                               <button type="button" class="padding-15 background-transparent-b-10 color-white">
                                  초기화
@@ -324,15 +324,15 @@ const Exchange = (props) => {
                            </div>
                            <div>
                               <button type="button" class="padding-15 background-green color-white">
-                                 출금신청
+                                 전환신청
                               </button>
                            </div>
                         </div>
                      </div>
                   </div>
                </div>
-               <div class="exchange-right-content account-height widthp-50 flex-inherit flex-column scrollable-auto">
-                  <div class="red-shadow exchange-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
+               <div class="exchange-right-content account-height widthp-50 flex-inherit padding-left-5 border-left flex-column scrollable-auto">
+                  <div class="red-shadow exchange-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
                      <span class="color-white">전환신청 내역</span>
                   </div>
                   <div class="widthp-100 exchange-history-content flex-inherit flex-column">
@@ -340,14 +340,14 @@ const Exchange = (props) => {
                         <table>
                            <thead>
                               <tr class="thead">
-                                 <th class="height-45 background-transparent-b-10 color-grey">전체 선택</th>
-                                 <th class="height-45 background-transparent-b-10 color-grey">신청 시간</th>
-                                 <th class="height-45 background-transparent-b-10 color-grey">종류</th>
-                                 <th class="height-45 background-transparent-b-10 color-grey">금액</th>
-                                 <th class="height-45 background-transparent-b-10 color-grey">상태</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey border-top">전체 선택</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey border-top">신청 시간</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey border-top">종류</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey border-top">금액</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey border-top">상태</th>
                               </tr>
                            </thead>
-                           <tbody>
+                           <tbody class="background-transparent-b-5">
                               <tr class="rows">
                                  <td class="height-45 border-top">
                                     <input type="checkbox" name="" value="1" />
@@ -385,7 +385,7 @@ const Exchange = (props) => {
                            </tbody>
                         </table>
                      </div>
-                     <div class="history-item-footer flex-inherit border-top padding-vertical-10 align-items-center background-transparent-b-5">
+                     <div class="history-item-footer flex-inherit border-top border-bottom-rb border-bottom-tb padding-vertical-10 align-items-center background-transparent-b-10">
                         <div class="grow-2 padding-left-10">
                            <button type="button" class="color-grey padding-10 background-transparent-b-10">
                               <i class="fal fa-trash-alt"></i>
@@ -399,7 +399,7 @@ const Exchange = (props) => {
                            </span>
                         </div>
                      </div>
-                     <div class="padding-vertical-10 flex-inherit border-top-white height-60 color-grey">
+                     <div class="padding-vertical-10 flex-inherit height-60 color-grey">
                         <div class="pagination flex-inherit widthp-100 heightp-100">
                            <div class="select">
                               <select name="slct" id="slct">
@@ -431,7 +431,7 @@ const Exchange = (props) => {
             </div>
          </div>
          <div class="widthp-100 interload-panel-mobile flex-column flex-inherit flex">
-            <div class="height-40 align-items-center-inherit border-bottom">
+            <div class="height-40 align-items-center-inherit border-bottom-rb">
                <div class="flex pi-title grow-2">
                   <span class="color-white padding-left-15">exchange</span>
                </div>
@@ -443,7 +443,7 @@ const Exchange = (props) => {
                </div>
             </div>
 
-            <div class="member-information height-40 align-items-center-inherit border-bottom">
+            <div class="member-information height-40 align-items-center-inherit border-bottom-rb">
                <div class="flex pi-title green grow-2">
                   <span class="color-white padding-left-15">안녕하세요. {user.member.nickname} 회원님</span>
                </div>
@@ -451,14 +451,14 @@ const Exchange = (props) => {
                   <span class="color-yellow padding-right-15">Lv.{user.member.level}</span>
                </div>
             </div>
-            <div class="money-information border-bottom flex-inherit">
-               <div class="widthp-33 border-right padding-left-15 padding-vertical-15">
+            <div class="money-information border-bottom-rb flex-inherit">
+               <div class="widthp-33 border-right-rb padding-left-15 padding-vertical-15">
                   <div class="flex flex-column">
                      <span class="color-white">예치금</span>
                      <span class="color-green">{Number(user.member.cash).toLocaleString()}</span>
                   </div>
                </div>
-               <div class="widthp-33 border-right padding-left-15 padding-vertical-15">
+               <div class="widthp-33 border-right-rb padding-left-15 padding-vertical-15">
                   <div class="flex flex-column">
                      <span class="color-white">게임머니</span>
                      <span class="color-green">100,000,000</span>
@@ -472,7 +472,7 @@ const Exchange = (props) => {
                </div>
             </div>
 
-            <div class="interload-tab height-50 border-bottom">
+            <div class="interload-tab height-50 border-bottom-rb">
                <div class="flex widthp-50">
                   <button type="button" class="active" id="tab-1" class={context.state.interMenu === 'inter-tab-1' ? 'active' : ''} onClick={() => context.actions.setinterMenu('inter-tab-1')}>
                      전환신청
@@ -493,8 +493,8 @@ const Exchange = (props) => {
                            <h1>전환 신청서</h1>
                         </div>
                         <div class="interload-list align-items-center-inherit">
-                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right border-bottom ">전환 방법</div>
-                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom">
+                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right-rb border-bottom-rb ">전환 방법</div>
+                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom-rb">
                               <div class="select">
                                  <select name="payment">
                                     <option value="cash">보유금액 -&gt; CASINO</option>
@@ -505,8 +505,8 @@ const Exchange = (props) => {
                         </div>
 
                         <div class="interload-list align-items-center-inherit">
-                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right border-bottom ">신청금액</div>
-                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom">
+                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right-rb border-bottom-rb ">신청금액</div>
+                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom-rb">
                               <input type="text" name="amount" placeholder="0" value={exchange.form.amount.toLocaleString()} onChange={amountChange} required />
                            </div>
                         </div>
@@ -543,7 +543,7 @@ const Exchange = (props) => {
             </div>
 
             <div class={context.state.interMenu === 'inter-tab-2' ? 'interload-content flex-column active' : 'interload-content flex-column'}>
-               <div class="widthp-100 flex-column flex border-bottom padding-vertical-10 padding-right-15 align-items-right">
+               <div class="widthp-100 flex-column flex border-bottom-rb padding-vertical-10 padding-right-15 align-items-right">
                   <div class="select height-40">
                      <select name="">
                         <option value="">전체</option>

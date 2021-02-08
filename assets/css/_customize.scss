@@ -440,7 +440,7 @@ em {
    height: calc(100vh - 110px);
 }
 .account-height {
-   height: calc(100vh - 162px);
+   height: calc(100vh - 130px);
 }
 
 /* etc */
@@ -468,6 +468,14 @@ em {
 }
 .box-shadow {
    box-shadow: 0px 0px 8px 0px #212329;
+}
+.amount-quick-box {
+   button {
+      &:hover {
+         background-color:rgba(0, 0, 0, 0.1);
+         transition: .2s;
+      }
+   }
 }
 .not-allowed {
    cursor: not-allowed !important;
@@ -2415,6 +2423,13 @@ select {
 .ac-payment-pbp {
    > div {
       cursor: pointer;
+      &.active {
+         background-color:rgba(0, 0, 0, 0.1) !important;
+      }
+      &:hover {
+         background-color:rgba(0, 0, 0, 0.1);
+         transition: .2s;
+      }
    }
 }
 
@@ -2428,7 +2443,6 @@ select {
 
 .history-item {
    tr.rows {
-      box-shadow: 2px 0px 0px 0px #29304a inset;
       &:hover {
          box-shadow: 2px 0px 0px 0px #38b853 inset;
       }
@@ -2437,7 +2451,7 @@ select {
 
 .message-item {
    tr.rows {
-      box-shadow: 2px 0px 0px 0px #29304a inset;
+      cursor:pointer;
       &:hover {
          box-shadow: 2px 0px 0px 0px #38b853 inset;
       }
@@ -2445,48 +2459,16 @@ select {
 }
 
 .history-tab {
-   .active {
-      i {
-         color: #34ac53;
+   > div {
+      &:hover {
+         background-color:rgba(0, 0, 0, 0.05);
+         transition: .2s;
+      }
+      &.active {
+         background-color:rgba(0, 0, 0, 0.05);
+         i {
+            color: #34ac53;
+         }
       }
    }
-}
-
-
-.send-message {
-	.message-content {
-		width: 60% !important;
-	}
-	.send-body {
-		.recipient {
-			.tab {
-				div {
-					button {
-						background-color: rgba(0,0,0,0.20);
-
-					}
-				}
-				.active {
-					button {
-						background-color: rgba(0,0,0,0.40) !important;
-					}
-				}
-			}
-		}
-		.contents {
-			.tab {
-				div {
-					button {
-						background-color: rgba(0,0,0,0.20);
-
-					}
-				}
-				.active {
-					button {
-						background-color: rgba(0,0,0,0.40) !important;
-					}
-				}
-			}
-		}
-	}
 }

@@ -174,12 +174,12 @@ const Withdrawal = (props) => {
       <Fragment>
          <div class="content account-continer flex flex-inherit grow-2 flex-column">
             <div class="withdraw-wrap account withdraw-content-desktop flex-inherit padding-10">
-               <div class="withdraw-left-content account-height widthp-50 flex-inherit flex-column margin-right-10 scrollable-auto">
+               <div class="withdraw-left-content account-height widthp-50 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
                   <div class="widthp-100 withdraw-notice flex-inherit flex-column margin-bottom-20">
-                     <div class="red-shadow withdraw-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
+                     <div class="red-shadow withdraw-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
                         <span class="color-white">출금신청 주의사항</span>
                      </div>
-                     <div class="ac-comment-header-content padding-15 background-transparent-b-5 flex-inherit flex-column">
+                     <div class="ac-comment-header-content padding-15 background-transparent-b-5 flex-inherit flex-column border-top">
                         <p class="color-grey">- 출금 시 출금자명이 다른경우 출금처리가 되지 않습니다</p>
                         <p class="color-grey">- 출금 신청시 보유머니가 차감됩니다</p>
                         <p class="color-grey">- 출금 최소 금액은 1만원이상 1천원 단위로 가능합니다</p>
@@ -188,28 +188,24 @@ const Withdrawal = (props) => {
                   </div>
                   <div class="withdraw-payment flex-column flex-inherit">
                      <div class="flex-column flex-inherit widthp-100">
-                        <div class="red-shadow withdraw-payment-apply height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                        <div class="red-shadow withdraw-payment-apply height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
                            <span class="color-white grow-2">출금 신청서</span>
-                           <div class="padding-right-15 align-items-center">
-                              <i class="far fa-exclamation-triangle color-yellow"></i>
-                              <span class="color-grey">선입금 후 신청서를 작성해주세요.</span>
-                           </div>
                         </div>
-                        <div class="green-shadow withdraw-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                        <div class="green-shadow withdraw-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit border-top">
                            <span class="color-white">출금 방법 선택</span>
                         </div>
                         <div class="ac-payment-pbp flex-inherit align-items-center align-items-center-inherit justify-content-center-inherit">
-                           <div class="widthp-33 border-right border-bottom height-45 color-green background-transparent-b-5">
+                           <div class="widthp-33 border-right-rb border-bottom-rb height-45 color-green background-transparent-b-10 border-top">
                               <span class="color-green">
                                  <i class="far fa-wallet"></i>현금
                               </span>
                            </div>
-                           <div class="widthp-33 border-right border-bottom height-45 color-green background-transparent-b-5">
+                           <div class="widthp-33 border-right-rb border-bottom-rb height-45 color-green background-transparent-b-5 not-allowed border-top border-left-rw">
                               <span class="color-grey">
                                  <i class="fab fa-paypal"></i>페이팔
                               </span>
                            </div>
-                           <div class="widthp-33  border-bottom height-45 color-green background-transparent-b-5">
+                           <div class="widthp-33  border-bottom-rb height-45 color-green background-transparent-b-5 not-allowed border-top border-left-rw">
                               <span class="color-grey">
                                  <i class="fab fa-bitcoin"></i>비트코인
                               </span>
@@ -217,24 +213,24 @@ const Withdrawal = (props) => {
                         </div>
                      </div>
                      <div class="flex-column flex-inherit widthp-100">
-                        <div class="green-shadow withdraw-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                        <div class="green-shadow withdraw-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit border-top">
                            <span class="color-white">출금 가능액 및 출금액 등록</span>
                         </div>
                         <div class="account-form-data flex-column flex-inherit">
                            <div class="form-rows flex-inherit">
-                              <div class="widthp-33 border-right form-title height-45 border-bottom align-items-center justify-content-center">
+                              <div class="widthp-33 border-right-rb form-title height-45 border-bottom-rb align-items-center justify-content-center background-transparent-b-10 border-top">
                                  <span class="color-grey">출금 가능액</span>
                               </div>
-                              <div class="widthp-67 form-content height-45 border-bottom align-items-center padding-right-15 justify-content-end">
+                              <div class="widthp-67 form-content height-45 border-bottom-rb align-items-center padding-right-15 justify-content-end background-transparent-b-5 border-top border-left-rw">
                                  <span class="color-green">23,000,000원</span>
                               </div>
                            </div>
                            <div class="form-rows flex-inherit">
-                              <div class="widthp-33 border-right form-title heightp-100 border-bottom align-items-center justify-content-center padding-vertical-15">
+                              <div class="widthp-33 border-right-rb form-title heightp-100 border-bottom-rb align-items-center justify-content-center padding-vertical-15 background-transparent-b-10 border-top">
                                  <span class="color-grey">출금 신청액</span>
                               </div>
-                              <div class="widthp-67 form-content border-bottom flex-inherit flex-column">
-                                 <div class="amount-box flex-inherit border-bottom padding-vertical-15">
+                              <div class="widthp-67 form-content border-bottom-rb flex-inherit flex-column background-transparent-b-5 border-top">
+                                 <div class="amount-box flex-inherit border-bottom-rb padding-vertical-15 border-left-rw">
                                     <div class="grow-2">
                                        <input
                                           type="text"
@@ -258,7 +254,7 @@ const Withdrawal = (props) => {
                                  <div class="amount-quick-box flex-inherit height-40">
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb heightp-100 color-grey border-top border-left-rw"
                                        data-amount="30000"
                                        onClick={QuickInput}
                                     >
@@ -266,7 +262,7 @@ const Withdrawal = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb heightp-100 color-grey border-top border-left-rw"
                                        data-amount="50000"
                                        onClick={QuickInput}
                                     >
@@ -274,7 +270,7 @@ const Withdrawal = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb heightp-100 color-grey border-top border-left-rw"
                                        data-amount="100000"
                                        onClick={QuickInput}
                                     >
@@ -282,7 +278,7 @@ const Withdrawal = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 border-right heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 border-right-rb heightp-100 color-grey border-top border-left-rw"
                                        data-amount="500000"
                                        onClick={QuickInput}
                                     >
@@ -290,7 +286,7 @@ const Withdrawal = (props) => {
                                     </button>
                                     <button
                                        type="button"
-                                       class="flex justify-content-center align-items-center background-transparent-b-5 widthp-20 heightp-100 color-grey"
+                                       class="flex justify-content-center align-items-center widthp-20 heightp-100 color-grey border-top border-left-rw"
                                        data-amount="1000000"
                                        onClick={QuickInput}
                                     >
@@ -302,41 +298,41 @@ const Withdrawal = (props) => {
                         </div>
                      </div>
                      <div class="flex-column flex-inherit widthp-100">
-                        <div class="green-shadow withdraw-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom flex-inherit">
+                        <div class="green-shadow withdraw-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit border-top">
                            <span class="color-white">출금 계좌 확인</span>
                         </div>
                         <div class="withdraw-payment-confirm-data flex-column flex-inherit">
-                           <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom align-items-center-inherit">
-                              <div class="widthp-33 border-right">
+                           <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom-rb align-items-center-inherit background-transparent-b-10 border-top">
+                              <div class="widthp-33 border-right-rb">
                                  <span class="color-grey">은행명</span>
                               </div>
-                              <div class="widthp-33 border-right">
+                              <div class="widthp-33 border-right-rb border-left-rw">
                                  <span class="color-grey">예금주</span>
                               </div>
-                              <div class="widthp-33">
+                              <div class="widthp-33 border-left-rw">
                                  <span class="color-grey">결제 계좌</span>
                               </div>
                            </div>
-                           <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom align-items-center-inherit">
-                              <div class="widthp-33 border-right">
+                           <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom-rb align-items-center-inherit background-transparent-b-5 border-top">
+                              <div class="widthp-33 border-right-rb">
                                  <span class="color-white">농협</span>
                               </div>
-                              <div class="widthp-33 border-right">
-                                 <span class="color-white">주식회사 웨스트몰</span>
+                              <div class="widthp-33 border-right-rb border-left-rw">
+                                 <span class="color-white">관리자</span>
                               </div>
-                              <div class="widthp-33">
-                                 <span class="color-white">301-0252-3577-31</span>
+                              <div class="widthp-33 border-left-rw">
+                                 <span class="color-white">123-4567-8901-23</span>
                               </div>
                            </div>
                         </div>
-                        <div class="withdraw-payment-confirm-btn padding-top-20 flex-inherit">
+                        <div class="withdraw-payment-confirm-btn padding-top-10 flex-inherit">
                            <div class="grow-2">
                               <button type="button" class="padding-15 background-transparent-b-10 color-white">
                                  초기화
                               </button>
                            </div>
                            <div>
-                              <input type="password" class="padding-15 color-white background-transparent-b-10 width-200 heightp-100 margin-right-15" placeholder="출금 비밀번호를 입력하세요" />
+                              <input type="password" class="padding-15 color-white background-transparent-b-10 width-200 heightp-100" placeholder="출금 비밀번호를 입력하세요" />
                               <button type="button" class="padding-15 background-green color-white">
                                  출금신청
                               </button>
@@ -345,8 +341,8 @@ const Withdrawal = (props) => {
                      </div>
                   </div>
                </div>
-               <div class="withdraw-right-content account-height widthp-50 flex-inherit flex-column scrollable-auto">
-                  <div class="red-shadow withdraw-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom">
+               <div class="withdraw-right-content account-height widthp-50 flex-inherit padding-left-5 border-left flex-column scrollable-auto">
+                  <div class="red-shadow withdraw-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
                      <span class="color-white">출금신청 내역</span>
                   </div>
                   <div class="widthp-100 withdraw-history-content flex-inherit flex-column">
@@ -354,14 +350,14 @@ const Withdrawal = (props) => {
                         <table>
                            <thead>
                               <tr class="thead">
-                                 <th class="height-45 background-transparent-b-10 color-grey">전체 선택</th>
-                                 <th class="height-45 background-transparent-b-10 color-grey">신청 시간</th>
-                                 <th class="height-45 background-transparent-b-10 color-grey">종류</th>
-                                 <th class="height-45 background-transparent-b-10 color-grey">금액</th>
-                                 <th class="height-45 background-transparent-b-10 color-grey">상태</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey border-top">전체 선택</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey border-top">신청 시간</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey border-top">종류</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey border-top">금액</th>
+                                 <th class="height-45 background-transparent-b-10 color-grey border-top">상태</th>
                               </tr>
                            </thead>
-                           <tbody>
+                           <tbody class="background-transparent-b-5">
                               <tr class="rows">
                                  <td class="height-45 border-top">
                                     <input type="checkbox" name="" value="1" />
@@ -399,7 +395,7 @@ const Withdrawal = (props) => {
                            </tbody>
                         </table>
                      </div>
-                     <div class="history-item-footer flex-inherit border-top padding-vertical-10 align-items-center background-transparent-b-5">
+                     <div class="history-item-footer flex-inherit border-top border-bottom-rb border-bottom-rb padding-vertical-10 align-items-center background-transparent-b-10">
                         <div class="grow-2 padding-left-10">
                            <button type="button" class="color-grey padding-10 background-transparent-b-10">
                               <i class="fal fa-trash-alt"></i>
@@ -413,7 +409,7 @@ const Withdrawal = (props) => {
                            </span>
                         </div>
                      </div>
-                     <div class="padding-vertical-10 flex-inherit border-top-white height-60 color-grey">
+                     <div class="padding-vertical-10 flex-inherit height-60 color-grey">
                         <div class="pagination flex-inherit widthp-100 heightp-100">
                            <div class="select">
                               <select name="slct" id="slct">
@@ -445,7 +441,7 @@ const Withdrawal = (props) => {
             </div>
          </div>
          <div class="widthp-100 interload-panel-mobile flex-column flex-inherit flex">
-            <div class="height-40 align-items-center-inherit border-bottom">
+            <div class="height-40 align-items-center-inherit border-bottom-rb">
                <div class="flex pi-title grow-2">
                   <span class="color-white padding-left-15">WITHDRAW</span>
                </div>
@@ -457,7 +453,7 @@ const Withdrawal = (props) => {
                </div>
             </div>
 
-            <div class="member-information height-40 align-items-center-inherit border-bottom">
+            <div class="member-information height-40 align-items-center-inherit border-bottom-rb">
                <div class="flex pi-title green grow-2">
                   <span class="color-white padding-left-15">안녕하세요. {user.member.nickname} 회원님</span>
                </div>
@@ -465,14 +461,14 @@ const Withdrawal = (props) => {
                   <span class="color-yellow padding-right-15">Lv.{user.member.level}</span>
                </div>
             </div>
-            <div class="money-information border-bottom flex-inherit">
-               <div class="widthp-33 border-right padding-left-15 padding-vertical-15">
+            <div class="money-information border-bottom-rb flex-inherit">
+               <div class="widthp-33 border-right-rb padding-left-15 padding-vertical-15">
                   <div class="flex flex-column">
                      <span class="color-white">예치금</span>
                      <span class="color-green">{Number(user.member.cash).toLocaleString()}</span>
                   </div>
                </div>
-               <div class="widthp-33 border-right padding-left-15 padding-vertical-15">
+               <div class="widthp-33 border-right-rb padding-left-15 padding-vertical-15">
                   <div class="flex flex-column">
                      <span class="color-white">게임머니</span>
                      <span class="color-green">100,000,000</span>
@@ -485,7 +481,7 @@ const Withdrawal = (props) => {
                   </div>
                </div>
             </div>
-            <div class="interload-tab height-50 border-bottom">
+            <div class="interload-tab height-50 border-bottom-rb">
                <div class="flex widthp-50">
                   <button type="button" id="tab-1" class={context.state.interMenu === 'inter-tab-1' ? 'active' : ''} onClick={() => context.actions.setinterMenu('inter-tab-1')}>
                      환전신청
@@ -523,8 +519,8 @@ const Withdrawal = (props) => {
                         </div>
 
                         <div class="interload-list align-items-center-inherit">
-                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right border-bottom ">환전 방법</div>
-                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom">
+                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right-rb border-bottom-rb ">환전 방법</div>
+                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom-rb">
                               <div class="select">
                                  <select name="">
                                     <option value="cash">현금</option>
@@ -536,8 +532,8 @@ const Withdrawal = (props) => {
                         </div>
 
                         <div class="interload-list align-items-center-inherit withdraw-amount-wrap">
-                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right border-bottom ">출금금액</div>
-                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom">
+                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right-rb border-bottom-rb ">출금금액</div>
+                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom-rb">
                               <input type="text" name="amount" placeholder="0" value={withdrawal.form.amount.toLocaleString()} onChange={amountChange} />
                            </div>
                         </div>
@@ -562,29 +558,29 @@ const Withdrawal = (props) => {
                         </div>
 
                         <div class="interload-list align-items-center-inherit">
-                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right border-bottom ">은행명</div>
-                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom">
+                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right-rb border-bottom-rb ">은행명</div>
+                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom-rb">
                               <span class="color-white padding-left-10">은행명출력</span>
                            </div>
                         </div>
 
                         <div class="interload-list align-items-center-inherit">
-                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right border-bottom ">예금주</div>
-                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom">
+                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right-rb border-bottom-rb ">예금주</div>
+                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom-rb">
                               <span class="color-white padding-left-10">예금주출력</span>
                            </div>
                         </div>
 
                         <div class="interload-list align-items-center-inherit">
-                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right border-bottom ">계좌번호</div>
-                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom">
+                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right-rb border-bottom-rb ">계좌번호</div>
+                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom-rb">
                               <span class="color-white padding-left-10">계좌번호출력</span>
                            </div>
                         </div>
 
                         <div class="interload-list align-items-center-inherit">
-                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right border-bottom ">환전 비밀번호</div>
-                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom">
+                           <div class="widthp-30 flex background-transparent-b-20 color-grey height-40 justify-content-center border-right-rb border-bottom-rb ">환전 비밀번호</div>
+                           <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom-rb">
                               <input type="password" name="password" placeholder="출금비밀번호를 입력하세요" required />
                            </div>
                         </div>
@@ -602,7 +598,7 @@ const Withdrawal = (props) => {
             </div>
 
             <div class={context.state.interMenu === 'inter-tab-2' ? 'interload-content flex-column active' : 'interload-content flex-column'}>
-               <div class="widthp-100 flex-column flex border-bottom padding-vertical-10 padding-right-15 align-items-right">
+               <div class="widthp-100 flex-column flex border-bottom-rb padding-vertical-10 padding-right-15 align-items-right">
                   <div class="select height-40">
                      <select name="">
                         <option value="">전체</option>

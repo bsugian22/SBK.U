@@ -411,6 +411,9 @@
    &-right {
       border-right: 1px solid rgba(0, 0, 0, 0.2);
    }
+   &-right-rb {
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+   }
    &-right-shadow {
       box-shadow: 0px 1px 0px 1px rgba(255, 255, 255, 0.05);
    }
@@ -419,6 +422,9 @@
    }
    &-bottom {
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+   }
+   &-bottom-rb {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
    }
    &-bottom-white {
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -440,5 +446,8 @@
    }
    &-left {
       border-left: 1px solid rgba(255, 255, 255, 0.05);
+   }
+   &-left-rw {
+      border-left: 1px solid rgba(255, 255, 255, 0.03);
    }
 }
