@@ -1,6 +1,14 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import MenuContext from "../../contexts/Menu.context";
 export default function BetslipNavi(props) {
+  const context = useContext(MenuContext);
+  const OpenLayer = {
+    display: "flex",
+  };
+  const CloseLayer = {
+    display: "hidden",
+  };
   return (
     <Fragment>
       <div class="flex betslip-content-desktop betslip content-height shrink-0 width-300 border-left border-left-shadow flex-column scrollable-auto">
@@ -121,13 +129,40 @@ export default function BetslipNavi(props) {
             </div>
           </div>
           <div class="widthp-10 upslide flex border-left justify-content-center">
-            <button type="button" class="color-white slip-up-arrow">
-              <i class="far fa-angle-double-up"></i>
-            </button>
+            {context.state.betslipMenu === true && (
+              <button
+                type="button"
+                class="color-white slip-up-arrow"
+                onClick={() => {
+                  context.actions.setbetslipMenu(false);
+                }}
+              >
+                <i class="far fa-angle-double-down"></i>
+              </button>
+            )}
+
+            {context.state.betslipMenu === false && (
+              <button
+                type="button"
+                class="color-white slip-up-arrow"
+                onClick={() => {
+                  context.actions.setbetslipMenu(true);
+                }}
+              >
+                <i class="far fa-angle-double-up"></i>
+              </button>
+            )}
           </div>
         </div>
       </div>
-      <div class="betslip betslip-content-mobile flex flex-column widthp-100">
+
+      <div
+        class={
+          context.state.betslipMenu
+            ? "betslip betslip-content-mobile flex flex-column widthp-100 betslip-open-layer"
+            : "betslip betslip-content-mobile flex flex-column widthp-100"
+        }
+      >
         <div class="widthp100 flex delete-all flex-column flex height-50 justify-content-center padding-left-15 border-bottom">
           <span class="color-red">모두삭제</span>
         </div>
