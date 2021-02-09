@@ -127,18 +127,19 @@ $baseFontSize: 16;
 */
 
 @include mq($max-width: 1024px) {
-  .header-utility {
-    &-naviguide {
-      display: none !important;
-    }
-    &-helpdesk {
-      display: none !important;
-    }
-    .mobile-utility-user {
-      &.on {
-        i {
-          color: green !important;
-        }
+   .header-utility {
+      &-naviguide {
+         display: none !important;
+      }
+      &-helpdesk {
+         display: none !important;
+      }
+      .mobile-utility-user {
+         &.on {
+            i {
+               color: green !important;
+            }
+         }
       }
 
       .mobile-utility-cog {
@@ -195,66 +196,66 @@ $baseFontSize: 16;
 */
 
 @include mq($min-width: 1025px) {
-  .mobile-header-quick {
-    display: none !important;
-  }
-  .header-utility-search,
-  .mobile-utility-left-menu,
-  .mobile-utility-search,
-  .mobile-utility-login,
-  .mobile-utility-cog,
-  .mobile-utility-logout,
-  .mobile-utility-user,
-  .prematch-header-mobile,
-  .prematch-content-mobile,
-  .inplay-header-mobile,
-  .inplay-content-mobile,
-  .esports-header-mobile,
-  .esports-content-mobile,
-  .games-header-mobile,
-  .games-content-mobile,
-  .casino-content-mobile,
-  .inter-left-menu,
-  .inter-right-menu,
-  .interload-panel-mobile,
-  .betslip-fixed-mobile,
-  .betslip-content-mobile,
-  .pick-mobile-list,
-  .odds-detail-wrap,
-  .main-content-mobile {
-    display: none !important;
-  }
+   .mobile-header-quick {
+      display: none !important;
+   }
+   .header-utility-search,
+   .mobile-utility-left-menu,
+   .mobile-utility-search,
+   .mobile-utility-login,
+   .mobile-utility-cog,
+   .mobile-utility-logout,
+   .mobile-utility-user,
+   .prematch-header-mobile,
+   .prematch-content-mobile,
+   .inplay-header-mobile,
+   .inplay-content-mobile,
+   .esports-header-mobile,
+   .esports-content-mobile,
+   .games-header-mobile,
+   .games-content-mobile,
+   .casino-content-mobile,
+   .inter-left-menu,
+   .inter-right-menu,
+   .interload-panel-mobile,
+   .betslip-fixed-mobile,
+   .betslip-content-mobile,
+   .pick-mobile-list,
+   .odds-detail-wrap,
+   .main-content-mobile {
+      display: none !important;
+   }
 
-  .footer {
-    display: none !important;
-  }
+   .footer {
+      display: none !important;
+   }
 }
 
 /**
 	아래코드가 모바일 시작지점
 */
 @include mq($max-width: 1024px) {
-  html,
-  body {
-    width: 100% !important;
-    min-width: 100% !important;
-    max-width: 100% !important;
-    overflow: auto !important;
-  }
-  body {
-    &.inter-slidemenu-open {
-      overflow: hidden !important;
-      position: fixed;
-      .continer {
-        opacity: 0.4;
+   html,
+   body {
+      width: 100% !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
+      overflow: auto !important;
+   }
+   body {
+      &.inter-slidemenu-open {
+         overflow: hidden !important;
+         position: fixed;
+         .continer {
+            opacity: 0.4;
+         }
       }
-    }
-  }
-  .display-none {
-    display: none !important;
-  }
+   }
+   .display-none {
+      display: none !important;
+   }
 
-  /**
+   /**
 		Pick Moobile List
 	*/
    .pick-mobile-list {
@@ -262,10 +263,15 @@ $baseFontSize: 16;
       .away-name {
          @include rem(font-size, 15px);
       }
-    }
-  }
+      .odds {
+         span {
+            @include rem(font-size, 15px);
+            font-weight: 600;
+         }
+      }
+   }
 
-  /**
+   /**
 		swal2
 	*/
    .swal2-backdrop-show {
@@ -1045,63 +1051,63 @@ $baseFontSize: 16;
     }
     */
 
-  .betslip-content-mobile {
-    position: absolute;
-    display: none;
-    width: 100%;
-    height: 100%;
-    background-color: #2a3045;
-    top: 50px;
-    z-index: 99999;
-    .stake {
-      input {
-        width: 100%;
-        height: 100%;
-        text-align: right;
-        padding-right: 10px;
-        &::placeholder {
-          color: white;
-        }
+   .betslip-content-mobile {
+      position: absolute;
+      display: none;
+      width: 100%;
+      height: 100%;
+      background-color: #2a3045;
+      top: 50px;
+      z-index: 99999;
+      .stake {
+         input {
+            width: 100%;
+            height: 100%;
+            text-align: right;
+            padding-right: 10px;
+            &::placeholder {
+               color: white;
+            }
+         }
       }
-    }
-    &.betslip-open-layer {
-      display: flex !important;
-    }
-    &.open {
-      display: flex !important;
-    }
-  }
+      &.betslip-open-layer {
+         display: flex !important;
+      }
+      &.open {
+         display: flex !important;
+      }
+   }
 
-  .text-media {
-    display: none;
-  }
-  .betslip-content-desktop {
-    display: none !important;
-  }
+   .text-media {
+      display: none;
+   }
+   .betslip-content-desktop {
+      display: none !important;
+   }
 
-  .betslip-fixed-mobile {
-    display: flex !important;
-  }
-  .left-sidebar,
-  .games-main-category,
-  .casino-left,
-  .left-account-sidebar {
-    max-width: 25% !important;
-  }
-  .games-book-continer,
-  .account-continer {
-    max-width: calc(100vw - 225px) !important;
-  }
-  .content-height {
-    height: calc(100vh - 165px) !important;
-  }
-  .ie-continer {
-    max-width: 100% !important;
-  }
-  .games-event-times {
-    font-size: 0 !important;
-  }
-  .betslip-content-mobile {
-    top: 0 !important;
-  }
+   .betslip-fixed-mobile {
+      display: flex !important;
+   }
+   .left-sidebar,
+   .games-main-category,
+   .casino-left,
+   .left-account-sidebar {
+      max-width: 25% !important;
+   }
+   .games-book-continer,
+   .account-continer {
+      max-width: calc(100vw - 225px) !important;
+   }
+   .content-height {
+      height: calc(100vh - 165px) !important;
+   }
+   .ie-continer {
+      max-width: 100% !important;
+   }
+   .games-event-times {
+      font-size: 0 !important;
+   }
+   .betslip-content-mobile {
+      top: 0 !important;
+   }
 }

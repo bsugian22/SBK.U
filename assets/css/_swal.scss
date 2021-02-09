@@ -548,8 +548,8 @@
 .swal2-input.swal2-inputerror,
 .swal2-file.swal2-inputerror,
 .swal2-textarea.swal2-inputerror {
-  border-color: rgba(212, 72, 72, 0.86) !important;
-  box-shadow: 0 0 2px rgba(212, 72, 72, 0.86) !important;
+  border-color: rgba(212, 72, 72, 0.86) !important !important;
+  box-shadow: 0 0 2px rgba(212, 72, 72, 0.86) !important !important;
 }
 
 .swal2-input:focus,

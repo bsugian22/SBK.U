@@ -2,409 +2,395 @@
 	Reset Code
 */
 
-@import "noto-sans-kr-shard/all.css";
-$font-family: "Noto Sans KR", sans-serif;
+@import 'noto-sans-kr-shard/all.css';
+$font-family: 'Noto Sans KR', sans-serif;
 
 html {
-  scrollbar-face-color: #646464;
-  scrollbar-base-color: #646464;
-  scrollbar-3dlight-color: #646464;
-  scrollbar-highlight-color: #646464;
-  scrollbar-track-color: #000;
-  scrollbar-arrow-color: #000;
-  scrollbar-shadow-color: #646464;
-  scrollbar-dark-shadow-color: #646464;
+   scrollbar-face-color: #646464;
+   scrollbar-base-color: #646464;
+   scrollbar-3dlight-color: #646464;
+   scrollbar-highlight-color: #646464;
+   scrollbar-track-color: #000;
+   scrollbar-arrow-color: #000;
+   scrollbar-shadow-color: #646464;
+   scrollbar-dark-shadow-color: #646464;
 }
 
 html,
 body {
-  width: 100%;
-  height: 100vh;
-  background: #2b324e;
-  box-sizing: border-box;
-  //min-width:1480px;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+   width: 100%;
+   height: 100vh;
+   background: #2b324e;
+   box-sizing: border-box;
+   //min-width:1480px;
+   margin: 0;
+   padding: 0;
+   overflow: hidden;
 }
 .darkMode {
-  transition: 0.5s;
-  background: rgb(37, 38, 39);
+   transition: 0.5s;
+   background: rgb(37, 38, 39);
 }
 .normalMode {
-  transition: 0.5s;
-  background: rgb(43, 50, 78);
+   transition: 0.5s;
+   background: rgb(43, 50, 78);
 }
 
 div {
-  box-sizing: border-box;
+   box-sizing: border-box;
 }
 
 hr {
-  margin: 0;
-  border-width: 1px 0px 0px 0px;
-  border-style: solid;
+   margin: 0;
+   border-width: 1px 0px 0px 0px;
+   border-style: solid;
 }
 
 a {
-  text-decoration: none;
-  color: #b7b7b7;
+   text-decoration: none;
+   color: #b7b7b7;
 }
 
 body {
-  font-family: $font-family;
-  font-size: 12px;
+   font-family: $font-family;
+   font-size: 12px;
 }
 
 input {
-  border-radius: 0;
-  box-sizing: border-box;
-  vertical-align: middle;
-  width: 18px;
-  height: 18px;
+   border-radius: 0;
+   box-sizing: border-box;
+   vertical-align: middle;
+   width: 18px;
+   height: 18px;
 }
 
 button {
-  cursor: pointer;
-  border: 0;
-  outline: 0;
+   cursor: pointer;
+   border: 0;
+   outline: 0;
 }
 
 button,
 input,
 select {
-  font-family: $font-family;
-  font-size: 12px;
-  border: 0px;
-  outline: 0px;
-  background: transparent;
+   font-family: $font-family;
+   font-size: 12px;
+   border: 0px;
+   outline: 0px;
+   background: transparent;
 }
 
 textarea {
-  resize: none;
-  border: 0;
-  outline: 0;
-  box-sizing: border-box;
+   resize: none;
+   border: 0;
+   outline: 0;
+   box-sizing: border-box;
 }
 
 .display-none {
-  display: none !important;
+   display: none !important;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-  th {
-    font-weight: normal !important;
-  }
-  td {
-    font-weight: normal !important;
-    text-align: center;
-  }
-  i {
-    margin: 0px;
-  }
+   width: 100%;
+   border-collapse: collapse;
+   border-spacing: 0;
+   th {
+      font-weight: normal !important;
+   }
+   td {
+      font-weight: normal !important;
+      text-align: center;
+   }
+   i {
+      margin: 0px;
+   }
 }
 i {
-  margin-right: 5px;
-  vertical-align: baseline;
+   margin-right: 5px;
+   vertical-align: baseline;
 }
 em {
-  font-style: normal;
+   font-style: normal;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 0px;
+   width: 8px;
+   height: 0px;
 }
 ::-webkit-scrollbar-button {
-  display: none;
+   display: none;
 }
 ::-webkit-scrollbar-track {
-  display: none;
+   display: none;
 }
 ::-webkit-scrollbar-track-piece {
-  background-color: transparent;
+   background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  height: 50px;
-  background-color: #757a8f;
-  border-radius: 3px;
+   height: 50px;
+   background-color: #757a8f;
+   border-radius: 3px;
 }
 ::-webkit-scrollbar-corner {
-  display: none;
+   display: none;
 }
 ::-webkit-resizer {
-  background-color: #505877;
+   background-color: #505877;
 }
 
 /**
 	SVG 아이콘 셋팅
 */
 .pi-bw-icon-valleyball {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - bw/valleyball.svg")
-    no-repeat;
-  background-size: contain;
-  opacity: 0.5;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - bw/valleyball.svg') no-repeat;
+   background-size: contain;
+   opacity: 0.5;
 }
 
 .pi-bw-icon-icehockey {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - bw/icehockey.svg")
-    no-repeat;
-  background-size: contain;
-  opacity: 0.5;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - bw/icehockey.svg') no-repeat;
+   background-size: contain;
+   opacity: 0.5;
 }
 
 .pi-bw-icon-basketball {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - bw/basketball.svg")
-    no-repeat;
-  background-size: contain;
-  opacity: 0.5;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - bw/basketball.svg') no-repeat;
+   background-size: contain;
+   opacity: 0.5;
 }
 
 .pi-bw-icon-soccer {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - bw/soccer.svg") no-repeat;
-  background-size: contain;
-  opacity: 0.5;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - bw/soccer.svg') no-repeat;
+   background-size: contain;
+   opacity: 0.5;
 }
 
 .pi-bw-icon-baseball {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - bw/baseball.svg")
-    no-repeat;
-  background-size: contain;
-  opacity: 0.5;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - bw/baseball.svg') no-repeat;
+   background-size: contain;
+   opacity: 0.5;
 }
 
 .pi-bw-icon-sports {
-  @include rem(width, 22px);
-  @include rem(height, 21px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/sports.svg") no-repeat;
-  background-size: contain;
-  opacity: 0.5;
+   @include rem(width, 22px);
+   @include rem(height, 21px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/sports.svg') no-repeat;
+   background-size: contain;
+   opacity: 0.5;
 }
 
 .pi-bw-icon-esports {
-  @include rem(width, 22px);
-  @include rem(height, 22px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - bw/esports.svg") no-repeat;
-  background-size: contain;
-  opacity: 0.5;
+   @include rem(width, 22px);
+   @include rem(height, 22px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - bw/esports.svg') no-repeat;
+   background-size: contain;
+   opacity: 0.5;
 }
 
 .pi-bw-icon-promotion {
-  @include rem(width, 24px);
-  @include rem(height, 23px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/promotion.svg") no-repeat;
-  background-size: contain;
-  opacity: 0.5;
+   @include rem(width, 24px);
+   @include rem(height, 23px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/promotion.svg') no-repeat;
+   background-size: contain;
+   opacity: 0.5;
 }
 
 .pi-bw-icon-inplay {
-  @include rem(width, 23px);
-  @include rem(height, 13px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/inplay_o.svg") no-repeat;
-  background-size: contain;
-  opacity: 0.5;
+   @include rem(width, 23px);
+   @include rem(height, 13px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/inplay_o.svg') no-repeat;
+   background-size: contain;
+   opacity: 0.5;
 }
 
 .pi-bw-icon-casino {
-  @include rem(width, 22px);
-  @include rem(height, 24px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/casino.svg") no-repeat;
-  background-size: contain;
-  opacity: 0.5;
+   @include rem(width, 22px);
+   @include rem(height, 24px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/casino.svg') no-repeat;
+   background-size: contain;
+   opacity: 0.5;
 }
 
 .pi-bw-icon-afootball {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - bw/afootball.svg")
-    no-repeat;
-  background-size: contain;
-  opacity: 0.5;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - bw/afootball.svg') no-repeat;
+   background-size: contain;
+   opacity: 0.5;
 }
 
 .pi-color-icon-valleyball {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - color/valleyball.svg")
-    no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - color/valleyball.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-icehockey {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - color/icehockey.svg")
-    no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - color/icehockey.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-basketball {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - color/basketball.svg")
-    no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - color/basketball.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-badminton {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - color/badminton.svg")
-    no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - color/badminton.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-cricket {
-  @include rem(width, 30px);
-  @include rem(height, 30px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - color/cricket.svg")
-    no-repeat;
-  background-size: contain;
+   @include rem(width, 30px);
+   @include rem(height, 30px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - color/cricket.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-tennis {
-  @include rem(width, 30px);
-  @include rem(height, 30px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - color/tennis.svg")
-    no-repeat;
-  background-size: contain;
+   @include rem(width, 30px);
+   @include rem(height, 30px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - color/tennis.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-soccer {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - color/soccer.svg")
-    no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - color/soccer.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-baseball {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - color/baseball.svg")
-    no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - color/baseball.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-afootball {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/category - color/afootball.svg")
-    no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/category - color/afootball.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-dalpangi {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/game/icon/dalpangi.svg") no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/game/icon/dalpangi.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-dhlottery {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/game/icon/dhlottery.svg") no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/game/icon/dhlottery.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-ladder {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/game/icon/ladder.svg") no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/game/icon/ladder.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-ladder-2 {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/game/icon/ladder-2.svg") no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/game/icon/ladder-2.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-lottery {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/game/icon/lottery.svg") no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/game/icon/lottery.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-lotus {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/game/icon/lotus.svg") no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/game/icon/lotus.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-ntry {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/game/icon/ntry.svg") no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/game/icon/ntry.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-p-ladder {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/game/icon/p-ladder.svg") no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/game/icon/p-ladder.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-p-ladder-2 {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/game/icon/p-ladder-2.svg") no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/game/icon/p-ladder-2.svg') no-repeat;
+   background-size: contain;
 }
 
 .pi-color-icon-powerball {
-  @include rem(width, 26px);
-  @include rem(height, 26px);
-  background-color: transparent;
-  background: url("https://cuzzle.org/scon/game/icon/powerball.svg") no-repeat;
-  background-size: contain;
+   @include rem(width, 26px);
+   @include rem(height, 26px);
+   background-color: transparent;
+   background: url('https://cuzzle.org/scon/game/icon/powerball.svg') no-repeat;
+   background-size: contain;
 }
 
 /**
@@ -412,18 +398,18 @@ em {
 */
 
 .header-utility {
-  &-naviguide {
-    a:hover {
-      color: #ffffff;
-      transition: 0.2s ease;
-    }
-  }
-  &-helpdesk {
-    button:hover {
-      color: #ffffff;
-      transition: 0.2s ease;
-    }
-  }
+   &-naviguide {
+      a:hover {
+         color: #ffffff;
+         transition: 0.2s ease;
+      }
+   }
+   &-helpdesk {
+      button:hover {
+         color: #ffffff;
+         transition: 0.2s ease;
+      }
+   }
 }
 
 /**
@@ -431,57 +417,57 @@ em {
 */
 
 .continer {
-  .content {
-    height: calc(100vh - 110px);
-    .content-main-repair {
-      @include rem(font-size, 64px);
-      color: white;
-      line-height: 2.9rem;
-      p {
-        @include rem(font-size, 21px);
-        letter-spacing: -0.5px;
-        color: #ddd;
-        padding-top: 10px;
+   .content {
+      height: calc(100vh - 110px);
+      .content-main-repair {
+         @include rem(font-size, 64px);
+         color: white;
+         line-height: 2.9rem;
+         p {
+            @include rem(font-size, 21px);
+            letter-spacing: -0.5px;
+            color: #ddd;
+            padding-top: 10px;
+         }
       }
-    }
-  }
+   }
 }
 
 /**
 	밑에는 기존PC 소스들임
 */
 .content-height {
-  height: calc(100vh - 110px);
+   height: calc(100vh - 110px);
 }
 .account-height {
-  height: calc(100vh - 162px);
+   height: calc(100vh - 130px);
 }
 
 /* etc */
 .btn-0 {
-  opacity: 0.8;
-  &:hover:not([disalbed]) {
-    opacity: 1;
-    transition: 0.2s ease;
-  }
-  &:disabled,
-  &[disabled] {
-    &:hover {
-      opacity: 0.8;
-      cursor: not-allowed;
-      transition: unset !important;
-    }
-    i {
-      color: #888888 !important;
-    }
-  }
-  &.active {
-    opacity: 1;
-    transition: 0.2s ease;
-  }
+   opacity: 0.8;
+   &:hover:not([disalbed]) {
+      opacity: 1;
+      transition: 0.2s ease;
+   }
+   &:disabled,
+   &[disabled] {
+      &:hover {
+         opacity: 0.8;
+         cursor: not-allowed;
+         transition: unset !important;
+      }
+      i {
+         color: #888888 !important;
+      }
+   }
+   &.active {
+      opacity: 1;
+      transition: 0.2s ease;
+   }
 }
 .box-shadow {
-  box-shadow: 0px 0px 8px 0px #212329;
+   box-shadow: 0px 0px 8px 0px #212329;
 }
 .amount-quick-box {
    button {
@@ -492,113 +478,113 @@ em {
    }
 }
 .not-allowed {
-  cursor: not-allowed !important;
+   cursor: not-allowed !important;
 }
 .match-list > div {
-  border-bottom: 1px solid RGB(255 255 255 / 5%);
+   border-bottom: 1px solid RGB(255 255 255 / 5%);
 }
 .match-list > div:last-child {
-  border-bottom: 0px;
+   border-bottom: 0px;
 }
 .input-1 {
-  width: 70px;
-  background-color: #484d5a;
-  padding: 0 5px;
-  color: #b7b7b7;
-  text-align: right;
+   width: 70px;
+   background-color: #484d5a;
+   padding: 0 5px;
+   color: #b7b7b7;
+   text-align: right;
 }
 
 /* //etc*/
 
 /* dropdown */
 .dropdown {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  > .dropdown-title {
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    a {
-      text-decoration: none;
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   > .dropdown-title {
       width: 100%;
       height: 100%;
-      align-items: center;
       justify-content: center;
-    }
-  }
-  > .dropdown-sub {
-    display: none;
-    z-index: 1;
-    flex-direction: column;
-    width: 100%;
-    background-color: #535867;
-  }
-  &:hover {
-    background-color: #484e5f;
-
-    > .dropdown-sub {
-      display: flex;
-
-      > .dropdown-option {
-        height: 50px;
-
-        &:hover {
-          background-color: #484e5f;
-        }
+      align-items: center;
+      a {
+         text-decoration: none;
+         width: 100%;
+         height: 100%;
+         align-items: center;
+         justify-content: center;
       }
-    }
-  }
+   }
+   > .dropdown-sub {
+      display: none;
+      z-index: 1;
+      flex-direction: column;
+      width: 100%;
+      background-color: #535867;
+   }
+   &:hover {
+      background-color: #484e5f;
+
+      > .dropdown-sub {
+         display: flex;
+
+         > .dropdown-option {
+            height: 50px;
+
+            &:hover {
+               background-color: #484e5f;
+            }
+         }
+      }
+   }
 }
 /* //dropdown */
 
 /* selectbox */
 
 select {
-  flex: 1;
-  padding: 0px 1.5em;
-  color: #fff;
-  cursor: pointer;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  outline: 0;
-  box-shadow: none;
-  border: 0 !important;
-  background: rgba(0, 0, 0, 0.2); // TODO. 20% 였음 0.2가 맞나?
-  background-image: none;
-  &::-ms-expand {
-    display: none;
-  }
+   flex: 1;
+   padding: 0px 1.5em;
+   color: #fff;
+   cursor: pointer;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   -ms-appearance: none;
+   appearance: none;
+   outline: 0;
+   box-shadow: none;
+   border: 0 !important;
+   background: rgba(0, 0, 0, 0.2); // TODO. 20% 였음 0.2가 맞나?
+   background-image: none;
+   &::-ms-expand {
+      display: none;
+   }
 }
 .select {
-  position: relative;
-  display: flex;
-  width: 8em;
-  height: 100%;
-  line-height: 3.2;
-  background: transparent;
-  overflow: hidden;
-  &::after {
-    content: "\25BC";
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 1em;
-    color: #ffffff;
-    cursor: pointer;
-    pointer-events: none;
-    -webkit-transition: 0.25s all ease;
-    -o-transition: 0.25s all ease;
-    transition: 0.25s all ease;
-  }
-  &:hover {
-    &::after {
-      color: #38b853;
-    }
-  }
+   position: relative;
+   display: flex;
+   width: 8em;
+   height: 100%;
+   line-height: 3.2;
+   background: transparent;
+   overflow: hidden;
+   &::after {
+      content: '\25BC';
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0 1em;
+      color: #ffffff;
+      cursor: pointer;
+      pointer-events: none;
+      -webkit-transition: 0.25s all ease;
+      -o-transition: 0.25s all ease;
+      transition: 0.25s all ease;
+   }
+   &:hover {
+      &::after {
+         color: #38b853;
+      }
+   }
 }
 /* //selectbox */
 
@@ -606,973 +592,941 @@ select {
 /* //checkbox */
 
 .switch-toggle {
-  position: relative;
-  display: inline-block;
-  width: 40px;
-  height: 20px;
-  border-radius: 25px;
-  background-color: rgba(255, 255, 255, 0.05); // TODO. 5% 였음 0.05가 맞나?
-  cursor: pointer;
-  input {
-    display: none;
-  }
-  div {
-    position: absolute;
-    border-radius: 50%;
-    background-color: #dfdfdf;
-    transition: 0.2s ease;
-  }
-  input:checked + div {
-    left: 50%;
-    background-color: #38b853;
-  }
-  &.rect {
-    border-radius: 0;
-
-    div {
+   position: relative;
+   display: inline-block;
+   width: 40px;
+   height: 20px;
+   border-radius: 25px;
+   background-color: rgba(255, 255, 255, 0.05); // TODO. 5% 였음 0.05가 맞나?
+   cursor: pointer;
+   input {
+      display: none;
+   }
+   div {
+      position: absolute;
+      border-radius: 50%;
+      background-color: #dfdfdf;
+      transition: 0.2s ease;
+   }
+   input:checked + div {
+      left: 50%;
+      background-color: #38b853;
+   }
+   &.rect {
       border-radius: 0;
-    }
-  }
-  &.inner {
-    div {
-      width: 18px;
-      height: 18px;
-      top: 1px;
-      left: 1px;
-    }
-  }
-  &.outer {
-    div {
-      width: 26px;
-      height: 26px;
-      top: -3px;
-      left: -3px;
-    }
-  }
+
+      div {
+         border-radius: 0;
+      }
+   }
+   &.inner {
+      div {
+         width: 18px;
+         height: 18px;
+         top: 1px;
+         left: 1px;
+      }
+   }
+   &.outer {
+      div {
+         width: 26px;
+         height: 26px;
+         top: -3px;
+         left: -3px;
+      }
+   }
 }
 .auto {
-  .switch-toggle {
-    background-color: #212329;
-  }
+   .switch-toggle {
+      background-color: #212329;
+   }
 }
 /* //toggle */
 
 /* content */
 .content {
-  background-color: rgba(255, 255, 255, 0.03);
+   background-color: rgba(255, 255, 255, 0.03);
 }
 /* //content */
 
 /* left-sidebar */
 .left-sidebar {
-  .active {
-    box-shadow: 0 -1px 0px #38b853 inset;
-  }
-  button {
-    &:hover {
+   .active {
       box-shadow: 0 -1px 0px #38b853 inset;
-      color: #38b853 !important;
-      transition: 0.2s ease;
-    }
-  }
-  .list {
-    .bookmark {
-      cursor: pointer;
+   }
+   button {
       &:hover {
-        background-color: rgba(0, 0, 0, 0.1);
-        span {
-          color: #ffffff;
-          transition: 0.2s ease;
-        }
+         box-shadow: 0 -1px 0px #38b853 inset;
+         color: #38b853 !important;
+         transition: 0.2s ease;
       }
-    }
-    .events-list {
-      .event {
-        > div {
-          cursor: pointer;
-          &:hover {
-            transition: 0.2s ease;
+   }
+   .list {
+      .bookmark {
+         cursor: pointer;
+         &:hover {
             background-color: rgba(0, 0, 0, 0.1);
-          }
-          &:first-child {
-            &:hover {
-              box-shadow: 2px 0px #38b853 inset;
-              color: #38b853 !important;
-              transition: 0.2s ease;
-              background-color: rgba(0, 0, 0, 0.2);
-            }
             span {
-              color: #ffffff;
-              transition: 0.2s ease;
+               color: #ffffff;
+               transition: 0.2s ease;
             }
-          }
-          &:first-child.active {
-            box-shadow: 2px 0px #38b853 inset;
-            color: #38b853 !important;
-            background-color: rgba(0, 0, 0, 0.1);
-          }
-        }
+         }
       }
-      .event-detail {
-        background-color: rgba(0, 0, 0, 0) !important;
-        > div {
-          &:hover {
-            span {
-              color: #ffffff;
-              transition: 0.2s ease;
+      .events-list {
+         .event {
+            > div {
+               cursor: pointer;
+               &:hover {
+                  transition: 0.2s ease;
+                  background-color: rgba(0, 0, 0, 0.1);
+               }
+               &:first-child {
+                  &:hover {
+                     box-shadow: 2px 0px #38b853 inset;
+                     color: #38b853 !important;
+                     transition: 0.2s ease;
+                     background-color: rgba(0, 0, 0, 0.2);
+                  }
+                  span {
+                     color: #ffffff;
+                     transition: 0.2s ease;
+                  }
+               }
+               &:first-child.active {
+                  box-shadow: 2px 0px #38b853 inset;
+                  color: #38b853 !important;
+                  background-color: rgba(0, 0, 0, 0.1);
+               }
             }
-          }
-        }
+         }
+         .event-detail {
+            background-color: rgba(0, 0, 0, 0) !important;
+            > div {
+               &:hover {
+                  span {
+                     color: #ffffff;
+                     transition: 0.2s ease;
+                  }
+               }
+            }
+         }
       }
-    }
-  }
+   }
 }
 /* //left-sidebar */
 
 /* left-account-sidebar */
 .left-account-sidebar {
-  .list {
-    a {
-      &:hover {
-        background-color: RGB(0 0 0 / 30%) !important;
-        transition: 0.2s ease;
-        .icon {
-          i {
+   .active {
+      box-shadow: 2px 0px 0px 0px #38b853 inset;
+      .icon-box {
+         i {
             color: #38b853;
-            transition: 0.2s ease;
-          }
-        }
-        .subject {
-          span {
-            color: #ffffff !important;
-          }
-        }
+         }
       }
-    }
-    a > div {
-      height: 60px;
-      cursor: pointer;
-    }
-    .icon {
-      width: 60px;
-      justify-content: center;
-    }
-    .active {
-      background-color: RGB(0 0 0 / 30%) !important;
-      transition: 0.2s ease;
-
-      .icon {
-        i {
-          color: #38b853;
-        }
+   }
+   .icon-box {
+      i {
+         margin: 0 !important;
       }
-      .subject {
-        span {
-          color: #ffffff !important;
-        }
-      }
-    }
-    .title {
-      width: calc(100% - 60px);
-    }
-  }
+   }
 }
 /* //left-account-sidebar */
 
 /* betslip */
 .betslip {
-  .title {
-    box-shadow: 0 -1px 0px #38b853 inset;
-  }
-  .pick {
-    .delete {
-      button {
-        &:hover {
-          color: #ff4949 !important;
-          transition: 0.2s ease;
-        }
+   .title {
+      box-shadow: 0 -1px 0px #38b853 inset;
+   }
+   .pick {
+      .delete {
+         button {
+            &:hover {
+               color: #ff4949 !important;
+               transition: 0.2s ease;
+            }
+         }
       }
-    }
-  }
+   }
 }
 /* //betslip */
 
 /* bottom-wrap */
 .pagination {
-  .page {
-    button {
-      width: 40px;
-      height: 100% !important;
-      &:hover:not([disabled]) {
-        i {
-          color: #34ac53 !important;
-          transition: 0.2s ease;
-        }
-      }
-    }
-  }
-  .selectBox {
-    .select-container {
-      &.select-position {
-        .select-box__menu {
-          position: absolute;
-          top: -35px;
-        }
-      }
-      .select-box__control {
-        background-color: rgba(0, 0, 0, 0.2);
-        width: 100px !important;
-        min-height: 100% !important;
-        border: 0 !important;
-        display: flex !important;
-        align-items: center !important;
-        border-radius: 0px !important;
-        box-shadow: none !important;
-
-        .select-box__value-container {
-          .select-box__single-value {
-            color: #b7b7b7 !important;
-          }
-        }
-
-        .select-box__indicators {
-          span {
-            background-color: rgba(255, 255, 255, 0.1) !important;
-          }
-        }
-      }
-      .select-box__menu {
-        background-color: rgba(0, 0, 0, 0.7);
-        border-radius: 0px !important;
-        margin: 0px;
-
-        .select-box__menu-list {
-          padding-top: 0px;
-          padding-bottom: 0px;
-
-          .select-box__option {
-            color: #b7b7b7 !important;
-            background-color: rgba(0, 0, 0, 0.05);
-            padding: 12px 12px;
-
-            &:hover {
-              background-color: rgba(0, 0, 0, 0.2);
-              transition: 0.2s ease;
+   .page {
+      button {
+         width: 40px;
+         height: 100% !important;
+         &:hover:not([disabled]) {
+            i {
+               color: #34ac53 !important;
+               transition: 0.2s ease;
             }
-          }
-        }
+         }
       }
-    }
-  }
+   }
+   .selectBox {
+      .select-container {
+         &.select-position {
+            .select-box__menu {
+               position: absolute;
+               top: -35px;
+            }
+         }
+         .select-box__control {
+            background-color: rgba(0, 0, 0, 0.2);
+            width: 100px !important;
+            min-height: 100% !important;
+            border: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            border-radius: 0px !important;
+            box-shadow: none !important;
+
+            .select-box__value-container {
+               .select-box__single-value {
+                  color: #b7b7b7 !important;
+               }
+            }
+
+            .select-box__indicators {
+               span {
+                  background-color: rgba(255, 255, 255, 0.1) !important;
+               }
+            }
+         }
+         .select-box__menu {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 0px !important;
+            margin: 0px;
+
+            .select-box__menu-list {
+               padding-top: 0px;
+               padding-bottom: 0px;
+
+               .select-box__option {
+                  color: #b7b7b7 !important;
+                  background-color: rgba(0, 0, 0, 0.05);
+                  padding: 12px 12px;
+
+                  &:hover {
+                     background-color: rgba(0, 0, 0, 0.2);
+                     transition: 0.2s ease;
+                  }
+               }
+            }
+         }
+      }
+   }
 }
 /* //bottom-wrap */
 
 /* prematch-wrap */
 .prematch-wrap {
-  height: calc(100% - 50px);
-  .prematch-content {
-    width: 100%;
-  }
+   height: calc(100% - 50px);
+   .prematch-content {
+      width: 100%;
+   }
 }
 
 /* //prematch-wrap */
 
 /* inplay-wrap */
 .inplay-wrap {
-  height: calc(100% - 50px);
-  .inplay-content {
-    width: 50%;
-    padding-right: 5px !important;
-  }
-  .inplay-detail {
-    width: 50%;
-    padding-left: 5px !important;
-  }
+   height: calc(100% - 50px);
+   .inplay-content {
+      width: 50%;
+      padding-right: 5px !important;
+   }
+   .inplay-detail {
+      width: 50%;
+      padding-left: 5px !important;
+   }
 }
 
 /* //inplay-wrap */
 
 /* inplay-detail */
 .inplay-detail {
-  .market-list {
-    .market-data {
-      .data {
-        cursor: pointer;
-        &:hover {
-          box-shadow: 0px 0px 1px 1px #34ac53 inset;
-          background-color: rgba(0, 0, 0, 0.1);
-          transition: 0.2s ease;
-          span {
-            color: #ffffff;
-            transition: 0.2s ease;
-          }
-        }
+   .market-list {
+      .market-data {
+         .data {
+            cursor: pointer;
+            &:hover {
+               box-shadow: 0px 0px 1px 1px #34ac53 inset;
+               background-color: rgba(0, 0, 0, 0.1);
+               transition: 0.2s ease;
+               span {
+                  color: #ffffff;
+                  transition: 0.2s ease;
+               }
+            }
+         }
+         .active {
+            box-shadow: 0px 0px 1px 1px #34ac53 inset;
+            background-color: rgba(0, 0, 0, 0.1);
+            span {
+               color: #ffffff;
+            }
+         }
+         .disabled {
+            cursor: not-allowed !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            opacity: 0.5 !important;
+            &:hover {
+               box-shadow: unset !important;
+               background-color: rgba(255, 255, 255, 0.05) !important;
+            }
+            span {
+               color: #b7b7b7 !important;
+            }
+         }
       }
-      .active {
-        box-shadow: 0px 0px 1px 1px #34ac53 inset;
-        background-color: rgba(0, 0, 0, 0.1);
-        span {
-          color: #ffffff;
-        }
-      }
-      .disabled {
-        cursor: not-allowed !important;
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        opacity: 0.5 !important;
-        &:hover {
-          box-shadow: unset !important;
-          background-color: rgba(255, 255, 255, 0.05) !important;
-        }
-        span {
-          color: #b7b7b7 !important;
-        }
-      }
-    }
-  }
+   }
 }
 /* //inplay-detail */
 
 /* Esports-wrap */
 .esports-wrap {
-  height: calc(100% - 35px);
-  .esports-content {
-    width: 50%;
-    padding-right: 5px !important;
-  }
-  .esports-detail {
-    width: 50%;
-    padding-left: 5px !important;
-  }
+   height: calc(100% - 35px);
+   .esports-content {
+      width: 50%;
+      padding-right: 5px !important;
+   }
+   .esports-detail {
+      width: 50%;
+      padding-left: 5px !important;
+   }
 }
 
 /* //inplay-wrap */
 
 /* Esports-detail */
 .esports-detail {
-  .market-list {
-    .market-data {
-      .data {
-        cursor: pointer;
-        &:hover {
-          box-shadow: 0px 0px 1px 1px #34ac53 inset;
-          background-color: rgba(0, 0, 0, 0.1);
-          transition: 0.2s ease;
-          span {
-            color: #ffffff;
-            transition: 0.2s ease;
-          }
-        }
+   .market-list {
+      .market-data {
+         .data {
+            cursor: pointer;
+            &:hover {
+               box-shadow: 0px 0px 1px 1px #34ac53 inset;
+               background-color: rgba(0, 0, 0, 0.1);
+               transition: 0.2s ease;
+               span {
+                  color: #ffffff;
+                  transition: 0.2s ease;
+               }
+            }
+         }
+         .active {
+            box-shadow: 0px 0px 1px 1px #34ac53 inset;
+            background-color: rgba(0, 0, 0, 0.1);
+            span {
+               color: #ffffff;
+            }
+         }
+         .disabled {
+            cursor: not-allowed !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            opacity: 0.5 !important;
+            &:hover {
+               box-shadow: unset !important;
+               background-color: rgba(255, 255, 255, 0.05) !important;
+            }
+            span {
+               color: #b7b7b7 !important;
+            }
+         }
       }
-      .active {
-        box-shadow: 0px 0px 1px 1px #34ac53 inset;
-        background-color: rgba(0, 0, 0, 0.1);
-        span {
-          color: #ffffff;
-        }
-      }
-      .disabled {
-        cursor: not-allowed !important;
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        opacity: 0.5 !important;
-        &:hover {
-          box-shadow: unset !important;
-          background-color: rgba(255, 255, 255, 0.05) !important;
-        }
-        span {
-          color: #b7b7b7 !important;
-        }
-      }
-    }
-  }
+   }
 }
 /* //Esports-detail */
 
 /* view-detail */
 .view-detail {
-  .prematch-content {
-    padding-right: 5px !important;
-  }
-  .prematch-content,
-  .prematch-detail {
-    width: 50% !important;
-    display: flex !important;
-  }
-  .setting-btn {
-    .text {
-      display: none !important;
-    }
-  }
-  .list {
-    > div {
-      &:first-child {
-        .league,
-        .team {
-          display: none !important;
-        }
+   .prematch-content {
+      padding-right: 5px !important;
+   }
+   .prematch-content,
+   .prematch-detail {
+      width: 50% !important;
+      display: flex !important;
+   }
+   .setting-btn {
+      .text {
+         display: none !important;
       }
-    }
-  }
-  .prematch-list {
-    .title {
+   }
+   .list {
       > div {
-        &:first-child {
-          width: 63px !important;
-          padding: 0px 5px !important;
-        }
+         &:first-child {
+            .league,
+            .team {
+               display: none !important;
+            }
+         }
+      }
+   }
+   .prematch-list {
+      .title {
+         > div {
+            &:first-child {
+               width: 63px !important;
+               padding: 0px 5px !important;
+            }
 
-        &:last-child {
-          width: calc(100% - 63px);
-        }
+            &:last-child {
+               width: calc(100% - 63px);
+            }
+         }
       }
-    }
-    .list {
-      > div {
-        &:first-child {
-          width: 63px !important;
-        }
-        &:last-child {
-          width: calc(100% - 63px);
-        }
+      .list {
+         > div {
+            &:first-child {
+               width: 63px !important;
+            }
+            &:last-child {
+               width: calc(100% - 63px);
+            }
+         }
+         .bookmark {
+            display: none !important;
+         }
+         .market-detail {
+            width: 100% !important;
+         }
+         .market-count {
+            width: 50px !important;
+            padding: 2px 0px 2px 0px !important;
+         }
+         .market-default {
+            > div {
+               &:first-child {
+                  width: calc(100% - 100px);
+               }
+               &:last-child {
+                  width: 100px;
+               }
+            }
+         }
       }
-      .bookmark {
-        display: none !important;
+      .title-info {
+         > div {
+            &:first-child {
+               width: calc(100% - 50px) !important;
+            }
+         }
       }
-      .market-detail {
-        width: 100% !important;
-      }
-      .market-count {
-        width: 50px !important;
-        padding: 2px 0px 2px 0px !important;
-      }
-      .market-default {
-        > div {
-          &:first-child {
-            width: calc(100% - 100px);
-          }
-          &:last-child {
-            width: 100px;
-          }
-        }
-      }
-    }
-    .title-info {
-      > div {
-        &:first-child {
-          width: calc(100% - 50px) !important;
-        }
-      }
-    }
-  }
+   }
 }
 /* //viwe-detail */
 
 /* prematch-detail */
 .prematch-detail {
-  display: none !important;
-  .market-list {
-    .market-data {
-      .data {
-        cursor: pointer;
-        &:hover {
-          box-shadow: 0px 0px 1px 1px #34ac53 inset;
-          background-color: rgba(0, 0, 0, 0.1);
-          transition: 0.2s ease;
-          span {
-            color: #ffffff;
-            transition: 0.2s ease;
-          }
-        }
+   display: none !important;
+   .market-list {
+      .market-data {
+         .data {
+            cursor: pointer;
+            &:hover {
+               box-shadow: 0px 0px 1px 1px #34ac53 inset;
+               background-color: rgba(0, 0, 0, 0.1);
+               transition: 0.2s ease;
+               span {
+                  color: #ffffff;
+                  transition: 0.2s ease;
+               }
+            }
+         }
+         .active {
+            box-shadow: 0px 0px 1px 1px #34ac53 inset;
+            background-color: rgba(0, 0, 0, 0.1);
+            span {
+               color: #ffffff;
+            }
+         }
+         .disabled {
+            cursor: not-allowed !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            opacity: 0.5 !important;
+            &:hover {
+               box-shadow: unset !important;
+               background-color: rgba(255, 255, 255, 0.05) !important;
+            }
+            span {
+               color: #b7b7b7 !important;
+            }
+         }
       }
-      .active {
-        box-shadow: 0px 0px 1px 1px #34ac53 inset;
-        background-color: rgba(0, 0, 0, 0.1);
-        span {
-          color: #ffffff;
-        }
-      }
-      .disabled {
-        cursor: not-allowed !important;
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        opacity: 0.5 !important;
-        &:hover {
-          box-shadow: unset !important;
-          background-color: rgba(255, 255, 255, 0.05) !important;
-        }
-        span {
-          color: #b7b7b7 !important;
-        }
-      }
-    }
-  }
+   }
 }
 
 /* //prematch-detail */
 
 /* prematch-header */
 .prematch-header {
-  .input-form {
-    height: 100%;
-    padding: 0 10px;
-    text-align: left;
-    color: #b7b7b7;
-    background-color: RGB(0 0 0 / 30%);
-  }
-  .search-btn {
-    width: 40px;
-    &:hover {
-      background-color: RGB(0 0 0 / 40%);
-      transition: 0.2s ease;
+   .input-form {
+      height: 100%;
+      padding: 0 10px;
+      text-align: left;
+      color: #b7b7b7;
+      background-color: RGB(0 0 0 / 30%);
+   }
+   .search-btn {
+      width: 40px;
+      &:hover {
+         background-color: RGB(0 0 0 / 40%);
+         transition: 0.2s ease;
 
-      span {
-        color: #34ac53 !important;
-        transition: 0.2s ease;
+         span {
+            color: #34ac53 !important;
+            transition: 0.2s ease;
+         }
       }
-    }
-  }
+   }
 }
 /* //prematch-header */
 
 /* prematch-list */
 .prematch-list {
-  .title {
-    box-shadow: 2px 0px 0px 0px #187900 inset;
-  }
-  .date {
-    width: 45px;
-  }
-  .league-icon {
-    width: 18px;
-  }
-  .league {
-    width: 30%;
-  }
-  .team {
-    width: calc(70% - 63px);
-  }
-  .title-info {
-    > div {
-      &:first-child {
-        width: calc(100% - 100px);
-      }
-    }
-  }
-  .market-default {
-    > div {
-      &:first-child {
-        width: calc(100% - 100px);
-      }
-      &:last-child {
-        width: 100px;
-      }
-    }
-    .odds {
-      background-color: RGB(255 255 255 / 5%);
-      cursor: pointer;
-      // &:hover {
-      // 	box-shadow:0px 0px 1px 1px #34ac53 inset;
-      // 	background-color:RGB(0 0 0 / 0.10);
-      // 	transition: .2s ease;
-      // 	span {
-      // 		color:#ffffff;
-      // 		transition: .2s ease;
-      // 	}
-      // }
-    }
-    .disabled {
-      cursor: not-allowed !important;
-      background-color: rgba(255, 255, 255, 0.05) !important;
-      opacity: 0.5 !important;
-      &:hover {
-        box-shadow: unset !important;
-        background-color: rgba(255, 255, 255, 0.05) !important;
-      }
-      span {
-        color: #b7b7b7 !important;
-      }
-    }
-    .odds.active {
-      box-shadow: 0px 0px 1px 1px #34ac53 inset;
-      background-color: RGB(0 0 0 / 0.1);
-      span {
-        color: #ffffff;
-      }
-    }
-    .market-count {
+   .title {
+      box-shadow: 2px 0px 0px 0px #187900 inset;
+   }
+   .date {
+      width: 45px;
+   }
+   .league-icon {
+      width: 18px;
+   }
+   .league {
+      width: 30%;
+   }
+   .team {
+      width: calc(70% - 63px);
+   }
+   .title-info {
       > div {
-        cursor: pointer;
+         &:first-child {
+            width: calc(100% - 100px);
+         }
       }
-      .market-detail {
-        background-color: RGB(255 255 255 / 5%);
-        &:hover {
-          background-color: #34ac53;
-          color: #ffffff;
-          transition: 0.2s ease;
-          span {
+   }
+   .market-default {
+      > div {
+         &:first-child {
+            width: calc(100% - 100px);
+         }
+         &:last-child {
+            width: 100px;
+         }
+      }
+      .odds {
+         background-color: RGB(255 255 255 / 5%);
+         cursor: pointer;
+         // &:hover {
+         // 	box-shadow:0px 0px 1px 1px #34ac53 inset;
+         // 	background-color:RGB(0 0 0 / 0.10);
+         // 	transition: .2s ease;
+         // 	span {
+         // 		color:#ffffff;
+         // 		transition: .2s ease;
+         // 	}
+         // }
+      }
+      .disabled {
+         cursor: not-allowed !important;
+         background-color: rgba(255, 255, 255, 0.05) !important;
+         opacity: 0.5 !important;
+         &:hover {
+            box-shadow: unset !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+         }
+         span {
+            color: #b7b7b7 !important;
+         }
+      }
+      .odds.active {
+         box-shadow: 0px 0px 1px 1px #34ac53 inset;
+         background-color: RGB(0 0 0 / 0.1);
+         span {
             color: #ffffff;
-            transition: 0.2s ease;
-          }
-        }
-        &.active {
-          background-color: #34ac53;
-        }
+         }
       }
-      .bookmark {
-        &:hover {
-          i {
-            color: #e8c414;
-            transition: 0.2s ease;
-            font-weight: bold;
-          }
-        }
+      .market-count {
+         > div {
+            cursor: pointer;
+         }
+         .market-detail {
+            background-color: RGB(255 255 255 / 5%);
+            &:hover {
+               background-color: #34ac53;
+               color: #ffffff;
+               transition: 0.2s ease;
+               span {
+                  color: #ffffff;
+                  transition: 0.2s ease;
+               }
+            }
+            &.active {
+               background-color: #34ac53;
+            }
+         }
+         .bookmark {
+            &:hover {
+               i {
+                  color: #e8c414;
+                  transition: 0.2s ease;
+                  font-weight: bold;
+               }
+            }
+         }
+         .bookmark.active {
+            i {
+               color: #e8c414;
+               transition: 0.2s ease;
+               font-weight: bold;
+            }
+         }
       }
-      .bookmark.active {
-        i {
-          color: #e8c414;
-          transition: 0.2s ease;
-          font-weight: bold;
-        }
-      }
-    }
-  }
+   }
 }
 /* //prematch-list */
 
 /* account */
 .account {
-  .payment {
-    > button {
-      background-color: rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      &:hover:not([disabled]) {
-        box-shadow: 0px 0px 1px 1px #34ac53 inset;
-        background-color: rgba(0, 0, 0, 0.2);
-        transition: 0.2s ease;
-        span {
-          color: #ffffff;
-          transition: 0.2s ease;
-        }
+   .wd-416 {
+      width: 41.6%;
+   }
+   .payment {
+      > button {
+         background-color: rgba(0, 0, 0, 0.1);
+         cursor: pointer;
+         &:hover:not([disabled]) {
+            box-shadow: 0px 0px 1px 1px #34ac53 inset;
+            background-color: rgba(0, 0, 0, 0.2);
+            transition: 0.2s ease;
+            span {
+               color: #ffffff;
+               transition: 0.2s ease;
+            }
+         }
       }
-    }
-    .active {
-      box-shadow: 0px 0px 1px 1px #34ac53 inset;
-      background-color: RGB(0 0 0 / 0.2);
-      span {
-        color: #ffffff;
+      .active {
+         box-shadow: 0px 0px 1px 1px #34ac53 inset;
+         background-color: RGB(0 0 0 / 0.2);
+         span {
+            color: #ffffff;
+         }
       }
-    }
-  }
-  .money-btn {
-    button {
-      &:hover {
-        box-shadow: 0px 0px 1px 1px #34ac53 inset;
-        background-color: rgba(0, 0, 0, 0.2);
-        transition: 0.2s ease;
+   }
+   .money-btn {
+      button {
+         &:hover {
+            box-shadow: 0px 0px 1px 1px #34ac53 inset;
+            background-color: rgba(0, 0, 0, 0.2);
+            transition: 0.2s ease;
+         }
       }
-    }
-  }
-  .input-form {
-    width: 100%;
-    height: 100%;
-    padding: 0 10px;
-    text-align: left;
-    color: #b7b7b7;
-    background-color: transparent;
-    color: #38b853;
-    text-align: right;
-    &::placeholder {
-      color: #38b853;
-    }
-  }
-  .input-form-2 {
-    width: 100%;
-    height: 100%;
-    padding: 0 10px;
-    text-align: left;
-    color: #b7b7b7;
-    background-color: transparent;
-    color: #b7b7b7;
-    text-align: right;
-    &::placeholder {
+   }
+   .input-form {
+      width: 100%;
+      height: 100%;
+      padding: 0 10px;
+      text-align: left;
       color: #b7b7b7;
-    }
-  }
+      background-color: transparent;
+      color: #38b853;
+      &::placeholder {
+         color: #38b853;
+      }
+   }
+   .input-form-2 {
+      width: 100%;
+      height: 100%;
+      padding: 0 10px;
+      text-align: left;
+      color: #b7b7b7;
+      background-color: transparent;
+      color: #b7b7b7;
+      text-align: right;
+      &::placeholder {
+         color: #b7b7b7;
+      }
+   }
 }
 /* //account */
 
 /* settings */
 .settings-wrap {
-  .input-form {
-    color: #a3a3a3;
-    &::placeholder {
-      color: #6d6c70;
-    }
-  }
+   .input-form {
+      color: #a3a3a3;
+      &::placeholder {
+         color: #6d6c70;
+      }
+   }
 }
 /* //settings */
 
 /* stake */
 .stake {
-  .bet {
-    &:hover {
-      background-color: #38b853;
-      transition: 0.2s ease;
-    }
-  }
+   .bet {
+      &:hover {
+         background-color: #38b853;
+         transition: 0.2s ease;
+      }
+   }
 }
 /* //stake */
 
 /* history */
 .history {
-  .division {
-    .active {
-      opacity: 1;
-    }
-    button {
-      &:hover {
-        color: #38b853;
+   .division {
+      .active {
+         opacity: 1;
       }
-    }
-  }
-  .list-wrap {
-    .list {
-      table {
-        tbody {
-          tr {
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-          }
-        }
-        .info {
-          &:hover {
-            background-color: rgba(0, 0, 0, 0.15) !important;
-            cursor: pointer !important;
-          }
-          &.active {
-            background-color: rgba(0, 0, 0, 0.15) !important;
-          }
-        }
+      button {
+         &:hover {
+            color: #38b853;
+         }
       }
-    }
-  }
+   }
+   .list-wrap {
+      .list {
+         table {
+            tbody {
+               tr {
+                  border-top: 1px solid rgba(255, 255, 255, 0.05);
+               }
+            }
+            .info {
+               &:hover {
+                  background-color: rgba(0, 0, 0, 0.15) !important;
+                  cursor: pointer !important;
+               }
+               &.active {
+                  background-color: rgba(0, 0, 0, 0.15) !important;
+               }
+            }
+         }
+      }
+   }
 }
 /* //history */
 
 /* inplay-list */
 
 .inplay-list {
-  .list {
-    line-height: 31px;
+   .list {
+      line-height: 31px;
 
-    .detail {
-      cursor: pointer;
+      .detail {
+         cursor: pointer;
 
-      &.active {
-        background-color: #1ca739 !important;
+         &.active {
+            background-color: #1ca739 !important;
+         }
+         &:hover {
+            background-color: #1ca739 !important;
+            transition: 0.2s ease;
+         }
       }
-      &:hover {
-        background-color: #1ca739 !important;
-        transition: 0.2s ease;
+      .odd {
+         cursor: pointer;
+         &.active {
+            box-shadow: 0px 0px 1px 1px #34ac53 inset;
+            background: rgba(0, 0, 0, 0.1);
+         }
+         &:hover {
+            box-shadow: 0px 0px 1px 1px #34ac53 inset;
+            background: rgba(0, 0, 0, 0.1);
+            transition: 0.2s ease;
+         }
       }
-    }
-    .odd {
-      cursor: pointer;
-      &.active {
-        box-shadow: 0px 0px 1px 1px #34ac53 inset;
-        background: rgba(0, 0, 0, 0.1);
+      .disabled {
+         cursor: not-allowed !important;
+         background-color: rgba(255, 255, 255, 0.05) !important;
+         opacity: 0.5 !important;
+         &:hover {
+            box-shadow: unset !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+         }
+         span {
+            color: #b7b7b7 !important;
+         }
       }
-      &:hover {
-        box-shadow: 0px 0px 1px 1px #34ac53 inset;
-        background: rgba(0, 0, 0, 0.1);
-        transition: 0.2s ease;
-      }
-    }
-    .disabled {
-      cursor: not-allowed !important;
-      background-color: rgba(255, 255, 255, 0.05) !important;
-      opacity: 0.5 !important;
-      &:hover {
-        box-shadow: unset !important;
-        background-color: rgba(255, 255, 255, 0.05) !important;
-      }
-      span {
-        color: #b7b7b7 !important;
-      }
-    }
-  }
+   }
 }
 
 .esports-list {
-  .list {
-    line-height: 31px;
+   .list {
+      line-height: 31px;
 
-    .detail {
-      cursor: pointer;
+      .detail {
+         cursor: pointer;
 
-      &.active {
-        background-color: #1ca739 !important;
+         &.active {
+            background-color: #1ca739 !important;
+         }
+         &:hover {
+            background-color: #1ca739 !important;
+            transition: 0.2s ease;
+         }
       }
-      &:hover {
-        background-color: #1ca739 !important;
-        transition: 0.2s ease;
+      .odd {
+         cursor: pointer;
+         &.active {
+            box-shadow: 0px 0px 1px 1px #34ac53 inset;
+            background: rgba(0, 0, 0, 0.1);
+         }
+         &:hover {
+            box-shadow: 0px 0px 1px 1px #34ac53 inset;
+            background: rgba(0, 0, 0, 0.1);
+            transition: 0.2s ease;
+         }
       }
-    }
-    .odd {
-      cursor: pointer;
-      &.active {
-        box-shadow: 0px 0px 1px 1px #34ac53 inset;
-        background: rgba(0, 0, 0, 0.1);
+      .disabled {
+         cursor: not-allowed !important;
+         background-color: rgba(255, 255, 255, 0.05) !important;
+         opacity: 0.5 !important;
+         &:hover {
+            box-shadow: unset !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
+         }
+         span {
+            color: #b7b7b7 !important;
+         }
       }
-      &:hover {
-        box-shadow: 0px 0px 1px 1px #34ac53 inset;
-        background: rgba(0, 0, 0, 0.1);
-        transition: 0.2s ease;
-      }
-    }
-    .disabled {
-      cursor: not-allowed !important;
-      background-color: rgba(255, 255, 255, 0.05) !important;
-      opacity: 0.5 !important;
-      &:hover {
-        box-shadow: unset !important;
-        background-color: rgba(255, 255, 255, 0.05) !important;
-      }
-      span {
-        color: #b7b7b7 !important;
-      }
-    }
-  }
+   }
 }
 
 /* //inplay list */
 
 /* login */
 .sign-in {
-  input {
-    box-sizing: border-box;
-  }
+   input {
+      box-sizing: border-box;
+   }
 }
 /* //login */
 
 /* notice */
 .notice-wrap {
-  .notice-list {
-    &:hover {
-      cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.2);
-      box-shadow: 2px 0px #38b853 inset;
-      transition: 0.2s ease;
-    }
-    &.active {
-      background-color: rgba(0, 0, 0, 0.2) !important;
-      box-shadow: 2px 0px #38b853 inset;
-    }
-  }
+   .notice-list {
+      &:hover {
+         cursor: pointer;
+         background-color: rgba(0, 0, 0, 0.2);
+         box-shadow: 2px 0px #38b853 inset;
+         transition: 0.2s ease;
+      }
+      &.active {
+         background-color: rgba(0, 0, 0, 0.2) !important;
+         box-shadow: 2px 0px #38b853 inset;
+      }
+   }
 }
 /* //notice */
 
 /* message */
 .message-wrap {
-  .message-list {
-    &:hover {
-      cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.2);
-      box-shadow: 2px 0px #38b853 inset;
-      transition: 0.2s ease;
-    }
-    &.active {
-      background-color: rgba(0, 0, 0, 0.2) !important;
-      box-shadow: 2px 0px #38b853 inset;
-    }
-  }
+   .message-list {
+      &:hover {
+         cursor: pointer;
+         background-color: rgba(0, 0, 0, 0.2);
+         box-shadow: 2px 0px #38b853 inset;
+         transition: 0.2s ease;
+      }
+      &.active {
+         background-color: rgba(0, 0, 0, 0.2) !important;
+         box-shadow: 2px 0px #38b853 inset;
+      }
+   }
 }
 /* //message */
 
 /* inquiry */
 .inquiry-wrap {
-  .inquiry-list {
-    &:hover {
-      cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.2);
-      box-shadow: 2px 0px #38b853 inset;
-      transition: 0.2s ease;
-    }
-    &.active {
-      background-color: rgba(0, 0, 0, 0.2) !important;
-      box-shadow: 2px 0px #38b853 inset;
-    }
-  }
+   .inquiry-list {
+      &:hover {
+         cursor: pointer;
+         background-color: rgba(0, 0, 0, 0.2);
+         box-shadow: 2px 0px #38b853 inset;
+         transition: 0.2s ease;
+      }
+      &.active {
+         background-color: rgba(0, 0, 0, 0.2) !important;
+         box-shadow: 2px 0px #38b853 inset;
+      }
+   }
 }
 /* //inquiry */
 
 /* casino-wrap */
 .casino-wrap {
-  /*background: url('https://i.postimg.cc/FHrFB8Tr/casino-bg.png') 0 0 no-repeat;*/
-  background-size: 100% 100%;
-  height: calc(100vh - 145px);
+   /*background: url('https://i.postimg.cc/FHrFB8Tr/casino-bg.png') 0 0 no-repeat;*/
+   background-size: 100% 100%;
+   height: calc(100vh - 145px);
 
-  .left {
-    .casino-icon {
-      background: url("https://i.postimg.cc/fbg3xHHB/casino-icon.png") 0 0
-        no-repeat;
-    }
-  }
-  .right {
-    .slot-icon {
-      background: url("https://i.postimg.cc/Th8PLjx0/slot-icon.png") 0 0
-        no-repeat;
-    }
-  }
+   .left {
+      .casino-icon {
+         background: url('https://i.postimg.cc/fbg3xHHB/casino-icon.png') 0 0 no-repeat;
+      }
+   }
+   .right {
+      .slot-icon {
+         background: url('https://i.postimg.cc/Th8PLjx0/slot-icon.png') 0 0 no-repeat;
+      }
+   }
 }
 /* //casino-wrap */
 
 /* side-area */
 .account-continer {
-  max-width: calc(100vw - 700px);
+   max-width: calc(100vw - 600px);
 }
 .games-book-continer {
-  max-width: calc(100vw - 600px);
+   max-width: calc(100vw - 600px);
 }
 .ie-continer {
-  max-width: calc(100vw - 300px);
+   max-width: calc(100vw - 300px);
 }
 /* //side-area */
 
 .sign-wrap {
-  p {
-    color: white;
-    margin: 0;
-    padding: 0;
-    @include rem(font-size, 11px);
-  }
-  .sign-right-title {
-    h1 {
-      @include rem(font-size, 25px);
-      font-weight: normal;
-      font-family: Arial;
-    }
-    p {
-      @include rem(font-size, 16px);
-    }
-  }
-  .sign-item-inner {
-    input[type="text"],
-    [type="password"] {
-      width: 100%;
-      @include rem(height, 40px);
+   p {
       color: white;
-    }
-    input[type="checkbox"] {
-      width: auto !important;
-    }
-    .btn-submit {
-      width: 30%;
-      @include rem(margin-left, 5px);
-      color: white;
-    }
+      margin: 0;
+      padding: 0;
+      @include rem(font-size, 11px);
+   }
+   .sign-right-title {
+      h1 {
+         @include rem(font-size, 25px);
+         font-weight: normal;
+         font-family: Arial;
+      }
+      p {
+         @include rem(font-size, 16px);
+      }
+   }
+   .sign-item-inner {
+      input[type='text'],
+      [type='password'] {
+         width: 100%;
+         @include rem(height, 40px);
+         color: white;
+      }
+      input[type='checkbox'] {
+         width: auto !important;
+      }
+      .btn-submit {
+         width: 30%;
+         @include rem(margin-left, 5px);
+         color: white;
+      }
 
-    .select-item-box {
-      width: 100% !important;
-    }
-  }
+      .select-item-box {
+         width: 100% !important;
+      }
+   }
 }
 
 /**
@@ -1580,879 +1534,844 @@ select {
 */
 
 .main-content-slotbox {
-  .round-box {
-    span,
-    div,
-    h1 {
-      z-index: 2;
-    }
-    border-radius: 3px;
-    -webkit-box-shadow: inset 0px -116px 116px -42px rgba(41, 41, 41, 0.68);
-    -moz-box-shadow: inset 0px -116px 116px -42px rgba(41, 41, 41, 0.68);
-    box-shadow: inset 0px -116px 116px -42px rgba(41, 41, 41, 0.68);
-
-    &.featured-matches {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://img.apmcdn.org/bc9a236a963eeb64a03d062b0409ce0d414dd27e/uncropped/359d64-20190413-mn-united-first-game-03.jpg");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    &.basketball {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://cms.qz.com/wp-content/uploads/2020/08/2020-08-13T181552Z_1081086110_NOCID_RTRMADP_3_NBA-SACRAMENTO-KINGS-AT-LOS-ANGELES-LAKERS-e1597347989610.jpg?quality=75&strip=all&w=1600&h=900&crop=1");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    &.mlb {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://upload.wikimedia.org/wikipedia/commons/8/80/Munhak_baseball_stadium_2012.png");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-    .round-header-title {
-      @include rem(font-size, 15px);
-      color: white;
-      font-weight: normal;
-      font-weight: 400;
-      text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
-    }
-    .round-team-name {
-      @include rem(font-size, 18px);
-      color: white;
-    }
-  }
-  .direct-link {
-    a {
-      @include rem(font-size, 16px);
-    }
-  }
-  .topevent-content {
-    table {
-      width: 100%;
-      td {
-        height: 60px;
-      }
-    }
-    .topevent-soccer {
-      @include rem(width, 26px);
-      @include rem(height, 26px);
-
-      background-color: transparent;
-      background: url("https://cuzzle.org/scon/category - bw/soccer.svg")
-        no-repeat;
-      background-size: contain;
-      display: flex;
-    }
-    .topevent-ico-zaragoza {
-      @include rem(width, 26px);
-      @include rem(height, 26px);
-
-      background-color: transparent;
-      background: url("https://i.imgur.com/suKDLDu.png") no-repeat;
-      background-size: contain;
-      display: flex;
-    }
-    .topevent-ico-fuenlabrada {
-      @include rem(width, 26px);
-      @include rem(height, 26px);
-
-      background-color: transparent;
-      background: url("https://i.imgur.com/ZeM1l3Z.png") no-repeat;
-      background-size: contain;
-      display: flex;
-    }
-    .topevent-ico-leedsunited {
-      @include rem(width, 26px);
-      @include rem(height, 26px);
-
-      background-color: transparent;
-      background: url("https://i.imgur.com/ZUbNNpl.png") no-repeat;
-      background-size: contain;
-      display: flex;
-    }
-    .topevent-ico-milan {
-      @include rem(width, 26px);
-      @include rem(height, 26px);
-
-      background-color: transparent;
-      background: url("https://i.imgur.com/9qmEET4.png") no-repeat;
-      background-size: contain;
-      display: flex;
-    }
-    .topevent-ico-sampdoria {
-      @include rem(width, 26px);
-      @include rem(height, 26px);
-
-      background-color: transparent;
-      background: url("https://i.imgur.com/x7ja2ot.png") no-repeat;
-      background-size: contain;
-      display: flex;
-    }
-    .topevent-ico-verona {
-      @include rem(width, 26px);
-      @include rem(height, 26px);
-
-      background-color: transparent;
-      background: url("https://i.imgur.com/T7RdPYE.png") no-repeat;
-      background-size: contain;
-      display: flex;
-    }
-    .topevent-ico-chelsea {
-      @include rem(width, 26px);
-      @include rem(height, 26px);
-
-      background-color: transparent;
-      background: url("https://i.imgur.com/sFvQkrP.png") no-repeat;
-      background-size: contain;
-      display: flex;
-    }
-    .topevent-ico-cagliari {
-      @include rem(width, 26px);
-      @include rem(height, 26px);
-
-      background-color: transparent;
-      background: url("https://i.imgur.com/kTGFQKH.png") no-repeat;
-      background-size: contain;
-      display: flex;
-    }
-  }
-}
-.main-content-footer-top {
-  .partner-rows {
-    width: 25%;
-    justify-content: center;
-  }
-  .partner-entwine {
-    @include rem(width, 180px);
-    @include rem(height, 50px);
-    background: url("https://i.imgur.com/sZLAfL8.png") no-repeat;
-    background-size: contain;
-  }
-  .partner-gameplay {
-    @include rem(width, 180px);
-    @include rem(height, 30px);
-    background: url("https://i.imgur.com/nL7g5mi.png") no-repeat;
-    background-size: contain;
-  }
-  .partner-hogaming {
-    @include rem(width, 180px);
-    @include rem(height, 50px);
-    background: url("https://i.imgur.com/hV4cITg.png") no-repeat;
-    background-size: contain;
-  }
-  .partner-microgaming {
-    @include rem(width, 180px);
-    @include rem(height, 45px);
-    background: url("https://i.imgur.com/BWRz0M2.png") no-repeat;
-    background-size: contain;
-  }
-  .partner-netent {
-    @include rem(width, 180px);
-    @include rem(height, 50px);
-    background: url("https://i.imgur.com/vWUhtBH.png") no-repeat;
-    background-size: contain;
-  }
-  .partner-playtech {
-    @include rem(width, 180px);
-    @include rem(height, 50px);
-    background: url("https://i.imgur.com/tW05hQa.png") no-repeat;
-    background-size: contain;
-  }
-}
-.main-content-footer-inner {
-  background: url(https://i.imgur.com/5zWec2O.jpg) no-repeat;
-  background-size: cover;
-  .main-content-footer-title {
-    .item-title-box {
-      h1 {
-        @include rem(font-size, 15px);
-        margin: 0;
-        @include rem(padding-top, 50px);
-      }
-    }
-  }
-  .main-content-footer-content {
-    .item-content-row {
-      > div {
-        @include rem(padding-bottom, 13px);
-        &:last-child {
-          padding-bottom: 0;
-        }
-      }
-      .footer-sns {
-        i {
-          @include rem(font-size, 14px);
-        }
-      }
-    }
-  }
-}
-.main-content-popular {
-  .popular-header-inner {
-    .popular-header-title {
-      .title-name {
-        @include rem(font-size, 18px);
-        color: white;
-        font-weight: normal;
-        font-weight: 400;
-        text-shadow: 1px 1px 10px #171a29, 1px 1px 10px #0a0b10;
-      }
-    }
-    .play-tab {
-      flex: 2;
-      button {
-        @include rem(font-size, 14px);
-        margin: 0;
-        padding: 0;
-      }
-    }
-    .all-list {
-      a {
-        border: 1px solid #e8c414;
-        border-radius: 3px;
-        padding: 7px 10px;
-        color: #e8c414;
-
-        @include rem(font-size, 14px);
-      }
-    }
-  }
-
-  .popular-content-inner {
-    span,
-    div,
-    h1 {
-      z-index: 2;
-    }
-
-    .twinspin {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://mk0gamesnetentcxytko.kinstacdn.com/wp-content/uploads/2018/09/gamethumb_twinspin.jpg");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    .gonzo {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://mk0gamesnetentcxytko.kinstacdn.com/wp-content/uploads/2018/08/gonzo.jpg");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    .dazzle {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://indiancasinos.org/wp-content/uploads/2019/11/dazzleme.jpg");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    .divine {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://mk0gamesnetentcxytko.kinstacdn.com/wp-content/uploads/2018/08/divine-fortune.jpg");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    .fruit {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://www.netentcasino.com/wp-content/uploads/2012/07/nec-fruit-shop-thumbnail.jpg");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    .reelrush {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://366754.smushcdn.com/946179/wp-content/uploads/2018/02/reel-rush-slot-mobile.jpg?lossy=0&strip=1&webp=1");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    .finnand {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://mk0gamesnetentcxytko.kinstacdn.com/wp-content/uploads/2018/09/gamethumb_finn.jpg");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    .aloha {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://www.askgamblers.com/uploads/game_screenshots/other/41/1b/59/82561793a55c60e0e4894fd6298798be13/aloha-cluster-pays-slot-netent.jpg");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    .jack {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://mk0gamesnetentcxytko.kinstacdn.com/wp-content/uploads/2018/09/gamethumb_jackandthebeanstalk.jpg");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    .dead {
-      position: relative;
-      &::after {
-        content: "";
-        background: url("https://www.askgamblers.com/uploads/game_screenshots/other/d3/cc/20/e36b0629465128c01a04e46819205d963d/dead-or-alive-2-slot-netent.jpg");
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-        z-index: 1;
-        background-size: cover;
-        opacity: 0.4;
-      }
-    }
-
-    .end-title {
-      span {
-        @include rem(font-size, 18px);
-        text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
-      }
-    }
-  }
-}
-
-.main-content-slotbox {
-  .slotbox-header-inner {
-    .slotbox-header-title {
-      .title-name {
-        @include rem(font-size, 18px);
-        color: white;
-        font-weight: normal;
-        font-weight: 400;
-        text-shadow: 1px 1px 10px #171a29, 1px 1px 10px #0a0b10;
-      }
-    }
-    .play-tab {
-      flex: 2;
-      button {
-        @include rem(font-size, 14px);
-        margin: 0;
-        padding: 0;
-      }
-    }
-    .all-list {
-      a {
-        border: 1px solid #e8c414;
-        border-radius: 3px;
-        padding: 7px 10px;
-        color: #e8c414;
-
-        @include rem(font-size, 14px);
-      }
-    }
-  }
-
-  .slotbox-content-inner {
-    span,
-    div,
-    h1 {
-      z-index: 2;
-    }
-
-    .end-title {
-      span {
-        @include rem(font-size, 18px);
-        text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
-      }
-    }
-  }
-}
-
-.main-content-livecasino {
-  .livecasino-header-inner {
-    .livecasino-header-title {
-      .title-name {
-        @include rem(font-size, 18px);
-        color: white;
-        font-weight: normal;
-        font-weight: 400;
-        text-shadow: 1px 1px 10px #171a29, 1px 1px 10px #0a0b10;
-      }
-    }
-    .play-tab {
-      flex: 2;
-      button {
-        @include rem(font-size, 14px);
-        margin: 0;
-        padding: 0;
-      }
-    }
-    .all-list {
-      a {
-        border: 1px solid #e8c414;
-        border-radius: 3px;
-        padding: 7px 10px;
-        color: #e8c414;
-
-        @include rem(font-size, 14px);
-      }
-    }
-  }
-
-  .livecasino-content-inner {
-    .round-box {
+   .round-box {
       span,
       div,
       h1 {
-        z-index: 2;
+         z-index: 2;
       }
       border-radius: 3px;
       -webkit-box-shadow: inset 0px -116px 116px -42px rgba(41, 41, 41, 0.68);
       -moz-box-shadow: inset 0px -116px 116px -42px rgba(41, 41, 41, 0.68);
       box-shadow: inset 0px -116px 116px -42px rgba(41, 41, 41, 0.68);
 
-      &.baccarat {
-        position: relative;
-        &::after {
-          content: "";
-          background: url("https://www.unlv.edu/sites/default/files/styles/850_width/public/event_images/M-Resort-Casino-Floor-3.jpg?itok=p9DRpqkg");
-          top: 0;
-          left: 0;
-          bottom: 0;
-          right: 0;
-          position: absolute;
-          z-index: 1;
-          background-size: cover;
-          opacity: 0.4;
-        }
+      &.featured-matches {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://img.apmcdn.org/bc9a236a963eeb64a03d062b0409ce0d414dd27e/uncropped/359d64-20190413-mn-united-first-game-03.jpg');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
       }
 
-      &.roulette {
-        position: relative;
-        &::after {
-          content: "";
-          background: url("https://wallup.net/wp-content/uploads/2019/09/355034-roulette-wheel-gambling-3-748x468.jpg");
-          top: 0;
-          left: 0;
-          bottom: 0;
-          right: 0;
-          position: absolute;
-          z-index: 1;
-          background-size: cover;
-          opacity: 0.4;
-        }
+      &.basketball {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://cms.qz.com/wp-content/uploads/2020/08/2020-08-13T181552Z_1081086110_NOCID_RTRMADP_3_NBA-SACRAMENTO-KINGS-AT-LOS-ANGELES-LAKERS-e1597347989610.jpg?quality=75&strip=all&w=1600&h=900&crop=1');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
       }
 
-      &.blackjack {
-        position: relative;
-        &::after {
-          content: "";
-          background: url("https://www.wallpaperbetter.com/wallpaper/921/397/192/poker-card-hd-720P-wallpaper.jpg");
-          top: 0;
-          left: 0;
-          bottom: 0;
-          right: 0;
-          position: absolute;
-          z-index: 1;
-          background-size: cover;
-          opacity: 0.4;
-        }
+      &.mlb {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://upload.wikimedia.org/wikipedia/commons/8/80/Munhak_baseball_stadium_2012.png');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
       }
-
-      &.dragon {
-        position: relative;
-        &::after {
-          content: "";
-          background: url("https://casinoble.co.za/wp-content/uploads/sites/7/2019/07/Dragon-Tiger-screenshot-table.png");
-          top: 0;
-          left: 0;
-          bottom: 0;
-          right: 0;
-          position: absolute;
-          z-index: 1;
-          background-size: cover;
-          opacity: 0.4;
-        }
+      .round-header-title {
+         @include rem(font-size, 15px);
+         color: white;
+         font-weight: normal;
+         font-weight: 400;
+         text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
       }
-
-      &.sicbo {
-        position: relative;
-        &::after {
-          content: "";
-          background: url("https://letou.pro/wp-content/uploads/2020/03/sicbo-la-gi.jpg");
-          top: 0;
-          left: 0;
-          bottom: 0;
-          right: 0;
-          position: absolute;
-          z-index: 1;
-          background-size: cover;
-          opacity: 0.4;
-        }
+      .round-team-name {
+         @include rem(font-size, 18px);
+         color: white;
       }
-    }
-
-    .round-header-title {
-      @include rem(font-size, 15px);
-      color: white;
-      font-weight: normal;
-      font-weight: 400;
-      text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
-    }
-    .round-team-name {
-      @include rem(font-size, 18px);
-      color: white;
-    }
-
-    .direct-link {
+   }
+   .direct-link {
       a {
-        @include rem(font-size, 16px);
+         @include rem(font-size, 16px);
       }
-    }
-  }
+   }
+   .topevent-content {
+      table {
+         width: 100%;
+         td {
+            height: 60px;
+         }
+      }
+      .topevent-soccer {
+         @include rem(width, 26px);
+         @include rem(height, 26px);
+
+         background-color: transparent;
+         background: url('https://cuzzle.org/scon/category - bw/soccer.svg') no-repeat;
+         background-size: contain;
+         display: flex;
+      }
+      .topevent-ico-zaragoza {
+         @include rem(width, 26px);
+         @include rem(height, 26px);
+
+         background-color: transparent;
+         background: url('https://i.imgur.com/suKDLDu.png') no-repeat;
+         background-size: contain;
+         display: flex;
+      }
+      .topevent-ico-fuenlabrada {
+         @include rem(width, 26px);
+         @include rem(height, 26px);
+
+         background-color: transparent;
+         background: url('https://i.imgur.com/ZeM1l3Z.png') no-repeat;
+         background-size: contain;
+         display: flex;
+      }
+      .topevent-ico-leedsunited {
+         @include rem(width, 26px);
+         @include rem(height, 26px);
+
+         background-color: transparent;
+         background: url('https://i.imgur.com/ZUbNNpl.png') no-repeat;
+         background-size: contain;
+         display: flex;
+      }
+      .topevent-ico-milan {
+         @include rem(width, 26px);
+         @include rem(height, 26px);
+
+         background-color: transparent;
+         background: url('https://i.imgur.com/9qmEET4.png') no-repeat;
+         background-size: contain;
+         display: flex;
+      }
+      .topevent-ico-sampdoria {
+         @include rem(width, 26px);
+         @include rem(height, 26px);
+
+         background-color: transparent;
+         background: url('https://i.imgur.com/x7ja2ot.png') no-repeat;
+         background-size: contain;
+         display: flex;
+      }
+      .topevent-ico-verona {
+         @include rem(width, 26px);
+         @include rem(height, 26px);
+
+         background-color: transparent;
+         background: url('https://i.imgur.com/T7RdPYE.png') no-repeat;
+         background-size: contain;
+         display: flex;
+      }
+      .topevent-ico-chelsea {
+         @include rem(width, 26px);
+         @include rem(height, 26px);
+
+         background-color: transparent;
+         background: url('https://i.imgur.com/sFvQkrP.png') no-repeat;
+         background-size: contain;
+         display: flex;
+      }
+      .topevent-ico-cagliari {
+         @include rem(width, 26px);
+         @include rem(height, 26px);
+
+         background-color: transparent;
+         background: url('https://i.imgur.com/kTGFQKH.png') no-repeat;
+         background-size: contain;
+         display: flex;
+      }
+   }
+}
+.main-content-footer-top {
+   .partner-rows {
+      width: 25%;
+      justify-content: center;
+   }
+   .partner-entwine {
+      @include rem(width, 180px);
+      @include rem(height, 50px);
+      background: url('https://i.imgur.com/sZLAfL8.png') no-repeat;
+      background-size: contain;
+   }
+   .partner-gameplay {
+      @include rem(width, 180px);
+      @include rem(height, 30px);
+      background: url('https://i.imgur.com/nL7g5mi.png') no-repeat;
+      background-size: contain;
+   }
+   .partner-hogaming {
+      @include rem(width, 180px);
+      @include rem(height, 50px);
+      background: url('https://i.imgur.com/hV4cITg.png') no-repeat;
+      background-size: contain;
+   }
+   .partner-microgaming {
+      @include rem(width, 180px);
+      @include rem(height, 45px);
+      background: url('https://i.imgur.com/BWRz0M2.png') no-repeat;
+      background-size: contain;
+   }
+   .partner-netent {
+      @include rem(width, 180px);
+      @include rem(height, 50px);
+      background: url('https://i.imgur.com/vWUhtBH.png') no-repeat;
+      background-size: contain;
+   }
+   .partner-playtech {
+      @include rem(width, 180px);
+      @include rem(height, 50px);
+      background: url('https://i.imgur.com/tW05hQa.png') no-repeat;
+      background-size: contain;
+   }
+}
+.main-content-footer-inner {
+   background: url(https://i.imgur.com/5zWec2O.jpg) no-repeat;
+   background-size: cover;
+   .main-content-footer-title {
+      .item-title-box {
+         h1 {
+            @include rem(font-size, 15px);
+            margin: 0;
+            @include rem(padding-top, 50px);
+         }
+      }
+   }
+   .main-content-footer-content {
+      .item-content-row {
+         > div {
+            @include rem(padding-bottom, 13px);
+            &:last-child {
+               padding-bottom: 0;
+            }
+         }
+         .footer-sns {
+            i {
+               @include rem(font-size, 14px);
+            }
+         }
+      }
+   }
+}
+.main-content-popular {
+   .popular-header-inner {
+      .popular-header-title {
+         .title-name {
+            @include rem(font-size, 18px);
+            color: white;
+            font-weight: normal;
+            font-weight: 400;
+            text-shadow: 1px 1px 10px #171a29, 1px 1px 10px #0a0b10;
+         }
+      }
+      .play-tab {
+         flex: 2;
+         button {
+            @include rem(font-size, 14px);
+            margin: 0;
+            padding: 0;
+         }
+      }
+      .all-list {
+         a {
+            border: 1px solid #e8c414;
+            border-radius: 3px;
+            padding: 7px 10px;
+            color: #e8c414;
+
+            @include rem(font-size, 14px);
+         }
+      }
+   }
+
+   .popular-content-inner {
+      span,
+      div,
+      h1 {
+         z-index: 2;
+      }
+
+      .twinspin {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://mk0gamesnetentcxytko.kinstacdn.com/wp-content/uploads/2018/09/gamethumb_twinspin.jpg');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
+      }
+
+      .gonzo {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://mk0gamesnetentcxytko.kinstacdn.com/wp-content/uploads/2018/08/gonzo.jpg');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
+      }
+
+      .dazzle {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://indiancasinos.org/wp-content/uploads/2019/11/dazzleme.jpg');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
+      }
+
+      .divine {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://mk0gamesnetentcxytko.kinstacdn.com/wp-content/uploads/2018/08/divine-fortune.jpg');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
+      }
+
+      .fruit {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://www.netentcasino.com/wp-content/uploads/2012/07/nec-fruit-shop-thumbnail.jpg');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
+      }
+
+      .reelrush {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://366754.smushcdn.com/946179/wp-content/uploads/2018/02/reel-rush-slot-mobile.jpg?lossy=0&strip=1&webp=1');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
+      }
+
+      .finnand {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://mk0gamesnetentcxytko.kinstacdn.com/wp-content/uploads/2018/09/gamethumb_finn.jpg');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
+      }
+
+      .aloha {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://www.askgamblers.com/uploads/game_screenshots/other/41/1b/59/82561793a55c60e0e4894fd6298798be13/aloha-cluster-pays-slot-netent.jpg');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
+      }
+
+      .jack {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://mk0gamesnetentcxytko.kinstacdn.com/wp-content/uploads/2018/09/gamethumb_jackandthebeanstalk.jpg');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
+      }
+
+      .dead {
+         position: relative;
+         &::after {
+            content: '';
+            background: url('https://www.askgamblers.com/uploads/game_screenshots/other/d3/cc/20/e36b0629465128c01a04e46819205d963d/dead-or-alive-2-slot-netent.jpg');
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: 1;
+            background-size: cover;
+            opacity: 0.4;
+         }
+      }
+
+      .end-title {
+         span {
+            @include rem(font-size, 18px);
+            text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
+         }
+      }
+   }
+}
+
+.main-content-slotbox {
+   .slotbox-header-inner {
+      .slotbox-header-title {
+         .title-name {
+            @include rem(font-size, 18px);
+            color: white;
+            font-weight: normal;
+            font-weight: 400;
+            text-shadow: 1px 1px 10px #171a29, 1px 1px 10px #0a0b10;
+         }
+      }
+      .play-tab {
+         flex: 2;
+         button {
+            @include rem(font-size, 14px);
+            margin: 0;
+            padding: 0;
+         }
+      }
+      .all-list {
+         a {
+            border: 1px solid #e8c414;
+            border-radius: 3px;
+            padding: 7px 10px;
+            color: #e8c414;
+
+            @include rem(font-size, 14px);
+         }
+      }
+   }
+
+   .slotbox-content-inner {
+      span,
+      div,
+      h1 {
+         z-index: 2;
+      }
+
+      .end-title {
+         span {
+            @include rem(font-size, 18px);
+            text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
+         }
+      }
+   }
+}
+
+.main-content-livecasino {
+   .livecasino-header-inner {
+      .livecasino-header-title {
+         .title-name {
+            @include rem(font-size, 18px);
+            color: white;
+            font-weight: normal;
+            font-weight: 400;
+            text-shadow: 1px 1px 10px #171a29, 1px 1px 10px #0a0b10;
+         }
+      }
+      .play-tab {
+         flex: 2;
+         button {
+            @include rem(font-size, 14px);
+            margin: 0;
+            padding: 0;
+         }
+      }
+      .all-list {
+         a {
+            border: 1px solid #e8c414;
+            border-radius: 3px;
+            padding: 7px 10px;
+            color: #e8c414;
+
+            @include rem(font-size, 14px);
+         }
+      }
+   }
+
+   .livecasino-content-inner {
+      .round-box {
+         span,
+         div,
+         h1 {
+            z-index: 2;
+         }
+         border-radius: 3px;
+         -webkit-box-shadow: inset 0px -116px 116px -42px rgba(41, 41, 41, 0.68);
+         -moz-box-shadow: inset 0px -116px 116px -42px rgba(41, 41, 41, 0.68);
+         box-shadow: inset 0px -116px 116px -42px rgba(41, 41, 41, 0.68);
+
+         &.baccarat {
+            position: relative;
+            &::after {
+               content: '';
+               background: url('https://www.unlv.edu/sites/default/files/styles/850_width/public/event_images/M-Resort-Casino-Floor-3.jpg?itok=p9DRpqkg');
+               top: 0;
+               left: 0;
+               bottom: 0;
+               right: 0;
+               position: absolute;
+               z-index: 1;
+               background-size: cover;
+               opacity: 0.4;
+            }
+         }
+
+         &.roulette {
+            position: relative;
+            &::after {
+               content: '';
+               background: url('https://wallup.net/wp-content/uploads/2019/09/355034-roulette-wheel-gambling-3-748x468.jpg');
+               top: 0;
+               left: 0;
+               bottom: 0;
+               right: 0;
+               position: absolute;
+               z-index: 1;
+               background-size: cover;
+               opacity: 0.4;
+            }
+         }
+
+         &.blackjack {
+            position: relative;
+            &::after {
+               content: '';
+               background: url('https://www.wallpaperbetter.com/wallpaper/921/397/192/poker-card-hd-720P-wallpaper.jpg');
+               top: 0;
+               left: 0;
+               bottom: 0;
+               right: 0;
+               position: absolute;
+               z-index: 1;
+               background-size: cover;
+               opacity: 0.4;
+            }
+         }
+
+         &.dragon {
+            position: relative;
+            &::after {
+               content: '';
+               background: url('https://casinoble.co.za/wp-content/uploads/sites/7/2019/07/Dragon-Tiger-screenshot-table.png');
+               top: 0;
+               left: 0;
+               bottom: 0;
+               right: 0;
+               position: absolute;
+               z-index: 1;
+               background-size: cover;
+               opacity: 0.4;
+            }
+         }
+
+         &.sicbo {
+            position: relative;
+            &::after {
+               content: '';
+               background: url('https://letou.pro/wp-content/uploads/2020/03/sicbo-la-gi.jpg');
+               top: 0;
+               left: 0;
+               bottom: 0;
+               right: 0;
+               position: absolute;
+               z-index: 1;
+               background-size: cover;
+               opacity: 0.4;
+            }
+         }
+      }
+
+      .round-header-title {
+         @include rem(font-size, 15px);
+         color: white;
+         font-weight: normal;
+         font-weight: 400;
+         text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
+      }
+      .round-team-name {
+         @include rem(font-size, 18px);
+         color: white;
+      }
+
+      .direct-link {
+         a {
+            @include rem(font-size, 16px);
+         }
+      }
+   }
 }
 
 .main-slide-wrap {
-  .swiper-container {
-    div,
-    span,
-    h1 {
-      z-index: 2;
-    }
-    width: 100%;
-    height: 100%;
+   .swiper-container {
+      div,
+      span,
+      h1 {
+         z-index: 2;
+      }
+      width: 100%;
+      height: 100%;
 
-    .swiper-slide {
-      width: 100% !important;
-      text-align: center;
-      @include rem(font-size, 18px);
-      background: transparent;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      -webkit-justify-content: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      -webkit-align-items: center;
-      align-items: center;
-      .big-title {
-        @include rem(font-size, 50px);
-        font-weight: 600;
-        margin: 0;
-        text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
-      }
-      .sm-title {
-        @include rem(font-size, 30px);
-        font-weight: 400;
-        text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
-      }
-      .link-box {
-        border: 1px solid #e8c414;
-        border-radius: 3px;
-        padding: 10px 25px;
-        color: #e8c414;
-        @include rem(font-size, 20px);
-        -webkit-box-shadow: 14px 9px 60px 4px rgba(0, 0, 0, 0.75);
-        -moz-box-shadow: 14px 9px 60px 4px rgba(0, 0, 0, 0.75);
-        box-shadow: 14px 9px 60px 4px rgba(0, 0, 0, 0.75);
-      }
-      .bonus-offer {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        &::after {
-          content: "";
-          background: url("https://i.pinimg.com/originals/89/b8/95/89b8957fb5ced34f7f356e1f9ee5a3c0.jpg");
-          top: 0;
-          left: 0;
-          bottom: 0;
-          right: 0;
-          position: absolute;
-          z-index: 1;
-          background-size: cover;
-          opacity: 0.4;
-        }
-      }
+      .swiper-slide {
+         width: 100% !important;
+         text-align: center;
+         @include rem(font-size, 18px);
+         background: transparent;
+         display: -webkit-box;
+         display: -ms-flexbox;
+         display: -webkit-flex;
+         display: flex;
+         -webkit-box-pack: center;
+         -ms-flex-pack: center;
+         -webkit-justify-content: center;
+         justify-content: center;
+         -webkit-box-align: center;
+         -ms-flex-align: center;
+         -webkit-align-items: center;
+         align-items: center;
+         .big-title {
+            @include rem(font-size, 50px);
+            font-weight: 600;
+            margin: 0;
+            text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
+         }
+         .sm-title {
+            @include rem(font-size, 30px);
+            font-weight: 400;
+            text-shadow: 1px 1px 10px #1b1b1b, 1px 1px 10px #000;
+         }
+         .link-box {
+            border: 1px solid #e8c414;
+            border-radius: 3px;
+            padding: 10px 25px;
+            color: #e8c414;
+            @include rem(font-size, 20px);
+            -webkit-box-shadow: 14px 9px 60px 4px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 14px 9px 60px 4px rgba(0, 0, 0, 0.75);
+            box-shadow: 14px 9px 60px 4px rgba(0, 0, 0, 0.75);
+         }
+         .bonus-offer {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            &::after {
+               content: '';
+               background: url('https://i.pinimg.com/originals/89/b8/95/89b8957fb5ced34f7f356e1f9ee5a3c0.jpg');
+               top: 0;
+               left: 0;
+               bottom: 0;
+               right: 0;
+               position: absolute;
+               z-index: 1;
+               background-size: cover;
+               opacity: 0.4;
+            }
+         }
 
-      .casino-offer {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        &::after {
-          content: "";
-          background: url("https://wallpaperaccess.com/full/782955.jpg");
-          top: 0;
-          left: 0;
-          bottom: 0;
-          right: 0;
-          position: absolute;
-          z-index: 1;
-          background-size: cover;
-          opacity: 0.4;
-        }
+         .casino-offer {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            &::after {
+               content: '';
+               background: url('https://wallpaperaccess.com/full/782955.jpg');
+               top: 0;
+               left: 0;
+               bottom: 0;
+               right: 0;
+               position: absolute;
+               z-index: 1;
+               background-size: cover;
+               opacity: 0.4;
+            }
+         }
       }
-    }
-  }
+   }
 }
 .games-content-wrap-desktop {
-  .games-multi-tab {
-    @include rem(height, 68px);
-    .games-multi-tab-inner {
-      .ntry-multi {
-        width: 20%;
+   .games-multi-tab {
+      @include rem(height, 68px);
+      .games-multi-tab-inner {
+         .ntry-multi {
+            width: 20%;
+         }
+         a {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            i {
+               opacity: 0.5;
+            }
+            &:hover {
+               i {
+                  opacity: 1;
+               }
+            }
+         }
       }
-      a {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-        i {
-          opacity: 0.5;
-        }
-        &:hover {
-          i {
-            opacity: 1;
-          }
-        }
-      }
-    }
-  }
+   }
 
-  .games-right-box {
-    .strong-text {
-      font-weight: 600;
-      @include rem(font-size, 13px);
-    }
-    .games-event-spread {
-      .btn-spread {
-        background-color: rgba(0, 0, 0, 0.2);
-        margin: 0;
-        padding: 13px 15px;
-        color: #bbbbbb;
-        &.active {
-          background-color: rgba(0, 0, 0, 0.3);
-          color: white;
-          i {
-            color: green;
+   .games-right-box {
+      .strong-text {
+         font-weight: 600;
+         @include rem(font-size, 13px);
+      }
+      .games-event-spread {
+         .btn-spread {
+            background-color: rgba(0, 0, 0, 0.2);
             margin: 0;
-            padding-right: 2px;
-          }
-        }
+            padding: 13px 15px;
+            color: #bbbbbb;
+            &.active {
+               background-color: rgba(0, 0, 0, 0.3);
+               color: white;
+               i {
+                  color: green;
+                  margin: 0;
+                  padding-right: 2px;
+               }
+            }
+         }
+         .select {
+            width: 100%;
+         }
       }
-      .select {
-        width: 100%;
+      .games-rows {
+         button,
+         i {
+            margin: 0;
+         }
+         .btn-arrow {
+            margin: 0;
+            padding: 0;
+            i {
+               color: white;
+            }
+         }
       }
-    }
-    .games-rows {
-      button,
-      i {
-        margin: 0;
-      }
-      .btn-arrow {
-        margin: 0;
-        padding: 0;
-        i {
-          color: white;
-        }
-      }
-    }
 
-    .bar {
-      display: flex;
-      position: relative;
-      width: 20%;
-      background-color: rgba(255, 255, 255, 0.1);
-      @include rem(height, 20px);
-      @include rem(margin-right, 10px);
+      .bar {
+         display: flex;
+         position: relative;
+         width: 20%;
+         background-color: rgba(255, 255, 255, 0.1);
+         @include rem(height, 20px);
+         @include rem(margin-right, 10px);
 
-      .num {
-        position: absolute;
-        height: 100%;
-        @include rem(padding-left, 7px);
+         .num {
+            position: absolute;
+            height: 100%;
+            @include rem(padding-left, 7px);
+         }
       }
-    }
-    .games-rows-odds {
-      > div {
-        &:hover {
-          border: 1px solid #34ac53;
-          cursor: pointer;
-        }
+      .games-rows-odds {
+         > div {
+            &:hover {
+               border: 1px solid #34ac53;
+               cursor: pointer;
+            }
+         }
       }
-    }
-  }
+   }
 }
 .games-main-category {
-  .category-item {
-    @include rem(height, 80px);
-    a {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      i {
-        @include rem(width, 38px);
-        @include rem(height, 38px);
-        opacity: 0.5;
+   .category-item {
+      @include rem(height, 80px);
+      a {
+         width: 100%;
+         height: 100%;
+         display: flex;
+         align-items: center;
+         i {
+            @include rem(width, 38px);
+            @include rem(height, 38px);
+            opacity: 0.5;
+         }
+         &:hover {
+            i {
+               opacity: 1;
+            }
+            span {
+               color: white !important;
+            }
+         }
+         &.active {
+            i {
+               opacity: 1;
+            }
+            span {
+               color: white !important;
+            }
+         }
       }
-      &:hover {
-        i {
-          opacity: 1;
-        }
-        span {
-          color: white !important;
-        }
-      }
-      &.active {
-        i {
-          opacity: 1;
-        }
-        span {
-          color: white !important;
-        }
-      }
-    }
-  }
-}
-
-/**
-		Mobile BetSlip
-	*/
-.betslip-fixed-mobile {
-  position: fixed;
-  bottom: 0;
-  z-index: 99999999;
-  -webkit-box-shadow: 0px -5px 18px -5px #0c0c0c;
-  -moz-box-shadow: 0px -5px 18px -5px #0c0c0c;
-  box-shadow: 0px -5px 18px -5px #0c0c0c;
-  background-color: #22283e;
-  .count {
-    @include rem(border-radius, 3px);
-    justify-content: center;
-    font-family: Tahoma;
-    font-weight: 600;
-  }
-  .upslide {
-    height: 100%;
-    button {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      i {
-        margin: 0;
-      }
-    }
-  }
-  &.on {
-    display: flex !important;
-  }
+   }
 }
 
 /**

@@ -190,7 +190,7 @@ const Sports = (props) => {
                         key={index}
                       >
                         <div class="flex padding-horizontal-10 widthp-45 heightp-100">
-                          <span class="color-grey text-ellipsis">
+                          <span class="color-grey">
                             <i class="far fa-calendar-week"></i>
                             {moment(matches.startAt).format("YY / MM / DD")}
                           </span>
