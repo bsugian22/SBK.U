@@ -1,403 +1,421 @@
-import React, { Fragment } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import React, { Fragment } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Games() {
-   return (
-      <Fragment>
-         <div class="content games-book-continer flex flex-inherit grow-2 flex-column">
-            <div class="games-content-wrap-desktop heightp-100 flex flex-inherit flex-column">
-               <div class="games-header border-bottom height-50 align-items-center padding-horizontal-10 padding-vertical-15 background-transparent-b-25 border-left">
-                  <span class="color-grey">
-                     <i class="fal fa-gamepad"></i>GAMES
-                  </span>
-               </div>
-               <div class="games-continer widthp-100 heightp-100 flex flex-inherit border-top">
-                  <div class="games-left-box flex-inherit widthp-50 flex-column border-right">
-                     <div class="games-multi-tab align-items-center border-bottom">
-                        <div class="games-multi-tab-inner widthp-100 flex flex-inherit heightp-100">
-                           <div class="ntry-multi border-right">
-                              <NavLink activeClassName="active" to="#">
-                                 <i class="pi-color-icon-dalpangi"></i>
-                              </NavLink>
-                           </div>
-                           <div class="ntry-multi border-left border-right">
-                              <NavLink activeClassName="active" to="#">
-                                 <i class="pi-color-icon-ladder"></i>
-                              </NavLink>
-                           </div>
-                           <div class="ntry-multi border-left border-right">
-                              <NavLink activeClassName="active" to="#">
-                                 <i class="pi-color-icon-p-ladder"></i>
-                              </NavLink>
-                           </div>
-                           <div class="ntry-multi border-left border-right">
-                              <NavLink activeClassName="active" to="#">
-                                 <i class="pi-color-icon-lottery"></i>
-                              </NavLink>
-                           </div>
-                           <div class="ntry-multi border-left">
-                              <NavLink activeClassName="active" to="#">
-                                 <i class="pi-color-icon-powerball"></i>
-                              </NavLink>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="games-frame-box border-top heightp-100 align-items-center justify-content-center">
-                        <span class="color-white">프레임 영상이 출력됩니다</span>
-                     </div>
+  return (
+    <Fragment>
+      <div class="content games-book-continer flex flex-inherit grow-2 flex-column">
+        <div class="games-content-wrap-desktop heightp-100 flex flex-inherit flex-column">
+          <div class="games-header border-bottom height-50 align-items-center padding-horizontal-10 padding-vertical-15 background-transparent-b-25 border-left">
+            <span class="color-grey">
+              <i class="fal fa-gamepad"></i>GAMES
+            </span>
+          </div>
+          <div class="games-continer widthp-100 heightp-100 flex flex-inherit border-top">
+            <div class="games-left-box flex-inherit widthp-50 flex-column border-right">
+              <div class="games-multi-tab align-items-center border-bottom">
+                <div class="games-multi-tab-inner widthp-100 flex flex-inherit heightp-100">
+                  <div class="ntry-multi border-right">
+                    <NavLink activeClassName="active" to="#">
+                      <i class="pi-color-icon-dalpangi"></i>
+                    </NavLink>
                   </div>
-                  <div class="games-right-box flex-inherit widthp-50 flex-column border-left">
-                     <div class="games-event-view flex-column padding-vertical-15 border-bottom padding-horizontal-15">
-                        <span class="color-white strong-text">EVENT VIEW</span>
-                        <span class="color-grey">엔트리 파워볼</span>
-                     </div>
-                     <div class="games-event-spread border-top padding-vertical-15 padding-horizontal-15 border-bottom">
-                        <div class="spread-btn-box grow-2">
-                           <button type="button" class="btn-spread active">
-                              <i class="far fa-check"></i>펼쳐보기
-                           </button>
-                           <button type="button" class="btn-spread">
-                              모두접기
-                           </button>
-                        </div>
-                        <div class="spread-select widthp-30">
-                           <div class="select">
-                              <select name="favicon-game">
-                                 <option value="">즐겨찾는 게임순</option>
-                              </select>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="games-event-content border-top scrollable-auto flex-column flex-inherit padding-vertical-15 padding-horizontal-15">
-                        <div class="games-rows flex-column">
-                           <div class="games-rows-title widthp-100 flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-30">
-                              <div class="datetime grow-2">
-                                 <div class="bar">
-                                    <span class="color-white num">3분42초 추첨</span>
-                                    <span class="percentage color-white background-red widthp-70"></span>
-                                 </div>
-                                 <span class="color-white">3월28일 21회차</span>
-                              </div>
-                              <div class="btn-arrow">
-                                 <button type="button">
-                                    <i class="fal fa-angle-down"></i>
-                                 </button>
-                              </div>
-                           </div>
-                           <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
-                              <div class="line-name grow-2">
-                                 <i class="fas fa-plus-square color-white padding-right-5"></i>
-                                 <span class="color-white">홀/짝</span>
-                              </div>
-                              <div class="favicon">
-                                 <button type="button">
-                                    <i class="fas fa-star color-yellow"></i>
-                                 </button>
-                              </div>
-                           </div>
-                           <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
-                              <div class="widthp-50 border-right flex-inherit">
-                                 <div class="grow-2 padding-left-15">
-                                    <span class="color-grey">홀</span>
-                                 </div>
-                                 <div class="padding-right-15">
-                                    <span class="color-grey">40%</span>
-                                 </div>
-                              </div>
-                              <div class="widthp-50 flex-inherit">
-                                 <div class="grow-2 padding-left-15">
-                                    <span class="color-grey">짝</span>
-                                 </div>
-                                 <div class="padding-right-15">
-                                    <span class="color-grey">1.95</span>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
-                              <div class="line-name grow-2">
-                                 <i class="fas fa-plus-square color-white padding-right-5"></i>
-                                 <span class="color-white">좌출발 / 우출발</span>
-                              </div>
-                              <div class="favicon">
-                                 <button type="button">
-                                    <i class="fas fa-star color-grey"></i>
-                                 </button>
-                              </div>
-                           </div>
-                           <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
-                              <div class="widthp-50 border-right flex-inherit">
-                                 <div class="grow-2 padding-left-15">
-                                    <span class="color-grey">좌</span>
-                                 </div>
-                                 <div class="padding-right-15">
-                                    <span class="color-grey">1.95</span>
-                                 </div>
-                              </div>
-                              <div class="widthp-50 flex-inherit">
-                                 <div class="grow-2 padding-left-15">
-                                    <span class="color-grey">우</span>
-                                 </div>
-                                 <div class="padding-right-15">
-                                    <span class="color-grey">1.95</span>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
-                              <div class="line-name grow-2">
-                                 <i class="fas fa-plus-square color-white padding-right-5"></i>
-                                 <span class="color-white">3줄 / 4줄</span>
-                              </div>
-                              <div class="favicon">
-                                 <button type="button">
-                                    <i class="fas fa-star color-grey"></i>
-                                 </button>
-                              </div>
-                           </div>
-                           <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
-                              <div class="widthp-50 border-right flex-inherit">
-                                 <div class="grow-2 padding-left-15">
-                                    <span class="color-grey">3줄</span>
-                                 </div>
-                                 <div class="padding-right-15">
-                                    <span class="color-grey">1.95</span>
-                                 </div>
-                              </div>
-                              <div class="widthp-50 flex-inherit">
-                                 <div class="grow-2 padding-left-15">
-                                    <span class="color-grey">4줄</span>
-                                 </div>
-                                 <div class="padding-right-15">
-                                    <span class="color-grey">1.95</span>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
-                              <div class="line-name grow-2">
-                                 <i class="fas fa-plus-square color-white padding-right-5"></i>
-                                 <span class="color-white">좌출발 3줄 / 좌출발 4줄</span>
-                              </div>
-                              <div class="favicon">
-                                 <button type="button">
-                                    <i class="fas fa-star color-grey"></i>
-                                 </button>
-                              </div>
-                           </div>
-                           <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
-                              <div class="widthp-50 border-right flex-inherit">
-                                 <div class="grow-2 padding-left-15">
-                                    <span class="color-grey">좌출발 3줄</span>
-                                 </div>
-                                 <div class="padding-right-15">
-                                    <span class="color-grey">3.50</span>
-                                 </div>
-                              </div>
-                              <div class="widthp-50 flex-inherit">
-                                 <div class="grow-2 padding-left-15">
-                                    <span class="color-grey">좌출발 4줄</span>
-                                 </div>
-                                 <div class="padding-right-15">
-                                    <span class="color-grey">3.95</span>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
-                              <div class="line-name grow-2">
-                                 <i class="fas fa-plus-square color-white padding-right-5"></i>
-                                 <span class="color-white">우출발 3줄 / 우출발 4줄</span>
-                              </div>
-                              <div class="favicon">
-                                 <button type="button">
-                                    <i class="fas fa-star color-grey"></i>
-                                 </button>
-                              </div>
-                           </div>
-                           <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
-                              <div class="widthp-50 border-right flex-inherit">
-                                 <div class="grow-2 padding-left-15">
-                                    <span class="color-grey">우출발 3줄</span>
-                                 </div>
-                                 <div class="padding-right-15">
-                                    <span class="color-grey">3.50</span>
-                                 </div>
-                              </div>
-                              <div class="widthp-50 flex-inherit">
-                                 <div class="grow-2 padding-left-15">
-                                    <span class="color-grey">우출발 4줄</span>
-                                 </div>
-                                 <div class="padding-right-15">
-                                    <span class="color-grey">3.95</span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                  <div class="ntry-multi border-left border-right">
+                    <NavLink activeClassName="active" to="#">
+                      <i class="pi-color-icon-ladder"></i>
+                    </NavLink>
                   </div>
-               </div>
+                  <div class="ntry-multi border-left border-right">
+                    <NavLink activeClassName="active" to="#">
+                      <i class="pi-color-icon-p-ladder"></i>
+                    </NavLink>
+                  </div>
+                  <div class="ntry-multi border-left border-right">
+                    <NavLink activeClassName="active" to="#">
+                      <i class="pi-color-icon-lottery"></i>
+                    </NavLink>
+                  </div>
+                  <div class="ntry-multi border-left">
+                    <NavLink activeClassName="active" to="#">
+                      <i class="pi-color-icon-powerball"></i>
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+              <div class="games-frame-box border-top heightp-100 align-items-center justify-content-center">
+                <span class="color-white">프레임 영상이 출력됩니다</span>
+              </div>
             </div>
-         </div>
-         <div class="games-header-tab games-header-mobile flex-inherit flex-column shrink-0 border-bottom align-items-center">
-            <div class="widthp-100 flex flex-inherit gamestab-top border-bottom">
-               <div class="widthp-33 main-category border-right flex-inherit">
-                  <NavLink activeClassName="active" to="#">
-                     <i class="pi-color-icon-dhlottery"></i>
-                     <span class="color-grey">MINIGAME</span>
-                     <span class="color-grey">동행복권</span>
-                  </NavLink>
-               </div>
-               <div class="widthp-33 main-category border-right">
-                  <NavLink activeClassName="active" to="#">
-                     <i class="pi-color-icon-ntry"></i>
-                     <span class="color-grey">MINIGAME</span>
-                     <span class="color-grey">엔트리</span>
-                  </NavLink>
-               </div>
-               <div class="widthp-33 main-category border-right">
-                  <NavLink activeClassName="active" to="#">
-                     <i class="pi-color-icon-lotus"></i>
-                     <span class="color-grey">MINIGAME</span>
-                     <span class="color-grey">로투스</span>
-                  </NavLink>
-               </div>
-            </div>
-            <div class="widthp-100 flex flex-inherit gamestab-row">
-               <div class="widthp-20 subclass-category border-right">
-                  <NavLink activeClassName="active" to="#">
-                     <i class="pi-color-icon-dalpangi"></i>
-                  </NavLink>
-               </div>
-               <div class="widthp-20 subclass-category border-right">
-                  <NavLink activeClassName="active" to="#">
-                     <i class="pi-color-icon-ladder"></i>
-                  </NavLink>
-               </div>
-               <div class="widthp-20 subclass-category border-right">
-                  <NavLink activeClassName="active" to="#">
-                     <i class="pi-color-icon-p-ladder"></i>
-                  </NavLink>
-               </div>
-               <div class="widthp-20 subclass-category border-right">
-                  <NavLink activeClassName="active" to="#">
-                     <i class="pi-color-icon-lottery"></i>
-                  </NavLink>
-               </div>
-               <div class="widthp-20 subclass-category">
-                  <NavLink activeClassName="active" to="#">
-                     <i class="pi-color-icon-powerball"></i>
-                  </NavLink>
-               </div>
-            </div>
-         </div>
-         <div class="games-wrap games-content-mobile flex-inherit flex-column">
-            <div class="games-list grow-2 flex-column">
-               <div class="flex widthp-100 height-40 align-items-center-inherit border-bottom">
-                  <div class="flex pi-title green">
-                     <span class="color-white padding-left-15">엔트리 파워볼</span>
+            <div class="games-right-box flex-inherit widthp-50 flex-column border-left">
+              <div class="games-event-view flex-column padding-vertical-15 border-bottom padding-horizontal-15">
+                <span class="color-white strong-text">EVENT VIEW</span>
+                <span class="color-grey">엔트리 파워볼</span>
+              </div>
+              <div class="games-event-spread border-top padding-vertical-15 padding-horizontal-15 border-bottom">
+                <div class="spread-btn-box grow-2">
+                  <button type="button" class="btn-spread active">
+                    <i class="far fa-check"></i>펼쳐보기
+                  </button>
+                  <button type="button" class="btn-spread">
+                    모두접기
+                  </button>
+                </div>
+                <div class="spread-select widthp-30">
+                  <div class="select">
+                    <select name="favicon-game">
+                      <option value="">즐겨찾는 게임순</option>
+                    </select>
                   </div>
-               </div>
-               <div class="flex list border-bottom align-items-center-inherit border-bottom">
-                  <div class="widthp-100 height-200 flex align-items-center justify-content-center color-white">파워볼 화면</div>
-               </div>
-               <div class="flex list height-40 align-items-center-inherit border-bottom background-transparent-b-20">
-                  <div class="flex pi-title border-right grow-2">
-                     <span class="color-white padding-left-15 grow-2">2020년 1월 24일 129회차</span>
-                  </div>
-                  <div class="flex border-left">
-                     <button type="button" class="color-white heightp-100 align-items-center padding-horizontal-15">
-                        <i class="fal fa-angle-up"></i>
-                     </button>
-                  </div>
-               </div>
-               <div class="flex height-40 align-items-center-inherit border-bottom">
-                  <div class="flex pi-title orange">
-                     <span class="color-white padding-left-15">홀/짝</span>
-                  </div>
-               </div>
-               <div class="flex games-odds border-bottom flex-inherit justify-content-center-inherit">
-                  <div class="widthp-50 border-right padding-vertical-10">
-                     <span class="color-white grow-2">좌</span>
-                     <span class="color-green">1.20</span>
-                  </div>
-                  <div class="widthp-50 padding-vertical-10">
-                     <span class="color-white grow-2">우</span>
-                     <span class="color-green">1.50</span>
-                  </div>
-               </div>
-
-               <div class="flex height-40 align-items-center-inherit border-bottom">
-                  <div class="flex pi-title orange">
-                     <span class="color-white padding-left-15">좌출발/우출발</span>
-                  </div>
-               </div>
-               <div class="flex games-odds border-bottom flex-inherit justify-content-center-inherit">
-                  <div class="widthp-50 border-right padding-vertical-10">
-                     <span class="color-white grow-2">좌</span>
-                     <span class="color-green">1.20</span>
-                  </div>
-                  <div class="widthp-50 padding-vertical-10">
-                     <span class="color-white grow-2">우</span>
-                     <span class="color-green">1.50</span>
-                  </div>
-               </div>
-
-               <div class="flex height-40 align-items-center-inherit border-bottom">
-                  <div class="flex pi-title orange">
-                     <span class="color-white padding-left-15">3줄/4줄</span>
-                  </div>
-               </div>
-               <div class="flex games-odds border-bottom flex-inherit justify-content-center-inherit">
-                  <div class="widthp-50 border-right padding-vertical-10">
-                     <span class="color-white grow-2">3줄</span>
-                     <span class="color-green">1.34</span>
-                  </div>
-                  <div class="widthp-50 padding-vertical-10">
-                     <span class="color-white grow-2">4줄</span>
-                     <span class="color-green">1.44</span>
-                  </div>
-               </div>
-
-               <div class="flex height-40 align-items-center-inherit border-bottom">
-                  <div class="flex pi-title orange">
-                     <span class="color-white padding-left-15">좌출발 3줄 / 좌출발 4줄</span>
-                  </div>
-               </div>
-               <div class="flex games-odds border-bottom flex-inherit justify-content-center-inherit">
-                  <div class="widthp-50 border-right padding-vertical-10">
-                     <span class="color-white grow-2">좌출발 3줄</span>
-                     <span class="color-green">1.11</span>
-                  </div>
-                  <div class="widthp-50 padding-vertical-10">
-                     <span class="color-white grow-2">좌출발 4줄</span>
-                     <span class="color-green">1.35</span>
-                  </div>
-               </div>
-
-               <div class="flex height-40 align-items-center-inherit border-bottom">
-                  <div class="flex pi-title orange">
-                     <span class="color-white padding-left-15">우출발 3줄 / 우출발 4줄</span>
-                  </div>
-               </div>
-               <div class="flex games-odds border-bottom flex-inherit justify-content-center-inherit">
-                  <div class="widthp-50 border-right padding-vertical-10">
-                     <span class="color-white grow-2">우출발 3줄</span>
-                     <span class="color-green">1.11</span>
-                  </div>
-                  <div class="widthp-50 padding-vertical-10">
-                     <span class="color-white grow-2">우출발 4줄</span>
-                     <span class="color-green">1.35</span>
-                  </div>
-               </div>
-               <div class="flex list height-40 align-items-center-inherit border-bottom background-transparent-b-20">
-                  <div class="flex pi-title border-right grow-2">
-                     <span class="color-white padding-left-15 grow-2">2020년 1월 24일 130회차</span>
-                  </div>
-                  <div class="flex border-left">
-                     <button type="button" class="color-white heightp-100 align-items-center padding-horizontal-15">
+                </div>
+              </div>
+              <div class="games-event-content border-top scrollable-auto flex-column flex-inherit padding-vertical-15 padding-horizontal-15">
+                <div class="games-rows flex-column">
+                  <div class="games-rows-title widthp-100 flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-30">
+                    <div class="datetime grow-2">
+                      <div class="bar">
+                        <span class="color-white num games-event-times">
+                          3분42초 추첨
+                        </span>
+                        <span class="percentage color-white background-red widthp-70"></span>
+                      </div>
+                      <span class="color-white">3월28일 21회차</span>
+                    </div>
+                    <div class="btn-arrow">
+                      <button type="button">
                         <i class="fal fa-angle-down"></i>
-                     </button>
+                      </button>
+                    </div>
                   </div>
-               </div>
+                  <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
+                    <div class="line-name grow-2">
+                      <i class="fas fa-plus-square color-white padding-right-5"></i>
+                      <span class="color-white">홀/짝</span>
+                    </div>
+                    <div class="favicon">
+                      <button type="button">
+                        <i class="fas fa-star color-yellow"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
+                    <div class="widthp-50 border-right flex-inherit">
+                      <div class="grow-2 padding-left-15">
+                        <span class="color-grey">홀</span>
+                      </div>
+                      <div class="padding-right-15">
+                        <span class="color-grey">40%</span>
+                      </div>
+                    </div>
+                    <div class="widthp-50 flex-inherit">
+                      <div class="grow-2 padding-left-15">
+                        <span class="color-grey">짝</span>
+                      </div>
+                      <div class="padding-right-15">
+                        <span class="color-grey">1.95</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
+                    <div class="line-name grow-2">
+                      <i class="fas fa-plus-square color-white padding-right-5"></i>
+                      <span class="color-white">좌출발 / 우출발</span>
+                    </div>
+                    <div class="favicon">
+                      <button type="button">
+                        <i class="fas fa-star color-grey"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
+                    <div class="widthp-50 border-right flex-inherit">
+                      <div class="grow-2 padding-left-15">
+                        <span class="color-grey">좌</span>
+                      </div>
+                      <div class="padding-right-15">
+                        <span class="color-grey">1.95</span>
+                      </div>
+                    </div>
+                    <div class="widthp-50 flex-inherit">
+                      <div class="grow-2 padding-left-15">
+                        <span class="color-grey">우</span>
+                      </div>
+                      <div class="padding-right-15">
+                        <span class="color-grey">1.95</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
+                    <div class="line-name grow-2">
+                      <i class="fas fa-plus-square color-white padding-right-5"></i>
+                      <span class="color-white">3줄 / 4줄</span>
+                    </div>
+                    <div class="favicon">
+                      <button type="button">
+                        <i class="fas fa-star color-grey"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
+                    <div class="widthp-50 border-right flex-inherit">
+                      <div class="grow-2 padding-left-15">
+                        <span class="color-grey">3줄</span>
+                      </div>
+                      <div class="padding-right-15">
+                        <span class="color-grey">1.95</span>
+                      </div>
+                    </div>
+                    <div class="widthp-50 flex-inherit">
+                      <div class="grow-2 padding-left-15">
+                        <span class="color-grey">4줄</span>
+                      </div>
+                      <div class="padding-right-15">
+                        <span class="color-grey">1.95</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
+                    <div class="line-name grow-2">
+                      <i class="fas fa-plus-square color-white padding-right-5"></i>
+                      <span class="color-white">좌출발 3줄 / 좌출발 4줄</span>
+                    </div>
+                    <div class="favicon">
+                      <button type="button">
+                        <i class="fas fa-star color-grey"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
+                    <div class="widthp-50 border-right flex-inherit">
+                      <div class="grow-2 padding-left-15">
+                        <span class="color-grey">좌출발 3줄</span>
+                      </div>
+                      <div class="padding-right-15">
+                        <span class="color-grey">3.50</span>
+                      </div>
+                    </div>
+                    <div class="widthp-50 flex-inherit">
+                      <div class="grow-2 padding-left-15">
+                        <span class="color-grey">좌출발 4줄</span>
+                      </div>
+                      <div class="padding-right-15">
+                        <span class="color-grey">3.95</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
+                    <div class="line-name grow-2">
+                      <i class="fas fa-plus-square color-white padding-right-5"></i>
+                      <span class="color-white">우출발 3줄 / 우출발 4줄</span>
+                    </div>
+                    <div class="favicon">
+                      <button type="button">
+                        <i class="fas fa-star color-grey"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
+                    <div class="widthp-50 border-right flex-inherit">
+                      <div class="grow-2 padding-left-15">
+                        <span class="color-grey">우출발 3줄</span>
+                      </div>
+                      <div class="padding-right-15">
+                        <span class="color-grey">3.50</span>
+                      </div>
+                    </div>
+                    <div class="widthp-50 flex-inherit">
+                      <div class="grow-2 padding-left-15">
+                        <span class="color-grey">우출발 4줄</span>
+                      </div>
+                      <div class="padding-right-15">
+                        <span class="color-grey">3.95</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-         </div>
-      </Fragment>
-   )
+          </div>
+        </div>
+      </div>
+      <div class="games-header-tab games-header-mobile flex-inherit flex-column shrink-0 border-bottom align-items-center">
+        <div class="widthp-100 flex flex-inherit gamestab-top border-bottom">
+          <div class="widthp-33 main-category border-right flex-inherit">
+            <NavLink activeClassName="active" to="#">
+              <i class="pi-color-icon-dhlottery"></i>
+              <span class="color-grey">MINIGAME</span>
+              <span class="color-grey">동행복권</span>
+            </NavLink>
+          </div>
+          <div class="widthp-33 main-category border-right">
+            <NavLink activeClassName="active" to="#">
+              <i class="pi-color-icon-ntry"></i>
+              <span class="color-grey">MINIGAME</span>
+              <span class="color-grey">엔트리</span>
+            </NavLink>
+          </div>
+          <div class="widthp-33 main-category border-right">
+            <NavLink activeClassName="active" to="#">
+              <i class="pi-color-icon-lotus"></i>
+              <span class="color-grey">MINIGAME</span>
+              <span class="color-grey">로투스</span>
+            </NavLink>
+          </div>
+        </div>
+        <div class="widthp-100 flex flex-inherit gamestab-row">
+          <div class="widthp-20 subclass-category border-right">
+            <NavLink activeClassName="active" to="#">
+              <i class="pi-color-icon-dalpangi"></i>
+            </NavLink>
+          </div>
+          <div class="widthp-20 subclass-category border-right">
+            <NavLink activeClassName="active" to="#">
+              <i class="pi-color-icon-ladder"></i>
+            </NavLink>
+          </div>
+          <div class="widthp-20 subclass-category border-right">
+            <NavLink activeClassName="active" to="#">
+              <i class="pi-color-icon-p-ladder"></i>
+            </NavLink>
+          </div>
+          <div class="widthp-20 subclass-category border-right">
+            <NavLink activeClassName="active" to="#">
+              <i class="pi-color-icon-lottery"></i>
+            </NavLink>
+          </div>
+          <div class="widthp-20 subclass-category">
+            <NavLink activeClassName="active" to="#">
+              <i class="pi-color-icon-powerball"></i>
+            </NavLink>
+          </div>
+        </div>
+      </div>
+      <div class="games-wrap games-content-mobile flex-inherit flex-column">
+        <div class="games-list grow-2 flex-column">
+          <div class="flex widthp-100 height-40 align-items-center-inherit border-bottom">
+            <div class="flex pi-title green">
+              <span class="color-white padding-left-15">엔트리 파워볼</span>
+            </div>
+          </div>
+          <div class="flex list border-bottom align-items-center-inherit border-bottom">
+            <div class="widthp-100 height-200 flex align-items-center justify-content-center color-white">
+              파워볼 화면
+            </div>
+          </div>
+          <div class="flex list height-40 align-items-center-inherit border-bottom background-transparent-b-20">
+            <div class="flex pi-title border-right grow-2">
+              <span class="color-white padding-left-15 grow-2">
+                2020년 1월 24일 129회차
+              </span>
+            </div>
+            <div class="flex border-left">
+              <button
+                type="button"
+                class="color-white heightp-100 align-items-center padding-horizontal-15"
+              >
+                <i class="fal fa-angle-up"></i>
+              </button>
+            </div>
+          </div>
+          <div class="flex height-40 align-items-center-inherit border-bottom">
+            <div class="flex pi-title orange">
+              <span class="color-white padding-left-15">홀/짝</span>
+            </div>
+          </div>
+          <div class="flex games-odds border-bottom flex-inherit justify-content-center-inherit">
+            <div class="widthp-50 border-right padding-vertical-10">
+              <span class="color-white grow-2">좌</span>
+              <span class="color-green">1.20</span>
+            </div>
+            <div class="widthp-50 padding-vertical-10">
+              <span class="color-white grow-2">우</span>
+              <span class="color-green">1.50</span>
+            </div>
+          </div>
+
+          <div class="flex height-40 align-items-center-inherit border-bottom">
+            <div class="flex pi-title orange">
+              <span class="color-white padding-left-15">좌출발/우출발</span>
+            </div>
+          </div>
+          <div class="flex games-odds border-bottom flex-inherit justify-content-center-inherit">
+            <div class="widthp-50 border-right padding-vertical-10">
+              <span class="color-white grow-2">좌</span>
+              <span class="color-green">1.20</span>
+            </div>
+            <div class="widthp-50 padding-vertical-10">
+              <span class="color-white grow-2">우</span>
+              <span class="color-green">1.50</span>
+            </div>
+          </div>
+
+          <div class="flex height-40 align-items-center-inherit border-bottom">
+            <div class="flex pi-title orange">
+              <span class="color-white padding-left-15">3줄/4줄</span>
+            </div>
+          </div>
+          <div class="flex games-odds border-bottom flex-inherit justify-content-center-inherit">
+            <div class="widthp-50 border-right padding-vertical-10">
+              <span class="color-white grow-2">3줄</span>
+              <span class="color-green">1.34</span>
+            </div>
+            <div class="widthp-50 padding-vertical-10">
+              <span class="color-white grow-2">4줄</span>
+              <span class="color-green">1.44</span>
+            </div>
+          </div>
+
+          <div class="flex height-40 align-items-center-inherit border-bottom">
+            <div class="flex pi-title orange">
+              <span class="color-white padding-left-15">
+                좌출발 3줄 / 좌출발 4줄
+              </span>
+            </div>
+          </div>
+          <div class="flex games-odds border-bottom flex-inherit justify-content-center-inherit">
+            <div class="widthp-50 border-right padding-vertical-10">
+              <span class="color-white grow-2">좌출발 3줄</span>
+              <span class="color-green">1.11</span>
+            </div>
+            <div class="widthp-50 padding-vertical-10">
+              <span class="color-white grow-2">좌출발 4줄</span>
+              <span class="color-green">1.35</span>
+            </div>
+          </div>
+
+          <div class="flex height-40 align-items-center-inherit border-bottom">
+            <div class="flex pi-title orange">
+              <span class="color-white padding-left-15">
+                우출발 3줄 / 우출발 4줄
+              </span>
+            </div>
+          </div>
+          <div class="flex games-odds border-bottom flex-inherit justify-content-center-inherit">
+            <div class="widthp-50 border-right padding-vertical-10">
+              <span class="color-white grow-2">우출발 3줄</span>
+              <span class="color-green">1.11</span>
+            </div>
+            <div class="widthp-50 padding-vertical-10">
+              <span class="color-white grow-2">우출발 4줄</span>
+              <span class="color-green">1.35</span>
+            </div>
+          </div>
+          <div class="flex list height-40 align-items-center-inherit border-bottom background-transparent-b-20">
+            <div class="flex pi-title border-right grow-2">
+              <span class="color-white padding-left-15 grow-2">
+                2020년 1월 24일 130회차
+              </span>
+            </div>
+            <div class="flex border-left">
+              <button
+                type="button"
+                class="color-white heightp-100 align-items-center padding-horizontal-15"
+              >
+                <i class="fal fa-angle-down"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  );
 }
