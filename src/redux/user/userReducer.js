@@ -1,4 +1,4 @@
-import * as types from "./userActions";
+import * as types from "./userTypes";
 
 const initialState = {
   user: {
@@ -37,7 +37,7 @@ const initialState = {
   status: "",
 };
 
-function userStore(state = initialState, action) {
+function userReducer(state = initialState, action) {
   const { user } = state;
 
   switch (action.type) {
@@ -119,4 +119,4 @@ function userStore(state = initialState, action) {
   }
 }
 
-export default userStore;
+export default userReducer;

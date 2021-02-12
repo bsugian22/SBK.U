@@ -10,12 +10,14 @@ import inplayReducer from "./inplay/inplayReducer";
 import inplaydetailReducer from "./inplaydetail/inplaydetailReducer";
 import loginReducer from "./login/loginReducer";
 import mainReducer from "./main/mainReducer";
+import preferenceReducer from "./preference/preferenceReducer";
 import promoReducer from "./promo/promoReducer";
 import promopostReducer from "./promopost/promopostReducer";
 import registerReducer from "./register/registerReducer";
 import sportReducer from "./sport/sportReducer";
 import sportsdetailReducer from "./sportsdetail/sportsdetailReducer";
 import swipermainReducer from "./swipermain/swipermainReducer";
+import userReducer from "./user/userReducer";
 
 const rootReducer = combineReducers({
   casino: casinoReducer,
@@ -29,12 +31,14 @@ const rootReducer = combineReducers({
   inplaydetail: inplaydetailReducer,
   login: loginReducer,
   main: mainReducer,
+  preference: preferenceReducer,
   promo: promoReducer,
   promopost: promopostReducer,
   register: registerReducer,
   sport: sportReducer,
   sportsdetail: sportsdetailReducer,
   swipermain: swipermainReducer,
+  user: userReducer,
 });
 
 export default rootReducer;

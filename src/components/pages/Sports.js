@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { chain } from "lodash";
 import moment from "moment";
 import Select from "react-select";
-import { mapStateToProps, mapDispatchProps } from "../../helpers/store";
+import { mapStateToProps, mapDispatchProps } from "../../redux/store";
 import sportsModel from "../../models/sportsModel";
 import MenuContext from "../../contexts/Menu.context";
 const Sports = (props) => {

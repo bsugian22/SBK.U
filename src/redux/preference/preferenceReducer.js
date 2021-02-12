@@ -1,10 +1,10 @@
-import * as types from "./preferenceActions";
+import * as types from "./preferenceTypes";
 
 const initialState = {
   preferences: [],
 };
 
-function preferencesStore(state = initialState, action) {
+function preferencesReducer(state = initialState, action) {
   const { preferences } = state;
 
   switch (action.type) {
@@ -17,4 +17,4 @@ function preferencesStore(state = initialState, action) {
   }
 }
 
-export default preferencesStore;
+export default preferencesReducer;

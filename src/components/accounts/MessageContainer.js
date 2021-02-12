@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import MessagePost from './MessagePost';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import { mapStateToProps, mapDispatchProps } from "../../helpers/store";
+import { mapStateToProps, mapDispatchProps } from "../../redux/store";
 import messagesModel from "../../models/messagesModel";
 import Moment from "moment";
 import Logo from "../layouts/Logo";
