@@ -3,7 +3,7 @@ import { camelize } from "../../helpers/object";
 import axios from "../../plugins/axios";
 
 export const setUser = (payload) => ({
-  type: SET_USER,
+  type: types.SET_USER,
   payload,
 });
 
