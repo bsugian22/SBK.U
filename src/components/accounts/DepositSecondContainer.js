@@ -213,7 +213,7 @@ const Deposit = () => {
           </div>
           <div class="deposit-right-content account-height widthp-50 flex-inherit padding-left-5 border-left flex-column scrollable-auto">
             <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
-              <span class="color-white">입금신청 내역</span>
+              <span class="color-white">입금신청 내역 (Deposit request details)</span>
             </div>
             <div class="widthp-100 deposit-history-content flex-inherit flex-column">
               <div class="history-item">
@@ -564,7 +564,7 @@ const Deposit = () => {
                     type="submit"
                     class="widthp-100 background-green color-white height-40 justify-content-center"
                   >
-                    입금신청
+                    입금신청 kelvin
                   </button>
                 </div>
               </div>
