@@ -1,174 +1,22 @@
-import React, { Fragment, useEffect, useState, useContext } from "react";
-import { connect } from "react-redux";
-import moment from "moment";
-import Select from "react-select";
-import { mapStateToProps, mapDispatchProps } from "../../redux/store";
+import React, { useState, useEffect, Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import sweetalert from "../../plugins/sweetalert";
-import depositModel from "../../models/depositModel";
-import echo from "../../plugins/echo";
+import { setDeposits } from "../../redux/accounts/deposit/depositActions";
 import { Link, NavLink } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
-const Deposit = (props) => {
-  const context = useContext(MenuContext);
+import echo from "../../plugins/echo";
+import Moment from "moment";
+const Deposit = () => {
+  let deposit = useSelector((state) => state.deposit);
   let isSubscribed = true;
-  const { user } = props;
-  const swal = new sweetalert();
-  const model = new depositModel();
-  const [deposit, setDeposit] = useState({
-    amount: 0,
-    page: 1,
-    lastPage: null,
-    createdFrom: null,
-    createdUntil: null,
-    depositActivities: [],
-    form: {
-      amount: 0,
-    },
-  });
-
+  let dispatch = useDispatch();
   useEffect(() => {
     isSubscribed = true;
-
-    if (user.isAuth) {
-      pusher();
-      fetch();
-    }
-
+    dispatch(setDeposits());
     return () => {
       isSubscribed = false;
     };
-  }, [deposit.page]);
-
-  const pusher = () => {
-    if (user.isAuth) {
-      echo.private(`users.${user.member.id}`).listen("DepositUpdated", (e) => {
-        fetch();
-      });
-    }
-  };
-
-  const fetch = async () => {
-    const {
-      data: { data: depositActivities, page, lastPage, amount },
-    } = await model.index({
-      page: deposit.page,
-      createdFrom: deposit.createdFrom,
-      createdUntil: deposit.createdUntil,
-    });
-
-    if (isSubscribed) {
-      setDeposit({
-        ...deposit,
-        depositActivities: depositActivities,
-        page: page,
-        lastPage: lastPage,
-        amount: amount,
-      });
-    }
-  };
-
-  const amountChange = (e) => {
-    setDeposit({
-      ...deposit,
-      form: {
-        ...deposit.form,
-        amount: Number(e.currentTarget.value.replaceAll(",", "")),
-      },
-    });
-  };
-
-  const QuickInput = (e) => {
-    const amount = e.currentTarget.getAttribute("data-amount");
-
-    setDeposit({
-      ...deposit,
-      form: {
-        ...deposit.form,
-        amount: Number(amount) + deposit.form.amount,
-      },
-    });
-  };
-
-  const submit = async (e) => {
-    e.preventDefault();
-    swal.confirm("입금신청을 하시겠습니까?", async (r) => {
-      if (r.value) {
-        const f = new FormData(e.target);
-        try {
-          const success = await model.create({
-            agreed: true,
-            method: "CASH",
-            amount: f.get("amount").replaceAll(",", ""),
-          });
-          swal.success(success.data.message);
-        } catch (error) {
-          const data = error.response.data;
-          swal.error(data.message);
-        }
-      }
-    });
-  };
-
-  const checkbox = (e, id) => {
-    const { depositActivities } = deposit;
-
-    depositActivities.filter((depositActivities) => {
-      if (depositActivities.id == id) {
-        depositActivities.isSelected = e.currentTarget.checked;
-      }
-    });
-
-    setDeposit({
-      ...deposit,
-      depositActivities: depositActivities,
-    });
-  };
-
-  const destroy = async () => {
-    swal.confirm("정말로 선택된 입금내역을 삭제하시겠습니까?", async (r) => {
-      if (r.value) {
-        try {
-          const filtered = deposit.depositActivities.filter(
-            (depositActivities) => depositActivities.isSelected
-          );
-          if (filtered.length) {
-            const success = await model.destroy({
-              depositActivities: filtered,
-            });
-
-            fetch();
-            swal.success(success.data.message);
-          } else {
-            swal.error("내역이 선택되지 않았습니다");
-          }
-        } catch (error) {
-          const data = error.response.data;
-          swal.error(data.message);
-        }
-      }
-    });
-  };
-
-  const prev = () => {
-    setDeposit({
-      ...deposit,
-      page: deposit.page - 1,
-    });
-  };
-
-  const next = () => {
-    setDeposit({
-      ...deposit,
-      page: deposit.page + 1,
-    });
-  };
-
-  const setPage = (e) => {
-    setDeposit({
-      ...deposit,
-      page: e.value,
-    });
-  };
+  }, []);
 
   return (
     <Fragment>
@@ -254,8 +102,8 @@ const Deposit = (props) => {
                             class="input-form padding-left-10"
                             name="amount"
                             placeholder="0"
-                            value={deposit.form.amount.toLocaleString()}
-                            onChange={amountChange}
+                            // value={deposit.form.amount.toLocaleString()}
+                            // onChange={amountChange}
                             required
                           />
                         </div>
@@ -273,7 +121,7 @@ const Deposit = (props) => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                           data-amount="30000"
-                          onClick={QuickInput}
+                          // onClick={QuickInput}
                         >
                           30,000
                         </button>
@@ -281,7 +129,7 @@ const Deposit = (props) => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                           data-amount="50000"
-                          onClick={QuickInput}
+                          // onClick={QuickInput}
                         >
                           50,000
                         </button>
@@ -289,7 +137,7 @@ const Deposit = (props) => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                           data-amount="100000"
-                          onClick={QuickInput}
+                          // onClick={QuickInput}
                         >
                           100,000
                         </button>
@@ -297,7 +145,7 @@ const Deposit = (props) => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                           data-amount="500000"
-                          onClick={QuickInput}
+                          // onClick={QuickInput}
                         >
                           500,000
                         </button>
@@ -305,7 +153,7 @@ const Deposit = (props) => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 heightp-100 color-grey border-top border-left-rw"
                           data-amount="1000000"
-                          onClick={QuickInput}
+                          // onClick={QuickInput}
                         >
                           1,000,000
                         </button>
@@ -493,12 +341,15 @@ const Deposit = (props) => {
         <div class="member-information height-40 align-items-center-inherit border-bottom">
           <div class="flex pi-title green grow-2">
             <span class="color-white padding-left-15">
-              안녕하세요. {user.member.nickname} 회원님
+              안녕하세요.
+              {/* {user.member.nickname}  */}
+              회원님
             </span>
           </div>
           <div class="flex">
             <span class="color-yellow padding-right-15">
-              Lv.{user.member.level}
+              Lv.
+              {/* {user.member.level} */}
             </span>
           </div>
         </div>
@@ -507,7 +358,7 @@ const Deposit = (props) => {
             <div class="flex flex-column">
               <span class="color-white">예치금</span>
               <span class="color-green">
-                {Number(user.member.cash).toLocaleString()}
+                {/* {Number(user.member.cash).toLocaleString()} */}
               </span>
             </div>
           </div>
@@ -529,8 +380,8 @@ const Deposit = (props) => {
             <button
               type="button"
               id="tab-1"
-              class={context.state.interMenu === "inter-tab-1" ? "active" : ""}
-              onClick={() => context.actions.setinterMenu("inter-tab-1")}
+              // class={context.state.interMenu === "inter-tab-1" ? "active" : ""}
+              // onClick={() => context.actions.setinterMenu("inter-tab-1")}
             >
               입금신청
             </button>
@@ -539,21 +390,24 @@ const Deposit = (props) => {
             <button
               type="button"
               id="tab-2"
-              class={context.state.interMenu === "inter-tab-2" ? "active" : ""}
-              onClick={() => context.actions.setinterMenu("inter-tab-2")}
+              // class={context.state.interMenu === "inter-tab-2" ? "active" : ""}
+              // onClick={() => context.actions.setinterMenu("inter-tab-2")}
             >
               입금내역
             </button>
           </div>
         </div>
         <div
-          class={
-            context.state.interMenu === "inter-tab-1"
-              ? "interload-content flex-column active"
-              : "interload-content flex-column"
-          }
+        // class={
+        //   context.state.interMenu === "inter-tab-1"
+        //     ? "interload-content flex-column active"
+        //     : "interload-content flex-column"
+        // }
         >
-          <form class="flex" onSubmit={submit}>
+          <form
+            class="flex"
+            //  onSubmit={submit}
+          >
             <div class="flex-column flex-inherit padding-horizontal-15 widthp-100">
               <div class="flex-column">
                 <div class="interload-list padding-vertical-10">
@@ -615,8 +469,8 @@ const Deposit = (props) => {
                       type="text"
                       name="amount"
                       placeholder="0"
-                      value={deposit.form.amount.toLocaleString()}
-                      onChange={amountChange}
+                      // value={deposit.form.amount.toLocaleString()}
+                      // onChange={amountChange}
                       required
                     />
                   </div>
@@ -627,7 +481,7 @@ const Deposit = (props) => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="5000"
-                      onClick={QuickInput}
+                      // onClick={QuickInput}
                     >
                       5,000
                     </button>
@@ -635,7 +489,7 @@ const Deposit = (props) => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="10000"
-                      onClick={QuickInput}
+                      // onClick={QuickInput}
                     >
                       10,000
                     </button>
@@ -643,7 +497,7 @@ const Deposit = (props) => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="50000"
-                      onClick={QuickInput}
+                      // onClick={QuickInput}
                     >
                       50,000
                     </button>
@@ -651,7 +505,7 @@ const Deposit = (props) => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="100000"
-                      onClick={QuickInput}
+                      // onClick={QuickInput}
                     >
                       100,000
                     </button>
@@ -659,7 +513,7 @@ const Deposit = (props) => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="500000"
-                      onClick={QuickInput}
+                      // onClick={QuickInput}
                     >
                       500,000
                     </button>
@@ -718,11 +572,11 @@ const Deposit = (props) => {
           </form>
         </div>
         <div
-          class={
-            context.state.interMenu === "inter-tab-2"
-              ? "interload-content flex-column active"
-              : "interload-content flex-column"
-          }
+        // class={
+        //   context.state.interMenu === "inter-tab-2"
+        //     ? "interload-content flex-column active"
+        //     : "interload-content flex-column"
+        // }
         >
           <div class="widthp-100 flex-column flex border-bottom padding-vertical-10 padding-right-15 align-items-right">
             <div class="select height-40">
@@ -732,10 +586,17 @@ const Deposit = (props) => {
               </select>
             </div>
           </div>
-         
-          <h1> SAMPLE</h1>
-          {/* {deposit.depositActivities.length > 0 ? (
-            deposit.depositActivities.map((value, index) => {
+          <h1>sample</h1>
+          {deposit.loading ? (
+            <div colspan="15" class="td-3">
+              <span></span>
+            </div>
+          ) : deposit?.deposits?.data?.length == 0 ? (
+            <div colspan="12" class="color-white">
+              데이터가 존재하지 않습니다.
+            </div>
+          ) : (
+            deposit?.deposits?.data?.map((value, index) => {
               return (
                 <div
                   class="flex flex-inherit flex-column list margin-bottom-1 background-transparent-b-10"
@@ -743,9 +604,8 @@ const Deposit = (props) => {
                 >
                   <div class="padding-horizontal-15 justify-content-center-inherit padding-vertical-15">
                     <div class="widthp-25 text-align-center">
-                      yey
                       <span class="color-grey">
-                        {moment(value.createdAt).format("MM / DD HH:mm")}
+                        yey{Moment(value.createdAt).format("MM / DD HH:mm")}
                       </span>
                     </div>
                     <div class="widthp-25 text-align-center">
@@ -761,7 +621,7 @@ const Deposit = (props) => {
                     </div>
                     <div class="widthp-25 text-align-center">
                       <span class="color-green">
-                        {value.amount.toLocaleString()}원
+                        {value.amount.toLocaleString()} 원
                       </span>
                     </div>
                     {value.status == "PENDING" ? (
@@ -787,15 +647,11 @@ const Deposit = (props) => {
                 </div>
               );
             })
-          ) : (
-            <div class="widthp-100 flex justify-content-center color-grey height-50 align-items-center">
-              입금내역이 없습니다.
-            </div>
-          )} */}
+          )}
         </div>
       </div>
     </Fragment>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchProps)(Deposit);
+export default Deposit;
