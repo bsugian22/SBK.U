@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import sweetalert from "../../plugins/sweetalert";
 import {
   changeCreateDepositAmount,
+  checkAllDeposit,
   checkDepositCertainItem,
   createDepositAction,
   decrementDeposit,
@@ -10,6 +11,7 @@ import {
   deleteDepositsRequest,
   incrementDeposit,
   listOfToDeleteDeposits,
+  resetCreateDeposit,
   selectDepositMethod,
   setDeposits,
 } from "../../redux/accounts/deposit/depositActions";
@@ -285,10 +287,13 @@ const Deposit = () => {
                 </div>
                 <div class="deposit-payment-confirm-btn padding-top-10 flex-inherit">
                   <div class="grow-2">
-                    {/* Create Deposit button */}
+                    {/* Reset button */}
                     <button
                       type="button"
                       class="padding-15 background-transparent-b-10 color-white"
+                      onClick={() => {
+                        dispatch(resetCreateDeposit());
+                      }}
                     >
                       초기화
                     </button>
@@ -317,7 +322,12 @@ const Deposit = () => {
                 <table>
                   <thead>
                     <tr class="thead border-top border-bottom-rb">
-                      <th class="height-45 background-transparent-b-10 color-grey">
+                      <th
+                        class="height-45 background-transparent-b-10 color-grey"
+                        onClick={() => {
+                          dispatch(checkAllDeposit());
+                        }}
+                      >
                         전체 선택
                       </th>
                       <th class="height-45 background-transparent-b-10 color-grey">
