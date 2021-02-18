@@ -142,10 +142,11 @@ const Deposit = () => {
                 <div class="account-form-data flex-column flex-inherit">
                   <div class="form-rows flex-inherit">
                     <div class="widthp-33 border-right-rb form-title height-45 border-bottom-rb align-items-center justify-content-center background-transparent-b-10 border-top">
+                      {/* name of depositor */}
                       <span class="color-grey">입금자명</span>
                     </div>
                     <div class="widthp-67 form-content height-45 border-bottom-rb border-left-rw align-items-center justify-content-end padding-horizontal-10 center background-transparent-b-5 border-top">
-                      <span class="color-green">관리자</span>
+                      <span class="color-green">{user.member.username}</span>
                     </div>
                   </div>
                   <div class="form-rows flex-inherit">
@@ -376,7 +377,13 @@ const Deposit = () => {
                               <span class="color-grey">{item.method}</span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey">{item.amount}BTC</span>
+                              <span class="color-grey">
+                                {item.amount}
+                                {item.method == "CASH" ||
+                                item.method == "PAYPAL"
+                                  ? "원"
+                                  : "BTC"}
+                              </span>
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-green">{item.status}</span>
