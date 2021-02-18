@@ -232,6 +232,7 @@ const exchangeReducer = (state = initialState, action) => {
         },
       };
     case DELETE_EXCHANGES_FAILURE:
+      swal.showError(action.payload);
       return {
         ...state,
         loading: false,
