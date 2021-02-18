@@ -29,6 +29,8 @@ import {
   CHANGE_CREATE_DEPOSIT_AMOUNT,
   INCREMENT_DEPOSIT_AMOUNT,
   DECREMENT_DEPOSIT_AMOUNT,
+  RESET_CREATE_DEPOSIT,
+  CHECK_ALL_DEPOSIT,
 } from "./depositTypes";
 import sweetalert from "../../../plugins/sweetalert";
 const swal = new sweetalert();
@@ -354,6 +356,24 @@ const depositReducer = (state = initialState, action) => {
           ...state.createDeposit,
           amount: dec.toString(),
         },
+      };
+    case RESET_CREATE_DEPOSIT:
+      return {
+        ...state,
+        createDeposit: {
+          ...state.createDeposit,
+          amount: "0",
+          method: "CASH",
+        },
+        createDepositStatus: "CASH",
+      };
+    case CHECK_ALL_DEPOSIT:
+      state.deposits.data.map((i) => {
+        i.isChecked = true;
+      });
+      return {
+        ...state,
+        deposits: { ...state.deposits, data: state.deposits.data },
       };
     default:
       return state;

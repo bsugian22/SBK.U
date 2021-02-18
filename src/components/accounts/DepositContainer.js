@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import sweetalert from "../../plugins/sweetalert";
 import {
   changeCreateDepositAmount,
+  checkAllDeposit,
   checkDepositCertainItem,
   createDepositAction,
   decrementDeposit,
@@ -10,6 +11,7 @@ import {
   deleteDepositsRequest,
   incrementDeposit,
   listOfToDeleteDeposits,
+  resetCreateDeposit,
   selectDepositMethod,
   setDeposits,
 } from "../../redux/accounts/deposit/depositActions";
@@ -142,10 +144,11 @@ const Deposit = () => {
                 <div class="account-form-data flex-column flex-inherit">
                   <div class="form-rows flex-inherit">
                     <div class="widthp-33 border-right-rb form-title height-45 border-bottom-rb align-items-center justify-content-center background-transparent-b-10 border-top">
+                      {/* name of depositor */}
                       <span class="color-grey">입금자명</span>
                     </div>
                     <div class="widthp-67 form-content height-45 border-bottom-rb border-left-rw align-items-center justify-content-end padding-horizontal-10 center background-transparent-b-5 border-top">
-                      <span class="color-green">관리자</span>
+                      <span class="color-green">{user.member.username}</span>
                     </div>
                   </div>
                   <div class="form-rows flex-inherit">
@@ -284,10 +287,13 @@ const Deposit = () => {
                 </div>
                 <div class="deposit-payment-confirm-btn padding-top-10 flex-inherit">
                   <div class="grow-2">
-                    {/* Create Deposit button */}
+                    {/* Reset button */}
                     <button
                       type="button"
                       class="padding-15 background-transparent-b-10 color-white"
+                      onClick={() => {
+                        dispatch(resetCreateDeposit());
+                      }}
                     >
                       초기화
                     </button>
@@ -316,7 +322,12 @@ const Deposit = () => {
                 <table>
                   <thead>
                     <tr class="thead border-top border-bottom-rb">
-                      <th class="height-45 background-transparent-b-10 color-grey">
+                      <th
+                        class="height-45 background-transparent-b-10 color-grey"
+                        onClick={() => {
+                          dispatch(checkAllDeposit());
+                        }}
+                      >
                         전체 선택
                       </th>
                       <th class="height-45 background-transparent-b-10 color-grey">
@@ -376,7 +387,13 @@ const Deposit = () => {
                               <span class="color-grey">{item.method}</span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey">{item.amount}BTC</span>
+                              <span class="color-grey">
+                                {item.amount}
+                                {item.method == "CASH" ||
+                                item.method == "PAYPAL"
+                                  ? "원"
+                                  : "BTC"}
+                              </span>
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-green">{item.status}</span>
