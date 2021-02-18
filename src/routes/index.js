@@ -9,7 +9,7 @@ import Games from "../components/pages/Games";
 import Casino from "../components/pages/Casino";
 import Promo from "../components/pages/Promo";
 import Deposit from "../components/accounts/DepositContainer";
-import Withdrawal from "../components/accounts/Withdrawal";
+import Withdrawal from "../components/accounts/WithdrawalContainer";
 import Exchange from "../components/accounts/ExchangeContainer";
 import Position from "../components/accounts/Position";
 import Notice from "../components/accounts/Notice";
