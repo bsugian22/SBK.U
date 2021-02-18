@@ -1,10 +1,11 @@
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import rootReducer from "./rootReducer";
-
+import logger from "redux-logger";
+import thunk from "redux-thunk";
 import * as userActions from "./user/userActions";
 import * as preferencesActions from "./preference/preferenceActions";
 
@@ -14,7 +15,7 @@ const persistConfig = {
 };
 
 const enhancedReducer = persistReducer(persistConfig, rootReducer);
-
+const middleWare = applyMiddleware(logger, thunk);
 export const mapStateToProps = (state) => {
   return {
     preferences: state.preference.preferences,
@@ -44,4 +45,4 @@ export const mapDispatchProps = (dispatch) => {
   };
 };
 
-export default createStore(enhancedReducer, composeWithDevTools());
+export default createStore(enhancedReducer, composeWithDevTools(middleWare));
