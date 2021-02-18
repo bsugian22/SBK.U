@@ -31,6 +31,8 @@ import {
   DECREMENT_EXCHANGE_AMOUNT,
   FROM_CASINO_TO_CASH_EXCHANGE,
   FROM_CASH_TO_CASINO_EXCHANGE,
+  RESET_CREATE_EXCHANGE,
+  CHECK_ALL_EXCHANGE,
 } from "./exchangeTypes";
 import sweetalert from "../../../plugins/sweetalert";
 const swal = new sweetalert();
@@ -320,10 +322,12 @@ const exchangeReducer = (state = initialState, action) => {
           newList.exchange_activities.push(item);
         }
       });
+
       state.newExchangeToDeleteList = {
         ...state.newExchangeToDeleteList,
         exchange_activities: [...newList.exchange_activities],
       };
+
       console.log(newList.exchange_activities);
       return {
         ...state,
@@ -383,6 +387,25 @@ const exchangeReducer = (state = initialState, action) => {
           from: "casino_cash",
           to: "cash",
         },
+      };
+    case RESET_CREATE_EXCHANGE:
+      return {
+        ...state,
+        createExchange: {
+          agreed: true,
+          amount: "0",
+          from: "cash",
+          to: "casino_cash",
+        },
+        createExchangeStatus: "cash",
+      };
+    case CHECK_ALL_EXCHANGE:
+      state.exchanges.data.map((i) => {
+        i.isChecked = true;
+      });
+      return {
+        ...state,
+        exchanges: { ...state.exchanges, data: state.exchanges.data },
       };
     default:
       return state;
