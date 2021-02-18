@@ -10,7 +10,7 @@ import Casino from "../components/pages/Casino";
 import Promo from "../components/pages/Promo";
 import Deposit from "../components/accounts/DepositContainer";
 import Withdrawal from "../components/accounts/Withdrawal";
-import Exchange from "../components/accounts/Exchange";
+import Exchange from "../components/accounts/ExchangeContainer";
 import Position from "../components/accounts/Position";
 import Notice from "../components/accounts/Notice";
 import Inquiry from "../components/accounts/Inquiry";
