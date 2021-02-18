@@ -23,6 +23,10 @@ import {
   FILTERED_HIT_LIST,
   FILTERED_PROCEEDING_LIST,
   LIST_OF_DEPOSIT,
+  CHECK_DEPOSIT_CERTAIN_ITEM,
+  LIST_OF_TODELETE_DEPOSITS,
+  SELECT_DEPOSIT_METHOD,
+  CHANGE_CREATE_DEPOSIT_AMOUNT,
 } from "./depositTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
@@ -72,9 +76,10 @@ export const createDepositRequest = () => {
   };
 };
 
-export const createDepositsuccess = () => {
+export const createDepositsuccess = (message) => {
   return {
     type: CREATE_DEPOSIT_SUCCESS,
+    payload: message,
   };
 };
 
@@ -235,28 +240,27 @@ export const fetchDeposit = () => {
   };
 };
 
-export const createDepositAction = (Deposit) => {
+export const createDepositAction = (deposit) => {
   return (dispatch) => {
-    let outcomes = Deposit.outcomes.split(",");
-    let newList = [];
-    outcomes.map((o) => {
-      let item = { id: " " + o };
-      newList.push(item);
-    });
-
-    Deposit.outcomes = [];
-    Deposit.outcomes = [...newList];
-    console.log(Deposit);
-    dispatch(createDepositRequest);
+    dispatch(createDepositRequest());
     axios
-      .post(`/api/Deposits`, Deposit)
+      .post(`/api/deposit`, deposit)
       .then((response) => {
         dispatch(setDeposits());
-        dispatch(createDepositsuccess());
+        dispatch(createDepositsuccess(response.data.message));
       })
       .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(createDepositailure(errorMsg));
+        const errorMsg = error.response.data;
+        let inquiryErrorMessage = {
+          html: ` ${errorMsg.message} <br />  ${
+            errorMsg?.errors?.method
+              ? errorMsg?.errors?.method[0] + " <br /> "
+              : ""
+          } ${errorMsg?.errors?.amount ? errorMsg?.errors?.amount[0] : ""}`,
+          icon: "error",
+          confirmButtonText: "확인",
+        };
+        dispatch(createDepositFailure(inquiryErrorMessage));
       });
   };
 };
@@ -277,18 +281,46 @@ export const updateDeposit = () => {
   };
 };
 
-export const deleteDeposits = () => {
+export const deleteDeposits = (list) => {
   return (dispatch) => {
-    dispatch(deleteDepositsRequest);
+    console.table(list);
     axios
-      .get(`/api/`)
+      .delete(`/api/deposit`, { data: list })
       .then((response) => {
-        const Deposits = response.data;
-        dispatch(deleteDepositsSuccess(Deposits));
+        const deposits = response.data;
+        dispatch(deleteDepositsSuccess(deposits));
+        dispatch(setDeposits());
       })
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(deleteDepositsFailure(errorMsg));
       });
+  };
+};
+
+export const checkDepositCertainItem = (data) => {
+  return {
+    type: CHECK_DEPOSIT_CERTAIN_ITEM,
+    payload: data,
+  };
+};
+
+export const listOfToDeleteDeposits = () => {
+  return {
+    type: LIST_OF_TODELETE_DEPOSITS,
+  };
+};
+
+export const selectDepositMethod = (status) => {
+  return {
+    type: SELECT_DEPOSIT_METHOD,
+    payload: status,
+  };
+};
+
+export const changeCreateDepositAmount = (amount) => {
+  return {
+    type: CHANGE_CREATE_DEPOSIT_AMOUNT,
+    payload: amount,
   };
 };

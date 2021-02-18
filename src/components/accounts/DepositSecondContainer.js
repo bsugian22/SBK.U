@@ -1,13 +1,31 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import sweetalert from "../../plugins/sweetalert";
-import { setDeposits } from "../../redux/accounts/deposit/depositActions";
+import {
+  changeCreateDepositAmount,
+  checkDepositCertainItem,
+  createDepositAction,
+  deleteDeposits,
+  deleteDepositsRequest,
+  listOfToDeleteDeposits,
+  selectDepositMethod,
+  setDeposits,
+} from "../../redux/accounts/deposit/depositActions";
 import { Link, NavLink } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
 import echo from "../../plugins/echo";
 import Moment from "moment";
 const Deposit = () => {
   let deposit = useSelector((state) => state.deposit);
+  let deleteList = useSelector((state) => state.deposit.newDepositToDeleteList);
+  let user = useSelector((state) => state.user.user);
+  let createDepositStatus = useSelector(
+    (state) => state.deposit.createDepositStatus
+  );
+  let createDeposit = useSelector((state) => state.deposit.createDeposit);
+  let listToDelete = useSelector(
+    (state) => state.deposit.newDepositToDeleteList
+  );
   let isSubscribed = true;
   let dispatch = useDispatch();
   useEffect(() => {
@@ -57,21 +75,59 @@ const Deposit = () => {
                   </div>
                 </div>
                 <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb border-top flex-inherit">
+                  {/* Create Deposit */}
                   <span class="color-white">결제 방법 선택</span>
                 </div>
                 <div class="ac-payment-pbp flex-inherit align-items-center align-items-center-inherit justify-content-center-inherit">
-                  <div class="widthp-33 border-right-rb border-bottom-rb height-45 color-green background-transparent-b-10 border-top">
-                    <span class="color-green">
+                  <div
+                    class={
+                      createDepositStatus == "CASH"
+                        ? "widthp-33 border-right-rb border-bottom-rb height-45  background-transparent-b-10 border-top color-green"
+                        : "widthp-33 border-right-rb border-bottom-rb height-45  background-transparent-b-10 border-top"
+                    }
+                    onClick={() => {
+                      dispatch(selectDepositMethod("CASH"));
+                    }}
+                  >
+                    <span
+                      class={
+                        createDepositStatus == "CASH"
+                          ? "color-green"
+                          : "color-grey"
+                      }
+                    >
                       <i class="far fa-wallet"></i>현금
                     </span>
                   </div>
-                  <div class="widthp-33 border-right-rb border-bottom-rb border-left-rw height-45 color-green background-transparent-b-5 not-allowed border-top">
-                    <span class="color-grey">
+                  <div
+                    class="widthp-33 border-right-rb border-bottom-rb border-left-rw height-45 color-green background-transparent-b-5 not-allowed border-top"
+                    onClick={() => {
+                      dispatch(selectDepositMethod("PAYPAL"));
+                    }}
+                  >
+                    <span
+                      class={
+                        createDepositStatus == "PAYPAL"
+                          ? "color-green"
+                          : "color-grey"
+                      }
+                    >
                       <i class="fab fa-paypal"></i>페이팔
                     </span>
                   </div>
-                  <div class="widthp-33 border-bottom-rb border-left-rw height-45 color-green background-transparent-b-5 not-allowed border-top">
-                    <span class="color-grey">
+                  <div
+                    class="widthp-33 border-bottom-rb border-left-rw height-45 color-green background-transparent-b-5 not-allowed border-top"
+                    onClick={() => {
+                      dispatch(selectDepositMethod("BITCOIN"));
+                    }}
+                  >
+                    <span
+                      class={
+                        createDepositStatus == "BITCOIN"
+                          ? "color-green"
+                          : "color-grey"
+                      }
+                    >
                       <i class="fab fa-bitcoin"></i>비트코인
                     </span>
                   </div>
@@ -102,8 +158,11 @@ const Deposit = () => {
                             class="input-form padding-left-10"
                             name="amount"
                             placeholder="0"
-                            // value={deposit.form.amount.toLocaleString()}
-                            // onChange={amountChange}
+                            value={Number(createDeposit.amount)}
+                            onChange={(e) => {
+                              let amt = e.target.value;
+                              dispatch(changeCreateDepositAmount(amt));
+                            }}
                             required
                           />
                         </div>
@@ -121,7 +180,9 @@ const Deposit = () => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                           data-amount="30000"
-                          // onClick={QuickInput}
+                          onClick={() => {
+                            dispatch(changeCreateDepositAmount(30000));
+                          }}
                         >
                           30,000
                         </button>
@@ -129,7 +190,9 @@ const Deposit = () => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                           data-amount="50000"
-                          // onClick={QuickInput}
+                          onClick={() => {
+                            dispatch(changeCreateDepositAmount(50000));
+                          }}
                         >
                           50,000
                         </button>
@@ -137,7 +200,9 @@ const Deposit = () => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                           data-amount="100000"
-                          // onClick={QuickInput}
+                          onClick={() => {
+                            dispatch(changeCreateDepositAmount(100000));
+                          }}
                         >
                           100,000
                         </button>
@@ -145,7 +210,9 @@ const Deposit = () => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-left-rw heightp-100 color-grey border-top"
                           data-amount="500000"
-                          // onClick={QuickInput}
+                          onClick={() => {
+                            dispatch(changeCreateDepositAmount(500000));
+                          }}
                         >
                           500,000
                         </button>
@@ -153,7 +220,9 @@ const Deposit = () => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 heightp-100 color-grey border-top border-left-rw"
                           data-amount="1000000"
-                          // onClick={QuickInput}
+                          onClick={() => {
+                            dispatch(changeCreateDepositAmount(1000000));
+                          }}
                         >
                           1,000,000
                         </button>
@@ -164,15 +233,17 @@ const Deposit = () => {
               </div>
               <div class="flex-column flex-inherit widthp-100">
                 <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit border-top">
-                  <span class="color-white">입금 계좌 확인</span>
+                  <span class="color-white">
+                    입금 계좌 확인 account details
+                  </span>
                 </div>
                 <div class="deposit-payment-confirm-data flex-column flex-inherit">
                   <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom-rb align-items-center-inherit background-transparent-b-10 border-top">
                     <div class="widthp-33 border-right-rb">
-                      <span class="color-grey">은행명</span>
+                      <span class="color-grey">은행명 </span>
                     </div>
                     <div class="widthp-33 border-right-rb border-left-rw">
-                      <span class="color-grey">예금주</span>
+                      <span class="color-grey">예금주 </span>
                     </div>
                     <div class="widthp-33 border-left-rw">
                       <span class="color-grey">결제 계좌</span>
@@ -180,18 +251,26 @@ const Deposit = () => {
                   </div>
                   <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom-rb align-items-center-inherit background-transparent-b-5 border-top">
                     <div class="widthp-33 border-right-rb">
-                      <span class="color-white">농협</span>
+                      <span class="color-white">
+                        {user.member.account_bank}
+                      </span>
                     </div>
                     <div class="widthp-33 border-right-rb border-left-rw">
-                      <span class="color-white">주식회사 웨스트몰</span>
+                      <span class="color-white">
+                        {user.member.account_holder}
+                      </span>
                     </div>
                     <div class="widthp-33 border-left-rw">
-                      <span class="color-white">301-0252-3577-31</span>
+                      <span class="color-white">
+                        {" "}
+                        {user.member.account_number}
+                      </span>
                     </div>
                   </div>
                 </div>
                 <div class="deposit-payment-confirm-btn padding-top-10 flex-inherit">
                   <div class="grow-2">
+                    {/* Create Deposit button */}
                     <button
                       type="button"
                       class="padding-15 background-transparent-b-10 color-white"
@@ -203,6 +282,9 @@ const Deposit = () => {
                     <button
                       type="button"
                       class="padding-15 background-green color-white"
+                      onClick={() => {
+                        dispatch(createDepositAction(createDeposit));
+                      }}
                     >
                       입금신청
                     </button>
@@ -213,7 +295,7 @@ const Deposit = () => {
           </div>
           <div class="deposit-right-content account-height widthp-50 flex-inherit padding-left-5 border-left flex-column scrollable-auto">
             <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
-              <span class="color-white">입금신청 내역 (Deposit request details)</span>
+              <span class="color-white">입금신청 내역</span>
             </div>
             <div class="widthp-100 deposit-history-content flex-inherit flex-column">
               <div class="history-item">
@@ -238,48 +320,73 @@ const Deposit = () => {
                     </tr>
                   </thead>
                   <tbody class="background-transparent-b-5">
-                    <tr class="rows">
-                      <td class="height-45 border-top">
-                        <input type="checkbox" name="" value="1" />
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">2020-11-12 22:11:34</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">현금</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">1,000,000원</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-red">대기</span>
-                      </td>
-                    </tr>
-                    <tr class="rows">
-                      <td class="height-45 border-top">
-                        <input type="checkbox" name="" value="1" />
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">2020-11-12 22:11:34</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">비트코인</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">0.5BTC</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-green">완료</span>
-                      </td>
-                    </tr>
+                    {deposit.loading ? (
+                      <tr>
+                        <td colspan="15" class="td-3">
+                          <span></span>
+                        </td>
+                      </tr>
+                    ) : deposit?.deposits?.data?.length == 0 ? (
+                      <tr>
+                        <td colspan="12" class="color-white">
+                          데이터가 존재하지 않습니다.
+                        </td>
+                      </tr>
+                    ) : (
+                      deposit.deposits.data.map((item, index) => {
+                        return (
+                          <tr class="rows" key={index}>
+                            <td class="height-45 border-top">
+                              <input
+                                type="checkbox"
+                                name=""
+                                checked={item.isChecked}
+                                onChange={(e) => {
+                                  let checked = e.target.checked;
+                                  let payload = {
+                                    status: checked,
+                                    id: item.id,
+                                  };
+                                  dispatch(checkDepositCertainItem(payload));
+                                }}
+                              />
+                            </td>
+                            <td class="height-45 border-top">
+                              <span class="color-grey">
+                                {Moment(item.createdAt).format(
+                                  "YY-MM-DD HH:mm "
+                                )}{" "}
+                              </span>
+                            </td>
+                            <td class="height-45 border-top">
+                              <span class="color-grey">{item.method}</span>
+                            </td>
+                            <td class="height-45 border-top">
+                              <span class="color-grey">{item.amount}BTC</span>
+                            </td>
+                            <td class="height-45 border-top">
+                              <span class="color-green">{item.status}</span>
+                            </td>
+                          </tr>
+                        );
+                      })
+                    )}
                   </tbody>
                 </table>
               </div>
               <div class="history-item-footer flex-inherit border-top padding-vertical-10 align-items-center background-transparent-b-10 border-bottom-rb">
                 <div class="grow-2 padding-left-10">
+                  {/* Delete All */}
                   <button
                     type="button"
                     class="color-grey padding-10 background-transparent-b-10"
+                    onClick={() => {
+                      dispatch(listOfToDeleteDeposits());
+                      dispatch(deleteDepositsRequest());
+                      // dispatch(deleteDeposits(deposit.newDepositToDeleteList));
+                      // console.log(deposit.newDepositToDeleteList);
+                      dispatch(deleteDeposits(deposit.newDepositToDeleteList));
+                    }}
                   >
                     <i class="fal fa-trash-alt"></i>
                     선택 삭제
@@ -289,7 +396,7 @@ const Deposit = () => {
                   <span class="color-grey">
                     누적 총 잔액
                     <strong class="color-red padding-left-5">
-                      12,500,000원
+                      {deposit?.deposits?.amount}원
                     </strong>
                   </span>
                 </div>
