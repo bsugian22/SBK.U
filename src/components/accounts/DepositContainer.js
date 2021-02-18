@@ -164,7 +164,7 @@ const Deposit = () => {
                             value={Number(createDeposit.amount)}
                             onChange={(e) => {
                               let amt = 0;
-                              amt = Number(createDeposit.amount);
+                              amt = Number(e.target.value);
                               console.log(amt);
                               dispatch(changeCreateDepositAmount(amt));
                             }}

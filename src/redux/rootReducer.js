@@ -19,7 +19,8 @@ import sportsdetailReducer from "./sportsdetail/sportsdetailReducer";
 import swipermainReducer from "./swipermain/swipermainReducer";
 import userReducer from "./user/userReducer";
 import depositReducer from "../redux/accounts/deposit/depositReducer";
-
+import exchangeReducer from "../redux/accounts/exchange/exchangeReducer";
+import withdrawalReducer from "../redux/accounts/withdrawal/withdrawalReducer";
 const rootReducer = combineReducers({
   casino: casinoReducer,
   esport: esportReducer,
@@ -41,6 +42,8 @@ const rootReducer = combineReducers({
   swipermain: swipermainReducer,
   user: userReducer,
   deposit: depositReducer,
+  exchange: exchangeReducer,
+  withdraw: withdrawalReducer,
 });
 
 export default rootReducer;
