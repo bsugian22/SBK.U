@@ -14,6 +14,7 @@ import {
   deleteInquiriesRequest,
   listOfToDeleteInquiries,
   resetCreateInquiry,
+  selectAllInquiry,
   setInquiries,
 } from "../../redux/accounts/inquiry/inquiryAction";
 
@@ -45,7 +46,15 @@ const Inquiry = () => {
                 <table>
                   <thead class="background-transparent-b-10">
                     <tr class="thead">
-                      <th class="height-45 color-grey border-top">전체선택</th>
+                      {/* SELECT ALL */}
+                      <th
+                        class="height-45 color-grey border-top"
+                        onClick={() => {
+                          dispatch(selectAllInquiry());
+                        }}
+                      >
+                        전체선택
+                      </th>
                       <th class="height-45 color-grey border-top">구분</th>
                       <th class="height-45 color-grey border-top">내용</th>
                       <th class="height-45 color-grey border-top">수신시간</th>
