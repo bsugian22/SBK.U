@@ -21,6 +21,7 @@ import userReducer from "./user/userReducer";
 import depositReducer from "../redux/accounts/deposit/depositReducer";
 import exchangeReducer from "../redux/accounts/exchange/exchangeReducer";
 import withdrawalReducer from "../redux/accounts/withdrawal/withdrawalReducer";
+import inquiryReducer from "../redux/accounts/inquiry/inquiryReducer";
 const rootReducer = combineReducers({
   casino: casinoReducer,
   esport: esportReducer,
@@ -44,6 +45,7 @@ const rootReducer = combineReducers({
   deposit: depositReducer,
   exchange: exchangeReducer,
   withdraw: withdrawalReducer,
+  inquiry: inquiryReducer,
 });
 
 export default rootReducer;
