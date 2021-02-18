@@ -241,7 +241,7 @@ const Inquiry = () => {
                     }}
                   >
                     <i class="fal fa-share color-white"></i>
-                    <span class="color-white">보내기 (create)</span>
+                    <span class="color-white">보내기 </span>
                   </button>
                 </div>
               </div>
