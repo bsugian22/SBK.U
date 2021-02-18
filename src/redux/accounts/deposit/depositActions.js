@@ -27,6 +27,8 @@ import {
   LIST_OF_TODELETE_DEPOSITS,
   SELECT_DEPOSIT_METHOD,
   CHANGE_CREATE_DEPOSIT_AMOUNT,
+  INCREMENT_DEPOSIT_AMOUNT,
+  DECREMENT_DEPOSIT_AMOUNT,
 } from "./depositTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
@@ -324,3 +326,16 @@ export const changeCreateDepositAmount = (amount) => {
     payload: amount,
   };
 };
+
+
+export const incrementDeposit =()=>{
+  return{
+    type: INCREMENT_DEPOSIT_AMOUNT
+  }
+}
+
+export const decrementDeposit = () =>{
+  return{
+    type: DECREMENT_DEPOSIT_AMOUNT
+  }
+}

@@ -27,6 +27,8 @@ import {
   LIST_OF_TODELETE_DEPOSITS,
   SELECT_DEPOSIT_METHOD,
   CHANGE_CREATE_DEPOSIT_AMOUNT,
+  INCREMENT_DEPOSIT_AMOUNT,
+  DECREMENT_DEPOSIT_AMOUNT,
 } from "./depositTypes";
 import sweetalert from "../../../plugins/sweetalert";
 const swal = new sweetalert();
@@ -333,6 +335,24 @@ const depositReducer = (state = initialState, action) => {
         createDeposit: {
           ...state.createDeposit,
           amount: action.payload.toString(),
+        },
+      };
+    case INCREMENT_DEPOSIT_AMOUNT:
+      let inc = Number(state.createDeposit.amount) + 1000;
+      return {
+        ...state,
+        createDeposit: {
+          ...state.createDeposit,
+          amount: inc.toString(),
+        },
+      };
+    case DECREMENT_DEPOSIT_AMOUNT:
+      let dec = Number(state.createDeposit.amount) - 1000;
+      return {
+        ...state,
+        createDeposit: {
+          ...state.createDeposit,
+          amount: dec.toString(),
         },
       };
     default:
