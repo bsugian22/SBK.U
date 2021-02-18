@@ -31,6 +31,8 @@ import {
   DECREMENT_EXCHANGE_AMOUNT,
   FROM_CASH_TO_CASINO_EXCHANGE,
   FROM_CASINO_TO_CASH_EXCHANGE,
+  RESET_CREATE_EXCHANGE,
+  CHECK_ALL_EXCHANGE,
 } from "./exchangeTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
@@ -355,5 +357,17 @@ export const fromCashToCasinoExchange = () => {
 export const fromCasinoToCashExchange = () => {
   return {
     type: FROM_CASINO_TO_CASH_EXCHANGE,
+  };
+};
+
+export const resetCreateExchange = () => {
+  return {
+    type: RESET_CREATE_EXCHANGE,
+  };
+};
+
+export const selectAllExchange = () => {
+  return {
+    type: CHECK_ALL_EXCHANGE,
   };
 };

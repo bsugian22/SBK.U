@@ -17,6 +17,8 @@ import {
   fromCasinoToCashExchange,
   incrementExchange,
   listOfToDeleteExchanges,
+  resetCreateExchange,
+  selectAllExchange,
   selectExchangeMethod,
   setExchanges,
 } from "../../redux/accounts/exchange/exchangeActions";
@@ -236,6 +238,9 @@ const Exchange = () => {
                     <button
                       type="button"
                       class="padding-15 background-transparent-b-10 color-white"
+                      onClick={() => {
+                        dispatch(resetCreateExchange());
+                      }}
                     >
                       초기화
                     </button>
@@ -248,7 +253,7 @@ const Exchange = () => {
                         dispatch(createExchangeAction(createExchange))
                       }
                     >
-                      전환신청 (create exchange)
+                      전환신청
                     </button>
                   </div>
                 </div>
@@ -257,15 +262,20 @@ const Exchange = () => {
           </div>
           <div class="exchange-right-content account-height widthp-50 flex-inherit padding-left-5 border-left flex-column scrollable-auto">
             <div class="red-shadow exchange-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
-              <span class="color-white">전환신청 내역 Here is the list </span>
+              <span class="color-white">전환신청 내역 </span>
             </div>
             <div class="widthp-100 exchange-history-content flex-inherit flex-column">
               <div class="history-item">
                 <table>
                   <thead>
                     <tr class="thead">
-                      <th class="height-45 background-transparent-b-10 color-grey border-top">
-                        전체 선택 one
+                      <th
+                        class="height-45 background-transparent-b-10 color-grey border-top"
+                        onClick={() => {
+                          dispatch(selectAllExchange());
+                        }}
+                      >
+                        전체 선택
                       </th>
                       <th class="height-45 background-transparent-b-10 color-grey border-top">
                         신청 시간
@@ -324,7 +334,10 @@ const Exchange = () => {
                               <span class="color-grey"> {item.from}</span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey">{item.amount}BTC</span>
+                              <span class="color-grey">
+                                {item.amount}
+                                {item.from == "cash" ? "원" : "BTC"}
+                              </span>
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-green">{item.to}</span>
@@ -342,11 +355,21 @@ const Exchange = () => {
                     type="button"
                     class="color-grey padding-10 background-transparent-b-10"
                     onClick={() => {
-                      dispatch(listOfToDeleteExchanges());
-                      dispatch(deleteExchangesRequest());
-                      dispatch(
-                        deleteExchanges(exchange.newExchangeToDeleteList)
-                      );
+                      let newList = [];
+                      exchange.exchanges.data.map((o) => {
+                        if (o.isChecked == true) {
+                          newList.push(o);
+                        }
+                      });
+                      if (newList.length == 0) {
+                        swal.warning("Please select a deposit to delete.");
+                      } else {
+                        dispatch(listOfToDeleteExchanges());
+                        dispatch(deleteExchangesRequest());
+                        dispatch(
+                          deleteExchanges(exchange.newExchangeToDeleteList)
+                        );
+                      }
                     }}
                   >
                     <i class="fal fa-trash-alt"></i>
