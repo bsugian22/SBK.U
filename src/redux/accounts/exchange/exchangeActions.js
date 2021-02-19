@@ -3,7 +3,7 @@ import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
 export const fetchExchangesRequest = () => {
   return {
-    type: types.types.FETCH_EXCHANGES_REQUEST,
+    type: types.FETCH_EXCHANGES_REQUEST,
   };
 };
 
@@ -174,7 +174,7 @@ export const hitList = () => {
 
 export const unfilteredAll = () => {
   return {
-    type: types.LIST_OF_DEPOSIT,
+    type: types.LIST_OF_EXCHANGE,
   };
 };
 export const setExchanges = (params) => {

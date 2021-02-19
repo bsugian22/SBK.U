@@ -174,7 +174,7 @@ export const hitList = () => {
 
 export const unfilteredAll = () => {
   return {
-    type: types.LIST_OF_DEPOSIT,
+    type: types.LIST_OF_WITHDRAWAL,
   };
 };
 export const setWithdrawals = (params) => {
