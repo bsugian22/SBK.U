@@ -1,118 +1,102 @@
-import {
-  FETCH_MAINS_REQUEST,
-  FETCH_MAINS_SUCCESS,
-  FETCH_MAINS_FAILURE,
-  FETCH_MAIN_REQUEST,
-  FETCH_MAIN_SUCCESS,
-  FETCH_MAIN_FAILURE,
-  CREATE_MAIN_REQUEST,
-  CREATE_MAIN_SUCCESS,
-  CREATE_MAIN_FAILURE,
-  UPDATE_MAIN_REQUEST,
-  UPDATE_MAIN_SUCCESS,
-  UPDATE_MAIN_FAILURE,
-  DELETE_MAINS_REQUEST,
-  DELETE_MAINS_SUCCESS,
-  DELETE_MAINS_FAILURE,
-} from "./mainTypes";
+import * as types from "./mainTypes";
 import axios from "axios";
 
 export const fetchMainsRequest = () => {
   return {
-    type: FETCH_MAINS_REQUEST,
+    type: types.FETCH_MAINS_REQUEST,
   };
 };
 
 export const fetchMainsSuccess = (mains) => {
   return {
-    type: FETCH_MAINS_SUCCESS,
+    type: types.FETCH_MAINS_SUCCESS,
     payload: mains,
   };
 };
 
 export const fetchMainsFailure = (error) => {
   return {
-    type: FETCH_MAINS_FAILURE,
+    type: types.FETCH_MAINS_FAILURE,
     payload: error,
   };
 };
 
 export const fetchMainRequest = () => {
   return {
-    type: FETCH_MAIN_REQUEST,
+    type: types.FETCH_MAIN_REQUEST,
   };
 };
 
 export const fetchMainSuccess = (main) => {
   return {
-    type: FETCH_MAIN_SUCCESS,
+    type: types.FETCH_MAIN_SUCCESS,
     payload: main,
   };
 };
 
 export const fetchMainFailure = (error) => {
   return {
-    type: FETCH_MAIN_FAILURE,
+    type: types.FETCH_MAIN_FAILURE,
     payload: error,
   };
 };
 
 export const createMainRequest = () => {
   return {
-    type: CREATE_MAIN_REQUEST,
+    type: types.CREATE_MAIN_REQUEST,
   };
 };
 
 export const createMainSuccess = (main) => {
   return {
-    type: CREATE_MAIN_SUCCESS,
+    type: types.CREATE_MAIN_SUCCESS,
     payload: main,
   };
 };
 
 export const createMainFailure = (error) => {
   return {
-    type: CREATE_MAIN_FAILURE,
+    type: types.CREATE_MAIN_FAILURE,
     payload: error,
   };
 };
 
 export const updateMainRequest = () => {
   return {
-    type: UPDATE_MAIN_REQUEST,
+    type: types.UPDATE_MAIN_REQUEST,
   };
 };
 
 export const updateMainSuccess = (main) => {
   return {
-    type: UPDATE_MAIN_SUCCESS,
+    type: types.UPDATE_MAIN_SUCCESS,
     payload: main,
   };
 };
 
 export const updateMainFailure = (error) => {
   return {
-    type: UPDATE_MAIN_FAILURE,
+    type: types.UPDATE_MAIN_FAILURE,
     payload: error,
   };
 };
 
 export const deleteMainsRequest = () => {
   return {
-    type: DELETE_MAINS_REQUEST,
+    type: types.DELETE_MAINS_REQUEST,
   };
 };
 
 export const deleteMainsSuccess = (mains) => {
   return {
-    type: DELETE_MAINS_SUCCESS,
+    type: types.DELETE_MAINS_SUCCESS,
     payload: mains,
   };
 };
 
 export const deleteMainsFailure = (error) => {
   return {
-    type: DELETE_MAINS_FAILURE,
+    type: types.DELETE_MAINS_FAILURE,
     payload: error,
   };
 };

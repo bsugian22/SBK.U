@@ -1,176 +1,139 @@
-import {
-  FETCH_INQUIRIES_REQUEST,
-  FETCH_INQUIRIES_SUCCESS,
-  FETCH_INQUIRIES_FAILURE,
-  FETCH_INQUIRY_REQUEST,
-  FETCH_INQUIRY_SUCCESS,
-  FETCH_INQUIRY_FAILURE,
-  CREATE_INQUIRY_REQUEST,
-  CREATE_INQUIRY_SUCCESS,
-  CREATE_INQUIRY_FAILURE,
-  UPDATE_INQUIRY_REQUEST,
-  UPDATE_INQUIRY_SUCCESS,
-  UPDATE_INQUIRY_FAILURE,
-  DELETE_INQUIRIES_REQUEST,
-  DELETE_INQUIRIES_SUCCESS,
-  DELETE_INQUIRIES_FAILURE,
-  OPEN_CREATE_MODAL,
-  CLOSE_CREATE_MODAL,
-  CHANGE_INQUIRY_AMOUNT,
-  CHANGE_INQUIRY_CATEGORY,
-  CHANGE_INQUIRY_IDS,
-  FILTERED_AESTHETIC_LIST,
-  FILTERED_HIT_LIST,
-  FILTERED_PROCEEDING_LIST,
-  LIST_OF_INQUIRY,
-  CHECK_INQUIRY_CERTAIN_ITEM,
-  LIST_OF_TODELETE_INQUIRIES,
-  SELECT_INQUIRY_METHOD,
-  CHANGE_CREATE_INQUIRY_AMOUNT,
-  INCREMENT_INQUIRY_AMOUNT,
-  DECREMENT_INQUIRY_AMOUNT,
-  FROM_CASH_TO_CASINO_INQUIRY,
-  FROM_CASINO_TO_CASH_INQUIRY,
-  RESET_CREATE_INQUIRY,
-  CHECK_ALL_INQUIRY,
-  CHANGE_INQUIRY_TITLE,
-  CHANGE_INQUIRY_CONTENT,
-} from "./inquiryTypes";
+import * as types from "./inquiryTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
 export const fetchInquiriesRequest = () => {
   return {
-    type: FETCH_INQUIRIES_REQUEST,
+    type: types.FETCH_INQUIRIES_REQUEST,
   };
 };
 
 export const fetchInquiriesSuccess = (inquiries) => {
   return {
-    type: FETCH_INQUIRIES_SUCCESS,
+    type: types.FETCH_INQUIRIES_SUCCESS,
     payload: inquiries,
   };
 };
 
 export const fetchInquiriesFailure = (error) => {
   return {
-    type: FETCH_INQUIRIES_FAILURE,
+    type: types.FETCH_INQUIRIES_FAILURE,
     payload: error,
   };
 };
 
 export const fetchInquiryRequest = () => {
   return {
-    type: FETCH_INQUIRY_REQUEST,
+    type: types.FETCH_INQUIRY_REQUEST,
   };
 };
 
 export const fetchInquiriesuccess = (Inquiry) => {
   return {
-    type: FETCH_INQUIRY_SUCCESS,
+    type: types.FETCH_INQUIRY_SUCCESS,
     payload: Inquiry,
   };
 };
 
 export const fetchInquiryFailure = (error) => {
   return {
-    type: FETCH_INQUIRY_FAILURE,
+    type: types.FETCH_INQUIRY_FAILURE,
     payload: error,
   };
 };
 
 export const createInquiryRequest = () => {
   return {
-    type: CREATE_INQUIRY_REQUEST,
+    type: types.CREATE_INQUIRY_REQUEST,
   };
 };
 
 export const createInquiriesuccess = (message) => {
   return {
-    type: CREATE_INQUIRY_SUCCESS,
+    type: types.CREATE_INQUIRY_SUCCESS,
     payload: message,
   };
 };
 
 export const createInquiryFailure = (error) => {
   return {
-    type: CREATE_INQUIRY_FAILURE,
+    type: types.CREATE_INQUIRY_FAILURE,
     payload: error,
   };
 };
 
 export const updateInquiryRequest = () => {
   return {
-    type: UPDATE_INQUIRY_REQUEST,
+    type: types.UPDATE_INQUIRY_REQUEST,
   };
 };
 
 export const updateInquiriesuccess = (Inquiry) => {
   return {
-    type: UPDATE_INQUIRY_SUCCESS,
+    type: types.UPDATE_INQUIRY_SUCCESS,
     payload: Inquiry,
   };
 };
 
 export const updateInquiryFailure = (error) => {
   return {
-    type: UPDATE_INQUIRY_FAILURE,
+    type: types.UPDATE_INQUIRY_FAILURE,
     payload: error,
   };
 };
 
 export const deleteInquiriesRequest = () => {
   return {
-    type: DELETE_INQUIRIES_REQUEST,
+    type: types.DELETE_INQUIRIES_REQUEST,
   };
 };
 
 export const deleteInquiriesSuccess = (inquiries) => {
   return {
-    type: DELETE_INQUIRIES_SUCCESS,
+    type: types.DELETE_INQUIRIES_SUCCESS,
     payload: inquiries,
   };
 };
 
 export const deleteInquiriesFailure = (error) => {
   return {
-    type: DELETE_INQUIRIES_FAILURE,
+    type: types.DELETE_INQUIRIES_FAILURE,
     payload: error,
   };
 };
 export const openModal = () => {
   return {
-    type: OPEN_CREATE_MODAL,
+    type: types.OPEN_CREATE_MODAL,
   };
 };
 export const closeModal = () => {
   return {
-    type: CLOSE_CREATE_MODAL,
+    type: types.CLOSE_CREATE_MODAL,
   };
 };
 
 export const changeInquiryCategory = (category) => {
   return {
-    type: CHANGE_INQUIRY_CATEGORY,
+    type: types.CHANGE_INQUIRY_CATEGORY,
     payload: category,
   };
 };
 
 export const changeInquiryAmount = (amount) => {
   return {
-    type: CHANGE_INQUIRY_AMOUNT,
+    type: types.CHANGE_INQUIRY_AMOUNT,
     payload: amount,
   };
 };
 
 export const changeInquiryIds = (ids) => {
   return {
-    type: CHANGE_INQUIRY_IDS,
+    type: types.CHANGE_INQUIRY_IDS,
     payload: ids,
   };
 };
 export const filteredProceeding = () => {
   return {
-    type: FILTERED_PROCEEDING_LIST,
+    type: types.FILTERED_PROCEEDING_LIST,
   };
 };
 
@@ -188,13 +151,13 @@ export const allInquiries = () => {
 
 export const filteredHit = () => {
   return {
-    type: FILTERED_HIT_LIST,
+    type: types.FILTERED_HIT_LIST,
   };
 };
 
 export const filteredAesthetic = () => {
   return {
-    type: FILTERED_AESTHETIC_LIST,
+    type: types.FILTERED_AESTHETIC_LIST,
   };
 };
 export const aetheticList = () => {
@@ -211,7 +174,7 @@ export const hitList = () => {
 
 export const unfilteredAll = () => {
   return {
-    type: LIST_OF_INQUIRY,
+    type: types.LIST_OF_INQUIRY,
   };
 };
 export const setInquiries = (params) => {
@@ -311,78 +274,78 @@ export const deleteInquiries = (list) => {
 
 export const checkInquiryCertainItem = (data) => {
   return {
-    type: CHECK_INQUIRY_CERTAIN_ITEM,
+    type: types.CHECK_INQUIRY_CERTAIN_ITEM,
     payload: data,
   };
 };
 
 export const listOfToDeleteInquiries = () => {
   return {
-    type: LIST_OF_TODELETE_INQUIRIES,
+    type: types.LIST_OF_TODELETE_INQUIRIES,
   };
 };
 
 export const selectInquiryMethod = (status) => {
   return {
-    type: SELECT_INQUIRY_METHOD,
+    type: types.SELECT_INQUIRY_METHOD,
     payload: status,
   };
 };
 
 export const changeCreateInquiryAmount = (amount) => {
   return {
-    type: CHANGE_CREATE_INQUIRY_AMOUNT,
+    type: types.CHANGE_CREATE_INQUIRY_AMOUNT,
     payload: amount,
   };
 };
 
 export const incrementInquiry = () => {
   return {
-    type: INCREMENT_INQUIRY_AMOUNT,
+    type: types.INCREMENT_INQUIRY_AMOUNT,
   };
 };
 
 export const decrementInquiry = (message) => {
   return {
-    type: DECREMENT_INQUIRY_AMOUNT,
+    type: types.DECREMENT_INQUIRY_AMOUNT,
     payload: message,
   };
 };
 
 export const fromCashToCasinoInquiry = () => {
   return {
-    type: FROM_CASH_TO_CASINO_INQUIRY,
+    type: types.FROM_CASH_TO_CASINO_INQUIRY,
   };
 };
 
 export const fromCasinoToCashInquiry = () => {
   return {
-    type: FROM_CASINO_TO_CASH_INQUIRY,
+    type: types.FROM_CASINO_TO_CASH_INQUIRY,
   };
 };
 
 export const resetCreateInquiry = () => {
   return {
-    type: RESET_CREATE_INQUIRY,
+    type: types.RESET_CREATE_INQUIRY,
   };
 };
 
 export const selectAllInquiry = () => {
   return {
-    type: CHECK_ALL_INQUIRY,
+    type: types.CHECK_ALL_INQUIRY,
   };
 };
 
 export const changeInquiryTitle = (title) => {
   return {
-    type: CHANGE_INQUIRY_TITLE,
+    type: types.CHANGE_INQUIRY_TITLE,
     payload: title,
   };
 };
 
 export const changeInquiryContent = (content) => {
   return {
-    type: CHANGE_INQUIRY_CONTENT,
+    type: types.CHANGE_INQUIRY_CONTENT,
     payload: content,
   };
 };

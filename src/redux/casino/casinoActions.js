@@ -1,118 +1,102 @@
-import {
-  FETCH_CASINOS_REQUEST,
-  FETCH_CASINOS_SUCCESS,
-  FETCH_CASINOS_FAILURE,
-  FETCH_CASINO_REQUEST,
-  FETCH_CASINO_SUCCESS,
-  FETCH_CASINO_FAILURE,
-  CREATE_CASINO_REQUEST,
-  CREATE_CASINO_SUCCESS,
-  CREATE_CASINO_FAILURE,
-  UPDATE_CASINO_REQUEST,
-  UPDATE_CASINO_SUCCESS,
-  UPDATE_CASINO_FAILURE,
-  DELETE_CASINOS_REQUEST,
-  DELETE_CASINOS_SUCCESS,
-  DELETE_CASINOS_FAILURE,
-} from "./casinoTypes";
+import * as types from "./casinoTypes";
 import axios from "axios";
 
 export const fetchCasinosRequest = () => {
   return {
-    type: FETCH_CASINOS_REQUEST,
+    type: types.FETCH_CASINOS_REQUEST,
   };
 };
 
 export const fetchCasinosSuccess = (casinos) => {
   return {
-    type: FETCH_CASINOS_SUCCESS,
+    type: types.FETCH_CASINOS_SUCCESS,
     payload: casinos,
   };
 };
 
 export const fetchCasinosFailure = (error) => {
   return {
-    type: FETCH_CASINOS_FAILURE,
+    type: types.FETCH_CASINOS_FAILURE,
     payload: error,
   };
 };
 
 export const fetchCasinoRequest = () => {
   return {
-    type: FETCH_CASINO_REQUEST,
+    type: types.FETCH_CASINO_REQUEST,
   };
 };
 
 export const fetchCasinoSuccess = (casino) => {
   return {
-    type: FETCH_CASINO_SUCCESS,
+    type: types.FETCH_CASINO_SUCCESS,
     payload: casino,
   };
 };
 
 export const fetchCasinoFailure = (error) => {
   return {
-    type: FETCH_CASINO_FAILURE,
+    type: types.FETCH_CASINO_FAILURE,
     payload: error,
   };
 };
 
 export const createCasinoRequest = () => {
   return {
-    type: CREATE_CASINO_REQUEST,
+    type: types.CREATE_CASINO_REQUEST,
   };
 };
 
 export const createCasinoSuccess = (casino) => {
   return {
-    type: CREATE_CASINO_SUCCESS,
+    type: types.CREATE_CASINO_SUCCESS,
     payload: casino,
   };
 };
 
 export const createCasinoFailure = (error) => {
   return {
-    type: CREATE_CASINO_FAILURE,
+    type: types.CREATE_CASINO_FAILURE,
     payload: error,
   };
 };
 
 export const updateCasinoRequest = () => {
   return {
-    type: UPDATE_CASINO_REQUEST,
+    type: types.UPDATE_CASINO_REQUEST,
   };
 };
 
 export const updateCasinoSuccess = (casino) => {
   return {
-    type: UPDATE_CASINO_SUCCESS,
+    type: types.UPDATE_CASINO_SUCCESS,
     payload: casino,
   };
 };
 
 export const updateCasinoFailure = (error) => {
   return {
-    type: UPDATE_CASINO_FAILURE,
+    type: types.UPDATE_CASINO_FAILURE,
     payload: error,
   };
 };
 
 export const deleteCasinosRequest = () => {
   return {
-    type: DELETE_CASINOS_REQUEST,
+    type: types.DELETE_CASINOS_REQUEST,
   };
 };
 
 export const deleteCasinosSuccess = (casinos) => {
   return {
-    type: DELETE_CASINOS_SUCCESS,
+    type: types.DELETE_CASINOS_SUCCESS,
     payload: casinos,
   };
 };
 
 export const deleteCasinosFailure = (error) => {
   return {
-    type: DELETE_CASINOS_FAILURE,
+    type: types.DELETE_CASINOS_FAILURE,
     payload: error,
   };
 };

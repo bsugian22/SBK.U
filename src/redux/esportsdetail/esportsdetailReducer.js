@@ -1,20 +1,4 @@
-import {
-  FETCH_ESPORTSDETAILS_REQUEST,
-  FETCH_ESPORTSDETAILS_SUCCESS,
-  FETCH_ESPORTSDETAILS_FAILURE,
-  FETCH_ESPORTSDETAIL_REQUEST,
-  FETCH_ESPORTSDETAIL_SUCCESS,
-  FETCH_ESPORTSDETAIL_FAILURE,
-  CREATE_ESPORTSDETAIL_REQUEST,
-  CREATE_ESPORTSDETAIL_SUCCESS,
-  CREATE_ESPORTSDETAIL_FAILURE,
-  UPDATE_ESPORTSDETAIL_REQUEST,
-  UPDATE_ESPORTSDETAIL_SUCCESS,
-  UPDATE_ESPORTSDETAIL_FAILURE,
-  DELETE_ESPORTSDETAILS_REQUEST,
-  DELETE_ESPORTSDETAILS_SUCCESS,
-  DELETE_ESPORTSDETAILS_FAILURE,
-} from "./esportsdetailTypes";
+import * as types from "./esportsdetailTypes";
 
 const initialState = {
   loading: false,
@@ -25,90 +9,90 @@ const initialState = {
 const esportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case FETCH_ESPORTSDETAILS_REQUEST:
+    case types. FETCH_ESPORTSDETAILS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_ESPORTSDETAILS_SUCCESS:
+    case types. FETCH_ESPORTSDETAILS_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_ESPORTSDETAILS_FAILURE:
+    case types. FETCH_ESPORTSDETAILS_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case FETCH_ESPORTSDETAIL_REQUEST:
+    case types. FETCH_ESPORTSDETAIL_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_ESPORTSDETAIL_SUCCESS:
+    case types. FETCH_ESPORTSDETAIL_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_ESPORTSDETAIL_FAILURE:
+    case types. FETCH_ESPORTSDETAIL_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case CREATE_ESPORTSDETAIL_REQUEST:
+    case types. CREATE_ESPORTSDETAIL_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case CREATE_ESPORTSDETAIL_SUCCESS:
+    case types. CREATE_ESPORTSDETAIL_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case CREATE_ESPORTSDETAIL_FAILURE:
+    case types. CREATE_ESPORTSDETAIL_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case UPDATE_ESPORTSDETAIL_REQUEST:
+    case types. UPDATE_ESPORTSDETAIL_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case UPDATE_ESPORTSDETAIL_SUCCESS:
+    case types. UPDATE_ESPORTSDETAIL_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case UPDATE_ESPORTSDETAIL_FAILURE:
+    case types. UPDATE_ESPORTSDETAIL_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case DELETE_ESPORTSDETAILS_REQUEST:
+    case types. DELETE_ESPORTSDETAILS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case DELETE_ESPORTSDETAILS_SUCCESS:
+    case types. DELETE_ESPORTSDETAILS_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case DELETE_ESPORTSDETAILS_FAILURE:
+    case types. DELETE_ESPORTSDETAILS_FAILURE:
       return {
         loading: false,
         data: [],

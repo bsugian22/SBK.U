@@ -1,118 +1,102 @@
-import {
-  FETCH_INPLAYDETAILS_REQUEST,
-  FETCH_INPLAYDETAILS_SUCCESS,
-  FETCH_INPLAYDETAILS_FAILURE,
-  FETCH_INPLAYDETAIL_REQUEST,
-  FETCH_INPLAYDETAIL_SUCCESS,
-  FETCH_INPLAYDETAIL_FAILURE,
-  CREATE_INPLAYDETAIL_REQUEST,
-  CREATE_INPLAYDETAIL_SUCCESS,
-  CREATE_INPLAYDETAIL_FAILURE,
-  UPDATE_INPLAYDETAIL_REQUEST,
-  UPDATE_INPLAYDETAIL_SUCCESS,
-  UPDATE_INPLAYDETAIL_FAILURE,
-  DELETE_INPLAYDETAILS_REQUEST,
-  DELETE_INPLAYDETAILS_SUCCESS,
-  DELETE_INPLAYDETAILS_FAILURE,
-} from "./inplaydetailTypes";
+import * as types from "./inplaydetailTypes";
 import axios from "axios";
 
 export const fetchInplaydetailsRequest = () => {
   return {
-    type: FETCH_INPLAYDETAILS_REQUEST,
+    type: types.FETCH_INPLAYDETAILS_REQUEST,
   };
 };
 
 export const fetchInplaydetailsSuccess = (inplays) => {
   return {
-    type: FETCH_INPLAYDETAILS_SUCCESS,
+    type: types.FETCH_INPLAYDETAILS_SUCCESS,
     payload: inplays,
   };
 };
 
 export const fetchInplaydetailsFailure = (error) => {
   return {
-    type: FETCH_INPLAYDETAILS_FAILURE,
+    type: types.FETCH_INPLAYDETAILS_FAILURE,
     payload: error,
   };
 };
 
 export const fetchInplaydetailRequest = () => {
   return {
-    type: FETCH_INPLAYDETAIL_REQUEST,
+    type: types.FETCH_INPLAYDETAIL_REQUEST,
   };
 };
 
 export const fetchInplaydetailSuccess = (inplay) => {
   return {
-    type: FETCH_INPLAYDETAIL_SUCCESS,
+    type: types.FETCH_INPLAYDETAIL_SUCCESS,
     payload: inplay,
   };
 };
 
 export const fetchInplaydetailFailure = (error) => {
   return {
-    type: FETCH_INPLAYDETAIL_FAILURE,
+    type: types.FETCH_INPLAYDETAIL_FAILURE,
     payload: error,
   };
 };
 
 export const createInplaydetailRequest = () => {
   return {
-    type: CREATE_INPLAYDETAIL_REQUEST,
+    type: types.CREATE_INPLAYDETAIL_REQUEST,
   };
 };
 
 export const createInplaydetailSuccess = (inplaydetail) => {
   return {
-    type: CREATE_INPLAYDETAIL_SUCCESS,
+    type: types.CREATE_INPLAYDETAIL_SUCCESS,
     payload: inplaydetail,
   };
 };
 
 export const createInplaydetailFailure = (error) => {
   return {
-    type: CREATE_INPLAYDETAIL_FAILURE,
+    type: types.CREATE_INPLAYDETAIL_FAILURE,
     payload: error,
   };
 };
 
 export const updateInplaydetailRequest = () => {
   return {
-    type: UPDATE_INPLAYDETAIL_REQUEST,
+    type: types.UPDATE_INPLAYDETAIL_REQUEST,
   };
 };
 
 export const updateInplaydetailSuccess = (inplaydetail) => {
   return {
-    type: UPDATE_INPLAYDETAIL_SUCCESS,
+    type: types.UPDATE_INPLAYDETAIL_SUCCESS,
     payload: inplaydetail,
   };
 };
 
 export const updateInplaydetailFailure = (error) => {
   return {
-    type: UPDATE_INPLAYDETAIL_FAILURE,
+    type: types.UPDATE_INPLAYDETAIL_FAILURE,
     payload: error,
   };
 };
 
 export const deleteInplaydetailsRequest = () => {
   return {
-    type: DELETE_INPLAYDETAILS_REQUEST,
+    type: types.DELETE_INPLAYDETAILS_REQUEST,
   };
 };
 
 export const deleteInplaydetailsSuccess = (inplaysdetails) => {
   return {
-    type: DELETE_INPLAYDETAILS_SUCCESS,
+    type: types.DELETE_INPLAYDETAILS_SUCCESS,
     payload: inplaydetails,
   };
 };
 
 export const deleteInplaydetailsFailure = (error) => {
   return {
-    type: DELETE_INPLAYDETAILS_FAILURE,
+    type: types.DELETE_INPLAYDETAILS_FAILURE,
     payload: error,
   };
 };

@@ -1,39 +1,4 @@
-import {
-  FETCH_EXCHANGES_REQUEST,
-  FETCH_EXCHANGES_SUCCESS,
-  FETCH_EXCHANGES_FAILURE,
-  FETCH_EXCHANGE_REQUEST,
-  FETCH_EXCHANGE_SUCCESS,
-  FETCH_EXCHANGE_FAILURE,
-  CREATE_EXCHANGE_REQUEST,
-  CREATE_EXCHANGE_SUCCESS,
-  CREATE_EXCHANGE_FAILURE,
-  UPDATE_EXCHANGE_REQUEST,
-  UPDATE_EXCHANGE_SUCCESS,
-  UPDATE_EXCHANGE_FAILURE,
-  DELETE_EXCHANGES_REQUEST,
-  DELETE_EXCHANGES_SUCCESS,
-  DELETE_EXCHANGES_FAILURE,
-  OPEN_CREATE_MODAL,
-  CLOSE_CREATE_MODAL,
-  CHANGE_EXCHANGE_AMOUNT,
-  CHANGE_EXCHANGE_CATEGORY,
-  CHANGE_EXCHANGE_IDS,
-  FILTERED_AESTHETIC_LIST,
-  FILTERED_HIT_LIST,
-  FILTERED_PROCEEDING_LIST,
-  LIST_OF_EXCHANGE,
-  CHECK_EXCHANGE_CERTAIN_ITEM,
-  LIST_OF_TODELETE_EXCHANGES,
-  SELECT_EXCHANGE_METHOD,
-  CHANGE_CREATE_EXCHANGE_AMOUNT,
-  INCREMENT_EXCHANGE_AMOUNT,
-  DECREMENT_EXCHANGE_AMOUNT,
-  FROM_CASINO_TO_CASH_EXCHANGE,
-  FROM_CASH_TO_CASINO_EXCHANGE,
-  RESET_CREATE_EXCHANGE,
-  CHECK_ALL_EXCHANGE,
-} from "./exchangeTypes";
+import * as types from "./exchangeTypes";
 import sweetalert from "../../../plugins/sweetalert";
 const swal = new sweetalert();
 const initialState = {
@@ -67,7 +32,7 @@ const initialState = {
 
 const exchangeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_EXCHANGES_REQUEST:
+    case types.FETCH_EXCHANGES_REQUEST:
       return {
         ...state,
         loading: true,
@@ -91,7 +56,7 @@ const exchangeReducer = (state = initialState, action) => {
         closeModal: false,
         createExchangeStatus: "cash",
       };
-    case FETCH_EXCHANGES_SUCCESS:
+    case types.FETCH_EXCHANGES_SUCCESS:
       let newData = {
         data: [],
         total: 0,
@@ -130,7 +95,7 @@ const exchangeReducer = (state = initialState, action) => {
         closeModal: false,
         createExchangeStatus: "cash",
       };
-    case FETCH_EXCHANGES_FAILURE:
+    case types.FETCH_EXCHANGES_FAILURE:
       swal.error(action.payload);
       return {
         ...state,
@@ -151,25 +116,25 @@ const exchangeReducer = (state = initialState, action) => {
         },
       };
 
-    case FETCH_EXCHANGE_REQUEST:
+    case types.FETCH_EXCHANGE_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_EXCHANGE_SUCCESS:
+    case types.FETCH_EXCHANGE_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_EXCHANGE_FAILURE:
+    case types.FETCH_EXCHANGE_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case CREATE_EXCHANGE_REQUEST:
+    case types.CREATE_EXCHANGE_REQUEST:
       return {
         ...state,
         loading: true,
@@ -179,7 +144,7 @@ const exchangeReducer = (state = initialState, action) => {
           to: state.createExchange.to,
         },
       };
-    case CREATE_EXCHANGE_SUCCESS:
+    case types.CREATE_EXCHANGE_SUCCESS:
       swal.success(action.payload);
       return {
         ...state,
@@ -187,7 +152,7 @@ const exchangeReducer = (state = initialState, action) => {
         error: "",
         showModal: false,
       };
-    case CREATE_EXCHANGE_FAILURE:
+    case types.CREATE_EXCHANGE_FAILURE:
       swal.showError(action.payload);
       return {
         ...state,
@@ -196,19 +161,19 @@ const exchangeReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
-    case UPDATE_EXCHANGE_REQUEST:
+    case types.UPDATE_EXCHANGE_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case UPDATE_EXCHANGE_SUCCESS:
+    case types.UPDATE_EXCHANGE_SUCCESS:
       return {
         ...state,
         loading: false,
         data: action.payload,
         error: "",
       };
-    case UPDATE_EXCHANGE_FAILURE:
+    case types.UPDATE_EXCHANGE_FAILURE:
       return {
         ...state,
         loading: false,
@@ -216,12 +181,12 @@ const exchangeReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
-    case DELETE_EXCHANGES_REQUEST:
+    case types.DELETE_EXCHANGES_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case DELETE_EXCHANGES_SUCCESS:
+    case types.DELETE_EXCHANGES_SUCCESS:
       swal.success(action.payload.message);
       return {
         ...state,
@@ -231,44 +196,44 @@ const exchangeReducer = (state = initialState, action) => {
           exchange_activities: [],
         },
       };
-    case DELETE_EXCHANGES_FAILURE:
+    case types.DELETE_EXCHANGES_FAILURE:
       swal.showError(action.payload);
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
-    case OPEN_CREATE_MODAL:
+    case types.OPEN_CREATE_MODAL:
       return {
         ...state,
         loading: false,
         error: "",
         showModal: true,
       };
-    case CLOSE_CREATE_MODAL:
+    case types.CLOSE_CREATE_MODAL:
       return {
         ...state,
         loading: false,
         error: "",
         showModal: false,
       };
-    case CHANGE_EXCHANGE_AMOUNT:
+    case types.CHANGE_EXCHANGE_AMOUNT:
       return {
         ...state,
         createExchange: { ...state.createExchange, amount: action.payload },
       };
 
-    case CHANGE_EXCHANGE_CATEGORY:
+    case types.CHANGE_EXCHANGE_CATEGORY:
       return {
         ...state,
         createExchange: { ...state.createExchange, category: action.payload },
       };
-    case CHANGE_EXCHANGE_IDS:
+    case types.CHANGE_EXCHANGE_IDS:
       return {
         ...state,
         createExchange: { ...state.createExchange, outcomes: action.payload },
       };
-    case FILTERED_PROCEEDING_LIST:
+    case types.FILTERED_PROCEEDING_LIST:
       let data = state.exchangeMainList.data.filter(
         (o) => o.status == "WAITING"
       );
@@ -277,13 +242,13 @@ const exchangeReducer = (state = initialState, action) => {
         exchanges: { ...state.exchanges, data: data },
         list: "WAITING",
       };
-    case LIST_OF_EXCHANGE:
+    case types.LIST_OF_EXCHANGE:
       return {
         ...state,
         exchanges: { ...state.exchanges, data: state.exchangeMainList.data },
         list: "ALL",
       };
-    case FILTERED_HIT_LIST:
+    case types.FILTERED_HIT_LIST:
       let hit = state.exchangeMainList.data.filter(
         (o) => o.status == "WINNING"
       );
@@ -292,7 +257,7 @@ const exchangeReducer = (state = initialState, action) => {
         exchanges: { ...state.exchanges, data: hit },
         list: "WINNING",
       };
-    case FILTERED_AESTHETIC_LIST:
+    case types.FILTERED_AESTHETIC_LIST:
       let defeated = state.exchangeMainList.data.filter(
         (o) => o.status == "DEFEATED"
       );
@@ -301,7 +266,7 @@ const exchangeReducer = (state = initialState, action) => {
         exchanges: { ...state.exchanges, data: defeated },
         list: "DEFEATED",
       };
-    case CHECK_EXCHANGE_CERTAIN_ITEM:
+    case types.CHECK_EXCHANGE_CERTAIN_ITEM:
       state.exchanges.data.map((i) => {
         if (i.id == action.payload.id) {
           i.isChecked = action.payload.status;
@@ -312,7 +277,7 @@ const exchangeReducer = (state = initialState, action) => {
         ...state,
         exchanges: { ...state.exchanges, data: state.exchanges.data },
       };
-    case LIST_OF_TODELETE_EXCHANGES:
+    case types.LIST_OF_TODELETE_EXCHANGES:
       let newList = {
         exchange_activities: [],
       };
@@ -340,12 +305,12 @@ const exchangeReducer = (state = initialState, action) => {
           ],
         },
       };
-    case SELECT_EXCHANGE_METHOD:
+    case types.SELECT_EXCHANGE_METHOD:
       return {
         ...state,
         createExchangeStatus: action.payload,
       };
-    case CHANGE_CREATE_EXCHANGE_AMOUNT:
+    case types.CHANGE_CREATE_EXCHANGE_AMOUNT:
       return {
         ...state,
         createExchange: {
@@ -353,7 +318,7 @@ const exchangeReducer = (state = initialState, action) => {
           amount: action.payload.toString(),
         },
       };
-    case INCREMENT_EXCHANGE_AMOUNT:
+    case types.INCREMENT_EXCHANGE_AMOUNT:
       let inc = Number(state.createExchange.amount) + 1000;
       return {
         ...state,
@@ -362,7 +327,7 @@ const exchangeReducer = (state = initialState, action) => {
           amount: inc.toString(),
         },
       };
-    case DECREMENT_EXCHANGE_AMOUNT:
+    case types.DECREMENT_EXCHANGE_AMOUNT:
       let dec = Number(state.createExchange.amount) - 1000;
       return {
         ...state,
@@ -371,7 +336,7 @@ const exchangeReducer = (state = initialState, action) => {
           amount: dec.toString(),
         },
       };
-    case FROM_CASH_TO_CASINO_EXCHANGE:
+    case types.FROM_CASH_TO_CASINO_EXCHANGE:
       return {
         ...state,
         createExchange: {
@@ -380,7 +345,7 @@ const exchangeReducer = (state = initialState, action) => {
           to: "casino_cash",
         },
       };
-    case FROM_CASINO_TO_CASH_EXCHANGE:
+    case types.FROM_CASINO_TO_CASH_EXCHANGE:
       return {
         ...state,
         createExchange: {
@@ -389,7 +354,7 @@ const exchangeReducer = (state = initialState, action) => {
           to: "cash",
         },
       };
-    case RESET_CREATE_EXCHANGE:
+    case types.RESET_CREATE_EXCHANGE:
       return {
         ...state,
         createExchange: {
@@ -400,7 +365,7 @@ const exchangeReducer = (state = initialState, action) => {
         },
         createExchangeStatus: "cash",
       };
-    case CHECK_ALL_EXCHANGE:
+    case types.CHECK_ALL_EXCHANGE:
       state.exchanges.data.map((i) => {
         i.isChecked = true;
       });

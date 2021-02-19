@@ -1,163 +1,138 @@
-import {
-  FETCH_POSITIONS_REQUEST,
-  FETCH_POSITIONS_SUCCESS,
-  FETCH_POSITIONS_FAILURE,
-  FETCH_POSITION_REQUEST,
-  FETCH_POSITION_SUCCESS,
-  FETCH_POSITION_FAILURE,
-  CREATE_POSITION_REQUEST,
-  CREATE_POSITION_SUCCESS,
-  CREATE_POSITION_FAILURE,
-  UPDATE_POSITION_REQUEST,
-  UPDATE_POSITION_SUCCESS,
-  UPDATE_POSITION_FAILURE,
-  DELETE_POSITIONS_REQUEST,
-  DELETE_POSITIONS_SUCCESS,
-  DELETE_POSITIONS_FAILURE,
-  OPEN_CREATE_MODAL,
-  CLOSE_CREATE_MODAL,
-  CHANGE_POSITION_AMOUNT,
-  CHANGE_POSITION_CATEGORY,
-  CHANGE_POSITION_IDS,
-  FILTERED_AESTHETIC_LIST,
-  FILTERED_HIT_LIST,
-  FILTERED_PROCEEDING_LIST,
-  LIST_OF_POSITION,
-} from "./positionTypes";
+import * as types from "./positionTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
 export const fetchPositionsRequest = () => {
   return {
-    type: FETCH_POSITIONS_REQUEST,
+    type: types.FETCH_POSITIONS_REQUEST,
   };
 };
 
 export const fetchPositionsSuccess = (positions) => {
   return {
-    type: FETCH_POSITIONS_SUCCESS,
+    type: types.FETCH_POSITIONS_SUCCESS,
     payload: positions,
   };
 };
 
 export const fetchPositionsFailure = (error) => {
   return {
-    type: FETCH_POSITIONS_FAILURE,
+    type: types.FETCH_POSITIONS_FAILURE,
     payload: error,
   };
 };
 
 export const fetchPositionRequest = () => {
   return {
-    type: FETCH_POSITION_REQUEST,
+    type: types.FETCH_POSITION_REQUEST,
   };
 };
 
 export const fetchPositionSuccess = (position) => {
   return {
-    type: FETCH_POSITION_SUCCESS,
+    type: types.FETCH_POSITION_SUCCESS,
     payload: position,
   };
 };
 
 export const fetchPositionFailure = (error) => {
   return {
-    type: FETCH_POSITION_FAILURE,
+    type: types.FETCH_POSITION_FAILURE,
     payload: error,
   };
 };
 
 export const createPositionRequest = () => {
   return {
-    type: CREATE_POSITION_REQUEST,
+    type: types.CREATE_POSITION_REQUEST,
   };
 };
 
 export const createPositionSuccess = () => {
   return {
-    type: CREATE_POSITION_SUCCESS,
+    type: types.CREATE_POSITION_SUCCESS,
   };
 };
 
 export const createPositionFailure = (error) => {
   return {
-    type: CREATE_POSITION_FAILURE,
+    type: types.CREATE_POSITION_FAILURE,
     payload: error,
   };
 };
 
 export const updatePositionRequest = () => {
   return {
-    type: UPDATE_POSITION_REQUEST,
+    type: types.UPDATE_POSITION_REQUEST,
   };
 };
 
 export const updatePositionSuccess = (position) => {
   return {
-    type: UPDATE_POSITION_SUCCESS,
+    type: types.UPDATE_POSITION_SUCCESS,
     payload: position,
   };
 };
 
 export const updatePositionFailure = (error) => {
   return {
-    type: UPDATE_POSITION_FAILURE,
+    type: types.UPDATE_POSITION_FAILURE,
     payload: error,
   };
 };
 
 export const deletePositionsRequest = () => {
   return {
-    type: DELETE_POSITIONS_REQUEST,
+    type: types.DELETE_POSITIONS_REQUEST,
   };
 };
 
 export const deletePositionsSuccess = (positions) => {
   return {
-    type: DELETE_POSITIONS_SUCCESS,
+    type: types.DELETE_POSITIONS_SUCCESS,
     payload: positions,
   };
 };
 
 export const deletePositionsFailure = (error) => {
   return {
-    type: DELETE_POSITIONS_FAILURE,
+    type: types.DELETE_POSITIONS_FAILURE,
     payload: error,
   };
 };
 export const openModal = () => {
   return {
-    type: OPEN_CREATE_MODAL,
+    type: types.OPEN_CREATE_MODAL,
   };
 };
 export const closeModal = () => {
   return {
-    type: CLOSE_CREATE_MODAL,
+    type: types.CLOSE_CREATE_MODAL,
   };
 };
 
 export const changePositionCategory = (category) => {
   return {
-    type: CHANGE_POSITION_CATEGORY,
+    type: types.CHANGE_POSITION_CATEGORY,
     payload: category,
   };
 };
 
 export const changePositionAmount = (amount) => {
   return {
-    type: CHANGE_POSITION_AMOUNT,
+    type: types.CHANGE_POSITION_AMOUNT,
     payload: amount,
   };
 };
 
 export const changePositionIds = (ids) => {
   return {
-    type: CHANGE_POSITION_IDS,
+    type: types.CHANGE_POSITION_IDS,
     payload: ids,
   };
 };
 export const filteredProceeding = () => {
   return {
-    type: FILTERED_PROCEEDING_LIST,
+    type: types.FILTERED_PROCEEDING_LIST,
   };
 };
 
@@ -175,13 +150,13 @@ export const allPositions = () => {
 
 export const filteredHit = () => {
   return {
-    type: FILTERED_HIT_LIST,
+    type: types.FILTERED_HIT_LIST,
   };
 };
 
 export const filteredAesthetic = () => {
   return {
-    type: FILTERED_AESTHETIC_LIST,
+    type: types.FILTERED_AESTHETIC_LIST,
   };
 };
 export const aetheticList = () => {
@@ -198,7 +173,7 @@ export const hitList = () => {
 
 export const unfilteredAll = () => {
   return {
-    type: LIST_OF_POSITION,
+    type: types.LIST_OF_POSITION,
   };
 };
 export const setPositions = () => {

@@ -1,173 +1,139 @@
-import {
-  FETCH_WITHDRAWALS_REQUEST,
-  FETCH_WITHDRAWALS_SUCCESS,
-  FETCH_WITHDRAWALS_FAILURE,
-  FETCH_WITHDRAWAL_REQUEST,
-  FETCH_WITHDRAWAL_SUCCESS,
-  FETCH_WITHDRAWAL_FAILURE,
-  CREATE_WITHDRAWAL_REQUEST,
-  CREATE_WITHDRAWAL_SUCCESS,
-  CREATE_WITHDRAWAL_FAILURE,
-  UPDATE_WITHDRAWAL_REQUEST,
-  UPDATE_WITHDRAWAL_SUCCESS,
-  UPDATE_WITHDRAWAL_FAILURE,
-  DELETE_WITHDRAWALS_REQUEST,
-  DELETE_WITHDRAWALS_SUCCESS,
-  DELETE_WITHDRAWALS_FAILURE,
-  OPEN_CREATE_MODAL,
-  CLOSE_CREATE_MODAL,
-  CHANGE_WITHDRAWAL_AMOUNT,
-  CHANGE_WITHDRAWAL_CATEGORY,
-  CHANGE_WITHDRAWAL_IDS,
-  FILTERED_AESTHETIC_LIST,
-  FILTERED_HIT_LIST,
-  FILTERED_PROCEEDING_LIST,
-  LIST_OF_WITHDRAWAL,
-  CHECK_WITHDRAWAL_CERTAIN_ITEM,
-  LIST_OF_TODELETE_WITHDRAWALS,
-  SELECT_WITHDRAWAL_METHOD,
-  CHANGE_CREATE_WITHDRAWAL_AMOUNT,
-  INCREMENT_WITHDRAWAL_AMOUNT,
-  DECREMENT_WITHDRAWAL_AMOUNT,
-  ENTER_WITHDRAWAL_PASSWORD,
-  RESET_CREATE_WITHDRAWAL,
-  CHECK_ALL_WITHDRAWALS,
-} from "./withdrawalTypes";
+import * as types from "./withdrawalTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
 export const fetchWithdrawalsRequest = () => {
   return {
-    type: FETCH_WITHDRAWALS_REQUEST,
+    type: types.FETCH_WITHDRAWALS_REQUEST,
   };
 };
 
 export const fetchWithdrawalsSuccess = (withdrawal) => {
   return {
-    type: FETCH_WITHDRAWALS_SUCCESS,
+    type: types.FETCH_WITHDRAWALS_SUCCESS,
     payload: withdrawal,
   };
 };
 
 export const fetchWithdrawalsFailure = (error) => {
   return {
-    type: FETCH_WITHDRAWALS_FAILURE,
+    type: types.FETCH_WITHDRAWALS_FAILURE,
     payload: error,
   };
 };
 
 export const fetchWithdrawalRequest = () => {
   return {
-    type: FETCH_WITHDRAWAL_REQUEST,
+    type: types.FETCH_WITHDRAWAL_REQUEST,
   };
 };
 
 export const fetchWithdrawaluccess = (withdrawal) => {
   return {
-    type: FETCH_WITHDRAWAL_SUCCESS,
+    type: types.FETCH_WITHDRAWAL_SUCCESS,
     payload: withdrawal,
   };
 };
 
 export const fetchWithdrawalFailure = (error) => {
   return {
-    type: FETCH_WITHDRAWAL_FAILURE,
+    type: types.FETCH_WITHDRAWAL_FAILURE,
     payload: error,
   };
 };
 
 export const createWithdrawalRequest = () => {
   return {
-    type: CREATE_WITHDRAWAL_REQUEST,
+    type: types.CREATE_WITHDRAWAL_REQUEST,
   };
 };
 
 export const createWithdrawaluccess = (message) => {
   return {
-    type: CREATE_WITHDRAWAL_SUCCESS,
+    type: types.CREATE_WITHDRAWAL_SUCCESS,
     payload: message,
   };
 };
 
 export const createWithdrawalFailure = (error) => {
   return {
-    type: CREATE_WITHDRAWAL_FAILURE,
+    type: types.CREATE_WITHDRAWAL_FAILURE,
     payload: error,
   };
 };
 
 export const updateWithdrawalRequest = () => {
   return {
-    type: UPDATE_WITHDRAWAL_REQUEST,
+    type: types.UPDATE_WITHDRAWAL_REQUEST,
   };
 };
 
 export const updateWithdrawaluccess = (withdrawal) => {
   return {
-    type: UPDATE_WITHDRAWAL_SUCCESS,
+    type: types.UPDATE_WITHDRAWAL_SUCCESS,
     payload: withdrawal,
   };
 };
 
 export const updateWithdrawalFailure = (error) => {
   return {
-    type: UPDATE_WITHDRAWAL_FAILURE,
+    type: types.UPDATE_WITHDRAWAL_FAILURE,
     payload: error,
   };
 };
 
 export const deleteWithdrawalRequest = () => {
   return {
-    type: DELETE_WITHDRAWALS_REQUEST,
+    type: types.DELETE_WITHDRAWALS_REQUEST,
   };
 };
 
 export const deleteWithdrawalSuccess = (withdrawal) => {
   return {
-    type: DELETE_WITHDRAWALS_SUCCESS,
+    type: types.DELETE_WITHDRAWALS_SUCCESS,
     payload: withdrawal,
   };
 };
 
 export const deleteWithdrawalFailure = (error) => {
   return {
-    type: DELETE_WITHDRAWALS_FAILURE,
+    type: types.DELETE_WITHDRAWALS_FAILURE,
     payload: error,
   };
 };
 export const openModal = () => {
   return {
-    type: OPEN_CREATE_MODAL,
+    type: types.OPEN_CREATE_MODAL,
   };
 };
 export const closeModal = () => {
   return {
-    type: CLOSE_CREATE_MODAL,
+    type: types.CLOSE_CREATE_MODAL,
   };
 };
 
 export const changeWithdrawalCategory = (category) => {
   return {
-    type: CHANGE_WITHDRAWAL_CATEGORY,
+    type: types.CHANGE_WITHDRAWAL_CATEGORY,
     payload: category,
   };
 };
 
 export const changeWithdrawalAmount = (amount) => {
   return {
-    type: CHANGE_WITHDRAWAL_AMOUNT,
+    type: types.CHANGE_WITHDRAWAL_AMOUNT,
     payload: amount,
   };
 };
 
 export const changeWithdrawalIds = (ids) => {
   return {
-    type: CHANGE_WITHDRAWAL_IDS,
+    type: types.CHANGE_WITHDRAWAL_IDS,
     payload: ids,
   };
 };
 export const filteredProceeding = () => {
   return {
-    type: FILTERED_PROCEEDING_LIST,
+    type: types.FILTERED_PROCEEDING_LIST,
   };
 };
 
@@ -185,13 +151,13 @@ export const allWithdrawal = () => {
 
 export const filteredHit = () => {
   return {
-    type: FILTERED_HIT_LIST,
+    type: types.FILTERED_HIT_LIST,
   };
 };
 
 export const filteredAesthetic = () => {
   return {
-    type: FILTERED_AESTHETIC_LIST,
+    type: types.FILTERED_AESTHETIC_LIST,
   };
 };
 export const aetheticList = () => {
@@ -208,7 +174,7 @@ export const hitList = () => {
 
 export const unfilteredAll = () => {
   return {
-    type: LIST_OF_DEPOSIT,
+    type: types.LIST_OF_DEPOSIT,
   };
 };
 export const setWithdrawals = (params) => {
@@ -308,58 +274,58 @@ export const deleteWithdrawal = (list) => {
 
 export const checkWithdrawalCertainItem = (data) => {
   return {
-    type: CHECK_WITHDRAWAL_CERTAIN_ITEM,
+    type: types.CHECK_WITHDRAWAL_CERTAIN_ITEM,
     payload: data,
   };
 };
 
 export const listOfToDeleteWithdrawal = () => {
   return {
-    type: LIST_OF_TODELETE_WITHDRAWALS,
+    type: types.LIST_OF_TODELETE_WITHDRAWALS,
   };
 };
 
 export const selectWithdrawalMethod = (status) => {
   return {
-    type: SELECT_WITHDRAWAL_METHOD,
+    type: types.SELECT_WITHDRAWAL_METHOD,
     payload: status,
   };
 };
 
 export const changeCreateWithdrawalAmount = (amount) => {
   return {
-    type: CHANGE_CREATE_WITHDRAWAL_AMOUNT,
+    type: types.CHANGE_CREATE_WITHDRAWAL_AMOUNT,
     payload: amount,
   };
 };
 
 export const incrementWithdrawal = () => {
   return {
-    type: INCREMENT_WITHDRAWAL_AMOUNT,
+    type: types.INCREMENT_WITHDRAWAL_AMOUNT,
   };
 };
 
 export const decrementWithdrawal = () => {
   return {
-    type: DECREMENT_WITHDRAWAL_AMOUNT,
+    type: types.DECREMENT_WITHDRAWAL_AMOUNT,
   };
 };
 
 export const withdrawalPassword = (pass) => {
   return {
-    type: ENTER_WITHDRAWAL_PASSWORD,
+    type: types.ENTER_WITHDRAWAL_PASSWORD,
     payload: pass,
   };
 };
 
 export const resetCreateWithdrawal = () => {
   return {
-    type: RESET_CREATE_WITHDRAWAL,
+    type: types.RESET_CREATE_WITHDRAWAL,
   };
 };
 
 export const selectAllWithdrawal = () => {
   return {
-    type: CHECK_ALL_WITHDRAWALS,
+    type: types.CHECK_ALL_WITHDRAWALS,
   };
 };

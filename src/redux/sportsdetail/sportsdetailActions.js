@@ -1,118 +1,102 @@
-import {
-  FETCH_SPORTSDETAILS_REQUEST,
-  FETCH_SPORTSDETAILS_SUCCESS,
-  FETCH_SPORTSDETAILS_FAILURE,
-  FETCH_SPORTSDETAIL_REQUEST,
-  FETCH_SPORTSDETAIL_SUCCESS,
-  FETCH_SPORTSDETAIL_FAILURE,
-  CREATE_SPORTSDETAIL_REQUEST,
-  CREATE_SPORTSDETAIL_SUCCESS,
-  CREATE_SPORTSDETAIL_FAILURE,
-  UPDATE_SPORTSDETAIL_REQUEST,
-  UPDATE_SPORTSDETAIL_SUCCESS,
-  UPDATE_SPORTSDETAIL_FAILURE,
-  DELETE_SPORTSDETAILS_REQUEST,
-  DELETE_SPORTSDETAILS_SUCCESS,
-  DELETE_SPORTSDETAILS_FAILURE,
-} from "./sportsdetailTypes";
+import * as types from "./sportsdetailTypes";
 import axios from "axios";
 
 export const fetchSportsdetailsRequest = () => {
   return {
-    type: FETCH_SPORTSDETAILS_REQUEST,
+    type: types.FETCH_SPORTSDETAILS_REQUEST,
   };
 };
 
 export const fetchSportsdetailsSuccess = (sportsdetails) => {
   return {
-    type: FETCH_SPORTSDETAILS_SUCCESS,
+    type: types.FETCH_SPORTSDETAILS_SUCCESS,
     payload: sportsdetails,
   };
 };
 
 export const fetchSportsdetailsFailure = (error) => {
   return {
-    type: FETCH_SPORTSDETAILS_FAILURE,
+    type: types.FETCH_SPORTSDETAILS_FAILURE,
     payload: error,
   };
 };
 
 export const fetchSportsdetailRequest = () => {
   return {
-    type: FETCH_SPORTSDETAIL_REQUEST,
+    type: types.FETCH_SPORTSDETAIL_REQUEST,
   };
 };
 
 export const fetchSportsdetailSuccess = (sportsdetail) => {
   return {
-    type: FETCH_SPORTSDETAIL_SUCCESS,
+    type: types.FETCH_SPORTSDETAIL_SUCCESS,
     payload: sportsdetail,
   };
 };
 
 export const fetchSportsdetailFailure = (error) => {
   return {
-    type: FETCH_SPORTSDETAIL_FAILURE,
+    type: types.FETCH_SPORTSDETAIL_FAILURE,
     payload: error,
   };
 };
 
 export const createSportsdetailRequest = () => {
   return {
-    type: CREATE_SPORTSDETAIL_REQUEST,
+    type: types.CREATE_SPORTSDETAIL_REQUEST,
   };
 };
 
 export const createSportsdetailSuccess = (sportsdetail) => {
   return {
-    type: CREATE_SPORTSDETAIL_SUCCESS,
+    type: types.CREATE_SPORTSDETAIL_SUCCESS,
     payload: sportsdetail,
   };
 };
 
 export const createSportsdetailFailure = (error) => {
   return {
-    type: CREATE_SPORTSDETAIL_FAILURE,
+    type: types.CREATE_SPORTSDETAIL_FAILURE,
     payload: error,
   };
 };
 
 export const updateSportsdetailRequest = () => {
   return {
-    type: UPDATE_SPORTSDETAIL_REQUEST,
+    type: types.UPDATE_SPORTSDETAIL_REQUEST,
   };
 };
 
 export const updateSportsdetailSuccess = (sportsdetail) => {
   return {
-    type: UPDATE_SPORTSDETAIL_SUCCESS,
+    type: types.UPDATE_SPORTSDETAIL_SUCCESS,
     payload: sportsdetail,
   };
 };
 
 export const updateSportsdetailFailure = (error) => {
   return {
-    type: UPDATE_SPORTSDETAIL_FAILURE,
+    type: types.UPDATE_SPORTSDETAIL_FAILURE,
     payload: error,
   };
 };
 
 export const deleteSportsdetailsRequest = () => {
   return {
-    type: DELETE_SPORTSDETAILS_REQUEST,
+    type: types.DELETE_SPORTSDETAILS_REQUEST,
   };
 };
 
 export const deleteSportsdetailsSuccess = (sportsdetails) => {
   return {
-    type: DELETE_SPORTSDETAILS_SUCCESS,
+    type: types.DELETE_SPORTSDETAILS_SUCCESS,
     payload: sportsdetails,
   };
 };
 
 export const deleteSportsdetailsFailure = (error) => {
   return {
-    type: DELETE_SPORTSDETAILS_FAILURE,
+    type: types.DELETE_SPORTSDETAILS_FAILURE,
     payload: error,
   };
 };

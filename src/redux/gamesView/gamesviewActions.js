@@ -1,118 +1,102 @@
-import {
-  FETCH_GAMESVIEWS_REQUEST,
-  FETCH_GAMESVIEWS_SUCCESS,
-  FETCH_GAMESVIEWS_FAILURE,
-  FETCH_GAMESVIEW_REQUEST,
-  FETCH_GAMESVIEW_SUCCESS,
-  FETCH_GAMESVIEW_FAILURE,
-  CREATE_GAMESVIEW_REQUEST,
-  CREATE_GAMESVIEW_SUCCESS,
-  CREATE_GAMESVIEW_FAILURE,
-  UPDATE_GAMESVIEW_REQUEST,
-  UPDATE_GAMESVIEW_SUCCESS,
-  UPDATE_GAMESVIEW_FAILURE,
-  DELETE_GAMESVIEWS_REQUEST,
-  DELETE_GAMESVIEWS_SUCCESS,
-  DELETE_GAMESVIEWS_FAILURE,
-} from "./gamesviewTypes";
+import * as types from "./gamesviewTypes";
 import axios from "axios";
 
 export const fetchGamesviewsRequest = () => {
   return {
-    type: FETCH_GAMESVIEWS_REQUEST,
+    type: types.FETCH_GAMESVIEWS_REQUEST,
   };
 };
 
 export const fetchGamesviewsSuccess = (gamesviews) => {
   return {
-    type: FETCH_GAMESVIEWS_SUCCESS,
+    type: types.FETCH_GAMESVIEWS_SUCCESS,
     payload: gamesviews,
   };
 };
 
 export const fetchGamesviewsFailure = (error) => {
   return {
-    type: FETCH_GAMESVIEWS_FAILURE,
+    type: types.FETCH_GAMESVIEWS_FAILURE,
     payload: error,
   };
 };
 
 export const fetchGamesviewRequest = () => {
   return {
-    type: FETCH_GAMESVIEW_REQUEST,
+    type: types.FETCH_GAMESVIEW_REQUEST,
   };
 };
 
 export const fetchGamesviewSuccess = (gamesview) => {
   return {
-    type: FETCH_GAMESVIEW_SUCCESS,
+    type: types.FETCH_GAMESVIEW_SUCCESS,
     payload: gamesview,
   };
 };
 
 export const fetchGamesviewFailure = (error) => {
   return {
-    type: FETCH_GAMESVIEW_FAILURE,
+    type: types.FETCH_GAMESVIEW_FAILURE,
     payload: error,
   };
 };
 
 export const createGamesviewRequest = () => {
   return {
-    type: CREATE_GAMESVIEW_REQUEST,
+    type: types.CREATE_GAMESVIEW_REQUEST,
   };
 };
 
 export const createGamesviewSuccess = (gamesview) => {
   return {
-    type: CREATE_GAMESVIEW_SUCCESS,
+    type: types.CREATE_GAMESVIEW_SUCCESS,
     payload: gamesview,
   };
 };
 
 export const createGamesviewFailure = (error) => {
   return {
-    type: CREATE_GAMESVIEW_FAILURE,
+    type: types.CREATE_GAMESVIEW_FAILURE,
     payload: error,
   };
 };
 
 export const updateGamesviewRequest = () => {
   return {
-    type: UPDATE_GAMESVIEW_REQUEST,
+    type: types.UPDATE_GAMESVIEW_REQUEST,
   };
 };
 
 export const updateGamesviewSuccess = (gamesview) => {
   return {
-    type: UPDATE_GAMESVIEW_SUCCESS,
+    type: types.UPDATE_GAMESVIEW_SUCCESS,
     payload: gamesview,
   };
 };
 
 export const updateGamesviewFailure = (error) => {
   return {
-    type: UPDATE_GAMESVIEW_FAILURE,
+    type: types.UPDATE_GAMESVIEW_FAILURE,
     payload: error,
   };
 };
 
 export const deleteGamesviewsRequest = () => {
   return {
-    type: DELETE_GAMESVIEWS_REQUEST,
+    type: types.DELETE_GAMESVIEWS_REQUEST,
   };
 };
 
 export const deleteGamesviewsSuccess = (gamesviews) => {
   return {
-    type: DELETE_GAMESVIEWS_SUCCESS,
+    type: types.DELETE_GAMESVIEWS_SUCCESS,
     payload: gamesviews,
   };
 };
 
 export const deleteGamesviewsFailure = (error) => {
   return {
-    type: DELETE_GAMESVIEWS_FAILURE,
+    type: types.DELETE_GAMESVIEWS_FAILURE,
     payload: error,
   };
 };

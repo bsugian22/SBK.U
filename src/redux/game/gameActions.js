@@ -1,118 +1,102 @@
-import {
-  FETCH_GAMES_REQUEST,
-  FETCH_GAMES_SUCCESS,
-  FETCH_GAMES_FAILURE,
-  FETCH_GAME_REQUEST,
-  FETCH_GAME_SUCCESS,
-  FETCH_GAME_FAILURE,
-  CREATE_GAME_REQUEST,
-  CREATE_GAME_SUCCESS,
-  CREATE_GAME_FAILURE,
-  UPDATE_GAME_REQUEST,
-  UPDATE_GAME_SUCCESS,
-  UPDATE_GAME_FAILURE,
-  DELETE_GAMES_REQUEST,
-  DELETE_GAMES_SUCCESS,
-  DELETE_GAMES_FAILURE,
-} from "./gameTypes";
+import * as types from "./gameTypes";
 import axios from "axios";
 
 export const fetchGamesRequest = () => {
   return {
-    type: FETCH_GAMES_REQUEST,
+    type:  types.FETCH_GAMES_REQUEST,
   };
 };
 
 export const fetchGamesSuccess = (games) => {
   return {
-    type: FETCH_GAMES_SUCCESS,
+    type:  types.FETCH_GAMES_SUCCESS,
     payload: games,
   };
 };
 
 export const fetchGamesFailure = (error) => {
   return {
-    type: FETCH_GAMES_FAILURE,
+    type:  types.FETCH_GAMES_FAILURE,
     payload: error,
   };
 };
 
 export const fetchGameRequest = () => {
   return {
-    type: FETCH_GAME_REQUEST,
+    type:  types.FETCH_GAME_REQUEST,
   };
 };
 
 export const fetchGameSuccess = (game) => {
   return {
-    type: FETCH_GAME_SUCCESS,
+    type:  types.FETCH_GAME_SUCCESS,
     payload: game,
   };
 };
 
 export const fetchGameFailure = (error) => {
   return {
-    type: FETCH_GAME_FAILURE,
+    type:  types.FETCH_GAME_FAILURE,
     payload: error,
   };
 };
 
 export const createGameRequest = () => {
   return {
-    type: CREATE_GAME_REQUEST,
+    type:  types.CREATE_GAME_REQUEST,
   };
 };
 
 export const createGameSuccess = (game) => {
   return {
-    type: CREATE_GAME_SUCCESS,
+    type:  types.CREATE_GAME_SUCCESS,
     payload: game,
   };
 };
 
 export const createGameFailure = (error) => {
   return {
-    type: CREATE_GAME_FAILURE,
+    type:  types.CREATE_GAME_FAILURE,
     payload: error,
   };
 };
 
 export const updateGameRequest = () => {
   return {
-    type: UPDATE_GAME_REQUEST,
+    type:  types.UPDATE_GAME_REQUEST,
   };
 };
 
 export const updateGameSuccess = (game) => {
   return {
-    type: UPDATE_GAME_SUCCESS,
+    type:  types.UPDATE_GAME_SUCCESS,
     payload: game,
   };
 };
 
 export const updateGameFailure = (error) => {
   return {
-    type: UPDATE_GAME_FAILURE,
+    type:  types.UPDATE_GAME_FAILURE,
     payload: error,
   };
 };
 
 export const deleteGamesRequest = () => {
   return {
-    type: DELETE_GAMES_REQUEST,
+    type:  types.DELETE_GAMES_REQUEST,
   };
 };
 
 export const deleteGamesSuccess = (games) => {
   return {
-    type: DELETE_GAMES_SUCCESS,
+    type:  types.DELETE_GAMES_SUCCESS,
     payload: games,
   };
 };
 
 export const deleteGamesFailure = (error) => {
   return {
-    type: DELETE_GAMES_FAILURE,
+    type:  types.DELETE_GAMES_FAILURE,
     payload: error,
   };
 };

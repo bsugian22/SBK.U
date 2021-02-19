@@ -1,118 +1,102 @@
-import {
-  FETCH_ESPORTS_REQUEST,
-  FETCH_ESPORTS_SUCCESS,
-  FETCH_ESPORTS_FAILURE,
-  FETCH_ESPORT_REQUEST,
-  FETCH_ESPORT_SUCCESS,
-  FETCH_ESPORT_FAILURE,
-  CREATE_ESPORT_REQUEST,
-  CREATE_ESPORT_SUCCESS,
-  CREATE_ESPORT_FAILURE,
-  UPDATE_ESPORT_REQUEST,
-  UPDATE_ESPORT_SUCCESS,
-  UPDATE_ESPORT_FAILURE,
-  DELETE_ESPORTS_REQUEST,
-  DELETE_ESPORTS_SUCCESS,
-  DELETE_ESPORTS_FAILURE,
-} from "./esportTypes";
+import * as types from "./esportTypes";
 import axios from "axios";
 
 export const fetchEsportsRequest = () => {
   return {
-    type: FETCH_ESPORTS_REQUEST,
+    type: types.FETCH_ESPORTS_REQUEST,
   };
 };
 
 export const fetchEsportsSuccess = (esports) => {
   return {
-    type: FETCH_ESPORTS_SUCCESS,
+    type: types.FETCH_ESPORTS_SUCCESS,
     payload: esports,
   };
 };
 
 export const fetchEsportsFailure = (error) => {
   return {
-    type: FETCH_ESPORTS_FAILURE,
+    type: types.FETCH_ESPORTS_FAILURE,
     payload: error,
   };
 };
 
 export const fetchEsportRequest = () => {
   return {
-    type: FETCH_ESPORT_REQUEST,
+    type: types.FETCH_ESPORT_REQUEST,
   };
 };
 
 export const fetchEsportSuccess = (esport) => {
   return {
-    type: FETCH_ESPORT_SUCCESS,
+    type: types.FETCH_ESPORT_SUCCESS,
     payload: esport,
   };
 };
 
 export const fetchEsportFailure = (error) => {
   return {
-    type: FETCH_ESPORT_FAILURE,
+    type: types.FETCH_ESPORT_FAILURE,
     payload: error,
   };
 };
 
 export const createEsportRequest = () => {
   return {
-    type: CREATE_ESPORT_REQUEST,
+    type: types.CREATE_ESPORT_REQUEST,
   };
 };
 
 export const createEsportSuccess = (esport) => {
   return {
-    type: CREATE_ESPORT_SUCCESS,
+    type: types.CREATE_ESPORT_SUCCESS,
     payload: esport,
   };
 };
 
 export const createEsportFailure = (error) => {
   return {
-    type: CREATE_ESPORT_FAILURE,
+    type: types.CREATE_ESPORT_FAILURE,
     payload: error,
   };
 };
 
 export const createEsportRequest = () => {
   return {
-    type: UPDATE_ESPORT_REQUEST,
+    type: types.UPDATE_ESPORT_REQUEST,
   };
 };
 
 export const createEsportSuccess = (esport) => {
   return {
-    type: UPDATE_ESPORT_SUCCESS,
+    type: types.UPDATE_ESPORT_SUCCESS,
     payload: esport,
   };
 };
 
 export const createEsportFailure = (error) => {
   return {
-    type: UPDATE_ESPORT_FAILURE,
+    type: types.UPDATE_ESPORT_FAILURE,
     payload: error,
   };
 };
 
 export const deleteEsportsRequest = () => {
   return {
-    type: DELETE_ESPORTS_REQUEST,
+    type: types.DELETE_ESPORTS_REQUEST,
   };
 };
 
 export const deleteEsportsSuccess = (esports) => {
   return {
-    type: DELETE_ESPORTS_SUCCESS,
+    type: types.DELETE_ESPORTS_SUCCESS,
     payload: esports,
   };
 };
 
 export const deleteEsportsFailure = (error) => {
   return {
-    type: DELETE_ESPORTS_FAILURE,
+    type: types.DELETE_ESPORTS_FAILURE,
     payload: error,
   };
 };

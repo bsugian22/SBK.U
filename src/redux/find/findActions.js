@@ -1,118 +1,102 @@
-import {
-  FETCH_FINDS_REQUEST,
-  FETCH_FINDS_SUCCESS,
-  FETCH_FINDS_FAILURE,
-  FETCH_FIND_REQUEST,
-  FETCH_FIND_SUCCESS,
-  FETCH_FIND_FAILURE,
-  CREATE_FIND_REQUEST,
-  CREATE_FIND_SUCCESS,
-  CREATE_FIND_FAILURE,
-  UPDATE_FIND_REQUEST,
-  UPDATE_FIND_SUCCESS,
-  UPDATE_FIND_FAILURE,
-  DELETE_FINDS_REQUEST,
-  DELETE_FINDS_SUCCESS,
-  DELETE_FINDS_FAILURE,
-} from "./findTypes";
+import * as types from "./findTypes";
 import axios from "axios";
 
 export const fetchFindsRequest = () => {
   return {
-    type: FETCH_FINDS_REQUEST,
+    type:  types.FETCH_FINDS_REQUEST,
   };
 };
 
 export const fetchFindsSuccess = (finds) => {
   return {
-    type: FETCH_FINDS_SUCCESS,
+    type:  types.FETCH_FINDS_SUCCESS,
     payload: finds,
   };
 };
 
 export const fetchFindsFailure = (error) => {
   return {
-    type: FETCH_FINDS_FAILURE,
+    type:  types.FETCH_FINDS_FAILURE,
     payload: error,
   };
 };
 
 export const fetchFindRequest = () => {
   return {
-    type: FETCH_FIND_REQUEST,
+    type:  types.FETCH_FIND_REQUEST,
   };
 };
 
 export const fetchFindSuccess = (find) => {
   return {
-    type: FETCH_FIND_SUCCESS,
+    type:  types.FETCH_FIND_SUCCESS,
     payload: find,
   };
 };
 
 export const fetchFindFailure = (error) => {
   return {
-    type: FETCH_FIND_FAILURE,
+    type:  types.FETCH_FIND_FAILURE,
     payload: error,
   };
 };
 
 export const createFindRequest = () => {
   return {
-    type: CREATE_FIND_REQUEST,
+    type:  types.CREATE_FIND_REQUEST,
   };
 };
 
 export const createFindSuccess = (find) => {
   return {
-    type: CREATE_FIND_SUCCESS,
+    type:  types.CREATE_FIND_SUCCESS,
     payload: find,
   };
 };
 
 export const createFindFailure = (error) => {
   return {
-    type: CREATE_FIND_FAILURE,
+    type:  types.CREATE_FIND_FAILURE,
     payload: error,
   };
 };
 
 export const updateFindRequest = () => {
   return {
-    type: UPDATE_FIND_REQUEST,
+    type:  types.UPDATE_FIND_REQUEST,
   };
 };
 
 export const updateFindSuccess = (find) => {
   return {
-    type: UPDATE_FIND_SUCCESS,
+    type:  types.UPDATE_FIND_SUCCESS,
     payload: find,
   };
 };
 
 export const updateFindFailure = (error) => {
   return {
-    type: UPDATE_FIND_FAILURE,
+    type:  types.UPDATE_FIND_FAILURE,
     payload: error,
   };
 };
 
 export const deleteFindsRequest = () => {
   return {
-    type: DELETE_FINDS_REQUEST,
+    type:  types.DELETE_FINDS_REQUEST,
   };
 };
 
 export const deleteFindsSuccess = (finds) => {
   return {
-    type: DELETE_FINDS_SUCCESS,
+    type:  types.DELETE_FINDS_SUCCESS,
     payload: finds,
   };
 };
 
 export const deleteFindsFailure = (error) => {
   return {
-    type: DELETE_FINDS_FAILURE,
+    type:  types.DELETE_FINDS_FAILURE,
     payload: error,
   };
 };

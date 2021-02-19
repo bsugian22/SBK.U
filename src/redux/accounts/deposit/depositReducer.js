@@ -1,37 +1,4 @@
-import {
-  FETCH_DEPOSITS_REQUEST,
-  FETCH_DEPOSITS_SUCCESS,
-  FETCH_DEPOSITS_FAILURE,
-  FETCH_DEPOSIT_REQUEST,
-  FETCH_DEPOSIT_SUCCESS,
-  FETCH_DEPOSIT_FAILURE,
-  CREATE_DEPOSIT_REQUEST,
-  CREATE_DEPOSIT_SUCCESS,
-  CREATE_DEPOSIT_FAILURE,
-  UPDATE_DEPOSIT_REQUEST,
-  UPDATE_DEPOSIT_SUCCESS,
-  UPDATE_DEPOSIT_FAILURE,
-  DELETE_DEPOSITS_REQUEST,
-  DELETE_DEPOSITS_SUCCESS,
-  DELETE_DEPOSITS_FAILURE,
-  OPEN_CREATE_MODAL,
-  CLOSE_CREATE_MODAL,
-  CHANGE_DEPOSIT_AMOUNT,
-  CHANGE_DEPOSIT_CATEGORY,
-  CHANGE_DEPOSIT_IDS,
-  FILTERED_AESTHETIC_LIST,
-  FILTERED_HIT_LIST,
-  FILTERED_PROCEEDING_LIST,
-  LIST_OF_DEPOSIT,
-  CHECK_DEPOSIT_CERTAIN_ITEM,
-  LIST_OF_TODELETE_DEPOSITS,
-  SELECT_DEPOSIT_METHOD,
-  CHANGE_CREATE_DEPOSIT_AMOUNT,
-  INCREMENT_DEPOSIT_AMOUNT,
-  DECREMENT_DEPOSIT_AMOUNT,
-  RESET_CREATE_DEPOSIT,
-  CHECK_ALL_DEPOSIT,
-} from "./depositTypes";
+import * as types from "./depositTypes";
 import sweetalert from "../../../plugins/sweetalert";
 const swal = new sweetalert();
 const initialState = {
@@ -64,7 +31,7 @@ const initialState = {
 
 const depositReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_DEPOSITS_REQUEST:
+    case types.FETCH_DEPOSITS_REQUEST:
       return {
         ...state,
         loading: true,
@@ -88,7 +55,7 @@ const depositReducer = (state = initialState, action) => {
         closeModal: false,
         createDepositStatus: "CASH",
       };
-    case FETCH_DEPOSITS_SUCCESS:
+    case types.FETCH_DEPOSITS_SUCCESS:
       let newData = {
         data: [],
         total: 0,
@@ -127,7 +94,7 @@ const depositReducer = (state = initialState, action) => {
         closeModal: false,
         createDepositStatus: "CASH",
       };
-    case FETCH_DEPOSITS_FAILURE:
+    case types.FETCH_DEPOSITS_FAILURE:
       return {
         ...state,
         loading: false,
@@ -146,30 +113,30 @@ const depositReducer = (state = initialState, action) => {
         },
       };
 
-    case FETCH_DEPOSIT_REQUEST:
+    case types.FETCH_DEPOSIT_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_DEPOSIT_SUCCESS:
+    case types.FETCH_DEPOSIT_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_DEPOSIT_FAILURE:
+    case types.FETCH_DEPOSIT_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case CREATE_DEPOSIT_REQUEST:
+    case types.CREATE_DEPOSIT_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case CREATE_DEPOSIT_SUCCESS:
+    case types.CREATE_DEPOSIT_SUCCESS:
       swal.success(action.payload);
       return {
         ...state,
@@ -177,7 +144,7 @@ const depositReducer = (state = initialState, action) => {
         error: "",
         showModal: false,
       };
-    case CREATE_DEPOSIT_FAILURE:
+    case types.CREATE_DEPOSIT_FAILURE:
       swal.showError(action.payload);
       return {
         ...state,
@@ -186,19 +153,19 @@ const depositReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
-    case UPDATE_DEPOSIT_REQUEST:
+    case types.UPDATE_DEPOSIT_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case UPDATE_DEPOSIT_SUCCESS:
+    case types.UPDATE_DEPOSIT_SUCCESS:
       return {
         ...state,
         loading: false,
         data: action.payload,
         error: "",
       };
-    case UPDATE_DEPOSIT_FAILURE:
+    case types.UPDATE_DEPOSIT_FAILURE:
       return {
         ...state,
         loading: false,
@@ -206,12 +173,12 @@ const depositReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
-    case DELETE_DEPOSITS_REQUEST:
+    case types.DELETE_DEPOSITS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case DELETE_DEPOSITS_SUCCESS:
+    case types.DELETE_DEPOSITS_SUCCESS:
       swal.success(action.payload.message);
       return {
         ...state,
@@ -221,43 +188,43 @@ const depositReducer = (state = initialState, action) => {
           deposit_activities: [],
         },
       };
-    case DELETE_DEPOSITS_FAILURE:
+    case types.DELETE_DEPOSITS_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
-    case OPEN_CREATE_MODAL:
+    case types.OPEN_CREATE_MODAL:
       return {
         ...state,
         loading: false,
         error: "",
         showModal: true,
       };
-    case CLOSE_CREATE_MODAL:
+    case types.CLOSE_CREATE_MODAL:
       return {
         ...state,
         loading: false,
         error: "",
         showModal: false,
       };
-    case CHANGE_DEPOSIT_AMOUNT:
+    case types.CHANGE_DEPOSIT_AMOUNT:
       return {
         ...state,
         createDeposit: { ...state.createDeposit, amount: action.payload },
       };
 
-    case CHANGE_DEPOSIT_CATEGORY:
+    case types.CHANGE_DEPOSIT_CATEGORY:
       return {
         ...state,
         createDeposit: { ...state.createDeposit, category: action.payload },
       };
-    case CHANGE_DEPOSIT_IDS:
+    case types.CHANGE_DEPOSIT_IDS:
       return {
         ...state,
         createDeposit: { ...state.createDeposit, outcomes: action.payload },
       };
-    case FILTERED_PROCEEDING_LIST:
+    case types.FILTERED_PROCEEDING_LIST:
       let data = state.depositMainList.data.filter(
         (o) => o.status == "WAITING"
       );
@@ -266,20 +233,20 @@ const depositReducer = (state = initialState, action) => {
         deposits: { ...state.deposits, data: data },
         list: "WAITING",
       };
-    case LIST_OF_DEPOSIT:
+    case types.LIST_OF_DEPOSIT:
       return {
         ...state,
         deposits: { ...state.deposits, data: state.depositMainList.data },
         list: "ALL",
       };
-    case FILTERED_HIT_LIST:
+    case types.FILTERED_HIT_LIST:
       let hit = state.depositMainList.data.filter((o) => o.status == "WINNING");
       return {
         ...state,
         deposits: { ...state.deposits, data: hit },
         list: "WINNING",
       };
-    case FILTERED_AESTHETIC_LIST:
+    case types.FILTERED_AESTHETIC_LIST:
       let defeated = state.depositMainList.data.filter(
         (o) => o.status == "DEFEATED"
       );
@@ -288,7 +255,7 @@ const depositReducer = (state = initialState, action) => {
         deposits: { ...state.deposits, data: defeated },
         list: "DEFEATED",
       };
-    case CHECK_DEPOSIT_CERTAIN_ITEM:
+    case types.CHECK_DEPOSIT_CERTAIN_ITEM:
       state.deposits.data.map((i) => {
         if (i.id == action.payload.id) {
           i.isChecked = action.payload.status;
@@ -299,7 +266,7 @@ const depositReducer = (state = initialState, action) => {
         ...state,
         deposits: { ...state.deposits, data: state.deposits.data },
       };
-    case LIST_OF_TODELETE_DEPOSITS:
+    case types.LIST_OF_TODELETE_DEPOSITS:
       let newList = {
         deposit_activities: [],
       };
@@ -325,13 +292,13 @@ const depositReducer = (state = initialState, action) => {
           ],
         },
       };
-    case SELECT_DEPOSIT_METHOD:
+    case types.SELECT_DEPOSIT_METHOD:
       return {
         ...state,
         createDepositStatus: action.payload,
         createDeposit: { ...state.createDeposit, method: action.payload },
       };
-    case CHANGE_CREATE_DEPOSIT_AMOUNT:
+    case types.CHANGE_CREATE_DEPOSIT_AMOUNT:
       return {
         ...state,
         createDeposit: {
@@ -339,7 +306,7 @@ const depositReducer = (state = initialState, action) => {
           amount: action.payload.toString(),
         },
       };
-    case INCREMENT_DEPOSIT_AMOUNT:
+    case types.INCREMENT_DEPOSIT_AMOUNT:
       let inc = Number(state.createDeposit.amount) + 1000;
       return {
         ...state,
@@ -348,7 +315,7 @@ const depositReducer = (state = initialState, action) => {
           amount: inc.toString(),
         },
       };
-    case DECREMENT_DEPOSIT_AMOUNT:
+    case types.DECREMENT_DEPOSIT_AMOUNT:
       let dec = Number(state.createDeposit.amount) - 1000;
       return {
         ...state,
@@ -357,7 +324,7 @@ const depositReducer = (state = initialState, action) => {
           amount: dec.toString(),
         },
       };
-    case RESET_CREATE_DEPOSIT:
+    case types.RESET_CREATE_DEPOSIT:
       return {
         ...state,
         createDeposit: {
@@ -367,7 +334,7 @@ const depositReducer = (state = initialState, action) => {
         },
         createDepositStatus: "CASH",
       };
-    case CHECK_ALL_DEPOSIT:
+    case types.CHECK_ALL_DEPOSIT:
       state.deposits.data.map((i) => {
         i.isChecked = true;
       });

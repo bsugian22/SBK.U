@@ -1,41 +1,4 @@
-import {
-  FETCH_INQUIRIES_REQUEST,
-  FETCH_INQUIRIES_SUCCESS,
-  FETCH_INQUIRIES_FAILURE,
-  FETCH_INQUIRY_REQUEST,
-  FETCH_INQUIRY_SUCCESS,
-  FETCH_INQUIRY_FAILURE,
-  CREATE_INQUIRY_REQUEST,
-  CREATE_INQUIRY_SUCCESS,
-  CREATE_INQUIRY_FAILURE,
-  UPDATE_INQUIRY_REQUEST,
-  UPDATE_INQUIRY_SUCCESS,
-  UPDATE_INQUIRY_FAILURE,
-  DELETE_INQUIRIES_REQUEST,
-  DELETE_INQUIRIES_SUCCESS,
-  DELETE_INQUIRIES_FAILURE,
-  OPEN_CREATE_MODAL,
-  CLOSE_CREATE_MODAL,
-  CHANGE_INQUIRY_AMOUNT,
-  CHANGE_INQUIRY_CATEGORY,
-  CHANGE_INQUIRY_IDS,
-  FILTERED_AESTHETIC_LIST,
-  FILTERED_HIT_LIST,
-  FILTERED_PROCEEDING_LIST,
-  LIST_OF_INQUIRY,
-  CHECK_INQUIRY_CERTAIN_ITEM,
-  LIST_OF_TODELETE_INQUIRIES,
-  SELECT_INQUIRY_METHOD,
-  CHANGE_CREATE_INQUIRY_AMOUNT,
-  INCREMENT_INQUIRY_AMOUNT,
-  DECREMENT_INQUIRY_AMOUNT,
-  FROM_CASINO_TO_CASH_INQUIRY,
-  FROM_CASH_TO_CASINO_INQUIRY,
-  RESET_CREATE_INQUIRY,
-  CHECK_ALL_INQUIRY,
-  CHANGE_INQUIRY_CONTENT,
-  CHANGE_INQUIRY_TITLE,
-} from "./inquiryTypes";
+import * as types from "./inquiryTypes";
 import sweetalert from "../../../plugins/sweetalert";
 const swal = new sweetalert();
 const initialState = {
@@ -66,7 +29,7 @@ const initialState = {
 
 const inquiryReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_INQUIRIES_REQUEST:
+    case types.FETCH_INQUIRIES_REQUEST:
       return {
         ...state,
         loading: true,
@@ -79,7 +42,7 @@ const inquiryReducer = (state = initialState, action) => {
         closeModal: false,
         createInquiryStatus: "cash",
       };
-    case FETCH_INQUIRIES_SUCCESS:
+    case types.FETCH_INQUIRIES_SUCCESS:
       let newData = {
         data: [],
         total: 0,
@@ -118,7 +81,7 @@ const inquiryReducer = (state = initialState, action) => {
           content: "",
         },
       };
-    case FETCH_INQUIRIES_FAILURE:
+    case types.FETCH_INQUIRIES_FAILURE:
       swal.error(action.payload);
       return {
         ...state,
@@ -139,25 +102,25 @@ const inquiryReducer = (state = initialState, action) => {
         },
       };
 
-    case FETCH_INQUIRY_REQUEST:
+    case types.FETCH_INQUIRY_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_INQUIRY_SUCCESS:
+    case types.FETCH_INQUIRY_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_INQUIRY_FAILURE:
+    case types.FETCH_INQUIRY_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case CREATE_INQUIRY_REQUEST:
+    case types.CREATE_INQUIRY_REQUEST:
       return {
         ...state,
         loading: true,
@@ -167,7 +130,7 @@ const inquiryReducer = (state = initialState, action) => {
           to: state.createInquiry.to,
         },
       };
-    case CREATE_INQUIRY_SUCCESS:
+    case types.CREATE_INQUIRY_SUCCESS:
       swal.success(action.payload);
       return {
         ...state,
@@ -175,7 +138,7 @@ const inquiryReducer = (state = initialState, action) => {
         error: "",
         showModal: false,
       };
-    case CREATE_INQUIRY_FAILURE:
+    case types.CREATE_INQUIRY_FAILURE:
       swal.showError(action.payload);
       return {
         ...state,
@@ -184,19 +147,19 @@ const inquiryReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
-    case UPDATE_INQUIRY_REQUEST:
+    case types.UPDATE_INQUIRY_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case UPDATE_INQUIRY_SUCCESS:
+    case types.UPDATE_INQUIRY_SUCCESS:
       return {
         ...state,
         loading: false,
         data: action.payload,
         error: "",
       };
-    case UPDATE_INQUIRY_FAILURE:
+    case types.UPDATE_INQUIRY_FAILURE:
       return {
         ...state,
         loading: false,
@@ -204,12 +167,12 @@ const inquiryReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
-    case DELETE_INQUIRIES_REQUEST:
+    case types.DELETE_INQUIRIES_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case DELETE_INQUIRIES_SUCCESS:
+    case types.DELETE_INQUIRIES_SUCCESS:
       swal.success(action.payload.message);
       return {
         ...state,
@@ -219,44 +182,44 @@ const inquiryReducer = (state = initialState, action) => {
           inquiries: [],
         },
       };
-    case DELETE_INQUIRIES_FAILURE:
+    case types.DELETE_INQUIRIES_FAILURE:
       swal.showError(action.payload);
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
-    case OPEN_CREATE_MODAL:
+    case types.OPEN_CREATE_MODAL:
       return {
         ...state,
         loading: false,
         error: "",
         showModal: true,
       };
-    case CLOSE_CREATE_MODAL:
+    case types.CLOSE_CREATE_MODAL:
       return {
         ...state,
         loading: false,
         error: "",
         showModal: false,
       };
-    case CHANGE_INQUIRY_AMOUNT:
+    case types.CHANGE_INQUIRY_AMOUNT:
       return {
         ...state,
         createInquiry: { ...state.createInquiry, amount: action.payload },
       };
 
-    case CHANGE_INQUIRY_CATEGORY:
+    case types.CHANGE_INQUIRY_CATEGORY:
       return {
         ...state,
         createInquiry: { ...state.createInquiry, category: action.payload },
       };
-    case CHANGE_INQUIRY_IDS:
+    case types.CHANGE_INQUIRY_IDS:
       return {
         ...state,
         createInquiry: { ...state.createInquiry, outcomes: action.payload },
       };
-    case FILTERED_PROCEEDING_LIST:
+    case types.FILTERED_PROCEEDING_LIST:
       let data = state.inquiryMainList.data.filter(
         (o) => o.status == "WAITING"
       );
@@ -265,20 +228,20 @@ const inquiryReducer = (state = initialState, action) => {
         inquiries: { ...state.inquiries, data: data },
         list: "WAITING",
       };
-    case LIST_OF_INQUIRY:
+    case types.LIST_OF_INQUIRY:
       return {
         ...state,
         inquiries: { ...state.inquiries, data: state.inquiryMainList.data },
         list: "ALL",
       };
-    case FILTERED_HIT_LIST:
+    case types.FILTERED_HIT_LIST:
       let hit = state.inquiryMainList.data.filter((o) => o.status == "WINNING");
       return {
         ...state,
         inquiries: { ...state.inquiries, data: hit },
         list: "WINNING",
       };
-    case FILTERED_AESTHETIC_LIST:
+    case types.FILTERED_AESTHETIC_LIST:
       let defeated = state.inquiryMainList.data.filter(
         (o) => o.status == "DEFEATED"
       );
@@ -287,7 +250,7 @@ const inquiryReducer = (state = initialState, action) => {
         inquiries: { ...state.inquiries, data: defeated },
         list: "DEFEATED",
       };
-    case CHECK_INQUIRY_CERTAIN_ITEM:
+    case types.CHECK_INQUIRY_CERTAIN_ITEM:
       state.inquiries.data.map((i) => {
         if (i.id == action.payload.id) {
           i.isChecked = action.payload.status;
@@ -298,7 +261,7 @@ const inquiryReducer = (state = initialState, action) => {
         ...state,
         inquiries: { ...state.inquiries, data: state.inquiries.data },
       };
-    case LIST_OF_TODELETE_INQUIRIES:
+    case types.LIST_OF_TODELETE_INQUIRIES:
       let newList = {
         inquiry: [],
       };
@@ -324,12 +287,12 @@ const inquiryReducer = (state = initialState, action) => {
           inquiries: [...state.newInquiryToDeleteList.inquiries],
         },
       };
-    case SELECT_INQUIRY_METHOD:
+    case types.SELECT_INQUIRY_METHOD:
       return {
         ...state,
         createInquiryStatus: action.payload,
       };
-    case CHANGE_CREATE_INQUIRY_AMOUNT:
+    case types.CHANGE_CREATE_INQUIRY_AMOUNT:
       return {
         ...state,
         createInquiry: {
@@ -337,7 +300,7 @@ const inquiryReducer = (state = initialState, action) => {
           amount: action.payload.toString(),
         },
       };
-    case INCREMENT_INQUIRY_AMOUNT:
+    case types.INCREMENT_INQUIRY_AMOUNT:
       let inc = Number(state.createInquiry.amount) + 1000;
       return {
         ...state,
@@ -346,7 +309,7 @@ const inquiryReducer = (state = initialState, action) => {
           amount: inc.toString(),
         },
       };
-    case DECREMENT_INQUIRY_AMOUNT:
+    case types.DECREMENT_INQUIRY_AMOUNT:
       let dec = Number(state.createInquiry.amount) - 1000;
       return {
         ...state,
@@ -355,7 +318,7 @@ const inquiryReducer = (state = initialState, action) => {
           amount: dec.toString(),
         },
       };
-    case FROM_CASH_TO_CASINO_INQUIRY:
+    case types.FROM_CASH_TO_CASINO_INQUIRY:
       return {
         ...state,
         createInquiry: {
@@ -364,7 +327,7 @@ const inquiryReducer = (state = initialState, action) => {
           to: "casino_cash",
         },
       };
-    case FROM_CASINO_TO_CASH_INQUIRY:
+    case types.FROM_CASINO_TO_CASH_INQUIRY:
       return {
         ...state,
         createInquiry: {
@@ -373,7 +336,7 @@ const inquiryReducer = (state = initialState, action) => {
           to: "cash",
         },
       };
-    case RESET_CREATE_INQUIRY:
+    case types.RESET_CREATE_INQUIRY:
       return {
         ...state,
         createInquiry: {
@@ -381,7 +344,7 @@ const inquiryReducer = (state = initialState, action) => {
           content: "",
         },
       };
-    case CHECK_ALL_INQUIRY:
+    case types.CHECK_ALL_INQUIRY:
       state.inquiries.data.map((i) => {
         i.isChecked = true;
       });
@@ -389,12 +352,12 @@ const inquiryReducer = (state = initialState, action) => {
         ...state,
         inquiries: { ...state.inquiries, data: state.inquiries.data },
       };
-    case CHANGE_INQUIRY_TITLE:
+    case types.CHANGE_INQUIRY_TITLE:
       return {
         ...state,
         createInquiry: { ...state.createInquiry, title: action.payload },
       };
-    case CHANGE_INQUIRY_CONTENT:
+    case types.CHANGE_INQUIRY_CONTENT:
       return {
         ...state,
         createInquiry: { ...state.createInquiry, content: action.payload },

@@ -1,20 +1,4 @@
-import {
-  FETCH_CASINOS_REQUEST,
-  FETCH_CASINOS_SUCCESS,
-  FETCH_CASINOS_FAILURE,
-  FETCH_CASINO_REQUEST,
-  FETCH_CASINO_SUCCESS,
-  FETCH_CASINO_FAILURE,
-  CREATE_CASINO_REQUEST,
-  CREATE_CASINO_SUCCESS,
-  CREATE_CASINO_FAILURE,
-  UPDATE_CASINO_REQUEST,
-  UPDATE_CASINO_SUCCESS,
-  UPDATE_CASINO_FAILURE,
-  DELETE_CASINOS_REQUEST,
-  DELETE_CASINOS_SUCCESS,
-  DELETE_CASINOS_FAILURE,
-} from "./casinoTypes";
+import * as types from "./casinoTypes";
 
 const initialState = {
   loading: false,
@@ -25,90 +9,90 @@ const initialState = {
 const casinoReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case FETCH_CASINOS_REQUEST:
+    case types.FETCH_CASINOS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_CASINOS_SUCCESS:
+    case types.FETCH_CASINOS_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_CASINOS_FAILURE:
+    case types.FETCH_CASINOS_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case FETCH_CASINO_REQUEST:
+    case types.FETCH_CASINO_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_CASINO_SUCCESS:
+    case types.FETCH_CASINO_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_CASINO_FAILURE:
+    case types.FETCH_CASINO_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case CREATE_CASINO_REQUEST:
+    case types.CREATE_CASINO_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case CREATE_CASINO_SUCCESS:
+    case types.CREATE_CASINO_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case CREATE_CASINO_FAILURE:
+    case types.CREATE_CASINO_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case UPDATE_CASINO_REQUEST:
+    case types.UPDATE_CASINO_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case UPDATE_CASINO_SUCCESS:
+    case types.UPDATE_CASINO_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case UPDATE_CASINO_FAILURE:
+    case types.UPDATE_CASINO_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case DELETE_CASINOS_REQUEST:
+    case types.DELETE_CASINOS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case DELETE_CASINOS_SUCCESS:
+    case types.DELETE_CASINOS_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case DELETE_CASINOS_FAILURE:
+    case types.DELETE_CASINOS_FAILURE:
       return {
         loading: false,
         data: [],

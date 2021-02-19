@@ -1,23 +1,4 @@
-import {
-  LOGIN_USER_REQUEST,
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAILURE,
-  FETCH_USERS_REQUEST,
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE,
-  FETCH_USER_REQUEST,
-  FETCH_USER_SUCCESS,
-  FETCH_USER_FAILURE,
-  CREATE_USER_REQUEST,
-  CREATE_USER_SUCCESS,
-  CREATE_USER_FAILURE,
-  UPDATE_USER_REQUEST,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILURE,
-  DELETE_USERS_REQUEST,
-  DELETE_USERS_SUCCESS,
-  DELETE_USERS_FAILURE,
-} from "./loginTypes";
+import * as types from "./loginTypes";
 
 const initialState = {
   loading: false,
@@ -27,18 +8,18 @@ const initialState = {
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_USER_REQUEST:
+    case types.LOGIN_USER_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case LOGIN_USER_SUCCESS:
+    case types.LOGIN_USER_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case LOGIN_USER_FAILURE:
+    case types.LOGIN_USER_FAILURE:
       return {
         loading: false,
         data: [],
@@ -46,18 +27,18 @@ const loginReducer = (state = initialState, action) => {
       };
 
 
-    case FETCH_USERS_REQUEST:
+    case types.FETCH_USERS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_USERS_SUCCESS:
+    case types.FETCH_USERS_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_USERS_FAILURE:
+    case types.FETCH_USERS_FAILURE:
       return {
         loading: false,
         data: [],
@@ -65,18 +46,18 @@ const loginReducer = (state = initialState, action) => {
       };
 
 
-    case FETCH_USER_REQUEST:
+    case types.FETCH_USER_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_USER_SUCCESS:
+    case types.FETCH_USER_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_USER_FAILURE:
+    case types.FETCH_USER_FAILURE:
       return {
         loading: false,
         data: [],
@@ -84,54 +65,54 @@ const loginReducer = (state = initialState, action) => {
       };
 
 
-    case CREATE_USER_REQUEST:
+    case types.CREATE_USER_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case CREATE_USER_SUCCESS:
+    case types.CREATE_USER_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case CREATE_USER_FAILURE:
+    case types.CREATE_USER_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case UPDATE_USER_REQUEST:
+    case types.UPDATE_USER_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case UPDATE_USER_SUCCESS:
+    case types.UPDATE_USER_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case UPDATE_USER_FAILURE:
+    case types.UPDATE_USER_FAILURE:
       return {
         loading: false,
         data: [],
         error: action.payload,
       };
 
-    case DELETE_USERS_REQUEST:
+    case types.DELETE_USERS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case DELETE_USERS_SUCCESS:
+    case types.DELETE_USERS_SUCCESS:
       return {
         loading: false,
         data: action.payload,
         error: "",
       };
-    case DELETE_USERS_FAILURE:
+    case types.DELETE_USERS_FAILURE:
       return {
         loading: false,
         data: [],

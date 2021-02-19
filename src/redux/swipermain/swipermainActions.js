@@ -1,118 +1,102 @@
-import {
-  FETCH_SWIPERMAINS_REQUEST,
-  FETCH_SWIPERMAINS_SUCCESS,
-  FETCH_SWIPERMAINS_FAILURE,
-  FETCH_SWIPERMAIN_REQUEST,
-  FETCH_SWIPERMAIN_SUCCESS,
-  FETCH_SWIPERMAIN_FAILURE,
-  CREATE_SWIPERMAIN_REQUEST,
-  CREATE_SWIPERMAIN_SUCCESS,
-  CREATE_SWIPERMAIN_FAILURE,
-  UPDATE_SWIPERMAIN_REQUEST,
-  UPDATE_SWIPERMAIN_SUCCESS,
-  UPDATE_SWIPERMAIN_FAILURE,
-  DELETE_SWIPERMAINS_REQUEST,
-  DELETE_SWIPERMAINS_SUCCESS,
-  DELETE_SWIPERMAINS_FAILURE,
-} from "./swipermainTypes";
+import * as types from "./swipermainTypes";
 import axios from "axios";
 
 export const fetchSwipermainsRequest = () => {
   return {
-    type: FETCH_SWIPERMAINS_REQUEST,
+    type: types.FETCH_SWIPERMAINS_REQUEST,
   };
 };
 
 export const fetchSwipermainsSuccess = (swipermains) => {
   return {
-    type: FETCH_SWIPERMAINS_SUCCESS,
+    type: types.FETCH_SWIPERMAINS_SUCCESS,
     payload: swipermains,
   };
 };
 
 export const fetchSwipermainsFailure = (error) => {
   return {
-    type: FETCH_SWIPERMAINS_FAILURE,
+    type: types.FETCH_SWIPERMAINS_FAILURE,
     payload: error,
   };
 };
 
 export const fetchSwipermainRequest = () => {
   return {
-    type: FETCH_SWIPERMAIN_REQUEST,
+    type: types.FETCH_SWIPERMAIN_REQUEST,
   };
 };
 
 export const fetchSwipermainSuccess = (swipermain) => {
   return {
-    type: FETCH_SWIPERMAIN_SUCCESS,
+    type: types.FETCH_SWIPERMAIN_SUCCESS,
     payload: swipermain,
   };
 };
 
 export const fetchSwipermainFailure = (error) => {
   return {
-    type: FETCH_SWIPERMAIN_FAILURE,
+    type: types.FETCH_SWIPERMAIN_FAILURE,
     payload: error,
   };
 };
 
 export const createSwipermainRequest = () => {
   return {
-    type: CREATE_SWIPERMAIN_REQUEST,
+    type: types.CREATE_SWIPERMAIN_REQUEST,
   };
 };
 
 export const createSwipermainSuccess = (swipermain) => {
   return {
-    type: CREATE_SWIPERMAIN_SUCCESS,
+    type: types.CREATE_SWIPERMAIN_SUCCESS,
     payload: swipermain,
   };
 };
 
 export const createSwipermainFailure = (error) => {
   return {
-    type: CREATE_SWIPERMAIN_FAILURE,
+    type: types.CREATE_SWIPERMAIN_FAILURE,
     payload: error,
   };
 };
 
 export const updateSwipermainRequest = () => {
   return {
-    type: UPDATE_SWIPERMAIN_REQUEST,
+    type: types.UPDATE_SWIPERMAIN_REQUEST,
   };
 };
 
 export const updateSwipermainSuccess = (swipermain) => {
   return {
-    type: UPDATE_SWIPERMAIN_SUCCESS,
+    type: types.UPDATE_SWIPERMAIN_SUCCESS,
     payload: swipermain,
   };
 };
 
 export const updateSwipermainFailure = (error) => {
   return {
-    type: UPDATE_SWIPERMAIN_FAILURE,
+    type: types.UPDATE_SWIPERMAIN_FAILURE,
     payload: error,
   };
 };
 
 export const deleteSwipermainsRequest = () => {
   return {
-    type: DELETE_SWIPERMAINS_REQUEST,
+    type: types.DELETE_SWIPERMAINS_REQUEST,
   };
 };
 
 export const deleteSwipermainsSuccess = (swipermains) => {
   return {
-    type: DELETE_SWIPERMAINS_SUCCESS,
+    type: types.DELETE_SWIPERMAINS_SUCCESS,
     payload: swipermains,
   };
 };
 
 export const deleteSwipermainsFailure = (error) => {
   return {
-    type: DELETE_SWIPERMAINS_FAILURE,
+    type: types.DELETE_SWIPERMAINS_FAILURE,
     payload: error,
   };
 };
