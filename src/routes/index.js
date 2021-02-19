@@ -11,7 +11,7 @@ import Promo from "../components/pages/Promo";
 import Deposit from "../components/accounts/DepositContainer";
 import Withdrawal from "../components/accounts/WithdrawalContainer";
 import Exchange from "../components/accounts/ExchangeContainer";
-import Position from "../components/accounts/Position";
+import Position from "../components/accounts/PositionContainer";
 import Notice from "../components/accounts/Notice";
 import Inquiry from "../components/accounts/InquiryContainer";
 import Message from "../components/accounts/MessageContainer";

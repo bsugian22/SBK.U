@@ -47,9 +47,10 @@ export const createPositionRequest = () => {
   };
 };
 
-export const createPositionSuccess = () => {
+export const createPositionSuccess = (message) => {
   return {
     type: types.CREATE_POSITION_SUCCESS,
+    payload: message,
   };
 };
 
@@ -130,7 +131,7 @@ export const changePositionIds = (ids) => {
     payload: ids,
   };
 };
-export const filteredProceeding = () => {
+export const filteredProceedingPosition = () => {
   return {
     type: types.FILTERED_PROCEEDING_LIST,
   };
@@ -148,13 +149,13 @@ export const allPositions = () => {
   };
 };
 
-export const filteredHit = () => {
+export const filteredHitPosition = () => {
   return {
     type: types.FILTERED_HIT_LIST,
   };
 };
 
-export const filteredAesthetic = () => {
+export const filteredAestheticPosition = () => {
   return {
     type: types.FILTERED_AESTHETIC_LIST,
   };
@@ -178,7 +179,7 @@ export const unfilteredAll = () => {
 };
 export const setPositions = () => {
   return (dispatch) => {
-    dispatch(fetchPositionsRequest);
+    dispatch(fetchPositionsRequest());
     axios
       .get(`/api/positions`)
       .then((response) => {
@@ -186,8 +187,9 @@ export const setPositions = () => {
         dispatch(fetchPositionsSuccess(positions));
       })
       .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(fetchPositionsFailure(errorMsg));
+        console.log(error);
+
+        dispatch(fetchPositionsFailure(error.message));
       });
   };
 };
@@ -220,16 +222,31 @@ export const createPositionAction = (position) => {
     position.outcomes = [];
     position.outcomes = [...newList];
     console.log(position);
-    dispatch(createPositionRequest);
+    dispatch(createPositionRequest());
     axios
       .post(`/api/positions`, position)
       .then((response) => {
+        dispatch(createPositionSuccess(response.data.message));
         dispatch(setPositions());
-        dispatch(createPositionSuccess());
       })
       .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(createPositionailure(errorMsg));
+        const errorMsg = error.response.data;
+        console.log("error is" + error);
+        let positionErrorMessage = {
+          html: ` ${errorMsg.message} <br />  ${
+            errorMsg?.errors?.category
+              ? errorMsg?.errors?.category[0] + " <br /> "
+              : ""
+          }
+            ${errorMsg?.errors?.amount ? errorMsg?.errors?.amount[0] : ""} ${
+            errorMsg?.errors?.outcomes ? errorMsg?.errors?.outcomes[0] : ""
+          }`,
+
+          icon: "error",
+          confirmButtonText: "확인",
+        };
+        let data = { message: positionErrorMessage, outcomes: outcomes };
+        dispatch(createPositionFailure(data));
       });
   };
 };
