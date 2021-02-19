@@ -39,7 +39,7 @@ export default function Position() {
             <div class="history-comfile flex-column flex-inherit">
               <div class="flex-column flex-inherit widthp-100">
                 <div class="red-shadow height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
-                  <span class="color-white grow-2">배팅내역 LIST</span>
+                  <span class="color-white grow-2">배팅내역 </span>
                 </div>
                 <div class="history-tab height-45 border-bottom-rb border-top flex-inherit align-items-center-inherit background-transparent-b-5">
                   <div
