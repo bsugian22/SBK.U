@@ -82,6 +82,7 @@ const messageReducer = (state = initialState, action) => {
         },
       };
     case types.FETCH_MESSAGES_FAILURE:
+      swal.error(action.payload);
       return {
         ...state,
         loading: false,
