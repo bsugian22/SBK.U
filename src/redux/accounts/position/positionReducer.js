@@ -1,5 +1,6 @@
 import * as types from "./positionTypes";
-
+import sweetalert from "../../../plugins/sweetalert";
+const swal = new sweetalert();
 const initialState = {
   loading: false,
   positions: { data: [] },
@@ -7,12 +8,12 @@ const initialState = {
   createPosition: {
     category: "",
     amount: "",
-    outcomes: "",
+    outcomes: [],
   },
   showModal: false,
   openModal: false,
   closeModal: false,
-  list: "",
+  list: "ALL",
   originalList: { data: [] },
 };
 
@@ -30,6 +31,7 @@ const positionReducer = (state = initialState, action) => {
         showModal: false,
         openModal: false,
         closeModal: false,
+        list: "ALL",
       };
     case types.FETCH_POSITIONS_SUCCESS:
       return {
@@ -42,17 +44,17 @@ const positionReducer = (state = initialState, action) => {
         createPosition: {
           category: "",
           amount: "",
-          outcomes: [],
+          outcomes: "",
         },
         showModal: false,
         openModal: false,
         closeModal: false,
       };
     case types.FETCH_POSITIONS_FAILURE:
+      swal.error(action.payload);
       return {
         ...state,
         loading: false,
-        positions: [],
         error: action.payload,
         showModal: false,
         openModal: false,
@@ -83,6 +85,7 @@ const positionReducer = (state = initialState, action) => {
         loading: true,
       };
     case types.CREATE_POSITION_SUCCESS:
+      swal.success(action.payload);
       return {
         ...state,
         loading: false,
@@ -90,11 +93,16 @@ const positionReducer = (state = initialState, action) => {
         showModal: false,
       };
     case types.CREATE_POSITION_FAILURE:
+      swal.showError(action.payload.message);
       return {
         ...state,
         loading: false,
         data: [],
         error: action.payload,
+        createPosition: {
+          ...state.createPosition,
+          outcomes: action.payload.outcomes,
+        },
       };
 
     case types.UPDATE_POSITION_REQUEST:
