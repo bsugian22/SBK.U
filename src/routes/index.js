@@ -14,7 +14,7 @@ import Exchange from "../components/accounts/ExchangeContainer";
 import Position from "../components/accounts/Position";
 import Notice from "../components/accounts/Notice";
 import Inquiry from "../components/accounts/InquiryContainer";
-import Message from "../components/accounts/Message";
+import Message from "../components/accounts/MessageContainer";
 import Settings from "../components/accounts/Settings";
 import Login from "../components/pages/Login";
 import Find from "../components/pages/Find";
