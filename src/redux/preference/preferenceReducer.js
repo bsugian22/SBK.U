@@ -1,10 +1,11 @@
 import * as types from "./preferenceTypes";
-
+import sweetalert from "../../plugins/sweetalert";
+const swal = new sweetalert();
 const initialState = {
   preferences: [],
   forgotPassword: {
     username: "",
-    password: "",
+    password: "0000",
     verify_token: "",
     tel_number: "",
   },
@@ -24,7 +25,7 @@ function preferencesReducer(state = initialState, action) {
         error: "",
         forgotPassword: {
           username: "",
-          password: "",
+          password: "0000",
           verify_token: "",
           tel_number: "",
         },
@@ -59,7 +60,7 @@ function preferencesReducer(state = initialState, action) {
         ...state,
         forgotPassword: {
           ...state.forgotPassword,
-          password: action.payload,
+          verify_token: action.payload,
         },
       };
     case types.HANDLE_USER_PHONENUMBER:
@@ -69,6 +70,24 @@ function preferencesReducer(state = initialState, action) {
           ...state.forgotPassword,
           tel_number: action.payload,
         },
+      };
+    case types.FORGOT_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.FORGOT_PASSWORD_SUCCESS:
+      swal.success(action.payload);
+      return {
+        ...state,
+        loading: false,
+      };
+    case types.FORGOT_PASSWORD_FAILURE:
+      swal.showError(action.payload);
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;

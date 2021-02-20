@@ -67,3 +67,63 @@ export const handleUserPhoneNumber = (number) => {
     payload: number,
   };
 };
+
+export const userForgotPassword = (data) => {
+  return (dispatch) => {
+    dispatch(forgotPassRequest(0));
+    axios
+      .patch(`/api/users/forgot-password`, data)
+      .then((response) => {
+        console.log(response);
+        dispatch(forgotPassSuccess(response.data.message));
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        const errorMsg = error.response.data;
+        let forgotPassErrorMessage = {
+          html: ` ${errorMsg.message} <br />  ${
+            errorMsg?.errors?.username
+              ? errorMsg?.errors?.username[0] + " <br /> "
+              : ""
+          }
+            ${errorMsg?.errors?.password ? errorMsg?.errors?.password[0] : ""}
+            ${
+              errorMsg?.errors?.verify_token
+                ? errorMsg?.errors?.verify_token[0]
+                : ""
+            }
+            ${
+              errorMsg?.errors?.tel_number
+                ? errorMsg?.errors?.tel_number[0]
+                : ""
+            }
+            `,
+
+          icon: "error",
+          confirmButtonText: "확인",
+        };
+
+        dispatch(forgotPassFailure(forgotPassErrorMessage));
+      });
+  };
+};
+
+export const forgotPassRequest = () => {
+  return {
+    type: types.FORGOT_PASSWORD_REQUEST,
+  };
+};
+
+export const forgotPassSuccess = (message) => {
+  return {
+    type: types.FORGOT_PASSWORD_SUCCESS,
+    payload: message,
+  };
+};
+
+export const forgotPassFailure = (error) => {
+  return {
+    type: types.FORGOT_PASSWORD_FAILURE,
+    payload: error,
+  };
+};
