@@ -1,29 +1,62 @@
 import * as types from "./promoTypes";
-
+import sweetalert from "../../plugins/sweetalert";
+const swal = new sweetalert();
 const initialState = {
   loading: false,
-  data: [],
+  promos: { data: [] },
   error: "",
+  promo: {
+    id: 0,
+    category: "",
+    title: "",
+    content: "",
+    photo: "",
+    fixed: 0,
+    hits: 0,
+    created_at: "",
+  },
 };
 
 const promoReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case types.FETCH_PROMOS_REQUEST:
       return {
         ...state,
         loading: true,
+        promos: { data: [] },
+        promo: {
+          id: 0,
+          category: "",
+          title: "",
+          content: "",
+          photo: "",
+          fixed: 0,
+          hits: 0,
+          created_at: "",
+        },
       };
     case types.FETCH_PROMOS_SUCCESS:
       return {
+        ...state,
         loading: false,
-        data: action.payload,
+        promos: action.payload,
         error: "",
+        promo: {
+          id: 0,
+          category: "",
+          title: "",
+          content: "",
+          photo: "",
+          fixed: 0,
+          hits: 0,
+          created_at: "",
+        },
       };
     case types.FETCH_PROMOS_FAILURE:
+      swal.error(action.payload);
       return {
+        ...state,
         loading: false,
-        data: [],
         error: action.payload,
       };
 
@@ -59,7 +92,7 @@ const promoReducer = (state = initialState, action) => {
     case types.CREATE_PROMO_FAILURE:
       return {
         loading: false,
-        data: [],
+        promos: { data: [] },
         error: action.payload,
       };
 
@@ -97,6 +130,20 @@ const promoReducer = (state = initialState, action) => {
         loading: false,
         data: [],
         error: action.payload,
+      };
+    case types.VIEW_PROMO_DATA:
+      console.log(action.payload);
+      return {
+        ...state,
+        promo: {
+          id: action.payload.id,
+          category: action.payload.category,
+          title: action.payload.title,
+          content: action.payload.content,
+          photo: action.payload.fixed,
+          hits: action.payload.hits,
+          created_at: action.payload.created_at,
+        },
       };
 
     default:

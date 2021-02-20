@@ -1,5 +1,5 @@
 import * as types from "./promoTypes";
-import axios from "axios";
+import axios from "../../plugins/axios";
 
 export const fetchPromosRequest = () => {
   return {
@@ -101,73 +101,89 @@ export const deletePromosFailure = (error) => {
   };
 };
 
-
 export const fetchPromos = () => {
-    return (dispatch) => {
-      dispatch(fetchPromosRequest);
-      await axios.get(`/api/promos`)
-                  .then(response => {
-                    const promos = response.data;
-                    dispatch(fetchPromosSuccess(promos))
-              }).catch(error => {
-                    const errorMsg = error.message;
-                    dispatch(fetchPromosFailure(errorMsg))
-              })
-      };
+  return (dispatch) => {
+    dispatch(fetchPromosRequest());
+    axios
+      .get(`/api/promos`)
+      .then((response) => {
+        const promos = response.data;
+        dispatch(fetchPromosSuccess(promos));
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        dispatch(fetchPromosFailure(errorMsg));
+      });
+  };
 };
 
 export const fetchPromo = () => {
   return (dispatch) => {
     dispatch(fetchPromoRequest);
-    await axios.get(`/api/promos`)
-                .then(response => {
-                  const promo = response.data;
-                  dispatch(fetchPromoSuccess(promo))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(fetchPromoFailure(errorMsg))
-            })
-    };
+    axios
+      .get(`/api/promos`)
+      .then((response) => {
+        const promo = response.data;
+        dispatch(fetchPromoSuccess(promo));
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        dispatch(fetchPromoFailure(errorMsg));
+      });
+  };
 };
 
 export const createPromo = () => {
   return (dispatch) => {
     dispatch(createPromoRequest);
-    await axios.get(`/api/promos`)
-                .then(response => {
-                  const promo = response.data;
-                  dispatch(createPromoSuccess(promo))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(createPromoFailure(errorMsg))
-            })
-    };
+    axios
+      .get(`/api/promos`)
+      .then((response) => {
+        const promo = response.data;
+        dispatch(createPromoSuccess(promo));
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        dispatch(createPromoFailure(errorMsg));
+      });
+  };
 };
 
 export const updatePromo = () => {
   return (dispatch) => {
     dispatch(updatePromoRequest);
-    await axios.get(`/api/promos`)
-                .then(response => {
-                  const promo = response.data;
-                  dispatch(updatePromoSuccess(promo))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(updatePromoFailure(errorMsg))
-            })
-    };
+    axios
+      .get(`/api/promos`)
+      .then((response) => {
+        const promo = response.data;
+        dispatch(updatePromoSuccess(promo));
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        dispatch(updatePromoFailure(errorMsg));
+      });
+  };
 };
 
 export const deletePromos = () => {
   return (dispatch) => {
     dispatch(deletePromosRequest);
-    await axios.get(`/api/promos`)
-                .then(response => {
-                  const promos = response.data;
-                  dispatch(deletePromosSuccess(promos))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(deletePromosFailure(errorMsg))
-            })
-    };
+    axios
+      .get(`/api/promos`)
+      .then((response) => {
+        const promos = response.data;
+        dispatch(deletePromosSuccess(promos));
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        dispatch(deletePromosFailure(errorMsg));
+      });
+  };
+};
+
+export const viewPromo = (promo) => {
+  return {
+    type: types.VIEW_PROMO_DATA,
+    payload: promo,
+  };
 };
