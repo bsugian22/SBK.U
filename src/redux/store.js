@@ -19,6 +19,7 @@ const middleWare = applyMiddleware(logger, thunk);
 export const mapStateToProps = (state) => {
   return {
     preferences: state.preference.preferences,
+    forgotPassword: state.preference.forgotPassword,
     user: state.user.user,
   };
 };
@@ -39,6 +40,16 @@ export const mapDispatchProps = (dispatch) => {
     setPreferences: (payload) => {
       dispatch(preferencesActions.setPreferences(payload));
     },
+    handleUsernameOnChange: (payload) => {
+      dispatch(preferencesActions.handleUsername(payload));
+    },
+    handlePassword: (payload) => {
+      dispatch(preferencesActions.handleUserPassword(payload));
+    },
+    handleUserPhoneNumber: (payload) => {
+      dispatch(preferencesActions.handleUserPhoneNumber(payload));
+    },
+
     setDarkmode: (toggle) => {
       dispatch(preferencesActions.setDarkmode(toggle));
     },

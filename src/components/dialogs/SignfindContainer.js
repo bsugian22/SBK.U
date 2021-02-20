@@ -1,13 +1,18 @@
 import React, { Fragment } from "react";
 import Logo from "../layouts/Logo";
 import { Link, NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { handleUsername } from "../../redux/preference/preferenceActions";
+import {
+  handleUsername,
+  handleUserPassword,
+  handleUserPhoneNumber,
+  userForgotPassword,
+} from "../../redux/preference/preferenceActions";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Signfind() {
   let dispatch = useDispatch();
   let forgotPassword = useSelector((state) => state.preference.forgotPassword);
-  console.log(forgotPassword);
+
   return (
     <Fragment>
       <div class="sign-wrap flex flex-inherit ">
@@ -64,8 +69,9 @@ export default function Signfind() {
                       class="padding-horizontal-10 background-transparent-b-30"
                       placeholder="아이디를 입력하세요."
                       value={forgotPassword.username}
-                      onChange={() => {
-                        dispatch(handleUsername());
+                      onChange={(e) => {
+                        let username = e.target.value;
+                        dispatch(handleUsername(username));
                       }}
                     />
                   </div>
@@ -90,6 +96,11 @@ export default function Signfind() {
                   name=""
                   class="padding-horizontal-10 background-transparent-b-30"
                   placeholder="휴대폰번호를 입력해주세요"
+                  value={forgotPassword.tel_number}
+                  onChange={(e) => {
+                    let telNum = e.target.value;
+                    dispatch(handleUserPhoneNumber(telNum));
+                  }}
                 />
                 <button
                   type="button"
@@ -108,6 +119,11 @@ export default function Signfind() {
                   name="passwrd"
                   class="padding-horizontal-10 background-transparent-b-30"
                   placeholder="인증번호를 입력해주세요"
+                  value={forgotPassword.verify_token}
+                  onChange={(e) => {
+                    let pass = e.target.value;
+                    dispatch(handleUserPassword(pass));
+                  }}
                 />
               </div>
             </div>
@@ -116,6 +132,7 @@ export default function Signfind() {
             <button
               type="button"
               class="next-sign-info background-green color-white padding-vertical-15 padding-horizontal-45"
+              onClick={() => dispatch(userForgotPassword(forgotPassword))}
             >
               확인
             </button>
