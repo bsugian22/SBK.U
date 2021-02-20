@@ -195,6 +195,97 @@ export const setDeposits = (params) => {
   };
 };
 
+export const onClickPageDeposit = (data) => {
+  return (dispatch) => {
+    dispatch(setDeposits(data));
+  };
+};
+
+export const nextDeptPage = (page) => {
+  return {
+    type: types.NEXT_PAGE_DEPOSIT,
+    payload: page,
+  };
+};
+
+export const nextPageDeposit = (data) => {
+  var page_number = data.page;
+  var last_page = data.list_pages[data.list_pages.length - 1];
+  if (last_page >= page_number + 1) {
+    return (dispatch) => {
+      let page = page_number + 1;
+      dispatch(nextDeptPage(page));
+      dispatch(setDeposits({ page: page, per_page: data.per_page }));
+    };
+  }
+};
+export const prevDeptPage = (page) => {
+  return {
+    type: types.PREV_PAGE_DEPOSIT,
+    payload: page,
+  };
+};
+
+export const prevPageDeposit = (data) => {
+  var page_number = data.page;
+  var first_page = data.list_pages[0];
+  if (first_page <= page_number - 1) {
+    return (dispatch) => {
+      let page = page_number - 1;
+      dispatch(prevDeptPage(page));
+      dispatch(setDeposits({ page: page, per_page: data.per_page }));
+    };
+  }
+};
+
+export const paginationRequestData = () => {
+  return {
+    type: types.PAGINATION_REQUEST_DEPOSIT,
+  };
+};
+
+export const paginationSuccessData = (deposits) => {
+  return {
+    type: types.PAGINATION_SUCCESS_DEPOSIT,
+    payload: deposits,
+  };
+};
+export const paginationFailureData = () => {
+  return {
+    type: types.PAGINATION_FAILURE_DEPOSIT,
+  };
+};
+
+export const requestData = (params) => {
+  return (dispatch) => {
+    dispatch(paginationRequestData(0));
+    axios
+      .get(`/api/deposit`, {
+        params: params,
+      })
+      .then((response) => {
+        const deposits = camelize(response.data);
+        dispatch(paginationSuccessData(deposits));
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        dispatch(paginationFailureData(errorMsg));
+      });
+  };
+};
+
+export const setPagesOfDeposit = () => {
+  return (dispatch) => {
+    dispatch(setPageDeposit());
+  };
+};
+
+export const setPageDeposit = () => {
+  return {
+    type: types.SET_DEPOSIT_PAGE,
+  };
+};
+
 export const fetchDeposit = () => {
   return (dispatch) => {
     dispatch(fetchDepositRequest);

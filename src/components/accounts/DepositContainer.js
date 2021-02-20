@@ -11,9 +11,14 @@ import {
   deleteDepositsRequest,
   incrementDeposit,
   listOfToDeleteDeposits,
+  nextPageDeposit,
+  onClickPageDeposit,
+  prevPageDeposit,
   resetCreateDeposit,
   selectDepositMethod,
   setDeposits,
+  setPageOfDeposit,
+  setPagesOfDeposit,
 } from "../../redux/accounts/deposit/depositActions";
 import { Link, NavLink } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
@@ -21,7 +26,10 @@ import echo from "../../plugins/echo";
 import Moment from "moment";
 const Deposit = () => {
   let deposit = useSelector((state) => state.deposit);
+  let list_pages = useSelector((state) => state.deposit.deposits.list_pages);
   let deleteList = useSelector((state) => state.deposit.newDepositToDeleteList);
+  let page = useSelector((state) => state.deposit.deposits.page);
+  let per_page = useSelector((state) => state.deposit.deposits.per_page);
   let user = useSelector((state) => state.user.user);
   let createDepositStatus = useSelector(
     (state) => state.deposit.createDepositStatus
@@ -34,11 +42,13 @@ const Deposit = () => {
   let dispatch = useDispatch();
   useEffect(() => {
     isSubscribed = true;
-    dispatch(setDeposits());
+    dispatch(setDeposits({ page: page, per_page: per_page }));
+    dispatch(setPagesOfDeposit());
+
     return () => {
       isSubscribed = false;
     };
-  }, []);
+  }, [page]);
 
   return (
     <Fragment>
@@ -345,7 +355,7 @@ const Deposit = () => {
                     </tr>
                   </thead>
                   <tbody class="background-transparent-b-5">
-                    {deposit.loading ? (
+                    {deposit?.loading ? (
                       <tr>
                         <td colspan="15" class="td-3">
                           <span></span>
@@ -358,7 +368,7 @@ const Deposit = () => {
                         </td>
                       </tr>
                     ) : (
-                      deposit.deposits.data.map((item, index) => {
+                      deposit?.deposits?.data?.map((item, index) => {
                         return (
                           <tr class="rows" key={index}>
                             <td class="height-45 border-top">
@@ -435,24 +445,53 @@ const Deposit = () => {
               <div class="padding-vertical-10 flex-inherit height-60 color-grey">
                 <div class="pagination flex-inherit widthp-100 heightp-100">
                   <div class="select">
-                    <select name="slct" id="slct">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4</option>
-                      <option value="">5</option>
-                      <option value="">6</option>
-                      <option value="">7</option>
+                    <select
+                      name="slct"
+                      id="slct"
+                      onChange={(e) => {
+                        let val = e.target.value;
+                        dispatch(
+                          onClickPageDeposit({ page: val, per_page: per_page })
+                        );
+                      }}
+                    >
+                      {list_pages?.map((item, index) => {
+                        return (
+                          <option key={index} value={item}>
+                            {page}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div class="flex margin-left-5 page grow-2 justify-content-end">
                     <Link to="#">
-                      <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5">
+                      <button
+                        class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
+                        onClick={() => {
+                          let prevData = {
+                            page: page,
+                            list_pages: list_pages,
+                            per_page: per_page,
+                          };
+                          dispatch(prevPageDeposit(prevData));
+                        }}
+                      >
                         <i class="fas fa-chevron-left margin-0 color-grey"></i>
                       </button>
                     </Link>
                     <Link to="#">
-                      <button class="page-right width-40 heightp-100 background-transparent-b-20">
+                      <button
+                        class="page-right width-40 heightp-100 background-transparent-b-20"
+                        onClick={() => {
+                          let nextData = {
+                            page: page,
+                            list_pages: list_pages,
+                            per_page: per_page,
+                          };
+                          dispatch(nextPageDeposit(nextData));
+                        }}
+                      >
                         <i class="fas fa-chevron-right margin-0 color-grey"></i>
                       </button>
                     </Link>

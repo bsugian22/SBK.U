@@ -3,15 +3,6 @@ import sweetalert from "../../../plugins/sweetalert";
 const swal = new sweetalert();
 const initialState = {
   loading: false,
-  deposits: {
-    data: [],
-    total: 0,
-    count: 0,
-    perPage: 0,
-    page: 0,
-    lastPage: 0,
-    amount: 0,
-  },
   error: "",
   createDeposit: {
     agreed: true,
@@ -27,6 +18,15 @@ const initialState = {
     deposit_activities: [],
   },
   createDepositStatus: "CASH",
+  deposits: {
+    data: [],
+    total: 0,
+    count: 0,
+    perPage: 0,
+    page: 0,
+    lastPage: 0,
+    amount: 0,
+  },
 };
 
 const depositReducer = (state = initialState, action) => {
@@ -35,15 +35,6 @@ const depositReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        deposits: {
-          data: [],
-          total: 0,
-          count: 0,
-          perPage: 0,
-          page: 0,
-          lastPage: 0,
-          amount: 0,
-        },
         createDeposit: {
           agreed: true,
           amount: "0",
@@ -77,11 +68,21 @@ const depositReducer = (state = initialState, action) => {
       newData.page = action.payload.page;
       newData.lastPage = action.payload.lastPage;
       newData.amount = action.payload.amount;
+
       console.log(newData);
       return {
         ...state,
         loading: false,
-        deposits: newData,
+        deposits: {
+          ...state.deposits,
+          total: newData.total,
+          data: newData.data,
+          count: newData.count,
+          perPage: newData.perPage,
+          page: newData.page,
+          lastPage: newData.lastPage,
+          amount: newData.amount,
+        },
         depositMainList: action.payload,
         list: "ALL",
         error: "",
@@ -342,6 +343,75 @@ const depositReducer = (state = initialState, action) => {
         ...state,
         deposits: { ...state.deposits, data: state.deposits.data },
       };
+
+    case types.PAGINATION_REQUEST_DEPOSIT:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.PAGINATION_SUCCESS_DEPOSIT:
+      let paginationData = {
+        amount: action.payload.data,
+        count: action.payload.count,
+        data: action.payload.data,
+        lastPage: action.payload.lastPage,
+        list_pages: state.deposits.list_pages,
+        pages: state.deposits.pages,
+        page: action.payload.page,
+        perPage: action.payload.perPage,
+        total: action.payload.total,
+      };
+      return {
+        ...state,
+        loading: false,
+        deposits: action.payload,
+      };
+    case types.PAGINATION_FAILURE_DEPOSIT:
+      swal.error(action.payload);
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case types.SET_DEPOSIT_PAGE:
+      var total = state.deposits.total;
+      state.deposits.list_pages = [];
+      if (total != null) {
+        for (let index = 1; index < Math.ceil(total / 5) + 1; index++) {
+          state.deposits.list_pages.push(index);
+        }
+      }
+      return {
+        ...state,
+        deposits: {
+          ...state.deposits,
+          list_pages: state.deposits.list_pages,
+          pages: state.deposits.pages,
+        },
+      };
+
+    case types.NEXT_PAGE_DEPOSIT:
+      return {
+        ...state,
+        loading: true,
+        deposits: {
+          ...state.deposits,
+          page: action.payload,
+        },
+      };
+
+    case types.PREV_PAGE_DEPOSIT:
+      return {
+        ...state,
+        loading: true,
+        deposits: {
+          ...state.deposits,
+          page: action.payload,
+        },
+      };
+
     default:
       return state;
   }
