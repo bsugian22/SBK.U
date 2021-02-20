@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPromos, viewPromo } from "../../redux/promo/promoActions";
-import PromoPost from "./PromoPost";
+import { fetchPromos, viewPromo } from "../../../redux/promo/promoActions";
+import PromoPost from "../promoposts";
 
 export default function Promo() {
   let promo = useSelector((state) => state.promo);
