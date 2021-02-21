@@ -48,8 +48,6 @@ const Withdrawal = () => {
   );
   useEffect(() => {
     isSubscribed = true;
-
-    dispatch(setPagesOfwithdrawal());
     dispatch(setWithdrawals({ page: page, per_page: per_page }));
     return () => {
       isSubscribed = false;
