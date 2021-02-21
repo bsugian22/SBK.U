@@ -16,6 +16,10 @@ import {
   createWithdrawalAction,
   resetCreateWithdrawal,
   selectAllWithdrawal,
+  setPagesOfwithdrawal,
+  onClickPageWIthdrawal,
+  prevPageWIthdrawal,
+  nextPageWIthdrawal,
 } from "../../redux/accounts/withdrawal/withdrawalAction";
 import { Link, NavLink } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
@@ -27,6 +31,12 @@ const Withdrawal = () => {
   const dispatch = useDispatch();
   let withdraw = useSelector((state) => state.withdraw);
   let user = useSelector((state) => state.user.user);
+  let page = useSelector((state) => state.withdraw.withdrawals.page);
+  let lastPage = useSelector((state) => state.withdraw.withdrawals.lastPage);
+  let per_page = useSelector((state) => state.withdraw.withdrawals.per_page);
+  let list_pages = useSelector(
+    (state) => state.withdraw.withdrawals.list_pages
+  );
   let createWithdrawal = useSelector(
     (state) => state.withdraw.createWithdrawal
   );
@@ -38,11 +48,13 @@ const Withdrawal = () => {
   );
   useEffect(() => {
     isSubscribed = true;
-    dispatch(setWithdrawals());
+
+    dispatch(setPagesOfwithdrawal());
+    dispatch(setWithdrawals({ page: page, per_page: per_page }));
     return () => {
       isSubscribed = false;
     };
-  }, []);
+  }, [page]);
 
   return (
     <Fragment>
@@ -418,8 +430,8 @@ const Withdrawal = () => {
                     onClick={() => {
                       dispatch(listOfToDeleteWithdrawal());
                       dispatch(deleteWithdrawalRequest());
-                      // dispatch(deleteDeposits(deposit.newDepositToDeleteList));
-                      // console.log(deposit.newDepositToDeleteList);
+                      // dispatch(deleteDeposits(withdrawal.newDepositToDeleteList));
+                      // console.log(withdrawal.newDepositToDeleteList);
                       dispatch(
                         deleteWithdrawal(withdraw.newWithdrawalToDeleteList)
                       );
@@ -442,24 +454,70 @@ const Withdrawal = () => {
               <div class="padding-vertical-10 flex-inherit height-60 color-grey">
                 <div class="pagination flex-inherit widthp-100 heightp-100">
                   <div class="select">
-                    <select name="slct" id="slct">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4</option>
-                      <option value="">5</option>
-                      <option value="">6</option>
-                      <option value="">7</option>
+                    {/* {list_pages.map((o) => {
+                    let newItem = { label: o.toString(), value: o };
+                    selectList.push(newItem);
+                  })} */}
+                    <select
+                      name="slct"
+                      id="slct"
+                      value={page}
+                      onChange={(e) => {
+                        let val = e.target.value;
+                        if (val.toString() == page.toString()) {
+                          swal.warning(" 페이지에 반응");
+                        } else {
+                          dispatch(
+                            onClickPageWIthdrawal({
+                              page: val,
+                              per_page: per_page,
+                            })
+                          );
+                        }
+                      }}
+                    >
+                      {list_pages?.map((item, index) => {
+                        console.log(item, page);
+                        return <option key={index}>{item}</option>;
+                      })}
                     </select>
                   </div>
                   <div class="flex margin-left-5 page grow-2 justify-content-end">
                     <Link to="#">
-                      <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5">
+                      <button
+                        class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
+                        onClick={() => {
+                          let prevData = {
+                            page: page,
+                            list_pages: list_pages,
+                            per_page: per_page,
+                          };
+                          if (page == 1) {
+                            swal.warning(" 페이지에 반응");
+                          } else {
+                            dispatch(prevPageWIthdrawal(prevData));
+                          }
+                        }}
+                      >
                         <i class="fas fa-chevron-left margin-0 color-grey"></i>
                       </button>
                     </Link>
                     <Link to="#">
-                      <button class="page-right width-40 heightp-100 background-transparent-b-20">
+                      <button
+                        class="page-right width-40 heightp-100 background-transparent-b-20"
+                        onClick={() => {
+                          let nextData = {
+                            page: page,
+                            list_pages: list_pages,
+                            per_page: per_page,
+                          };
+                          if (page == lastPage) {
+                            swal.warning(" 페이지에 반응");
+                          } else {
+                            dispatch(nextPageWIthdrawal(nextData));
+                          }
+                        }}
+                      >
                         <i class="fas fa-chevron-right margin-0 color-grey"></i>
                       </button>
                     </Link>
