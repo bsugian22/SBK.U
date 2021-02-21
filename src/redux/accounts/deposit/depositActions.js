@@ -187,6 +187,7 @@ export const setDeposits = (params) => {
       .then((response) => {
         const deposits = camelize(response.data);
         dispatch(fetchDepositsSuccess(deposits));
+        dispatch(setPagesOfDeposit());
       })
       .catch((error) => {
         const errorMsg = error.message;
@@ -411,8 +412,7 @@ export const checkAllDeposit = () => {
 };
 
 export const changePage = (data) => {
-  return(dispatch) => {
+  return (dispatch) => {
     dispatch(setDeposits({ page: data.page, per_page: data.per_page }));
-  }
-
+  };
 };
