@@ -195,6 +195,60 @@ export const setWithdrawals = (params) => {
   };
 };
 
+export const setPagesOfwithdrawal = () => {
+  return (dispatch) => {
+    dispatch(setPagewithdrawal());
+  };
+};
+
+export const setPagewithdrawal = () => {
+  return {
+    type: types.SET_WITHDRAWAL_PAGE,
+  };
+};
+
+export const onClickPageWIthdrawal = (data) => {
+  return (dispatch) => {
+    dispatch(setWithdrawals(data));
+  };
+};
+
+export const nextWithdrawalPage = (page) => {
+  return {
+    type: types.NEXT_PAGE_WITHDRAWAL,
+    payload: page,
+  };
+};
+
+export const nextPageWIthdrawal = (data) => {
+  var page_number = data.page;
+  var last_page = data.list_pages[data.list_pages.length - 1];
+  if (last_page >= page_number + 1) {
+    return (dispatch) => {
+      let page = page_number + 1;
+      dispatch(nextWithdrawalPage(page));
+    };
+  }
+};
+export const prevWithdrawalPage = (page) => {
+  return {
+    type: types.PREV_PAGE_WITHDRAWAL,
+    payload: page,
+  };
+};
+
+export const prevPageWIthdrawal = (data) => {
+  var page_number = data.page;
+  var first_page = data.list_pages[0];
+  if (first_page <= page_number - 1) {
+    return (dispatch) => {
+      let page = page_number - 1;
+      dispatch(prevWithdrawalPage(page));
+      dispatch(setWithdrawals({ page: page, per_page: data.per_page }));
+    };
+  }
+};
+
 export const fetchWithdrawal = () => {
   return (dispatch) => {
     dispatch(fetchWithdrawalRequest);

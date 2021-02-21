@@ -12,6 +12,8 @@ const initialState = {
     page: 0,
     lastPage: 0,
     amount: 0,
+    list_pages: [],
+    pages: [],
   },
   error: "",
   createWithdrawal: {
@@ -36,15 +38,6 @@ const withdrawalReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        withdrawals: {
-          data: [],
-          total: 0,
-          count: 0,
-          perPage: 0,
-          page: 0,
-          lastPage: 0,
-          amount: 0,
-        },
         createWithdrawal: {
           agreed: true,
           amount: "",
@@ -78,12 +71,20 @@ const withdrawalReducer = (state = initialState, action) => {
       newData.perPage = action.payload.perPage;
       newData.page = action.payload.page;
       newData.lastPage = action.payload.lastPage;
-      newData.amount = action.payload.amount;
+
       console.log(newData);
       return {
         ...state,
         loading: false,
-        withdrawals: newData,
+        withdrawals: {
+          ...state.withdrawals,
+          total: newData.total,
+          data: newData.data,
+          count: newData.count,
+          perPage: newData.perPage,
+          page: newData.page,
+          lastPage: newData.lastPage,
+        },
         withdrawalMainList: action.payload,
         list: "ALL",
         error: "",
@@ -367,6 +368,51 @@ const withdrawalReducer = (state = initialState, action) => {
         ...state,
         withdrawals: { ...state.withdrawals, data: state.withdrawals.data },
       };
+
+    case types.SET_WITHDRAWAL_PAGE:
+      var total = state.withdrawals.total;
+      state.withdrawals.list_pages = [];
+      if (total != null) {
+        for (let index = 1; index < Math.ceil(total / 5) + 1; index++) {
+          state.withdrawals.list_pages.push(index);
+        }
+      }
+      console.log(state.withdrawals.list_pages);
+      return {
+        ...state,
+        withdrawals: {
+          ...state.withdrawals,
+          list_pages: state.withdrawals.list_pages,
+          pages: state.withdrawals.pages,
+        },
+      };
+
+    case types.NEXT_PAGE_WITHDRAWAL:
+      console.log(action.payload);
+      return {
+        ...state,
+        loading: true,
+        withdrawals: {
+          ...state.withdrawals,
+          page: action.payload,
+        },
+      };
+
+    case types.PREV_PAGE_WITHDRAWAL:
+      return {
+        ...state,
+        loading: true,
+        withdrawals: {
+          ...state.withdrawals,
+          page: action.payload,
+        },
+      };
+    case types.CHANGE_WITHDRAWAL_PAGE:
+      return {
+        ...state,
+        withdrawals: { ...state.withdrawals, page: action.payload },
+      };
+
     default:
       return state;
   }
