@@ -46,7 +46,7 @@ const Exchange = () => {
 
   useEffect(() => {
     isSubscribed = true;
-    dispatch(setPagesOfExchange());
+
     dispatch(setExchanges({ page: page, per_page: per_page }));
 
     return () => {

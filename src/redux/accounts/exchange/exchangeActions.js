@@ -188,6 +188,7 @@ export const setExchanges = (params) => {
         const exchanges = camelize(response.data);
         console.log(exchanges);
         dispatch(fetchExchangesSuccess(exchanges));
+        dispatch(setPagesOfExchange());
       })
       .catch((error) => {
         const errorMsg = error.message;
@@ -228,6 +229,7 @@ export const nextPageExchange = (data) => {
     return (dispatch) => {
       let page = page_number + 1;
       dispatch(nextExchangePage(page));
+      dispatch(setExchanges({ page: page, per_page: data.per_page }));
     };
   }
 };
@@ -320,6 +322,7 @@ export const deleteExchanges = (list) => {
         const exchanges = response.data;
         dispatch(deleteExchangesSuccess(exchanges));
         dispatch(setExchanges());
+        dispatch(setPagesOfExchange());
       })
       .catch((error) => {
         const errorMsg = error.message;
