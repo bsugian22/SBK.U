@@ -17,11 +17,16 @@ import {
   fromCasinoToCashExchange,
   incrementExchange,
   listOfToDeleteExchanges,
+  nextPageExchange,
+  onClickPageExchange,
+  prevPageExchange,
   resetCreateExchange,
   selectAllExchange,
   selectExchangeMethod,
   setExchanges,
+  setPagesOfExchange,
 } from "../../redux/accounts/exchange/exchangeActions";
+import { nextPageWIthdrawal } from "../../redux/accounts/withdrawal/withdrawalAction";
 
 const Exchange = () => {
   let exchange = useSelector((state) => state.exchange);
@@ -31,19 +36,23 @@ const Exchange = () => {
   let createExchangeStatus = useSelector(
     (state) => state.exchange.createExchangeStatus
   );
+  let page = useSelector((state) => state.exchange.exchanges.page);
+  let lastPage = useSelector((state) => state.exchange.exchanges.lastPage);
+  let per_page = useSelector((state) => state.exchange.exchanges.per_page);
+  let list_pages = useSelector((state) => state.exchange.exchanges.list_pages);
   const dispatch = useDispatch();
   let isSubscribed = true;
-  //   const context = useContext(MenuContext);
   const swal = new sweetalert();
 
   useEffect(() => {
     isSubscribed = true;
-    dispatch(setExchanges());
-    console.table(exchange);
+    dispatch(setPagesOfExchange());
+    dispatch(setExchanges({ page: page, per_page: per_page }));
+
     return () => {
       isSubscribed = false;
     };
-  }, []);
+  }, [page]);
 
   return (
     <Fragment>
@@ -133,7 +142,7 @@ const Exchange = () => {
                     </div>
                     <div class="widthp-67 form-content height-45 border-bottom-rb border-top align-items-center padding-right-15 justify-content-end background-transparent-b-5 border-left-rw">
                       <span class="color-green">
-                        {preference.withdrawalMinAmount}원
+                        {preference.exchangealMinAmount}원
                       </span>
                     </div>
                   </div>
@@ -388,24 +397,70 @@ const Exchange = () => {
               <div class="padding-vertical-10 flex-inherit height-60 color-grey">
                 <div class="pagination flex-inherit widthp-100 heightp-100">
                   <div class="select">
-                    <select name="slct" id="slct">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4</option>
-                      <option value="">5</option>
-                      <option value="">6</option>
-                      <option value="">7</option>
+                    {/* {list_pages.map((o) => {
+                    let newItem = { label: o.toString(), value: o };
+                    selectList.push(newItem);
+                  })} */}
+                    <select
+                      name="slct"
+                      id="slct"
+                      value={page}
+                      onChange={(e) => {
+                        let val = e.target.value;
+                        if (val.toString() == page.toString()) {
+                          swal.warning(" 페이지에 반응");
+                        } else {
+                          dispatch(
+                            onClickPageExchange({
+                              page: val,
+                              per_page: per_page,
+                            })
+                          );
+                        }
+                      }}
+                    >
+                      {list_pages?.map((item, index) => {
+                        console.log(item, page);
+                        return <option key={index}>{item}</option>;
+                      })}
                     </select>
                   </div>
                   <div class="flex margin-left-5 page grow-2 justify-content-end">
                     <Link to="#">
-                      <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5">
+                      <button
+                        class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
+                        onClick={() => {
+                          let prevData = {
+                            page: page,
+                            list_pages: list_pages,
+                            per_page: per_page,
+                          };
+                          if (page == 1) {
+                            swal.warning(" 페이지에 반응");
+                          } else {
+                            dispatch(prevPageExchange(prevData));
+                          }
+                        }}
+                      >
                         <i class="fas fa-chevron-left margin-0 color-grey"></i>
                       </button>
                     </Link>
                     <Link to="#">
-                      <button class="page-right width-40 heightp-100 background-transparent-b-20">
+                      <button
+                        class="page-right width-40 heightp-100 background-transparent-b-20"
+                        onClick={() => {
+                          let nextData = {
+                            page: page,
+                            list_pages: list_pages,
+                            per_page: per_page,
+                          };
+                          if (page == lastPage) {
+                            swal.warning(" 페이지에 반응");
+                          } else {
+                            dispatch(nextPageExchange(nextData));
+                          }
+                        }}
+                      >
                         <i class="fas fa-chevron-right margin-0 color-grey"></i>
                       </button>
                     </Link>
@@ -594,7 +649,7 @@ const Exchange = () => {
             </div>
           </form>
         </div>
-        <h1>SAMPLE</h1>
+
         <div
         //   class={
         //     context.state.interMenu === "inter-tab-2"

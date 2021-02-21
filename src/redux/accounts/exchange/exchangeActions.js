@@ -196,6 +196,60 @@ export const setExchanges = (params) => {
   };
 };
 
+export const setPagesOfExchange = () => {
+  return (dispatch) => {
+    dispatch(setPageExchange());
+  };
+};
+
+export const setPageExchange = () => {
+  return {
+    type: types.SET_EXCHANGE_PAGE,
+  };
+};
+
+export const onClickPageExchange = (data) => {
+  return (dispatch) => {
+    dispatch(setExchanges(data));
+  };
+};
+
+export const nextExchangePage = (page) => {
+  return {
+    type: types.NEXT_PAGE_EXCHANGE,
+    payload: page,
+  };
+};
+
+export const nextPageExchange = (data) => {
+  var page_number = data.page;
+  var last_page = data.list_pages[data.list_pages.length - 1];
+  if (last_page >= page_number + 1) {
+    return (dispatch) => {
+      let page = page_number + 1;
+      dispatch(nextExchangePage(page));
+    };
+  }
+};
+export const prevExchangePage = (page) => {
+  return {
+    type: types.PREV_PAGE_EXCHANGE,
+    payload: page,
+  };
+};
+
+export const prevPageExchange = (data) => {
+  var page_number = data.page;
+  var first_page = data.list_pages[0];
+  if (first_page <= page_number - 1) {
+    return (dispatch) => {
+      let page = page_number - 1;
+      dispatch(prevExchangePage(page));
+      dispatch(setExchanges({ page: page, per_page: data.per_page }));
+    };
+  }
+};
+
 export const fetchExchange = () => {
   return (dispatch) => {
     dispatch(fetchExchangeRequest);
@@ -223,6 +277,7 @@ export const createExchangeAction = (exchange) => {
       .then((response) => {
         dispatch(setExchanges());
         dispatch(createExchangesuccess(response.data.message));
+        dispatch(setPagesOfExchange());
       })
       .catch((error) => {
         const errorMsg = error.response.data;

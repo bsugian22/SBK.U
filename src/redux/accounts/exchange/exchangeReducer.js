@@ -27,6 +27,8 @@ const initialState = {
     page: 0,
     lastPage: 0,
     amount: 0,
+    list_pages: [],
+    pages: [],
   },
 };
 
@@ -42,15 +44,7 @@ const exchangeReducer = (state = initialState, action) => {
           from: "cash",
           to: "casino_cash",
         },
-        exchanges: {
-          data: [],
-          total: 0,
-          count: 0,
-          perPage: 0,
-          page: 0,
-          lastPage: 0,
-          amount: 0,
-        },
+
         showModal: false,
         openModal: false,
         closeModal: false,
@@ -77,12 +71,20 @@ const exchangeReducer = (state = initialState, action) => {
       newData.perPage = action.payload.perPage;
       newData.page = action.payload.page;
       newData.lastPage = action.payload.lastPage;
-      newData.amount = action.payload.amount;
-      console.log(newData);
+
+      console.log(action.payload);
       return {
         ...state,
         loading: false,
-        exchanges: newData,
+        exchanges: {
+          ...state.exchanges,
+          total: newData.total,
+          data: newData.data,
+          count: newData.count,
+          perPage: newData.perPage,
+          page: newData.page,
+          lastPage: newData.lastPage,
+        },
         exchangeMainList: action.payload,
         list: "ALL",
         error: "",
@@ -151,6 +153,10 @@ const exchangeReducer = (state = initialState, action) => {
         loading: false,
         error: "",
         showModal: false,
+        exchanges: {
+          ...state,
+          list_pages: state.exchanges.list_pages,
+        },
       };
     case types.CREATE_EXCHANGE_FAILURE:
       swal.showError(action.payload);
@@ -372,6 +378,49 @@ const exchangeReducer = (state = initialState, action) => {
       return {
         ...state,
         exchanges: { ...state.exchanges, data: state.exchanges.data },
+      };
+    case types.SET_EXCHANGE_PAGE:
+      var total = state.exchanges.total;
+      state.exchanges.list_pages = [];
+      if (total != null) {
+        for (let index = 1; index < Math.ceil(total / 5) + 1; index++) {
+          state.exchanges.list_pages.push(index);
+        }
+      }
+      console.log(state.exchanges.list_pages);
+      return {
+        ...state,
+        exchanges: {
+          ...state.exchanges,
+          list_pages: state.exchanges.list_pages,
+          pages: state.exchanges.pages,
+        },
+      };
+
+    case types.NEXT_PAGE_EXCHANGE:
+      console.log(action.payload);
+      return {
+        ...state,
+        loading: true,
+        exchanges: {
+          ...state.exchanges,
+          page: action.payload,
+        },
+      };
+
+    case types.PREV_PAGE_EXCHANGE:
+      return {
+        ...state,
+        loading: true,
+        exchanges: {
+          ...state.exchanges,
+          page: action.payload,
+        },
+      };
+    case types.CHANGE_EXCHANGE_PAGE:
+      return {
+        ...state,
+        exchanges: { ...state.exchanges, page: action.payload },
       };
     default:
       return state;
