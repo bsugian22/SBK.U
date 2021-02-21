@@ -228,6 +228,7 @@ export const nextPageExchange = (data) => {
     return (dispatch) => {
       let page = page_number + 1;
       dispatch(nextExchangePage(page));
+      dispatch(setExchanges({ page: page, per_page: data.per_page }));
     };
   }
 };
