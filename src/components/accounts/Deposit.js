@@ -45,7 +45,6 @@ const Deposit = () => {
   let swal = new sweetalert();
   useEffect(() => {
     isSubscribed = true;
-    dispatch(setPagesOfDeposit());
     dispatch(setDeposits({ page: page, per_page: per_page }));
 
     return () => {
