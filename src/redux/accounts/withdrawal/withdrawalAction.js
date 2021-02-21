@@ -187,6 +187,7 @@ export const setWithdrawals = (params) => {
       .then((response) => {
         const withdrawals = camelize(response.data);
         dispatch(fetchWithdrawalsSuccess(withdrawals));
+        dispatch(setPagesOfwithdrawal());
       })
       .catch((error) => {
         const errorMsg = error.message;
