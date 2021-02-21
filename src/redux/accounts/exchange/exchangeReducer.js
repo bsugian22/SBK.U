@@ -153,10 +153,6 @@ const exchangeReducer = (state = initialState, action) => {
         loading: false,
         error: "",
         showModal: false,
-        exchanges: {
-          ...state,
-          list_pages: state.exchanges.list_pages,
-        },
       };
     case types.CREATE_EXCHANGE_FAILURE:
       swal.showError(action.payload);
