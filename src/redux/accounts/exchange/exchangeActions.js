@@ -188,6 +188,7 @@ export const setExchanges = (params) => {
         const exchanges = camelize(response.data);
         console.log(exchanges);
         dispatch(fetchExchangesSuccess(exchanges));
+        dispatch(setPagesOfExchange());
       })
       .catch((error) => {
         const errorMsg = error.message;
@@ -321,6 +322,7 @@ export const deleteExchanges = (list) => {
         const exchanges = response.data;
         dispatch(deleteExchangesSuccess(exchanges));
         dispatch(setExchanges());
+        dispatch(setPagesOfExchange());
       })
       .catch((error) => {
         const errorMsg = error.message;
