@@ -12,7 +12,7 @@ import Deposit from "../components/accounts/deposit";
 import Withdrawal from "../components/accounts/withdrawal";
 import Exchange from "../components/accounts/exchange";
 import Position from "../components/accounts/position";
-import Notice from "../components/accounts/notice";
+import Notice from "../components/accounts/NoticeContainer";
 import Inquiry from "../components/accounts/inquiry";
 import Message from "../components/accounts/message";
 import Settings from "../components/accounts/settings";
