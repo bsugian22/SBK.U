@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import sweetalert from "../../plugins/sweetalert";
 import {
   changeCreateDepositAmount,
+  changePage,
   checkAllDeposit,
   checkDepositCertainItem,
   createDepositAction,
@@ -11,17 +12,28 @@ import {
   deleteDepositsRequest,
   incrementDeposit,
   listOfToDeleteDeposits,
+  nextPageDeposit,
+  onClickPageDeposit,
+  prevPageDeposit,
   resetCreateDeposit,
   selectDepositMethod,
   setDeposits,
+  setPageOfDeposit,
+  setPagesOfDeposit,
 } from "../../redux/accounts/deposit/depositActions";
 import { Link, NavLink } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
 import echo from "../../plugins/echo";
 import Moment from "moment";
+import { useRef } from "react";
+import Select from "react-select";
 const Deposit = () => {
   let deposit = useSelector((state) => state.deposit);
+  let list_pages = useSelector((state) => state.deposit.deposits.list_pages);
+  let totalPages = useSelector((state) => state.deposit.deposits.totalPages);
   let deleteList = useSelector((state) => state.deposit.newDepositToDeleteList);
+  let page = useSelector((state) => state.deposit.deposits.page);
+  let per_page = useSelector((state) => state.deposit.deposits.per_page);
   let user = useSelector((state) => state.user.user);
   let createDepositStatus = useSelector(
     (state) => state.deposit.createDepositStatus
@@ -32,13 +44,19 @@ const Deposit = () => {
   );
   let isSubscribed = true;
   let dispatch = useDispatch();
+  const [depPage, setDepPage] = useState(page);
+  const selectInputRef = useRef();
+  let selectList = [];
   useEffect(() => {
     isSubscribed = true;
-    dispatch(setDeposits());
+    dispatch(setPagesOfDeposit());
+    dispatch(setDeposits({ page: page, per_page: per_page }));
+
     return () => {
       isSubscribed = false;
     };
-  }, []);
+  }, [page]);
+  console.log(totalPages);
 
   return (
     <Fragment>
@@ -345,7 +363,7 @@ const Deposit = () => {
                     </tr>
                   </thead>
                   <tbody class="background-transparent-b-5">
-                    {deposit.loading ? (
+                    {deposit?.loading ? (
                       <tr>
                         <td colspan="15" class="td-3">
                           <span></span>
@@ -358,7 +376,8 @@ const Deposit = () => {
                         </td>
                       </tr>
                     ) : (
-                      deposit.deposits.data.map((item, index) => {
+                      deposit?.deposits?.data?.map((item, index) => {
+                        console.log(deposit.deposits.list_pages);
                         return (
                           <tr class="rows" key={index}>
                             <td class="height-45 border-top">
@@ -435,24 +454,65 @@ const Deposit = () => {
               <div class="padding-vertical-10 flex-inherit height-60 color-grey">
                 <div class="pagination flex-inherit widthp-100 heightp-100">
                   <div class="select">
-                    <select name="slct" id="slct">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4</option>
-                      <option value="">5</option>
-                      <option value="">6</option>
-                      <option value="">7</option>
+                    {/* {list_pages.map((o) => {
+                    let newItem = { label: o.toString(), value: o };
+                    selectList.push(newItem);
+                  })} */}
+                    <select
+                      name="slct"
+                      id="slct"
+                      value={page}
+                      onChange={(e) => {
+                        let val = e.target.value;
+                        dispatch(
+                          onClickPageDeposit({ page: val, per_page: per_page })
+                        );
+                      }}
+                    >
+                      {list_pages?.map((item, index) => {
+                        console.log(item, page);
+                        return (
+                          <option
+                            key={index}
+                            defaultValue={item}
+                            selected={item == page ? true : false}
+                          >
+                            {item}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div class="flex margin-left-5 page grow-2 justify-content-end">
                     <Link to="#">
-                      <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5">
+                      <button
+                        class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
+                        onClick={() => {
+                          let prevData = {
+                            page: page,
+                            list_pages: list_pages,
+                            per_page: per_page,
+                          };
+
+                          dispatch(prevPageDeposit(prevData));
+                        }}
+                      >
                         <i class="fas fa-chevron-left margin-0 color-grey"></i>
                       </button>
                     </Link>
                     <Link to="#">
-                      <button class="page-right width-40 heightp-100 background-transparent-b-20">
+                      <button
+                        class="page-right width-40 heightp-100 background-transparent-b-20"
+                        onClick={() => {
+                          let nextData = {
+                            page: page,
+                            list_pages: list_pages,
+                            per_page: per_page,
+                          };
+
+                          dispatch(nextPageDeposit(nextData));
+                        }}
+                      >
                         <i class="fas fa-chevron-right margin-0 color-grey"></i>
                       </button>
                     </Link>
