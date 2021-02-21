@@ -22,17 +22,15 @@ import {
   setPagesOfDeposit,
 } from "../../redux/accounts/deposit/depositActions";
 import { Link, NavLink } from "react-router-dom";
-import MenuContext from "../../contexts/Menu.context";
-import echo from "../../plugins/echo";
 import Moment from "moment";
-import { useRef } from "react";
-import Select from "react-select";
+
 const Deposit = () => {
   let deposit = useSelector((state) => state.deposit);
   let list_pages = useSelector((state) => state.deposit.deposits.list_pages);
   let totalPages = useSelector((state) => state.deposit.deposits.totalPages);
   let deleteList = useSelector((state) => state.deposit.newDepositToDeleteList);
   let page = useSelector((state) => state.deposit.deposits.page);
+  let lastPage = useSelector((state) => state.deposit.deposits.lastPage);
   let per_page = useSelector((state) => state.deposit.deposits.per_page);
   let user = useSelector((state) => state.user.user);
   let createDepositStatus = useSelector(
@@ -44,9 +42,7 @@ const Deposit = () => {
   );
   let isSubscribed = true;
   let dispatch = useDispatch();
-  const [depPage, setDepPage] = useState(page);
-  const selectInputRef = useRef();
-  let selectList = [];
+  let swal = new sweetalert();
   useEffect(() => {
     isSubscribed = true;
     dispatch(setPagesOfDeposit());
@@ -464,9 +460,16 @@ const Deposit = () => {
                       value={page}
                       onChange={(e) => {
                         let val = e.target.value;
-                        dispatch(
-                          onClickPageDeposit({ page: val, per_page: per_page })
-                        );
+                        if (val.toString() == page.toString()) {
+                          swal.warning(" 페이지에 반응");
+                        } else {
+                          dispatch(
+                            onClickPageDeposit({
+                              page: val,
+                              per_page: per_page,
+                            })
+                          );
+                        }
                       }}
                     >
                       {list_pages?.map((item, index) => {
@@ -474,8 +477,7 @@ const Deposit = () => {
                         return (
                           <option
                             key={index}
-                            defaultValue={item}
-                            selected={item == page ? true : false}
+                            // selected={item == page ? true : false}
                           >
                             {item}
                           </option>
@@ -493,8 +495,11 @@ const Deposit = () => {
                             list_pages: list_pages,
                             per_page: per_page,
                           };
-
-                          dispatch(prevPageDeposit(prevData));
+                          if (page == 1) {
+                            swal.warning(" 페이지에 반응");
+                          } else {
+                            dispatch(prevPageDeposit(prevData));
+                          }
                         }}
                       >
                         <i class="fas fa-chevron-left margin-0 color-grey"></i>
@@ -509,8 +514,11 @@ const Deposit = () => {
                             list_pages: list_pages,
                             per_page: per_page,
                           };
-
-                          dispatch(nextPageDeposit(nextData));
+                          if (page == lastPage) {
+                            swal.warning(" 페이지에 반응");
+                          } else {
+                            dispatch(nextPageDeposit(nextData));
+                          }
                         }}
                       >
                         <i class="fas fa-chevron-right margin-0 color-grey"></i>
