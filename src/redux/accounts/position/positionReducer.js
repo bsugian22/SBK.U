@@ -203,6 +203,49 @@ const positionReducer = (state = initialState, action) => {
         positions: { ...state.positions, data: defeated },
         list: "DEFEATED",
       };
+    case types.SET_POSITION_PAGE:
+      var total = state.positions.total;
+      state.positions.list_pages = [];
+      if (total != null) {
+        for (let index = 1; index < Math.ceil(total / 5) + 1; index++) {
+          state.positions.list_pages.push(index);
+        }
+      }
+      console.log(state.positions.list_pages);
+      return {
+        ...state,
+        positions: {
+          ...state.positions,
+          list_pages: state.positions.list_pages,
+          pages: state.positions.pages,
+        },
+      };
+
+    case types.NEXT_PAGE_POSITION:
+      console.log(action.payload);
+      return {
+        ...state,
+        loading: true,
+        positions: {
+          ...state.positions,
+          page: action.payload,
+        },
+      };
+
+    case types.PREV_PAGE_POSITION:
+      return {
+        ...state,
+        loading: true,
+        positions: {
+          ...state.positions,
+          page: action.payload,
+        },
+      };
+    case types.CHANGE_POSITION_PAGE:
+      return {
+        ...state,
+        positions: { ...state.positions, page: action.payload },
+      };
     default:
       return state;
   }

@@ -177,14 +177,15 @@ export const unfilteredAll = () => {
     type: types.LIST_OF_POSITION,
   };
 };
-export const setPositions = () => {
+export const setPositions = (params) => {
   return (dispatch) => {
     dispatch(fetchPositionsRequest());
     axios
-      .get(`/api/positions`)
+      .get(`/api/positions`, { params: params })
       .then((response) => {
         const positions = camelize(response.data);
         dispatch(fetchPositionsSuccess(positions));
+        dispatch(setPagesOfPosition());
       })
       .catch((error) => {
         console.log(error);
@@ -192,6 +193,61 @@ export const setPositions = () => {
         dispatch(fetchPositionsFailure(error.message));
       });
   };
+};
+
+export const setPagesOfPosition = () => {
+  return (dispatch) => {
+    dispatch(setPagePosition());
+  };
+};
+
+export const setPagePosition = () => {
+  return {
+    type: types.SET_POSITION_PAGE,
+  };
+};
+
+export const onClickPagePosition = (data) => {
+  return (dispatch) => {
+    dispatch(setPositions(data));
+  };
+};
+
+export const nextPositionPage = (page) => {
+  return {
+    type: types.NEXT_PAGE_POSITION,
+    payload: page,
+  };
+};
+
+export const nextPagePosition = (data) => {
+  var page_number = data.page;
+  var last_page = data.list_pages[data.list_pages.length - 1];
+  if (last_page >= page_number + 1) {
+    return (dispatch) => {
+      let page = page_number + 1;
+      dispatch(nextPositionPage(page));
+      dispatch(setPositions({ page: page, per_page: data.per_page }));
+    };
+  }
+};
+export const prevPositionPage = (page) => {
+  return {
+    type: types.PREV_PAGE_POSITION,
+    payload: page,
+  };
+};
+
+export const prevPagePosition = (data) => {
+  var page_number = data.page;
+  var first_page = data.list_pages[0];
+  if (first_page <= page_number - 1) {
+    return (dispatch) => {
+      let page = page_number - 1;
+      dispatch(prevPositionPage(page));
+      dispatch(setPositions({ page: page, per_page: data.per_page }));
+    };
+  }
 };
 
 export const fetchPosition = () => {
