@@ -26,6 +26,9 @@ const initialState = {
     page: 0,
     lastPage: 0,
     amount: 0,
+    list_pages: [],
+    pages: [],
+    totalPages: [],
   },
 };
 
@@ -67,9 +70,9 @@ const depositReducer = (state = initialState, action) => {
       newData.perPage = action.payload.perPage;
       newData.page = action.payload.page;
       newData.lastPage = action.payload.lastPage;
-      newData.amount = action.payload.amount;
 
       console.log(newData);
+      console.log(state.deposits.list_pages);
       return {
         ...state,
         loading: false,
@@ -81,7 +84,6 @@ const depositReducer = (state = initialState, action) => {
           perPage: newData.perPage,
           page: newData.page,
           lastPage: newData.lastPage,
-          amount: newData.amount,
         },
         depositMainList: action.payload,
         list: "ALL",
@@ -383,16 +385,19 @@ const depositReducer = (state = initialState, action) => {
           state.deposits.list_pages.push(index);
         }
       }
+      console.log(state.deposits.list_pages);
       return {
         ...state,
         deposits: {
           ...state.deposits,
           list_pages: state.deposits.list_pages,
           pages: state.deposits.pages,
+          totalPages: state.deposits.list_pages,
         },
       };
 
     case types.NEXT_PAGE_DEPOSIT:
+      console.log(action.payload);
       return {
         ...state,
         loading: true,
@@ -411,7 +416,11 @@ const depositReducer = (state = initialState, action) => {
           page: action.payload,
         },
       };
-
+    case types.CHANGE_DEPOSIT_PAGE:
+      return {
+        ...state,
+        deposits: { ...state.deposits, page: action.payload },
+      };
     default:
       return state;
   }

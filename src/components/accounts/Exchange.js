@@ -1,191 +1,49 @@
 import React, { Fragment, useEffect, useState, useContext } from "react";
-import { connect } from "react-redux";
-import moment from "moment";
-import Select from "react-select";
-import { mapStateToProps, mapDispatchProps } from "../../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import Moment from "moment";
 import sweetalert from "../../plugins/sweetalert";
-import exchangeModel from "../../models/exchangeModel";
-import echo from "../../plugins/echo";
 import { method } from "lodash";
 import { Link, NavLink } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
 
-const Exchange = (props) => {
+import {
+  changeCreateExchangeAmount,
+  checkExchangeCertainItem,
+  createExchangeAction,
+  decrementExchange,
+  deleteExchanges,
+  deleteExchangesRequest,
+  fromCashToCasinoExchange,
+  fromCasinoToCashExchange,
+  incrementExchange,
+  listOfToDeleteExchanges,
+  resetCreateExchange,
+  selectAllExchange,
+  selectExchangeMethod,
+  setExchanges,
+} from "../../redux/accounts/exchange/exchangeActions";
+
+const Exchange = () => {
+  let exchange = useSelector((state) => state.exchange);
+  let user = useSelector((state) => state.user.user);
+  let createExchange = useSelector((state) => state.exchange.createExchange);
+  let preference = useSelector((state) => state.preference.preferences);
+  let createExchangeStatus = useSelector(
+    (state) => state.exchange.createExchangeStatus
+  );
+  const dispatch = useDispatch();
   let isSubscribed = true;
-  const context = useContext(MenuContext);
-  const { user } = props;
+  //   const context = useContext(MenuContext);
   const swal = new sweetalert();
-  const model = new exchangeModel();
-  const [exchange, setExchange] = useState({
-    amount: 0,
-    page: 1,
-    lastPage: null,
-    createdFrom: null,
-    createdUntil: null,
-    exchangeActivities: [],
-    from: "cash",
-    to: "casino_cash",
-    form: {
-      amount: 0,
-    },
-  });
 
   useEffect(() => {
     isSubscribed = true;
-
-    if (user.isAuth) {
-      pusher();
-      fetch();
-    }
-
+    dispatch(setExchanges());
+    console.table(exchange);
     return () => {
       isSubscribed = false;
     };
-  }, [exchange.page]);
-
-  const pusher = () => {
-    if (user.isAuth) {
-      echo.private(`users.${user.member.id}`).listen("ExchangeUpdated", (e) => {
-        fetch();
-      });
-    }
-  };
-
-  const fetch = async () => {
-    const {
-      data: { data: exchangeActivities, page, lastPage, amount },
-    } = await model.index({
-      page: exchange.page,
-      createdFrom: exchange.createdFrom,
-      createdUntil: exchange.createdUntil,
-    });
-
-    if (isSubscribed) {
-      setExchange({
-        ...exchange,
-        exchangeActivities: exchangeActivities,
-        page: page,
-        lastPage: lastPage,
-        amount: amount,
-      });
-    }
-  };
-
-  const method = (e) => {
-    const _from = e.currentTarget.getAttribute("data-from");
-    const _to = e.currentTarget.getAttribute("data-to");
-
-    setExchange({
-      ...exchange,
-      from: _from,
-      to: _to,
-    });
-  };
-
-  const amountChange = (e) => {
-    setExchange({
-      ...exchange,
-      form: {
-        ...exchange.form,
-        amount: Number(e.currentTarget.value.replaceAll(",", "")),
-      },
-    });
-  };
-
-  const QuickInput = (e) => {
-    const amount = e.currentTarget.getAttribute("data-amount");
-
-    setExchange({
-      ...exchange,
-      form: {
-        ...exchange.form,
-        amount: Number(amount) + exchange.form.amount,
-      },
-    });
-  };
-
-  const submit = async (e) => {
-    e.preventDefault();
-    swal.confirm("전환신청을 하시겠습니까?", async (r) => {
-      if (r.value) {
-        const f = new FormData(e.target);
-        try {
-          const success = await model.create({
-            agreed: true,
-            from: exchange.from,
-            to: exchange.to,
-            amount: f.get("amount").replaceAll(",", ""),
-          });
-
-          swal.success(success.data.message);
-        } catch (error) {
-          const data = error.response.data;
-          swal.error(data.message);
-        }
-      }
-    });
-  };
-
-  const checkbox = (e, id) => {
-    const { exchangeActivities } = exchange;
-
-    exchangeActivities.filter((exchangeActivities) => {
-      if (exchangeActivities.id == id) {
-        exchangeActivities.isSelected = e.currentTarget.checked;
-      }
-    });
-
-    setExchange({
-      ...exchange,
-      exchangeActivities: exchangeActivities,
-    });
-  };
-
-  const destroy = async () => {
-    swal.confirm("정말로 선택된 전환내역을 삭제하시겠습니까?", async (r) => {
-      if (r.value) {
-        try {
-          const filtered = exchange.exchangeActivities.filter(
-            (exchangeActivities) => exchangeActivities.isSelected
-          );
-          if (filtered.length) {
-            const success = await model.destroy({
-              exchangeActivities: filtered,
-            });
-
-            fetch();
-            swal.success(success.data.message);
-          } else {
-            swal.error("내역이 선택되지 않았습니다");
-          }
-        } catch (error) {
-          const data = error.response.data;
-          swal.error(data.message);
-        }
-      }
-    });
-  };
-
-  const prev = () => {
-    setExchange({
-      ...exchange,
-      page: exchange.page - 1,
-    });
-  };
-
-  const next = () => {
-    setExchange({
-      ...exchange,
-      page: exchange.page + 1,
-    });
-  };
-
-  const setPage = (e) => {
-    setExchange({
-      ...exchange,
-      page: e.value,
-    });
-  };
+  }, []);
 
   return (
     <Fragment>
@@ -207,8 +65,9 @@ const Exchange = (props) => {
                     </div>
                     <div class="widthp-67 form-content height-45 background-transparent-b-5 border-bottom-rb border-top align-items-center padding-right-15 justify-content-end border-left-rw">
                       <span class="color-green">
+                        {/* CASH */}
                         <i class="far fa-won-sign"></i>
-                        24,000,000원
+                        {user.member.cash}원
                       </span>
                     </div>
                   </div>
@@ -220,7 +79,7 @@ const Exchange = (props) => {
                     <div class="widthp-67 form-content height-45 background-transparent-b-5 border-bottom-rb border-top align-items-center padding-right-15 justify-content-end border-left-rw">
                       <span class="color-green">
                         <i class="far fa-won-sign"></i>
-                        120,000원
+                        {user.member.casino_cash}원
                       </span>
                     </div>
                   </div>
@@ -232,19 +91,50 @@ const Exchange = (props) => {
                 </div>
                 <div class="account-form-data flex-column flex-inherit">
                   <div class="ac-payment-pbp flex-inherit align-items-center align-items-center-inherit justify-content-center-inherit">
-                    <div class="widthp-50 border-right-rb border-bottom-rb border-top height-45 color-green background-transparent-b-5 active">
-                      <span class="color-green">보유금액 -&gt; CASINO</span>
+                    <div
+                      class="widthp-50 border-right-rb border-bottom-rb border-top height-45  background-transparent-b-5 active"
+                      onClick={() => {
+                        dispatch(selectExchangeMethod("cash"));
+                        dispatch(fromCashToCasinoExchange());
+                      }}
+                    >
+                      <span
+                        class={
+                          createExchangeStatus == "cash"
+                            ? "color-green"
+                            : "color-grey"
+                        }
+                      >
+                        보유금액 -&gt; CASINO
+                      </span>
                     </div>
-                    <div class="widthp-50 border-bottom-rb border-top height-45 color-green background-transparent-b-5 border-left-rw">
-                      <span class="color-grey">CASINO -&gt; 보유금액</span>
+                    <div
+                      class="widthp-50 border-bottom-rb border-top height-45  background-transparent-b-5 border-left-rw"
+                      onClick={() => {
+                        dispatch(selectExchangeMethod("casino_cash"));
+                        dispatch(fromCasinoToCashExchange());
+                      }}
+                    >
+                      <span
+                        class={
+                          createExchangeStatus == "casino_cash"
+                            ? "color-green"
+                            : "color-grey"
+                        }
+                      >
+                        CASINO -&gt; 보유금액
+                      </span>
                     </div>
                   </div>
                   <div class="form-rows flex-inherit">
                     <div class="widthp-33 border-right-rb form-title height-45 border-bottom-rb border-top align-items-center justify-content-center background-transparent-b-10">
+                      {/* Withdrawable Amount */}
                       <span class="color-grey">출금 가능액</span>
                     </div>
                     <div class="widthp-67 form-content height-45 border-bottom-rb border-top align-items-center padding-right-15 justify-content-end background-transparent-b-5 border-left-rw">
-                      <span class="color-green">23,000,000원</span>
+                      <span class="color-green">
+                        {preference.withdrawalMinAmount}원
+                      </span>
                     </div>
                   </div>
                   <div class="form-rows flex-inherit">
@@ -259,16 +149,31 @@ const Exchange = (props) => {
                             class="input-form padding-left-10"
                             name="amount"
                             placeholder="0"
-                            value={exchange.form.amount.toLocaleString()}
-                            onChange={amountChange}
+                            value={createExchange.amount}
+                            onChange={(e) => {
+                              let amt = 0;
+                              amt = Number(createExchange.amount);
+                              console.log(amt);
+                              dispatch(changeCreateExchangeAmount(amt));
+                            }}
                             required
                           />
                         </div>
                         <div>
-                          <button type="button">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              dispatch(incrementExchange());
+                            }}
+                          >
                             <i class="far fa-plus color-grey"></i>
                           </button>
-                          <button type="button">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              dispatch(decrementExchange());
+                            }}
+                          >
                             <i class="far fa-minus color-grey"></i>
                           </button>
                         </div>
@@ -278,7 +183,9 @@ const Exchange = (props) => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-top heightp-100 color-grey border-left-rw"
                           data-amount="30000"
-                          onClick={QuickInput}
+                          onClick={() => {
+                            dispatch(changeCreateExchangeAmount(30000));
+                          }}
                         >
                           30,000
                         </button>
@@ -286,7 +193,9 @@ const Exchange = (props) => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-top heightp-100 color-grey border-left-rw"
                           data-amount="50000"
-                          onClick={QuickInput}
+                          onClick={() => {
+                            dispatch(changeCreateExchangeAmount(50000));
+                          }}
                         >
                           50,000
                         </button>
@@ -294,7 +203,9 @@ const Exchange = (props) => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-top heightp-100 color-grey border-left-rw"
                           data-amount="100000"
-                          onClick={QuickInput}
+                          onClick={() => {
+                            dispatch(changeCreateExchangeAmount(100000));
+                          }}
                         >
                           100,000
                         </button>
@@ -302,7 +213,9 @@ const Exchange = (props) => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-right-rb border-top heightp-100 color-grey border-left-rw"
                           data-amount="500000"
-                          onClick={QuickInput}
+                          onClick={() => {
+                            dispatch(changeCreateExchangeAmount(500000));
+                          }}
                         >
                           500,000
                         </button>
@@ -310,7 +223,9 @@ const Exchange = (props) => {
                           type="button"
                           class="flex justify-content-center align-items-center widthp-20 border-top heightp-100 color-grey border-left-rw"
                           data-amount="1000000"
-                          onClick={QuickInput}
+                          onClick={() => {
+                            dispatch(changeCreateExchangeAmount(1000000));
+                          }}
                         >
                           1,000,000
                         </button>
@@ -323,6 +238,9 @@ const Exchange = (props) => {
                     <button
                       type="button"
                       class="padding-15 background-transparent-b-10 color-white"
+                      onClick={() => {
+                        dispatch(resetCreateExchange());
+                      }}
                     >
                       초기화
                     </button>
@@ -331,6 +249,9 @@ const Exchange = (props) => {
                     <button
                       type="button"
                       class="padding-15 background-green color-white"
+                      onClick={() =>
+                        dispatch(createExchangeAction(createExchange))
+                      }
                     >
                       전환신청
                     </button>
@@ -341,14 +262,19 @@ const Exchange = (props) => {
           </div>
           <div class="exchange-right-content account-height widthp-50 flex-inherit padding-left-5 border-left flex-column scrollable-auto">
             <div class="red-shadow exchange-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
-              <span class="color-white">전환신청 내역 Here is the list </span>
+              <span class="color-white">전환신청 내역 </span>
             </div>
             <div class="widthp-100 exchange-history-content flex-inherit flex-column">
               <div class="history-item">
                 <table>
                   <thead>
                     <tr class="thead">
-                      <th class="height-45 background-transparent-b-10 color-grey border-top">
+                      <th
+                        class="height-45 background-transparent-b-10 color-grey border-top"
+                        onClick={() => {
+                          dispatch(selectAllExchange());
+                        }}
+                      >
                         전체 선택
                       </th>
                       <th class="height-45 background-transparent-b-10 color-grey border-top">
@@ -366,40 +292,60 @@ const Exchange = (props) => {
                     </tr>
                   </thead>
                   <tbody class="background-transparent-b-5">
-                    <tr class="rows">
-                      <td class="height-45 border-top">
-                        <input type="checkbox" name="" value="1" />
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">2020-11-12 22:11:34</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">현금</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">1,000,000원</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-red">대기</span>
-                      </td>
-                    </tr>
-                    <tr class="rows">
-                      <td class="height-45 border-top">
-                        <input type="checkbox" name="" value="1" />
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">2020-11-12 22:11:34</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">비트코인</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-grey">0.5BTC</span>
-                      </td>
-                      <td class="height-45 border-top">
-                        <span class="color-green">완료</span>
-                      </td>
-                    </tr>
+                    {exchange.loading ? (
+                      <tr>
+                        <td colspan="15" class="td-3">
+                          <span></span>
+                        </td>
+                      </tr>
+                    ) : exchange?.exchanges?.data?.length == 0 ? (
+                      <tr>
+                        <td colspan="12" class="color-white">
+                          데이터가 존재하지 않습니다.
+                        </td>
+                      </tr>
+                    ) : (
+                      exchange?.exchanges?.data?.map((item, index) => {
+                        return (
+                          <tr class="rows" key={index}>
+                            <td class="height-45 border-top">
+                              <input
+                                type="checkbox"
+                                name=""
+                                checked={item.isChecked}
+                                onChange={(e) => {
+                                  let checked = e.target.checked;
+                                  let payload = {
+                                    status: checked,
+                                    id: item.id,
+                                  };
+                                  dispatch(checkExchangeCertainItem(payload));
+                                }}
+                              />
+                            </td>
+                            <td class="height-45 border-top">
+                              <span class="color-grey">
+                                {Moment(item.createdAt).format(
+                                  "YY-MM-DD HH:mm "
+                                )}{" "}
+                              </span>
+                            </td>
+                            <td class="height-45 border-top">
+                              <span class="color-grey"> {item.from}</span>
+                            </td>
+                            <td class="height-45 border-top">
+                              <span class="color-grey">
+                                {item.amount}
+                                {item.from == "cash" ? "원" : "BTC"}
+                              </span>
+                            </td>
+                            <td class="height-45 border-top">
+                              <span class="color-green">{item.to}</span>
+                            </td>
+                          </tr>
+                        );
+                      })
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -408,6 +354,23 @@ const Exchange = (props) => {
                   <button
                     type="button"
                     class="color-grey padding-10 background-transparent-b-10"
+                    onClick={() => {
+                      let newList = [];
+                      exchange.exchanges.data.map((o) => {
+                        if (o.isChecked == true) {
+                          newList.push(o);
+                        }
+                      });
+                      if (newList.length == 0) {
+                        swal.warning("Please select a deposit to delete.");
+                      } else {
+                        dispatch(listOfToDeleteExchanges());
+                        dispatch(deleteExchangesRequest());
+                        dispatch(
+                          deleteExchanges(exchange.newExchangeToDeleteList)
+                        );
+                      }
+                    }}
                   >
                     <i class="fal fa-trash-alt"></i>
                     선택 삭제
@@ -417,7 +380,7 @@ const Exchange = (props) => {
                   <span class="color-grey">
                     누적 총 잔액
                     <strong class="color-red padding-left-5">
-                      12,500,000원
+                      {exchange.exchanges.amount}원
                     </strong>
                   </span>
                 </div>
@@ -469,12 +432,14 @@ const Exchange = (props) => {
         <div class="member-information height-40 align-items-center-inherit border-bottom-rb">
           <div class="flex pi-title green grow-2">
             <span class="color-white padding-left-15">
-              안녕하세요. {user.member.nickname} 회원님
+              안녕하세요.
+              {/* {user.member.nickname}  */}
+              회원님
             </span>
           </div>
           <div class="flex">
             <span class="color-yellow padding-right-15">
-              Lv.{user.member.level}
+              {/* Lv.{user.member.level} */} Lv.
             </span>
           </div>
         </div>
@@ -483,7 +448,7 @@ const Exchange = (props) => {
             <div class="flex flex-column">
               <span class="color-white">예치금</span>
               <span class="color-green">
-                {Number(user.member.cash).toLocaleString()}
+                {/* {Number(user.member.cash).toLocaleString()} */}
               </span>
             </div>
           </div>
@@ -507,8 +472,8 @@ const Exchange = (props) => {
               type="button"
               class="active"
               id="tab-1"
-              class={context.state.interMenu === "inter-tab-1" ? "active" : ""}
-              onClick={() => context.actions.setinterMenu("inter-tab-1")}
+              //   class={context.state.interMenu === "inter-tab-1" ? "active" : ""}
+              //   onClick={() => context.actions.setinterMenu("inter-tab-1")}
             >
               전환신청
             </button>
@@ -517,8 +482,8 @@ const Exchange = (props) => {
             <button
               type="button"
               id="tab-2"
-              class={context.state.interMenu === "inter-tab-2" ? "active" : ""}
-              onClick={() => context.actions.setinterMenu("inter-tab-2")}
+              //   class={context.state.interMenu === "inter-tab-2" ? "active" : ""}
+              //   onClick={() => context.actions.setinterMenu("inter-tab-2")}
             >
               전환내역
             </button>
@@ -526,13 +491,16 @@ const Exchange = (props) => {
         </div>
 
         <div
-          class={
-            context.state.interMenu === "inter-tab-1"
-              ? "interload-content flex-column active"
-              : "interload-content flex-column"
-          }
+        //   class={
+        //     context.state.interMenu === "inter-tab-1"
+        //       ? "interload-content flex-column active"
+        //       : "interload-content flex-column"
+        //   }
         >
-          <form class="flex" onSubmit={submit}>
+          <form
+            class="flex"
+            //   onSubmit={submit}
+          >
             <div class="widthp-100 flex-column flex-inherit padding-horizontal-15">
               <div class="flex-column flex-inherit">
                 <div class="interload-list padding-vertical-10">
@@ -561,8 +529,8 @@ const Exchange = (props) => {
                       type="text"
                       name="amount"
                       placeholder="0"
-                      value={exchange.form.amount.toLocaleString()}
-                      onChange={amountChange}
+                      //   value={exchange.form.amount.toLocaleString()}
+                      //   onChange={amountChange}
                       required
                     />
                   </div>
@@ -573,7 +541,7 @@ const Exchange = (props) => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="5000"
-                      onClick={QuickInput}
+                      //   onClick={QuickInput}
                     >
                       5,000
                     </button>
@@ -581,7 +549,7 @@ const Exchange = (props) => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="10000"
-                      onClick={QuickInput}
+                      //   onClick={QuickInput}
                     >
                       10,000
                     </button>
@@ -589,7 +557,7 @@ const Exchange = (props) => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="50000"
-                      onClick={QuickInput}
+                      //   onClick={QuickInput}
                     >
                       50,000
                     </button>
@@ -597,7 +565,7 @@ const Exchange = (props) => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="100000"
-                      onClick={QuickInput}
+                      //   onClick={QuickInput}
                     >
                       100,000
                     </button>
@@ -605,7 +573,7 @@ const Exchange = (props) => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="500000"
-                      onClick={QuickInput}
+                      //   onClick={QuickInput}
                     >
                       500,000
                     </button>
@@ -628,11 +596,11 @@ const Exchange = (props) => {
         </div>
         <h1>SAMPLE</h1>
         <div
-          class={
-            context.state.interMenu === "inter-tab-2"
-              ? "interload-content flex-column active"
-              : "interload-content flex-column"
-          }
+        //   class={
+        //     context.state.interMenu === "inter-tab-2"
+        //       ? "interload-content flex-column active"
+        //       : "interload-content flex-column"
+        //   }
         >
           <div class="widthp-100 flex-column flex border-bottom-rb padding-vertical-10 padding-right-15 align-items-right">
             <div class="select height-40">
@@ -643,7 +611,7 @@ const Exchange = (props) => {
             </div>
           </div>
 
-          {exchange.exchangeActivities.length > 0 ? (
+          {/* {exchange.exchangeActivities.length > 0 ? (
             exchange.exchangeActivities.map((value, index) => {
               return (
                 <div
@@ -681,11 +649,11 @@ const Exchange = (props) => {
             <div class="widthp-100 flex justify-content-center color-grey height-50 align-items-center">
               전환내역이 없습니다.
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </Fragment>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchProps)(Exchange);
+export default Exchange;
