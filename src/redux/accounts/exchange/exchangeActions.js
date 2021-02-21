@@ -279,7 +279,6 @@ export const createExchangeAction = (exchange) => {
       .then((response) => {
         dispatch(setExchanges());
         dispatch(createExchangesuccess(response.data.message));
-        dispatch(setPagesOfExchange());
       })
       .catch((error) => {
         const errorMsg = error.response.data;
@@ -322,7 +321,6 @@ export const deleteExchanges = (list) => {
         const exchanges = response.data;
         dispatch(deleteExchangesSuccess(exchanges));
         dispatch(setExchanges());
-        dispatch(setPagesOfExchange());
       })
       .catch((error) => {
         const errorMsg = error.message;
