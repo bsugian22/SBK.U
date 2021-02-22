@@ -269,18 +269,22 @@ export const fetchPosition = () => {
 export const createPositionAction = (position) => {
   return (dispatch) => {
     let outcomes = position.outcomes.split(",");
-    let newList = [];
+    let newList = {
+      category: "",
+      amount: "",
+      outcomes: [],
+    };
     outcomes.map((o) => {
       let item = { id: " " + o };
-      newList.push(item);
+      newList.outcomes.push(item);
     });
+    newList.category = position.category;
+    newList.amount = position.amount;
 
-    position.outcomes = [];
-    position.outcomes = [...newList];
-    console.log(position);
+    console.log(newList);
     dispatch(createPositionRequest());
     axios
-      .post(`/api/positions`, position)
+      .post(`/api/positions`, newList)
       .then((response) => {
         dispatch(createPositionSuccess(response.data.message));
         dispatch(setPositions());
