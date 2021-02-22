@@ -179,7 +179,7 @@ export const unfilteredAll = () => {
 };
 export const setWithdrawals = (params) => {
   return (dispatch) => {
-    dispatch(fetchWithdrawalsRequest(0));
+    dispatch(fetchWithdrawalsRequest());
     axios
       .get(`/api/withdrawal`, {
         params: params,

@@ -646,13 +646,13 @@ const Deposit = () => {
                     결제 방법
                   </div>
                   <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom">
-                    <div class="select">
+                    {/* <div class="select">
                       <select name="">
                         <option value="cash">현금</option>
                         <option value="paypal">페이팔</option>
                         <option value="bitcoin">비트코인</option>
                       </select>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 

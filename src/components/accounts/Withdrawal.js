@@ -22,10 +22,8 @@ import {
   nextPageWIthdrawal,
 } from "../../redux/accounts/withdrawal/withdrawalAction";
 import { Link, NavLink } from "react-router-dom";
-import MenuContext from "../../contexts/Menu.context";
 
 const Withdrawal = () => {
-  const context = useContext(MenuContext);
   let isSubscribed = true;
   const swal = new sweetalert();
   const dispatch = useDispatch();
@@ -146,7 +144,14 @@ const Withdrawal = () => {
                       <span class="color-grey">출금 가능액</span>
                     </div>
                     <div class="widthp-67 form-content height-45 border-bottom-rb align-items-center padding-right-15 justify-content-end background-transparent-b-5 border-top border-left-rw">
-                      <span class="color-green">{withdrawableAmount}원</span>
+                      <span class="color-green">
+                        {withdrawableAmount == null ||
+                        withdrawableAmount == "" ||
+                        withdrawableAmount == undefined
+                          ? ""
+                          : withdrawableAmount}
+                        원
+                      </span>
                     </div>
                   </div>
                   <div class="form-rows flex-inherit">
@@ -162,7 +167,13 @@ const Withdrawal = () => {
                             class="input-form padding-left-10"
                             name="amount"
                             placeholder="0"
-                            value={Number(createWithdrawal.amount)}
+                            value={
+                              createWithdrawal?.amount == "" ||
+                              createWithdrawal?.amount == null ||
+                              createWithdrawal?.amount == undefined
+                                ? ""
+                                : Number(createWithdrawal?.amount)
+                            }
                             onChange={(e) => {
                               let amt = 0;
                               amt = Number(e.target.value);
@@ -270,20 +281,20 @@ const Withdrawal = () => {
                     <div class="widthp-33 border-right-rb">
                       {/* name of bank */}
                       <span class="color-white">
-                        {user.member.account_bank}
+                        {user?.member?.account_bank}
                       </span>
                     </div>
                     <div class="widthp-33 border-right-rb border-left-rw">
                       {/* account holder */}
                       <span class="color-white">
                         {" "}
-                        {user.member.account_holder}
+                        {user?.member?.account_holder}
                       </span>
                     </div>
                     <div class="widthp-33 border-left-rw">
                       {/* account number */}
                       <span class="color-white">
-                        {user.member.account_number}
+                        {user?.member?.account_number}
                       </span>
                     </div>
                   </div>
@@ -307,7 +318,13 @@ const Withdrawal = () => {
                       type="password"
                       class="padding-15 color-white background-transparent-b-10 width-200 heightp-100"
                       placeholder="출금 비밀번호를 입력하세요"
-                      value={createWithdrawal.password}
+                      value={
+                        createWithdrawal?.password == "" ||
+                        createWithdrawal?.password == null ||
+                        createWithdrawal?.password == undefined
+                          ? ""
+                          : createWithdrawal?.password
+                      }
                       onChange={(e) => {
                         let pass = e.target.value;
                         dispatch(withdrawalPassword(pass));
@@ -360,7 +377,7 @@ const Withdrawal = () => {
                     </tr>
                   </thead>
                   <tbody class="background-transparent-b-5">
-                    {withdraw.loading ? (
+                    {withdraw?.loading ? (
                       <tr>
                         <td colspan="15" class="td-3">
                           <span></span>
@@ -431,7 +448,7 @@ const Withdrawal = () => {
                       // dispatch(deleteDeposits(withdrawal.newDepositToDeleteList));
                       // console.log(withdrawal.newDepositToDeleteList);
                       dispatch(
-                        deleteWithdrawal(withdraw.newWithdrawalToDeleteList)
+                        deleteWithdrawal(withdraw?.newWithdrawalToDeleteList)
                       );
                     }}
                   >
@@ -444,7 +461,7 @@ const Withdrawal = () => {
                     누적 총 잔액
                     <strong class="color-red padding-left-5">
                       {/* total amount */}
-                      {withdraw.withdrawals.amount}원
+                      {withdraw?.withdrawals?.amount}원
                     </strong>
                   </span>
                 </div>
@@ -636,13 +653,13 @@ const Withdrawal = () => {
                     환전 방법
                   </div>
                   <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom-rb">
-                    <div class="select">
+                    {/* <div class="select">
                       <select name="">
                         <option value="cash">현금</option>
                         <option value="paypal">페이팔</option>
                         <option value="bitcoin">비트코인</option>
                       </select>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -651,13 +668,13 @@ const Withdrawal = () => {
                     출금금액
                   </div>
                   <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom-rb">
-                    <input
+                    {/* <input
                       type="text"
                       name="amount"
                       placeholder="0"
                       //   value={withdrawal.form.amount.toLocaleString()}
                       //   onChange={amountChange}
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div class="interload-list interload-tab height-50 align-items-center-inherit">
@@ -739,12 +756,12 @@ const Withdrawal = () => {
                     환전 비밀번호
                   </div>
                   <div class="widthp-70 flex background-transparent-b-10 color-grey height-40 border-bottom-rb">
-                    <input
+                    {/* <input
                       type="password"
                       name="password"
                       placeholder="출금비밀번호를 입력하세요"
                       required
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>
@@ -771,67 +788,13 @@ const Withdrawal = () => {
         //   }
         >
           <div class="widthp-100 flex-column flex border-bottom-rb padding-vertical-10 padding-right-15 align-items-right">
-            <div class="select height-40">
+            {/* <div class="select height-40">
               <select name="">
                 <option value="">전체</option>
                 <option value="">확인중</option>
               </select>
-            </div>
+            </div> */}
           </div>
-
-          {/* {withdrawal.withdrawalActivities.length > 0 ? (
-            withdrawal.withdrawalActivities.map((value, index) => {
-              return (
-                <div
-                  class="flex flex-inherit flex-column list margin-bottom-1 background-transparent-b-10"
-                  key={index}
-                >
-                  <div class="padding-horizontal-15 justify-content-center-inherit padding-vertical-15">
-                    <div class="widthp-25 text-align-center">
-                      <span class="color-grey">
-                        {moment(value.createdAt).format("MM / DD HH:mm")}
-                      </span>
-                    </div>
-                    <div class="widthp-25 text-align-center">
-                      <span class="color-grey text-align-center">
-                        {value.method == "BITCOIN"
-                          ? "비트코인"
-                          : value.method == "CASH"
-                          ? "현금"
-                          : value.method == "PAYPAL"
-                          ? "페이팔"
-                          : "알 수 없음"}
-                      </span>
-                    </div>
-                    <div class="widthp-25 text-align-center">
-                      <span class="color-green">
-                        {value.amount.toLocaleString()}원
-                      </span>
-                    </div>
-                    {value.status == "PENDING" ? (
-                      <div class="widthp-25 text-align-center">
-                        <span class="color-grey">대기</span>
-                      </div>
-                    ) : value.status == "ACCEPTED" ? (
-                      <div class="widthp-25 text-align-center">
-                        <span class="color-blue">완료</span>
-                      </div>
-                    ) : value.status == "REJECTED" ? (
-                      <div class="widthp-25 text-align-center">
-                        <span class="color-red">취소</span>
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-              );
-            })
-          ) : (
-            <div class="widthp-100 flex justify-content-center color-grey height-50 align-items-center">
-              전환내역이 없습니다.
-            </div>
-          )} */}
         </div>
       </div>
     </Fragment>

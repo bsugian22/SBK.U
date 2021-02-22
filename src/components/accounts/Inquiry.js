@@ -282,11 +282,11 @@ const Inquiry = () => {
                   </button>
                 </div>
                 <div>
-                  <div class="select">
+                  {/* <div class="select">
                     <select name="slct" id="slct">
                       <option value="">전용계좌</option>
                     </select>
-                  </div>
+                  </div> */}
                   <button
                     type="button"
                     class="padding-15 background-green color-white margin-left-10"
