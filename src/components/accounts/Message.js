@@ -163,7 +163,7 @@ export default function Message() {
                     <select
                       name="slct"
                       id="slct"
-                      value={page}
+                      value={page == null || page == "" ? 1 : page}
                       onChange={(e) => {
                         let val = e.target.value;
                         if (val.toString() == page.toString()) {

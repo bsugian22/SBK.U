@@ -49,6 +49,7 @@ const withdrawalReducer = (state = initialState, action) => {
         openModal: false,
         closeModal: false,
         createWithdrawalStatus: "CASH",
+        
       };
     case types.FETCH_WITHDRAWALS_SUCCESS:
       let newData = {
