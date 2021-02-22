@@ -1,20 +1,20 @@
 import * as types from "./noticeTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
-export const fetchNoticesRequest = () => {
+export const setNoticesRequest = () => {
   return {
     type: types.FETCH_NOTICES_REQUEST,
   };
 };
 
-export const fetchNoticesSuccess = (notices) => {
+export const setNoticesSuccess = (notices) => {
   return {
     type: types.FETCH_NOTICES_SUCCESS,
     payload: notices,
   };
 };
 
-export const fetchNoticesFailure = (error) => {
+export const setNoticesFailure = (error) => {
   return {
     type: types.FETCH_NOTICES_FAILURE,
     payload: error,
@@ -27,7 +27,7 @@ export const fetchNoticeRequest = () => {
   };
 };
 
-export const fetchNoticesuccess = (Notice) => {
+export const setNoticesuccess = (Notice) => {
   return {
     type: types.FETCH_NOTICE_SUCCESS,
     payload: Notice,
@@ -179,19 +179,75 @@ export const unfilteredAll = () => {
 };
 export const setNotices = (params) => {
   return (dispatch) => {
-    dispatch(fetchNoticesRequest(0));
+    dispatch(setNoticesRequest(0));
     axios
       .get(`/api/notices`, { params: params })
       .then((response) => {
         const notices = camelize(response.data);
         console.log(response);
-        dispatch(fetchNoticesSuccess(notices));
+        dispatch(setNoticesSuccess(notices));
+        dispatch(setPagesOfNotice());
       })
       .catch((error) => {
         const errorMsg = error.message;
-        dispatch(fetchNoticesFailure(errorMsg));
+        dispatch(setNoticesFailure(errorMsg));
       });
   };
+};
+
+export const setPagesOfNotice = () => {
+  return (dispatch) => {
+    dispatch(setPageNotice());
+  };
+};
+
+export const setPageNotice = () => {
+  return {
+    type: types.SET_NOTICE_PAGE,
+  };
+};
+
+export const onClickPageNotice = (data) => {
+  return (dispatch) => {
+    dispatch(setNotices(data));
+  };
+};
+
+export const nextNoticePage = (page) => {
+  return {
+    type: types.NEXT_PAGE_NOTICE,
+    payload: page,
+  };
+};
+
+export const nextPageNotice = (data) => {
+  var page_number = data.page;
+  var last_page = data.list_pages[data.list_pages.length - 1];
+  if (last_page >= page_number + 1) {
+    return (dispatch) => {
+      let page = page_number + 1;
+      dispatch(nextNoticePage(page));
+      dispatch(setNotices({ page: page, per_page: data.per_page }));
+    };
+  }
+};
+export const prevNoticePage = (page) => {
+  return {
+    type: types.PREV_PAGE_NOTICE,
+    payload: page,
+  };
+};
+
+export const prevPageNotice = (data) => {
+  var page_number = data.page;
+  var first_page = data.list_pages[0];
+  if (first_page <= page_number - 1) {
+    return (dispatch) => {
+      let page = page_number - 1;
+      dispatch(prevNoticePage(page));
+      dispatch(setNotices({ page: page, per_page: data.per_page }));
+    };
+  }
 };
 
 export const fetchNotice = () => {
@@ -200,8 +256,8 @@ export const fetchNotice = () => {
     axios
       .get(`/api/`)
       .then((response) => {
-        const Notice = response.data;
-        dispatch(fetchNoticesuccess(Notice));
+        const notice = response.data;
+        dispatch(setNoticesuccess(notice));
       })
       .catch((error) => {
         const errorMsg = error.message;
@@ -221,7 +277,7 @@ export const createNoticeAction = (notice) => {
       })
       .catch((error) => {
         const errorMsg = error.response.data;
-        let noticeErrorMessage = {
+        let noticeErrorNotice = {
           html: ` ${errorMsg.message} <br />  ${
             errorMsg?.errors?.title
               ? errorMsg?.errors?.title[0] + " <br /> "
@@ -232,7 +288,7 @@ export const createNoticeAction = (notice) => {
           icon: "error",
           confirmButtonText: "확인",
         };
-        dispatch(createNoticeFailure(noticeErrorMessage));
+        dispatch(createNoticeFailure(noticeErrorNotice));
       });
   };
 };

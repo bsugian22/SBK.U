@@ -375,6 +375,49 @@ const noticeReducer = (state = initialState, action) => {
         ...state,
         viewNotice: action.payload,
       };
+    case types.SET_NOTICE_PAGE:
+      var total = state.notices.total;
+      state.notices.list_pages = [];
+      if (total != null) {
+        for (let index = 1; index < Math.ceil(total / 15) + 1; index++) {
+          state.notices.list_pages.push(index);
+        }
+      }
+      console.log(state.notices.list_pages);
+      return {
+        ...state,
+        notices: {
+          ...state.notices,
+          list_pages: state.notices.list_pages,
+          pages: state.notices.pages,
+        },
+      };
+
+    case types.NEXT_PAGE_NOTICE:
+      console.log(action.payload);
+      return {
+        ...state,
+        loading: true,
+        notices: {
+          ...state.notices,
+          page: action.payload,
+        },
+      };
+
+    case types.PREV_PAGE_NOTICE:
+      return {
+        ...state,
+        loading: true,
+        notices: {
+          ...state.notices,
+          page: action.payload,
+        },
+      };
+    case types.CHANGE_NOTICE_PAGE:
+      return {
+        ...state,
+        notices: { ...state.notices, page: action.payload },
+      };
     default:
       return state;
   }

@@ -9,6 +9,9 @@ import noticeModel from "../../models/noticeModel";
 import Logo from "../layouts/Logo";
 import sweetalert from "../../plugins/sweetalert";
 import {
+  nextPageNotice,
+  onClickPageNotice,
+  prevPageNotice,
   setNotices,
   viewNotice,
 } from "../../redux/accounts/notice/noticeAction";
@@ -19,10 +22,13 @@ const Notice = () => {
   let isSubscribed = true;
   let notice = useSelector((state) => state.notice);
   let view = useSelector((state) => state.notice.viewNotice);
-
+  let page = useSelector((state) => state.notice.notices.page);
+  let lastPage = useSelector((state) => state.notice.notices.lastPage);
+  let per_page = useSelector((state) => state.notice.notices.per_page);
+  let list_pages = useSelector((state) => state.notice.notices.list_pages);
   useEffect(() => {
     isSubscribed = true;
-    dispatch(setNotices());
+    dispatch(setNotices({ page: page, per_page: per_page }));
     return () => {
       isSubscribed = false;
     };
@@ -36,9 +42,9 @@ const Notice = () => {
             <i class="fad fa-megaphone"></i>NOTICE
           </span>
         </div>
-        <div class="notice-wrap account notice-content-desktop border-top flex-inherit flex-row">
+        <div class="notice-wrap account notice-content-desktop border-top flex-inherit flex-row scrollable-auto">
           <div class="notice-left flex-inherit flex-column account-height widthp-40 border-right ">
-            <div class="notice flex-column grow-2 flex-inherit padding-10 scrollable-auto">
+            <div class="notice flex-column grow-2 flex-inherit padding-10 ">
               {notice?.loading ? (
                 <div colspan="15" class="td-3">
                   <span></span>
@@ -86,17 +92,64 @@ const Notice = () => {
             <div class="flex-inherit notice-page-bottom border-top-white height-60 background-transparent-b-15 padding-10 color-grey">
               <div class="pagination flex-inherit widthp-100 justify-content-end margin-top-5">
                 <div class="flex selectBox">
-                  <Select
-                    className="select-container"
-                    classNamePrefix="select-box"
-                  />
+                  <select
+                    name="slct"
+                    id="slct"
+                    value={page}
+                    onChange={(e) => {
+                      let val = e.target.value;
+                      if (val.toString() == page.toString()) {
+                        swal.warning(" 페이지에 반응");
+                      } else {
+                        dispatch(
+                          onClickPageNotice({
+                            page: val,
+                            per_page: per_page,
+                          })
+                        );
+                      }
+                    }}
+                  >
+                    {list_pages?.map((item, index) => {
+                      console.log(item, page);
+                      return <option key={index}>{item}</option>;
+                    })}
+                  </select>
                 </div>
-                <div class="grow-2"></div>
+
                 <div class="flex page">
-                  <button class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5">
+                  <button
+                    class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
+                    onClick={() => {
+                      let prevData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+                      if (page == 1) {
+                        swal.warning(" 페이지에 반응");
+                      } else {
+                        dispatch(prevPageNotice(prevData));
+                      }
+                    }}
+                  >
                     <i class="fas fa-chevron-left margin-0 color-white"></i>
                   </button>
-                  <button class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center">
+                  <button
+                    class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                    onClick={() => {
+                      let nextData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+                      if (page == lastPage) {
+                        swal.warning(" 페이지에 반응");
+                      } else {
+                        dispatch(nextPageNotice(nextData));
+                      }
+                    }}
+                  >
                     <i class="fas fa-chevron-right margin-0 color-white"></i>
                   </button>
                 </div>
