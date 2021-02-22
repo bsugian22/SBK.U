@@ -8,7 +8,7 @@ const initialState = {
   createPosition: {
     category: "",
     amount: "",
-    outcomes: [],
+    outcomes: "",
   },
   showModal: false,
   openModal: false,
@@ -26,7 +26,7 @@ const positionReducer = (state = initialState, action) => {
         createPosition: {
           category: "",
           amount: "",
-          outcomes: [],
+          outcomes: "",
         },
         showModal: false,
         openModal: false,
