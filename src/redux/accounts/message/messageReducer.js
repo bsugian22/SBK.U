@@ -413,6 +413,49 @@ const messageReducer = (state = initialState, action) => {
           messages: [...state.newMessageToDeleteList.messages],
         },
       };
+    case types.SET_MESSAGE_PAGE:
+      var total = state.messages.total;
+      state.messages.list_pages = [];
+      if (total != null) {
+        for (let index = 1; index < Math.ceil(total / 15) + 1; index++) {
+          state.messages.list_pages.push(index);
+        }
+      }
+      console.log(state.messages.list_pages);
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          list_pages: state.messages.list_pages,
+          pages: state.messages.pages,
+        },
+      };
+
+    case types.NEXT_PAGE_MESSAGE:
+      console.log(action.payload);
+      return {
+        ...state,
+        loading: true,
+        messages: {
+          ...state.messages,
+          page: action.payload,
+        },
+      };
+
+    case types.PREV_PAGE_MESSAGE:
+      return {
+        ...state,
+        loading: true,
+        messages: {
+          ...state.messages,
+          page: action.payload,
+        },
+      };
+    case types.CHANGE_MESSAGE_PAGE:
+      return {
+        ...state,
+        messages: { ...state.messages, page: action.payload },
+      };
     default:
       return state;
   }
