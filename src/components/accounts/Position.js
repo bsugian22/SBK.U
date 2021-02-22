@@ -32,7 +32,7 @@ export default function Position() {
 
   useEffect(() => {
     isSubscribed = true;
-    dispatch(setPositions());
+    dispatch(setPositions({ page: page, per_page: per_page }));
     return () => {
       isSubscribed = false;
     };

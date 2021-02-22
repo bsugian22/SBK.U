@@ -363,6 +363,50 @@ const inquiryReducer = (state = initialState, action) => {
         createInquiry: { ...state.createInquiry, content: action.payload },
       };
 
+    case types.SET_INQUIRY_PAGE:
+      var total = state.inquiries.total;
+      state.inquiries.list_pages = [];
+      if (total != null) {
+        for (let index = 1; index < Math.ceil(total / 15) + 1; index++) {
+          state.inquiries.list_pages.push(index);
+        }
+      }
+      console.log(state.inquiries.list_pages);
+      return {
+        ...state,
+        inquiries: {
+          ...state.inquiries,
+          list_pages: state.inquiries.list_pages,
+          pages: state.inquiries.pages,
+        },
+      };
+
+    case types.NEXT_PAGE_INQUIRY:
+      console.log(action.payload);
+      return {
+        ...state,
+        loading: true,
+        inquiries: {
+          ...state.inquiries,
+          page: action.payload,
+        },
+      };
+
+    case types.PREV_PAGE_INQUIRY:
+      return {
+        ...state,
+        loading: true,
+        inquiries: {
+          ...state.inquiries,
+          page: action.payload,
+        },
+      };
+    case types.CHANGE_INQUIRY_PAGE:
+      return {
+        ...state,
+        inquiries: { ...state.inquiries, page: action.payload },
+      };
+
     default:
       return state;
   }

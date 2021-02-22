@@ -181,17 +181,73 @@ export const setInquiries = (params) => {
   return (dispatch) => {
     dispatch(fetchInquiriesRequest(0));
     axios
-      .get(`/api/inquiries`)
+      .get(`/api/inquiries`, { params: params })
       .then((response) => {
         const inquiries = camelize(response.data);
         console.table(response);
         dispatch(fetchInquiriesSuccess(inquiries));
+        dispatch(setPagesOfInquiry())
       })
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchInquiriesFailure(errorMsg));
       });
   };
+};
+
+export const setPagesOfInquiry = () => {
+  return (dispatch) => {
+    dispatch(setPageInquiry());
+  };
+};
+
+export const setPageInquiry = () => {
+  return {
+    type: types.SET_INQUIRY_PAGE,
+  };
+};
+
+export const onClickPageInquiry = (data) => {
+  return (dispatch) => {
+    dispatch(setInquiries(data));
+  };
+};
+
+export const nextInquiryPage = (page) => {
+  return {
+    type: types.NEXT_PAGE_INQUIRY,
+    payload: page,
+  };
+};
+
+export const nextPageInquiry = (data) => {
+  var page_number = data.page;
+  var last_page = data.list_pages[data.list_pages.length - 1];
+  if (last_page >= page_number + 1) {
+    return (dispatch) => {
+      let page = page_number + 1;
+      dispatch(nextInquiryPage(page));
+      dispatch(setInquiries({ page: page, per_page: data.per_page }));
+    };
+  }
+};
+export const prevInquiryPage = (page) => {
+  return {
+    type: types.PREV_PAGE_INQUIRY,
+    payload: page,
+  };
+};
+
+export const prevPageInquiry = (data) => {
+  var page_number = data.page;
+  var first_page = data.list_pages[0];
+  if (first_page <= page_number - 1) {
+    return (dispatch) => {
+      let page = page_number - 1;
+      dispatch(prevInquiryPage(page));
+      dispatch(setInquiries({ page: page, per_page: data.per_page }));
+    };
+  }
 };
 
 export const fetchInquiry = () => {
