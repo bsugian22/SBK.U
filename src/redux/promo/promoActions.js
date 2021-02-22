@@ -101,20 +101,76 @@ export const deletePromosFailure = (error) => {
   };
 };
 
-export const fetchPromos = () => {
+export const fetchPromos = (params) => {
   return (dispatch) => {
     dispatch(fetchPromosRequest());
     axios
-      .get(`/api/promos`)
+      .get(`/api/promos`, { params: params })
       .then((response) => {
         const promos = response.data;
         dispatch(fetchPromosSuccess(promos));
+        dispatch(setPagesOfPromo());
       })
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchPromosFailure(errorMsg));
       });
   };
+};
+export const setPagesOfPromo = () => {
+  return (dispatch) => {
+    dispatch(setPagePromo());
+  };
+};
+
+export const setPagePromo = () => {
+  return {
+    type: types.SET_PROMO_PAGE,
+  };
+};
+
+export const onClickPagePromo = (data) => {
+  return (dispatch) => {
+    dispatch(fetchPromos(data));
+  };
+};
+
+export const nextPromoPage = (page) => {
+  return {
+    type: types.NEXT_PAGE_PROMO,
+    payload: page,
+  };
+};
+
+export const nextPagePromo = (data) => {
+  console.log(data);
+  var page_number = data.page;
+  var last_page = data.list_pages[data.list_pages.length - 1];
+  if (last_page >= page_number + 1) {
+    return (dispatch) => {
+      let page = page_number + 1;
+      dispatch(nextPromoPage(page));
+      dispatch(fetchPromos({ page: page, per_page: data.per_page }));
+    };
+  }
+};
+export const prevPromoPage = (page) => {
+  return {
+    type: types.PREV_PAGE_PROMO,
+    payload: page,
+  };
+};
+
+export const prevPagePromo = (data) => {
+  var page_number = data.page;
+  var first_page = data.list_pages[0];
+  if (first_page <= page_number - 1) {
+    return (dispatch) => {
+      let page = page_number - 1;
+      dispatch(prevPromoPage(page));
+      dispatch(fetchPromos({ page: page, per_page: data.per_page }));
+    };
+  }
 };
 
 export const fetchPromo = () => {
