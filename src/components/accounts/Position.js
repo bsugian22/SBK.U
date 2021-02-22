@@ -605,14 +605,14 @@ export default function Position() {
           </div>
         </div>
 
-        <div class="widthp-100 flex-column flex border-bottom-rb padding-vertical-10 padding-right-15 align-items-right">
+        {/* <div class="widthp-100 flex-column flex border-bottom-rb padding-vertical-10 padding-right-15 align-items-right">
           <div class="select height-40">
             <select name="">
               <option value="">전체</option>
               <option value="">확인중</option>
             </select>
           </div>
-        </div>
+        </div> */}
 
         <div class="flex-column flex-inherit">
           <div class="flex flex-inherit flex-column list margin-bottom-1 background-transparent-b-10">
