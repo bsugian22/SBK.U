@@ -13,7 +13,9 @@ import {
   deleteInquiries,
   deleteInquiriesRequest,
   listOfToDeleteInquiries,
+  nextPageInquiry,
   onClickPageInquiry,
+  prevPageInquiry,
   resetCreateInquiry,
   selectAllInquiry,
   setInquiries,
@@ -199,7 +201,7 @@ const Inquiry = () => {
                           if (page == 1) {
                             swal.warning(" 페이지에 반응");
                           } else {
-                            dispatch(prevPageDeposit(prevData));
+                            dispatch(prevPageInquiry(prevData));
                           }
                         }}
                       >
@@ -218,7 +220,7 @@ const Inquiry = () => {
                           if (page == lastPage) {
                             swal.warning(" 페이지에 반응");
                           } else {
-                            dispatch(nextPagePosition(nextData));
+                            dispatch(nextPageInquiry(nextData));
                           }
                         }}
                       >
