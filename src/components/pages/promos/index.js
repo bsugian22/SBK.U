@@ -1,16 +1,27 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPromos, viewPromo } from "../../../redux/promo/promoActions";
+import {
+  fetchPromos,
+  nextPagePromo,
+  onClickPagePromo,
+  prevPagePromo,
+  viewPromo,
+} from "../../../redux/promo/promoActions";
 import PromoPost from "../promoposts";
-
+import sweetalert from "../../../plugins/sweetalert";
 export default function Promo() {
+  let swal = new sweetalert();
   let promo = useSelector((state) => state.promo);
   let viewPromoData = useSelector((state) => state.promo.promo);
+  let page = useSelector((state) => state.promo.promos.page);
+  let lastPage = useSelector((state) => state.promo.promos.lastPage);
+  let per_page = useSelector((state) => state.promo.promos.per_page);
+  let list_pages = useSelector((state) => state.promo.promos.list_pages);
   let isSubscribed = true;
   let dispatch = useDispatch();
   useEffect(() => {
     isSubscribed = true;
-    dispatch(fetchPromos());
+    dispatch(fetchPromos({ page: page, per_page: per_page }));
     return () => {
       isSubscribed = false;
     };
@@ -45,7 +56,7 @@ export default function Promo() {
                 >
                   <a
                     class="flex-inherit margin-bottom-5"
-                    href=""
+
                     // href="<?php echo element('post_url', $result); ?>"
                   >
                     {item.title}
@@ -61,24 +72,67 @@ export default function Promo() {
           <div class="flex-inherit promo-page-bottom border-top-white height-60 background-transparent-b-15 padding-10 color-grey">
             <div class="pagination flex-inherit widthp-100 heightp-100">
               <div class="select">
-                <select name="slct" id="slct">
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                  <option value="">6</option>
-                  <option value="">7</option>
+                <select
+                  name="slct"
+                  id="slct"
+                  value={page}
+                  onChange={(e) => {
+                    let val = e.target.value;
+                    if (val.toString() == page.toString()) {
+                      swal.warning(" 페이지에 반응");
+                    } else {
+                      dispatch(
+                        onClickPagePromo({
+                          page: val,
+                          per_page: per_page,
+                        })
+                      );
+                    }
+                  }}
+                >
+                  {list_pages?.map((item, index) => {
+                    console.log(item, page);
+                    return <option key={index}>{item}</option>;
+                  })}
                 </select>
               </div>
               <div class="flex margin-left-5 page grow-2 justify-content-end">
-                <a href="/sports?offset=-100">
-                  <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5">
+                <a>
+                  <button
+                    class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
+                    onClick={() => {
+                      let prevData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+                      if (page == 1) {
+                        swal.warning(" 페이지에 반응");
+                      } else {
+                        dispatch(prevPagePromo(prevData));
+                      }
+                    }}
+                  >
                     <i class="fas fa-chevron-left margin-0 color-grey"></i>
                   </button>
                 </a>
-                <a href="/sports?offset=100">
-                  <button class="page-right width-40 heightp-100 background-transparent-b-20">
+                <a>
+                  <button
+                    class="page-right width-40 heightp-100 background-transparent-b-20"
+                    onClick={() => {
+                      let nextData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+                      let last = list_pages.length;
+                      if (page == last) {
+                        swal.warning(" 페이지에 반응");
+                      } else {
+                        dispatch(nextPagePromo(nextData));
+                      }
+                    }}
+                  >
                     <i class="fas fa-chevron-right margin-0 color-grey"></i>
                   </button>
                 </a>

@@ -3,7 +3,18 @@ import sweetalert from "../../plugins/sweetalert";
 const swal = new sweetalert();
 const initialState = {
   loading: false,
-  promos: { data: [] },
+  promos: {
+    data: [],
+    total: 0,
+    count: 0,
+    perPage: 0,
+    page: 0,
+    lastPage: 0,
+    amount: 0,
+    list_pages: [],
+    pages: [],
+    totalPages: [],
+  },
   error: "",
   promo: {
     id: 0,
@@ -23,7 +34,7 @@ const promoReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        promos: { data: [] },
+
         promo: {
           id: 0,
           category: "",
@@ -36,10 +47,38 @@ const promoReducer = (state = initialState, action) => {
         },
       };
     case types.FETCH_PROMOS_SUCCESS:
+      let newData = {
+        data: [],
+        total: 0,
+        count: 0,
+        perPage: 0,
+        page: 0,
+        lastPage: 0,
+      };
+      newData.data = action.payload.data.map((o) => {
+        return {
+          isChecked: false,
+          ...o,
+        };
+      });
+      newData.total = action.payload.total;
+      newData.count = action.payload.count;
+      newData.perPage = action.payload.perPage;
+      newData.page = action.payload.page;
+      newData.lastPage = action.payload.lastPage;
+      console.log(action.payload);
       return {
         ...state,
         loading: false,
-        promos: action.payload,
+        promos: {
+          ...state.promos,
+          total: newData.total,
+          data: newData.data,
+          count: newData.count,
+          perPage: newData.perPage,
+          page: newData.page,
+          lastPage: newData.lastPage,
+        },
         error: "",
         promo: {
           id: 0,
@@ -145,7 +184,49 @@ const promoReducer = (state = initialState, action) => {
           created_at: action.payload.created_at,
         },
       };
+    case types.SET_PROMO_PAGE:
+      var total = state.promos.total;
+      state.promos.list_pages = [];
+      if (total != null) {
+        for (let index = 1; index < Math.ceil(total / 15) + 1; index++) {
+          state.promos.list_pages.push(index);
+        }
+      }
+      console.log(state.promos.list_pages);
+      return {
+        ...state,
+        promos: {
+          ...state.promos,
+          list_pages: state.promos.list_pages,
+          pages: state.promos.pages,
+        },
+      };
 
+    case types.NEXT_PAGE_PROMO:
+      console.log(action.payload);
+      return {
+        ...state,
+        loading: true,
+        promos: {
+          ...state.promos,
+          page: action.payload,
+        },
+      };
+
+    case types.PREV_PAGE_PROMO:
+      return {
+        ...state,
+        loading: true,
+        promos: {
+          ...state.promos,
+          page: action.payload,
+        },
+      };
+    case types.CHANGE_PROMO_PAGE:
+      return {
+        ...state,
+        promos: { ...state.promos, page: action.payload },
+      };
     default:
       return state;
   }
