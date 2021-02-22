@@ -131,6 +131,7 @@ export const fetchMessages = (params) => {
           messages.data[index].isChecked = false;
         });
         dispatch(fetchMessagesSuccess(camelize(messages)));
+        dispatch(setPagesOfMessage());
       })
       .catch((error) => {
         const errorMsg = error.message;
@@ -140,6 +141,61 @@ export const fetchMessages = (params) => {
         }
       });
   };
+};
+
+export const setPagesOfMessage = () => {
+  return (dispatch) => {
+    dispatch(setPageMessage());
+  };
+};
+
+export const setPageMessage = () => {
+  return {
+    type: types.SET_MESSAGE_PAGE,
+  };
+};
+
+export const onClickPageMessage = (data) => {
+  return (dispatch) => {
+    dispatch(fetchMessages(data));
+  };
+};
+
+export const nextMessagePage = (page) => {
+  return {
+    type: types.NEXT_PAGE_MESSAGE,
+    payload: page,
+  };
+};
+
+export const nextPageMessage = (data) => {
+  var page_number = data.page;
+  var last_page = data.list_pages[data.list_pages.length - 1];
+  if (last_page >= page_number + 1) {
+    return (dispatch) => {
+      let page = page_number + 1;
+      dispatch(nextMessagePage(page));
+      dispatch(fetchMessages({ page: page, per_page: data.per_page }));
+    };
+  }
+};
+export const prevMessagePage = (page) => {
+  return {
+    type: types.PREV_PAGE_MESSAGE,
+    payload: page,
+  };
+};
+
+export const prevPageMessage = (data) => {
+  var page_number = data.page;
+  var first_page = data.list_pages[0];
+  if (first_page <= page_number - 1) {
+    return (dispatch) => {
+      let page = page_number - 1;
+      dispatch(prevMessagePage(page));
+      dispatch(fetchMessages({ page: page, per_page: data.per_page }));
+    };
+  }
 };
 
 export const fetchMessage = () => {

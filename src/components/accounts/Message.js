@@ -10,6 +10,9 @@ import {
   deleteMessagesRequest,
   fetchMessages,
   listOfToDeleteMessages,
+  nextPageMessage,
+  onClickPageMessage,
+  prevPageMessage,
   readMessageReceived,
   selectAllMessage,
 } from "../../redux/accounts/message/messageActions";
@@ -19,11 +22,15 @@ export default function Message() {
   let message = useSelector((state) => state.message);
   let viewMessage = useSelector((state) => state.message.message);
   let isSubscribed = true;
+  let page = useSelector((state) => state.message.messages.page);
+  let lastPage = useSelector((state) => state.message.messages.lastPage);
+  let per_page = useSelector((state) => state.message.messages.per_page);
+  let list_pages = useSelector((state) => state.message.messages.list_pages);
   const swal = new sweetalert();
   let dispatch = useDispatch();
   useEffect(() => {
     isSubscribed = true;
-    dispatch(fetchMessages());
+    dispatch(fetchMessages({ page: page, per_page: per_page }));
     return () => {
       isSubscribed = false;
     };
@@ -149,24 +156,70 @@ export default function Message() {
               <div class="padding-vertical-10 flex-inherit height-60 color-grey">
                 <div class="pagination flex-inherit widthp-100 heightp-100">
                   <div class="select">
-                    <select name="slct" id="slct">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4</option>
-                      <option value="">5</option>
-                      <option value="">6</option>
-                      <option value="">7</option>
+                    {/* {list_pages.map((o) => {
+                    let newItem = { label: o.toString(), value: o };
+                    selectList.push(newItem);
+                  })} */}
+                    <select
+                      name="slct"
+                      id="slct"
+                      value={page}
+                      onChange={(e) => {
+                        let val = e.target.value;
+                        if (val.toString() == page.toString()) {
+                          swal.warning(" 페이지에 반응");
+                        } else {
+                          dispatch(
+                            onClickPageMessage({
+                              page: val,
+                              per_page: per_page,
+                            })
+                          );
+                        }
+                      }}
+                    >
+                      {list_pages?.map((item, index) => {
+                        console.log(item, page);
+                        return <option key={index}>{item}</option>;
+                      })}
                     </select>
                   </div>
                   <div class="flex margin-left-5 page grow-2 justify-content-end">
                     <Link to="#">
-                      <button class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5">
+                      <button
+                        class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
+                        onClick={() => {
+                          let prevData = {
+                            page: page,
+                            list_pages: list_pages,
+                            per_page: per_page,
+                          };
+                          if (page == 1) {
+                            swal.warning(" 페이지에 반응");
+                          } else {
+                            dispatch(prevPageMessage(prevData));
+                          }
+                        }}
+                      >
                         <i class="fas fa-chevron-left margin-0 color-grey"></i>
                       </button>
                     </Link>
                     <Link to="#">
-                      <button class="page-right width-40 heightp-100 background-transparent-b-20">
+                      <button
+                        class="page-right width-40 heightp-100 background-transparent-b-20"
+                        onClick={() => {
+                          let nextData = {
+                            page: page,
+                            list_pages: list_pages,
+                            per_page: per_page,
+                          };
+                          if (page == lastPage) {
+                            swal.warning(" 페이지에 반응");
+                          } else {
+                            dispatch(nextPageMessage(nextData));
+                          }
+                        }}
+                      >
                         <i class="fas fa-chevron-right margin-0 color-grey"></i>
                       </button>
                     </Link>
