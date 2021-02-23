@@ -354,3 +354,10 @@ export const changePositionStatus = () => {
     type: types.CHANGE_POSITION_STATUS,
   };
 };
+
+export const checkPositionCertainItem = (data) => {
+  return {
+    type: types.CHECK_POSITION_CERTAIN_ITEM,
+    payload: data,
+  };
+};

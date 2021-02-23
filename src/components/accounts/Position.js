@@ -19,6 +19,7 @@ import {
   nextPagePosition,
   selectAllPosition,
   changePositionStatus,
+  checkPositionCertainItem,
 } from "../../redux/accounts/position/positionActions";
 export default function Position() {
   let position = useSelector((state) => state.position);
@@ -196,7 +197,14 @@ export default function Position() {
                                     ? false
                                     : item.isChecked
                                 }
-                                onChange={() => {}}
+                                onChange={(e) => {
+                                  let checked = e.target.checked;
+                                  let payload = {
+                                    status: checked,
+                                    id: item.id,
+                                  };
+                                  dispatch(checkPositionCertainItem(payload));
+                                }}
                               />
                             </td>
                             <td class="height-45 border-top">

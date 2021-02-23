@@ -270,6 +270,17 @@ const positionReducer = (state = initialState, action) => {
         ...state,
         status: !state.status,
       };
+    case types.CHECK_POSITION_CERTAIN_ITEM:
+      state.positions.data.map((i) => {
+        if (i.id == action.payload.id) {
+          i.isChecked = action.payload.status;
+        }
+      });
+      console.log(state.positions.data);
+      return {
+        ...state,
+        positions: { ...state.positions, data: state.positions.data },
+      };
     default:
       return state;
   }
