@@ -339,7 +339,7 @@ const depositReducer = (state = initialState, action) => {
       };
     case types.CHECK_ALL_DEPOSIT:
       state.deposits.data.map((i) => {
-        i.isChecked = true;
+        i.isChecked = !i.isChecked;
       });
       return {
         ...state,

@@ -342,3 +342,9 @@ export const deletePositions = () => {
       });
   };
 };
+
+export const selectAllPosition = () => {
+  return {
+    type: types.SELECT_ALL_POSITION,
+  };
+};

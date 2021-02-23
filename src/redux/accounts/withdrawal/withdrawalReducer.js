@@ -363,7 +363,7 @@ const withdrawalReducer = (state = initialState, action) => {
       };
     case types.CHECK_ALL_WITHDRAWALS:
       state.withdrawals.data.map((i) => {
-        i.isChecked = true;
+        i.isChecked = !i.isChecked;
       });
       return {
         ...state,

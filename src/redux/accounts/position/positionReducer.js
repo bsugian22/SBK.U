@@ -203,6 +203,16 @@ const positionReducer = (state = initialState, action) => {
         positions: { ...state.positions, data: defeated },
         list: "DEFEATED",
       };
+
+      case types.SELECT_ALL_POSITION:
+      state.positions.data.map((i) => {
+        i.isChecked = !i.isChecked;
+      });
+      return {
+        ...state,
+        positions: { ...state.positions, data: state.positions.data },
+      };
+
     case types.SET_POSITION_PAGE:
       var total = state.positions.total;
       state.positions.list_pages = [];

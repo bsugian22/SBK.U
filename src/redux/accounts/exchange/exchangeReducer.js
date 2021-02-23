@@ -369,7 +369,7 @@ const exchangeReducer = (state = initialState, action) => {
       };
     case types.CHECK_ALL_EXCHANGE:
       state.exchanges.data.map((i) => {
-        i.isChecked = true;
+        i.isChecked = !i.isChecked;
       });
       return {
         ...state,

@@ -381,7 +381,7 @@ const messageReducer = (state = initialState, action) => {
       };
     case types.SELECT_ALL_MESSAGE:
       state.messages.data.map((i) => {
-        i.isChecked = true;
+        i.isChecked = !i.isChecked;
       });
       return {
         ...state,

@@ -17,6 +17,7 @@ import {
   onClickPagePosition,
   prevPagePosition,
   nextPagePosition,
+  selectAllPosition,
 } from "../../redux/accounts/position/positionActions";
 export default function Position() {
   let position = useSelector((state) => state.position);
@@ -135,7 +136,7 @@ export default function Position() {
                 <table>
                   <thead class="background-transparent-b-10  border-top">
                     <tr>
-                      <th class="height-45">
+                      <th class="height-45" onClick={() => dispatch(selectAllPosition())}>
                         <span class="color-grey">전체선택</span>
                       </th>
                       <th class="height-45">

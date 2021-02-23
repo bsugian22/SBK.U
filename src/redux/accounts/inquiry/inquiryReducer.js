@@ -346,7 +346,7 @@ const inquiryReducer = (state = initialState, action) => {
       };
     case types.CHECK_ALL_INQUIRY:
       state.inquiries.data.map((i) => {
-        i.isChecked = true;
+        i.isChecked = !i.isChecked;
       });
       return {
         ...state,
