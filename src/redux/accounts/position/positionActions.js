@@ -348,3 +348,9 @@ export const selectAllPosition = () => {
     type: types.SELECT_ALL_POSITION,
   };
 };
+
+export const changePositionStatus = () => {
+  return {
+    type: types.CHANGE_POSITION_STATUS,
+  };
+};

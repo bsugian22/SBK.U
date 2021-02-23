@@ -18,6 +18,7 @@ import {
   prevPagePosition,
   nextPagePosition,
   selectAllPosition,
+  changePositionStatus,
 } from "../../redux/accounts/position/positionActions";
 export default function Position() {
   let position = useSelector((state) => state.position);
@@ -136,7 +137,13 @@ export default function Position() {
                 <table>
                   <thead class="background-transparent-b-10  border-top">
                     <tr>
-                      <th class="height-45" onClick={() => dispatch(selectAllPosition())}>
+                      <th
+                        class="height-45"
+                        onClick={() => {
+                          dispatch(changePositionStatus());
+                          dispatch(selectAllPosition());
+                        }}
+                      >
                         <span class="color-grey">전체선택</span>
                       </th>
                       <th class="height-45">
@@ -163,7 +170,7 @@ export default function Position() {
                     </tr>
                   </thead>
                   <tbody class="background-transparent-b-5">
-                    {position.loading ? (
+                    {position?.loading ? (
                       <tr>
                         <td colspan="15" class="td-3">
                           <span></span>
@@ -180,23 +187,35 @@ export default function Position() {
                         return (
                           <tr key={index}>
                             <td class="height-45 border-top">
-                              <input type="checkbox" name="" value="1" />
+                              <input
+                                type="checkbox"
+                                checked={
+                                  item?.isChecked == "" ||
+                                  item?.isChecked == undefined ||
+                                  item?.isChecked == null
+                                    ? false
+                                    : item.isChecked
+                                }
+                                onChange={() => {}}
+                              />
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-grey">
-                                {Moment(item.createdAt).format(
-                                  "YY-MM-DD HH:mm "
-                                )}{" "}
+                                {item?.createdAt
+                                  ? ""
+                                  : Moment(item.createdAt).format(
+                                      "YY-MM-DD HH:mm "
+                                    )}
                               </span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey">{item.type}</span>
+                              <span class="color-grey">{item?.type}</span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey">{item.odds}</span>
+                              <span class="color-grey">{item?.odds}</span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey">{item.amount}원</span>
+                              <span class="color-grey">{item?.amount}원</span>
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-grey">21,000,000원</span>
@@ -205,7 +224,7 @@ export default function Position() {
                               <span class="color-grey">1/1</span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-red">{item.status}</span>
+                              <span class="color-red">{item?.status}</span>
                             </td>
                           </tr>
                         );
@@ -230,7 +249,7 @@ export default function Position() {
                     type="text"
                     class="padding-15 color-white background-transparent-b-10 width-110 heightp-100"
                     placeholder="Category"
-                    value={createPosition.category}
+                    value={createPosition?.category}
                     onChange={(e) => {
                       let category = e.target.value;
                       dispatch(changePositionCategory(category));
@@ -242,7 +261,7 @@ export default function Position() {
                     type="text"
                     class="padding-15 color-white background-transparent-b-10 width-110 heightp-100 "
                     placeholder="Amount"
-                    value={createPosition.amount}
+                    value={createPosition?.amount}
                     onChange={(e) => {
                       let amount = e.target.value;
                       dispatch(changePositionAmount(amount));
@@ -254,7 +273,7 @@ export default function Position() {
                     type="text"
                     class="padding-15 color-white background-transparent-b-10 width-110 heightp-100 "
                     placeholder="Outcomes"
-                    value={createPosition.outcomes}
+                    value={createPosition?.outcomes}
                     onChange={(e) => {
                       let ids = e.target.value;
                       dispatch(changePositionIds(ids));
@@ -282,7 +301,11 @@ export default function Position() {
                     <select
                       name="slct"
                       id="slct"
-                      value={page}
+                      value={
+                        page == null || page == "" || page == undefined
+                          ? ""
+                          : page
+                      }
                       onChange={(e) => {
                         let val = e.target.value;
                         if (val.toString() == page.toString()) {

@@ -15,6 +15,7 @@ const initialState = {
   closeModal: false,
   list: "ALL",
   originalList: { data: [] },
+  status: false,
 };
 
 const positionReducer = (state = initialState, action) => {
@@ -32,6 +33,7 @@ const positionReducer = (state = initialState, action) => {
         openModal: false,
         closeModal: false,
         list: "ALL",
+        status: false,
       };
     case types.FETCH_POSITIONS_SUCCESS:
       return {
@@ -204,13 +206,20 @@ const positionReducer = (state = initialState, action) => {
         list: "DEFEATED",
       };
 
-      case types.SELECT_ALL_POSITION:
+    case types.SELECT_ALL_POSITION:
+      let newList = { data: [] };
       state.positions.data.map((i) => {
-        i.isChecked = !i.isChecked;
+        i.createdAt == null || i.createdAt == undefined
+          ? (i.createdAt = "")
+          : i.createdAt;
+        i.createdAt = i.createdAt;
+        i.isChecked = state.status;
+        newList.data.push(i);
       });
+
       return {
         ...state,
-        positions: { ...state.positions, data: state.positions.data },
+        positions: { ...state.positions, data: newList.data },
       };
 
     case types.SET_POSITION_PAGE:
@@ -255,6 +264,11 @@ const positionReducer = (state = initialState, action) => {
       return {
         ...state,
         positions: { ...state.positions, page: action.payload },
+      };
+    case types.CHANGE_POSITION_STATUS:
+      return {
+        ...state,
+        status: !state.status,
       };
     default:
       return state;
