@@ -30,7 +30,13 @@ function preferencesReducer(state = initialState, action) {
           tel_number: "",
         },
       };
-
+    case types.SET_DARKMODE:
+      return {
+        preferences: {
+          ...preferences,
+          darkmode: action.toggle,
+        },
+      };
     case types.FETCH_COUNTRIES_REQUEST:
       return {
         ...state,
