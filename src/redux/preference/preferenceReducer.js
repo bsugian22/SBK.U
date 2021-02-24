@@ -2,7 +2,10 @@ import * as types from "./preferenceTypes";
 import sweetalert from "../../plugins/sweetalert";
 const swal = new sweetalert();
 const initialState = {
-  preferences: [],
+  preferences: {
+    darkmode: false,
+    data: [],
+  },
   forgotPassword: {
     username: "",
     password: "0000",
@@ -19,9 +22,11 @@ function preferencesReducer(state = initialState, action) {
   switch (action.type) {
     case types.SET_PREFERENCES:
       return {
-        preferences: action.payload,
+        preferences: {
+          ...preferences,
+          data: action.payload,
+        },
         countries: { data: [] },
-        countries: [],
         error: "",
         forgotPassword: {
           username: "",
