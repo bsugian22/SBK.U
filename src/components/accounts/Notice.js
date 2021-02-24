@@ -46,7 +46,7 @@ const Notice = () => {
           <div class="notice-left flex-inherit flex-column account-height widthp-40 border-right ">
             <div class="notice flex-column grow-2 flex-inherit padding-10 ">
               {notice?.loading ? (
-                <div colspan="15" class="td-3">
+                <div class="barloader1">
                   <span></span>
                 </div>
               ) : notice?.notices?.data?.length == 0 ? (

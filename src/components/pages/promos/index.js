@@ -37,7 +37,7 @@ export default function Promo() {
       <div class="promo-wrap account border-top flex-inherit flex-row scrollable-auto ">
         <div class="promo-left flex-inherit flex-column account-height widthp-40 border-right ">
           {promo.loading ? (
-            <div colspan="15" class="td-3">
+            <div class="barloader2">
               <span></span>
             </div>
           ) : promo?.promos?.data?.length == 0 ? (
