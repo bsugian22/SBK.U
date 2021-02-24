@@ -40,7 +40,7 @@ export default function Promo() {
             <table>
             <tbody>
               <tr>
-                <td class="td-3">
+                <td class="td-4">
                   <span></span>
                 </td>
               </tr>

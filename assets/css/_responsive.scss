@@ -1141,6 +1141,21 @@ table {
           animation: gradient 1s ease infinite;
         }
       }
+      &.td-4 {
+        width: 800px;
+        // padding-right: 100px;
+        span {
+          height: 12px;
+          background: linear-gradient(
+            to right,
+            #40424a 20%,
+            #555761 50%,
+            #40424a 80%
+          );
+          background-size: 500px 100px;
+          animation: gradient 1s ease infinite;
+        }
+      }
     }
   }
 }
