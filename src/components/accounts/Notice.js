@@ -46,48 +46,54 @@ const Notice = () => {
           <div class="notice-left flex-inherit flex-column account-height widthp-40 border-right ">
             <div class="notice flex-column grow-2 flex-inherit padding-10 ">
               {notice?.loading ? (
-                <div class="barloader1">
-                  <span></span>
-                </div>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td class="td-3">
+                        <span></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               ) : notice?.notices?.data?.length == 0 ? (
                 <div class="noArticle color-grey padding-10 background-transparent-b-10 justify-content-center">
                   <span>게시글이 없습니다.</span>
                 </div>
               ) : (
-                notice?.notices?.data?.map((item, index) => {
-                  return (
-                    <button
-                      key={index}
-                      type="button"
-                      class="flex-inherit"
-                      onClick={() => dispatch(viewNotice(item))}
-                      //  key={index}
-                    >
-                      <div class="flex-column flex-inherit widthp-100 notice-list min-height-100 padding-10 background-transparent-b-10 color-grey border-bottom-white">
-                        <div class="heightp-100 flex-inherit flex-column">
-                          <div class="flex-inherit heightp-50">
-                            <div class="padding-10 background-transparent-b-10">
-                              <span class="color-grey">{item.category}</span>
-                            </div>
-                            <div class="padding-10 grow-2 justify-content-end">
-                              <span class="color-grey">
-                                {moment(item.createdAt).format("MM / DD HH:mm")}
-                              </span>
+                    notice?.notices?.data?.map((item, index) => {
+                      return (
+                        <button
+                          key={index}
+                          type="button"
+                          class="flex-inherit"
+                          onClick={() => dispatch(viewNotice(item))}
+                        //  key={index}
+                        >
+                          <div class="flex-column flex-inherit widthp-100 notice-list min-height-100 padding-10 background-transparent-b-10 color-grey border-bottom-white">
+                            <div class="heightp-100 flex-inherit flex-column">
+                              <div class="flex-inherit heightp-50">
+                                <div class="padding-10 background-transparent-b-10">
+                                  <span class="color-grey">{item.category}</span>
+                                </div>
+                                <div class="padding-10 grow-2 justify-content-end">
+                                  <span class="color-grey">
+                                    {moment(item.createdAt).format("MM / DD HH:mm")}
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="flex-inherit heightp-50 align-items-center">
+                                <div class="padding-10 text-ellipsis">
+                                  <span class="color-white text-ellipsis">
+                                    {item.title}
+                                  </span>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                          <div class="flex-inherit heightp-50 align-items-center">
-                            <div class="padding-10 text-ellipsis">
-                              <span class="color-white text-ellipsis">
-                                {item.title}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })
-              )}
+                        </button>
+                      );
+                    })
+                  )}
             </div>
             <div class="flex-inherit notice-page-bottom border-top-white height-60 background-transparent-b-15 padding-10 color-grey">
               <div class="pagination flex-inherit widthp-100 justify-content-end margin-top-5">
@@ -169,8 +175,8 @@ const Notice = () => {
                 <span class="color-grey margin-right-15 align-items-center">
                   <i class="fal fa-calendar-alt margin-right-5"></i>
                   {view.createdAt == "" ||
-                  view.createdAt == null ||
-                  view.createdAt == undefined
+                    view.createdAt == null ||
+                    view.createdAt == undefined
                     ? ""
                     : moment(view.createdAt).format("MM / DD HH:mm")}
                 </span>

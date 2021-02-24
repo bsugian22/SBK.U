@@ -37,9 +37,15 @@ export default function Promo() {
       <div class="promo-wrap account border-top flex-inherit flex-row scrollable-auto ">
         <div class="promo-left flex-inherit flex-column account-height widthp-40 border-right ">
           {promo.loading ? (
-            <div class="barloader2">
-              <span></span>
-            </div>
+            <table>
+            <tbody>
+              <tr>
+                <td class="td-3">
+                  <span></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
           ) : promo?.promos?.data?.length == 0 ? (
             <div colspan="12" class="color-white">
               데이터가 존재하지 않습니다.
