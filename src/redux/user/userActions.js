@@ -59,6 +59,17 @@ export const setUsers = () => {
   };
 };
 
+export const refreshToken = () => {
+  axios
+    .get(`/api/users/me`)
+    .then((response) => {
+      console.log("token:refreshed");
+    })
+    .catch((error) => {
+      console.log("token: no token to refresh");
+    });
+};
+
 export const handleNewPass = (newpass) => {
   return {
     type: types.CHANGE_USER_NEWPASSWORD,
@@ -115,20 +126,17 @@ export const changePassWord = (pass) => {
         console.log(error);
         const errorMsg = error.response.data;
         let changePassErrorMessage = {
-          html: ` ${errorMsg.message} <br />  ${
-            errorMsg?.errors?.password
+          html: ` ${errorMsg.message} <br />  ${errorMsg?.errors?.password
               ? errorMsg?.errors?.password[0] + " <br /> "
               : ""
-          }
-            ${
-              errorMsg?.errors?.password_confirmation
-                ? errorMsg?.errors?.password_confirmation[0]
-                : ""
             }
-            ${
-              errorMsg?.errors?.old_password
-                ? errorMsg?.errors?.old_password[0]
-                : ""
+            ${errorMsg?.errors?.password_confirmation
+              ? errorMsg?.errors?.password_confirmation[0]
+              : ""
+            }
+            ${errorMsg?.errors?.old_password
+              ? errorMsg?.errors?.old_password[0]
+              : ""
             }
             `,
 

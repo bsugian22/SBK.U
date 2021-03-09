@@ -1,8 +1,21 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect, useRef } from "react";
+import { refreshToken } from "../../../redux/user/userActions";
 import { Link, NavLink } from 'react-router-dom'
 import Select from 'react-select'
 
 export default function SportsDetail() {
+
+   let isSubscribed = true;
+
+  useEffect(() => {
+    isSubscribed = true;
+    refreshToken();
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
+
+
    return (
       <Fragment>
          <div class="odds-detail-wrap flex-inherit flex-column widthp-100">

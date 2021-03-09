@@ -7,6 +7,7 @@ import Select from "react-select";
 import { mapStateToProps, mapDispatchProps } from "../../../redux/store";
 import sportsModel from "../../../models/sportsModel";
 import MenuContext from "../../../contexts/Menu.context";
+import { refreshToken } from "../../../redux/user/userActions";
 const Sports = (props) => {
   let isSubscribed = true;
   const model = new sportsModel();
@@ -25,6 +26,7 @@ const Sports = (props) => {
   useEffect(() => {
     isSubscribed = true;
     fetch();
+    refreshToken();
     return () => {
       isSubscribed = false;
     };

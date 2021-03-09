@@ -1,6 +1,18 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
+import { refreshToken } from "../../../redux/user/userActions";
 import moment from "moment";
 export default function PromoPost({ viewPromoData }) {
+
+  let isSubscribed = true;
+
+  useEffect(() => {
+    isSubscribed = true;
+    refreshToken();
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
+  
   return (
     <div class="promo-read-header flex-inherit flex-column align-items-center-inherit">
       <div class="flex-column notice-read-content padding-10 background-transparent-b-10 color-grey">

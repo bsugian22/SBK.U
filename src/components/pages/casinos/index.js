@@ -1,7 +1,19 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect, useRef } from "react";
+import { refreshToken } from "../../../redux/user/userActions";
 import { Link, NavLink } from 'react-router-dom'
 
 export default function Casino() {
+
+   let isSubscribed = true;
+
+  useEffect(() => {
+    isSubscribed = true;
+    refreshToken();
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
+
    return (
       <Fragment>
          <div class="content casiono-continer flex flex-inherit grow-2 flex-column">

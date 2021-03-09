@@ -1,4 +1,5 @@
-import React, { Fragment, useState, useRef } from 'react'
+import React, { Fragment, useState, useEffect, useRef } from "react";
+import { refreshToken } from "../../../redux/user/userActions";
 import Swiper from 'react-id-swiper'
 import { Link, NavLink } from 'react-router-dom'
 const SwiperMain = () => {
@@ -8,6 +9,16 @@ const SwiperMain = () => {
          prevEl: '.swiper-button-prev',
       },
    }
+   let isSubscribed = true;
+
+  useEffect(() => {
+    isSubscribed = true;
+    refreshToken();
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
+  
    return (
       <Fragment>
          <Swiper {...params}>

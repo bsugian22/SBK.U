@@ -1,7 +1,21 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect, useRef } from "react";
+import { refreshToken } from "../../../redux/user/userActions";
+
 import { Link, NavLink } from 'react-router-dom'
 
+
 export default function Find() {
+
+   let isSubscribed = true;
+
+  useEffect(() => {
+    isSubscribed = true;
+    refreshToken();
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
+  
    return (
       <Fragment>
          <div class="widthp-100 interload-panel-mobile flex-column flex-inherit flex border-bottom">

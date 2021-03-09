@@ -1,8 +1,20 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { refreshToken } from "../../../redux/user/userActions";
 
 import Swiper from "../swipermains";
 export default function Main() {
+
+  let isSubscribed = true;
+
+  useEffect(() => {
+    isSubscribed = true;
+    refreshToken();
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
+
   return (
     <Fragment>
       <div class="main-content-desktop content flex flex-inherit grow-2 flex-column">
