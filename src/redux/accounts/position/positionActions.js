@@ -1,6 +1,7 @@
 import * as types from "./positionTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
+import { setLogout } from "../../user/userActions";
 export const fetchPositionsRequest = () => {
   return {
     type: types.FETCH_POSITIONS_REQUEST,
