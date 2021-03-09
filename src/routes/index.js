@@ -15,7 +15,7 @@ import Position from "../components/accounts/position";
 import Notice from "../components/accounts/notice";
 import Inquiry from "../components/accounts/inquiry";
 import Message from "../components/accounts/message";
-import Settings from "../components/accounts/settings";
+import Settings from "../components/accounts/Settings";
 import Login from "../components/pages/login";
 import Find from "../components/pages/finds";
 import Register from "../components/pages/register";

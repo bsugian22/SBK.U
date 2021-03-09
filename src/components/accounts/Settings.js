@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState, useEffect, useRef  } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
@@ -7,12 +7,24 @@ import {
   handleNewPass,
   handleOldPassword,
   changePassWord,
+  refreshToken,
 } from "../../redux/user/userActions";
 export default function Settings() {
   let user = useSelector((state) => state.user.user);
   let changePass = useSelector((state) => state.user.changePassword);
   let dispatch = useDispatch();
   const context = useContext(MenuContext);
+  let isSubscribed = true;
+
+  useEffect(() => {
+    isSubscribed = true;
+    dispatch(refreshToken())
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
+
+
   return (
     <Fragment>
       <div className="content account-continer flex flex-inherit grow-2 flex-column">
