@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { refreshToken } from "../../../redux/user/userActions";
 
@@ -6,10 +7,11 @@ import Swiper from "../swipermains";
 export default function Main() {
 
   let isSubscribed = true;
+const dispatch = useDispatch();
 
   useEffect(() => {
     isSubscribed = true;
-    refreshToken();
+    dispatch(refreshToken())
     return () => {
       isSubscribed = false;
     };

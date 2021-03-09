@@ -1,6 +1,7 @@
 import * as types from "./noticeTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
+import { setLogout } from "../../user/userActions";
 export const setNoticesRequest = () => {
   return {
     type: types.FETCH_NOTICES_REQUEST,
@@ -191,6 +192,9 @@ export const setNotices = (params) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(setNoticesFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -262,6 +266,9 @@ export const fetchNotice = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchNoticeFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -305,6 +312,9 @@ export const updateNotice = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(updateNoticeFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -324,6 +334,9 @@ export const deleteNotices = (list) => {
         const errorMsg = error.message;
         console.log(error);
         dispatch(deleteNoticesFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };

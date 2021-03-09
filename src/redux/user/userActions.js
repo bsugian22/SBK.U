@@ -60,6 +60,7 @@ export const setUsers = () => {
 };
 
 export const refreshToken = () => {
+  return (dispatch) => {
   axios
     .get(`/api/users/me`)
     .then((response) => {
@@ -67,7 +68,11 @@ export const refreshToken = () => {
     })
     .catch((error) => {
       console.log("token: no token to refresh");
+      if (error.response.status == 401) {
+        dispatch(setLogout());
+      }
     });
+  };
 };
 
 export const handleNewPass = (newpass) => {

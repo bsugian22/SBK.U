@@ -1,6 +1,7 @@
 import * as types from "./withdrawalTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
+import { setLogout } from "../../user/userActions";
 export const fetchWithdrawalsRequest = () => {
   return {
     type: types.FETCH_WITHDRAWALS_REQUEST,
@@ -192,6 +193,9 @@ export const setWithdrawals = (params) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchWithdrawalsFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -262,6 +266,9 @@ export const fetchWithdrawal = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchWithdrawalFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -306,6 +313,9 @@ export const updateWithdrawal = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(updateWithdrawalFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -323,6 +333,9 @@ export const deleteWithdrawal = (list) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(deleteWithdrawalFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };

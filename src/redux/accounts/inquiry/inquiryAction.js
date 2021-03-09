@@ -1,6 +1,7 @@
 import * as types from "./inquiryTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
+import { setLogout } from "../../user/userActions";
 export const fetchInquiriesRequest = () => {
   return {
     type: types.FETCH_INQUIRIES_REQUEST,
@@ -191,6 +192,9 @@ export const setInquiries = (params) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchInquiriesFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -262,6 +266,9 @@ export const fetchInquiry = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchInquiryFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -305,6 +312,9 @@ export const updateInquiry = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(updateInquiryFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -324,6 +334,9 @@ export const deleteInquiries = (list) => {
         const errorMsg = error.message;
         console.log(error);
         dispatch(deleteInquiriesFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };

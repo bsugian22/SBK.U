@@ -191,6 +191,9 @@ export const setPositions = (params) => {
         console.log(error);
 
         dispatch(fetchPositionsFailure(error.message));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -262,6 +265,9 @@ export const fetchPosition = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchPositionFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -323,6 +329,9 @@ export const updatePosition = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(updatePositionFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -339,6 +348,9 @@ export const deletePositions = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(deletePositionsFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };

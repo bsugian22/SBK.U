@@ -769,7 +769,7 @@ const Deposit = () => {
                     type="submit"
                     class="widthp-100 background-green color-white height-40 justify-content-center"
                   >
-                    입금신청 kelvin
+                    입금신청
                   </button>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState, useContext } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { chain } from "lodash";
 import moment from "moment";
@@ -10,6 +10,7 @@ import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
 const Sports = (props) => {
   let isSubscribed = true;
+  const dispatch = useDispatch();
   const model = new sportsModel();
   const context = useContext(MenuContext);
   const [sports, setSports] = useState({
@@ -26,7 +27,7 @@ const Sports = (props) => {
   useEffect(() => {
     isSubscribed = true;
     fetch();
-    refreshToken();
+    dispatch(refreshToken())
     return () => {
       isSubscribed = false;
     };

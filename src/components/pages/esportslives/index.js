@@ -1,19 +1,21 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "../../../redux/user/userActions";
 import { Link, NavLink } from 'react-router-dom'
 
 export default function EsportsLive() {
 
    let isSubscribed = true;
+const dispatch = useDispatch();
 
   useEffect(() => {
     isSubscribed = true;
-    refreshToken();
+    dispatch(refreshToken())
     return () => {
       isSubscribed = false;
     };
   }, []);
-  
+
    return (
       <Fragment>
          <div class="odds-detail-wrap flex-inherit flex-column widthp-100">

@@ -1,6 +1,7 @@
 import * as types from "./exchangeTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
+import { setLogout } from "../../user/userActions";
 export const fetchExchangesRequest = () => {
   return {
     type: types.FETCH_EXCHANGES_REQUEST,
@@ -193,6 +194,9 @@ export const setExchanges = (params) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchExchangesFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -264,6 +268,9 @@ export const fetchExchange = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchExchangeFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -308,6 +315,9 @@ export const updateExchange = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(updateExchangeFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -325,6 +335,9 @@ export const deleteExchanges = (list) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(deleteExchangesFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };

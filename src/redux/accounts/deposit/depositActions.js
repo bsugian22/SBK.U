@@ -1,6 +1,7 @@
 import * as types from "./depositTypes";
 import axios from "../../../plugins/axios";
 import { camelize } from "../../../helpers/object";
+import { setLogout } from "../../user/userActions";
 export const fetchDepositsRequest = () => {
   return {
     type: types.FETCH_DEPOSITS_REQUEST,
@@ -192,6 +193,9 @@ export const setDeposits = (params) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchDepositsFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -271,6 +275,9 @@ export const requestData = (params) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(paginationFailureData(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -299,6 +306,9 @@ export const fetchDeposit = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchDepositFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -340,6 +350,9 @@ export const updateDeposit = () => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(updateDepositFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };
@@ -357,6 +370,9 @@ export const deleteDeposits = (list) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(deleteDepositsFailure(errorMsg));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
       });
   };
 };

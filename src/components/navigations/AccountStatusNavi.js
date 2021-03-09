@@ -6,7 +6,7 @@ export default function AccountStatusNavi(props) {
       <Fragment>
          <div class="right-account-sidebar content-height width-300 flex-inherit flex-column scrollable-auto border-left border-left-shadow">
             <div class="summary-title height-45 background-transparent-b-10 align-items-center-inherit flex-inherit padding-left-15 border-bottom">
-               <span class="color-green">SUMMARY kelvin</span>
+               <span class="color-green">SUMMARY</span>
             </div>
             <div class="balance-status flex-inherit flex-column">
                <div class="balance-status-header flex-inherit height-45 background-transparent-b-10 align-items-center-inherit border-bottom">
@@ -307,7 +307,7 @@ export default function AccountStatusNavi(props) {
                <div class="dw-status-header flex-inherit height-45 background-transparent-b-10 align-items-center-inherit">
                   <div class="padding-left-15 border-top border-bottom">
                      <i class="fal fa-history color-grey margin-0 font-size-15"></i>
-                     <span class="color-green padding-left-5">PROMOTION kelvin </span>
+                     <span class="color-green padding-left-5">PROMOTION </span>
                   </div>
                </div>
                <div class="betting-history-content flex-inherit flex-column ">
