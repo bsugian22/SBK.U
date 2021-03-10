@@ -55,11 +55,11 @@ const Deposit = () => {
   }, [page]);
 
   const pusher = () => {
-    // if (user.isAuth) {
+    if (user.isAuth) {
     echo.private(`users.${user.member.id}`).listen('DepositUpdated', (e) => {
       dispatch(setDeposits({ page: page, per_page: per_page }));
     })
-    // }
+    }
   }
 
   return (

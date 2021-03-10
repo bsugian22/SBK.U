@@ -23,6 +23,7 @@ import {
 } from "../../redux/accounts/inquiry/inquiryAction";
 import { prevPageDeposit } from "../../redux/accounts/deposit/depositActions";
 import { nextPagePosition } from "../../redux/accounts/position/positionActions";
+import echo from '../../plugins/echo'
 
 const Inquiry = () => {
   const dispatch = useDispatch();
@@ -34,13 +35,25 @@ const Inquiry = () => {
   let lastPage = useSelector((state) => state.inquiry.inquiries.lastPage);
   let per_page = useSelector((state) => state.inquiry.inquiries.per_page);
   let list_pages = useSelector((state) => state.inquiry.inquiries.list_pages);
+  let user = useSelector((state) => state.user.user);
+
   useEffect(() => {
     isSubscribed = true;
     dispatch(setInquiries({ page: page, per_page: per_page }));
+    pusher();
     return () => {
       isSubscribed = false;
     };
   }, []);
+
+  const pusher = () => {
+    if (user.isAuth) {
+    echo.private(`users.${user.member.id}`).listen('InquiryUpdated', (e) => {
+      dispatch(setInquiries({ page: page, per_page: per_page }));
+    })
+    }
+  }
+
   return (
     <Fragment>
       <div class="content account-continer flex flex-inherit grow-2 flex-column">

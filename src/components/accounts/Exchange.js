@@ -5,6 +5,7 @@ import sweetalert from "../../plugins/sweetalert";
 import { method } from "lodash";
 import { Link, NavLink } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
+import echo from '../../plugins/echo'
 
 import {
   changeCreateExchangeAmount,
@@ -48,11 +49,20 @@ const Exchange = () => {
     isSubscribed = true;
 
     dispatch(setExchanges({ page: page, per_page: per_page }));
+    pusher();
 
     return () => {
       isSubscribed = false;
     };
   }, [page]);
+
+  const pusher = () => {
+    if (user.isAuth) {
+    echo.private(`users.${user.member.id}`).listen('ExchangeUpdated', (e) => {
+      dispatch(setExchanges({ page: page, per_page: per_page }));
+    })
+    }
+  }
 
   return (
     <Fragment>

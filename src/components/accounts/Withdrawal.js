@@ -22,6 +22,7 @@ import {
   nextPageWIthdrawal,
 } from "../../redux/accounts/withdrawal/withdrawalAction";
 import { Link, NavLink } from "react-router-dom";
+import echo from '../../plugins/echo'
 
 const Withdrawal = () => {
   let isSubscribed = true;
@@ -47,10 +48,19 @@ const Withdrawal = () => {
   useEffect(() => {
     isSubscribed = true;
     dispatch(setWithdrawals({ page: page, per_page: per_page }));
+    pusher();
     return () => {
       isSubscribed = false;
     };
   }, [page]);
+
+  const pusher = () => {
+    if (user.isAuth) {
+    echo.private(`users.${user.member.id}`).listen('WithdrawalUpdated', (e) => {
+      dispatch(setWithdrawals({ page: page, per_page: per_page }));
+    })
+    }
+  }
 
   return (
     <Fragment>
