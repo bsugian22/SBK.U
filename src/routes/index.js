@@ -8,7 +8,7 @@ import EsportsDetail from "../components/pages/esportsdetails";
 import Games from "../components/pages/games";
 import Casino from "../components/pages/casinos";
 import Promo from "../components/pages/promos";
-import Deposit from "../components/accounts/deposit";
+import Deposit from "../components/accounts/Deposit";
 import Withdrawal from "../components/accounts/withdrawal";
 import Exchange from "../components/accounts/exchange";
 import Position from "../components/accounts/position";

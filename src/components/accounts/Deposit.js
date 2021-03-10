@@ -23,6 +23,7 @@ import {
 } from "../../redux/accounts/deposit/depositActions";
 import { Link, NavLink } from "react-router-dom";
 import Moment from "moment";
+import echo from '../../plugins/echo'
 
 const Deposit = () => {
   let deposit = useSelector((state) => state.deposit);
@@ -43,15 +44,24 @@ const Deposit = () => {
   let isSubscribed = true;
   let dispatch = useDispatch();
   let swal = new sweetalert();
+
   useEffect(() => {
     isSubscribed = true;
     dispatch(setDeposits({ page: page, per_page: per_page }));
-
+    pusher();
+    console.log(user.member.id)
     return () => {
       isSubscribed = false;
     };
   }, [page]);
-  console.log(totalPages);
+
+  const pusher = () => {
+    // if (user.isAuth) {
+    echo.private(`users.${user.member.id}`).listen('DepositUpdated', (e) => {
+      dispatch(setDeposits({ page: page, per_page: per_page }));
+    })
+    // }
+  }
 
   return (
     <Fragment>
@@ -404,7 +414,7 @@ const Deposit = () => {
                               <span class="color-grey">
                                 {item.amount}
                                 {item.method == "CASH" ||
-                                item.method == "PAYPAL"
+                                  item.method == "PAYPAL"
                                   ? "원"
                                   : "BTC"}
                               </span>
@@ -476,7 +486,7 @@ const Deposit = () => {
                         return (
                           <option
                             key={index}
-                            // selected={item == page ? true : false}
+                          // selected={item == page ? true : false}
                           >
                             {item}
                           </option>
@@ -585,8 +595,8 @@ const Deposit = () => {
             <button
               type="button"
               id="tab-1"
-              // class={context.state.interMenu === "inter-tab-1" ? "active" : ""}
-              // onClick={() => context.actions.setinterMenu("inter-tab-1")}
+            // class={context.state.interMenu === "inter-tab-1" ? "active" : ""}
+            // onClick={() => context.actions.setinterMenu("inter-tab-1")}
             >
               입금신청
             </button>
@@ -595,8 +605,8 @@ const Deposit = () => {
             <button
               type="button"
               id="tab-2"
-              // class={context.state.interMenu === "inter-tab-2" ? "active" : ""}
-              // onClick={() => context.actions.setinterMenu("inter-tab-2")}
+            // class={context.state.interMenu === "inter-tab-2" ? "active" : ""}
+            // onClick={() => context.actions.setinterMenu("inter-tab-2")}
             >
               입금내역
             </button>
@@ -611,7 +621,7 @@ const Deposit = () => {
         >
           <form
             class="flex"
-            //  onSubmit={submit}
+          //  onSubmit={submit}
           >
             <div class="flex-column flex-inherit padding-horizontal-15 widthp-100">
               <div class="flex-column">
@@ -686,7 +696,7 @@ const Deposit = () => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="5000"
-                      // onClick={QuickInput}
+                    // onClick={QuickInput}
                     >
                       5,000
                     </button>
@@ -694,7 +704,7 @@ const Deposit = () => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="10000"
-                      // onClick={QuickInput}
+                    // onClick={QuickInput}
                     >
                       10,000
                     </button>
@@ -702,7 +712,7 @@ const Deposit = () => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="50000"
-                      // onClick={QuickInput}
+                    // onClick={QuickInput}
                     >
                       50,000
                     </button>
@@ -710,7 +720,7 @@ const Deposit = () => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="100000"
-                      // onClick={QuickInput}
+                    // onClick={QuickInput}
                     >
                       100,000
                     </button>
@@ -718,7 +728,7 @@ const Deposit = () => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="500000"
-                      // onClick={QuickInput}
+                    // onClick={QuickInput}
                     >
                       500,000
                     </button>
@@ -818,10 +828,10 @@ const Deposit = () => {
                         {value.method == "BITCOIN"
                           ? "비트코인"
                           : value.method == "CASH"
-                          ? "현금"
-                          : value.method == "PAYPAL"
-                          ? "페이팔"
-                          : "알 수 없음"}
+                            ? "현금"
+                            : value.method == "PAYPAL"
+                              ? "페이팔"
+                              : "알 수 없음"}
                       </span>
                     </div>
                     <div class="widthp-25 text-align-center">
