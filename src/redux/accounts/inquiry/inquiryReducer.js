@@ -25,6 +25,7 @@ const initialState = {
     page: 0,
     lastPage: 0,
   },
+  isViewing: false,
 };
 
 const inquiryReducer = (state = initialState, action) => {
@@ -108,12 +109,13 @@ const inquiryReducer = (state = initialState, action) => {
       };
     case types.FETCH_INQUIRY_SUCCESS:
       return {
+        ...state,
         loading: false,
-        data: action.payload,
-        error: "",
+        isViewing: true,
       };
     case types.FETCH_INQUIRY_FAILURE:
       return {
+        ...state,
         loading: false,
         data: [],
         error: action.payload,
@@ -336,6 +338,7 @@ const inquiryReducer = (state = initialState, action) => {
     case types.RESET_CREATE_INQUIRY:
       return {
         ...state,
+        isViewing : false,
         createInquiry: {
           title: "",
           content: "",

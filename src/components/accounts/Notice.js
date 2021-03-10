@@ -9,6 +9,7 @@ import noticeModel from "../../models/noticeModel";
 import Logo from "../layouts/Logo";
 import sweetalert from "../../plugins/sweetalert";
 import {
+  fetchNotice,
   nextPageNotice,
   onClickPageNotice,
   prevPageNotice,
@@ -66,7 +67,9 @@ const Notice = () => {
                           key={index}
                           type="button"
                           class="flex-inherit"
-                          onClick={() => dispatch(viewNotice(item))}
+                          onClick={() => {
+                            dispatch(fetchNotice(item.id))
+                          }}
                         //  key={index}
                         >
                           <div class="flex-column flex-inherit widthp-100 notice-list min-height-100 padding-10 background-transparent-b-10 color-grey border-bottom-white">

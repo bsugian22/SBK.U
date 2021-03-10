@@ -119,13 +119,11 @@ const noticeReducer = (state = initialState, action) => {
     case types.FETCH_NOTICE_SUCCESS:
       return {
         loading: false,
-        data: action.payload,
         error: "",
       };
     case types.FETCH_NOTICE_FAILURE:
       return {
         loading: false,
-        data: [],
         error: action.payload,
       };
 

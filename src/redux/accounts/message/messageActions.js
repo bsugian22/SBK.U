@@ -198,14 +198,15 @@ export const prevPageMessage = (data) => {
   }
 };
 
-export const fetchMessage = () => {
+export const fetchMessage = (id) => {
   return (dispatch) => {
     dispatch(fetchMessageRequest);
     axios
-      .get(`/api/admin/message`)
+      .get(`/api/messages/`+id)
       .then((response) => {
         const message = response.data;
         dispatch(fetchMessageSuccess(message));
+        dispatch(readMessageReceived(message.data));
       })
       .catch((error) => {
         const errorMsg = error.message;

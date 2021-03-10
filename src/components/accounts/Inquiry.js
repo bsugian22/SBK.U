@@ -12,6 +12,7 @@ import {
   createInquiryAction,
   deleteInquiries,
   deleteInquiriesRequest,
+  fetchInquiry,
   listOfToDeleteInquiries,
   nextPageInquiry,
   onClickPageInquiry,
@@ -85,7 +86,13 @@ const Inquiry = () => {
                     ) : (
                       inquiry?.inquiries?.data?.map((item, index) => {
                         return (
-                          <tr class="rows" key={index}>
+                          <tr
+                            class="rows"
+                            key={index}
+                            onClick={() => {
+                              dispatch(fetchInquiry(item.id));
+                            }}
+                          >
                             <td class="height-45 border-top">
                               <input
                                 type="checkbox"
@@ -226,7 +233,10 @@ const Inquiry = () => {
                       </button>
                     </Link>
                     <Link to="#">
-                      <button class="write page-right width-40 heightp-100 background-green">
+                      <button class="write page-right width-40 heightp-100 background-green"
+                        onClick={() => {
+                          dispatch(resetCreateInquiry());
+                        }}>
                         <i class="fal fa-pencil-alt color-white"></i>
                       </button>
                     </Link>
@@ -251,6 +261,7 @@ const Inquiry = () => {
                     let title = e.target.value;
                     dispatch(changeInquiryTitle(title));
                   }}
+                  disabled = {inquiry.isViewing}
                 />
               </div>
               <div class="message-form-write flex-column flex-inherit">
@@ -263,6 +274,7 @@ const Inquiry = () => {
                     let content = e.target.value;
                     dispatch(changeInquiryContent(content));
                   }}
+                  disabled = {inquiry.isViewing}
                 ></textarea>
               </div>
               <div class="message-form-btn margin-top-10 flex-inherit">
@@ -274,6 +286,7 @@ const Inquiry = () => {
                     onClick={() => {
                       dispatch(resetCreateInquiry());
                     }}
+                    hidden = {inquiry.isViewing}
                   >
                     <i class="far fa-times color-red"></i>
                     <span class="color-grey">취소</span>
@@ -291,6 +304,7 @@ const Inquiry = () => {
                     onClick={() => {
                       dispatch(createInquiryAction(createInquiry));
                     }}
+                    hidden = {inquiry.isViewing}
                   >
                     <i class="fal fa-share color-white"></i>
                     <span class="color-white">보내기 </span>

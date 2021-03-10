@@ -8,6 +8,7 @@ import {
   clearMessageObject,
   deleteMessages,
   deleteMessagesRequest,
+  fetchMessage,
   fetchMessages,
   listOfToDeleteMessages,
   nextPageMessage,
@@ -83,7 +84,7 @@ export default function Message() {
                             class="rows"
                             key={index}
                             onClick={() => {
-                              dispatch(readMessageReceived(item));
+                              dispatch(fetchMessage(item.id));
                             }}
                           >
                             <td class="height-45 border-top">

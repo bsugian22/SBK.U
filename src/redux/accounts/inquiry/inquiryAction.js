@@ -254,14 +254,16 @@ export const prevPageInquiry = (data) => {
   }
 };
 
-export const fetchInquiry = () => {
+export const fetchInquiry = (id) => {
   return (dispatch) => {
     dispatch(fetchInquiryRequest);
     axios
-      .get(`/api/`)
+      .get(`/api/inquiries/`+id)
       .then((response) => {
-        const Inquiry = response.data;
-        dispatch(fetchInquiriesuccess(Inquiry));
+        const inquiry = response.data;
+        dispatch(fetchInquiriesuccess(inquiry));
+        dispatch(changeInquiryTitle(inquiry.data.title));
+        inquiry.data.answer == null ?  dispatch(changeInquiryContent(inquiry.data.status)) : dispatch(changeInquiryContent(inquiry.data.answer.content));
       })
       .catch((error) => {
         const errorMsg = error.message;

@@ -253,14 +253,15 @@ export const prevPageNotice = (data) => {
   }
 };
 
-export const fetchNotice = () => {
+export const fetchNotice = (id) => {
   return (dispatch) => {
     dispatch(fetchNoticeRequest);
     axios
-      .get(`/api/`)
+      .get(`/api/notices/`+id)
       .then((response) => {
         const notice = response.data;
-        dispatch(setNoticesuccess(notice));
+        // dispatch(setNoticesuccess(notice));
+        dispatch(viewNotice(notice.data));
       })
       .catch((error) => {
         const errorMsg = error.message;
