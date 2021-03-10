@@ -321,7 +321,6 @@ export const updateInquiry = () => {
 
 export const deleteInquiries = (list) => {
   return (dispatch) => {
-    console.log(list);
     axios
       .delete(`/api/inquiries`, { data: list })
       .then((response) => {
@@ -332,7 +331,6 @@ export const deleteInquiries = (list) => {
       })
       .catch((error) => {
         const errorMsg = error.message;
-        console.log(error);
         dispatch(deleteInquiriesFailure(errorMsg));
         if (error.response.status == 401) {
           dispatch(setLogout());

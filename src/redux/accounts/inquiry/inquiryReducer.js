@@ -62,7 +62,6 @@ const inquiryReducer = (state = initialState, action) => {
       newData.perPage = action.payload.perPage;
       newData.page = action.payload.page;
       newData.lastPage = action.payload.lastPage;
-      console.log(action.payload);
       return {
         ...state,
         loading: false,
@@ -256,7 +255,6 @@ const inquiryReducer = (state = initialState, action) => {
           i.isChecked = action.payload.status;
         }
       });
-      console.log(state.inquiries.data);
       return {
         ...state,
         inquiries: { ...state.inquiries, data: state.inquiries.data },
@@ -278,7 +276,6 @@ const inquiryReducer = (state = initialState, action) => {
         inquiries: [...newList.inquiry],
       };
 
-      console.log("list" + newList.inquiry);
       return {
         ...state,
         inquiries: { ...state.inquiries, data: state.inquiries.data },
@@ -371,7 +368,6 @@ const inquiryReducer = (state = initialState, action) => {
           state.inquiries.list_pages.push(index);
         }
       }
-      console.log(state.inquiries.list_pages);
       return {
         ...state,
         inquiries: {
@@ -382,7 +378,6 @@ const inquiryReducer = (state = initialState, action) => {
       };
 
     case types.NEXT_PAGE_INQUIRY:
-      console.log(action.payload);
       return {
         ...state,
         loading: true,

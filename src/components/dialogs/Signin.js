@@ -8,7 +8,6 @@ import store from "../../redux/store";
 import { Provider, ReactReduxContext } from "react-redux";
 export default function Signin(props) {
   const { onLogin, forgotPassword, onChangeUsername, dispatch } = props;
-  console.log(forgotPassword);
   let pass = forgotPassword;
   const swal = new sweetalert();
   const model = new userModel();

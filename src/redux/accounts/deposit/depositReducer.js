@@ -70,9 +70,6 @@ const depositReducer = (state = initialState, action) => {
       newData.perPage = action.payload.perPage;
       newData.page = action.payload.page;
       newData.lastPage = action.payload.lastPage;
-
-      console.log(newData);
-      console.log(state.deposits.list_pages);
       return {
         ...state,
         loading: false,
@@ -264,7 +261,6 @@ const depositReducer = (state = initialState, action) => {
           i.isChecked = action.payload.status;
         }
       });
-      console.log(state.deposits.data);
       return {
         ...state,
         deposits: { ...state.deposits, data: state.deposits.data },
@@ -284,7 +280,6 @@ const depositReducer = (state = initialState, action) => {
         ...state.newDepositToDeleteList,
         deposit_activities: [...newList.deposit_activities],
       };
-      console.log(newList.deposit_activities);
       return {
         ...state,
         deposits: { ...state.deposits, data: state.deposits.data },
@@ -385,7 +380,6 @@ const depositReducer = (state = initialState, action) => {
           state.deposits.list_pages.push(index);
         }
       }
-      console.log(state.deposits.list_pages);
       return {
         ...state,
         deposits: {
@@ -397,7 +391,6 @@ const depositReducer = (state = initialState, action) => {
       };
 
     case types.NEXT_PAGE_DEPOSIT:
-      console.log(action.payload);
       return {
         ...state,
         loading: true,

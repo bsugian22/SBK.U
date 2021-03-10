@@ -148,7 +148,6 @@ const Inquiry = () => {
                         dispatch(
                           deleteInquiries(inquiry.newInquiryToDeleteList)
                         );
-                        console.log(inquiry.newInquiryToDeleteList);
                       }
                     }}
                   >
@@ -183,7 +182,6 @@ const Inquiry = () => {
                       }}
                     >
                       {list_pages?.map((item, index) => {
-                        console.log(item, page);
                         return <option key={index}>{item}</option>;
                       })}
                     </select>
@@ -291,7 +289,6 @@ const Inquiry = () => {
                     type="button"
                     class="padding-15 background-green color-white margin-left-10"
                     onClick={() => {
-                      console.log(createInquiry);
                       dispatch(createInquiryAction(createInquiry));
                     }}
                   >

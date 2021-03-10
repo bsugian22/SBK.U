@@ -185,7 +185,6 @@ export const setNotices = (params) => {
       .get(`/api/notices`, { params: params })
       .then((response) => {
         const notices = camelize(response.data);
-        console.log(response);
         dispatch(setNoticesSuccess(notices));
         dispatch(setPagesOfNotice());
       })
@@ -321,7 +320,6 @@ export const updateNotice = () => {
 
 export const deleteNotices = (list) => {
   return (dispatch) => {
-    console.log(list);
     axios
       .delete(`/api/notices`, { data: list })
       .then((response) => {
@@ -332,7 +330,6 @@ export const deleteNotices = (list) => {
       })
       .catch((error) => {
         const errorMsg = error.message;
-        console.log(error);
         dispatch(deleteNoticesFailure(errorMsg));
         if (error.response.status == 401) {
           dispatch(setLogout());

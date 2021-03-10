@@ -49,7 +49,6 @@ export const setUsers = () => {
       .get(`/api/branch/users`)
       .then((response) => {
         const users = camelize(response.data);
-        console.log("data" + response.data);
         dispatch(fetchUsersSuccess(users));
       })
       .catch((error) => {
@@ -118,17 +117,14 @@ export const changePassFailure = (message) => {
 
 export const changePassWord = (pass) => {
   return (dispatch) => {
-    console.log(pass);
     dispatch(changePassRequest());
     axios
       .patch(`/api/users/password`, pass)
       .then((response) => {
         // const users = camelize(response.data);
-        console.log(response);
         dispatch(changePassSuccess(response.data.message));
       })
       .catch((error) => {
-        console.log(error);
         const errorMsg = error.response.data;
         let changePassErrorMessage = {
           html: ` ${errorMsg.message} <br />  ${errorMsg?.errors?.password

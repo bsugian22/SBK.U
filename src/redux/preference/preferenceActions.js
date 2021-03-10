@@ -74,11 +74,9 @@ export const userForgotPassword = (data) => {
     axios
       .patch(`/api/users/forgot-password`, data)
       .then((response) => {
-        console.log(response);
         dispatch(forgotPassSuccess(response.data.message));
       })
       .catch((error) => {
-        console.log(error.response.data);
         const errorMsg = error.response.data;
         let forgotPassErrorMessage = {
           html: ` ${errorMsg.message} <br />  ${

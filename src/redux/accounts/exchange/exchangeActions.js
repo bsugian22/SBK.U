@@ -187,7 +187,6 @@ export const setExchanges = (params) => {
       })
       .then((response) => {
         const exchanges = camelize(response.data);
-        console.log(exchanges);
         dispatch(fetchExchangesSuccess(exchanges));
         dispatch(setPagesOfExchange());
       })

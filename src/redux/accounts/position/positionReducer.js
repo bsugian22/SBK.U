@@ -230,7 +230,6 @@ const positionReducer = (state = initialState, action) => {
           state.positions.list_pages.push(index);
         }
       }
-      console.log(state.positions.list_pages);
       return {
         ...state,
         positions: {
@@ -241,7 +240,6 @@ const positionReducer = (state = initialState, action) => {
       };
 
     case types.NEXT_PAGE_POSITION:
-      console.log(action.payload);
       return {
         ...state,
         loading: true,
@@ -276,7 +274,6 @@ const positionReducer = (state = initialState, action) => {
           i.isChecked = action.payload.status;
         }
       });
-      console.log(state.positions.data);
       return {
         ...state,
         positions: { ...state.positions, data: state.positions.data },

@@ -189,7 +189,6 @@ export const setPositions = (params) => {
         dispatch(setPagesOfPosition());
       })
       .catch((error) => {
-        console.log(error);
 
         dispatch(fetchPositionsFailure(error.message));
         if (error.response.status == 401) {
@@ -288,7 +287,6 @@ export const createPositionAction = (position) => {
     newList.category = position.category;
     newList.amount = position.amount;
 
-    console.log(newList);
     dispatch(createPositionRequest());
     axios
       .post(`/api/positions`, newList)
@@ -298,7 +296,6 @@ export const createPositionAction = (position) => {
       })
       .catch((error) => {
         const errorMsg = error.response.data;
-        console.log("error is" + error);
         let positionErrorMessage = {
           html: ` ${errorMsg.message} <br />  ${
             errorMsg?.errors?.category

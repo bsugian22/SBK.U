@@ -97,7 +97,6 @@ export default function Promo() {
                   }}
                 >
                   {list_pages?.map((item, index) => {
-                    console.log(item, page);
                     return <option key={index}>{item}</option>;
                   })}
                 </select>

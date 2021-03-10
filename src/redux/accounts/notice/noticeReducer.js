@@ -72,7 +72,6 @@ const noticeReducer = (state = initialState, action) => {
       newData.perPage = action.payload.perPage;
       newData.page = action.payload.page;
       newData.lastPage = action.payload.lastPage;
-      console.log(action.payload);
       return {
         ...state,
         loading: false,
@@ -264,7 +263,6 @@ const noticeReducer = (state = initialState, action) => {
           i.isChecked = action.payload.status;
         }
       });
-      console.log(state.notices.data);
       return {
         ...state,
         notices: { ...state.notices, data: state.notices.data },
@@ -286,7 +284,6 @@ const noticeReducer = (state = initialState, action) => {
         notices: [...newList.notice],
       };
 
-      console.log("list" + newList.notice);
       return {
         ...state,
         notices: { ...state.notices, data: state.notices.data },
@@ -383,7 +380,6 @@ const noticeReducer = (state = initialState, action) => {
           state.notices.list_pages.push(index);
         }
       }
-      console.log(state.notices.list_pages);
       return {
         ...state,
         notices: {
@@ -394,7 +390,6 @@ const noticeReducer = (state = initialState, action) => {
       };
 
     case types.NEXT_PAGE_NOTICE:
-      console.log(action.payload);
       return {
         ...state,
         loading: true,

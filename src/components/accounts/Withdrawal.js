@@ -177,7 +177,6 @@ const Withdrawal = () => {
                             onChange={(e) => {
                               let amt = 0;
                               amt = Number(e.target.value);
-                              console.log(amt);
                               dispatch(changeCreateWithdrawalAmount(amt));
                             }}
                             required
@@ -445,8 +444,6 @@ const Withdrawal = () => {
                     onClick={() => {
                       dispatch(listOfToDeleteWithdrawal());
                       dispatch(deleteWithdrawalRequest());
-                      // dispatch(deleteDeposits(withdrawal.newDepositToDeleteList));
-                      // console.log(withdrawal.newDepositToDeleteList);
                       dispatch(
                         deleteWithdrawal(withdraw?.newWithdrawalToDeleteList)
                       );
@@ -492,7 +489,6 @@ const Withdrawal = () => {
                       }}
                     >
                       {list_pages?.map((item, index) => {
-                        console.log(item, page);
                         return <option key={index}>{item}</option>;
                       })}
                     </select>

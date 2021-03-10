@@ -143,7 +143,6 @@ export const nextPromoPage = (page) => {
 };
 
 export const nextPagePromo = (data) => {
-  console.log(data);
   var page_number = data.page;
   var last_page = data.list_pages[data.list_pages.length - 1];
   if (last_page >= page_number + 1) {

@@ -73,7 +73,6 @@ const withdrawalReducer = (state = initialState, action) => {
       newData.page = action.payload.page;
       newData.lastPage = action.payload.lastPage;
 
-      console.log(newData);
       return {
         ...state,
         loading: false,
@@ -278,7 +277,6 @@ const withdrawalReducer = (state = initialState, action) => {
           i.isChecked = action.payload.status;
         }
       });
-      console.log(state.withdrawals.data);
       return {
         ...state,
         withdrawals: { ...state.withdrawals, data: state.withdrawals.data },
@@ -298,7 +296,6 @@ const withdrawalReducer = (state = initialState, action) => {
         ...state.newWithdrawalToDeleteList,
         withdrawal_activities: [...newList.withdrawal_activities],
       };
-      console.log(newList.withdrawal_activities);
       return {
         ...state,
         withdrawals: { ...state.withdrawals, data: state.withdrawals.data },
@@ -378,7 +375,6 @@ const withdrawalReducer = (state = initialState, action) => {
           state.withdrawals.list_pages.push(index);
         }
       }
-      console.log(state.withdrawals.list_pages);
       return {
         ...state,
         withdrawals: {
@@ -389,7 +385,6 @@ const withdrawalReducer = (state = initialState, action) => {
       };
 
     case types.NEXT_PAGE_WITHDRAWAL:
-      console.log(action.payload);
       return {
         ...state,
         loading: true,

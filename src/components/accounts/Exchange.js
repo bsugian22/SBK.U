@@ -162,7 +162,6 @@ const Exchange = () => {
                             onChange={(e) => {
                               let amt = 0;
                               amt = Number(createExchange.amount);
-                              console.log(amt);
                               dispatch(changeCreateExchangeAmount(amt));
                             }}
                             required
@@ -420,7 +419,6 @@ const Exchange = () => {
                       }}
                     >
                       {list_pages?.map((item, index) => {
-                        console.log(item, page);
                         return <option key={index}>{item}</option>;
                       })}
                     </select>

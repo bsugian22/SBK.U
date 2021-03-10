@@ -71,8 +71,6 @@ const exchangeReducer = (state = initialState, action) => {
       newData.perPage = action.payload.perPage;
       newData.page = action.payload.page;
       newData.lastPage = action.payload.lastPage;
-
-      console.log(action.payload);
       return {
         ...state,
         loading: false,
@@ -274,7 +272,6 @@ const exchangeReducer = (state = initialState, action) => {
           i.isChecked = action.payload.status;
         }
       });
-      console.log(state.exchanges.data);
       return {
         ...state,
         exchanges: { ...state.exchanges, data: state.exchanges.data },
@@ -296,7 +293,6 @@ const exchangeReducer = (state = initialState, action) => {
         exchange_activities: [...newList.exchange_activities],
       };
 
-      console.log(newList.exchange_activities);
       return {
         ...state,
         exchanges: { ...state.exchanges, data: state.exchanges.data },
@@ -383,7 +379,6 @@ const exchangeReducer = (state = initialState, action) => {
           state.exchanges.list_pages.push(index);
         }
       }
-      console.log(state.exchanges.list_pages);
       return {
         ...state,
         exchanges: {
@@ -394,7 +389,6 @@ const exchangeReducer = (state = initialState, action) => {
       };
 
     case types.NEXT_PAGE_EXCHANGE:
-      console.log(action.payload);
       return {
         ...state,
         loading: true,

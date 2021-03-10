@@ -49,7 +49,6 @@ const Deposit = () => {
     isSubscribed = true;
     dispatch(setDeposits({ page: page, per_page: per_page }));
     pusher();
-    console.log(user.member.id)
     return () => {
       isSubscribed = false;
     };
@@ -190,7 +189,6 @@ const Deposit = () => {
                             onChange={(e) => {
                               let amt = 0;
                               amt = Number(e.target.value);
-                              console.log(amt);
                               dispatch(changeCreateDepositAmount(amt));
                             }}
                             required
@@ -382,7 +380,6 @@ const Deposit = () => {
                       </tr>
                     ) : (
                       deposit?.deposits?.data?.map((item, index) => {
-                        console.log(deposit.deposits.list_pages);
                         return (
                           <tr class="rows" key={index}>
                             <td class="height-45 border-top">
@@ -438,8 +435,6 @@ const Deposit = () => {
                     onClick={() => {
                       dispatch(listOfToDeleteDeposits());
                       dispatch(deleteDepositsRequest());
-                      // dispatch(deleteDeposits(deposit.newDepositToDeleteList));
-                      // console.log(deposit.newDepositToDeleteList);
                       dispatch(deleteDeposits(deposit.newDepositToDeleteList));
                     }}
                   >
@@ -482,7 +477,6 @@ const Deposit = () => {
                       }}
                     >
                       {list_pages?.map((item, index) => {
-                        console.log(item, page);
                         return (
                           <option
                             key={index}

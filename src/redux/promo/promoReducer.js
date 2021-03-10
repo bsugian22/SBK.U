@@ -66,7 +66,6 @@ const promoReducer = (state = initialState, action) => {
       newData.perPage = action.payload.perPage;
       newData.page = action.payload.page;
       newData.lastPage = action.payload.lastPage;
-      console.log(action.payload);
       return {
         ...state,
         loading: false,
@@ -171,7 +170,6 @@ const promoReducer = (state = initialState, action) => {
         error: action.payload,
       };
     case types.VIEW_PROMO_DATA:
-      console.log(action.payload);
       return {
         ...state,
         promo: {
@@ -192,7 +190,6 @@ const promoReducer = (state = initialState, action) => {
           state.promos.list_pages.push(index);
         }
       }
-      console.log(state.promos.list_pages);
       return {
         ...state,
         promos: {
@@ -203,7 +200,6 @@ const promoReducer = (state = initialState, action) => {
       };
 
     case types.NEXT_PAGE_PROMO:
-      console.log(action.payload);
       return {
         ...state,
         loading: true,

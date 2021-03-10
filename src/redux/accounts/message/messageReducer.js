@@ -338,7 +338,6 @@ const messageReducer = (state = initialState, action) => {
         data: { ...state.data, data: titleMessage },
       };
     case types.READ_MESSAGE_RECEIVED:
-      console.log(action.payload);
       state.message.id = Number(action.payload.id);
       state.message.category = action.payload.category;
       state.message.content = action.payload.content;
@@ -364,7 +363,6 @@ const messageReducer = (state = initialState, action) => {
           i.isChecked = action.payload.status;
         }
       });
-      console.log(state.messages.data);
       state.message = {
         id: 0,
         category: "",
@@ -404,7 +402,6 @@ const messageReducer = (state = initialState, action) => {
         messages: [...newList.messages],
       };
 
-      console.log(newList.messages);
       return {
         ...state,
         messages: { ...state.messages, data: state.messages.data },
@@ -421,7 +418,6 @@ const messageReducer = (state = initialState, action) => {
           state.messages.list_pages.push(index);
         }
       }
-      console.log(state.messages.list_pages);
       return {
         ...state,
         messages: {
@@ -432,7 +428,6 @@ const messageReducer = (state = initialState, action) => {
       };
 
     case types.NEXT_PAGE_MESSAGE:
-      console.log(action.payload);
       return {
         ...state,
         loading: true,
