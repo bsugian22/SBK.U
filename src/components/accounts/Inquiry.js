@@ -24,6 +24,8 @@ import {
 import { prevPageDeposit } from "../../redux/accounts/deposit/depositActions";
 import { nextPagePosition } from "../../redux/accounts/position/positionActions";
 import echo from '../../plugins/echo'
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const Inquiry = () => {
   const dispatch = useDispatch();
@@ -86,8 +88,8 @@ const Inquiry = () => {
                   <tbody class="background-transparent-b-5">
                     {inquiry.loading ? (
                       <tr>
-                        <td colspan="15" class="td-3">
-                          <span></span>
+                        <td colspan="5" class="td-3">
+                          <i class="fa fa-spinner fa-spin fa-2x fa-fw color-grey"></i>
                         </td>
                       </tr>
                     ) : inquiry?.inquiries?.data?.length == 0 ? (
@@ -279,16 +281,14 @@ const Inquiry = () => {
               </div>
               <div class="message-form-write flex-column flex-inherit">
                 {/* CONTENT */}
-                <textarea
-                  class="background-transparent-b-5 padding-10 border-top height-200 color-grey"
-                  placeholder="내용을 입력해주세요"
-                  value={createInquiry.content}
-                  onChange={(e) => {
-                    let content = e.target.value;
-                    dispatch(changeInquiryContent(content));
-                  }}
-                  disabled = {inquiry.isViewing}
-                ></textarea>
+                <CKEditor
+                    editor={ ClassicEditor }
+                    onChange={ ( event, editor ) => {
+                        const content = editor.getData();
+                        dispatch(changeInquiryContent(content));
+                        console.log( { event, editor, content } );
+                    } }
+                />
               </div>
               <div class="message-form-btn margin-top-10 flex-inherit">
                 <div class="grow-2">

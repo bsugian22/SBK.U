@@ -1115,6 +1115,15 @@ $baseFontSize: 16;
     top: 0 !important;
   }
 }
+.notice-loading {
+    > div {
+    height: 12px;
+    background: linear-gradient(to right, #323854 20%, #303550 50%, #353b58 80%);
+    background-size: 500px 100px;
+    border-radius:4px;
+    animation: gradient 1s ease infinite;
+  }
+}
 table {
   width: 100%;
   tr {
@@ -1131,13 +1140,9 @@ table {
         // padding-right: 100px;
         span {
           height: 12px;
-          background: linear-gradient(
-            to right,
-            #40424a 20%,
-            #555761 50%,
-            #40424a 80%
-          );
+          background: linear-gradient(to right, #2a2e46 20%, #2d324b 50%, #2a2e46 80%);
           background-size: 500px 100px;
+          border-radius:4px;
           animation: gradient 1s ease infinite;
         }
       }

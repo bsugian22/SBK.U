@@ -1,0 +1,43 @@
+.ck-editor {
+    display:flex;
+    flex-direction:column;
+    > div {
+        display:flex;
+    }
+    .ck-sticky-panel {
+        width:100% !important;
+        
+    }
+    .ck-toolbar {
+        background-color: rgba(0,0,0, 0.1) !important;
+        border: 0 !important;
+    }
+    .ck-icon,.ck-button {
+        color: #b7b7b7 !important;
+        outline: 0 !important;
+        box-shadow: 0 !important;
+        &:hover {
+            background: transparent !important;
+            color: #ffffff !important;
+            box-shadow: 0 !important;
+            outline: 0 !important;
+        }
+    }
+    .ck-on {
+        background: transparent !important;
+        color: #ffffff !important;
+    }
+    .ck-off {
+        background: transparent !important;
+        color: #b7b7b7 !important;
+    }
+    .ck-content {
+        width:100%;
+        box-shadow:none !important;
+        outline:0 !important;;
+        height:300px;
+        background-color: rgba(0,0,0, 0.05) !important;
+        color:#b7b7b7 !important;
+        border:0 !important;
+    }
+}

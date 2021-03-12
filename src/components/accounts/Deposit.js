@@ -336,7 +336,7 @@ const Deposit = () => {
           </div>
           <div class="deposit-right-content account-height widthp-50 flex-inherit padding-left-5 border-left flex-column scrollable-auto">
             <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
-              <span class="color-white">입금신청 내역</span>
+              <span class="color-white">입금신청내역</span>
             </div>
             <div class="widthp-100 deposit-history-content flex-inherit flex-column">
               <div class="history-item">
@@ -368,8 +368,8 @@ const Deposit = () => {
                   <tbody class="background-transparent-b-5">
                     {deposit?.loading ? (
                       <tr>
-                        <td colspan="15" class="td-3">
-                          <span></span>
+                        <td colspan="5" class="td-3">
+                          <i class="fa fa-spinner fa-spin fa-2x fa-fw color-grey"></i>
                         </td>
                       </tr>
                     ) : deposit?.deposits?.data?.length == 0 ? (

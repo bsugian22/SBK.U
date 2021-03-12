@@ -173,8 +173,8 @@ export default function Position() {
                   <tbody class="background-transparent-b-5">
                     {position?.loading ? (
                       <tr>
-                        <td colspan="15" class="td-3">
-                          <span></span>
+                        <td colspan="8" class="td-3">
+                          <i class="fa fa-spinner fa-spin fa-2x fa-fw color-grey"></i>
                         </td>
                       </tr>
                     ) : position?.positions?.data?.length == 0 ? (

@@ -38,24 +38,37 @@ const Notice = () => {
   return (
     <Fragment>
       <div class="content account-continer flex flex-inherit grow-2 flex-column">
-        <div class="content-header notice-header-desktop shrink-0 border-bottom height-50 align-items-center padding-horizontal-10 background-transparent-b-25 border-left">
-          <span class="color-grey">
-            <i class="fad fa-megaphone"></i>NOTICE
-          </span>
-        </div>
-        <div class="notice-wrap account notice-content-desktop border-top flex-inherit flex-row scrollable-auto">
-          <div class="notice-left flex-inherit flex-column account-height widthp-40 border-right ">
-            <div class="notice flex-column grow-2 flex-inherit padding-10 ">
+        <div class="notice-wrap account notice-content-desktop border-top flex-inherit flex-row">
+          <div class="notice-left flex-inherit flex-column account-height widthp-40 border-right scrollable-auto">
+            <div class="notice flex-column grow-2 flex-inherit padding-10">
               {notice?.loading ? (
-                <table>
-                  <tbody>
-                    <tr>
-                      <td class="td-3">
-                        <span></span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div class="flex-column flex-inherit widthp-100 min-height-100 color-grey padding-horizontal-6">
+                  <div class="heightp-100 flex-inherit flex-column background-transparent-b-10 height-100 padding-10 margin-bottom-10">
+                    <div class="flex-inherit heightp-50">
+                      <div class="padding-10 background-transparent-b-10 flex align-items-center">
+                        <div class="notice-loading width-80">
+                         <div></div>
+                        </div>
+                      </div>
+                      <div class="padding-10 grow-2 justify-content-end">
+                        <span class="color-grey">
+                          <div class="notice-loading width-80">
+                            <div></div>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="flex-inherit heightp-50 align-items-center">
+                      <div class="padding-10 text-ellipsis widthp-100">
+                        <div class="color-white text-ellipsis widthp-100">
+                          <div class="notice-loading widthp-100">
+                            <div></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               ) : notice?.notices?.data?.length == 0 ? (
                 <div class="noArticle color-grey padding-10 background-transparent-b-10 justify-content-center">
                   <span>게시글이 없습니다.</span>

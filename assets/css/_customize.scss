@@ -91,6 +91,10 @@ textarea {
    display: none !important;
 }
 
+.bcol-0 {
+   border-collapse:unset !important;
+}
+
 table {
    width: 100%;
    border-collapse: collapse;
@@ -440,7 +444,7 @@ em {
    height: calc(100vh - 110px);
 }
 .account-height {
-   height: calc(100vh - 130px);
+   height: calc(100vh - 110px);
 }
 
 /* etc */

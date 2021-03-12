@@ -67,8 +67,8 @@ export default function Message() {
                   <tbody class="background-transparent-b-5">
                     {message.loading ? (
                       <tr>
-                        <td colspan="15" class="td-3">
-                          <span></span>
+                        <td colspan="5" class="td-3">
+                          <i class="fa fa-spinner fa-spin fa-2x fa-fw color-grey"></i>
                         </td>
                       </tr>
                     ) : message?.messages?.data?.length == 0 ? (
