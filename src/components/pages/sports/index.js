@@ -373,7 +373,6 @@ const Sports = (props) => {
                           </span>
                         </div>
                       );
-                        console.log(market.outcomes[0] === undefined ? "und" : market.outcomes[0].name == null ? "null name" : market.outcomes[0].odds )
                       rows.push(
                         <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
                           <div class="height-40 data active flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
