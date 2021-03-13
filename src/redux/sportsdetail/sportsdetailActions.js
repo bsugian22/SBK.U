@@ -129,7 +129,6 @@ export const fetchSportsdetails = (params) => {
         sportsdetails.data = data
         sportsdetails.detail = null
         sportsdetails.detail_data= null
-        console.log(sportsdetails)
 
         dispatch(fetchSportsdetailsSuccess(sportsdetails))
       }).catch(error => {

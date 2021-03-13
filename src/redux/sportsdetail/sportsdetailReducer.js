@@ -40,7 +40,6 @@ const sportsdetailReducer = (state = initialState, action) => {
         loading: true,
       };
     case types.FETCH_SPORTSDETAIL_SUCCESS:
-      console.log(action.payload.data)
       return {
         ...state,
         loading: false,
