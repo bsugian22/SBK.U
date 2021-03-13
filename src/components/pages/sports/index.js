@@ -217,8 +217,45 @@ const Sports = (props) => {
                           <div class="flex widthp-55">
                             <div class="flex widthp-100 market-default">
                               <div class="flex flex-inherit align-items-center-inherit padding-2">
-                                이 곳은 배당영역
+                                <div class="flex pick-wrap flex-inherit align-items-center-inherit justify-content-center-inherit widthp-100">
+                                  <div class="widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5"> {/* "active" class must be entered when selected. */}
+                                    <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                      <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">Team Name</span></div>
+                                      <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2"><span class="color-grey text-ellipsis">1.00</span></div>
+                                    </div>
+                                  </div>
+                                  <div class="widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-horizontal-2">
+                                    <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                      <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">Team Name</span></div>
+                                      <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2"><span class="color-grey text-ellipsis">1.00</span></div>
+                                    </div>
+                                  </div>
+                                  <div class="widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5">
+                                    <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                      <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">Team Name</span></div>
+                                      <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2"><span class="color-grey text-ellipsis">1.00</span></div>
+                                    </div>
+                                  </div>
                                 </div>
+                              </div>
+                              {/* 2pick 
+                              <div class="flex flex-inherit align-items-center-inherit padding-2">
+                                <div class="flex pick-wrap flex-inherit align-items-center-inherit justify-content-center-inherit widthp-100">
+                                  <div class="widthp-50 padding-horizontal-5 heightp-100 background-transparent-w-5">
+                                    <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                      <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">Team Name</span></div>
+                                      <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2"><span class="color-grey text-ellipsis">1.00</span></div>
+                                    </div>
+                                  </div>
+                                  <div class="widthp-50 padding-horizontal-5 heightp-100 background-transparent-w-5 margin-left-2">
+                                    <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                      <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">Team Name</span></div>
+                                      <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2"><span class="color-grey text-ellipsis">1.00</span></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              */}
                               <div class="flex justify-content-center-inherit align-items-center-inherit padding-vertical-2 padding-left-0 padding-right-2 market-count">
                                 <div
                                   class="flex market-detail widthp-50 margin-right-2"

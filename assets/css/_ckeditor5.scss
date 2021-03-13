@@ -15,7 +15,8 @@
     .ck-icon,.ck-button {
         color: #b7b7b7 !important;
         outline: 0 !important;
-        box-shadow: 0 !important;
+        box-shadow: none !important;
+        border: 0 !important;
         &:hover {
             background: transparent !important;
             color: #ffffff !important;
