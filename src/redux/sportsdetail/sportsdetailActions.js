@@ -1,5 +1,8 @@
 import * as types from "./sportsdetailTypes";
-import axios from "axios";
+import axios from "../../plugins/axios";
+import { camelize, snakelize } from "../../helpers/object";
+import { chain } from "lodash";
+import moment from "moment";
 
 export const fetchSportsdetailsRequest = () => {
   return {
@@ -38,6 +41,11 @@ export const fetchSportsdetailFailure = (error) => {
   return {
     type: types.FETCH_SPORTSDETAIL_FAILURE,
     payload: error,
+  };
+};
+export const sportDetailReset = () => {
+  return {
+    type: types.SPORTSDETAIL_RESET,
   };
 };
 
@@ -102,72 +110,89 @@ export const deleteSportsdetailsFailure = (error) => {
 };
 
 
-export const fetchSportsdetails = () => {
-    return (dispatch) => {
-      dispatch(fetchSportsdetailsRequest);
-      await axios.get(`/api/`)
-                  .then(response => {
-                    const sportsdetails = response.data;
-                    dispatch(fetchSportsdetailsSuccess(sportsdetails))
-              }).catch(error => {
-                    const errorMsg = error.message;
-                    dispatch(fetchSportsdetailsFailure(errorMsg))
-              })
-      };
+export const fetchSportsdetails = (params) => {
+  return (dispatch) => {
+    dispatch(fetchSportsdetailsRequest);
+    axios.get(`/api/feed/sports`, {
+      params: snakelize(params)
+    })
+      .then(response => {
+        const sportsdetails = camelize(response.data);
+
+        // console.log(sportsdetails)
+
+        var data = chain(sportsdetails.data)
+          .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
+          .map((matches, startAt) => ({ startAt, matches }))
+          .orderBy("startAt")
+          .value();
+        sportsdetails.data = data
+        sportsdetails.detail = null
+        sportsdetails.detail_data= null
+        console.log(sportsdetails)
+
+        dispatch(fetchSportsdetailsSuccess(sportsdetails))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(fetchSportsdetailsFailure(errorMsg))
+      })
+  };
 };
 
-export const fetchSportsdetail = () => {
+export const fetchSportsdetail = (matchId) => {
   return (dispatch) => {
     dispatch(fetchSportsdetailRequest);
-    await axios.get(`/api/`)
-                .then(response => {
-                  const sportsdetail = response.data;
-                  dispatch(fetchSportsdetailSuccess(sportsdetail))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(fetchSportsdetailFailure(errorMsg))
-            })
-    };
+    axios.get(`/api/feed/matches/${matchId}`)
+      .then(response => {
+        const sportsdetail = camelize (response.data) ;
+        // console.log(sportsdetail);
+
+        dispatch(fetchSportsdetailSuccess(sportsdetail))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(fetchSportsdetailFailure(errorMsg))
+      })
+  };
 };
 
 export const createSportsdetail = () => {
   return (dispatch) => {
     dispatch(createSportsdetailRequest);
-    await axios.get(`/api/`)
-                .then(response => {
-                  const sportsdetail = response.data;
-                  dispatch(createSportsdetailSuccess(sportsdetail))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(createSportsdetailFailure(errorMsg))
-            })
-    };
+    axios.get(`/api/`)
+      .then(response => {
+        const sportsdetail = response.data;
+        dispatch(createSportsdetailSuccess(sportsdetail))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(createSportsdetailFailure(errorMsg))
+      })
+  };
 };
 
 export const updateSportsdetail = () => {
   return (dispatch) => {
     dispatch(updateSportsdetailRequest);
-    await axios.get(`/api/`)
-                .then(response => {
-                  const sportsdetail = response.data;
-                  dispatch(updateSportsdetailSuccess(sportsdetail))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(updateSportsdetailFailure(errorMsg))
-            })
-    };
+    axios.get(`/api/`)
+      .then(response => {
+        const sportsdetail = response.data;
+        dispatch(updateSportsdetailSuccess(sportsdetail))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(updateSportsdetailFailure(errorMsg))
+      })
+  };
 };
 
 export const deleteSportsdetails = () => {
   return (dispatch) => {
     dispatch(deleteSportsdetailsRequest);
-    await axios.get(`/api/`)
-                .then(response => {
-                  const sportsdetails = response.data;
-                  dispatch(deleteSportsdetailsSuccess(sportsdetails))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(deleteSportsdetailsFailure(errorMsg))
-            })
-    };
+    axios.get(`/api/`)
+      .then(response => {
+        const sportsdetails = response.data;
+        dispatch(deleteSportsdetailsSuccess(sportsdetails))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(deleteSportsdetailsFailure(errorMsg))
+      })
+  };
 };
