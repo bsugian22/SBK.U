@@ -669,43 +669,48 @@ const Sports = (props) => {
               {sports.data.detail_data.markets.length > 0
                 ? sports.data.detail_data.markets.map((market, market_index) => {
                   var rows = [];
-
-                  rows.push(
-                    <div class="odds-detail-wwl-titleist height-40 align-items-center-inherit border-bottom background-transparent-b-20" key={market_index}>
-                      <div class="flex pi-title">
-                        <span class="color-white padding-left-15">
-                          {market.title.marketName.ko}
-                        </span>
-                      </div>
-                    </div>
-                  );
-
-                  rows.push(
-                    <Fragment>
-                      <div class="odds-detail-wwl-cs align-items-center-inherite border-bottom flex-inherit justify-content-center-inherit heightp-100" key={market_index}>
-                        <div class="widthp-33 border-right padding-vertical-10">
-                          <span class="color-white">AI Naser SC</span>
-                        </div>
-                        <div class="widthp-33 border-right padding-vertical-10">
-                          <span class="color-white">무승부</span>
-                        </div>
-                        <div class="widthp-33 padding-vertical-10">
-                          <span class="color-white">AI Arbi SC</span>
+                  
+                  // console.log(market.status != 0 );
+                  if (market.status == 1 ){
+                    // console.log(market.status);
+                    rows.push(
+                      <div class="odds-detail-wwl-titleist height-40 align-items-center-inherit border-bottom background-transparent-b-20" key={market_index}>
+                        <div class="flex pi-title">
+                          <span class="color-white padding-left-15">
+                            {market.title.marketName.ko}
+                          </span>
                         </div>
                       </div>
-                      <div class="odds-detail-wwl-content border-bottom flex-inherit justify-content-center-inherit">
-                        <div class="widthp-33 border-right padding-vertical-10">
-                          <span class="color-green">2.14</span>
+                    );
+  
+                    rows.push(
+                      <Fragment>
+                        <div class="odds-detail-wwl-cs align-items-center-inherite border-bottom flex-inherit justify-content-center-inherit heightp-100" key={market_index}>
+                          <div class="widthp-33 border-right padding-vertical-10">
+                            <span class="color-white">AI Naser SC</span>
+                          </div>
+                          <div class="widthp-33 border-right padding-vertical-10">
+                            <span class="color-white">무승부</span>
+                          </div>
+                          <div class="widthp-33 padding-vertical-10">
+                            <span class="color-white">AI Arbi SC</span>
+                          </div>
                         </div>
-                        <div class="widthp-33 border-right padding-vertical-10">
-                          <span class="color-green">3.30</span>
+                        <div class="odds-detail-wwl-content border-bottom flex-inherit justify-content-center-inherit">
+                          <div class="widthp-33 border-right padding-vertical-10">
+                            <span class="color-green">2.14</span>
+                          </div>
+                          <div class="widthp-33 border-right padding-vertical-10">
+                            <span class="color-green">3.30</span>
+                          </div>
+                          <div class="widthp-33 padding-vertical-10">
+                            <span class="color-green">3.45</span>
+                          </div>
                         </div>
-                        <div class="widthp-33 padding-vertical-10">
-                          <span class="color-green">3.45</span>
-                        </div>
-                      </div>
-                    </Fragment>
-                  );
+                      </Fragment>
+                    );
+                  }
+                  
 
                   return rows;
                 })
