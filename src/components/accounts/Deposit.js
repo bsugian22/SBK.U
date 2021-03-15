@@ -170,7 +170,7 @@ const Deposit = () => {
                       <span class="color-grey">입금자명</span>
                     </div>
                     <div class="widthp-67 form-content height-45 border-bottom-rb border-left-rw align-items-center justify-content-end padding-horizontal-10 center background-transparent-b-5 border-top">
-                      <span class="color-green">{user.member.username}</span>
+                      <span class="color-green">{user.member.account_holder}</span>
                     </div>
                   </div>
                   <div class="form-rows flex-inherit">
@@ -272,7 +272,7 @@ const Deposit = () => {
               <div class="flex-column flex-inherit widthp-100">
                 <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit border-top">
                   <span class="color-white">
-                    입금 계좌 확인 account details
+                    입금 계좌 확인
                   </span>
                 </div>
                 <div class="deposit-payment-confirm-data flex-column flex-inherit">
@@ -409,7 +409,7 @@ const Deposit = () => {
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-grey">
-                                {item.amount}
+                                {item.amount.toLocaleString()}
                                 {item.method == "CASH" ||
                                   item.method == "PAYPAL"
                                   ? "원"
@@ -417,7 +417,17 @@ const Deposit = () => {
                               </span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-green">{item.status}</span>
+                              {item.status == "PENDING" ? (
+                                  <span class="color-grey">대기</span>
+                              ) : item.status == "ACCEPTED" ? (
+                                  <span class="color-green">승인</span>
+                              ) : item.status == "REJECTED" ? (
+                                  <span class="color-red">취소</span>
+                              ) : item.status == "RECALLED" ? (
+                                  <span class="color-yellow">회수</span>
+                              ) : (
+                                ""
+                              )}
                             </td>
                           </tr>
                         );
@@ -444,9 +454,9 @@ const Deposit = () => {
                 </div>
                 <div class="padding-right-10">
                   <span class="color-grey">
-                    누적 총 잔액
-                    <strong class="color-red padding-left-5">
-                      {deposit?.deposits?.amount}원
+                    누적 입금 금액
+                    <strong class="color-green padding-left-5">
+                      {deposit?.deposits?.amount.toLocaleString()}원
                     </strong>
                   </span>
                 </div>

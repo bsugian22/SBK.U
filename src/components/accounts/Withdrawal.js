@@ -437,7 +437,17 @@ const Withdrawal = () => {
                               </span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-red">{item.status}</span>
+                              {item.status == "PENDING" ? (
+                                <span class="color-grey">대기</span>
+                              ) : item.status == "ACCEPTED" ? (
+                                <span class="color-green">승인</span>
+                              ) : item.status == "REJECTED" ? (
+                                <span class="color-red">취소</span>
+                              ) : item.status == "RECALLED" ? (
+                                <span class="color-yellow">회수</span>
+                              ) : (
+                                ""
+                              )}
                             </td>
                           </tr>
                         );
@@ -465,7 +475,7 @@ const Withdrawal = () => {
                 </div>
                 <div class="padding-right-10">
                   <span class="color-grey">
-                    누적 총 잔액
+                    누적 출금 금액
                     <strong class="color-red padding-left-5">
                       {/* total amount */}
                       {withdraw?.withdrawals?.amount}원

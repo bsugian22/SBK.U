@@ -439,6 +439,7 @@ em {
 .pick-wrap {
    .active {
       box-shadow: inset 0 0 0px 1px #34ac53;
+      background-color:rgba(0, 0, 0, 0.1);
    }
    .pick {
       &:hover{
@@ -446,6 +447,34 @@ em {
          cursor:pointer;
       }
    }
+}
+
+.flash {
+  -webkit-animation-name: flash;
+  animation-name: flash;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes flash {
+   0%, 50%, 100% {
+      opacity: 1;
+   }
+  
+  25%, 75% {
+   opacity: 0;
+   }
+  }
+  
+  @keyframes flash {
+   0%, 50%, 100% {
+   opacity: 1;
+  }
+  
+  25%, 75% {
+   opacity: 0;
+  }
 }
 /**
 	밑에는 기존PC 소스들임
