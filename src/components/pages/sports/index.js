@@ -362,47 +362,48 @@ const Sports = (props) => {
                   {sports.data.detail_data.markets.length > 0
                     ? sports.data.detail_data.markets.map((market, market_index) => {
                       var rows = [];
+                      if (market.status == 1) {
+                        rows.push(
+                          <div
+                            class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center border-bottom shrink-0"
+                            key={market_index}
+                          >
+                            <span class="color-grey">
+                              {market.title.marketName.ko}
+                            </span>
+                          </div>
+                        );
+                        rows.push(
+                          <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
+                            <div class="height-40 data active flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
+                              <div class="grow-2 text-ellipsis padding-horizontal-2">
+                                <span class="color-grey text-ellipsis">{market.outcomes[0] === undefined ? "" : market.outcomes[0].name == null ? "" : market.outcomes[0].name.outcomeName.ko}</span>
 
-                      rows.push(
-                        <div
-                          class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center border-bottom shrink-0"
-                          key={market_index}
-                        >
-                          <span class="color-grey">
-                            {market.title.marketName.ko}
-                          </span>
-                        </div>
-                      );
-                      rows.push(
-                        <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
-                          <div class="height-40 data active flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
-                            <div class="grow-2 text-ellipsis padding-horizontal-2">
-                              <span class="color-grey text-ellipsis">{market.outcomes[0] === undefined ? "" : market.outcomes[0].name == null ? "" : market.outcomes[0].name.outcomeName.ko}</span>
-                              
+                              </div>
+                              <div class="shrink-0">
+                                <span class="color-grey">{market.outcomes[0] === undefined ? "" : market.outcomes[0].name == null ? "" : market.outcomes[0].odds}</span>
+                              </div>
                             </div>
-                            <div class="shrink-0">
-                              <span class="color-grey">{market.outcomes[0] === undefined ? "" : market.outcomes[0].name == null ? "" : market.outcomes[0].odds}</span>
+                            <div class="height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-left-white border-top-white1 border-bottom-white1 border-right-white">
+                              <div class="grow-2 text-ellipsis padding-horizontal-2">
+                                <span class="color-grey text-ellipsis">{market.outcomes[1] === undefined ? "" : market.outcomes[1].name == null ? "" : market.outcomes[1].name.outcomeName.ko}</span>
+
+                              </div>
+                              <div class="shrink-0">
+                                <span class="color-grey">{market.outcomes[1] === undefined ? "" : market.outcomes[1].name == null ? "" : market.outcomes[1].odds}</span>
+                              </div>
                             </div>
-                          </div>
-                          <div class="height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-left-white border-top-white1 border-bottom-white1 border-right-white">
-                            <div class="grow-2 text-ellipsis padding-horizontal-2">
-                              <span class="color-grey text-ellipsis">{market.outcomes[1] === undefined ? "" : market.outcomes[1].name == null ? "" : market.outcomes[1].name.outcomeName.ko}</span>
-                               
-                            </div>
-                            <div class="shrink-0">
-                            <span class="color-grey">{market.outcomes[1] === undefined ? "" : market.outcomes[1].name == null ? "" : market.outcomes[1].odds}</span>
+                            <div class="height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
+                              <div class="grow-2 text-ellipsis padding-horizontal-2">
+                                <span class="color-grey text-ellipsis">{market.outcomes[2] === undefined ? "" : market.outcomes[2].name == null ? "" : market.outcomes[2].name.outcomeName.ko}</span>
+                              </div>
+                              <div class="shrink-0">
+                                <span class="color-grey">{market.outcomes[2] === undefined ? "" : market.outcomes[2].name == null ? "" : market.outcomes[2].odds}</span>
+                              </div>
                             </div>
                           </div>
-                          <div class="height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
-                            <div class="grow-2 text-ellipsis padding-horizontal-2">
-                            <span class="color-grey text-ellipsis">{market.outcomes[2] === undefined ? "" : market.outcomes[2].name == null ? "" : market.outcomes[2].name.outcomeName.ko}</span>
-                            </div>
-                            <div class="shrink-0">
-                            <span class="color-grey">{market.outcomes[2] === undefined ? "" : market.outcomes[2].name == null ? "" : market.outcomes[2].odds}</span>
-                            </div>
-                          </div>
-                        </div>
-                      );
+                        );
+                      }
 
                       return rows;
                     })
@@ -669,9 +670,9 @@ const Sports = (props) => {
               {sports.data.detail_data.markets.length > 0
                 ? sports.data.detail_data.markets.map((market, market_index) => {
                   var rows = [];
-                  
+
                   // console.log(market.status != 0 );
-                  if (market.status == 1 ){
+                  if (market.status == 1) {
                     // console.log(market.status);
                     rows.push(
                       <div class="odds-detail-wwl-titleist height-40 align-items-center-inherit border-bottom background-transparent-b-20" key={market_index}>
@@ -682,7 +683,7 @@ const Sports = (props) => {
                         </div>
                       </div>
                     );
-  
+
                     rows.push(
                       <Fragment>
                         <div class="odds-detail-wwl-cs align-items-center-inherite border-bottom flex-inherit justify-content-center-inherit heightp-100" key={market_index}>
@@ -710,7 +711,7 @@ const Sports = (props) => {
                       </Fragment>
                     );
                   }
-                  
+
 
                   return rows;
                 })
