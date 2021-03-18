@@ -39,16 +39,21 @@ const Sports = (props) => {
     dispatch(refreshToken())
 
     let socket = new WebSocket("wss://io.vosa.dev");
-  socket.onopen = function (e) {
-      alert("[open] Connection established");
-      alert("Sending to server");
-      socket.send("{type:\"book_match\",match_id:26407052}"); // macth id
+    socket.onopen = function (e) {
+      const data = {
+        type: "book_match",
+        match_id: 26292620
+      }
+
+      socket.send(JSON.stringify(data));
     };
   
     socket.onmessage = function (event) {
-      console.log(event)
-      // alert(`[message] Data received from server: ${event.data}`);
-      alert(`[message] Data received`);
+      event.data.text().then((data) => {
+        const market = JSON.parse(data)
+        console.log(market)
+      });
+
     };
   
     socket.onclose = function (event) {
