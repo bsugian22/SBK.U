@@ -42,7 +42,7 @@ const Sports = (props) => {
   socket.onopen = function (e) {
       alert("[open] Connection established");
       alert("Sending to server");
-      socket.send({ type: "book_match", match_id: 26269474 }); // macth id
+      socket.send("{type:\"book_match\",match_id:26407052}"); // macth id
     };
   
     socket.onmessage = function (event) {
