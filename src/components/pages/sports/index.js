@@ -9,12 +9,16 @@ import sportsModel from "../../../models/sportsModel";
 import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
 import { fetchSportsdetail, fetchSportsdetails, sportDetailReset } from "../../../redux/sportsdetail/sportsdetailActions";
+// import { io } from "socket.io-client";
+
+
 const Sports = (props) => {
   let isSubscribed = true;
   const dispatch = useDispatch();
   const model = new sportsModel();
   const context = useContext(MenuContext);
   let sports = useSelector((state) => state.sportsdetail);
+
   // const [sports, setSports] = useState({
   //   data: [],
   //   total: null,
@@ -25,16 +29,79 @@ const Sports = (props) => {
   //   detail: null,
   //   detail_data: null,
   // });
+  // wss://io.vosa.dev { type: "book_match", match_id: 1234 }
+  
 
   useEffect(() => {
     isSubscribed = true;
     // fetch();
     dispatch(fetchSportsdetails());
     dispatch(refreshToken())
+
+    let socket = new WebSocket("wss://io.vosa.dev");
+  socket.onopen = function (e) {
+      alert("[open] Connection established");
+      alert("Sending to server");
+      socket.send({ type: "book_match", match_id: 26269474 }); // macth id
+    };
+  
+    socket.onmessage = function (event) {
+      console.log(event)
+      // alert(`[message] Data received from server: ${event.data}`);
+      alert(`[message] Data received`);
+    };
+  
+    socket.onclose = function (event) {
+      if (event.wasClean) {
+        alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+      } else {
+        // e.g. server process killed or network down
+        // event.code is usually 1006 in this case
+        alert('[close] Connection died');
+      }
+    };
+  
+    socket.onerror = function (error) {
+      alert(`[error] ${error.message}`);
+    };
+    
+    
+
     return () => {
       isSubscribed = false;
     };
   }, []);
+
+ 
+
+
+  
+
+  // const socket = new WebSocket("wss://javascript.info/article/websocket/demo/hello");
+
+  // // socket.readyState = () =>{
+  // //   socket.send();
+  // // }
+  // socket.onopen = () => {
+  //   socket.send("Hello!");
+  // };
+
+  // socket.onmessage = (data) => {
+  //   console.log(data);
+  // }; 
+
+  // const io = require("socket.io-client");
+
+  // const socket = io("wss://io.vosa.dev", {
+  //   // cors: {
+  //   //   origin: "localhost:8080",
+  //   //   methods: ["GET", "POST"],
+  //   //   credentials: false
+  //   // },
+  //   query: { type: "book_match", match_id: 25563270 }
+  // });
+
+
 
   const prev = () => {
     dispatch(fetchSportsdetails({ page: sports.data.page - 1 }));
@@ -49,6 +116,8 @@ const Sports = (props) => {
   };
 
   const setDetail = async (item) => {
+    socket.send({ type: "book_match", match_id: 1234 });
+
     if (sports.data.detail === item.id && context.state.detailMenu === true) {
       dispatch(sportDetailReset());
       context.actions.setdetailMenu(false);
