@@ -112,7 +112,7 @@ export const deleteSportsdetailsFailure = (error) => {
 
 export const fetchSportsdetails = (params) => {
   return (dispatch) => {
-    dispatch(fetchSportsdetailsRequest);
+    dispatch(fetchSportsdetailsRequest());
     axios.get(`/api/feed/sports`, {
       params: snakelize(params)
     })

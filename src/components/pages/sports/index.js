@@ -18,6 +18,7 @@ const Sports = (props) => {
   const model = new sportsModel();
   const context = useContext(MenuContext);
   let sports = useSelector((state) => state.sportsdetail);
+  let socket = new WebSocket("wss://io.vosa.dev");
 
   // const [sports, setSports] = useState({
   //   data: [],
@@ -30,7 +31,7 @@ const Sports = (props) => {
   //   detail_data: null,
   // });
   // wss://io.vosa.dev { type: "book_match", match_id: 1234 }
-  
+
 
   useEffect(() => {
     isSubscribed = true;
@@ -38,24 +39,14 @@ const Sports = (props) => {
     dispatch(fetchSportsdetails());
     dispatch(refreshToken())
 
-    let socket = new WebSocket("wss://io.vosa.dev");
-    socket.onopen = function (e) {
-      const data = {
-        type: "book_match",
-        match_id: 26292620
-      }
 
-      socket.send(JSON.stringify(data));
-    };
-  
     socket.onmessage = function (event) {
       event.data.text().then((data) => {
         const market = JSON.parse(data)
         console.log(market)
       });
-
     };
-  
+
     socket.onclose = function (event) {
       if (event.wasClean) {
         alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
@@ -65,48 +56,15 @@ const Sports = (props) => {
         alert('[close] Connection died');
       }
     };
-  
+
     socket.onerror = function (error) {
       alert(`[error] ${error.message}`);
     };
-    
-    
 
     return () => {
       isSubscribed = false;
     };
   }, []);
-
- 
-
-
-  
-
-  // const socket = new WebSocket("wss://javascript.info/article/websocket/demo/hello");
-
-  // // socket.readyState = () =>{
-  // //   socket.send();
-  // // }
-  // socket.onopen = () => {
-  //   socket.send("Hello!");
-  // };
-
-  // socket.onmessage = (data) => {
-  //   console.log(data);
-  // }; 
-
-  // const io = require("socket.io-client");
-
-  // const socket = io("wss://io.vosa.dev", {
-  //   // cors: {
-  //   //   origin: "localhost:8080",
-  //   //   methods: ["GET", "POST"],
-  //   //   credentials: false
-  //   // },
-  //   query: { type: "book_match", match_id: 25563270 }
-  // });
-
-
 
   const prev = () => {
     dispatch(fetchSportsdetails({ page: sports.data.page - 1 }));
@@ -121,14 +79,22 @@ const Sports = (props) => {
   };
 
   const setDetail = async (item) => {
-    socket.send({ type: "book_match", match_id: 1234 });
-
     if (sports.data.detail === item.id && context.state.detailMenu === true) {
       dispatch(sportDetailReset());
       context.actions.setdetailMenu(false);
+
     } else {
       dispatch(fetchSportsdetail(item.id));
       context.actions.setdetailMenu(true);
+      console.log(item.id)
+      socket.onopen = function (e) {
+        alert("sending")
+        const data = {
+          type: "book_match",
+          match_id: item.id
+        }
+        socket.send(JSON.stringify(data));
+      };
     }
   };
 
@@ -461,7 +427,6 @@ const Sports = (props) => {
                             <div class="active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
                               <div class="grow-2 text-ellipsis padding-horizontal-2">
                                 <span class="color-grey text-ellipsis">{market.outcomes[0] === undefined ? "" : market.outcomes[0].name == null ? "" : market.outcomes[0].name.outcomeName.ko}</span>
-
                               </div>
                               <div class="shrink-0">
                                 {/*odds-change*/}<span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> {/*odds-change end*/}

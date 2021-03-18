@@ -21,6 +21,16 @@ const sportsdetailReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        data: {
+          data: [],
+          total: null,
+          count: null,
+          per_page: null,
+          page: 1,
+          last_page: null,
+          detail: null,
+          detail_data: null,
+        },
       };
     case types.FETCH_SPORTSDETAILS_SUCCESS:
       return {
