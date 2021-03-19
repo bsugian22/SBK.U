@@ -475,9 +475,9 @@ const Deposit = () => {
                     </select>
                   </div>
                   <div class="flex margin-left-5 page grow-2 justify-content-end">
-                    <Link to="#">
                       <button
                         class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
+                        disabled = {page == 1 }
                         onClick={() => {
                           let prevData = {
                             page: page,
@@ -493,10 +493,9 @@ const Deposit = () => {
                       >
                         <i class="fas fa-chevron-left margin-0 color-grey"></i>
                       </button>
-                    </Link>
-                    <Link to="#">
                       <button
                         class="page-right width-40 heightp-100 background-transparent-b-20"
+                        disabled = {page == lastPage }
                         onClick={() => {
                           let nextData = {
                             page: page,
@@ -512,7 +511,6 @@ const Deposit = () => {
                       >
                         <i class="fas fa-chevron-right margin-0 color-grey"></i>
                       </button>
-                    </Link>
                   </div>
                 </div>
               </div>
