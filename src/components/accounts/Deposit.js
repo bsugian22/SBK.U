@@ -115,47 +115,23 @@ const Deposit = () => {
                       dispatch(selectDepositMethod("CASH"));
                     }}
                   >
-                    <span
-                      class={
-                        createDepositStatus == "CASH"
-                          ? "color-green"
-                          : "color-grey"
-                      }
-                    >
-                      <i class="far fa-wallet"></i>현금
-                    </span>
+                    <span class="color-green"><i class="far fa-wallet"></i>현금</span>
                   </div>
                   <div
-                    class="widthp-33 border-right-rb border-bottom-rb border-left-rw height-45 color-green background-transparent-b-5 not-allowed border-top"
+                    class="widthp-33 border-right-rb border-bottom-rb border-left-rw height-45 background-transparent-b-5 not-allowed border-top"
                     onClick={() => {
                       dispatch(selectDepositMethod("PAYPAL"));
                     }}
                   >
-                    <span
-                      class={
-                        createDepositStatus == "PAYPAL"
-                          ? "color-green"
-                          : "color-grey"
-                      }
-                    >
-                      <i class="fab fa-paypal"></i>페이팔
-                    </span>
+                    <span class="color-grey"><i class="fab fa-paypal"></i>페이팔</span>
                   </div>
                   <div
-                    class="widthp-33 border-bottom-rb border-left-rw height-45 color-green background-transparent-b-5 not-allowed border-top"
+                    class="widthp-33 border-bottom-rb border-left-rw height-45 background-transparent-b-5 not-allowed border-top"
                     onClick={() => {
                       dispatch(selectDepositMethod("BITCOIN"));
                     }}
                   >
-                    <span
-                      class={
-                        createDepositStatus == "BITCOIN"
-                          ? "color-green"
-                          : "color-grey"
-                      }
-                    >
-                      <i class="fab fa-bitcoin"></i>비트코인
-                    </span>
+                    <span class="color-grey"><i class="fab fa-bitcoin"></i>비트코인</span>
                   </div>
                 </div>
               </div>
@@ -502,7 +478,6 @@ const Deposit = () => {
                     <Link to="#">
                       <button
                         class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == 1}
                         onClick={() => {
                           let prevData = {
                             page: page,
@@ -522,7 +497,6 @@ const Deposit = () => {
                     <Link to="#">
                       <button
                         class="page-right width-40 heightp-100 background-transparent-b-20"
-                        disabled = {page == lastPage }
                         onClick={() => {
                           let nextData = {
                             page: page,

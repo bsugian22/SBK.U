@@ -6,7 +6,6 @@ import Select from "react-select";
 import parse from "html-react-parser";
 import { mapStateToProps, mapDispatchProps } from "../../redux/store";
 import noticeModel from "../../models/noticeModel";
-import Logo from "../layouts/Logo";
 import sweetalert from "../../plugins/sweetalert";
 import {
   fetchNotice,
@@ -40,14 +39,65 @@ const Notice = () => {
       <div class="content account-continer flex flex-inherit grow-2 flex-column">
         <div class="notice-wrap account notice-content-desktop border-top flex-inherit flex-row">
           <div class="notice-left flex-inherit flex-column account-height widthp-40 border-right scrollable-auto">
-            <div class="notice flex-column grow-2 flex-inherit padding-10">
+            <div class="notice flex-column flex-inherit padding-horizontal-10 padding-top-10">
+              <div class="flex-inherit flex-column"><div class="red-shadow notice-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-white"><span class="color-white">공지사항</span></div></div>
               {notice?.loading ? (
-                <div class="flex-column flex-inherit widthp-100 min-height-100 color-grey padding-horizontal-6">
-                  <div class="heightp-100 flex-inherit flex-column background-transparent-b-10 height-100 padding-10 margin-bottom-10">
+                <div class="flex-column flex-inherit widthp-100 color-grey">
+                  <div class="heightp-100 flex-inherit flex-column background-transparent-b-10 padding-10 margin-bottom-10">
                     <div class="flex-inherit heightp-50">
                       <div class="padding-10 background-transparent-b-10 flex align-items-center">
                         <div class="notice-loading width-80">
                          <div></div>
+                        </div>
+                      </div>
+                      <div class="padding-10 grow-2 justify-content-end">
+                        <span class="color-grey">
+                          <div class="notice-loading width-80">
+                            <div></div>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="flex-inherit heightp-50 align-items-center">
+                      <div class="padding-10 text-ellipsis widthp-100">
+                        <div class="color-white text-ellipsis widthp-100">
+                          <div class="notice-loading widthp-100">
+                            <div></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="heightp-100 flex-inherit flex-column background-transparent-b-10 padding-10 margin-bottom-10">
+                    <div class="flex-inherit heightp-50">
+                      <div class="padding-10 background-transparent-b-10 flex align-items-center">
+                        <div class="notice-loading width-80">
+                          <div></div>
+                        </div>
+                      </div>
+                      <div class="padding-10 grow-2 justify-content-end">
+                        <span class="color-grey">
+                          <div class="notice-loading width-80">
+                            <div></div>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="flex-inherit heightp-50 align-items-center">
+                      <div class="padding-10 text-ellipsis widthp-100">
+                        <div class="color-white text-ellipsis widthp-100">
+                          <div class="notice-loading widthp-100">
+                            <div></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="heightp-100 flex-inherit flex-column background-transparent-b-10 padding-10">
+                    <div class="flex-inherit heightp-50">
+                      <div class="padding-10 background-transparent-b-10 flex align-items-center">
+                        <div class="notice-loading width-80">
+                          <div></div>
                         </div>
                       </div>
                       <div class="padding-10 grow-2 justify-content-end">
@@ -79,13 +129,13 @@ const Notice = () => {
                         <button
                           key={index}
                           type="button"
-                          class="flex-inherit"
+                          class="flex-inherit padding-0"
                           onClick={() => {
                             dispatch(fetchNotice(item.id))
                           }}
                         //  key={index}
                         >
-                          <div class="flex-column flex-inherit widthp-100 notice-list min-height-100 padding-10 background-transparent-b-10 color-grey border-bottom-white">
+                          <div class="flex-column flex-inherit widthp-100 notice-list padding-10 background-transparent-b-10 color-grey border-bottom-white"> {/* active */}
                             <div class="heightp-100 flex-inherit flex-column">
                               <div class="flex-inherit heightp-50">
                                 <div class="padding-10 background-transparent-b-10">
@@ -111,9 +161,9 @@ const Notice = () => {
                     })
                   )}
             </div>
-            <div class="flex-inherit notice-page-bottom border-top-white height-60 background-transparent-b-15 padding-10 color-grey">
-              <div class="pagination flex-inherit widthp-100 justify-content-end margin-top-5">
-                <div class="flex selectBox">
+            <div class="flex-inherit notice-page-bottom height-60 padding-10 color-grey">
+              <div class="pagination flex-inherit widthp-100 justify-content-end">
+                <div class="flex select selectBox">
                   <select
                     name="slct"
                     id="slct"
@@ -137,11 +187,10 @@ const Notice = () => {
                     })}
                   </select>
                 </div>
-
+                <div class="grow-2"></div>
                 <div class="flex page">
                   <button
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
-                    disabled = {page == 1 }
                     onClick={() => {
                       let prevData = {
                         page: page,
@@ -159,9 +208,7 @@ const Notice = () => {
                   </button>
                   <button
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
-                    disabled = {page == lastPage }
                     onClick={() => {
-                      alert(page)
                       let nextData = {
                         page: page,
                         list_pages: list_pages,
@@ -181,34 +228,22 @@ const Notice = () => {
             </div>
           </div>
           <div class="notice-read border-left flex-inherit flex-column account-height widthp-60 padding-10 scrollable-auto">
-            <div class="message-read-header flex-inherit flex-column align-items-center-inherit">
-              <div class="title flex-inherit grow-2 background-transparent-b-20 widthp-100 padding-15">
-                <span class="flex color-grey align-items-center text-ellipsis">
-                  <span class="margin-left-5 color-white text-ellipsis">
-                    {view.title}
-                  </span>
-                </span>
-              </div>
-              <div class="date flex-inherit grow-2 margin-bottom-10 background-transparent-b-10 widthp-100 padding-15">
-                <span class="color-grey margin-right-15 align-items-center">
-                  <i class="fal fa-calendar-alt margin-right-5"></i>
-                  {view.createdAt == "" ||
-                    view.createdAt == null ||
-                    view.createdAt == undefined
-                    ? ""
-                    : moment(view.createdAt).format("MM / DD HH:mm")}
-                </span>
-                <span class="color-grey align-items-center">
-                  <i class="far fa-user-alt margin-right-5"></i>관리자
-                </span>
-              </div>
-              <div class="flex-column message-read-content min-height-150 padding-10 background-transparent-b-10 color-grey">
-                <div class="text">{view.content}</div>
+            <div class="notice-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
+              <span class="color-white grow-2">공지사항 내용</span>
+              <div>
+                <span class="color-grey padding-right-10"><i class="fal fa-calendar-week"></i>20/10/28 07:00:30</span>
+                <span class="color-grey padding-right-15"><i class="fal fa-user"></i>운영팀</span>
               </div>
             </div>
-
-            <div>
-              <Logo width="130" height="20" />
+            <div class="flex-inherit flex-column">
+              <div class="notice-read-header-title background-transparent-b-10 align-items-center-inherit padding-horizontal-15 border-bottom-rb flex-column border-top">
+                <span class="flex align-items-center height-40 color-grey">제목 : {view.title}</span>
+              </div>
+              <div class="notice-read-content background-transparent-b-5 align-items-center-inherit padding-15 border-bottom-rb flex-column border-top">
+                <div class="color-grey min-height-100">
+                  <span>{view.content}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

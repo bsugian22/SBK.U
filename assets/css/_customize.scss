@@ -596,7 +596,7 @@ select {
    outline: 0;
    box-shadow: none;
    border: 0 !important;
-   background: rgba(0, 0, 0, 0.2); // TODO. 20% 였음 0.2가 맞나?
+   background: rgba(0, 0, 0, 0.2);
    background-image: none;
    &::-ms-expand {
       display: none;
@@ -1467,23 +1467,6 @@ select {
    }
 }
 /* //notice */
-
-/* message */
-.message-wrap {
-   .message-list {
-      &:hover {
-         cursor: pointer;
-         background-color: rgba(0, 0, 0, 0.2);
-         box-shadow: 2px 0px #38b853 inset;
-         transition: 0.2s ease;
-      }
-      &.active {
-         background-color: rgba(0, 0, 0, 0.2) !important;
-         box-shadow: 2px 0px #38b853 inset;
-      }
-   }
-}
-/* //message */
 
 /* inquiry */
 .inquiry-wrap {
@@ -2496,7 +2479,13 @@ select {
    tr.rows {
       cursor:pointer;
       &:hover {
-         box-shadow: 2px 0px 0px 0px #38b853 inset;
+         background-color: rgba(0, 0, 0, 0.1);
+         transition: 0.2s ease;
+         box-shadow: 2px 0px #38b853 inset;
+      }
+      &.active {
+         background-color: rgba(0, 0, 0, 0.1) !important;
+         box-shadow: 2px 0px #38b853 inset;
       }
    }
 }

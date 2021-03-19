@@ -100,15 +100,7 @@ const Withdrawal = () => {
                       dispatch(selectWithdrawalMethod("CASH"));
                     }}
                   >
-                    <span
-                      class={
-                        createWithdrawalStatus == "CASH"
-                          ? "color-green"
-                          : "color-grey"
-                      }
-                    >
-                      <i class="far fa-wallet"></i>현금
-                    </span>
+                    <span class= "color-green"><i class="far fa-wallet"></i>현금</span>
                   </div>
                   <div
                     class="widthp-33 border-right-rb border-bottom-rb height-45 color-green background-transparent-b-5 not-allowed border-top border-left-rw"
@@ -116,15 +108,7 @@ const Withdrawal = () => {
                       dispatch(selectWithdrawalMethod("PAYPAL"));
                     }}
                   >
-                    <span
-                      class={
-                        createWithdrawalStatus == "PAYPAL"
-                          ? "color-green"
-                          : "color-grey"
-                      }
-                    >
-                      <i class="fab fa-paypal"></i>페이팔
-                    </span>
+                    <span class="color-grey"><i class="fab fa-paypal"></i>페이팔</span>
                   </div>
                   <div
                     class="widthp-33  border-bottom-rb height-45 color-green background-transparent-b-5 not-allowed border-top border-left-rw"
@@ -132,15 +116,7 @@ const Withdrawal = () => {
                       dispatch(selectWithdrawalMethod("BITCOIN"));
                     }}
                   >
-                    <span
-                      class={
-                        createWithdrawalStatus == "BITCOIN"
-                          ? "color-green"
-                          : "color-grey"
-                      }
-                    >
-                      <i class="fab fa-bitcoin"></i>비트코인
-                    </span>
+                    <span class="color-grey"><i class="fab fa-bitcoin"></i>비트코인</span>
                   </div>
                 </div>
               </div>
@@ -517,7 +493,6 @@ const Withdrawal = () => {
                     <Link to="#">
                       <button
                         class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == 1 }
                         onClick={() => {
                           let prevData = {
                             page: page,
@@ -537,7 +512,6 @@ const Withdrawal = () => {
                     <Link to="#">
                       <button
                         class="page-right width-40 heightp-100 background-transparent-b-20"
-                        disabled = {page == lastPage }
                         onClick={() => {
                           let nextData = {
                             page: page,

@@ -43,7 +43,7 @@ export default function Message() {
           <div class="message-left-content account-height widthp-50 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
             <div class="flex-inherit flex-column">
               <div class="red-shadow message-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
-                <span class="color-white">개인 필독 메시지</span>
+                <span class="color-white">메세지 리스트</span>
               </div>
             </div>
             <div class="widthp-100 message-content flex-inherit flex-column">
@@ -57,20 +57,29 @@ export default function Message() {
                           dispatch(selectAllMessage());
                         }}
                       >
-                        선택
+                        전체선택
                       </th>
-                      <th class="height-45 color-grey border-top">구분</th>
-                      <th class="height-45 color-grey border-top">내용</th>
+                      <th class="height-45 widthp-50 color-grey border-top">제목</th>
                       <th class="height-45 color-grey border-top">수신시간</th>
+                      <th class="height-45 color-grey border-top">수신여부</th>
                     </tr>
                   </thead>
                   <tbody class="background-transparent-b-5">
                     {message.loading ? (
-                      <tr>
-                        <td colspan="5" class="td-3">
-                          <i class="fa fa-spinner fa-spin fa-2x fa-fw color-grey"></i>
-                        </td>
-                      </tr>
+                      Array(3).fill(1).map(() => {
+                        return (
+                          <tr>
+                            {Array(4).fill(1).map(() => {
+                              return (
+                                <td class="td-3">
+                                  <span></span>
+                                </td>
+                              )
+                            })
+                            }
+                          </tr>
+                        )
+                      })
                     ) : message?.messages?.data?.length == 0 ? (
                       <tr>
                         <td colspan="12" class="color-white">
@@ -86,7 +95,7 @@ export default function Message() {
                             onClick={() => {
                               dispatch(fetchMessage(item.id));
                             }}
-                          >
+                          > {/* active */}
                             <td class="height-45 border-top">
                               <input
                                 type="checkbox"
@@ -106,19 +115,18 @@ export default function Message() {
                               <span class="color-grey">{item.title}</span>
                             </td>
                             <td class="height-45 border-top">
-                              <Link to="#" className="color-white">
-                                {item.content}
-                              </Link>
-                              <span class="color-white padding-5 margin-left-5 background-transparent-b-15">
-                                {item.readAt == null ? "읽지않음" : "read"}
-                              </span>
-                            </td>
-                            <td class="height-45 border-top">
                               <span class="color-grey">
                                 {Moment(item.createdAt).format(
                                   "YY-MM-DD HH:mm "
                                 )}{" "}
                               </span>
+                            </td>
+                            <td class="height-45 border-top">
+                              {item.readAt == null ? (
+                                <span class="color-red">읽지않음</span>
+                              ) : (
+                                <span class="color-green">읽음</span>
+                              )}
                             </td>
                           </tr>
                         );
@@ -131,7 +139,7 @@ export default function Message() {
                 <div class="grow-2 padding-left-10">
                   <button
                     type="button"
-                    class="color-grey padding-10 background-transparent-b-10"
+                    class="color-red padding-10"
                     onClick={() => {
                       let newList = [];
                       message.messages.data.map((o) => {
@@ -150,7 +158,7 @@ export default function Message() {
                     }}
                   >
                     <i class="fal fa-trash-alt"></i>
-                    선택 삭제 DELETE
+                    선택삭제
                   </button>
                 </div>
               </div>
@@ -188,7 +196,6 @@ export default function Message() {
                     <Link to="#">
                       <button
                         class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == 1 }
                         onClick={() => {
                           let prevData = {
                             page: page,
@@ -208,7 +215,6 @@ export default function Message() {
                     <Link to="#">
                       <button
                         class="page-right width-40 heightp-100 background-transparent-b-20"
-                        disabled = {page == lastPage }
                         onClick={() => {
                           let nextData = {
                             page: page,
@@ -232,10 +238,9 @@ export default function Message() {
           </div>
           <div class="message-right-content account-height widthp-50 flex-inherit flex-column padding-left-5 border-left scrollable-auto">
             <div class="flex-inherit flex-column">
-              <div class="message-read-header-title red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
+              <div class="message-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
                 <span class="color-white grow-2">
-                  <i class="fal fa-paperclip color-grey"></i>
-                  전용계좌
+                  메세지 내용
                 </span>
                 <div>
                   <span class="color-grey padding-right-10">
@@ -250,25 +255,13 @@ export default function Message() {
               </div>
             </div>
             <div class="flex-inherit flex-column">
-              <div class="message-read-header-title  background-transparent-b-5 align-items-center-inherit padding-left-15 border-bottom-rb flex-column border-top">
-                <p class="color-grey">
-                  {viewMessage.title == null || viewMessage.title == ""
-                    ? " BET365KOR"
-                    : viewMessage.title}
-                </p>
-                <p class="color-grey">
-                  {viewMessage.content == null || viewMessage.content == ""
-                    ? "안녕하세요. 'BET365KOR' 운영팀입니다."
-                    : viewMessage.content}
-                </p>
+              <div class="message-read-header-title background-transparent-b-10 align-items-center-inherit padding-horizontal-15 border-bottom-rb flex-column border-top">
+                <span class="flex align-items-center height-40 color-grey">제목 : {viewMessage.title}</span>
               </div>
-            </div>
-            <div class="flex-inherit flex-column">
-              <div class="message-read-question height-50 background-transparent-b-10 align-items-center justify-content-end padding-right-15 border-top">
-                <Link to="#">
-                  <i class="fal fa-pencil-alt color-green"></i>
-                  <span class="color-white">이 메시지 문의하기</span>
-                </Link>
+              <div class="message-read-content background-transparent-b-5 align-items-center-inherit padding-15 border-bottom-rb flex-column border-top">
+                <div class="color-grey min-height-100">
+                  <span>{viewMessage.content}</span>
+                </div>
               </div>
             </div>
           </div>

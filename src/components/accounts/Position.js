@@ -62,9 +62,9 @@ export default function Position() {
                     <button
                       type="button"
                       class={
-                        "widthp-100 heightp-100 " + list == "ALL"
-                          ? "color-green"
-                          : "color-white"
+                        list == "ALL"
+                          ? "color-green widthp-100 heightp-100 flex justify-content-center align-items-center widthp-100 heightp-100"
+                          : "color-white widthp-100 heightp-100 flex justify-content-center align-items-center widthp-100 heightp-100"
                       }
                       onClick={() => dispatch(allPositions())}
                     >
@@ -82,9 +82,9 @@ export default function Position() {
                     <button
                       type="button"
                       class={
-                        "widthp-100 heightp-100 " + list == "WAITING"
-                          ? "color-green"
-                          : "color-white"
+                        list == "WAITING"
+                          ? "color-green widthp-100 heightp-100 flex justify-content-center align-items-center widthp-100 heightp-100"
+                          : "color-white widthp-100 heightp-100 flex justify-content-center align-items-center widthp-100 heightp-100"
                       }
                       onClick={() => dispatch(filteredProceedingPosition())}
                     >
@@ -102,9 +102,9 @@ export default function Position() {
                     <button
                       type="button"
                       class={
-                        "widthp-100 heightp-100 " + list == "WINNING"
-                          ? "color-green"
-                          : "color-white"
+                        list == "WINNING"
+                          ? "color-green widthp-100 heightp-100 flex justify-content-center align-items-center widthp-100 heightp-100"
+                          : "color-white widthp-100 heightp-100 flex justify-content-center align-items-center widthp-100 heightp-100"
                       }
                       onClick={() => dispatch(filteredHitPosition())}
                     >
@@ -122,9 +122,9 @@ export default function Position() {
                     <button
                       type="button"
                       class={
-                        "widthp-100 heightp-100 " + list == "DEFEATED"
-                          ? "color-green"
-                          : "color-white"
+                        list == "DEFEATED"
+                          ? "color-green widthp-100 heightp-100 flex justify-content-center align-items-center widthp-100 heightp-100"
+                          : "color-white widthp-100 heightp-100 flex justify-content-center align-items-center widthp-100 heightp-100"
                       }
                       onClick={() => dispatch(filteredAestheticPosition())}
                     >
@@ -337,7 +337,6 @@ export default function Position() {
                     <Link to="#">
                       <button
                         class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == 1 }
                         onClick={() => {
                           let prevData = {
                             page: page,
@@ -357,7 +356,6 @@ export default function Position() {
                     <Link to="#">
                       <button
                         class="page-right width-40 heightp-100 background-transparent-b-20"
-                        disabled = {page == lastPage }
                         onClick={() => {
                           let nextData = {
                             page: page,

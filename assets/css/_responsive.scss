@@ -1118,7 +1118,7 @@ $baseFontSize: 16;
 .notice-loading {
     > div {
     height: 12px;
-    background: linear-gradient(to right, #323854 20%, #303550 50%, #353b58 80%);
+    background: linear-gradient(to right, rgba(255,255,255,0.02) 20%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.02) 80%);
     background-size: 500px 100px;
     border-radius:4px;
     animation: gradient 1s ease infinite;
@@ -1140,7 +1140,7 @@ table {
         // padding-right: 100px;
         span {
           height: 12px;
-          background: linear-gradient(to right, #2a2e46 20%, #2d324b 50%, #2a2e46 80%);
+          background: linear-gradient(to right, rgba(255,255,255,0.02) 20%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.02) 80%);
           background-size: 500px 100px;
           border-radius:4px;
           animation: gradient 1s ease infinite;
@@ -1221,9 +1221,4 @@ div.barloader2 {
     background-size: 500px 100px;
     animation: gradient 1s ease infinite;
   }
-}
-
-.deactivate-pagination {
-  pointer-events: none;
-  color: gray;
 }

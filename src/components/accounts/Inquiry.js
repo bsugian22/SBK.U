@@ -80,18 +80,27 @@ const Inquiry = () => {
                       >
                         전체선택
                       </th>
-                      <th class="height-45 color-grey border-top">구분</th>
-                      <th class="height-45 color-grey border-top">내용</th>
-                      <th class="height-45 color-grey border-top">수신시간</th>
+                      <th class="height-45 widthp-50 color-grey border-top">제목</th>
+                      <th class="height-45 color-grey border-top">작성시간</th>
+                      <th class="height-45 color-grey border-top">답변여부</th>
                     </tr>
                   </thead>
                   <tbody class="background-transparent-b-5">
                     {inquiry.loading ? (
-                      <tr>
-                        <td colspan="5" class="td-3">
-                          <i class="fa fa-spinner fa-spin fa-2x fa-fw color-grey"></i>
-                        </td>
-                      </tr>
+                      Array(3).fill(1).map(() => {
+                        return (
+                          <tr>
+                            {Array(4).fill(1).map(() => {
+                              return (
+                                <td class="td-3">
+                                  <span></span>
+                                </td>
+                              )
+                            })
+                            }
+                          </tr>
+                        )
+                      })
                     ) : inquiry?.inquiries?.data?.length == 0 ? (
                       <tr>
                         <td colspan="12" class="color-white">
@@ -124,15 +133,7 @@ const Inquiry = () => {
                               />
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey">{item.title}</span>
-                            </td>
-                            <td class="height-45 border-top">
-                              <Link to="#" className="color-white">
-                                {item.status}
-                              </Link>
-                              <span class="color-red padding-5 margin-left-5 background-transparent-b-15">
-                                {item.content}
-                              </span>
+                                <span class="color-grey">{item.title}</span>
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-grey">
@@ -141,6 +142,17 @@ const Inquiry = () => {
                                   "YY-MM-DD HH:mm "
                                 )}{" "}
                               </span>
+                            </td>
+                            <td class="height-45 border-top">
+                              {item.status == "PENDING" ? (
+                                <span class="color-grey">답변대기</span>
+                              ) : item.status == "IN_PROGRESS" ? (
+                                <span class="color-yellow">답변중</span>
+                              ) : item.status == "COMPLETED" ? (
+                                <span class="color-green">답변완료</span>
+                              ) : (
+                                ""
+                              )}
                             </td>
                           </tr>
                         );
@@ -154,7 +166,7 @@ const Inquiry = () => {
                   {/* Delete Inquiries */}
                   <button
                     type="button"
-                    class="color-grey padding-10 background-transparent-b-10"
+                    class="color-red padding-10"
                     onClick={() => {
                       let newList = [];
                       inquiry?.inquiries?.data.map((o) => {
@@ -163,7 +175,7 @@ const Inquiry = () => {
                         }
                       });
                       if (newList.length == 0) {
-                        swal.warning("Please select an inquiry to delete.");
+                        swal.warning("");
                       } else {
                         dispatch(listOfToDeleteInquiries());
                         dispatch(deleteInquiriesRequest());
@@ -174,7 +186,7 @@ const Inquiry = () => {
                     }}
                   >
                     <i class="fal fa-trash-alt"></i>
-                    선택 삭제
+                    선택삭제
                   </button>
                 </div>
               </div>
@@ -212,7 +224,6 @@ const Inquiry = () => {
                     <Link to="#">
                       <button
                         class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == 1 }
                         onClick={() => {
                           let prevData = {
                             page: page,
@@ -232,7 +243,6 @@ const Inquiry = () => {
                     <Link to="#">
                       <button
                         class="page-right width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == lastPage }
                         onClick={() => {
                           let nextData = {
                             page: page,

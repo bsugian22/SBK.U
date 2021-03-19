@@ -111,38 +111,31 @@ const Exchange = () => {
                 <div class="account-form-data flex-column flex-inherit">
                   <div class="ac-payment-pbp flex-inherit align-items-center align-items-center-inherit justify-content-center-inherit">
                     <div
-                      class="widthp-50 border-right-rb border-bottom-rb border-top height-45  background-transparent-b-5 active"
+                      class={
+                          createExchangeStatus == "cash"
+                            ? "color-green widthp-50 border-right-rb border-bottom-rb border-top height-45 background-transparent-b-5 active"
+                            : "color-grey widthp-50 border-right-rb border-bottom-rb border-top height-45 background-transparent-b-5"
+                      }
                       onClick={() => {
                         dispatch(selectExchangeMethod("cash"));
                         dispatch(fromCashToCasinoExchange());
                       }}
                     >
-                      <span
-                        class={
-                          createExchangeStatus == "cash"
-                            ? "color-green"
-                            : "color-grey"
-                        }
-                      >
-                        보유금액 -&gt; CASINO
-                      </span>
+                      <span>보유금액 -&gt; CASINO</span>
                     </div>
                     <div
-                      class="widthp-50 border-bottom-rb border-top height-45  background-transparent-b-5 border-left-rw"
+                      class=
+                      {
+                        createExchangeStatus == "casino_cash"
+                          ? "color-green widthp-50 border-bottom-rb border-top height-45 background-transparent-b-5 border-left-rw active"
+                          : "color-grey widthp-50 border-bottom-rb border-top height-45 background-transparent-b-5 border-left-rw"
+                      }
                       onClick={() => {
                         dispatch(selectExchangeMethod("casino_cash"));
                         dispatch(fromCasinoToCashExchange());
                       }}
                     >
-                      <span
-                        class={
-                          createExchangeStatus == "casino_cash"
-                            ? "color-green"
-                            : "color-grey"
-                        }
-                      >
-                        CASINO -&gt; 보유금액
-                      </span>
+                      <span>CASINO -&gt; 보유금액</span>
                     </div>
                   </div>
                   <div class="form-rows flex-inherit">
@@ -437,7 +430,6 @@ const Exchange = () => {
                     <Link to="#">
                       <button
                         class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == 1 }
                         onClick={() => {
                           let prevData = {
                             page: page,
@@ -457,7 +449,6 @@ const Exchange = () => {
                     <Link to="#">
                       <button
                         class="page-right width-40 heightp-100 background-transparent-b-20"
-                        disabled = {page == lastPage }
                         onClick={() => {
                           let nextData = {
                             page: page,
