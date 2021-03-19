@@ -90,10 +90,15 @@ export default function Message() {
                       message?.messages?.data?.map((item, index) => {
                         return (
                           <tr
+                            id={item.id}
                             class="rows"
                             key={index}
                             onClick={() => {
+                              if (viewMessage.id) {
+                                document.getElementById(viewMessage.id).classList.remove("active");
+                              }
                               dispatch(fetchMessage(item.id));
+                              document.getElementById(item.id).classList.add("active"); 
                             }}
                           > {/* active */}
                             <td class="height-45 border-top">
@@ -196,7 +201,7 @@ export default function Message() {
                     <Link to="#">
                       <button
                         class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == 1 }
+                        disabled={page == 1}
                         onClick={() => {
                           let prevData = {
                             page: page,
@@ -216,7 +221,7 @@ export default function Message() {
                     <Link to="#">
                       <button
                         class="page-right width-40 heightp-100 background-transparent-b-20"
-                        disabled = {page == lastPage }
+                        disabled={page == lastPage}
                         onClick={() => {
                           let nextData = {
                             page: page,

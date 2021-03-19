@@ -112,6 +112,7 @@ const inquiryReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         isViewing: true,
+        viewingId:action.payload.data.id
       };
     case types.FETCH_INQUIRY_FAILURE:
       return {

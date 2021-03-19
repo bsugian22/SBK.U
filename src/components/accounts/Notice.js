@@ -130,12 +130,17 @@ const Notice = () => {
                           key={index}
                           type="button"
                           class="flex-inherit padding-0"
-                          onClick={() => {
+                          onClick={(e) => {
+                            if(view.id){
+                              document.getElementById(view.id).classList.remove("active");
+                            }
                             dispatch(fetchNotice(item.id))
+                            document.getElementById(item.id).classList.add("active");
+                            
                           }}
                         //  key={index}
                         >
-                          <div class="flex-column flex-inherit widthp-100 notice-list padding-10 background-transparent-b-10 color-grey border-bottom-white"> {/* active */}
+                          <div id={item.id} class="flex-column flex-inherit widthp-100 notice-list padding-10 background-transparent-b-10 color-grey border-bottom-white "> {/* active */}
                             <div class="heightp-100 flex-inherit flex-column">
                               <div class="flex-inherit heightp-50">
                                 <div class="padding-10 background-transparent-b-10">

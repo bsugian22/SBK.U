@@ -50,9 +50,9 @@ const Inquiry = () => {
 
   const pusher = () => {
     if (user.isAuth) {
-    echo.private(`users.${user.member.id}`).listen('InquiryUpdated', (e) => {
-      dispatch(setInquiries({ page: page, per_page: per_page }));
-    })
+      echo.private(`users.${user.member.id}`).listen('InquiryUpdated', (e) => {
+        dispatch(setInquiries({ page: page, per_page: per_page }));
+      })
     }
   }
 
@@ -112,9 +112,14 @@ const Inquiry = () => {
                         return (
                           <tr
                             class="rows"
+                            id = { item.id }
                             key={index}
                             onClick={() => {
+                              if (inquiry.viewingId) {
+                                document.getElementById(inquiry.viewingId).classList.remove("active");
+                              }
                               dispatch(fetchInquiry(item.id));
+                              document.getElementById(item.id).classList.add("active");
                             }}
                           >
                             <td class="height-45 border-top">
@@ -133,7 +138,7 @@ const Inquiry = () => {
                               />
                             </td>
                             <td class="height-45 border-top">
-                                <span class="color-grey">{item.title}</span>
+                              <span class="color-grey">{item.title}</span>
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-grey">
@@ -224,7 +229,7 @@ const Inquiry = () => {
                     <Link to="#">
                       <button
                         class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == 1 }
+                        disabled={page == 1}
                         onClick={() => {
                           let prevData = {
                             page: page,
@@ -244,7 +249,7 @@ const Inquiry = () => {
                     <Link to="#">
                       <button
                         class="page-right width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == lastPage }
+                        disabled={page == lastPage}
                         onClick={() => {
                           let nextData = {
                             page: page,
@@ -290,18 +295,18 @@ const Inquiry = () => {
                     let title = e.target.value;
                     dispatch(changeInquiryTitle(title));
                   }}
-                  disabled = {inquiry.isViewing}
+                  disabled={inquiry.isViewing}
                 />
               </div>
               <div class="message-form-write flex-column flex-inherit">
                 {/* CONTENT */}
                 <CKEditor
-                    editor={ ClassicEditor }
-                    onChange={ ( event, editor ) => {
-                        const content = editor.getData();
-                        dispatch(changeInquiryContent(content));
-                        console.log( { event, editor, content } );
-                    } }
+                  editor={ClassicEditor}
+                  onChange={(event, editor) => {
+                    const content = editor.getData();
+                    dispatch(changeInquiryContent(content));
+                    console.log({ event, editor, content });
+                  }}
                 />
               </div>
               <div class="message-form-btn margin-top-10 flex-inherit">
@@ -313,7 +318,7 @@ const Inquiry = () => {
                     onClick={() => {
                       dispatch(resetCreateInquiry());
                     }}
-                    hidden = {inquiry.isViewing}
+                    hidden={inquiry.isViewing}
                   >
                     <i class="far fa-times color-red"></i>
                     <span class="color-grey">취소</span>
@@ -331,7 +336,7 @@ const Inquiry = () => {
                     onClick={() => {
                       dispatch(createInquiryAction(createInquiry));
                     }}
-                    hidden = {inquiry.isViewing}
+                    hidden={inquiry.isViewing}
                   >
                     <i class="fal fa-share color-white"></i>
                     <span class="color-white">보내기 </span>
