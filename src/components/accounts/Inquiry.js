@@ -26,6 +26,8 @@ import { nextPagePosition } from "../../redux/accounts/position/positionActions"
 import echo from '../../plugins/echo'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Logo from "../layouts/Logo";
+import moment from "moment";
 
 const Inquiry = () => {
   const dispatch = useDispatch();
@@ -112,7 +114,7 @@ const Inquiry = () => {
                         return (
                           <tr
                             class="rows"
-                            id = { item.id }
+                            id={item.id}
                             key={index}
                             onClick={() => {
                               if (inquiry.viewingId) {
@@ -279,10 +281,22 @@ const Inquiry = () => {
               </div>
             </div>
           </div>
-          <div class="message-right-content account-height widthp-50 flex-inherit flex-column padding-left-5 border-left scrollable-auto">
-            <div class="flex-inherit flex-column">
-              <div class="red-shadow message-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
-                <span class="color-white">문의하기</span>
+          <div class="message-right-content account-height widthp-50 flex-inherit flex-column padding-left-5 border-left scrollable-auto" hidden={inquiry.viewingId == null ? true : false}>
+            <div class="flex-inherit flex-column" >
+              <div class="message-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
+                <span class="color-white" hidden={!inquiry.isViewing}>view</span>
+                <div style={{marginLeft:"50%"}} hidden={!inquiry.isViewing}>
+                  <span class="color-grey padding-right-10">
+                    <i class="fal fa-calendar-week"></i>
+                    {moment(createInquiry.createdAt).format("YY/MM/DD HH:mm")}
+                  </span>
+                  <span class="color-grey padding-right-15">
+                    <i class="fal fa-user"></i>
+                    운영팀
+                  </span>
+                </div>
+
+                <span class="color-white" hidden={inquiry.isViewing}>apply</span>
               </div>
               <div class="message-title-write flex-column flex-inherit">
                 {/* TITLE */}
@@ -298,7 +312,7 @@ const Inquiry = () => {
                   disabled={inquiry.isViewing}
                 />
               </div>
-              <div class="message-form-write flex-column flex-inherit">
+              <div class="message-form-write flex-column flex-inherit" hidden={inquiry.isViewing}>
                 {/* CONTENT */}
                 <CKEditor
                   editor={ClassicEditor}
@@ -308,6 +322,11 @@ const Inquiry = () => {
                     console.log({ event, editor, content });
                   }}
                 />
+              </div>
+              <div hidden={!inquiry.isViewing} class="message-read-content background-transparent-b-5 align-items-center-inherit padding-15 border-bottom-rb flex-column border-top">
+                <div class="color-grey min-height-100">
+                  <span>{createInquiry.content}</span>
+                </div>
               </div>
               <div class="message-form-btn margin-top-10 flex-inherit">
                 <div class="grow-2">
@@ -344,6 +363,9 @@ const Inquiry = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div class="align-items-center  margin-right-5" style={{ marginLeft: "20%" }} hidden={inquiry.viewingId == null ? false : true}>
+            <Logo width="120" height="30" />
           </div>
         </div>
       </div>

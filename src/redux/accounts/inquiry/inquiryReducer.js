@@ -26,6 +26,7 @@ const initialState = {
     lastPage: 0,
   },
   isViewing: false,
+  viewingId: null,
 };
 
 const inquiryReducer = (state = initialState, action) => {
@@ -42,6 +43,8 @@ const inquiryReducer = (state = initialState, action) => {
         openModal: false,
         closeModal: false,
         createInquiryStatus: "cash",
+        viewingId: null,
+        isViewing: false,
       };
     case types.FETCH_INQUIRIES_SUCCESS:
       let newData = {
@@ -112,7 +115,7 @@ const inquiryReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         isViewing: true,
-        viewingId:action.payload.data.id
+        viewingId: action.payload.data.id
       };
     case types.FETCH_INQUIRY_FAILURE:
       return {
@@ -215,6 +218,11 @@ const inquiryReducer = (state = initialState, action) => {
       return {
         ...state,
         createInquiry: { ...state.createInquiry, category: action.payload },
+      };
+    case types.CHANGE_INQUIRY_CREATED_AT:
+      return {
+        ...state,
+        createInquiry: { ...state.createInquiry, createdAt: action.payload },
       };
     case types.CHANGE_INQUIRY_IDS:
       return {
@@ -339,7 +347,7 @@ const inquiryReducer = (state = initialState, action) => {
     case types.RESET_CREATE_INQUIRY:
       return {
         ...state,
-        isViewing : false,
+        isViewing: false,
         createInquiry: {
           title: "",
           content: "",

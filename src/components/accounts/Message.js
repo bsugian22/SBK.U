@@ -20,6 +20,7 @@ import {
 
 import sweetalert from "../../plugins/sweetalert";
 import Logo from "../layouts/Logo";
+import moment from "moment";
 export default function Message() {
   let message = useSelector((state) => state.message);
   let viewMessage = useSelector((state) => state.message.message);
@@ -253,7 +254,7 @@ export default function Message() {
                 <div>
                   <span class="color-grey padding-right-10">
                     <i class="fal fa-calendar-week"></i>
-                    20/10/28 07:00:30
+                    {moment(viewMessage.createdAt).format("YY/MM/DD HH:mm")}
                   </span>
                   <span class="color-grey padding-right-15">
                     <i class="fal fa-user"></i>

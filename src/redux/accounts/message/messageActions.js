@@ -204,7 +204,7 @@ export const fetchMessage = (id) => {
     axios
       .get(`/api/messages/`+id)
       .then((response) => {
-        const message = response.data;
+        const message = camelize(response.data) ;
         dispatch(fetchMessageSuccess(message));
         dispatch(readMessageReceived(message.data));
       })

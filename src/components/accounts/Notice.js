@@ -239,7 +239,7 @@ const Notice = () => {
             <div class="notice-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
               <span class="color-white grow-2">공지사항 내용</span>
               <div>
-                <span class="color-grey padding-right-10"><i class="fal fa-calendar-week"></i>{moment(view.createdAt).format("MM / DD HH:mm")}</span>
+                <span class="color-grey padding-right-10"><i class="fal fa-calendar-week"></i>{moment(view.createdAt).format("YY/MM/DD HH:mm")}</span>
                 <span class="color-grey padding-right-15"><i class="fal fa-user"></i>운영팀</span>
               </div>
             </div>
