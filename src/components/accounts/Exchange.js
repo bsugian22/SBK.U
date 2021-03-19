@@ -437,6 +437,7 @@ const Exchange = () => {
                     <Link to="#">
                       <button
                         class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
+                        disabled = {page == 1 }
                         onClick={() => {
                           let prevData = {
                             page: page,
@@ -456,6 +457,7 @@ const Exchange = () => {
                     <Link to="#">
                       <button
                         class="page-right width-40 heightp-100 background-transparent-b-20"
+                        disabled = {page == lastPage }
                         onClick={() => {
                           let nextData = {
                             page: page,

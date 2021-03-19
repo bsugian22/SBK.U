@@ -141,6 +141,7 @@ const Notice = () => {
                 <div class="flex page">
                   <button
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
+                    disabled = {page == 1 }
                     onClick={() => {
                       let prevData = {
                         page: page,
@@ -158,7 +159,9 @@ const Notice = () => {
                   </button>
                   <button
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                    disabled = {page == lastPage }
                     onClick={() => {
+                      alert(page)
                       let nextData = {
                         page: page,
                         list_pages: list_pages,

@@ -39,6 +39,14 @@ const Sports = (props) => {
     dispatch(fetchSportsdetails());
     dispatch(refreshToken())
 
+    socket.onopen = function (e) {
+      console.log("connected")
+      const data = {
+        type: "book_match",
+        match_id: 26470604
+      }
+      socket.send(JSON.stringify(data));
+    };
 
     socket.onmessage = function (event) {
       event.data.text().then((data) => {
@@ -87,14 +95,12 @@ const Sports = (props) => {
       dispatch(fetchSportsdetail(item.id));
       context.actions.setdetailMenu(true);
       console.log(item.id)
-      socket.onopen = function (e) {
-        alert("sending")
-        const data = {
-          type: "book_match",
-          match_id: item.id
-        }
-        socket.send(JSON.stringify(data));
-      };
+      alert("sending")
+      const data = {
+        type: "book_match",
+        match_id: item.id
+      }
+      socket.send(JSON.stringify(data));
     }
   };
 

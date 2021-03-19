@@ -1222,3 +1222,8 @@ div.barloader2 {
     animation: gradient 1s ease infinite;
   }
 }
+
+.deactivate-pagination {
+  pointer-events: none;
+  color: gray;
+}

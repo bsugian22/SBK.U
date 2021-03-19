@@ -371,10 +371,10 @@ const noticeReducer = (state = initialState, action) => {
         viewNotice: action.payload,
       };
     case types.SET_NOTICE_PAGE:
-      var total = state.notices.total;
+      var lastPage = state.notices.lastPage;
       state.notices.list_pages = [];
-      if (total != null) {
-        for (let index = 1; index < Math.ceil(total / 15) + 1; index++) {
+      if (lastPage != null) {
+        for (let index = 1; index <= lastPage; index++) {
           state.notices.list_pages.push(index);
         }
       }
