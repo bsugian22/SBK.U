@@ -96,11 +96,9 @@ export default function Message() {
                             class="rows"
                             key={index}
                             onClick={() => {
-                              if (viewMessage.id) {
-                                message.messages.data.map((data, index) => {
-                                  document.getElementById(data.id).classList.remove("active");
-                                })
-                              }
+                              message.messages.data.map((data, index) => {
+                                document.getElementById(data.id).classList.remove("active");
+                              })
                               dispatch(fetchMessage(item.id));
                               document.getElementById(item.id).classList.add("active");
                             }}
@@ -276,7 +274,7 @@ export default function Message() {
               </div>
             </div>
           </div>
-          <div class="align-items-center  margin-right-5" style={{ marginLeft: "20%" }} hidden={viewMessage.id == 0? false : true}>
+          <div class="align-items-center  margin-right-5" style={{ marginLeft: "20%" }} hidden={viewMessage.id == 0 ? false : true}>
             <Logo width="120" height="30" />
           </div>
         </div>

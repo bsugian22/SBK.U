@@ -117,11 +117,9 @@ const Inquiry = () => {
                             id={item.id}
                             key={index}
                             onClick={() => {
-                              if (inquiry.viewingId) {
                                 inquiry.inquiries.data.map((data, index) => {
                                   document.getElementById(data.id).classList.remove("active");
                                 })
-                              }
                               dispatch(fetchInquiry(item.id));
                               document.getElementById(item.id).classList.add("active");
                             }}

@@ -132,11 +132,9 @@ const Notice = () => {
                       type="button"
                       class="flex-inherit padding-0"
                       onClick={(e) => {
-                        if (view.id) {
-                          notice.notices.data.map((data, index) => {
-                            document.getElementById(data.id).classList.remove("active");
-                          })
-                        }
+                        notice.notices.data.map((data, index) => {
+                          document.getElementById(data.id).classList.remove("active");
+                        })
                         dispatch(fetchNotice(item.id))
                         document.getElementById(item.id).classList.add("active");
 
@@ -257,8 +255,8 @@ const Notice = () => {
             </div>
           </div>
 
-          <div class="align-items-center  margin-right-5" style={{marginLeft: "25%"}} hidden={view.id ? true : false}>
-            <Logo width="120" height="30"  />
+          <div class="align-items-center  margin-right-5" style={{ marginLeft: "25%" }} hidden={view.id ? true : false}>
+            <Logo width="120" height="30" />
           </div>
         </div>
       </div>
