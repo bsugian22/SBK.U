@@ -19,6 +19,7 @@ import {
 } from "../../redux/accounts/message/messageActions";
 
 import sweetalert from "../../plugins/sweetalert";
+import Logo from "../layouts/Logo";
 export default function Message() {
   let message = useSelector((state) => state.message);
   let viewMessage = useSelector((state) => state.message.message);
@@ -98,7 +99,7 @@ export default function Message() {
                                 document.getElementById(viewMessage.id).classList.remove("active");
                               }
                               dispatch(fetchMessage(item.id));
-                              document.getElementById(item.id).classList.add("active"); 
+                              document.getElementById(item.id).classList.add("active");
                             }}
                           > {/* active */}
                             <td class="height-45 border-top">
@@ -243,7 +244,7 @@ export default function Message() {
               </div>
             </div>
           </div>
-          <div class="message-right-content account-height widthp-50 flex-inherit flex-column padding-left-5 border-left scrollable-auto">
+          <div class="message-right-content account-height widthp-50 flex-inherit flex-column padding-left-5 border-left scrollable-auto" hidden={viewMessage.id == 0 ? true : false}>
             <div class="flex-inherit flex-column">
               <div class="message-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
                 <span class="color-white grow-2">
@@ -271,6 +272,9 @@ export default function Message() {
                 </div>
               </div>
             </div>
+          </div>
+          <div class="align-items-center  margin-right-5" style={{ marginLeft: "20%" }} hidden={viewMessage.id == 0? false : true}>
+            <Logo width="120" height="30" />
           </div>
         </div>
       </div>

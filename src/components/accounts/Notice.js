@@ -16,6 +16,7 @@ import {
   viewNotice,
 } from "../../redux/accounts/notice/noticeAction";
 import { CREATE_GAMESVIEW_FAILURE } from "../../redux/gamesview/gamesviewTypes";
+import Logo from "../layouts/Logo";
 const Notice = () => {
   const dispatch = useDispatch();
   const swal = new sweetalert();
@@ -47,7 +48,7 @@ const Notice = () => {
                     <div class="flex-inherit heightp-50">
                       <div class="padding-10 background-transparent-b-10 flex align-items-center">
                         <div class="notice-loading width-80">
-                         <div></div>
+                          <div></div>
                         </div>
                       </div>
                       <div class="padding-10 grow-2 justify-content-end">
@@ -124,47 +125,47 @@ const Notice = () => {
                   <span>게시글이 없습니다.</span>
                 </div>
               ) : (
-                    notice?.notices?.data?.map((item, index) => {
-                      return (
-                        <button
-                          key={index}
-                          type="button"
-                          class="flex-inherit padding-0"
-                          onClick={(e) => {
-                            if(view.id){
-                              document.getElementById(view.id).classList.remove("active");
-                            }
-                            dispatch(fetchNotice(item.id))
-                            document.getElementById(item.id).classList.add("active");
-                            
-                          }}
-                        //  key={index}
-                        >
-                          <div id={item.id} class="flex-column flex-inherit widthp-100 notice-list padding-10 background-transparent-b-10 color-grey border-bottom-white "> {/* active */}
-                            <div class="heightp-100 flex-inherit flex-column">
-                              <div class="flex-inherit heightp-50">
-                                <div class="padding-10 background-transparent-b-10">
-                                  <span class="color-grey">{item.category}</span>
-                                </div>
-                                <div class="padding-10 grow-2 justify-content-end">
-                                  <span class="color-grey">
-                                    {moment(item.createdAt).format("MM / DD HH:mm")}
-                                  </span>
-                                </div>
-                              </div>
-                              <div class="flex-inherit heightp-50 align-items-center">
-                                <div class="padding-10 text-ellipsis">
-                                  <span class="color-white text-ellipsis">
-                                    {item.title}
-                                  </span>
-                                </div>
-                              </div>
+                notice?.notices?.data?.map((item, index) => {
+                  return (
+                    <button
+                      key={index}
+                      type="button"
+                      class="flex-inherit padding-0"
+                      onClick={(e) => {
+                        if (view.id) {
+                          document.getElementById(view.id).classList.remove("active");
+                        }
+                        dispatch(fetchNotice(item.id))
+                        document.getElementById(item.id).classList.add("active");
+
+                      }}
+                    //  key={index}
+                    >
+                      <div id={item.id} class="flex-column flex-inherit widthp-100 notice-list padding-10 background-transparent-b-10 color-grey border-bottom-white "> {/* active */}
+                        <div class="heightp-100 flex-inherit flex-column">
+                          <div class="flex-inherit heightp-50">
+                            <div class="padding-10 background-transparent-b-10">
+                              <span class="color-grey">{item.category}</span>
+                            </div>
+                            <div class="padding-10 grow-2 justify-content-end">
+                              <span class="color-grey">
+                                {moment(item.createdAt).format("MM / DD HH:mm")}
+                              </span>
                             </div>
                           </div>
-                        </button>
-                      );
-                    })
-                  )}
+                          <div class="flex-inherit heightp-50 align-items-center">
+                            <div class="padding-10 text-ellipsis">
+                              <span class="color-white text-ellipsis">
+                                {item.title}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })
+              )}
             </div>
             <div class="flex-inherit notice-page-bottom height-60 padding-10 color-grey">
               <div class="pagination flex-inherit widthp-100 justify-content-end">
@@ -196,7 +197,7 @@ const Notice = () => {
                 <div class="flex page">
                   <button
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
-                    disabled = {page == 1 }
+                    disabled={page == 1}
                     onClick={() => {
                       let prevData = {
                         page: page,
@@ -214,7 +215,7 @@ const Notice = () => {
                   </button>
                   <button
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
-                    disabled = {page == lastPage }
+                    disabled={page == lastPage}
                     onClick={() => {
                       let nextData = {
                         page: page,
@@ -234,11 +235,11 @@ const Notice = () => {
               </div>
             </div>
           </div>
-          <div class="notice-read border-left flex-inherit flex-column account-height widthp-60 padding-10 scrollable-auto">
+          <div class="notice-read border-left flex-inherit flex-column account-height widthp-60 padding-10 scrollable-auto" hidden={view.id ? false : true}>
             <div class="notice-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
               <span class="color-white grow-2">공지사항 내용</span>
               <div>
-                <span class="color-grey padding-right-10"><i class="fal fa-calendar-week"></i>20/10/28 07:00:30</span>
+                <span class="color-grey padding-right-10"><i class="fal fa-calendar-week"></i>{moment(view.createdAt).format("MM / DD HH:mm")}</span>
                 <span class="color-grey padding-right-15"><i class="fal fa-user"></i>운영팀</span>
               </div>
             </div>
@@ -252,6 +253,10 @@ const Notice = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="align-items-center  margin-right-5" style={{marginLeft: "25%"}} hidden={view.id ? true : false}>
+            <Logo width="120" height="30"  />
           </div>
         </div>
       </div>

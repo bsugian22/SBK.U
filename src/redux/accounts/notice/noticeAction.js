@@ -259,7 +259,7 @@ export const fetchNotice = (id) => {
     axios
       .get(`/api/notices/`+id)
       .then((response) => {
-        const notice = response.data;
+        const notice = camelize( response.data);
         // dispatch(setNoticesuccess(notice));
         dispatch(viewNotice(notice.data));
       })
