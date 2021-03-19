@@ -347,6 +347,7 @@ const inquiryReducer = (state = initialState, action) => {
     case types.RESET_CREATE_INQUIRY:
       return {
         ...state,
+        viewingId: 0,
         isViewing: false,
         createInquiry: {
           title: "",

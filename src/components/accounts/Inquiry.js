@@ -118,7 +118,9 @@ const Inquiry = () => {
                             key={index}
                             onClick={() => {
                               if (inquiry.viewingId) {
-                                document.getElementById(inquiry.viewingId).classList.remove("active");
+                                inquiry.inquiries.data.map((data, index) => {
+                                  document.getElementById(data.id).classList.remove("active");
+                                })
                               }
                               dispatch(fetchInquiry(item.id));
                               document.getElementById(item.id).classList.add("active");

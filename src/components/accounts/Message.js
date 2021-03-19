@@ -97,7 +97,9 @@ export default function Message() {
                             key={index}
                             onClick={() => {
                               if (viewMessage.id) {
-                                document.getElementById(viewMessage.id).classList.remove("active");
+                                message.messages.data.map((data, index) => {
+                                  document.getElementById(data.id).classList.remove("active");
+                                })
                               }
                               dispatch(fetchMessage(item.id));
                               document.getElementById(item.id).classList.add("active");

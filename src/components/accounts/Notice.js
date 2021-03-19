@@ -133,7 +133,9 @@ const Notice = () => {
                       class="flex-inherit padding-0"
                       onClick={(e) => {
                         if (view.id) {
-                          document.getElementById(view.id).classList.remove("active");
+                          notice.notices.data.map((data, index) => {
+                            document.getElementById(data.id).classList.remove("active");
+                          })
                         }
                         dispatch(fetchNotice(item.id))
                         document.getElementById(item.id).classList.add("active");
