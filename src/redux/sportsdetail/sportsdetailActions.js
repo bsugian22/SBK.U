@@ -178,18 +178,6 @@ const sportWebSocket = (match_id) => {
         const market = JSON.parse(data)
         // console.log(market)
         dispatch(Sportsdetails(market));
-        console.log("match_id:" + market.match_id)
-        market.markets.map((data, index) => {
-          let specifier = "";
-          data.specifier ? specifier = "may laman" : specifier = " wlang laman"
-          console.log("market_id[type_id]: " + data.market_id + " - spec: " + specifier)
-
-          data.outcomes.map((data, index) => {
-            console.log("outcome_id[outcomes->name->id]: " + data.outcome_id + " - value of odds:" + data.odds)
-          })
-
-        })
-
       });
     };
     // console.log(sportsss)

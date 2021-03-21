@@ -18,12 +18,23 @@ const initialState = {
 const sportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_SPORTSDETAILS:
+      const market = action.payload.market;
       console.log(state)
       console.log(action.payload)
-      if(state.data.detail == action.payload.market.match_id){
+      console.log("match_id:" + market.match_id)
+      market.markets.map((data, index) => {
+        let specifier = "";
+        data.specifier ? specifier = "may laman" : specifier = " wlang laman"
+        console.log("market_id[type_id]: " + data.market_id + " - spec: " + specifier)
+        data.outcomes.map((data, index) => {
+          console.log("outcome_id[outcomes->name->id]: " + data.outcome_id + " - value of odds:" + data.odds)
+        })
+      })
+      if (state.data.detail == market.match_id) {
         // const market_data = state.data.details_data.find(x => x.id === '45'); // find specific data 
+        console.log("match_id:" + market.match_id)
         console.log("market active");
-      }else {
+      } else {
         console.log("no market active");
       }
       return {
