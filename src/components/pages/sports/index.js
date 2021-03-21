@@ -242,12 +242,13 @@ const Sports = (props) => {
                             </div>
                             <div class="league padding-horizontal-5">
                               <span class="color-grey text-ellipsis">
-                                {match.tournament.title["ko"]}
+                                {match.tournament.title["ko"] }
+                                
                               </span>
                             </div>
                             <div class="team padding-horizontal-5">
                               <span class="color-grey text-ellipsis">
-                                {match.homeTeam.name["ko"]}
+                                {match.homeTeam.name["ko"]} 
                                 <span class="color-twhite margin-horizontal-5">
                                   vs
                                   </span>
@@ -264,7 +265,7 @@ const Sports = (props) => {
                                       <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{match.homeTeam.name["ko"]}</span></div>
                                       <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
                                         {/*odds-change*/}<span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> {/*odds-change end*/}
-                                        <span class="color-grey text-ellipsis">{match.market.outcomes[0].odds}</span>
+                                        <span class="color-grey text-ellipsis">{match.market.outcomes[0].odds} {match.id+"_"+match.market.id+"_"+match.market.type+"_"+match.market.outcomes[0].id}</span>
                                       </div>
                                     </div>
                                   </div>
@@ -273,7 +274,7 @@ const Sports = (props) => {
                                       <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">무승부</span></div>
                                       <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
                                         {/*odds-change*/}<span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span>{/*odds-change end*/}
-                                        <span class="color-grey text-ellipsis">{match.market.outcomes[1].odds}</span>
+                                        <span class="color-grey text-ellipsis">{match.market.outcomes[1].odds} {match.id+"_"+match.market.id+"_"+match.market.outcomes[1].id}</span>
                                       </div>
                                     </div>
                                   </div>
@@ -282,7 +283,7 @@ const Sports = (props) => {
                                       <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{match.awayTeam.name["ko"]}</span></div>
                                       <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
                                         {/*odds-change*/}<span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>{/*odds-change end*/}
-                                        <span class="color-grey text-ellipsis">{match.market.outcomes[2].odds}</span>
+                                        <span class="color-grey text-ellipsis">{match.market.outcomes[2].odds} {match.id+"_"+match.market.id+"_"+match.market.outcomes[2].id}</span>
                                       </div>
                                     </div>
                                   </div>
@@ -589,7 +590,7 @@ const Sports = (props) => {
                         <div class="flex detail widthp-100 flex-column padding-horizontal-15 padding-vertical-10">
                           <div class="flex">
                             <span class="color-white">
-                              {match.homeTeam.name["ko"]}
+                              {match.homeTeam.name["ko"]} 
                             </span>
                           </div>
                           <div class="flex">

@@ -17,6 +17,18 @@ const initialState = {
 
 const sportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.GET_SPORTSDETAILS:
+      console.log(state)
+      console.log(action.payload)
+      if(state.data.detail == action.payload.market.match_id){
+        // const market_data = state.data.details_data.find(x => x.id === '45'); // find specific data 
+        console.log("market active");
+      }else {
+        console.log("no market active");
+      }
+      return {
+        ...state,
+      };
     case types.FETCH_SPORTSDETAILS_REQUEST:
       return {
         ...state,
