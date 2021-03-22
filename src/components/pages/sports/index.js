@@ -35,7 +35,7 @@ const Sports = (props) => {
   useEffect(() => {
     isSubscribed = true;
     // fetch();
-    dispatch(fetchSportsdetails());
+    // dispatch(fetchSportsdetails());
     dispatch(refreshToken())
 
     return () => {
@@ -233,7 +233,7 @@ const Sports = (props) => {
                                       <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{match.homeTeam.name["ko"]}</span></div>
                                       <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
                                         {/*odds-change*/}<span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> {/*odds-change end*/}
-                                        <span class="color-grey text-ellipsis">{match.market.outcomes[0].odds} {match.id+"_"+match.market.id+"_"+match.market.type+"_"+match.market.outcomes[0].id}</span>
+                                        <span class="color-grey text-ellipsis">{match.market.outcomes[0].odds} </span>
                                       </div>
                                     </div>
                                   </div>
@@ -242,7 +242,7 @@ const Sports = (props) => {
                                       <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">무승부</span></div>
                                       <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
                                         {/*odds-change*/}<span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span>{/*odds-change end*/}
-                                        <span class="color-grey text-ellipsis">{match.market.outcomes[1].odds} {match.id+"_"+match.market.id+"_"+match.market.outcomes[1].id}</span>
+                                        <span class="color-grey text-ellipsis">{match.market.outcomes[1].odds}</span>
                                       </div>
                                     </div>
                                   </div>
@@ -251,7 +251,7 @@ const Sports = (props) => {
                                       <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{match.awayTeam.name["ko"]}</span></div>
                                       <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
                                         {/*odds-change*/}<span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>{/*odds-change end*/}
-                                        <span class="color-grey text-ellipsis">{match.market.outcomes[2].odds} {match.id+"_"+match.market.id+"_"+match.market.outcomes[2].id}</span>
+                                        <span class="color-grey text-ellipsis">{match.market.outcomes[2].odds} </span>
                                       </div>
                                     </div>
                                   </div>

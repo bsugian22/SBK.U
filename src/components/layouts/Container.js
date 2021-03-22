@@ -11,7 +11,7 @@ import { connect, useSelector, useDispatch } from "react-redux";
 
 const Container = (props) => {
    let isSubscribed = true
-   const { preferences, setPreferences, setUser } = props
+   const { preferences, setPreferences, setUser, setSports } = props
    const model = new preferencesModel()
    let user = useSelector((state) => state.user.user);
    const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Container = (props) => {
    useEffect(() => {
       preferencesFetch()
       pusher();
-
+      setSports();
       return () => {
          isSubscribed = false
       }

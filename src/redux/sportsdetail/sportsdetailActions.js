@@ -1,6 +1,6 @@
 import * as types from "./sportsdetailTypes";
 import axios from "../../plugins/axios";
-import { camelize, snakelize } from "../../helpers/object";
+import { camelize, snakelize, socket } from "../../helpers/object";
 import { chain } from "lodash";
 import moment from "moment";
 import { connect, useDispatch, useSelector } from "react-redux";
@@ -141,7 +141,7 @@ export const fetchSportsdetails = (params) => {
           // console.log(data.id)
           matches.push(data.id)
         })
-        sportWebSocket(matches);
+        dispatch(sportWebSocket(matches));
 
         var data = chain(sportsdetails.data)
           .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
@@ -153,7 +153,6 @@ export const fetchSportsdetails = (params) => {
         sportsdetails.detail_data = null
 
         dispatch(fetchSportsdetailsSuccess(sportsdetails))
-        // dispatch(Sportsdetails);
 
       }).catch(error => {
         const errorMsg = error.message;
@@ -164,10 +163,11 @@ export const fetchSportsdetails = (params) => {
 
 
 
-const sportWebSocket = (matches) => {
+export const sportWebSocket = (matches) => {
 
-  let socket = new WebSocket("wss://io.vosa.dev");
-  socket.onopen = function (e) {
+  // alert(socket.OPEN)
+  return (dispatch) => {
+    // socket.onopen = function (e) {
     matches.map((data, index) => {
       console.log("sending:" + data)
       const match_data = {
@@ -176,37 +176,33 @@ const sportWebSocket = (matches) => {
       }
       socket.send(JSON.stringify(match_data));
     })
-  };
-
-  socket.onmessage = function (event) {
-    return (dispatch) => {
+    // };
+    socket.onmessage = function (event) {
       event.data.text().then((data) => {
         const market = JSON.parse(data)
         // console.log(market)
-        dispatch(Sportsdetails(market));
+        dispatch(getSportsDetails(market));
       });
     };
-    // console.log(sportsss)
-  };
 
-  socket.onclose = function (event) {
-    if (event.wasClean) {
-      alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-    } else {
-      // e.g. server process killed or network down
-      // event.code is usually 1006 in this case
-      alert('[close] Connection died');
-    }
-  };
 
-  socket.onerror = function (error) {
-    alert(`[error] ${error.message}`);
-  };
+    socket.onclose = function (event) {
+      if (event.wasClean) {
+        console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+      } else {
+        // e.g. server process killed or network down
+        // event.code is usually 1006 in this case
+        console.log('[close] Connection died');
+      }
+    };
+
+    socket.onerror = function (error) {
+      console.log(`[error] ${error.message}`);
+    };
+
+  }
 };
 
-const updateSportsDetailsData = (data) => {
-
-};
 
 export const fetchSportsdetail = (matchId) => {
   return (dispatch) => {

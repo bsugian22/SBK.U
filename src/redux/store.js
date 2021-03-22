@@ -8,6 +8,7 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 import * as userActions from "./user/userActions";
 import * as preferencesActions from "./preference/preferenceActions";
+import { fetchSportsdetail, fetchSportsdetails, fetchSportsdetailsRequest } from "./sportsdetail/sportsdetailActions";
 
 const persistConfig = {
   key: "root",
@@ -36,6 +37,9 @@ export const mapDispatchProps = (dispatch) => {
     setLogout: () => {
       localStorage.removeItem("ACCESS_TOKEN");
       dispatch(userActions.setLogout());
+    },
+    setSports: () => {
+      dispatch(fetchSportsdetails());
     },
     setPreferences: (payload) => {
       dispatch(preferencesActions.setPreferences(payload));

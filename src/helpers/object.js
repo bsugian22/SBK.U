@@ -1,5 +1,6 @@
 import { camelCase, snakeCase } from 'lodash'
 
+export const socket = new WebSocket("wss://io.vosa.dev");
 export const camelize = (data) => {
     if (Array.isArray(data)) {
         return data.map(camelize)

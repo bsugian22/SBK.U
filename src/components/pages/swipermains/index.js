@@ -15,7 +15,6 @@ const dispatch = useDispatch();
 
   useEffect(() => {
     isSubscribed = true;
-    dispatch(refreshToken())
     return () => {
       isSubscribed = false;
     };
