@@ -796,6 +796,16 @@ select {
 
 /* bottom-wrap */
 .pagination {
+   .write {
+      width: auto !important;
+      padding:0 20px !important;
+      &:hover:not([disabled]) {
+         i, span {
+            color: #34ac53 !important;
+            transition: 0.2s ease;
+         }
+      }
+   }
    .page {
       button {
          width: 40px;
@@ -2469,8 +2479,30 @@ select {
 
 .history-item {
    tr.rows {
+      cursor:pointer;
       &:hover {
-         box-shadow: 2px 0px 0px 0px #38b853 inset;
+         background-color: rgba(0, 0, 0, 0.1);
+         transition: 0.2s ease;
+         box-shadow: 2px 0px #38b853 inset;
+      }
+      &.active {
+         background-color: rgba(0, 0, 0, 0.1) !important;
+         box-shadow: 2px 0px #38b853 inset;
+      }
+   }
+}
+
+.inquiry-item {
+   tr.rows {
+      cursor:pointer;
+      &:hover {
+         background-color: rgba(0, 0, 0, 0.1);
+         transition: 0.2s ease;
+         box-shadow: 2px 0px #38b853 inset;
+      }
+      &.active {
+         background-color: rgba(0, 0, 0, 0.1) !important;
+         box-shadow: 2px 0px #38b853 inset;
       }
    }
 }

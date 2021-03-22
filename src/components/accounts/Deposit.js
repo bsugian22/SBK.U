@@ -65,8 +65,8 @@ const Deposit = () => {
   return (
     <Fragment>
       <div class="content account-continer flex flex-inherit grow-2 flex-column">
-        <div class="deposit-wrap account deposit-content-desktop flex-inherit padding-10">
-          <div class="deposit-left-content account-height widthp-50 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
+        <div class="deposit-wrap account deposit-content-desktop flex-inherit">
+          <div class="deposit-left-content account-height widthp-50 padding-10 flex-inherit flex-column border-right scrollable-auto">
             <div class="widthp-100 deposit-notice flex-inherit flex-column margin-bottom-20">
               <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
                 <span class="color-white">입금신청 주의사항</span>
@@ -310,7 +310,7 @@ const Deposit = () => {
               </div>
             </div>
           </div>
-          <div class="deposit-right-content account-height widthp-50 flex-inherit padding-left-5 border-left flex-column scrollable-auto">
+          <div class="deposit-right-content account-height widthp-50 padding-10 flex-inherit border-left flex-column scrollable-auto">
             <div class="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
               <span class="color-white">입금신청내역</span>
             </div>

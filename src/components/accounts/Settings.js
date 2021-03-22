@@ -28,8 +28,8 @@ export default function Settings() {
   return (
     <Fragment>
       <div className="content account-continer flex flex-inherit grow-2 flex-column">
-        <div className="settings-wrap account settings-content-desktop flex-inherit padding-10">
-          <div className="settings-left-content account-height widthp-50 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
+        <div className="settings-wrap account settings-content-desktop flex-inherit">
+          <div className="settings-left-content account-height widthp-50 padding-10 flex-inherit flex-column border-right scrollable-auto">
             <div className="flex-inherit flex-column">
               <div className="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
                 <span className="color-white">계정</span>
@@ -227,7 +227,7 @@ export default function Settings() {
               </div>
             </div>
           </div>
-          <div className="settings-right-content account-height widthp-50 flex-inherit flex-column border-left padding-left-5 scrollable-auto">
+          <div className="settings-right-content account-height widthp-50 flex-inherit flex-column border-left padding-10 scrollable-auto">
             <div className="flex-inherit flex-column">
               <div className="red-shadow deposit-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 flex-inherit">
                 <span className="color-white grow-2">이용한도</span>

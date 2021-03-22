@@ -65,8 +65,8 @@ const Withdrawal = () => {
   return (
     <Fragment>
       <div class="content account-continer flex flex-inherit grow-2 flex-column">
-        <div class="withdraw-wrap account withdraw-content-desktop flex-inherit padding-10">
-          <div class="withdraw-left-content account-height widthp-50 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
+        <div class="withdraw-wrap account withdraw-content-desktop flex-inherit">
+          <div class="withdraw-left-content account-height widthp-50 padding-10 flex-inherit flex-column border-right scrollable-auto">
             <div class="widthp-100 withdraw-notice flex-inherit flex-column margin-bottom-20">
               <div class="red-shadow withdraw-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
                 <span class="color-white">출금신청 주의사항</span>
@@ -131,12 +131,7 @@ const Withdrawal = () => {
                     </div>
                     <div class="widthp-67 form-content height-45 border-bottom-rb align-items-center padding-right-15 justify-content-end background-transparent-b-5 border-top border-left-rw">
                       <span class="color-green">
-                        {withdrawableAmount == null ||
-                        withdrawableAmount == "" ||
-                        withdrawableAmount == undefined
-                          ? ""
-                          : withdrawableAmount}
-                        원
+                        {Number(user.member.cash).toLocaleString()}원
                       </span>
                     </div>
                   </div>
@@ -329,7 +324,7 @@ const Withdrawal = () => {
               </div>
             </div>
           </div>
-          <div class="withdraw-right-content account-height widthp-50 flex-inherit padding-left-5 border-left flex-column scrollable-auto">
+          <div class="withdraw-right-content account-height widthp-50 padding-10 flex-inherit border-left flex-column scrollable-auto">
             <div class="red-shadow withdraw-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
               {/* (list of withdrawals) */}
               <span class="color-white">출금신청 내역</span>
@@ -452,7 +447,7 @@ const Withdrawal = () => {
                 <div class="padding-right-10">
                   <span class="color-grey">
                     누적 출금 금액
-                    <strong class="color-red padding-left-5">
+                    <strong class="color-green padding-left-5">
                       {/* total amount */}
                       {withdraw?.withdrawals?.amount}원
                     </strong>

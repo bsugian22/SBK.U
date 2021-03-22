@@ -44,8 +44,8 @@ export default function Position() {
   return (
     <Fragment>
       <div class="content account-continer flex flex-inherit grow-2 flex-column">
-        <div class="history-wrap account history-content-desktop flex-inherit padding-10">
-          <div class="history-left-content account-height widthp-50 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
+        <div class="history-wrap account history-content-desktop flex-inherit">
+          <div class="history-left-content account-height widthp-50 padding-10 flex-inherit flex-column border-right scrollable-auto">
             <div class="history-comfile flex-column flex-inherit">
               <div class="flex-column flex-inherit widthp-100">
                 <div class="red-shadow height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
@@ -379,7 +379,7 @@ export default function Position() {
               </div>
             </div>
           </div>
-          <div class="history-right-content account-height widthp-50 flex-inherit flex-column padding-left-5 border-left scrollable-auto">
+          <div class="history-right-content account-height widthp-50 padding-10 flex-inherit flex-column border-left scrollable-auto">
             <div class="history-comfile flex-column flex-inherit">
               <div class="flex-column flex-inherit widthp-100">
                 <div class="red-shadow height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">

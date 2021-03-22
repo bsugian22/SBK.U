@@ -264,7 +264,8 @@ export const fetchInquiry = (id) => {
         dispatch(fetchInquiriesuccess(inquiry));
         dispatch(changeInquiryTitle(inquiry.data.title));
         dispatch(changeInquiryCreatedAt(inquiry.data.created_at));
-        inquiry.data.answer == null ?  dispatch(changeInquiryContent(inquiry.data.status)) : dispatch(changeInquiryContent(inquiry.data.answer.content));
+        dispatch(changeInquiryContent(inquiry.data.content));
+        inquiry.data.answer != null ? dispatch(changeInquiryAnswer(inquiry.data.answer.content)) : dispatch(changeInquiryAnswer(null));
       })
       .catch((error) => {
         const errorMsg = error.message;
@@ -417,6 +418,13 @@ export const changeInquiryContent = (content) => {
   return {
     type: types.CHANGE_INQUIRY_CONTENT,
     payload: content,
+  };
+};
+
+export const changeInquiryAnswer = (answer) => {
+  return {
+    type: types.CHANGE_INQUIRY_ANSWER,
+    payload: answer,
   };
 };
 

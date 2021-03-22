@@ -372,6 +372,11 @@ const inquiryReducer = (state = initialState, action) => {
         ...state,
         createInquiry: { ...state.createInquiry, content: action.payload },
       };
+    case types.CHANGE_INQUIRY_ANSWER:
+      return {
+        ...state,
+        createInquiry: { ...state.createInquiry, answer: action.payload },
+      };
 
     case types.SET_INQUIRY_PAGE:
       var total = state.inquiries.total;

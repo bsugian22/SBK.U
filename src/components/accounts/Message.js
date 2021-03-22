@@ -41,8 +41,8 @@ export default function Message() {
   return (
     <Fragment>
       <div class="content account-continer flex flex-inherit grow-2 flex-column">
-        <div class="message-wrap account message-content-desktop flex-inherit padding-10">
-          <div class="message-left-content account-height widthp-50 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
+        <div class="message-wrap account message-content-desktop flex-inherit">
+          <div class="message-left-content account-height widthp-50 padding-10 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
             <div class="flex-inherit flex-column">
               <div class="red-shadow message-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
                 <span class="color-white">메세지 리스트</span>
@@ -73,7 +73,7 @@ export default function Message() {
                           <tr>
                             {Array(4).fill(1).map(() => {
                               return (
-                                <td class="td-3">
+                                <td class="td-3 border-top">
                                   <span></span>
                                 </td>
                               )
@@ -245,7 +245,7 @@ export default function Message() {
               </div>
             </div>
           </div>
-          <div class="message-right-content account-height widthp-50 flex-inherit flex-column padding-left-5 border-left scrollable-auto" hidden={viewMessage.id == 0 ? true : false}>
+          <div class="message-right-content account-height widthp-50 padding-10 flex-inherit flex-column padding-left-5 border-left scrollable-auto" hidden={viewMessage.id == 0 ? true : false}>
             <div class="flex-inherit flex-column">
               <div class="message-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
                 <span class="color-white grow-2">
@@ -258,14 +258,14 @@ export default function Message() {
                   </span>
                   <span class="color-grey padding-right-15">
                     <i class="fal fa-user"></i>
-                    운영팀
+                    TERA
                   </span>
                 </div>
               </div>
             </div>
             <div class="flex-inherit flex-column">
-              <div class="message-read-header-title background-transparent-b-10 align-items-center-inherit padding-horizontal-15 border-bottom-rb flex-column border-top">
-                <span class="flex align-items-center height-40 color-grey">제목 : {viewMessage.title}</span>
+              <div class="message-read-header-title background-transparent-b-10 align-items-center-inherit padding-horizontal-15 border-bottom-rb flex height-45 align-items-center border-top">
+                <span class="flex align-items-center color-grey">제목 : {viewMessage.title}</span>
               </div>
               <div class="message-read-content background-transparent-b-5 align-items-center-inherit padding-15 border-bottom-rb flex-column border-top">
                 <div class="color-grey min-height-100">
@@ -274,7 +274,7 @@ export default function Message() {
               </div>
             </div>
           </div>
-          <div class="align-items-center  margin-right-5" style={{ marginLeft: "20%" }} hidden={viewMessage.id == 0 ? false : true}>
+          <div class="align-items-center border-left" style={{ paddingLeft: "20%" }} hidden={viewMessage.id == 0 ? false : true}>
             <Logo width="120" height="30" />
           </div>
         </div>

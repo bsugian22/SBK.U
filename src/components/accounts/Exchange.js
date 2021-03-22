@@ -67,8 +67,8 @@ const Exchange = () => {
   return (
     <Fragment>
       <div class="content account-continer flex flex-inherit grow-2 flex-column">
-        <div class="exchange-wrap account exchange-content-desktop flex-inherit padding-10">
-          <div class="exchange-left-content account-height padding-right-5 border-right widthp-50 flex-inherit flex-column scrollable-auto">
+        <div class="exchange-wrap account exchange-content-desktop flex-inherit">
+          <div class="exchange-left-content account-height border-right widthp-50 padding-10 flex-inherit flex-column scrollable-auto">
             <div class="exchange-payment flex-column flex-inherit">
               <div class="flex-column flex-inherit widthp-100">
                 <div class="red-shadow exchange-payment-apply height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
@@ -141,7 +141,7 @@ const Exchange = () => {
                   <div class="form-rows flex-inherit">
                     <div class="widthp-33 border-right-rb form-title height-45 border-bottom-rb border-top align-items-center justify-content-center background-transparent-b-10">
                       {/* Withdrawable Amount */}
-                      <span class="color-grey">출금 가능액</span>
+                      <span class="color-grey">전환 가능액</span>
                     </div>
                     <div class="widthp-67 form-content height-45 border-bottom-rb border-top align-items-center padding-right-15 justify-content-end background-transparent-b-5 border-left-rw">
                       <span class="color-green">
@@ -271,7 +271,7 @@ const Exchange = () => {
               </div>
             </div>
           </div>
-          <div class="exchange-right-content account-height widthp-50 flex-inherit padding-left-5 border-left flex-column scrollable-auto">
+          <div class="exchange-right-content account-height widthp-50 padding-10 flex-inherit border-left flex-column scrollable-auto">
             <div class="red-shadow exchange-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
               <span class="color-white">전환신청 내역 </span>
             </div>
@@ -386,14 +386,6 @@ const Exchange = () => {
                     <i class="fal fa-trash-alt"></i>
                     선택 삭제
                   </button>
-                </div>
-                <div class="padding-right-10">
-                  <span class="color-grey">
-                    누적 총 잔액
-                    <strong class="color-red padding-left-5">
-                      {exchange.exchanges.amount}원
-                    </strong>
-                  </span>
                 </div>
               </div>
               <div class="padding-vertical-10 flex-inherit height-60 color-grey">

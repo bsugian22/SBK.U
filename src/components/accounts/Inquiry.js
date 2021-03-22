@@ -61,15 +61,15 @@ const Inquiry = () => {
   return (
     <Fragment>
       <div class="content account-continer flex flex-inherit grow-2 flex-column">
-        <div class="message-wrap account message-content-desktop flex-inherit padding-10">
-          <div class="message-left-content account-height widthp-50 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
+        <div class="inquiry-wrap account inquiry-content-desktop flex-inherit">
+          <div class="inquiry-left-content account-height widthp-50 padding-10 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
             <div class="flex-inherit flex-column">
-              <div class="red-shadow message-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
+              <div class="red-shadow inquiry-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
                 <span class="color-white">1:1문의</span>
               </div>
             </div>
-            <div class="widthp-100 message-content flex-inherit flex-column">
-              <div class="message-item">
+            <div class="widthp-100 inquiry-content flex-inherit flex-column">
+              <div class="inquiry-item">
                 <table>
                   <thead class="background-transparent-b-10">
                     <tr class="thead">
@@ -94,7 +94,7 @@ const Inquiry = () => {
                           <tr>
                             {Array(4).fill(1).map(() => {
                               return (
-                                <td class="td-3">
+                                <td class="td-3 border-top">
                                   <span></span>
                                 </td>
                               )
@@ -168,7 +168,7 @@ const Inquiry = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="message-item-footer flex-inherit border-top border-bottom-rb padding-vertical-10 align-items-center background-transparent-b-10">
+              <div class="inquiry-item-footer flex-inherit border-top border-bottom-rb padding-vertical-10 align-items-center background-transparent-b-10">
                 <div class="grow-2 padding-left-10">
                   {/* Delete Inquiries */}
                   <button
@@ -269,11 +269,11 @@ const Inquiry = () => {
                       </button>
                     </Link>
                     <Link to="#">
-                      <button class="write page-right width-40 heightp-100 background-green"
+                      <button class="write page-right width-40 heightp-100 background-transparent-b-20"
                         onClick={() => {
                           dispatch(resetCreateInquiry());
                         }}>
-                        <i class="fal fa-pencil-alt color-white"></i>
+                        <i class="fal fa-pencil-alt color-grey"></i><span class="color-grey">글 작성</span>
                       </button>
                     </Link>
                   </div>
@@ -281,38 +281,41 @@ const Inquiry = () => {
               </div>
             </div>
           </div>
-          <div class="message-right-content account-height widthp-50 flex-inherit flex-column padding-left-5 border-left scrollable-auto" hidden={inquiry.viewingId == null ? true : false}>
+          <div class="inquiry-right-content account-height widthp-50 padding-10 flex-inherit flex-column padding-left-5 border-left scrollable-auto" hidden={inquiry.viewingId == null ? true : false}>
             <div class="flex-inherit flex-column" >
-              <div class="message-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
-                <span class="color-white" hidden={!inquiry.isViewing}>view</span>
-                <div style={{marginLeft:"50%"}} hidden={!inquiry.isViewing}>
+              <div class="inquiry-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
+                <span class="color-white grow-2" hidden={!inquiry.isViewing}>1:1문의 내용</span>
+                <div hidden={!inquiry.isViewing}>
                   <span class="color-grey padding-right-10">
                     <i class="fal fa-calendar-week"></i>
                     {moment(createInquiry.createdAt).format("YY/MM/DD HH:mm")}
                   </span>
                   <span class="color-grey padding-right-15">
                     <i class="fal fa-user"></i>
-                    운영팀
+                    {user.member.nickname}
                   </span>
                 </div>
 
-                <span class="color-white" hidden={inquiry.isViewing}>apply</span>
+                <span class="color-white" hidden={inquiry.isViewing}>1:1문의 작성</span>
               </div>
-              <div class="message-title-write flex-column flex-inherit">
-                {/* TITLE */}
+              {
+                /**
+                 * 글 작성 페이지
+                 */
+              }
+              <div class="inquiry-title-write flex-column flex-inherit" hidden={inquiry.isViewing}>
                 <input
                   type="text"
-                  class="widthp-100 border-top border-bottom-rb background-transparent-b-5 padding-10 height-45 color-grey"
+                  class="widthp-100 border-top border-bottom-rb background-transparent-b-10 padding-10 height-45 color-grey"
                   placeholder="제목을 입력해주세요"
                   value={createInquiry.title}
                   onChange={(e) => {
                     let title = e.target.value;
                     dispatch(changeInquiryTitle(title));
                   }}
-                  disabled={inquiry.isViewing}
                 />
               </div>
-              <div class="message-form-write flex-column flex-inherit" hidden={inquiry.isViewing}>
+              <div class="inquiry-form-write flex-column flex-inherit background-transparent-b-10 border-top" hidden={inquiry.isViewing}>
                 {/* CONTENT */}
                 <CKEditor
                   editor={ClassicEditor}
@@ -323,32 +326,32 @@ const Inquiry = () => {
                   }}
                 />
               </div>
-              <div hidden={!inquiry.isViewing} class="message-read-content background-transparent-b-5 align-items-center-inherit padding-15 border-bottom-rb flex-column border-top">
-                <div class="color-grey min-height-100">
-                  <span>{createInquiry.content}</span>
+              {
+                /**
+                 * 이 곳은 글 보기 페이지
+                 */
+              }
+              <div hidden={!inquiry.isViewing} class="inquiry-title-write flex height-45 align-items-center flex-inherit widthp-100 border-top border-bottom-rb background-transparent-b-10 padding-10">
+                <div class="color-grey">
+                  <span>제목 : {createInquiry.title}</span>
                 </div>
               </div>
-              <div class="message-form-btn margin-top-10 flex-inherit">
-                <div class="grow-2">
-                  {/* reset */}
-                  <button
-                    type="button"
-                    class="padding-15 background-transparent-b-20 color-white"
-                    onClick={() => {
-                      dispatch(resetCreateInquiry());
-                    }}
-                    hidden={inquiry.isViewing}
-                  >
-                    <i class="far fa-times color-red"></i>
-                    <span class="color-grey">취소</span>
-                  </button>
+              <div hidden={!inquiry.isViewing} class="inquiry-read-content background-transparent-b-5 align-items-center-inherit padding-15 border-bottom-rb flex-column border-top">
+                <div class="color-grey">
+                  <span dangerouslySetInnerHTML={ {__html: createInquiry.content} }></span>
                 </div>
+              </div>
+              <div hidden={!inquiry.isViewing} class="inquiry-read-content background-transparent-b-5 align-items-center-inherit padding-15 border-bottom-rb border-top flex-column">
+                <div class="color-grey">
+                  <span class="flex widthp-100 justify-content-center" hidden={createInquiry.answer != null}>
+                    관리자의 답변을 기다리고 있습니다.
+                  </span>
+                  <span hidden={createInquiry.answer == null} dangerouslySetInnerHTML={ {__html: createInquiry.answer} }></span>
+                </div>
+              </div>
+              <div class="inquiry-form-btn margin-top-10 flex-inherit">
+                <div class="grow-2"></div>
                 <div>
-                  {/* <div class="select">
-                    <select name="slct" id="slct">
-                      <option value="">전용계좌</option>
-                    </select>
-                  </div> */}
                   <button
                     type="button"
                     class="padding-15 background-green color-white margin-left-10"
@@ -358,13 +361,13 @@ const Inquiry = () => {
                     hidden={inquiry.isViewing}
                   >
                     <i class="fal fa-share color-white"></i>
-                    <span class="color-white">보내기 </span>
+                    <span class="color-white">작성완료</span>
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="align-items-center  margin-right-5" style={{ marginLeft: "20%" }} hidden={inquiry.viewingId == null ? false : true}>
+          <div class="align-items-center border-left" style={{ paddingLeft: "20%" }} hidden={inquiry.viewingId == null ? false : true}>
             <Logo width="120" height="30" />
           </div>
         </div>
