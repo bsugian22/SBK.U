@@ -18,7 +18,6 @@ const Sports = (props) => {
   const model = new sportsModel();
   const context = useContext(MenuContext);
   let sports = useSelector((state) => state.sportsdetail);
-  let socket = new WebSocket("wss://io.vosa.dev");
 
   // const [sports, setSports] = useState({
   //   data: [],
