@@ -214,8 +214,6 @@ export const fetchSportsdetail = (matchId) => {
     axios.get(`/api/feed/matches/${matchId}`)
       .then(response => {
         const sportsdetail = camelize(response.data);
-        // console.log(sportsdetail);
-
         dispatch(fetchSportsdetailSuccess(sportsdetail))
       }).catch(error => {
         const errorMsg = error.message;

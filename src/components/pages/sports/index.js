@@ -39,36 +39,6 @@ const Sports = (props) => {
     dispatch(fetchSportsdetails());
     dispatch(refreshToken())
 
-    // socket.onopen = function (e) {
-    //   alert("sending")
-    //   const data = {
-    //     type: "book_match",
-    //     match_id: 25736100
-    //   }
-    //   socket.send(JSON.stringify(data));
-    // };
-
-    // socket.onmessage = function (event) {
-    //   event.data.text().then((data) => {
-    //     const market = JSON.parse(data)
-    //     console.log(market)
-    //   });
-    // };
-
-    // socket.onclose = function (event) {
-    //   if (event.wasClean) {
-    //     alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-    //   } else {
-    //     // e.g. server process killed or network down
-    //     // event.code is usually 1006 in this case
-    //     alert('[close] Connection died');
-    //   }
-    // };
-
-    // socket.onerror = function (error) {
-    //   alert(`[error] ${error.message}`);
-    // };
-
     return () => {
       isSubscribed = false;
     };
@@ -95,7 +65,6 @@ const Sports = (props) => {
       dispatch(fetchSportsdetail(item.id));
       context.actions.setdetailMenu(true);
       console.log(item.id)
-      
     }
   };
 
