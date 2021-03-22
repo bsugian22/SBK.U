@@ -135,12 +135,13 @@ export const fetchSportsdetails = (params) => {
     })
       .then(response => {
         const sportsdetails = camelize(response.data);
-
+        const matches = []
         // console.log(response.data)
         response.data.data.map((data, index) => {
           // console.log(data.id)
-          sportWebSocket(data.id)
+          matches.push(data.id)
         })
+        sportWebSocket(matches);
 
         var data = chain(sportsdetails.data)
           .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
@@ -161,15 +162,20 @@ export const fetchSportsdetails = (params) => {
   };
 };
 
-const sportWebSocket = (match_id) => {
+
+
+const sportWebSocket = (matches) => {
+
   let socket = new WebSocket("wss://io.vosa.dev");
   socket.onopen = function (e) {
-    console.log("sending:" + match_id)
-    const data = {
-      type: "book_match",
-      match_id: match_id
-    }
-    socket.send(JSON.stringify(data));
+    matches.map((data, index) => {
+      console.log("sending:" + data)
+      const match_data = {
+        type: "book_match",
+        match_id: data
+      }
+      socket.send(JSON.stringify(match_data));
+    })
   };
 
   socket.onmessage = function (event) {

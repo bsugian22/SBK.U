@@ -29,9 +29,15 @@ const sportsdetailReducer = (state = initialState, action) => {
         data.outcomes.map((data, index) => {
           console.log("outcome_id[outcomes->name->id]: " + data.outcome_id + " - value of odds:" + data.odds)
         })
+
+        state.data.data.map((data, index) => {
+          // console.log("outcome_id[outcomes->name->id]: " + data.outcome_id + " - value of odds:" + data.odds)
+          const market_data = data.matches.find(x => x.id == data.market_id); // find specific data 
+          console.log(market_data);
+        })
+
       })
-      const market_data = state.data.data.find(x => x.id == data.market_id); // find specific data 
-      console.log(market_data);
+
 
       // checking if the scoket has acctive shwoing market
       if (state.data.detail == market.match_id) {
@@ -40,7 +46,6 @@ const sportsdetailReducer = (state = initialState, action) => {
       } else {
         console.log("no market active");
       }
-
       return {
         ...state,
       };
