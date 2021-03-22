@@ -30,13 +30,17 @@ const sportsdetailReducer = (state = initialState, action) => {
           console.log("outcome_id[outcomes->name->id]: " + data.outcome_id + " - value of odds:" + data.odds)
         })
       })
+      const market_data = state.data.data.find(x => x.id == data.market_id); // find specific data 
+      console.log(market_data);
+
+      // checking if the scoket has acctive shwoing market
       if (state.data.detail == market.match_id) {
-        // const market_data = state.data.details_data.find(x => x.id === '45'); // find specific data 
         console.log("match_id:" + market.match_id)
         console.log("market active");
       } else {
         console.log("no market active");
       }
+
       return {
         ...state,
       };
@@ -63,6 +67,7 @@ const sportsdetailReducer = (state = initialState, action) => {
       };
     case types.FETCH_SPORTSDETAILS_FAILURE:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };
