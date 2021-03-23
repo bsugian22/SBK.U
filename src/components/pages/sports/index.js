@@ -412,7 +412,14 @@ const Sports = (props) => {
                                 <span class="color-grey text-ellipsis">{market.outcomes[0] === undefined ? "" : market.outcomes[0].name == null ? "" : market.outcomes[0].name.outcomeName.ko}</span>
                               </div>
                               <div class="shrink-0">
-                                {/*odds-change*/}<span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> {/*odds-change end*/}
+
+                                {market.outcomes[0] === undefined ? "" :
+                                  market.outcomes[0].name == null ? "" :
+                                    market.outcomes[0].oldOdds == null ? "" :
+                                      market.outcomes[0].oldOdds < market.outcomes[0].odds ?
+                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                 <span class="color-grey">{market.outcomes[0] === undefined ? "" : market.outcomes[0].name == null ? "" : market.outcomes[0].odds}</span>
                               </div>
                             </div>
@@ -422,7 +429,14 @@ const Sports = (props) => {
 
                               </div>
                               <div class="shrink-0">
-                                {/*odds-change*/}<span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> {/*odds-change end*/}
+
+                                {market.outcomes[1] === undefined ? "" :
+                                  market.outcomes[1].name == null ? "" :
+                                    market.outcomes[1].oldOdds == null ? "" :
+                                      market.outcomes[1].oldOdds < market.outcomes[1].odds ?
+                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                 <span class="color-grey">{market.outcomes[1] === undefined ? "" : market.outcomes[1].name == null ? "" : market.outcomes[1].odds}</span>
                               </div>
                             </div>
@@ -431,7 +445,15 @@ const Sports = (props) => {
                                 <span class="color-grey text-ellipsis">{market.outcomes[2] === undefined ? "" : market.outcomes[2].name == null ? "" : market.outcomes[2].name.outcomeName.ko}</span>
                               </div>
                               <div class="shrink-0">
-                                {/*odds-change*/}<span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> {/*odds-change end*/}
+
+                                {market.outcomes[2] === undefined ? "" :
+                                  market.outcomes[2].name == null ? "" :
+                                    market.outcomes[2].oldOdds == null ? "" :
+                                      market.outcomes[2].oldOdds < market.outcomes[2].odds ?
+                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+
                                 <span class="color-grey">{market.outcomes[2] === undefined ? "" : market.outcomes[2].name == null ? "" : market.outcomes[2].odds}</span>
                               </div>
                             </div>

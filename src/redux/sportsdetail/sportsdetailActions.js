@@ -213,6 +213,14 @@ export const fetchSportsdetail = (matchId) => {
     axios.get(`/api/feed/matches/${matchId}`)
       .then(response => {
         const sportsdetail = camelize(response.data);
+        // console.log(sportsdetail.data.markets)
+        sportsdetail.data.markets.map((data, index) => {
+          data.outcomes.map((data, index) => {
+            // console.log(data.id)
+            data.oldOdds = null;
+          })
+        })
+
         dispatch(fetchSportsdetailSuccess(sportsdetail))
       }).catch(error => {
         const errorMsg = error.message;
