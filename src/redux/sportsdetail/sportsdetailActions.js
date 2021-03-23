@@ -137,9 +137,12 @@ export const fetchSportsdetails = (params) => {
         const sportsdetails = camelize(response.data);
         const matches = []
         // console.log(response.data)
-        response.data.data.map((data, index) => {
-          // console.log(data.id)
+        sportsdetails.data.map((data, index) => {
           matches.push(data.id)
+          data.market.outcomes.map((data, index) => {
+            // console.log(data.id)
+            data.oldOdds = null;
+          })
         })
         dispatch(sportWebSocket(matches));
 

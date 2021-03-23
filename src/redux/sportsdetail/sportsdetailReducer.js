@@ -20,44 +20,45 @@ const sportsdetailReducer = (state = initialState, action) => {
     case types.GET_SPORTSDETAILS:
       console.log("connnected");
       const market = action.payload;
-      // console.log(state)
       console.log(market)
-      let match_id = market.match_id
+      const match_id = market.match_id
       console.log("match_id:" + match_id)
 
       // state.data.data.map((data, index) => {
-      let state_data = state.data.data;
+      const state_data = state.data.data;
       for (var i = 0; i < state_data.length; i++) {
 
-        const market_data = state_data[i].matches.find(x => x.id == match_id); // find specific data 
+        let market_data = state_data[i].matches.find(x => x.id == match_id); // find specific data 
         if (market_data) {
           console.log(market_data);
           // look for market_id to the websocket data 
-          const market_type = market_data.market.type
+          let market_type = market_data.market.type
           console.log("amrket_type :" + market_type);
 
           // update data from ws
-          const ws_data_market = market.markets.find(x => x.market_id == market_type)
-          const outcomes = market_data.market.outcomes;
+          let ws_data_market = market.markets.find(x => x.market_id == market_type)
+          let outcomes = market_data.market.outcomes;
 
           //check if the markets ws has the same market type on sports page data
           if (ws_data_market) {
             console.log(ws_data_market);
             ws_data_market.outcomes.map((data, index) => {
-              const ws_outcome_id = data.outcome_id;
-              const ws_new_outcome_odds = data.odds;
+              let ws_outcome_id = data.outcome_id;
+              let ws_new_outcome_odds = data.odds;
               // look for the outcomes->name-> id to match with ws_outcome_id
               outcomes.map((data, index) => {
                 if (ws_outcome_id == data.name.id) {
-                  console.log(data.name.id + " - " + ws_outcome_id)
-                  console.log(data.odds + " - " + ws_new_outcome_odds)
-                  data.odds = ws_new_outcome_odds
-                  console.log(data.odds + " new data - " + ws_new_outcome_odds)
+                  let old_value = data.odds;
+                  console.log("incoming odds - " + ws_new_outcome_odds)
+                  data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
+                  data.oldOdds = old_value // changing value of the state of the outcomes old odds
+                  console.log(" old odds - " + old_value)
+                  console.log(" new odds - " + data.odds)
                 }
               })
             })
           } else {
-            break; // nothing to update here ( no market_id 1 market type)
+            break; // nothing to update here ( didnt fine any same (market_id != market type) )
           }
           //current market outcomes 
 
