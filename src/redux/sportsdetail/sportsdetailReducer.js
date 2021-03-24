@@ -79,18 +79,16 @@ const sportsdetailReducer = (state = initialState, action) => {
           state_details_market.markets.map((data, index) => {
             let details_specifier = JSON.stringify(data.specifier)
             let details_outcomes = data.outcomes;
-            let market_type = market_data.market.type
+            let market_type = data.type
 
+
+            // check if the market is same with the ws data and details data
             if (ws_market_type == market_type) {
 
-              // naiwan mo to check mo if running tong logic na to with market type na hnd na dapat mag redundand ung data patg hnd same ng market type
-              if (ws_specifier == "{}") { // check if the specifer is only one 
-                console.log("walang laman find the equal type ")
-              }
 
-              if (ws_specifier === details_specifier) {
-                console.log(details_specifier + " - " + ws_specifier)
-                console.log(data.outcomes)
+              if (ws_specifier == "{}") { // check if the specifer is only one 
+                console.log("chekcing  ")
+                console.log(ws_market_type + " - " + market_type)
 
                 ws_data_market_outcomes.map((data, index) => {
                   let ws_outcome_id = data.outcome_id;
@@ -109,11 +107,38 @@ const sportsdetailReducer = (state = initialState, action) => {
                       console.log(" new odds - " + data.odds)
                     }
                   })
-
                 })
-              }
-            }
 
+              } else {
+
+                if (ws_specifier === details_specifier) {
+                  console.log(ws_market_type + " - " + market_type)
+                  console.log(details_specifier + " - " + ws_specifier)
+                  console.log(data.outcomes)
+
+                  ws_data_market_outcomes.map((data, index) => {
+                    let ws_outcome_id = data.outcome_id;
+                    let ws_new_outcome_odds = data.odds;
+
+                    details_outcomes.map((data, index) => {
+                      // check if the outcomes has the same id and name
+
+                      if (ws_outcome_id == data.name.id) {
+                        let old_value = data.odds;
+
+                        // console.log("incoming odds - " + ws_new_outcome_odds)
+                        data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
+                        data.oldOdds = old_value // changing value of the state of the outcomes old odds
+                        console.log(" old odds - " + old_value)
+                        console.log(" new odds - " + data.odds)
+                      }
+                    })
+
+                  })
+                }
+              }
+
+            }
 
 
           })
