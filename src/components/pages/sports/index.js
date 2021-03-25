@@ -234,7 +234,7 @@ const Sports = (props) => {
                                       return (
                                         <div class="active widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5"> {/* "active" class must be entered when selected. */}
                                           <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                            <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' :  outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"]: ""}</span></div>
+                                            <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
                                             <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
                                               {outcome.oldOdds == null ?
                                                 "" :
