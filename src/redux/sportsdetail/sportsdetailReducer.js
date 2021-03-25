@@ -75,16 +75,18 @@ const sportsdetailReducer = (state = initialState, action) => {
           let ws_data_market_outcomes = data.outcomes; // list of outcomes comeing from the ws
           let ws_specifier = JSON.stringify(data.specifier)
           let ws_market_type = data.market_id;
+          let ws_status = data.status
 
           state_details_market.markets.map((data, index) => {
             let details_specifier = JSON.stringify(data.specifier)
             let details_outcomes = data.outcomes;
             let market_type = data.type
+            let status = data.status
 
 
             // check if the market is same with the ws data and details data
             if (ws_market_type == market_type) {
-
+              status = ws_status;
 
               if (ws_specifier == "{}") { // check if the specifer is only one 
                 console.log("chekcing  ")
