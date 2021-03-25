@@ -5,7 +5,7 @@ export default function BookNavi(props)
 {
     return (
         <div class="left-sidebar content-height width-300 border-right border-right-shadow flex-inherit flex-column shrink-0 scrollable-auto">
-            <div class="tab flex-row height-50">
+            <div class="tab flex-row height-50 border-bottom">
                 <button class="sports flex widthp-33 align-items-center justify-content-center color-grey background-transparent-b-15 active">
                     <span>SPORTS</span>
                 </button>
@@ -17,7 +17,7 @@ export default function BookNavi(props)
                 </button>
             </div>
             <div class="list flex-column flex-inherit">
-                <div class="bookmark background-transparent-b-5 align-items-center-inherit">
+                <div class="bookmark background-transparent-b-5 align-items-center-inherit border-bottom border-top">
                     <div class="flex height-40 padding-10 grow-2">
                         <i class="fas fa-star color-yellow"></i>
                         <span class="color-grey">Bookmark</span>
@@ -31,7 +31,7 @@ export default function BookNavi(props)
                 </div>
                 <div class="events-list flex-column">
                     <div class="event flex-inherit">
-                        <div id="soccer" class="align-items-center-inherit background-transparent-b-10 active">
+                        <div id="soccer" class="align-items-center-inherit border-top border-bottom background-transparent-b-10 active">
                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                 <i class="fas fa-futbol color-grey"></i>
                                 <span class="color-grey text-ellipsis">축구</span>
@@ -44,7 +44,7 @@ export default function BookNavi(props)
                             </div>
                         </div>
                         <div class="event-detail flex-column">
-                            <div class="flex align-items-center-inherit widthp-100">
+                            <div class="flex align-items-center-inherit border-top border-bottom widthp-100">
                                 <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                     <i class="far fa-flag color-yellow"></i>
                                     <span class="color-grey text-ellipsis">USA. MLS. Season 2020</span>
@@ -56,7 +56,7 @@ export default function BookNavi(props)
                                     </span>
                                 </div>
                             </div>
-                            <div class="flex align-items-center-inherit widthp-100">
+                            <div class="flex align-items-center-inherit border-top border-bottom widthp-100">
                                 <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                     <i class="far fa-flag color-yellow"></i>
                                     <span class="color-grey text-ellipsis">Honduras. Liga Nacional. Season 2020/2021</span>
@@ -68,7 +68,7 @@ export default function BookNavi(props)
                                     </span>
                                 </div>
                             </div>
-                            <div class="flex align-items-center-inherit widthp-100">
+                            <div class="flex align-items-center-inherit border-top border-bottom widthp-100">
                                 <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                     <i class="far fa-flag color-yellow"></i>
                                     <span class="color-grey text-ellipsis">Portugal. Primeira Liga. Season 2020/2021</span>
@@ -80,7 +80,7 @@ export default function BookNavi(props)
                                     </span>
                                 </div>
                             </div>
-                            <div class="flex align-items-center-inherit widthp-100">
+                            <div class="flex align-items-center-inherit border-top border-bottom widthp-100">
                                 <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                     <i class="far fa-flag color-yellow"></i>
                                     <span class="color-grey text-ellipsis">China. Super League. Play Offs. Season 2020</span>
@@ -92,7 +92,7 @@ export default function BookNavi(props)
                                     </span>
                                 </div>
                             </div>
-                            <div class="flex align-items-center-inherit widthp-100">
+                            <div class="flex align-items-center-inherit border-top border-bottom widthp-100">
                                 <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                     <i class="far fa-flag color-yellow"></i>
                                     <span class="color-grey text-ellipsis">England. Premier League. Season 2020/2021</span>
@@ -104,7 +104,7 @@ export default function BookNavi(props)
                                     </span>
                                 </div>
                             </div>
-                            <div class="flex align-items-center-inherit widthp-100">
+                            <div class="flex align-items-center-inherit border-top border-bottom widthp-100">
                                 <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                     <i class="far fa-flag color-yellow"></i>
                                     <span class="color-grey text-ellipsis">SPAIN. LALIGA. SEASON 2020/2021</span>
@@ -116,7 +116,7 @@ export default function BookNavi(props)
                                     </span>
                                 </div>
                             </div>
-                            <div class="flex align-items-center-inherit widthp-100">
+                            <div class="flex align-items-center-inherit border-top border-bottom widthp-100">
                                 <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                     <i class="far fa-flag color-yellow"></i>
                                     <span class="color-grey text-ellipsis">Mexico. Liga de Expansion. Season 2020/2021</span>
@@ -129,7 +129,7 @@ export default function BookNavi(props)
                                 </div>
                             </div>
                         </div>
-                        <div id="baseball" class="align-items-center-inherit background-transparent-b-5">
+                        <div id="baseball" class="align-items-center-inherit border-top border-bottom background-transparent-b-5">
                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                 <i class="fal fa-baseball-ball color-grey"></i>
                                 <span class="color-grey text-ellipsis">야구</span>
@@ -141,7 +141,7 @@ export default function BookNavi(props)
                                 </span>
                             </div>
                         </div>
-                        <div id="volleyball" class="align-items-center-inherit background-transparent-b-5">
+                        <div id="volleyball" class="align-items-center-inherit border-top border-bottom background-transparent-b-5">
                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                 <i class="fal fa-volleyball-ball color-grey"></i>
                                 <span class="color-grey text-ellipsis">배구</span>
@@ -153,7 +153,7 @@ export default function BookNavi(props)
                                 </span>
                             </div>
                         </div>
-                        <div id="basketball" class="align-items-center-inherit background-transparent-b-5">
+                        <div id="basketball" class="align-items-center-inherit border-top border-bottom background-transparent-b-5">
                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                 <i class="fal fa-basketball-ball color-grey"></i>
                                 <span class="color-grey text-ellipsis">농구</span>
@@ -165,7 +165,7 @@ export default function BookNavi(props)
                                 </span>
                             </div>
                         </div>
-                        <div id="shuttlecock" class="align-items-center-inherit background-transparent-b-5">
+                        <div id="shuttlecock" class="align-items-center-inherit border-top border-bottom background-transparent-b-5">
                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                 <i class="fal fa-shuttlecock color-grey"></i>
                                 <span class="color-grey text-ellipsis">배드민턴</span>
@@ -177,7 +177,7 @@ export default function BookNavi(props)
                                 </span>
                             </div>
                         </div>
-                        <div id="tabletennis" class="align-items-center-inherit background-transparent-b-5">
+                        <div id="tabletennis" class="align-items-center-inherit border-top border-bottom background-transparent-b-5">
                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                 <i class="fal fa-table-tennis color-grey"></i>
                                 <span class="color-grey text-ellipsis">탁구</span>
