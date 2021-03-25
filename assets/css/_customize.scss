@@ -778,9 +778,6 @@ select {
 
 /* betslip */
 .betslip {
-   .title {
-      box-shadow: 0 -1px 0px #38b853 inset;
-   }
    .pick {
       .delete {
          button {
@@ -788,6 +785,20 @@ select {
                color: #ff4949 !important;
                transition: 0.2s ease;
             }
+         }
+      }
+   }
+   .pick-empty {
+      background:rgba(0, 0, 0, 0.15);
+   }
+   .slip-content {
+      .slip-data {
+         &:hover {
+            background: rgba(0, 0, 0, 0) !important;
+         }
+         &:hover {
+            transition: 0.2s ease;
+            box-shadow: 2px 0px #38b853 inset;
          }
       }
    }

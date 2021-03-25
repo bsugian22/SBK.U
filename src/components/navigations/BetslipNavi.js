@@ -12,7 +12,7 @@ export default function BetslipNavi(props) {
   return (
     <Fragment>
       <div class="flex betslip-content-desktop betslip content-height shrink-0 width-300 border-left border-left-shadow flex-column scrollable-auto">
-        <div class="tab flex shrink-0 flex-inherit height-50 padding-10 title align-items-center-inherit background-transparent-b-15">
+        <div class="tab flex shrink-0 flex-inherit height-50 padding-10 title align-items-center-inherit background-transparent-b-15 border-bottom">
           <div class="grow-2">
             <span class="color-green">BETTING SLIP</span>
           </div>
@@ -25,12 +25,48 @@ export default function BetslipNavi(props) {
             </button>
           </div>
         </div>
-        <div class="pick flex flex-inherit flex-column padding-10 min-height-150">
-          <span class="heightp-100 color-grey flex justify-content-center align-items-center">
-            선택된 베팅이 없습니다
+        <div class="pick pick-empty flex flex-inherit flex-column"> {/*Pick이 있을 시 pick-empty class 제거*/}
+          <span class="color-grey flex justify-content-center align-items-center padding-10 border-top border-bottom"> {/*Pick이 있을 시 display-none class 추가*/}
+            <i class="fal fa-exclamation-triangle margin-top-2"></i>선택된 경기가 없습니다
           </span>
+          {/* Pick이 있을 시 
+
+          <div class="slip-content flex-inherit flex-column">
+            <div class="slip-data flex-inherit widthp-100 background-transparent-b-5 padding-10 border-top border-bottom">
+              <div class="flex-inherit slip-odds background-transparent-b-10 padding-15 align-items-center"><span class="color-red">2.90</span></div>
+              <div class="flex-inherit flex-column slip-pick grow-2">
+                <div class="flex-inherit padding-left-10">
+                  <div class="pick-info flex-column widthp-90">
+                    <div class="pick"><span class="color-white">무승부</span></div>
+                    <div class="type"><span class="color-grey">승무패</span></div>
+                  </div>
+                  <div class="delete widthp-10 justify-content-center"><button type="button" class="btn-0 color-twhite"><i class="fal fa-times margin-0"></i></button></div>
+                </div>
+                <div class="flex-inherit team-info padding-left-10 text-ellipsis">
+                  <span class="color-grey text-ellipsis">BC 아스타나<span class="color-white padding-horizontal-5">vs</span>Basket Zielona Goa</span>
+                </div>
+              </div>
+            </div>
+            <div class="slip-data flex-inherit widthp-100 background-transparent-b-5 padding-10 border-top border-bottom">
+              <div class="flex-inherit slip-odds background-transparent-b-10 padding-15 align-items-center"><span class="color-red">2.90</span></div>
+              <div class="flex-inherit flex-column slip-pick grow-2">
+                <div class="flex-inherit padding-left-10">
+                  <div class="pick-info flex-column widthp-90">
+                    <div class="pick"><span class="color-white">무승부</span></div>
+                    <div class="type"><span class="color-grey">승무패</span></div>
+                  </div>
+                  <div class="delete widthp-10 justify-content-center"><button type="button" class="btn-0 color-twhite"><i class="fal fa-times margin-0"></i></button></div>
+                </div>
+                <div class="flex-inherit team-info padding-left-10 text-ellipsis">
+                  <span class="color-grey text-ellipsis">BC 아스타나<span class="color-white padding-horizontal-5">vs</span>Basket Zielona Goa</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          */}
         </div>
-        <div class="stake flex flex-inherit shrink-0">
+        <div class="stake flex flex-inherit shrink-0 border-top">
           <div class="flex-inherit flex-column widthp-100">
             <div class="flex-inherit align-items-center-inherit padding-5 height-40 align-items-center-inherit background-transparent-b-15">
               <div class="grow-2 color-grey">베팅금액</div>
@@ -44,7 +80,7 @@ export default function BetslipNavi(props) {
                 />
               </div>
             </div>
-            <div class="flex-inherit flex-column border-top">
+            <div class="flex-inherit flex-column border-top border-bottom">
               <div class="widthp-100 flex-inherit height-40 justify-content-center-inherit align-items-center-inherit background-transparent-b-5">
                 <div class="widthp-33">
                   <button class="heightp-100 widthp-100 color-grey btn-0 border-right-white background-transparent">
@@ -80,31 +116,31 @@ export default function BetslipNavi(props) {
                 </div>
               </div>
             </div>
-            <div class="flex-inherit align-items-center-inherit padding-5 height-40 align-items-center-inherit border-top background-transparent-b-15">
+            <div class="flex-inherit align-items-center-inherit padding-5 height-40 align-items-center-inherit border-top background-transparent-b-15 border-bottom">
               <div class="grow-2 color-grey">배당률 합계</div>
               <div class="color-green total-odds">
-                <i class="fal fa-times fa-xs margin-right-5"></i>0
+                <i class="fal fa-times fa-xs margin-right-5 margin-top-2"></i>0
               </div>
             </div>
-            <div class="flex-inherit align-items-center-inherit padding-5 height-40 align-items-center-inherit border-top background-transparent-b-15">
+            <div class="flex-inherit align-items-center-inherit padding-5 height-40 align-items-center-inherit border-top background-transparent-b-15 border-bottom">
               <div class="grow-2 color-grey">예상당첨금액</div>
               <div class="color-green total-win-price">
                 <i class="fas fa-won-sign fa-xs margin-right-5"></i>0
               </div>
             </div>
-            <div class="flex-inherit align-items-center-inherit height-40 align-items-center-inherit">
+            <div class="flex-inherit align-items-center-inherit height-40 align-items-center-inherit border-top border-bottom">
               <button class="bet widthp-100 height-40 align-items-center justify-content-center background-green">
                 <span class="color-white">BET</span>
               </button>
             </div>
           </div>
         </div>
-        <div class="flex shrink-0 flex-inherit height-50 padding-10 align-items-center-inherit background-transparent-b-15 margin-top-10">
+        <div class="flex shrink-0 flex-inherit height-50 padding-10 align-items-center-inherit background-transparent-b-15 border-top border-bottom">
           <div class="grow-2 flex">
             <span class="color-green">PROMOTION</span>
           </div>
         </div>
-        <div class="promo-content flex">
+        <div class="promo-content flex border-top">
           <span class="height-40 padding-10 flex color-grey align-items-center justify-content-center widthp-100">
             진행중인 프로모가 없습니다
           </span>
