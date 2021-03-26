@@ -51,6 +51,7 @@ const sportsdetailReducer = (state = initialState, action) => {
             ws_data_market.outcomes.map((data, index) => {
               let ws_outcome_id = data.outcome_id;
               let ws_new_outcome_odds = data.odds;
+              let ws_active_status= data.active;
               // look for the outcomes->name-> id to match with ws_outcome_id
               outcomes.map((data, index) => {
                 if (ws_outcome_id == data.name.id) {
@@ -58,6 +59,7 @@ const sportsdetailReducer = (state = initialState, action) => {
                   // console.log("incoming odds - " + ws_new_outcome_odds)
                   data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
                   data.oldOdds = old_value // changing value of the state of the outcomes old odds
+                  data.active = ws_active_status;
                   // console.log(" old odds - " + old_value)
                   // console.log(" new odds - " + data.odds)
                 }
@@ -99,6 +101,7 @@ const sportsdetailReducer = (state = initialState, action) => {
                 ws_data_market_outcomes.map((data, index) => {
                   let ws_outcome_id = data.outcome_id;
                   let ws_new_outcome_odds = data.odds;
+                  let ws_active_status= data.active;
 
                   details_outcomes.map((data, index) => {
                     // check if the outcomes has the same id and name
@@ -109,6 +112,7 @@ const sportsdetailReducer = (state = initialState, action) => {
                       // console.log("incoming odds - " + ws_new_outcome_odds)
                       data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
                       data.oldOdds = old_value // changing value of the state of the outcomes old odds
+                      data.active = ws_active_status // changing of active stat
                       // console.log(" old odds - " + old_value)
                       // console.log(" new odds - " + data.odds)
                     }
@@ -125,13 +129,13 @@ const sportsdetailReducer = (state = initialState, action) => {
                   ws_data_market_outcomes.map((data, index) => {
                     let ws_outcome_id = data.outcome_id;
                     let ws_new_outcome_odds = data.odds;
-
+                    let ws_active_status= data.active;
                     details_outcomes.map((data, index) => {
                       // check if the outcomes has the same id and name
 
                       if (ws_outcome_id == data.name.id) {
                         let old_value = data.odds;
-
+                        data.active = ws_active_status
                         // console.log("incoming odds - " + ws_new_outcome_odds)
                         data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
                         data.oldOdds = old_value // changing value of the state of the outcomes old odds

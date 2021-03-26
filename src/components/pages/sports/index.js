@@ -233,8 +233,8 @@ const Sports = (props) => {
 
                                       match.market.outcomes.map((outcome, market_index) => {
                                         return (
-
-                                          <div class="active widthp-50 padding-horizontal-5 heightp-100 background-transparent-w-5"> {/* "active" class must be entered when selected. */}
+                                          
+                                          <div class={outcome.active == 1 || outcome.active == true ? "active widthp-50 padding-horizontal-5 heightp-100 background-transparent-w-5" : "disabled widthp-50 padding-horizontal-5 heightp-100 background-transparent-w-5" } >
                                             <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                               <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : outcome.name.outcomeName.ko}</span></div>
                                               <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -244,14 +244,14 @@ const Sports = (props) => {
                                                     <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
                                                     <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
-                                                <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                <span class="color-grey text-ellipsis">{outcome.odds} - {outcome.active}</span>
                                               </div>
                                             </div>
                                           </div>
                                         )
                                       }) : match.market.outcomes.map((outcome, market_index) => {
                                         return (
-                                          <div class="active widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5"> {/* "active" class must be entered when selected. */}
+                                          <div class={outcome.active == 1 || outcome.active == true ? "active widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5" : "disabled widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5" } > 
                                             <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                               <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
                                               <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -434,7 +434,7 @@ const Sports = (props) => {
 
                               market.outcomes.map((outcome, market_index) => {
                                 return (
-                                  <div class="active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1">
+                                  <div class={outcome.active == 1 || outcome.active == true ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1" : "disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1" }>
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
                                       <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
                                     </div>
@@ -452,7 +452,7 @@ const Sports = (props) => {
                               }) :
                               market.outcomes.map((outcome, market_index) => {
                                 return (
-                                  <div class="active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
+                                  <div class={outcome.active == 1 || outcome.active == true ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1" : "disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1" }>
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
                                       <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
                                     </div>
