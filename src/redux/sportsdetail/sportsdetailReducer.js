@@ -11,12 +11,63 @@ const initialState = {
     last_page: null,
     detail: null,
     detail_data: null,
+    bet: {
+      category: "SPORTS",
+      amount: 0,
+      outcomes: [],
+      total_odds: 0,
+    }
   },
   error: "",
 };
 
 const sportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.SET_BET_AMOUNT:
+      state.data.bet.amount = action.payload
+
+      return {
+        ...state,
+      };
+
+    case types.SET_BET_OUTCOMES:
+      console.log(action.payload)
+      const set_outcome_id = action.payload.outcome_id;
+      const set_match_id = action.payload.match_id;
+      const set_odds = action.payload.odds;
+      let total_odds = 1;
+      const existing_outcome = state.data.bet.outcomes.findIndex(x => x.id == set_outcome_id)
+
+      // check if the outcome exists
+      if (existing_outcome == "-1") {
+
+        let existing_match = state.data.bet.outcomes.findIndex(x => x.match_id == set_match_id)
+
+        // check if the match exists 
+        if (existing_match == "-1") {
+          state.data.bet.outcomes.push({ id: set_outcome_id, match_id: set_match_id, odds: set_odds })
+        } else {
+          state.data.bet.outcomes.splice(existing_match, 1)
+          state.data.bet.outcomes.push({ id: set_outcome_id, match_id: set_match_id, odds: set_odds })
+        }
+
+      } else {
+        state.data.bet.outcomes.splice(existing_outcome, 1)
+      }
+
+      state.data.bet.outcomes.forEach(e => {
+        total_odds *= e.odds;
+      });
+
+      state.data.bet.total_odds = total_odds
+      // state.data.bet.outcomes ;
+      // state.data.bet.outcomes ;
+
+
+      return {
+        ...state,
+      };
+
     case types.GET_SPORTSDETAILS:
       const market = action.payload;
       console.log(market)
@@ -51,7 +102,7 @@ const sportsdetailReducer = (state = initialState, action) => {
             ws_data_market.outcomes.map((data, index) => {
               let ws_outcome_id = data.outcome_id;
               let ws_new_outcome_odds = data.odds;
-              let ws_active_status= data.active;
+              let ws_active_status = data.active;
               // look for the outcomes->name-> id to match with ws_outcome_id
               outcomes.map((data, index) => {
                 if (ws_outcome_id == data.name.id) {
@@ -101,7 +152,7 @@ const sportsdetailReducer = (state = initialState, action) => {
                 ws_data_market_outcomes.map((data, index) => {
                   let ws_outcome_id = data.outcome_id;
                   let ws_new_outcome_odds = data.odds;
-                  let ws_active_status= data.active;
+                  let ws_active_status = data.active;
 
                   details_outcomes.map((data, index) => {
                     // check if the outcomes has the same id and name
@@ -129,7 +180,7 @@ const sportsdetailReducer = (state = initialState, action) => {
                   ws_data_market_outcomes.map((data, index) => {
                     let ws_outcome_id = data.outcome_id;
                     let ws_new_outcome_odds = data.odds;
-                    let ws_active_status= data.active;
+                    let ws_active_status = data.active;
                     details_outcomes.map((data, index) => {
                       // check if the outcomes has the same id and name
 
@@ -162,17 +213,6 @@ const sportsdetailReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-
-      // checking if the scoket has acctive shwoing market
-      if (state.data.detail == market.match_id) {
-        console.log("match_id:" + market.match_id)
-        console.log("market active");
-      } else {
-        console.log("no market active");
-      }
-      return {
-        ...state,
-      };
     case types.FETCH_SPORTSDETAILS_REQUEST:
       return {
         ...state,
@@ -186,6 +226,12 @@ const sportsdetailReducer = (state = initialState, action) => {
           last_page: null,
           detail: null,
           detail_data: null,
+          bet: {
+            category: "SPORTS",
+            amount: 0,
+            total_odds: 0,
+            outcomes: []
+          }
         },
       };
     case types.FETCH_SPORTSDETAILS_SUCCESS:

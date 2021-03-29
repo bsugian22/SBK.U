@@ -1,6 +1,8 @@
 import React, { Fragment, useState, useContext } from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
+import { bet, setBetAmount } from "../../redux/sportsdetail/sportsdetailActions";
 export default function BetslipNavi(props) {
   const context = useContext(MenuContext);
   const OpenLayer = {
@@ -9,6 +11,15 @@ export default function BetslipNavi(props) {
   const CloseLayer = {
     display: "hidden",
   };
+  const dispatch = useDispatch();
+  let sports = useSelector((state) => state.sportsdetail);
+
+
+
+  const setBet = (value) => {
+    dispatch(setBetAmount(value));
+  };
+
   return (
     <Fragment>
       <div class="flex betslip-content-desktop betslip content-height shrink-0 width-300 border-left border-left-shadow flex-column scrollable-auto">
@@ -77,40 +88,62 @@ export default function BetslipNavi(props) {
                   name="skeyword"
                   placeholder="금액을 입력하세요"
                   required
+                  value={sports.data.bet.amount}
+                  onChange={(e) =>
+                    dispatch(setBetAmount(e.target.value))
+                  }
                 />
               </div>
             </div>
             <div class="flex-inherit flex-column border-top border-bottom">
               <div class="widthp-100 flex-inherit height-40 justify-content-center-inherit align-items-center-inherit background-transparent-b-5">
                 <div class="widthp-33">
-                  <button class="heightp-100 widthp-100 color-grey btn-0 border-right-white background-transparent">
+                  <button class="heightp-100 widthp-100 color-grey btn-0 border-right-white background-transparent"
+                    onClick={() =>
+                      setBet("5000")
+                    }>
                     5,000
                   </button>
                 </div>
                 <div class="widthp-33">
-                  <button class="heightp-100 widthp-100 color-grey btn-0 border-right-white background-transparent">
+                  <button class="heightp-100 widthp-100 color-grey btn-0 border-right-white background-transparent"
+                    onClick={() =>
+                      setBet("10000")
+                    }>
                     10,000
                   </button>
                 </div>
                 <div class="widthp-33">
-                  <button class="heightp-100 widthp-100 color-grey btn-0 background-transparent">
+                  <button class="heightp-100 widthp-100 color-grey btn-0 background-transparent"
+                    onClick={() =>
+                      setBet("50000")
+                    }>
                     50,000
                   </button>
                 </div>
               </div>
               <div class="widthp-100 flex-inherit height-40 justify-content-center-inherit align-items-center-inherit border-top background-transparent-b-5">
                 <div class="widthp-33">
-                  <button class="heightp-100 widthp-100 color-grey btn-0 background-transparent border-right-white">
+                  <button class="heightp-100 widthp-100 color-grey btn-0 background-transparent border-right-white"
+                  onClick={ () =>
+                    setBet("100000")
+                  }>
                     100,000
                   </button>
                 </div>
                 <div class="widthp-33">
-                  <button class="heightp-100 widthp-100 color-grey btn-0 background-transparent border-right-white">
+                  <button class="heightp-100 widthp-100 color-grey btn-0 background-transparent border-right-white"
+                  onClick={ () =>
+                    setBet("500000")
+                  }>
                     500,000
                   </button>
                 </div>
                 <div class="widthp-33">
-                  <button class="heightp-100 widthp-100 color-grey btn-0 background-transparent">
+                  <button class="heightp-100 widthp-100 color-grey btn-0 background-transparent"
+                  onClick={ () =>
+                    setBet("1000000")
+                  }>
                     1,000,000
                   </button>
                 </div>
@@ -119,17 +152,20 @@ export default function BetslipNavi(props) {
             <div class="flex-inherit align-items-center-inherit padding-5 height-40 align-items-center-inherit border-top background-transparent-b-15 border-bottom">
               <div class="grow-2 color-grey">배당률 합계</div>
               <div class="color-green total-odds">
-                <i class="fal fa-times fa-xs margin-right-5 margin-top-2"></i>0
+                <i class="fal fa-times fa-xs margin-right-5 margin-top-2"></i> {sports.data.bet.total_odds}
               </div>
             </div>
             <div class="flex-inherit align-items-center-inherit padding-5 height-40 align-items-center-inherit border-top background-transparent-b-15 border-bottom">
               <div class="grow-2 color-grey">예상당첨금액</div>
               <div class="color-green total-win-price">
-                <i class="fas fa-won-sign fa-xs margin-right-5"></i>0
+                <i class="fas fa-won-sign fa-xs margin-right-5"></i>{sports.data.bet.total_odds * sports.data.bet.amount}
               </div>
             </div>
             <div class="flex-inherit align-items-center-inherit height-40 align-items-center-inherit border-top border-bottom">
-              <button class="bet widthp-100 height-40 align-items-center justify-content-center background-green">
+              <button class="bet widthp-100 height-40 align-items-center justify-content-center background-green"
+              onClick = { () => 
+                bet(sports.data.bet)
+              }>
                 <span class="color-white">BET</span>
               </button>
             </div>

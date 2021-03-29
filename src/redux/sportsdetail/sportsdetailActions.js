@@ -20,6 +20,20 @@ export const getSportsDetails = (details) => {
   };
 };
 
+export const setBetOutcome = (data) => {
+  return {
+    type: types.SET_BET_OUTCOMES,
+    payload: data
+  };
+};
+
+export const setBetAmount = (amount) => {
+  return {
+    type: types.SET_BET_AMOUNT,
+    payload: amount
+  };
+};
+
 export const fetchSportsdetailsSuccess = (sportsdetails) => {
   return {
     type: types.FETCH_SPORTSDETAILS_SUCCESS,
@@ -144,7 +158,7 @@ export const fetchSportsdetails = (params) => {
             data.oldOdds = null;
           })
         })
-        dispatch(sportWebSocket(matches));
+        // dispatch(sportWebSocket(matches));
 
         var data = chain(sportsdetails.data)
           .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
@@ -154,6 +168,12 @@ export const fetchSportsdetails = (params) => {
         sportsdetails.data = data
         sportsdetails.detail = null
         sportsdetails.detail_data = null
+        sportsdetails.bet = {
+          category: "SPORTS",
+          amount: 0,
+          outcomes: [],
+          total_odds: 0,
+        }
 
         dispatch(fetchSportsdetailsSuccess(sportsdetails))
 
@@ -227,6 +247,17 @@ export const fetchSportsdetail = (matchId) => {
         dispatch(fetchSportsdetailFailure(errorMsg))
       })
   };
+};
+
+export const bet = (data) => {
+  // return (dispatch) => {
+  axios.post(`/api/positions`, data)
+    .then(response => {
+      console.log(response.data)
+    }).catch(error => {
+      const errorMsg = error.message;
+    })
+  // };
 };
 
 export const createSportsdetail = () => {
