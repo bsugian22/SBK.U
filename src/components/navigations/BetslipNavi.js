@@ -40,7 +40,7 @@ export default function BetslipNavi(props) {
           <span class="color-grey flex justify-content-center align-items-center padding-10 border-top border-bottom"> {/*Pick이 있을 시 display-none class 추가*/}
             <i class="fal fa-exclamation-triangle margin-top-2"></i>선택된 경기가 없습니다
           </span>
-          {/* Pick이 있을 시 
+          {/* Pick이 있을 시  */}
 
           <div class="slip-content flex-inherit flex-column">
             <div class="slip-data flex-inherit widthp-100 background-transparent-b-5 padding-10 border-top border-bottom">
@@ -75,7 +75,7 @@ export default function BetslipNavi(props) {
             </div>
           </div>
 
-          */}
+         
         </div>
         <div class="stake flex flex-inherit shrink-0 border-top">
           <div class="flex-inherit flex-column widthp-100">

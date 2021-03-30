@@ -34,6 +34,7 @@ const sportsdetailReducer = (state = initialState, action) => {
       console.log(action.payload)
       const set_outcome_id = action.payload.outcome_id;
       const set_match_id = action.payload.match_id;
+      const set_market_id = action.payload.market_id;
       const set_odds = action.payload.odds;
       let total_odds = 1;
       const existing_outcome = state.data.bet.outcomes.findIndex(x => x.id == set_outcome_id)
@@ -41,14 +42,14 @@ const sportsdetailReducer = (state = initialState, action) => {
       // check if the outcome exists
       if (existing_outcome == "-1") {
 
-        let existing_match = state.data.bet.outcomes.findIndex(x => x.match_id == set_match_id)
+        let existing_market = state.data.bet.outcomes.findIndex(x => x.market_id == set_market_id)
 
         // check if the match exists 
-        if (existing_match == "-1") {
-          state.data.bet.outcomes.push({ id: set_outcome_id, match_id: set_match_id, odds: set_odds })
+        if (existing_market == "-1") {
+          state.data.bet.outcomes.push({ id: set_outcome_id, market_id: set_market_id, odds: set_odds })
         } else {
-          state.data.bet.outcomes.splice(existing_match, 1)
-          state.data.bet.outcomes.push({ id: set_outcome_id, match_id: set_match_id, odds: set_odds })
+          state.data.bet.outcomes.splice(existing_market, 1)
+          state.data.bet.outcomes.push({ id: set_outcome_id, market_id: set_market_id, odds: set_odds })
         }
 
       } else {
