@@ -236,7 +236,7 @@ const Sports = (props) => {
                                 <div class="flex pick-wrap flex-inherit align-items-center-inherit justify-content-center-inherit widthp-100">
 
                                   {match.market.status == 1 ?
-                                    match.market.outcomes.length == 2 ?
+                                    match.market?.outcomes?.length == 2 ?
 
                                       match.market.outcomes.map((outcome, market_index) => {
                                         return (
@@ -273,7 +273,7 @@ const Sports = (props) => {
                                             </div>
                                           </div>
                                         )
-                                      }) : match.market.outcomes.length == 2 ?
+                                      }) : match?.market?.outcomes?.length == 2 ?
 
                                       match.market.outcomes.map((outcome, market_index) => {
                                         return (
@@ -437,7 +437,7 @@ const Sports = (props) => {
 
 
 
-                            {market.outcomes.length == 2 ?
+                            {market?.outcomes?.length == 2 ?
 
                               market.outcomes.map((outcome, market_index) => {
                                 return (
@@ -496,7 +496,7 @@ const Sports = (props) => {
 
 
 
-                            {market.outcomes.length == 2 ?
+                            {market?.outcomes?.length == 2 ?
 
                               market.outcomes.map((outcome, market_index) => {
                                 return (
