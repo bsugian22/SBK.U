@@ -250,8 +250,6 @@ export default function BetslipNavi(props) {
                 class="background-transparent-b-5 color-white stake-input-mobile"
                 name="skeyword"
                 placeholder="금액을 입력하세요"
-                required=""
-                value=""
               />
             </div>
           </div>
