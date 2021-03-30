@@ -195,7 +195,6 @@ export const fetchSportsdetails = (params) => {
 
 export const sportWebSocket = (matches) => {
 
-  // alert(socket.OPEN)
   return (dispatch) => {
     // socket.onopen = function (e) {
     matches.map((data, index) => {
@@ -210,7 +209,6 @@ export const sportWebSocket = (matches) => {
     socket.onmessage = function (event) {
       event.data.text().then((data) => {
         const market = JSON.parse(data)
-        // console.log(market)
         dispatch(getSportsDetails(market));
       });
     };

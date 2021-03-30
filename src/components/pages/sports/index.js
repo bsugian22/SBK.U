@@ -441,7 +441,7 @@ const Sports = (props) => {
 
                               market.outcomes.map((outcome, market_index) => {
                                 return (
-                                  <div key={market_index} onClick={setBet} data-outcome_name = {outcome.name.outcomeName.ko} data-market_name = {market.title.marketName.ko} data-home-team = {sports.data.detail_data.homeTeam.name["ko"]} data-away-team = {sports.data.detail_data.awayTeam.name["ko"]} data-match-id = {sports.data.detail_data.id} data-market-id = {market.id} data-outcome-id = {outcome.id} data-odds = {outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1" }>
+                                  <div key={market_index+100000} onClick={setBet} data-outcome_name = {outcome.name.outcomeName.ko} data-market_name = {market.title.marketName.ko} data-home-team = {sports.data.detail_data.homeTeam.name["ko"]} data-away-team = {sports.data.detail_data.awayTeam.name["ko"]} data-match-id = {sports.data.detail_data.id} data-market-id = {market.id} data-outcome-id = {outcome.id} data-odds = {outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1" }>
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
                                       <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
                                     </div>
@@ -459,7 +459,7 @@ const Sports = (props) => {
                               }) :
                               market.outcomes.map((outcome, market_index) => {
                                 return (
-                                  <div key={market_index} onClick={setBet} data-outcome_name = {outcome.name.outcomeName.ko} data-market_name = {market.title.marketName.ko} data-home-team = {sports.data.detail_data.homeTeam.name["ko"]} data-away-team = {sports.data.detail_data.awayTeam.name["ko"]} data-match-id = {sports.data.detail_data.id} data-market-id = {market.id} data-outcome-id = {outcome.id} data-odds = {outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1" }>
+                                  <div key={market_index+100000} onClick={setBet} data-outcome_name = {outcome.name.outcomeName.ko} data-market_name = {market.title.marketName.ko} data-home-team = {sports.data.detail_data.homeTeam.name["ko"]} data-away-team = {sports.data.detail_data.awayTeam.name["ko"]} data-match-id = {sports.data.detail_data.id} data-market-id = {market.id} data-outcome-id = {outcome.id} data-odds = {outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1" }>
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
                                       <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
                                     </div>
@@ -484,7 +484,7 @@ const Sports = (props) => {
                         rows.push(
                           <div
                             class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center border-bottom shrink-0"
-                            key={market_index}
+                            key={market_index+100000}
                           >
                             <span class="color-grey">
                               {market.title.marketName.ko}
@@ -500,7 +500,7 @@ const Sports = (props) => {
 
                               market.outcomes.map((outcome, market_index) => {
                                 return (
-                                  <div key={market_index} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1">
+                                  <div key={market_index+100000} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1">
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
                                       <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
                                     </div>
@@ -518,7 +518,7 @@ const Sports = (props) => {
                               }) :
                               market.outcomes.map((outcome, market_index) => {
                                 return (
-                                  <div key={market_index} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
+                                  <div key={market_index+100000} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1">
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
                                       <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
                                     </div>
@@ -613,7 +613,7 @@ const Sports = (props) => {
               var rows = [];
               rows.push(
                 <Fragment key={index}>
-                  <div class="flex widthp-100 height-40 align-items-center-inherit border-bottom" >
+                  <div key={index} class="flex widthp-100 height-40 align-items-center-inherit border-bottom" >
                     <div class="flex pi-title orange border-right grow-2">
                       <span class="color-white padding-left-15 grow-2">
                         {moment(matches.startAt).format("YY-MM-DD")} 수요일
@@ -807,9 +807,7 @@ const Sports = (props) => {
                 ? sports.data.detail_data.markets.map((market, market_index) => {
                   var rows = [];
 
-                  // console.log(market.status != 0 );
                   if (market.status == 1) {
-                    // console.log(market.status);
                     rows.push(
                       <div key={market_index} class="odds-detail-wwl-titleist height-40 align-items-center-inherit border-bottom background-transparent-b-20" key={market_index}>
                         <div class="flex pi-title">
@@ -822,7 +820,7 @@ const Sports = (props) => {
 
                     rows.push(
                       <Fragment>
-                        <div class="odds-detail-wwl-cs align-items-center-inherite border-bottom flex-inherit justify-content-center-inherit heightp-100" key={market_index}>
+                        <div key={market_index} class="odds-detail-wwl-cs align-items-center-inherite border-bottom flex-inherit justify-content-center-inherit heightp-100" key={market_index}>
                           <div class="widthp-33 border-right padding-vertical-10">
                             <span class="color-white">AI Naser SC</span>
                           </div>
