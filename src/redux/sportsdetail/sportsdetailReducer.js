@@ -23,6 +23,18 @@ const initialState = {
 
 const sportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.SPLICE_OUTCOME:
+      state.data.bet.outcomes.splice (action.payload,1)
+
+      let total_odds_x = 1;
+      state.data.bet.outcomes.forEach(e => {
+        total_odds_x *= e.odds;
+      });
+      state.data.bet.total_odds = total_odds_x
+
+      return {
+        ...state,
+      };
     case types.SET_BET_AMOUNT:
       state.data.bet.amount = action.payload
 
@@ -35,6 +47,12 @@ const sportsdetailReducer = (state = initialState, action) => {
       const set_outcome_id = action.payload.outcome_id;
       const set_match_id = action.payload.match_id;
       const set_odds = action.payload.odds;
+      const set_home = action.payload.home_team;
+      const set_away = action.payload.away_team;
+      const set_market_name = action.payload.market_name;
+      const set_outcome_name = action.payload.outcome_name;
+
+
       let total_odds = 1;
       const existing_outcome = state.data.bet.outcomes.findIndex(x => x.id == set_outcome_id)
 
@@ -45,10 +63,26 @@ const sportsdetailReducer = (state = initialState, action) => {
 
         // check if the match exists 
         if (existing_match == "-1") {
-          state.data.bet.outcomes.push({ id: set_outcome_id, match_id: set_match_id, odds: set_odds })
+          state.data.bet.outcomes.push({
+            id: set_outcome_id,
+            match_id: set_match_id,
+            odds: set_odds,
+            home_team: set_home,
+            away_team: set_away,
+            market_name: set_market_name,
+            outcome_name: set_outcome_name,
+          })
         } else {
           state.data.bet.outcomes.splice(existing_match, 1)
-          state.data.bet.outcomes.push({ id: set_outcome_id, match_id: set_match_id, odds: set_odds })
+          state.data.bet.outcomes.push({
+            id: set_outcome_id,
+            match_id: set_match_id,
+            odds: set_odds,
+            home_team: set_home,
+            away_team: set_away,
+            market_name: set_market_name,
+            outcome_name: set_outcome_name,
+          })
         }
 
       } else {
@@ -200,14 +234,8 @@ const sportsdetailReducer = (state = initialState, action) => {
               }
 
             }
-
-
           })
-
         })
-
-
-
       }
 
       return {

@@ -2,7 +2,8 @@ import React, { Fragment, useState, useContext } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
-import { bet, setBetAmount } from "../../redux/sportsdetail/sportsdetailActions";
+import { splice_data } from "../../helpers/object";
+import { bet, setBetAmount, spliceOutcome } from "../../redux/sportsdetail/sportsdetailActions";
 export default function BetslipNavi(props) {
   const context = useContext(MenuContext);
   const OpenLayer = {
@@ -37,45 +38,47 @@ export default function BetslipNavi(props) {
           </div>
         </div>
         <div class="pick pick-empty flex flex-inherit flex-column"> {/*Pick이 있을 시 pick-empty class 제거*/}
-          <span class="color-grey flex justify-content-center align-items-center padding-10 border-top border-bottom"> {/*Pick이 있을 시 display-none class 추가*/}
-            <i class="fal fa-exclamation-triangle margin-top-2"></i>선택된 경기가 없습니다
-          </span>
-          {/* Pick이 있을 시  */}
 
+          {/* Pick이 있을 시  */}
           <div class="slip-content flex-inherit flex-column">
-            <div class="slip-data flex-inherit widthp-100 background-transparent-b-5 padding-10 border-top border-bottom">
-              <div class="flex-inherit slip-odds background-transparent-b-10 padding-15 align-items-center"><span class="color-red">2.90</span></div>
-              <div class="flex-inherit flex-column slip-pick grow-2">
-                <div class="flex-inherit padding-left-10">
-                  <div class="pick-info flex-column widthp-90">
-                    <div class="pick"><span class="color-white">무승부</span></div>
-                    <div class="type"><span class="color-grey">승무패</span></div>
+            {sports.data.bet.outcomes.length > 0
+              ? sports.data.bet.outcomes.map((outcome, index) => {
+                return (
+                  <div key={index} class="slip-data flex-inherit widthp-100 background-transparent-b-5 padding-10 border-top border-bottom">
+                    <div class="flex-inherit slip-odds background-transparent-b-10 padding-15 align-items-center"><span class="color-red">{outcome.odds}</span></div>
+                    <div class="flex-inherit flex-column slip-pick grow-2">
+                      <div class="flex-inherit padding-left-10">
+                        <div class="pick-info flex-column widthp-90">
+                          <div class="pick"><span class="color-white">{outcome.outcome_name}</span></div>
+                          <div class="type"><span class="color-grey">{outcome.market_name}</span></div>
+                        </div>
+                        <div class="delete widthp-10 justify-content-center">
+                          <button type="button" class="btn-0 color-twhite"
+                            onClick={() => {
+                              dispatch(spliceOutcome(index))
+                            }
+
+                            }
+                          ><i class="fal fa-times margin-0"></i></button>
+                        </div>
+                      </div>
+                      <div class="flex-inherit team-info padding-left-10 text-ellipsis">
+                        <span class="color-grey text-ellipsis">{outcome.home_team.length < 8 ? outcome.home_team : outcome.home_team.substring(0,8)+"..."}<span class="color-white padding-horizontal-5">vs</span>{outcome.away_team.length < 8 ? outcome.away_team : outcome.away_team.substring(0,8)+"..."}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="delete widthp-10 justify-content-center"><button type="button" class="btn-0 color-twhite"><i class="fal fa-times margin-0"></i></button></div>
-                </div>
-                <div class="flex-inherit team-info padding-left-10 text-ellipsis">
-                  <span class="color-grey text-ellipsis">BC 아스타나<span class="color-white padding-horizontal-5">vs</span>Basket Zielona Goa</span>
-                </div>
-              </div>
-            </div>
-            <div class="slip-data flex-inherit widthp-100 background-transparent-b-5 padding-10 border-top border-bottom">
-              <div class="flex-inherit slip-odds background-transparent-b-10 padding-15 align-items-center"><span class="color-red">2.90</span></div>
-              <div class="flex-inherit flex-column slip-pick grow-2">
-                <div class="flex-inherit padding-left-10">
-                  <div class="pick-info flex-column widthp-90">
-                    <div class="pick"><span class="color-white">무승부</span></div>
-                    <div class="type"><span class="color-grey">승무패</span></div>
-                  </div>
-                  <div class="delete widthp-10 justify-content-center"><button type="button" class="btn-0 color-twhite"><i class="fal fa-times margin-0"></i></button></div>
-                </div>
-                <div class="flex-inherit team-info padding-left-10 text-ellipsis">
-                  <span class="color-grey text-ellipsis">BC 아스타나<span class="color-white padding-horizontal-5">vs</span>Basket Zielona Goa</span>
-                </div>
-              </div>
-            </div>
+                )
+              })
+              : <span class="color-grey flex justify-content-center align-items-center padding-10 border-top border-bottom"> {/*Pick이 있을 시 display-none class 추가*/}
+                <i class="fal fa-exclamation-triangle margin-top-2"></i>선택된 경기가 없습니다
+              </span>
+            }
+
+
+
           </div>
 
-         
+
         </div>
         <div class="stake flex flex-inherit shrink-0 border-top">
           <div class="flex-inherit flex-column widthp-100">
@@ -125,25 +128,25 @@ export default function BetslipNavi(props) {
               <div class="widthp-100 flex-inherit height-40 justify-content-center-inherit align-items-center-inherit border-top background-transparent-b-5">
                 <div class="widthp-33">
                   <button class="heightp-100 widthp-100 color-grey btn-0 background-transparent border-right-white"
-                  onClick={ () =>
-                    setBet("100000")
-                  }>
+                    onClick={() =>
+                      setBet("100000")
+                    }>
                     100,000
                   </button>
                 </div>
                 <div class="widthp-33">
                   <button class="heightp-100 widthp-100 color-grey btn-0 background-transparent border-right-white"
-                  onClick={ () =>
-                    setBet("500000")
-                  }>
+                    onClick={() =>
+                      setBet("500000")
+                    }>
                     500,000
                   </button>
                 </div>
                 <div class="widthp-33">
                   <button class="heightp-100 widthp-100 color-grey btn-0 background-transparent"
-                  onClick={ () =>
-                    setBet("1000000")
-                  }>
+                    onClick={() =>
+                      setBet("1000000")
+                    }>
                     1,000,000
                   </button>
                 </div>
@@ -163,9 +166,9 @@ export default function BetslipNavi(props) {
             </div>
             <div class="flex-inherit align-items-center-inherit height-40 align-items-center-inherit border-top border-bottom">
               <button class="bet widthp-100 height-40 align-items-center justify-content-center background-green"
-              onClick = { () => 
-                bet(sports.data.bet)
-              }>
+                onClick={() =>
+                  bet(sports.data.bet)
+                }>
                 <span class="color-white">BET</span>
               </button>
             </div>

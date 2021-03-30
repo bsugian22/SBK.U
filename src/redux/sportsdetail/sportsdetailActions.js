@@ -27,6 +27,13 @@ export const setBetOutcome = (data) => {
   };
 };
 
+export const spliceOutcome = (index) => {
+  return {
+    type: types.SPLICE_OUTCOME,
+    payload: index
+  };
+};
+
 export const setBetAmount = (amount) => {
   return {
     type: types.SET_BET_AMOUNT,
@@ -158,7 +165,7 @@ export const fetchSportsdetails = (params) => {
             data.oldOdds = null;
           })
         })
-        // dispatch(sportWebSocket(matches));
+        dispatch(sportWebSocket(matches));
 
         var data = chain(sportsdetails.data)
           .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
