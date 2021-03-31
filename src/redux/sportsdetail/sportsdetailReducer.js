@@ -23,6 +23,13 @@ const initialState = {
 
 const sportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.RESET_OUTCOME:
+      state.data.bet.outcomes = [];
+
+      return {
+        ...state,
+      };
+
     case types.SPLICE_OUTCOME:
       state.data.bet.outcomes.splice (action.payload,1)
 

@@ -3,7 +3,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
 import { splice_data } from "../../helpers/object";
-import { bet, setBetAmount, spliceOutcome } from "../../redux/sportsdetail/sportsdetailActions";
+import { bet, resetOutcome, setBetAmount, spliceOutcome } from "../../redux/sportsdetail/sportsdetailActions";
 export default function BetslipNavi(props) {
   const context = useContext(MenuContext);
   const OpenLayer = {
@@ -29,10 +29,15 @@ export default function BetslipNavi(props) {
             <span class="color-green">BETTING SLIP</span>
           </div>
           <div class="count">
-            <span class="color-white">0</span>
+            <span class="color-white">{sports.data.bet.outcomes.length}</span>
           </div>
           <div class="delete padding-horizontal-10">
-            <button class="color-grey">
+            <button class="color-grey"
+              onClick={() => {
+                dispatch(resetOutcome())
+              }
+
+              }>
               <i class="fad fa-trash margin-0"></i>
             </button>
           </div>
@@ -63,7 +68,7 @@ export default function BetslipNavi(props) {
                         </div>
                       </div>
                       <div class="flex-inherit team-info padding-left-10 text-ellipsis">
-                        <span class="color-grey text-ellipsis">{outcome.home_team.length < 8 ? outcome.home_team : outcome.home_team.substring(0,8)+"..."}<span class="color-white padding-horizontal-5">vs</span>{outcome.away_team.length < 8 ? outcome.away_team : outcome.away_team.substring(0,8)+"..."}</span>
+                        <span class="color-grey text-ellipsis">{outcome.home_team.length < 8 ? outcome.home_team : outcome.home_team.substring(0, 8) + "..."}<span class="color-white padding-horizontal-5">vs</span>{outcome.away_team.length < 8 ? outcome.away_team : outcome.away_team.substring(0, 8) + "..."}</span>
                       </div>
                     </div>
                   </div>

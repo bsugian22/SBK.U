@@ -34,6 +34,12 @@ export const spliceOutcome = (index) => {
   };
 };
 
+export const resetOutcome = () => {
+  return {
+    type: types.RESET_OUTCOME,
+  };
+};
+
 export const setBetAmount = (amount) => {
   return {
     type: types.SET_BET_AMOUNT,
