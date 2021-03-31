@@ -251,7 +251,7 @@ export default function Position() {
                   </button>
                 </div>
               </div>
-              <div class="history-item-footer flex-inherit border-top padding-vertical-10 align-items-center background-transparent-b-10 border-bottom-rb">
+              {/* <div class="history-item-footer flex-inherit border-top padding-vertical-10 align-items-center background-transparent-b-10 border-bottom-rb">
                 <div class="grow-2 padding-left-10">
                   <input
                     type="text"
@@ -298,7 +298,7 @@ export default function Position() {
                 >
                   Create
                 </button>
-              </div>
+              </div> */}
               <div class="padding-vertical-10 flex-inherit  height-60 color-grey">
                 <div class="pagination flex-inherit widthp-100 heightp-100">
                   <div class="select">
