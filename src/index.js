@@ -1,4 +1,5 @@
 import '../assets/css/app.scss'
+import '../assets/css/icons.css';
 
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'

@@ -171,7 +171,7 @@ export const fetchSportsdetails = (params) => {
             data.oldOdds = null;
           })
         })
-        dispatch(sportWebSocket(matches));
+        // dispatch(sportWebSocket(matches));
 
         var data = chain(sportsdetails.data)
           .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
