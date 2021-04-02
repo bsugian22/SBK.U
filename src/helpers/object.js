@@ -35,9 +35,9 @@ export const snakelize = function (data) {
 
 
 
-export const iconsList = []
+export const iconsList = {icons:[],total:198,start:1,end:26}
 for (let index = 1; index <= 198; index++) {
-    index == 44 ? iconsList.push({id:index , icon:"icon-svg"}) : iconsList.push({id:index , icon:"icon-"+index})
+    index == 44 ? iconsList.icons.push({id:index , icon:"icon-svg"}) : iconsList.icons.push({id:index , icon:"icon-"+index})
 }
     
 

@@ -94,14 +94,24 @@ const Sports = (props) => {
             <div class="prematch-header flex-inherit flex-column padding-top-10 padding-left-10 padding-right-10">
               <div class="event-slider flex-column widthp-100">
                 <div class="flex event-list height-60 align-items-center padding-horizontal-10 background-transparent-b-30">
+                  <button
+                    class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                  >
+                    <i class="fas fa-chevron-left margin-0 color-white"></i>
+                  </button>
                   <div class="scrollmenu">
-                   { iconsList.map((icon, index) => {
-                     return  <a href="#icon"> <span class={icon.icon}></span></a>
-                   }
-                   )}
-                   
-                    
+                    {console.log(iconsList)}
+                    {iconsList.icons.map((icon, index) => {
+                      return <a href="#icon"> <span class={icon.icon}></span></a>
+                    }
+                    )}
+
                   </div>
+                  <button
+                    class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                  >
+                    <i class="fas fa-chevron-right margin-0 color-white"></i>
+                  </button>
                 </div>
                 <div class="flex height-40 padding-horizontal-10 align-items-center background-transparent-b-20">
                   <div class="flex">

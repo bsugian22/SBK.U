@@ -1223,10 +1223,14 @@ div.barloader2 {
   }
 }
 
+.next {
+  float: right;
+}
 
 div.scrollmenu {
   overflow: auto;
   white-space: nowrap;
+  text-align: center;
 }
 
 div.scrollmenu a {
