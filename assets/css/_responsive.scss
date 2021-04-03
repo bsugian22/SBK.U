@@ -1227,13 +1227,14 @@ div.barloader2 {
   float: right;
 }
 
-div.scrollmenu {
-  overflow: auto;
+#scrollmenu {
+  overflow-x: scroll;
   white-space: nowrap;
   text-align: center;
+  scroll-behavior: smooth;
 }
 
-div.scrollmenu a {
+#scrollmenu a {
   display: inline-block;
   color: white;
   text-align: center;
@@ -1241,6 +1242,6 @@ div.scrollmenu a {
   text-decoration: none;
 }
 
-div.scrollmenu a:hover {
+div#scrollmenu a:hover {
   background-color: #777;
 }

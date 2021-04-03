@@ -52,6 +52,14 @@ const Sports = (props) => {
     }
   };
 
+  const scrollRight = () => {
+    document.getElementById('scrollmenu').scrollLeft += 250;
+  };
+  const scrollLeft = () => {
+    document.getElementById('scrollmenu').scrollLeft -= 250;
+  };
+  
+
   const setBet = (e) => {
     let match_id = e.currentTarget.getAttribute("data-match-id");
     let market_id = e.currentTarget.getAttribute("data-market-id");
@@ -96,10 +104,11 @@ const Sports = (props) => {
                 <div class="flex event-list height-60 align-items-center padding-horizontal-10 background-transparent-b-30">
                   <button
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                    onClick={ () => {scrollLeft()}}
                   >
                     <i class="fas fa-chevron-left margin-0 color-white"></i>
                   </button>
-                  <div class="scrollmenu">
+                  <div id="scrollmenu">
                     {console.log(iconsList)}
                     {iconsList.icons.map((icon, index) => {
                       return <a href="#icon"> <span class={icon.icon}></span></a>
@@ -109,6 +118,7 @@ const Sports = (props) => {
                   </div>
                   <button
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                    onClick={ () => {scrollRight()}}
                   >
                     <i class="fas fa-chevron-right margin-0 color-white"></i>
                   </button>
