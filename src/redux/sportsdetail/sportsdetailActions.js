@@ -202,7 +202,7 @@ export const fetchSportsdetails = (params) => {
 export const sportWebSocket = (matches) => {
 
   return (dispatch) => {
-    socket.onopen = function (e) {
+    // socket.onopen = function (e) {
       matches.map((data, index) => {
         console.log("sending:" + data)
         const match_data = {
@@ -211,7 +211,7 @@ export const sportWebSocket = (matches) => {
         }
         socket.send(JSON.stringify(match_data));
       })
-    };
+    // };
     socket.onmessage = function (event) {
       event.data.text().then((data) => {
         const market = JSON.parse(data)

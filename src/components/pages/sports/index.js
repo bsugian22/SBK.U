@@ -339,14 +339,19 @@ const Sports = (props) => {
 
                               <div class="flex justify-content-center-inherit align-items-center-inherit padding-vertical-2 padding-left-0 padding-right-2 market-count">
                                 <div
-                                  class="flex market-detail widthp-50 margin-right-2"
+                                  class=""
+                                  className={
+                                    match.id === sports.data.detail
+                                      ? "flex market-detail widthp-50 margin-right-2 active"
+                                      : "flex market-detail widthp-50 margin-right-2"
+                                  }
                                   data-id="0"
                                   onClick={() => setDetail(match)}
                                 >
                                   <button
                                     className={
                                       match.id === sports.data.detail
-                                        ? "color-green"
+                                        ? "color-white"
                                         : "color-white"
                                     }
                                   >
