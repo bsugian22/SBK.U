@@ -440,11 +440,39 @@ em {
    .active {
       box-shadow: inset 0 0 0px 1px #34ac53;
       background-color:rgba(0, 0, 0, 0.1);
+      transition: 0.2s ease;
+      .team-1 {
+         span {
+            color :#ffffff !important;
+            transition: 0.2s ease;
+         }
+      }
+      .team-odds {
+         span {
+            color :#ffffff !important;
+            transition: 0.2s ease;
+         }
+      }
    }
    .pick {
       &:hover{
+         background-color:rgba(0, 0, 0, 0.1);
          box-shadow: inset 0 0 0px 1px #34ac53;
+         transition: 0.2s ease;
          cursor:pointer;
+
+         .team-1 {
+            span {
+               color :#ffffff !important;
+               transition: 0.2s ease;
+            }
+         }
+         .team-odds {
+            span {
+               color :#ffffff !important;
+               transition: 0.2s ease;
+            }
+         }
       }
    }
 }
@@ -1066,10 +1094,10 @@ select {
          .market-default {
             > div {
                &:first-child {
-                  width: calc(100% - 100px);
+                  width: calc(100% - 50px);
                }
                &:last-child {
-                  width: 100px;
+                  width: 50px;
                }
             }
          }
@@ -1092,6 +1120,7 @@ select {
       .market-data {
          .data {
             cursor: pointer;
+            border-bottom:1px solid rgba(255, 255, 255, 0.05) !important;
             &:hover {
                box-shadow: 0px 0px 1px 1px #34ac53 inset;
                background-color: rgba(0, 0, 0, 0.1);
@@ -1120,6 +1149,13 @@ select {
             span {
                color: #b7b7b7 !important;
             }
+         }
+         .widthp-50:nth-child(2n) {
+            border-left:1px solid rgba(255, 255, 255, 0.05) !important;
+         }
+         .widthp-33:nth-child(3n+2) {
+            border-left:1px solid rgba(255, 255, 255, 0.05) !important;
+            border-right:1px solid rgba(255, 255, 255, 0.05) !important;
          }
       }
    }
@@ -1171,17 +1207,17 @@ select {
    .title-info {
       > div {
          &:first-child {
-            width: calc(100% - 100px);
+            width: calc(100% - 50px);
          }
       }
    }
    .market-default {
       > div {
          &:first-child {
-            width: calc(100% - 100px);
+            width: calc(100% - 50px);
          }
          &:last-child {
-            width: 100px;
+            width: 50px;
          }
       }
       .odds {
@@ -1229,6 +1265,9 @@ select {
                span {
                   color: #ffffff;
                   transition: 0.2s ease;
+               }
+               button {
+                  color: #ffffff !important;
                }
             }
             &.active {
@@ -1537,7 +1576,6 @@ select {
    max-width: calc(100vw - 300px);
 }
 /* //side-area */
-
 .sign-wrap {
    p {
       color: white;

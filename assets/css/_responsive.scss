@@ -1039,22 +1039,7 @@ $baseFontSize: 16;
   }
 }
 
-@include mq($max-width: 1600px) {
-  .games-book-continer {
-    max-width: calc(100vw - 300px) !important;
-  }
-  .account-continer {
-    max-width: calc(100vw - 400px) !important;
-  }
-  /*
-    .betslip-content-desktop {
-      position: absolute !important;
-      right: 0 !important;
-      background-color: #2b324e;
-      top: calc(100vh - 50px);
-    }
-    */
-
+@include mq($max-width: 1400px) {
   .betslip-content-mobile {
     position: absolute;
     display: none;
@@ -1085,6 +1070,8 @@ $baseFontSize: 16;
   .text-media {
     display: none;
   }
+  
+  .right-account-sidebar,
   .betslip-content-desktop {
     display: none !important;
   }
@@ -1100,10 +1087,7 @@ $baseFontSize: 16;
   }
   .games-book-continer,
   .account-continer {
-    max-width: calc(100vw - 225px) !important;
-  }
-  .content-height {
-    height: calc(100vh - 165px) !important;
+    max-width: calc(100vw - 300px) !important;
   }
   .ie-continer {
     max-width: 100% !important;
@@ -1235,13 +1219,29 @@ div.barloader2 {
 }
 
 #scrollmenu a {
-  display: inline-block;
-  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  color: #b7b7b7;
   text-align: center;
-  padding: 14px;
+  height:100%;
+  padding: 0px 30px 0px 30px;
   text-decoration: none;
+  span {
+    display:flex;
+    flex-grow:2;
+    align-items: flex-end;
+    font-size:2em;
+  }
+  .event-count {
+    padding-top:5px;
+    font-size:12px !important;
+    align-items: flex-start !important;
+  }
 }
 
 div#scrollmenu a:hover {
-  background-color: #777;
+  color:#ffffff;
+  background-color: #1d2132;
+  transition: 0.2s ease;
 }

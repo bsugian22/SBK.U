@@ -14,7 +14,7 @@ export default function AccountStatusNavi(props) {
                      <i class="fal fa-wallet color-grey margin-0 font-size-15"></i>
                      <span class="color-white padding-left-5">잔고 현황</span>
                   </div>
-                  <div>
+                  <div class="border-top">
                      <button type="button" class="font-size-15">
                         <i class="fal fa-angle-down color-grey"></i>
                      </button>
@@ -59,7 +59,7 @@ export default function AccountStatusNavi(props) {
                      <i class="far fa-exchange color-grey margin-0 font-size-15"></i>
                      <span class="color-white padding-left-5">입/출금 처리현황</span>
                   </div>
-                  <div>
+                  <div class="border-top border-bottom">
                      <button type="button" class="font-size-15">
                         <i class="fal fa-angle-down color-grey"></i>
                      </button>
@@ -143,7 +143,7 @@ export default function AccountStatusNavi(props) {
                      <i class="fal fa-history color-grey margin-0 font-size-15"></i>
                      <span class="color-white padding-left-5">최근 배팅현황</span>
                   </div>
-                  <div>
+                  <div class="border-top border-bottom">
                      <button type="button" class="font-size-15">
                         <i class="fal fa-angle-down color-grey"></i>
                      </button>
@@ -227,7 +227,7 @@ export default function AccountStatusNavi(props) {
                      <i class="fas fa-question color-grey margin-0 font-size-15"></i>
                      <span class="color-white padding-left-5">1:1문의</span>
                   </div>
-                  <div>
+                  <div class="border-top border-bottom">
                      <button type="button" class="font-size-15">
                         <i class="fal fa-angle-down color-grey"></i>
                      </button>
