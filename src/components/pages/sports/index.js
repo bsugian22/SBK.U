@@ -345,9 +345,9 @@ const Sports = (props) => {
                                 >
                                   <button
                                     className={
-                                      match.id === sports.detail
+                                      match.id === sports.data.detail
                                         ? "color-green"
-                                        : "color-grey"
+                                        : "color-white"
                                     }
                                   >
                                     +{match.markets}
@@ -463,9 +463,9 @@ const Sports = (props) => {
 
                               market.outcomes.map((outcome, market_index) => {
                                 return (
-                                  <div key={"details-outcome-id" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName.ko} data-market_name={market.title.marketName.ko} data-home-team={sports.data.detail_data.homeTeam.name["ko"]} data-away-team={sports.data.detail_data.awayTeam.name["ko"]} data-match-id={sports.data.detail_data.id} data-market-id={market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1"}>
+                                  <div key={"details-outcome-id" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName?.ko? outcome.name.outcomeName.ko : ""} data-market_name={market.title.marketName.ko} data-home-team={sports.data.detail_data.homeTeam.name["ko"]} data-away-team={sports.data.detail_data.awayTeam.name["ko"]} data-match-id={sports.data.detail_data.id} data-market-id={market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5 border-top-white1 border-bottom-white1"}>
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                      <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
+                                      <span class="color-grey text-ellipsis">{outcome.name.outcomeName?.ko? outcome.name.outcomeName.ko : ""}</span>
                                     </div>
                                     <div class="shrink-0">
                                       {
@@ -481,9 +481,9 @@ const Sports = (props) => {
                               }) :
                               market.outcomes.map((outcome, market_index) => {
                                 return (
-                                  <div key={"details-outcome-id" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName.ko} data-market_name={market.title.marketName.ko} data-home-team={sports.data.detail_data.homeTeam.name["ko"]} data-away-team={sports.data.detail_data.awayTeam.name["ko"]} data-match-id={sports.data.detail_data.id} data-market-id={market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1"}>
+                                  <div key={"details-outcome-id" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName?.ko? outcome.name.outcomeName.ko : ""} data-market_name={market.title.marketName.ko} data-home-team={sports.data.detail_data.homeTeam.name["ko"]} data-away-team={sports.data.detail_data.awayTeam.name["ko"]} data-match-id={sports.data.detail_data.id} data-market-id={market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5 border-top-white1 border-bottom-white1"}>
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                      <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
+                                      <span class="color-grey text-ellipsis">{outcome.name.outcomeName?.ko? outcome.name.outcomeName.ko : ""}</span>
                                     </div>
                                     <div class="shrink-0">
                                       {

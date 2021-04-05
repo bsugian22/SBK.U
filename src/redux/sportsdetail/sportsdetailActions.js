@@ -171,7 +171,7 @@ export const fetchSportsdetails = (params) => {
             data.oldOdds = null;
           })
         })
-        // dispatch(sportWebSocket(matches));
+        dispatch(sportWebSocket(matches));
 
         var data = chain(sportsdetails.data)
           .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
@@ -202,16 +202,16 @@ export const fetchSportsdetails = (params) => {
 export const sportWebSocket = (matches) => {
 
   return (dispatch) => {
-    // socket.onopen = function (e) {
-    matches.map((data, index) => {
-      console.log("sending:" + data)
-      const match_data = {
-        type: "book_match",
-        match_id: data
-      }
-      socket.send(JSON.stringify(match_data));
-    })
-    // };
+    socket.onopen = function (e) {
+      matches.map((data, index) => {
+        console.log("sending:" + data)
+        const match_data = {
+          type: "book_match",
+          match_id: data
+        }
+        socket.send(JSON.stringify(match_data));
+      })
+    };
     socket.onmessage = function (event) {
       event.data.text().then((data) => {
         const market = JSON.parse(data)
@@ -263,7 +263,7 @@ export const fetchSportsdetail = (matchId) => {
 export const bet = (data) => {
   let bet = data;
   delete bet.total_odds
-  bet.outcomes.map((outcome,index)=>{
+  bet.outcomes.map((outcome, index) => {
     delete outcome.outcome_name;
     delete outcome.match_id;
     delete outcome.market_name;
@@ -271,7 +271,7 @@ export const bet = (data) => {
     delete outcome.home_team
     delete outcome.away_team
   })
-  
+
   // return (dispatch) => {
   axios.post(`/api/positions`, bet)
     .then(response => {
