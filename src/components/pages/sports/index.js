@@ -352,7 +352,7 @@ const Sports = (props) => {
                                     className={
                                       match.id === sports.data.detail
                                         ? "color-white"
-                                        : "color-white"
+                                        : "color-grey"
                                     }
                                   >
                                     +{match.markets}
