@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchPromos,
@@ -9,10 +9,13 @@ import {
 } from "../../../redux/promo/promoActions";
 import PromoPost from "../promoposts";
 import sweetalert from "../../../plugins/sweetalert";
+import moment from "moment";
+import Logo from "../../layouts/Logo";
+import { Link } from "react-router-dom";
 export default function Promo() {
   let swal = new sweetalert();
   let promo = useSelector((state) => state.promo);
-  let viewPromoData = useSelector((state) => state.promo.promo);
+  let view = useSelector((state) => state.promo.promo);
   let page = useSelector((state) => state.promo.promos.page);
   let lastPage = useSelector((state) => state.promo.promos.lastPage);
   let per_page = useSelector((state) => state.promo.promos.per_page);
@@ -28,56 +31,139 @@ export default function Promo() {
   }, []);
 
   return (
-    <div class="content promo-continer flex flex-inherit grow-2 flex-column">
-      <div class="content-header shrink-0 border-bottom height-50 align-items-center padding-horizontal-10 background-transparent-b-25">
-        <span class="color-grey">
-          <i class="fad fa-megaphone"></i>PROMO
-        </span>
-      </div>
-      <div class="promo-wrap account border-top flex-inherit flex-row scrollable-auto ">
-        <div class="promo-left flex-inherit flex-column account-height widthp-40 border-right ">
-          {promo.loading ? (
-            <table>
-            <tbody>
-              <tr>
-                <td class="td-4">
-                  <span></span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          ) : promo?.promos?.data?.length == 0 ? (
-            <div colspan="12" class="color-white">
-              데이터가 존재하지 않습니다.
-            </div>
-          ) : (
-            promo?.promos?.data?.map((item, index) => {
-              return (
-                <div
-                  key={index}
-                  class="promo flex-column grow-1 flex-inherit padding-10 heightp-30"
-                  onClick={() => {
-                    dispatch(viewPromo(item));
-                  }}
-                >
-                  <a
-                    class="flex-inherit margin-bottom-5"
-
-                    // href="<?php echo element('post_url', $result); ?>"
-                  >
-                    {item.title}
-                  </a>
-                  <div class="noArticle color-grey padding-10 background-transparent-b-10 justify-content-center">
-                    <span>{item.content}</span>
+    <div class="content account-continer flex flex-inherit grow-2 flex-column">
+      <div class="notice-wrap account notice-content-desktop border-top flex-inherit flex-row">
+        <div class="notice-left flex-inherit flex-column account-height padding-10 widthp-50 border-right scrollable-auto">
+          <div class="notice flex-column flex-inherit">
+            <div class="flex-inherit flex-column"><div class="red-shadow notice-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-white"><span class="color-white">공지사항</span></div></div>
+            {promo?.loading ? (
+              <div class="flex-column flex-inherit widthp-100 color-grey">
+                <div class="heightp-100 flex-inherit flex-column background-transparent-b-10 padding-10 border-bottom-white">
+                  <div class="flex-inherit heightp-50">
+                    <div class="padding-10 background-transparent-b-10 flex align-items-center">
+                      <div class="notice-loading width-80">
+                        <div></div>
+                      </div>
+                    </div>
+                    <div class="padding-10 grow-2 justify-content-end">
+                      <span class="color-grey">
+                        <div class="notice-loading width-80">
+                          <div></div>
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="flex-inherit heightp-50 align-items-center">
+                    <div class="padding-10 text-ellipsis widthp-100">
+                      <div class="color-white text-ellipsis widthp-100">
+                        <div class="notice-loading widthp-100">
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              );
-            })
-          )}
+                <div class="heightp-100 flex-inherit flex-column background-transparent-b-10 padding-10 border-bottom-white">
+                  <div class="flex-inherit heightp-50">
+                    <div class="padding-10 background-transparent-b-10 flex align-items-center">
+                      <div class="notice-loading width-80">
+                        <div></div>
+                      </div>
+                    </div>
+                    <div class="padding-10 grow-2 justify-content-end">
+                      <span class="color-grey">
+                        <div class="notice-loading width-80">
+                          <div></div>
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="flex-inherit heightp-50 align-items-center">
+                    <div class="padding-10 text-ellipsis widthp-100">
+                      <div class="color-white text-ellipsis widthp-100">
+                        <div class="notice-loading widthp-100">
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="heightp-100 flex-inherit flex-column background-transparent-b-10 padding-10">
+                  <div class="flex-inherit heightp-50">
+                    <div class="padding-10 background-transparent-b-10 flex align-items-center">
+                      <div class="notice-loading width-80">
+                        <div></div>
+                      </div>
+                    </div>
+                    <div class="padding-10 grow-2 justify-content-end">
+                      <span class="color-grey">
+                        <div class="notice-loading width-80">
+                          <div></div>
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="flex-inherit heightp-50 align-items-center">
+                    <div class="padding-10 text-ellipsis widthp-100">
+                      <div class="color-white text-ellipsis widthp-100">
+                        <div class="notice-loading widthp-100">
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : promo?.promos?.data?.length == 0 ? (
+              <div class="noArticle color-grey padding-10 background-transparent-b-10 justify-content-center">
+                <span>게시글이 없습니다.</span>
+              </div>
+            ) : (
+              promo?.promos?.data?.map((item, index) => {
+                return (
+                  <button
+                    key={index}
+                    type="button"
+                    class="flex-inherit padding-0"
+                    onClick={(e) => {
+                      promo.promos.data.map((data, index) => {
+                        document.getElementById(data.id).classList.remove("active");
+                      })
+                      dispatch(viewPromo(item));
+                      document.getElementById(item.id).classList.add("active");
 
-          <div class="flex-inherit promo-page-bottom border-top-white height-60 background-transparent-b-15 padding-10 color-grey">
-            <div class="pagination flex-inherit widthp-100 heightp-100">
-              <div class="select">
+                    }}
+                  //  key={index}
+                  >
+                    <div id={item.id} class="flex-column flex-inherit widthp-100 notice-list padding-10 background-transparent-b-10 color-grey border-bottom-white "> {/* active */}
+                      <div class="heightp-100 flex-inherit flex-column">
+                        <div class="flex-inherit heightp-50">
+                          <div class="padding-10 background-transparent-b-10">
+                            <span class="color-grey">{item.category} promo </span>
+                          </div>
+                          <div class="padding-10 grow-2 justify-content-end">
+                            <span class="color-grey">
+                              {moment(item.createdAt).format("MM / DD HH:mm")}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="flex-inherit heightp-50 align-items-center">
+                          <div class="padding-10 text-ellipsis">
+                            <span class="color-white text-ellipsis">
+                              {item.title}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })
+            )}
+          </div>
+          <div class="flex-inherit notice-page-bottom height-60 padding-10 color-grey">
+            <div class="pagination flex-inherit widthp-100 justify-content-end">
+              <div class="flex select selectBox">
                 <select
                   name="slct"
                   id="slct"
@@ -101,52 +187,70 @@ export default function Promo() {
                   })}
                 </select>
               </div>
-              <div class="flex margin-left-5 page grow-2 justify-content-end">
-                <a>
-                  <button
-                    class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                    onClick={() => {
-                      let prevData = {
-                        page: page,
-                        list_pages: list_pages,
-                        per_page: per_page,
-                      };
-                      if (page == 1) {
-                        swal.warning(" 페이지에 반응");
-                      } else {
-                        dispatch(prevPagePromo(prevData));
-                      }
-                    }}
-                  >
-                    <i class="fas fa-chevron-left margin-0 color-grey"></i>
-                  </button>
-                </a>
-                <a>
-                  <button
-                    class="page-right width-40 heightp-100 background-transparent-b-20"
-                    onClick={() => {
-                      let nextData = {
-                        page: page,
-                        list_pages: list_pages,
-                        per_page: per_page,
-                      };
-                      let last = list_pages.length;
-                      if (page == last) {
-                        swal.warning(" 페이지에 반응");
-                      } else {
-                        dispatch(nextPagePromo(nextData));
-                      }
-                    }}
-                  >
-                    <i class="fas fa-chevron-right margin-0 color-grey"></i>
-                  </button>
-                </a>
+              <div class="grow-2"></div>
+              <div class="flex page">
+                <button
+                  class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
+                  disabled={page == 1}
+                  onClick={() => {
+                    let prevData = {
+                      page: page,
+                      list_pages: list_pages,
+                      per_page: per_page,
+                    };
+                    if (page == 1) {
+                      swal.warning(" 페이지에 반응");
+                    } else {
+                      dispatch(prevPagePromo(prevData));
+                    }
+                  }}
+                >
+                  <i class="fas fa-chevron-left margin-0 color-white"></i>
+                </button>
+                <button
+                  class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                  disabled={page == lastPage}
+                  onClick={() => {
+                    let nextData = {
+                      page: page,
+                      list_pages: list_pages,
+                      per_page: per_page,
+                    };
+                    if (page == lastPage) {
+                      swal.warning(" 페이지에 반응");
+                    } else {
+                      dispatch(nextPagePromo(nextData));
+                    }
+                  }}
+                >
+                  <i class="fas fa-chevron-right margin-0 color-white"></i>
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <div class="promo-read border-left flex-inherit flex-column account-height widthp-60 padding-10 scrollable-auto">
-          <PromoPost viewPromoData={viewPromoData} />
+        <div class="notice-read border-left flex-inherit flex-column account-height widthp-60 padding-10 scrollable-auto" hidden={view.id ? false : true}>
+          <div class="notice-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
+            <span class="color-white grow-2">공지사항 내용</span>
+            <div>
+              <span class="color-grey padding-right-10"><i class="fal fa-calendar-week"></i>{moment(view.createdAt).format("YY/MM/DD HH:mm")}</span>
+              <span class="color-grey padding-right-15"><i class="fal fa-user"></i>TERA</span>
+            </div>
+          </div>
+          <div class="flex-inherit flex-column">
+            <div class="notice-read-header-title flex height-45 align-items-center background-transparent-b-10 align-items-center-inherit padding-horizontal-15 border-bottom-rb border-top">
+              <span class="flex align-items-center color-grey">제목 : {view.title}</span>
+            </div>
+            <div class="notice-read-content background-transparent-b-5 align-items-center-inherit padding-15 border-bottom-rb flex-column border-top">
+              <div class="color-grey min-height-100">
+                <span>{view.content}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="align-items-center border-left" style={{ paddingLeft: "25%" }} hidden={view.id ? true : false}>
+          <Logo width="120" height="30" />
         </div>
       </div>
     </div>
