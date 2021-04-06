@@ -179,7 +179,7 @@ const promoReducer = (state = initialState, action) => {
           content: action.payload.content,
           photo: action.payload.fixed,
           hits: action.payload.hits,
-          created_at: action.payload.created_at,
+          createdAt: action.payload.createdAt,
         },
       };
     case types.SET_PROMO_PAGE:

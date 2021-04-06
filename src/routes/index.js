@@ -13,6 +13,7 @@ import Withdrawal from "../components/accounts/Withdrawal";
 import Exchange from "../components/accounts/Exchange";
 import Position from "../components/accounts/Position";
 import Notice from "../components/accounts/Notice";
+import AccountsPromo from "../components/accounts/Promo";
 import Inquiry from "../components/accounts/Inquiry";
 import Message from "../components/accounts/Message";
 import Settings from "../components/accounts/Settings";
@@ -79,6 +80,16 @@ export const routes = [
     useGameNavi: false,
     useAccountStatusNavi: true,
     component: Notice,
+  },
+  {
+    path: "/account/promo",
+    auth: true,
+    useBetslipNavi: false,
+    useBookNavi: false,
+    useAccountNavi: true,
+    useGameNavi: false,
+    useAccountStatusNavi: true,
+    component: AccountsPromo,
   },
   {
     path: "/account/inquiry",

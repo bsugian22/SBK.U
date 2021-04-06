@@ -1,5 +1,6 @@
 import * as types from "./promoTypes";
 import axios from "../../plugins/axios";
+import { camelize } from "../../helpers/object";
 
 export const fetchPromosRequest = () => {
   return {
@@ -108,7 +109,7 @@ export const fetchPromos = (params) => {
       .get(`/api/promos`, { params: params })
       .then((response) => {
         const promos = response.data;
-        dispatch(fetchPromosSuccess(promos));
+        dispatch(fetchPromosSuccess(camelize(promos) ));
         dispatch(setPagesOfPromo());
       })
       .catch((error) => {

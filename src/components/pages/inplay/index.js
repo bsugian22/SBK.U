@@ -3,6 +3,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "../../../redux/user/userActions";
 
 import { Link, NavLink } from 'react-router-dom'
+import { fetchInplays } from "../../../redux/inplay/inplayActions";
 export default function Inplay() {
 
    let isSubscribed = true;
@@ -11,6 +12,7 @@ const dispatch = useDispatch();
   useEffect(() => {
     isSubscribed = true;
     dispatch(refreshToken())
+    dispatch(fetchInplays())
     return () => {
       isSubscribed = false;
     };

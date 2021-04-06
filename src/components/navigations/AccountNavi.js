@@ -67,6 +67,19 @@ export default function AccountNavi(props) {
          </NavLink>
          <NavLink
             activeClassName="background-transparent-b-5 active"
+            to="/account/promo"
+            className="padding-10 padding-vertical-15 flex-inherit justify-content-center-inherit align-items-center border-top border-bottom"
+         >
+            <div class="icon-box width-45 height-45 background-transparent-w-5 align-items-center">
+               <i class="fad fa-megaphone fa-2x color-grey"></i>
+            </div>
+            <div class="title-name widthp-100 flex-column padding-left-15">
+               <span class="color-white">PROMO</span>
+               <span class="color-grey">PROMO PROMO</span>
+            </div>
+         </NavLink>
+         <NavLink
+            activeClassName="background-transparent-b-5 active"
             to="/account/inquiry"
             className="padding-10 padding-vertical-15 flex-inherit justify-content-center-inherit align-items-center border-top border-bottom"
          >
