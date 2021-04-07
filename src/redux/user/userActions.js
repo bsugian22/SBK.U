@@ -22,10 +22,23 @@ export const fetchUsersRequest = () => {
   };
 };
 
+export const registerUserRequest = () => {
+  return {
+    type: types.REGISTER_USER_REQUEST,
+  };
+};
+
 export const fetchUsersSuccess = (users) => {
   return {
     type: types.FETCH_USERS_SUCCESS,
     payload: users,
+  };
+};
+
+export const registerUserSucess = (user) => {
+  return {
+    type: types.REGISTER_USER_SUCCESS,
+    payload: user,
   };
 };
 
@@ -35,10 +48,25 @@ export const fetchUsersFailure = (error) => {
     payload: error,
   };
 };
+
+export const registerUserFailure = (error) => {
+  return {
+    type: types.REGISTER_USER_FAILURE,
+    payload: error,
+  };
+};
+
 export const setUserStatus = (status) => {
   return {
     type: types.SET_USER_STATUS,
     payload: status,
+  };
+};
+
+export const registrationForm = (data) => {
+  return {
+    type: types.REGISTRATION_FORM,
+    payload: data,
   };
 };
 
@@ -73,6 +101,24 @@ export const refreshToken = () => {
     });
   };
 };
+
+export const registerUser = (data) => {
+  return (dispatch) => {
+    dispatch(registerUserRequest);
+    axios
+      .post(`/api/users`,data)
+      .then((response) => {
+        const users = camelize(response.data);
+        dispatch(registerUserSucess(users));
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        dispatch(registerUserFailure(errorMsg));
+      });
+  };
+};
+
+
 
 export const handleNewPass = (newpass) => {
   return {

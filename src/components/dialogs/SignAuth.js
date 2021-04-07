@@ -3,13 +3,25 @@ import Logo from '../layouts/Logo'
 import userModel from '../../models/userModel'
 import sweetalert from '../../plugins/sweetalert'
 import Signinfo from '../dialogs/Signinfo'
+import { connect, useDispatch, useSelector, Provider } from "react-redux";
 import { Link, NavLink } from 'react-router-dom'
+import store from "../../redux/store";
 export default function SignAuth() {
    const swal = new sweetalert()
    const model = new userModel()
+   const dispatch = useDispatch();
+
    const SigninfoDialog = () => {
       swal.fire({
-         html: <Signinfo />,
+         html: (
+            <Provider store={store}>
+              <Signinfo
+              //  pass={pass}
+              //  changeUsername={onChangeUsername}
+              //  dispatch={dispatch}
+              />
+            </Provider>
+          ),
          width: 1100,
          padding: 0,
          showCloseButton: true,
@@ -36,7 +48,7 @@ export default function SignAuth() {
             <div class="widthp-100 sign-content border-left flex flex-inherit flex-column">
                <div class="sign-right-title padding-horizontal-20 padding-top-30 flex-column text-align-left">
                   <h1 class="color-green">Create Your Free Account</h1>
-                  <p class="color-grey">본인인증</p>
+                  <p class="color-grey">본인인증 kelvin</p>
                </div>
                <div class="widthp-100 heightp-100 flex-inherit align-items-center justify-content-center padding-top-50 padding-horizontal-20">
                   <div class="widthp-50 flex-inherit sign-item-inner flex-column">
@@ -45,7 +57,16 @@ export default function SignAuth() {
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="memid" class="padding-horizontal-10 background-transparent-b-30" placeholder="휴대폰번호를 입력해주세요" />
+                        <input type="text" name="memid" class="padding-horizontal-10 background-transparent-b-30" placeholder="휴대폰번호를 입력해주세요"
+                           onChange={(e) => {
+                              let data = {
+                                 target: "tel_number",
+                                 value: e.target.value
+                              }
+
+                              dispatch(registrationForm(data))
+                           }
+                           } />
                         <button type="button" class="background-green padding-horizontal-10 btn-submit">
                            인증요청
                         </button>
@@ -55,7 +76,16 @@ export default function SignAuth() {
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="인증번호를 입력해주세요" />
+                        <input type="text" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="인증번호를 입력해주세요"
+                           onChange={(e) => {
+                              let data = {
+                                 target: "cert_number",
+                                 value: e.target.value
+                              }
+
+                              dispatch(registrationForm(data))
+                           }
+                           } />
                      </div>
                   </div>
                </div>

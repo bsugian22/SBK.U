@@ -1,15 +1,29 @@
 import React, { Fragment } from 'react'
 import Logo from '../layouts/Logo'
 import { Link, NavLink } from 'react-router-dom'
+import { connect, useDispatch, useSelector,Provider } from "react-redux";
+import store from "../../redux/store";
+
 import SignAuth from '../dialogs/SignAuth'
 import userModel from '../../models/userModel'
 import sweetalert from '../../plugins/sweetalert'
+import { registrationForm } from '../../redux/user/userActions'
 export default function Signup() {
    const swal = new sweetalert()
    const model = new userModel()
+   const dispatch = useDispatch();
+
    const SignAuthDialog = () => {
       swal.fire({
-         html: <SignAuth />,
+         html: (
+            <Provider store={store}>
+              <SignAuth
+              //  pass={pass}
+              //  changeUsername={onChangeUsername}
+              //  dispatch={dispatch}
+              />
+            </Provider>
+          ),
          width: 1100,
          padding: 0,
          showCloseButton: true,
@@ -51,7 +65,17 @@ export default function Signup() {
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="memid" class="padding-horizontal-10 background-transparent-b-30" placeholder="아이디를 입력하세요." />
+                        <input type="text" name="memid" class="padding-horizontal-10 background-transparent-b-30" placeholder="아이디를 입력하세요."
+                           onChange={(e) => {
+                              let data = {
+                                 target: "username",
+                                 value: e.target.value
+                              }
+
+                              dispatch(registrationForm(data))
+                           }
+                           }
+                        />
                         <button type="button" class="background-green padding-horizontal-10 btn-submit">
                            중복확인
                         </button>
@@ -61,10 +85,27 @@ export default function Signup() {
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="password" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="비밀번호를 입력해주세요" />
+                        <input type="password" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="비밀번호를 입력해주세요" onChange={(e) => {
+                           let data = {
+                              target: "password",
+                              value: e.target.value
+                           }
+
+                           dispatch(registrationForm(data))
+                        }
+                        } />
                      </div>
                      <div class="padding-top-5">
-                        <input type="password" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="비밀번호를 다시한번 입력하세요." />
+                        <input type="password" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="비밀번호를 다시한번 입력하세요."
+                           onChange={(e) => {
+                              let data = {
+                                 target: "confirm_password",
+                                 value: e.target.value
+                              }
+
+                              dispatch(registrationForm(data))
+                           }
+                           } />
                      </div>
                   </div>
                   <div class="widthp-50 flex-inherit padding-left-30 sign-item-inner flex-column">
@@ -73,21 +114,49 @@ export default function Signup() {
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="username" class="padding-horizontal-10 background-transparent-b-30" placeholder="이름을 입력하세요" />
+                        <input type="text" name="username" class="padding-horizontal-10 background-transparent-b-30" placeholder="이름을 입력하세요"
+                           onChange={(e) => {
+                              let data = {
+                                 target: "nickname",
+                                 value: e.target.value
+                              }
+
+                              dispatch(registrationForm(data))
+                           }
+                           } />
                      </div>
 
                      <div class="padding-top-10">
                         <span class="color-grey">생년월일</span>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="yyyy" class="padding-horizontal-10 background-transparent-b-30" placeholder="YYYY-MM-DD" />
+                        <input type="text" name="yyyy" class="padding-horizontal-10 background-transparent-b-30" placeholder="YYYY-MM-DD" 
+                        onChange={(e) => {
+                           let data = {
+                              target: "birth_date",
+                              value: e.target.value
+                           }
+
+                           dispatch(registrationForm(data))
+                        }
+                        }/>
+                        
                      </div>
 
                      <div class="padding-top-10">
                         <span class="color-grey">이메일</span>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="email" class="padding-horizontal-10 background-transparent-b-30" placeholder="aaa@bbb.ccc" />
+                        <input type="text" name="email" class="padding-horizontal-10 background-transparent-b-30" placeholder="aaa@bbb.ccc"
+                           onChange={(e) => {
+                              let data = {
+                                 target: "email",
+                                 value: e.target.value
+                              }
+
+                              dispatch(registrationForm(data))
+                           }
+                           } />
                      </div>
 
                      <div class="flex-column flex-inherit">
@@ -107,7 +176,15 @@ export default function Signup() {
                         <div class="flex text-align-left">
                            <div class="widthp-50 margin-top-6">
                               <div class="select-item-box select height-40 margin-top-10">
-                                 <select name="country">
+                                 <select name="country" onChange={(e) => {
+                                    let data = {
+                                       target: "country",
+                                       value: e.target.value
+                                    }
+
+                                    dispatch(registrationForm(data))
+                                 }
+                                 }>
                                     <option value="0">한국</option>
                                     <option value="1">미국</option>
                                  </select>
@@ -115,7 +192,15 @@ export default function Signup() {
                            </div>
                            <div class="widthp-50 margin-top-6">
                               <div class="select-item-box padding-left-10 select height-40 margin-top-10">
-                                 <select name="country">
+                                 <select name="country" onChange={(e) => {
+                                    let data = {
+                                       target: "language",
+                                       value: e.target.value
+                                    }
+
+                                    dispatch(registrationForm(data))
+                                 }
+                                 }>
                                     <option value="0">한국어</option>
                                     <option value="1">미국어</option>
                                  </select>

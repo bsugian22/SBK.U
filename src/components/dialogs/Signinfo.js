@@ -1,8 +1,13 @@
 import React, { Fragment } from 'react'
 import Logo from '../layouts/Logo'
 import { Link, NavLink } from 'react-router-dom'
+import { connect, useDispatch, useSelector, Provider } from "react-redux";
+import { registerUser, registerUserRequest } from '../../redux/user/userActions';
 
 export default function Signinfo() {
+   let registration_form = useSelector((state) => state.user.registration);
+   const dispatch = useDispatch();
+
    return (
       <Fragment>
          <div class="sign-wrap flex flex-inherit ">
@@ -36,14 +41,32 @@ export default function Signinfo() {
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="" class="padding-horizontal-10 background-transparent-b-30" placeholder="은행명을 입력하세요." />
+                        <input type="text" name="" class="padding-horizontal-10 background-transparent-b-30" placeholder="은행명을 입력하세요."
+                           onChange={(e) => {
+                              let data = {
+                                 target: "account_bank",
+                                 value: e.target.value
+                              }
+
+                              dispatch(registrationForm(data))
+                           }
+                           } />
                      </div>
                      <div class="padding-top-10">
                         <span class="color-grey">계좌번호</span>
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="계좌번호를 입력해주세요" />
+                        <input type="text" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="계좌번호를 입력해주세요"
+                           onChange={(e) => {
+                              let data = {
+                                 target: "account_number",
+                                 value: e.target.value
+                              }
+
+                              dispatch(registrationForm(data))
+                           }
+                           } />
                      </div>
 
                      <div class="padding-top-10">
@@ -51,7 +74,16 @@ export default function Signinfo() {
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="예금주명을 입력해주세요." />
+                        <input type="text" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="예금주명을 입력해주세요."
+                           onChange={(e) => {
+                              let data = {
+                                 target: "account_holder",
+                                 value: e.target.value
+                              }
+
+                              dispatch(registrationForm(data))
+                           }
+                           } />
                      </div>
                      <div class="padding-top-10">
                         <p class="color-grey">은행 계좌 예금주와 다른 경우 입금처리가 불가합니다.</p>
@@ -63,17 +95,43 @@ export default function Signinfo() {
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="" class="padding-horizontal-10 background-transparent-b-30" placeholder="비밀번호를 입력하세요" />
+                        <input type="text" name="" class="padding-horizontal-10 background-transparent-b-30" placeholder="비밀번호를 입력하세요" 
+                        onChange={(e) => {
+                           let data = {
+                              target: "withdrawal_password",
+                              value: e.target.value
+                           }
+
+                           dispatch(registrationForm(data))
+                        }
+                        }/>
                      </div>
                      <div class="padding-top-5">
-                        <input type="text" name="" class="padding-horizontal-10 background-transparent-b-30" placeholder="비밀번호를 다시한번 입력하세요" />
+                        <input type="text" name="" class="padding-horizontal-10 background-transparent-b-30" placeholder="비밀번호를 다시한번 입력하세요" 
+                        onChange={(e) => {
+                           let data = {
+                              target: "withdrawal_password_confirmation",
+                              value: e.target.value
+                           }
+
+                           dispatch(registrationForm(data))
+                        }
+                        }/>
                      </div>
                      <div class="padding-top-45">
                         <span class="color-grey">파트너 코드 또는 추천인</span>
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="code" class="padding-horizontal-10 background-transparent-b-30" placeholder="파트너 코드 또는 추천인을 입력하세요." />
+                        <input type="text" name="code" class="padding-horizontal-10 background-transparent-b-30" placeholder="파트너 코드 또는 추천인을 입력하세요." 
+                        onChange={(e) => {
+                           let data = {
+                              target: "referrer_username",
+                              value: e.target.value
+                           }
+                           dispatch(registrationForm(data))
+                        }
+                        }/>
                      </div>
                   </div>
                </div>
@@ -98,7 +156,11 @@ export default function Signinfo() {
                   </div>
                </div>
                <div class="widthp-100 sign-content-bottom  height-150 align-items-center justify-content-end padding-right-25">
-                  <button type="button" class="next-sign-auth background-green color-white padding-vertical-15 padding-horizontal-45">
+                  <button type="button" class="next-sign-auth background-green color-white padding-vertical-15 padding-horizontal-45" 
+                  onClick={(e) => {
+                     dispatch(registerUser(registration_form))
+                  }
+                  }>
                      회원가입
                   </button>
                </div>

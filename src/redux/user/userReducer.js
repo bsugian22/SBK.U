@@ -32,6 +32,22 @@ const initialState = {
       unread_messages: 0,
     },
   },
+  registration: {
+    username: "",
+    password: "",
+    nickname: "",
+    password_confirmation: "",
+    country_code: "",
+    language: "",
+    tel_number: "",
+    account_bank: "",
+    account_number: "",
+    account_holder: "",
+    withdrawal_password: "",
+    withdrawal_password_confirmation: "",
+    referrer_username: "",
+    branch_code: ""
+  },
   loading: false,
   error: "",
   users: [],
@@ -47,6 +63,14 @@ function userReducer(state = initialState, action) {
   const { user } = state;
 
   switch (action.type) {
+    case types.REGISTRATION_FORM:
+      let target = action.payload.target
+      console.log(action.payload.target)
+      console.log(action.payload.value)
+      state.registration[target] = action.payload.value;
+      return {
+        ...state
+      };
     case types.SET_USER:
       return {
         user: {
@@ -68,6 +92,22 @@ function userReducer(state = initialState, action) {
           refresh_token: action.payload.refresh_token,
           token_type: action.payload.token_type,
           isAuth: action.payload.isAuth,
+        },
+        registration: {
+          username: "test6",
+          password: "0000",
+          nickname: "test6",
+          password_confirmation: "0000",
+          country_code: "PHL",
+          language: "ko",
+          tel_number: "1111",
+          account_bank: "111",
+          account_number: "22222222222",
+          account_holder: "lucas",
+          withdrawal_password: "0000",
+          withdrawal_password_confirmation: "0000",
+          referrer_username: "",
+          branch_code: ""
         },
         changePassword: {
           password: "",
@@ -107,6 +147,31 @@ function userReducer(state = initialState, action) {
             unread_messages: 0,
           },
         },
+        registration: {
+          username: "test6",
+          password: "0000",
+          nickname: "test6",
+          password_confirmation: "0000",
+          country_code: "PHL",
+          language: "ko",
+          tel_number: "1111",
+          account_bank: "111",
+          account_number: "22222222222",
+          account_holder: "lucas",
+          withdrawal_password: "0000",
+          withdrawal_password_confirmation: "0000",
+          referrer_username: "",
+          branch_code: ""
+        },
+        loading: false,
+        error: "",
+        users: [],
+        status: "",
+        changePassword: {
+          password: "",
+          password_confirmation: "",
+          old_password: "",
+        },
       };
     case types.FETCH_USERS_REQUEST:
       return {
@@ -122,6 +187,22 @@ function userReducer(state = initialState, action) {
         users: [],
         error: action.payload,
       };
+
+    case types.REGISTER_USER_REQUEST:
+      return {
+        ...state,
+      };
+
+    case types.REGISTER_USER_SUCCESS:
+      swal.success(action.payload);
+      return { ...state };
+
+    case types.REGISTER_USER_FAILURE:
+      swal.error(action.payload);
+      return {
+        ...state
+      };
+
     case types.SET_USER_STATUS:
       let stat = "";
       if (action.payload == "all") {
