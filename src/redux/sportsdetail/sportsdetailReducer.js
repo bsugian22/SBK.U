@@ -112,7 +112,7 @@ const sportsdetailReducer = (state = initialState, action) => {
       };
 
     case types.GET_SPORTSDETAILS:
-      const market = action.payload;
+      const market = action.payload; // ws main data
       console.log(market)
       const match_id = market.match_id
       console.log("match_id:" + match_id)

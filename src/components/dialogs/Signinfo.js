@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import Logo from '../layouts/Logo'
 import { Link, NavLink } from 'react-router-dom'
 import { connect, useDispatch, useSelector, Provider } from "react-redux";
-import { registerUser, registerUserRequest } from '../../redux/user/userActions';
+import { registerUser, registerUserRequest, registrationForm } from '../../redux/user/userActions';
 
 export default function Signinfo() {
    let registration_form = useSelector((state) => state.user.registration);
