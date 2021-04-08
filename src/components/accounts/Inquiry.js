@@ -65,7 +65,7 @@ const Inquiry = () => {
           <div class="inquiry-left-content account-height widthp-50 padding-10 flex-inherit flex-column padding-right-5 border-right scrollable-auto">
             <div class="flex-inherit flex-column">
               <div class="red-shadow inquiry-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb">
-                <span class="color-white">1:1문의</span>
+                <span class="color-white">1:1문의 리스트</span>
               </div>
             </div>
             <div class="widthp-100 inquiry-content flex-inherit flex-column">

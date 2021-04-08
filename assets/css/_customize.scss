@@ -508,13 +508,11 @@ em {
 /**
 	밑에는 기존PC 소스들임
 */
-.content-height {
+.content-height,
+.promos-height,
+.account-height  {
    height: calc(100vh - 110px);
 }
-.account-height {
-   height: calc(100vh - 110px);
-}
-
 /* etc */
 .btn-0 {
    opacity: 0.8;

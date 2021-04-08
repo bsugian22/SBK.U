@@ -41,7 +41,7 @@ const Notice = () => {
         <div class="notice-wrap account notice-content-desktop border-top flex-inherit flex-row">
           <div class="notice-left flex-inherit flex-column account-height padding-10 widthp-40 border-right scrollable-auto">
             <div class="notice flex-column flex-inherit">
-              <div class="flex-inherit flex-column"><div class="red-shadow notice-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-white"><span class="color-white">공지사항</span></div></div>
+              <div class="flex-inherit flex-column"><div class="red-shadow notice-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-white"><span class="color-white">공지사항 리스트</span></div></div>
               {notice?.loading ? (
                 <div class="flex-column flex-inherit widthp-100 color-grey">
                   <div class="heightp-100 flex-inherit flex-column background-transparent-b-10 padding-10 border-bottom-white">

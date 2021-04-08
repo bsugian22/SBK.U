@@ -31,11 +31,11 @@ export default function Promo() {
   }, []);
 
   return (
-    <div class="content account-continer flex flex-inherit grow-2 flex-column">
-      <div class="notice-wrap account notice-content-desktop border-top flex-inherit flex-row">
-        <div class="notice-left flex-inherit flex-column account-height padding-10 widthp-50 border-right scrollable-auto">
+    <div class="content promos-continer flex flex-inherit grow-2 flex-column">
+      <div class="notice-wrap poromos notice-content-desktop border-top flex-inherit flex-row">
+        <div class="notice-left flex-inherit flex-column promos-height padding-10 widthp-50 border-right scrollable-auto">
           <div class="notice flex-column flex-inherit">
-            <div class="flex-inherit flex-column"><div class="red-shadow notice-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-white"><span class="color-white">공지사항</span></div></div>
+            <div class="flex-inherit flex-column"><div class="red-shadow notice-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-white"><span class="color-white">프로모션 리스트</span></div></div>
             {promo?.loading ? (
               <div class="flex-column flex-inherit widthp-100 color-grey">
                 <div class="heightp-100 flex-inherit flex-column background-transparent-b-10 padding-10 border-bottom-white">
@@ -229,9 +229,9 @@ export default function Promo() {
             </div>
           </div>
         </div>
-        <div class="notice-read border-left flex-inherit flex-column account-height widthp-60 padding-10 scrollable-auto" hidden={view.id ? false : true}>
+        <div class="notice-read border-left flex-inherit flex-column promos-height widthp-50 padding-10 scrollable-auto" hidden={view.id ? false : true}>
           <div class="notice-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
-            <span class="color-white grow-2">공지사항 내용</span>
+            <span class="color-white grow-2">프로모션 내용</span>
             <div>
               <span class="color-grey padding-right-10"><i class="fal fa-calendar-week"></i>{moment(view.createdAt).format("YY/MM/DD HH:mm")}</span>
               <span class="color-grey padding-right-15"><i class="fal fa-user"></i>TERA</span>
