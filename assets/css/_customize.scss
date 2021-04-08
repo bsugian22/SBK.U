@@ -423,6 +423,7 @@ em {
 .continer {
    .content {
       height: calc(100vh - 110px);
+      overflow:auto;
       .content-main-repair {
          @include rem(font-size, 64px);
          color: white;
@@ -787,6 +788,13 @@ select {
 
 /* left-account-sidebar */
 .left-account-sidebar {
+   a {
+      &:hover {
+         box-shadow: 2px 0px 0px 0px #38b853 inset;
+         background-color:rgba(0, 0, 0, 0.05);
+         transition: 0.2s ease;
+      }
+   }
    .active {
       box-shadow: 2px 0px 0px 0px #38b853 inset;
       .icon-box {
@@ -802,6 +810,8 @@ select {
    }
 }
 /* //left-account-sidebar */
+
+
 
 /* betslip */
 .betslip {
@@ -2433,25 +2443,44 @@ select {
          height: 100%;
          display: flex;
          align-items: center;
-         i {
-            @include rem(width, 38px);
-            @include rem(height, 38px);
-            opacity: 0.5;
-         }
+         opacity: 0.5;
          &:hover {
-            i {
-               opacity: 1;
-            }
-            span {
-               color: white !important;
-            }
+            box-shadow: 2px 0px #38b853 inset;
+            background-color:rgba(0, 0, 0, 0.05);
+            opacity: 1;
+            transition: 0.2s ease;
          }
          &.active {
-            i {
-               opacity: 1;
+            box-shadow: 2px 0px #38b853 inset;
+            background-color:rgba(0, 0, 0, 0.05);
+            opacity: 1;
+         }
+      }
+   }
+   .category-item-list {
+      .item {
+         cursor:pointer;
+
+         > div {
+            width: 100%;
+            opacity: 0.5;
+            background-color:rgba(0, 0, 0, 0.05);
+         }
+
+         &:hover {
+            box-shadow: 2px 0px #38b853 inset;
+            transition: 0.2s ease;
+            > div {
+               opacity:1;
+               transition: 0.2s ease;
             }
-            span {
-               color: white !important;
+         }
+
+         &.active {
+            box-shadow: 2px 0px #38b853 inset;
+            > div {
+               opacity:1;
+               transition: 0.2s ease;
             }
          }
       }
@@ -2505,6 +2534,9 @@ select {
 }
 
 .ac-payment-pbp {
+   .not-allowed {
+      background-color: transparent !important;
+   }
    > div {
       cursor: pointer;
       &.active {
@@ -2533,12 +2565,23 @@ select {
          transition: 0.2s ease;
          box-shadow: 2px 0px #38b853 inset;
       }
+   }
+}
+.position-content {
+   tr.rows {
+      cursor:pointer;
+      &:hover {
+         background-color: rgba(0, 0, 0, 0.1);
+         transition: 0.2s ease;
+         box-shadow: 2px 0px #38b853 inset;
+      }
       &.active {
          background-color: rgba(0, 0, 0, 0.1) !important;
          box-shadow: 2px 0px #38b853 inset;
       }
    }
 }
+
 
 .inquiry-item {
    tr.rows {

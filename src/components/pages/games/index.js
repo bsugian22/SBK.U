@@ -26,62 +26,16 @@ const dispatch = useDispatch();
                      <i class="fal fa-gamepad"></i>GAMES
                   </span>
                </div>
-               <div class="games-continer widthp-100 heightp-100 flex flex-inherit border-top">
+               <div class="games-continer widthp-100 heightp-100 flex flex-inherit">
                   <div class="games-left-box flex-inherit widthp-50 flex-column border-right">
-                     <div class="games-multi-tab align-items-center border-bottom">
-                        <div class="games-multi-tab-inner widthp-100 flex flex-inherit heightp-100">
-                           <div class="ntry-multi border-right">
-                              <NavLink activeClassName="active" to="#">
-                                 <i class="pi-color-icon-dalpangi"></i>
-                              </NavLink>
-                           </div>
-                           <div class="ntry-multi border-left border-right">
-                              <NavLink activeClassName="active" to="#">
-                                 <i class="pi-color-icon-ladder"></i>
-                              </NavLink>
-                           </div>
-                           <div class="ntry-multi border-left border-right">
-                              <NavLink activeClassName="active" to="#">
-                                 <i class="pi-color-icon-p-ladder"></i>
-                              </NavLink>
-                           </div>
-                           <div class="ntry-multi border-left border-right">
-                              <NavLink activeClassName="active" to="#">
-                                 <i class="pi-color-icon-lottery"></i>
-                              </NavLink>
-                           </div>
-                           <div class="ntry-multi border-left">
-                              <NavLink activeClassName="active" to="#">
-                                 <i class="pi-color-icon-powerball"></i>
-                              </NavLink>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="games-frame-box border-top heightp-100 align-items-center justify-content-center">
+                     <div class="games-frame-box heightp-100 align-items-center justify-content-center">
                         <span class="color-white">프레임 영상이 출력됩니다</span>
                      </div>
                   </div>
                   <div class="games-right-box flex-inherit widthp-50 flex-column border-left">
                      <div class="games-event-view flex-column padding-vertical-15 border-bottom padding-horizontal-15">
                         <span class="color-white strong-text">EVENT VIEW</span>
-                        <span class="color-grey">엔트리 파워볼</span>
-                     </div>
-                     <div class="games-event-spread border-top padding-vertical-15 padding-horizontal-15 border-bottom">
-                        <div class="spread-btn-box grow-2">
-                           <button type="button" class="btn-spread active">
-                              <i class="far fa-check"></i>펼쳐보기
-                           </button>
-                           <button type="button" class="btn-spread">
-                              모두접기
-                           </button>
-                        </div>
-                        <div class="spread-select widthp-30">
-                           <div class="select">
-                              <select name="favicon-game">
-                                 <option value="">즐겨찾는 게임순</option>
-                              </select>
-                           </div>
-                        </div>
+                        <span class="color-grey">동행복권 파워볼</span>
                      </div>
                      <div class="games-event-content border-top scrollable-auto flex-column flex-inherit padding-vertical-15 padding-horizontal-15">
                         <div class="games-rows flex-column">

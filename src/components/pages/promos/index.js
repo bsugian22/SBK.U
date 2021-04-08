@@ -33,7 +33,7 @@ export default function Promo() {
   return (
     <div class="content promos-continer flex flex-inherit grow-2 flex-column">
       <div class="notice-wrap poromos notice-content-desktop border-top flex-inherit flex-row">
-        <div class="notice-left flex-inherit flex-column promos-height padding-10 widthp-50 border-right scrollable-auto">
+        <div class="notice-left flex-inherit flex-column promos-height padding-10 widthp-40 border-right scrollable-auto">
           <div class="notice flex-column flex-inherit">
             <div class="flex-inherit flex-column"><div class="red-shadow notice-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-white"><span class="color-white">프로모션 리스트</span></div></div>
             {promo?.loading ? (
@@ -229,7 +229,7 @@ export default function Promo() {
             </div>
           </div>
         </div>
-        <div class="notice-read border-left flex-inherit flex-column promos-height widthp-50 padding-10 scrollable-auto" hidden={view.id ? false : true}>
+        <div class="notice-read border-left flex-inherit flex-column promos-height widthp-60 padding-10 scrollable-auto" hidden={view.id ? false : true}>
           <div class="notice-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">
             <span class="color-white grow-2">프로모션 내용</span>
             <div>

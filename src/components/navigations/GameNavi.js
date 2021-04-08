@@ -6,46 +6,87 @@ export default function GameNavi(props)
     return (
         <div class="games-main-category flex flex-column flex-inherit width-300 border-right">
             <div class="category-item border-bottom background-transparent-b-15">
-                <a href="#" class="flex-inherit">
+                <a href="#" class="flex flex-inherit active">
                     <div class="icon padding-left-20">
-                        <i class="pi-color-icon-dhlottery"></i>
+                        <svg enable-background="new 0 0 100 100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="width-30 height-30"><circle cx="88.736" cy="54.602" fill="#fab900" r="10.646"></circle><path d="m73.551 43.771s-5.868 16.431 7.746 30.515l3.074 3.074c2.213 2.213 4.288 3.954 5.101 7.102.504 1.951.482 4.223-.332 6.089-1.534 3.516-5.567 4.17-8.959 3.404-3.513-.793-5.88-2.88-8.146-5.542-4.694-5.514-8.032-11.86-9.868-18.861-.001-.001-4.147-15.805 11.384-25.781z" fill="#ee7d00"></path><circle cx="11.264" cy="55.78" fill="#93c01f" r="10.646"></circle><path d="m26.449 66.612s5.868-16.431-7.746-30.515c-1.025-1.025-2.049-2.049-3.074-3.074-2.213-2.213-4.288-3.954-5.101-7.101-.504-1.951-.482-4.223.332-6.089 1.534-3.516 5.567-4.17 8.959-3.404 3.513.793 5.88 2.88 8.146 5.542 4.694 5.514 8.032 11.86 9.869 18.861 0 0 4.146 15.804-11.385 25.78z" fill="#00a099"></path><ellipse cx="49.606" cy="16.404" fill="#e9528d" rx="10.646" ry="10.646" transform="matrix(.7071 -.7071 .7071 .7071 2.9295 39.8813)"></ellipse><path d="m38.774 31.59s16.431 5.868 30.515-7.746l3.074-3.074c2.213-2.213 3.954-4.288 7.101-5.101 1.951-.504 4.223-.482 6.089.332 3.516 1.534 4.17 5.567 3.404 8.959-.793 3.513-2.88 5.88-5.542 8.146-5.514 4.694-11.86 8.032-18.861 9.869 0 0-15.804 4.146-25.78-11.385z" fill="#b65097"></path></svg>
                     </div>
                     <div class="flex-column flex-inherit flex padding-left-10">
                         <div>
-                            <span class="color-grey">MINIGAME</span>
+                            <span class="color-white">MINIGAME</span>
                         </div>
                         <div>
-                            <span class="color-grey">동행복권</span>
+                            <span class="color-white">동행복권</span>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="category-item border-bottom border-top background-transparent-b-15">
-                <a href="#" class="flex-inherit active">
-                    <div class="icon padding-left-20">
-                        <i class="pi-color-icon-ntry"></i>
+            <div class="category-item-list border-top background-transparent-b-5 flex flex-column flex-inherit">
+                <div class="item dhlottery-powerball widthp-100 flex align-items-center-inherit height-60 border-bottom active">
+                    <div class="text flex padding-left-20">
+                        <span class="color-white">동행복권 파워볼</span>
                     </div>
-                    <div class="flex-column flex-inherit flex padding-left-10">
-                        <div>
-                            <span class="color-grey">MINIGAME</span>
-                        </div>
-                        <div>
-                            <span class="color-grey">엔트리게임</span>
-                        </div>
+                </div>
+                <div class="item dhlottery-speedkino widthp-100 flex align-items-center-inherit height-60 border-top border-bottom">
+                    <div class="text flex padding-left-20">
+                        <span class="color-white">동행복권 스피드키노</span>
                     </div>
-                </a>
+                </div>
             </div>
             <div class="category-item border-bottom border-top background-transparent-b-15">
                 <a href="#" class="flex-inherit">
                     <div class="icon padding-left-20">
-                        <i class="pi-color-icon-lotus"></i>
+                        <svg enable-background="new 0 0 100 100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="width-30 height-30"><g fill="#e64c3b"><path d="m60.854 90.177h-21.708c-16.168 0-29.322-13.154-29.322-29.322v-21.711c0-16.167 13.153-29.322 29.322-29.322h21.708c16.168 0 29.322 13.154 29.322 29.322v21.711c0 16.168-13.153 29.322-29.322 29.322zm-21.708-75.843c-13.681 0-24.811 11.13-24.811 24.811v21.711c0 13.681 11.13 24.811 24.811 24.811h21.708c13.681 0 24.811-11.13 24.811-24.811v-21.712c0-13.681-11.13-24.811-24.811-24.811h-21.708z" /><path d="m39.851 43.514c-.577 0-1.154-.22-1.595-.661-.881-.881-.881-2.308 0-3.189l10.714-10.714c.423-.423.997-.661 1.595-.661.598 0 1.172.238 1.595.661l7.849 7.85 7.427-7.427c.881-.881 2.308-.881 3.189 0s.881 2.308 0 3.189l-9.022 9.022c-.423.423-.997.661-1.595.661-.598 0-1.172-.238-1.595-.661l-7.849-7.85-9.119 9.119c-.44.441-1.017.661-1.594.661z" /><path d="m29.701 70.864c-.577 0-1.154-.22-1.595-.661-.881-.881-.881-2.308 0-3.189l11.982-11.982c.881-.881 2.308-.881 3.189 0s.881 2.308 0 3.189l-11.981 11.983c-.441.44-1.018.66-1.595.66z" /><path d="m49.014 71.569c-.577 0-1.154-.22-1.595-.661-.881-.881-.881-2.308 0-3.189l8.898-8.899-9.602-9.606c-.881-.881-.881-2.308 0-3.189s2.308-.881 3.189 0l11.197 11.2c.881.881.881 2.308 0 3.189l-10.493 10.495c-.44.44-1.017.66-1.594.66z" /></g><path d="m70.299 66.917c0 1.401-1.137 2.537-2.537 2.537-1.401 0-2.537-1.137-2.537-2.537 0-1.401 1.137-2.537 2.537-2.537 1.4 0 2.537 1.137 2.537 2.537z" fill="#ee4036" /><path d="m67.762 70.583c-2.021 0-3.665-1.643-3.665-3.665s1.644-3.665 3.665-3.665 3.665 1.643 3.665 3.665c0 2.021-1.645 3.665-3.665 3.665zm0-5.075c-.778 0-1.41.632-1.41 1.41s.632 1.41 1.41 1.41 1.41-.632 1.41-1.41c-.001-.778-.633-1.41-1.41-1.41z" fill="#e64c3b" /></svg>
                     </div>
                     <div class="flex-column flex-inherit flex padding-left-10">
                         <div>
-                            <span class="color-grey">MINIGAME</span>
+                            <span class="color-white">MINIGAME</span>
                         </div>
                         <div>
-                            <span class="color-grey">로투스</span>
+                            <span class="color-white">엔트리게임</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {/*item list
+            <div class="category-item-list border-top background-transparent-b-5 flex flex-column flex-inherit">
+                <div class="item ntry-powerball widthp-100 flex align-items-center-inherit height-60 border-bottom">
+                    <div class="text flex padding-left-20">
+                        <span class="color-white">엔트리 파워볼</span>
+                    </div>
+                </div>
+                <div class="item ntry-ladder widthp-100 flex align-items-center-inherit height-60 border-top">
+                    <div class="text flex padding-left-20">
+                        <span class="color-white">엔트리 파워사다리</span>
+                    </div>
+                </div>
+                <div class="item ntry-speedkino widthp-100 flex align-items-center-inherit height-60 border-top">
+                    <div class="text flex padding-left-20">
+                        <span class="color-white">엔트리 스피드키노</span>
+                    </div>
+                </div>
+                <div class="item ntry-kinoladder widthp-100 flex align-items-center-inherit height-60 border-top">
+                    <div class="text flex padding-left-20">
+                        <span class="color-white">엔트리 키노사다리</span>
+                    </div>
+                </div>
+                <div class="item ntry-powerkinoladder widthp-100 flex align-items-center-inherit height-60 border-top">
+                    <div class="text flex padding-left-20">
+                        <span class="color-white">엔트리 파워키노사다리</span>
+                    </div>
+                </div>
+            </div>
+            */}
+            <div class="category-item border-bottom border-top background-transparent-b-15">
+                <a href="#" class="flex-inherit">
+                    <div class="icon padding-left-20">
+                        <svg enable-background="new 0 0 100 100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="width-30 height-30"><linearGradient id="a"><stop offset="0" stop-color="#efe786" /><stop offset=".9983" stop-color="#b2822c" /></linearGradient><linearGradient id="b" gradientUnits="userSpaceOnUse" x1="36.4579" x2="63.5619" xlink:href="#a" y1="32.862" y2="32.862" /><linearGradient id="c" gradientUnits="userSpaceOnUse" x1="25.7627" x2="41.1181" xlink:href="#a" y1="26.8228" y2="26.8228" /><linearGradient id="d" gradientUnits="userSpaceOnUse" x1="9.7778" x2="31.8616" xlink:href="#a" y1="29.6172" y2="29.6172" /><linearGradient id="e" gradientUnits="userSpaceOnUse" x1="6.0457" x2="22.1677" xlink:href="#a" y1="33.2197" y2="33.2197" /><linearGradient id="f" gradientUnits="userSpaceOnUse" x1="2.6284" x2="45.5863" xlink:href="#a" y1="48.6502" y2="48.6502" /><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="58.8819" x2="74.2373" xlink:href="#a" y1="27.0384" y2="27.0384" /><linearGradient id="h" gradientUnits="userSpaceOnUse" x1="68.1384" x2="90.2222" xlink:href="#a" y1="29.8327" y2="29.8327" /><linearGradient id="i" gradientUnits="userSpaceOnUse" x1="77.8323" x2="93.9543" xlink:href="#a" y1="33.4352" y2="33.4352" /><linearGradient id="j" gradientUnits="userSpaceOnUse" x1="54.4137" x2="97.3716" xlink:href="#a" y1="48.8657" y2="48.8657" /><linearGradient id="k" gradientUnits="userSpaceOnUse" x1="6.6481" x2="11.3735" xlink:href="#a" y1="69.8648" y2="69.8648" /><linearGradient id="l" gradientUnits="userSpaceOnUse" x1="12.5047" x2="19.7161" xlink:href="#a" y1="69.8648" y2="69.8648" /><linearGradient id="m" gradientUnits="userSpaceOnUse" x1="20.6557" x2="27.2155" xlink:href="#a" y1="69.8648" y2="69.8648" /><linearGradient id="n" gradientUnits="userSpaceOnUse" x1="28.7794" x2="34.6766" xlink:href="#a" y1="69.9497" y2="69.9497" /><linearGradient id="o" gradientUnits="userSpaceOnUse" x1="36.6675" x2="42.2142" xlink:href="#a" y1="69.8647" y2="69.8647" /><linearGradient id="p" gradientUnits="userSpaceOnUse" x1="48.0413" x2="54.6284" xlink:href="#a" y1="69.8702" y2="69.8702" /><linearGradient id="q" gradientUnits="userSpaceOnUse" x1="55.9515" x2="62.785" xlink:href="#a" y1="69.8648" y2="69.8648" /><linearGradient id="r" gradientUnits="userSpaceOnUse" x1="64.3981" x2="71.3849" xlink:href="#a" y1="69.8648" y2="69.8648" /><linearGradient id="s" gradientUnits="userSpaceOnUse" x1="73.562" x2="76.7269" xlink:href="#a" y1="69.8648" y2="69.8648" /><linearGradient id="t" gradientUnits="userSpaceOnUse" x1="78.904" x2="84.7354" xlink:href="#a" y1="69.8648" y2="69.8648" /><linearGradient id="u" gradientUnits="userSpaceOnUse" x1="86.7648" x2="93.3519" xlink:href="#a" y1="69.8702" y2="69.8702" /><linearGradient id="v" gradientUnits="userSpaceOnUse" x1="7.4054" x2="92.5946" xlink:href="#a" y1="81.5362" y2="81.5362" /><linearGradient id="w" gradientUnits="userSpaceOnUse" x1="28.7325" x2="71.2675" xlink:href="#a" y1="91.2193" y2="91.2193" /><path d="m62.523 31.649c-1.808-3.196-5.598-9.501-12.513-13.749-.054-.033-.125-.033-.179 0-6.914 4.248-10.525 10.413-12.334 13.609-2.127 3.759-.914 8.301 2.954 10.222 1.009.5 1.742.566 2.612.566 0 0 .213-.007.563-.06 1.555-.232 2.984-.988 4.09-2.105l.157-.159c.23-.232.624-.05.594.276-.164 1.764-1.463 4.551-2.813 6.234-.414.516-.075 1.278.587 1.278l7.451.087c.66 0 .996-.76.583-1.274-1.367-1.702-2.564-4.617-2.731-6.381-.026-.275.314-.424.5-.219.964 1.062 2.208 1.842 3.595 2.207.772.203 1.317.257 1.317.257.87 0 1.603-.066 2.612-.566 3.869-1.922 5.082-6.464 2.955-10.223z" fill="url(#b)" /><path d="m33.994 6.467s7.214 9.437 7.123 10.39-14.836 12.386-1.996 30.035c0 0 0 .363-.318.272s-25.679-15.97-4.809-40.697z" fill="url(#c)" /><path d="m10.81 16.221c-2.768 2.768-1.27 23.048 21.052 26.95 0 0-8.53-6.443-7.35-18.965 0 0-8.303-7.101-13.52-8.144-.001.001-.114.182-.182.159z" fill="url(#d)" /><path d="m6.046 25.613s12.182 14.564 15.653 14.904-13.416 1.342-14.655-3.811c-.998-4.151-.998-5.648-.998-11.093z" fill="url(#e)" /><path d="m45.586 55.898s-7.206-13.883-26.338-13.883c-14.632 0-16.606-6.738-16.606-6.738s-1.419 26.746 23.82 26.746c14.565 0 19.124-6.125 19.124-6.125z" fill="url(#f)" /><path d="m66.006 6.682s-7.214 9.437-7.123 10.39 14.836 12.386 1.996 30.035c0 0 0 .363.318.272s25.68-15.97 4.809-40.697z" fill="url(#g)" /><path d="m89.19 16.437c2.768 2.768 1.27 23.048-21.052 26.95 0 0 8.53-6.443 7.35-18.965 0 0 8.303-7.101 13.52-8.144.001 0 .114.182.182.159z" fill="url(#h)" /><path d="m93.954 25.829s-12.182 14.564-15.653 14.904 13.416 1.342 14.655-3.811c.998-4.152.998-5.649.998-11.093z" fill="url(#i)" /><path d="m54.414 56.114s7.206-13.883 26.338-13.883c14.632 0 16.606-6.738 16.606-6.738s1.419 26.746-23.82 26.746c-14.565 0-19.124-6.125-19.124-6.125z" fill="url(#j)" /><path d="m11.374 73.941h-4.726v-8.153h1.084v7.189h3.641v.964z" fill="url(#k)" /><path d="m18.736 66.724c.31.358.551.801.723 1.331.171.529.257 1.133.257 1.812 0 .661-.084 1.258-.252 1.791s-.411.98-.728 1.341c-.332.38-.72.66-1.164.841-.443.181-.932.271-1.465.271-.551 0-1.048-.093-1.489-.279-.442-.186-.821-.464-1.139-.832-.314-.361-.555-.807-.723-1.336s-.252-1.128-.252-1.796c0-.686.085-1.289.255-1.807s.412-.964.726-1.336c.314-.361.693-.636 1.136-.824s.939-.282 1.487-.282c.555 0 1.055.097 1.5.29s.821.465 1.128.815zm-.148 3.144c0-.54-.058-1.018-.175-1.435-.117-.416-.281-.761-.493-1.035-.215-.281-.476-.492-.78-.632-.305-.14-.647-.211-1.027-.211-.394 0-.738.068-1.032.205s-.554.35-.78.638c-.215.278-.381.626-.496 1.046s-.172.894-.172 1.424c0 1.07.225 1.888.674 2.456s1.051.851 1.807.851 1.357-.284 1.804-.851c.446-.568.67-1.387.67-2.456z" fill="url(#l)" /><path d="m23.394 73.941v-7.189h-2.738v-.964h6.56v.964h-2.738v7.189z" fill="url(#m)" /><path d="m31.725 74.111c-.478 0-.896-.063-1.254-.189s-.663-.313-.914-.561c-.285-.285-.486-.625-.602-1.021-.117-.396-.175-.884-.175-1.465v-5.087h1.084v5.087c0 .376.024.693.071.95s.14.488.279.693c.146.219.344.385.594.498s.556.17.917.17c.34 0 .641-.057.903-.17.263-.113.467-.279.613-.498.135-.208.227-.438.277-.69.049-.252.074-.56.074-.925v-5.114h1.084v5.087c0 .566-.058 1.051-.172 1.456-.115.405-.317.748-.605 1.029-.259.252-.561.44-.906.564s-.768.186-1.268.186z" fill="url(#n)" /><path d="m39.345 74.089c-.591 0-1.094-.061-1.509-.183-.414-.122-.804-.273-1.169-.452v-1.358h.077c.358.336.763.596 1.216.78s.889.277 1.309.277c.599 0 1.051-.125 1.358-.375s.46-.579.46-.988c0-.325-.08-.589-.241-.794-.161-.204-.416-.356-.767-.454-.252-.073-.482-.133-.69-.181-.208-.047-.469-.111-.783-.192-.281-.073-.533-.166-.756-.279s-.42-.261-.591-.444c-.168-.179-.298-.39-.392-.632-.093-.243-.14-.523-.14-.84 0-.661.257-1.215.772-1.662s1.172-.671 1.971-.671c.456 0 .888.046 1.295.137s.784.221 1.131.389v1.298h-.082c-.259-.237-.591-.444-.996-.621s-.831-.266-1.276-.266c-.504 0-.911.118-1.221.353s-.465.545-.465.928c0 .347.091.622.274.827.183.204.447.354.794.449.23.062.511.132.843.211s.608.151.827.216c.562.172.973.431 1.232.778s.389.774.389 1.281c0 .318-.065.632-.194.942-.13.31-.311.573-.545.788-.263.237-.559.42-.89.548-.331.126-.745.19-1.241.19z" fill="url(#o)" /><path d="m51.918 74.1c-.577 0-1.104-.088-1.582-.263s-.889-.442-1.232-.799c-.343-.361-.606-.809-.789-1.342s-.274-1.146-.274-1.84c0-.657.092-1.246.277-1.766.184-.52.448-.965.791-1.333.332-.358.741-.633 1.227-.827.485-.193 1.016-.29 1.593-.29.274 0 .537.02.789.06s.493.095.723.164c.182.055.386.131.611.227.224.097.406.18.545.249v1.309h-.093c-.135-.121-.275-.235-.419-.342-.144-.108-.348-.224-.611-.348-.219-.11-.471-.201-.755-.274-.285-.073-.591-.11-.92-.11-.785 0-1.419.296-1.903.887s-.725 1.378-.725 2.36c0 .548.064 1.026.192 1.435s.312.756.553 1.04c.234.281.516.495.846.643s.702.222 1.114.222c.307 0 .612-.022.915-.066s.558-.11.766-.197v-2.108h-1.883v-.951h2.957v3.559c-.139.062-.324.141-.556.235-.232.095-.448.17-.649.225-.267.08-.507.141-.723.181-.217.04-.478.06-.785.06z" fill="url(#p)" /><path d="m55.951 73.941 2.749-8.153h1.336l2.749 8.153h-1.144l-.739-2.278h-3.116l-.739 2.278zm4.649-3.203-1.259-3.844-1.254 3.844z" fill="url(#q)" /><path d="m71.385 73.941h-1.084v-7.025l-2.124 4.78h-.657l-2.108-4.78v7.025h-1.013v-8.153h1.478l2.037 4.539 1.966-4.539h1.506v8.153z" fill="url(#r)" /><path d="m76.727 73.941h-3.165v-.832h1.04v-6.489h-1.04v-.832h3.165v.832h-1.04v6.489h1.04z" fill="url(#s)" /><path d="m84.735 73.941h-1.215l-3.603-7.031v7.031h-1.013v-8.153h1.539l3.28 6.456v-6.456h1.013v8.153z" fill="url(#t)" /><path d="m90.642 74.1c-.577 0-1.104-.088-1.582-.263s-.889-.442-1.232-.799c-.343-.361-.606-.809-.788-1.342s-.274-1.146-.274-1.84c0-.657.092-1.246.277-1.766.184-.52.448-.965.791-1.333.332-.358.741-.633 1.227-.827.485-.193 1.016-.29 1.593-.29.274 0 .537.02.789.06s.493.095.723.164c.182.055.386.131.611.227s.406.18.545.249v1.309h-.093c-.135-.121-.275-.235-.419-.342-.144-.108-.348-.224-.611-.348-.219-.11-.471-.201-.755-.274-.285-.073-.591-.11-.92-.11-.785 0-1.419.296-1.903.887s-.725 1.378-.725 2.36c0 .548.064 1.026.192 1.435s.312.756.553 1.04c.234.281.516.495.846.643s.702.222 1.114.222c.307 0 .612-.022.915-.066s.558-.11.766-.197v-2.108h-1.883v-.951h2.957v3.559c-.139.062-.324.141-.556.235-.232.095-.448.17-.649.225-.27.081-.511.141-.727.181-.215.04-.476.06-.782.06z" fill="url(#u)" /><path d="m69.592 82.829c14.088 0 23.003-1.94 23.003-3.131s-16.725-4.679-18.001-3.403c-2.735 2.735-23.986 3.398-25.914 3.4 0-.004.001-.011.001-.011-1.872 0-20.536-.868-23.275-3.607-1.276-1.276-18.001 2.212-18.001 3.403s8.915 3.131 23.003 3.131c3.369 0-7.452.51-7.452 2.076 0 1.551 25.241 2.533 25.714 2.552v.034s28.374-.802 28.374-2.368-10.821-2.076-7.452-2.076zm-20.916 3.01c-.007-1.98-.017-5.43 0-6.055.017.594.007 4.052 0 6.055z" fill="url(#v)" /><ellipse cx="50" cy="91.219" fill="url(#w)" rx="21.268" ry="2.314" /></svg>
+                    </div>
+                    <div class="flex-column flex-inherit flex padding-left-10">
+                        <div>
+                            <span class="color-white">MINIGAME</span>
+                        </div>
+                        <div>
+                            <span class="color-white">로투스</span>
                         </div>
                     </div>
                 </a>

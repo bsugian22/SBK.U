@@ -44,14 +44,14 @@ export default function Position() {
   return (
     <Fragment>
       <div class="content account-continer flex flex-inherit grow-2 flex-column">
-        <div class="history-wrap account history-content-desktop flex-inherit">
-          <div class="history-left-content account-height widthp-50 padding-10 flex-inherit flex-column border-right scrollable-auto">
-            <div class="history-comfile flex-column flex-inherit">
+        <div class="position-wrap account position-content-desktop flex-inherit">
+          <div class="position-left-content account-height widthp-50 padding-10 flex-inherit flex-column border-right scrollable-auto">
+            <div class="position-comfile flex-column flex-inherit">
               <div class="flex-column flex-inherit widthp-100">
                 <div class="red-shadow height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
                   <span class="color-white grow-2">배팅내역 </span>
                 </div>
-                <div class="history-tab height-45 border-bottom-rb border-top flex-inherit align-items-center-inherit background-transparent-b-5">
+                <div class="position-tab height-45 border-bottom-rb border-top flex-inherit align-items-center-inherit background-transparent-b-5">
                   <div
                     class={
                       list == "ALL"
@@ -134,7 +134,7 @@ export default function Position() {
                   </div>
                 </div>
               </div>
-              <div class="history-content flex-column">
+              <div class="position-content flex-column">
                 <table>
                   <thead class="background-transparent-b-10  border-top">
                     <tr>
@@ -186,7 +186,7 @@ export default function Position() {
                     ) : (
                       position?.positions?.data?.map((item, index) => {
                         return (
-                          <tr key={index}>
+                          <tr class="rows" key={index}>
                             <td class="height-45 border-top">
                               <input
                                 type="checkbox"
@@ -241,7 +241,7 @@ export default function Position() {
                   </tbody>
                 </table>
               </div>
-              <div class="history-item-footer flex-inherit border-top padding-vertical-10 align-items-center background-transparent-b-10 border-bottom-rb">
+              <div class="position-item-footer flex-inherit border-top padding-vertical-10 align-items-center background-transparent-b-10 border-bottom-rb">
                 <div class="grow-2 padding-left-10">
                   <button
                     type="button"
@@ -379,14 +379,14 @@ export default function Position() {
               </div>
             </div>
           </div>
-          <div class="history-right-content account-height widthp-50 padding-10 flex-inherit flex-column border-left scrollable-auto">
-            <div class="history-comfile flex-column flex-inherit">
+          <div class="position-right-content account-height widthp-50 padding-10 flex-inherit flex-column border-left scrollable-auto">
+            <div class="position-comfile flex-column flex-inherit">
               <div class="flex-column flex-inherit widthp-100">
                 <div class="red-shadow height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
                   <span class="color-white">배팅 상세 내역</span>
                 </div>
               </div>
-              <div class="history-content flex-column">
+              <div class="position-content flex-column">
                 <table>
                   <thead class="background-transparent-b-10 border-top">
                     <tr>
@@ -560,7 +560,7 @@ export default function Position() {
                   </tbody>
                 </table>
               </div>
-              <div class="history-item-footer flex-inherit border-top border-bottom-rb padding-vertical-15 align-items-center background-transparent-b-10">
+              <div class="position-item-footer flex-inherit border-top border-bottom-rb padding-vertical-15 align-items-center background-transparent-b-10">
                 <div class="grow-2 padding-left-10">
                   <span class="color-grey padding-right-10">
                     누적 배당 <strong class="color-red">3.10</strong>
