@@ -220,13 +220,21 @@ export default function Position() {
                               <span class="color-grey">{item?.type}</span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey">{item?.odds.toFixed(2)}</span>
+                              <span class="color-grey">
+                                {item?.odds.toFixed(2)}
+                              </span>
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-grey">{item?.amount}원</span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey"> {(item?.odds.toFixed(2) * item?.amount).toLocaleString()}원</span>
+                              <span class="color-grey">
+                                {" "}
+                                {(
+                                  item?.odds.toFixed(2) * item?.amount
+                                ).toLocaleString()}
+                                원
+                              </span>
                             </td>
                             {/* <td class="height-45 border-top">
                               <span class="color-grey">1/1</span>
@@ -337,7 +345,7 @@ export default function Position() {
                     <Link to="#">
                       <button
                         class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == 1 }
+                        disabled={page == 1}
                         onClick={() => {
                           let prevData = {
                             page: page,
@@ -357,7 +365,7 @@ export default function Position() {
                     <Link to="#">
                       <button
                         class="page-right width-40 heightp-100 background-transparent-b-20"
-                        disabled = {page == lastPage }
+                        disabled={page == lastPage}
                         onClick={() => {
                           let nextData = {
                             page: page,
@@ -411,6 +419,67 @@ export default function Position() {
                     </tr>
                   </thead>
                   <tbody class="background-transparent-b-5">
+                  {position.positions.data.map((match,index)=>{
+                    return( 
+                    <tr key={index}> 
+
+                    {match.outcomes.map((outcome, indx)=>{
+                      return (
+                        <div>
+                          <td class="height-60 border-top">
+                            <div class="list-td flex flex-column flex-inherit padding-10">
+                              <div class="flex-column">
+                                <span class="color-grey"> {outcome?.startAt
+                                  ? ""
+                                  : Moment(outcome.startAt).format(
+                                      "YY-MM-DD HH:mm "
+                                    )}</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="height-60 border-top">
+                            <div class="list-td flex flex-column flex-inherit padding-10">
+                              <div class="flex-column">
+                                <span class="color-grey">{outcome?.matches?.homeTeam.name.ko} vs {outcome?.matches?.awayTeam.name.ko}</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="height-60 border-top">
+                            <div class="list-td flex flex-column flex-inherit padding-10">
+                              <div class="flex-column">
+                                <span class="color-red">{outcome?.matches?.homeScore} : {outcome?.matches?.awayScore}</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="height-60 border-top">
+                            <div class="list-td flex flex-column flex-inherit padding-10">
+                              <div class="flex-column">
+                                <span class="color-white">아시아오버언더</span>
+                                <span class="color-grey">오버2.5</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="height-60 border-top">
+                            <div class="list-td flex flex-column flex-inherit padding-10">
+                              <div class="flex-column">
+                                <span class="color-grey">1.78</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="height-60 border-top">
+                            <div class="list-td flex flex-column flex-inherit padding-10">
+                              <div class="flex-column">
+                                <span class="color-green">적중</span>
+                              </div>
+                            </div>
+                          </td>
+                        </div>
+                      );
+                    })}
+                    </tr>
+                    )
+                  })}
+                    {/* 
                     <tr>
                       <td class="height-60 border-top">
                         <div class="list-td flex flex-column flex-inherit padding-10">
@@ -507,56 +576,7 @@ export default function Position() {
                           </div>
                         </div>
                       </td>
-                    </tr>
-
-                    <tr>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-grey">20-11-12</span>
-                            <span class="color-grey">22:00</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-grey">FK 츠르배나즈배</span>
-                            <span class="color-grey">리버풀</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-red">2</span>
-                            <span class="color-red">1</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-white">아시아오버언더</span>
-                            <span class="color-grey">오버2.5</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-grey">1.78</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-green">적중</span>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
               </div>
