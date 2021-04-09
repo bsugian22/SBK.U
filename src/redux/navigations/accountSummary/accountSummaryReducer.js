@@ -287,4 +287,4 @@ const accountSummaryReducer = (state = initialState, action) => {
   }
 };
 
-export default summaryReducer;
+export default accountSummaryReducer;
