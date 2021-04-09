@@ -220,13 +220,13 @@ export default function Position() {
                               <span class="color-grey">{item?.type}</span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey">{item?.odds}</span>
+                              <span class="color-grey">{item?.odds.toFixed(2)}</span>
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-grey">{item?.amount}원</span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey">21,000,000원</span>
+                              <span class="color-grey"> {(item?.odds.toFixed(2) * item?.amount).toLocaleString()}원</span>
                             </td>
                             {/* <td class="height-45 border-top">
                               <span class="color-grey">1/1</span>
