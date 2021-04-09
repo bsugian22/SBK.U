@@ -148,7 +148,7 @@ export default function Position() {
                         <span class="color-grey">전체선택</span>
                       </th>
                       <th class="height-45">
-                        <span class="color-grey">배팅시간</span>
+                        {/* <span class="color-grey">배팅시간</span> */}
                       </th>
                       <th class="height-45">
                         <span class="color-grey">타입</span>
@@ -162,9 +162,9 @@ export default function Position() {
                       <th class="height-45">
                         <span class="color-grey">예상 당첨금</span>
                       </th>
-                      <th class="height-45">
+                      {/* <th class="height-45">
                         <span class="color-grey">진행</span>
-                      </th>
+                      </th> */}
                       <th class="height-45">
                         <span class="color-grey">결과</span>
                       </th>
@@ -228,9 +228,9 @@ export default function Position() {
                             <td class="height-45 border-top">
                               <span class="color-grey">21,000,000원</span>
                             </td>
-                            <td class="height-45 border-top">
+                            {/* <td class="height-45 border-top">
                               <span class="color-grey">1/1</span>
-                            </td>
+                            </td> */}
                             <td class="height-45 border-top">
                               <span class="color-red">{item?.status}</span>
                             </td>
