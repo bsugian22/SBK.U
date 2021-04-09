@@ -58,6 +58,7 @@ const Withdrawal = () => {
     if (user.isAuth) {
     echo.private(`users.${user.member.id}`).listen('WithdrawalUpdated', (e) => {
       dispatch(setWithdrawals({ page: page, per_page: per_page }));
+      dispatch(fetchSummary());
     })
     }
   }
@@ -392,7 +393,7 @@ const Withdrawal = () => {
                               <span class="color-grey">
                                 {Moment(item.createdAt).format(
                                   "YY-MM-DD HH:mm "
-                                )}{" "}
+                                )}
                               </span>
                             </td>
                             <td class="height-45 border-top">

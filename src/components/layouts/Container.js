@@ -43,6 +43,7 @@ const Container = (props) => {
       if (user.isAuth) {
          echo.private(`users.${user.member.id}`).listen('UserUpdated', (e) => {
             setUser(e)
+            dispatch(fetchSummary());
          })
       }
    }

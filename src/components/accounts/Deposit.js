@@ -58,6 +58,7 @@ const Deposit = () => {
     if (user.isAuth) {
     echo.private(`users.${user.member.id}`).listen('DepositUpdated', (e) => {
       dispatch(setDeposits({ page: page, per_page: per_page }));
+      dispatch(fetchSummary());
     })
     }
   }

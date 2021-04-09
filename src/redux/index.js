@@ -39,3 +39,6 @@ export { fetchSportsdetails, fetchSportsdetail, createSportsdetail, updateSports
 
 // swipermain
 export { fetchSwipermains, fetchSwipermain, createSwipermain, updateSwipermain, deleteSwipermains } from "./swipermain/swipermainActions"
+
+// account summary
+export { fetchSummary } from "./navigations/accountSummary/accountSummaryActions"

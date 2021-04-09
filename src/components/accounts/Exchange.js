@@ -60,6 +60,7 @@ const Exchange = () => {
     if (user.isAuth) {
     echo.private(`users.${user.member.id}`).listen('ExchangeUpdated', (e) => {
       dispatch(setExchanges({ page: page, per_page: per_page }));
+      dispatch(fetchSummary());
     })
     }
   }

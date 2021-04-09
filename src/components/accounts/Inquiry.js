@@ -54,6 +54,7 @@ const Inquiry = () => {
     if (user.isAuth) {
       echo.private(`users.${user.member.id}`).listen('InquiryUpdated', (e) => {
         dispatch(setInquiries({ page: page, per_page: per_page }));
+        dispatch(fetchSummary());
       })
     }
   }
