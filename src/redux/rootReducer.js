@@ -25,6 +25,8 @@ import inquiryReducer from "../redux/accounts/inquiry/inquiryReducer";
 import messageReducer from "../redux/accounts/message/messageReducer";
 import positionReducer from "../redux/accounts/position/positionReducer";
 import noticeReducer from "../redux/accounts/notice/noticeReducer";
+import accountSummaryReducer from "../redux/navigations/accountSummary/accountSummaryReducer";
+
 const rootReducer = combineReducers({
   casino: casinoReducer,
   esport: esportReducer,
@@ -52,6 +54,7 @@ const rootReducer = combineReducers({
   message: messageReducer,
   position: positionReducer,
   notice: noticeReducer,
+  accountSummary: accountSummaryReducer,
 });
 
 export default rootReducer;
