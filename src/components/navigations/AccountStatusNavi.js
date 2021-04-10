@@ -26,11 +26,11 @@ export default function AccountStatusNavi(props) {
       <div class="right-account-sidebar content-height width-300 flex-inherit flex-column scrollable-auto border-left border-left-shadow">
         <div class="summary-title height-45 background-transparent-b-10 align-items-center-inherit flex-inherit padding-left-15 border-bottom">
           <span class="color-green">
-            SUMMARY {console.log(summary.data.deposit)}
+            SUMMARY
           </span>
         </div>
         <div class="balance-status flex-inherit flex-column">
-          <div class="balance-status-header flex-inherit height-45 background-transparent-b-10 align-items-center-inherit border-bottom" onClick={()=>{
+          <div class="balance-status-header flex-inherit height-45 background-transparent-b-10 align-items-center-inherit border-bottom" onClick={() => {
             showingUser = false;
             alert(showingUser);
           }}>
@@ -52,9 +52,9 @@ export default function AccountStatusNavi(props) {
               </div>
               <div>
                 <span class="color-green">
-                  {summary.data.data.users.cash.toLocaleString("en-US", {
+                  {summary.data.data.users?.cash ? summary.data.data.users.cash.toLocaleString("en-US", {
                     maximumFractionDigits: 2,
-                  })}
+                  }) : "0"}
                 </span>
               </div>
             </div>
@@ -66,9 +66,9 @@ export default function AccountStatusNavi(props) {
               </div>
               <div>
                 <span class="color-green">
-                  {summary.data.data.users.point.toLocaleString("en-US", {
+                  {summary.data.data.users?.point ? summary.data.data.users.point.toLocaleString("en-US", {
                     maximumFractionDigits: 2,
-                  })}
+                  }) : "0"}
                 </span>
               </div>
             </div>
@@ -80,9 +80,9 @@ export default function AccountStatusNavi(props) {
               </div>
               <div>
                 <span class="color-green">
-                  {summary.data.data.users.casinoCash.toLocaleString("en-US", {
+                  {summary.data.data.users?.casinoCash ? summary.data.data.users.casinoCash.toLocaleString("en-US", {
                     maximumFractionDigits: 2,
-                  })}
+                  }) : "0"}
                 </span>
               </div>
             </div>
@@ -115,71 +115,71 @@ export default function AccountStatusNavi(props) {
                 <tbody>
                   {summary.data.data.deposit.length > 0
                     ? summary.data.data.deposit.map((deposit, index) => {
-                        return (
-                          <tr key = {"deposit-" + index}>
-                            <td>
-                              <div class="background-transparent-b-10 padding-5 margin-5">
-                                <span class="color-grey">입금</span>
-                              </div>
-                            </td>
-                            <td>
-                              <span class="color-grey">
-                                {Moment(deposit.createdAt).format(
-                                  "YY-MM-DD HH:mm "
-                                )}
-                              </span>
-                            </td>
-                            <td>
-                              <span class="color-green">
-                                {deposit.amount.toLocaleString("en-US", {
-                                  maximumFractionDigits: 2,
-                                })}
+                      return (
+                        <tr key={"deposit-" + index}>
+                          <td>
+                            <div class="background-transparent-b-10 padding-5 margin-5">
+                              <span class="color-grey">입금</span>
+                            </div>
+                          </td>
+                          <td>
+                            <span class="color-grey">
+                              {Moment(deposit.createdAt).format(
+                                "YY-MM-DD HH:mm "
+                              )}
+                            </span>
+                          </td>
+                          <td>
+                            <span class="color-green">
+                              {deposit.amount.toLocaleString("en-US", {
+                                maximumFractionDigits: 2,
+                              })}
                                 원
                               </span>
-                            </td>
-                            <td>
-                              <div class="background-transparent-b-10 padding-5 margin-5">
-                                <span class="color-grey">{deposit.status}</span>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      })
+                          </td>
+                          <td>
+                            <div class="background-transparent-b-10 padding-5 margin-5">
+                              <span class="color-grey">{deposit.status}</span>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
                     : ""}
                   {summary.data.data.withdrawal.length > 0
                     ? summary.data.data.withdrawal.map((withdrawal, index) => {
-                        return (
-                          <tr key = {"withdraw-" + index}>
-                            <td>
-                              <div class="background-transparent-b-10 padding-5 margin-5">
-                                <span class="color-grey">Withdrawal</span>
-                              </div>
-                            </td>
-                            <td>
-                              <span class="color-grey">
-                                {Moment(withdrawal.createdAt).format(
-                                  "YY-MM-DD HH:mm "
-                                )}
-                              </span>
-                            </td>
-                            <td>
-                              <span class="color-green">
-                                {withdrawal.amount.toLocaleString("en-US", {
-                                  maximumFractionDigits: 2,
-                                })}
+                      return (
+                        <tr key={"withdraw-" + index}>
+                          <td>
+                            <div class="background-transparent-b-10 padding-5 margin-5">
+                              <span class="color-grey">Withdrawal</span>
+                            </div>
+                          </td>
+                          <td>
+                            <span class="color-grey">
+                              {Moment(withdrawal.createdAt).format(
+                                "YY-MM-DD HH:mm "
+                              )}
+                            </span>
+                          </td>
+                          <td>
+                            <span class="color-green">
+                              {withdrawal.amount.toLocaleString("en-US", {
+                                maximumFractionDigits: 2,
+                              })}
                                 원
                               </span>
-                            </td>
-                            <td>
-                              <div class="background-transparent-b-10 padding-5 margin-5">
-                                <span class="color-grey">
-                                  {withdrawal.status}
-                                </span>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      })
+                          </td>
+                          <td>
+                            <div class="background-transparent-b-10 padding-5 margin-5">
+                              <span class="color-grey">
+                                {withdrawal.status}
+                              </span>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
                     : ""}
                 </tbody>
               </table>
@@ -213,34 +213,34 @@ export default function AccountStatusNavi(props) {
                 <tbody>
                   {summary.data.data.bettings.length > 0
                     ? summary.data.data.bettings.map((betting, index) => {
-                        return (
-                          <tr key = {"bettings-" + index}>
-                            <td>
-                              <div>
-                                <span class="color-grey">
+                      return (
+                        <tr key={"bettings-" + index}>
+                          <td>
+                            <div>
+                              <span class="color-grey">
                                 {Moment(betting.createdAt).format(
                                   "YY-MM-DD HH:mm "
                                 )}</span>
-                              </div>
-                            </td>
-                            <td>
-                              <span class="color-red">{betting.odds.toLocaleString("en-US", {
-                                  maximumFractionDigits: 2,
-                                })}</span>
-                            </td>
-                            <td>
-                              <span class="color-green">{betting.amount.toLocaleString("en-US", {
-                                  maximumFractionDigits: 2,
-                                })}원</span>
-                            </td>
-                            <td>
-                              <div class="background-transparent-b-10 padding-5 margin-5">
-                                <span class={betting.status == "DEFEATED" ? "color-red" : betting.status == "WINNING" ? "color-green" : "color-grey"}>{betting.status}</span>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      })
+                            </div>
+                          </td>
+                          <td>
+                            <span class="color-red">{betting.odds.toLocaleString("en-US", {
+                              maximumFractionDigits: 2,
+                            })}</span>
+                          </td>
+                          <td>
+                            <span class="color-green">{betting.amount.toLocaleString("en-US", {
+                              maximumFractionDigits: 2,
+                            })}원</span>
+                          </td>
+                          <td>
+                            <div class="background-transparent-b-10 padding-5 margin-5">
+                              <span class={betting.status == "DEFEATED" ? "color-red" : betting.status == "WINNING" ? "color-green" : "color-grey"}>{betting.status}</span>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
                     : ""}
                 </tbody>
               </table>
@@ -273,28 +273,28 @@ export default function AccountStatusNavi(props) {
                 <tbody>
                   {summary.data.data.inquiries.length > 0
                     ? summary.data.data.inquiries.map((inquiry, index) => {
-                        return (
-                           <tr key = {"inquiries-" + index}>
-                             <td>
-                               <div>
-                                 <span class="color-grey">{Moment(inquiry.createdAt).format(
-                                  "YY-MM-DD HH:mm "
-                                )}</span>
-                               </div>
-                             </td>
-                             <td>
-                               <Link to="#" className="color-grey">
-                                 {inquiry.title}
-                               </Link>
-                             </td>
-                             <td>
-                               <div class="background-transparent-b-10 padding-5 margin-5">
-                                 <span class={inquiry.status == "PENDING" ? "color-red" : inquiry.status == "COMPLETED" ? "color-green" : "color-grey"}>{inquiry.status}</span>
-                               </div>
-                             </td>
-                           </tr>
-                        );
-                      })
+                      return (
+                        <tr key={"inquiries-" + index}>
+                          <td>
+                            <div>
+                              <span class="color-grey">{Moment(inquiry.createdAt).format(
+                                "YY-MM-DD HH:mm "
+                              )}</span>
+                            </div>
+                          </td>
+                          <td>
+                            <Link to="#" className="color-grey">
+                              {inquiry.title}
+                            </Link>
+                          </td>
+                          <td>
+                            <div class="background-transparent-b-10 padding-5 margin-5">
+                              <span class={inquiry.status == "PENDING" ? "color-red" : inquiry.status == "COMPLETED" ? "color-green" : "color-grey"}>{inquiry.status}</span>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
                     : ""}
                   {/* <tr>
                     <td>

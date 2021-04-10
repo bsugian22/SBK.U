@@ -7,16 +7,17 @@ import { fetchInplays } from "../../../redux/inplay/inplayActions";
 export default function Inplay() {
 
    let isSubscribed = true;
-const dispatch = useDispatch();
+   const dispatch = useDispatch();
+   let inplay = useSelector((state) => state.inplay);
 
-  useEffect(() => {
-    isSubscribed = true;
-    dispatch(refreshToken())
-    dispatch(fetchInplays())
-    return () => {
-      isSubscribed = false;
-    };
-  }, []);
+   useEffect(() => {
+      isSubscribed = true;
+      dispatch(refreshToken())
+      //  dispatch(fetchInplays())
+      return () => {
+         isSubscribed = false;
+      };
+   }, []);
 
    return (
       <Fragment>
@@ -72,6 +73,7 @@ const dispatch = useDispatch();
                            </div>
                         </div>
                      </div>
+                     {/* inplay start */}
                      <div class="list flex-inherit border-bottom-white" data-type="" data-id="" data-market-hash="" data-home-competitor="" data-away-competitor="">
                         <div class="widthp-40 flex-inherit background-transparent-b-30 padding-horizontal-10">
                            <div class="info flex-inherit flex-column align-items-center-inherit justify-content-end-inherit width-45 margin-right-5">
@@ -141,6 +143,7 @@ const dispatch = useDispatch();
                            <div class="flex detail widthp-100 justify-content-center align-items-center color-white active">+9</div>
                         </div>
                      </div>
+                     {/* inplay end */}
                   </div>
                   <div class="bottom-wrap border-top flex padding-vertical-10 flex-inherit height-59 align-items-center-inherit0">
                      <div class="count-list flex-inherit grow-2 heightp-100"></div>
