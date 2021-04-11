@@ -185,6 +185,7 @@ export default function Position() {
                       </tr>
                     ) : (
                       position?.positions?.data?.map((item, index) => {
+                        console.log(item)
                         return (
                           <tr class="rows" key={index}>
                             <td class="height-45 border-top">
@@ -210,10 +211,10 @@ export default function Position() {
                             <td class="height-45 border-top">
                               <span class="color-grey">
                                 {item?.createdAt
-                                  ? ""
-                                  : Moment(item.createdAt).format(
-                                    "YY-MM-DD HH:mm "
-                                  )}
+                                  ? Moment(item.createdAt).format(
+                                    "YY-MM-DD HH:mm ")
+                                  : ""
+                                  }
                               </span>
                             </td>
                             <td class="height-45 border-top">
@@ -229,7 +230,6 @@ export default function Position() {
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-grey">
-                                {" "}
                                 {(
                                   item?.odds.toFixed(2) * item?.amount
                                 ).toLocaleString()}
@@ -420,9 +420,6 @@ export default function Position() {
                   </thead>
                   <tbody class="background-transparent-b-5">
                     {position.positions.data.map((match, index) => {
-
-
-
                       return (match.outcomes.map((outcome, indx) => {
                         return (
                           <tr key={"match_outcomes_id"+indx}>
