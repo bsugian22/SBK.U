@@ -427,11 +427,11 @@ export default function Position() {
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  <span class="color-grey"> {outcome?.startAt
-                                    ? ""
-                                    : Moment(outcome.startAt).format(
+                                  <span class="color-grey"> {outcome?.matches.startAt
+                                    ?  Moment(outcome.matches.startAt).format(
                                       "YY-MM-DD HH:mm "
-                                    )}</span>
+                                    )
+                                    : " "}</span>
                                 </div>
                               </div>
                             </td>
@@ -452,8 +452,8 @@ export default function Position() {
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  <span class="color-white">아시아오버언더</span>
-                                  <span class="color-grey">오버2.5</span>
+                                <span class="color-grey">{outcome?.markets?.marketName?.ko ? outcome.markets.marketName.ko : ""}</span>
+                                  {/* <span class="color-grey">{outcome?.markets?.specifier ? outcome.markets.specifier : ""}</span> */}
                                 </div>
                               </div>
                             </td>
