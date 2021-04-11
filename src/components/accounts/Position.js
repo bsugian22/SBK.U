@@ -148,7 +148,7 @@ export default function Position() {
                         <span class="color-grey">전체선택</span>
                       </th>
                       <th class="height-45">
-                        {/* <span class="color-grey">배팅시간</span> */}
+                        <span class="color-grey">배팅시간</span>
                       </th>
                       <th class="height-45">
                         <span class="color-grey">타입</span>
@@ -421,6 +421,7 @@ export default function Position() {
                   <tbody class="background-transparent-b-5">
                     {position.positions.data.map((match, index) => {
                       return (match.outcomes.map((outcome, indx) => {
+                        console.log(outcome)
                         return (
                           <tr key={"match_outcomes_id"+indx}>
                             <td class="height-60 border-top">
