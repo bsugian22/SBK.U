@@ -20,6 +20,7 @@ import {
   selectAllPosition,
   changePositionStatus,
   checkPositionCertainItem,
+  selectPostion,
 } from "../../redux/accounts/position/positionActions";
 export default function Position() {
   let position = useSelector((state) => state.position);
@@ -185,9 +186,9 @@ export default function Position() {
                       </tr>
                     ) : (
                       position?.positions?.data?.map((item, index) => {
-                        console.log(item)
+                        // console.log(item)
                         return (
-                          <tr class="rows" key={index}>
+                          <tr class={position.selectedPosition == null ? "rows" : position.selectedPosition.id == item.id ? "active rows" : "rows"} key={index} onClick={() => { dispatch(selectPostion(item)) }}>
                             <td class="height-45 border-top">
                               <input
                                 type="checkbox"
@@ -214,7 +215,7 @@ export default function Position() {
                                   ? Moment(item.createdAt).format(
                                     "YY-MM-DD HH:mm ")
                                   : ""
-                                  }
+                                }
                               </span>
                             </td>
                             <td class="height-45 border-top">
@@ -236,9 +237,6 @@ export default function Position() {
                                 원
                               </span>
                             </td>
-                            {/* <td class="height-45 border-top">
-                              <span class="color-grey">1/1</span>
-                            </td> */}
                             <td class="height-45 border-top">
                               <span class="color-red">{item?.status}</span>
                             </td>
@@ -419,16 +417,16 @@ export default function Position() {
                     </tr>
                   </thead>
                   <tbody class="background-transparent-b-5">
-                    {position.positions.data.map((match, index) => {
-                      return (match.outcomes.map((outcome, indx) => {
-                        console.log(outcome)
+                    {position.selectedPosition == null ? "" :
+                      position.selectedPosition.outcomes.map((outcome, indx)=> {
+                        // console.log(match.isChecked)
                         return (
-                          <tr key={"match_outcomes_id"+indx}>
+                          <tr key={"match_outcomes_id" + indx}>
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
                                   <span class="color-grey"> {outcome?.matches.startAt
-                                    ?  Moment(outcome.matches.startAt).format(
+                                    ? Moment(outcome.matches.startAt).format(
                                       "YY-MM-DD HH:mm "
                                     )
                                     : " "}</span>
@@ -452,148 +450,49 @@ export default function Position() {
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                <span class="color-grey">{outcome?.markets?.marketName?.ko ? outcome.markets.marketName.ko : ""}</span>
-                                  {/* <span class="color-grey">{outcome?.markets?.specifier ? outcome.markets.specifier : ""}</span> */}
+                                  <span class="color-white">{outcome?.markets?.marketName?.ko ? outcome.markets.marketName.ko : ""}</span>
+                                  {/* {console.log(outcome.markets.specifier == {} ? "wala lmang"  : Object.values(outcome.markets.specifier))} */}
+
+                                  {/* {outcome.markets.specifier == {} ? "wala lmang"  : outcome.markets.specifier} */}
+                                  {Object.values(outcome.markets.specifier).map(specifier => <span class="color-grey">{specifier}</span>)}
                                 </div>
                               </div>
                             </td>
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  <span class="color-grey">1.78</span>
+                                  <span class="color-grey">{outcome.odds}</span>
                                 </div>
                               </div>
                             </td>
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  <span class="color-green">적중</span>
+                                  <span class="color-green">{outcome.status}</span>
                                 </div>
                               </div>
                             </td>
                           </tr>
-                        );
+                        )
                       })
-
-                      )
-
-
-                    })}
-                    {/* 
-                    <tr>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-grey">20-11-12</span>
-                            <span class="color-grey">22:00</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-grey">FK 츠르배나즈배</span>
-                            <span class="color-grey">리버풀</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-red">2</span>
-                            <span class="color-red">1</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-white">아시아오버언더</span>
-                            <span class="color-grey">오버2.5</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-grey">1.78</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-green">적중</span>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-grey">20-11-12</span>
-                            <span class="color-grey">22:00</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-grey">FK 츠르배나즈배</span>
-                            <span class="color-grey">리버풀</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-red">2</span>
-                            <span class="color-red">1</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-white">아시아오버언더</span>
-                            <span class="color-grey">오버2.5</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-grey">1.78</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="height-60 border-top">
-                        <div class="list-td flex flex-column flex-inherit padding-10">
-                          <div class="flex-column">
-                            <span class="color-green">적중</span>
-                          </div>
-                        </div>
-                      </td>
-                    </tr> */}
+                      }
                   </tbody>
                 </table>
               </div>
               <div class="position-item-footer flex-inherit border-top border-bottom-rb padding-vertical-15 align-items-center background-transparent-b-10">
                 <div class="grow-2 padding-left-10">
                   <span class="color-grey padding-right-10">
-                    누적 배당 <strong class="color-red">3.10</strong>
+                    누적 배당 <strong class="color-red">{position.selectedPosition.odds}</strong>
                   </span>
                   <span class="color-grey padding-right-10">
-                    배팅금액 <strong class="color-red">50,000원</strong>
+                    배팅금액 <strong class="color-red">{position.selectedPosition.amount} 원</strong>
                   </span>
                   <span class="color-grey padding-right-10">
-                    적중상금 <strong class="color-red">155,000</strong>
+                    적중상금 <strong class="color-red">{position.selectedPosition.amount * position.selectedPosition.odds}</strong>
                   </span>
                 </div>
                 <div class="padding-right-25">
-                  <strong class="color-red">적중</strong>
+                  <strong class="color-red">{position.selectedPosition.status}</strong>
                 </div>
               </div>
             </div>

@@ -119,6 +119,13 @@ export const changePositionCategory = (category) => {
   };
 };
 
+export const selectPostion = (data) => {
+  return {
+    type: types.SELECT_POSITION,
+    payload: data,
+  };
+};
+
 export const changePositionAmount = (amount) => {
   return {
     type: types.CHANGE_POSITION_AMOUNT,
@@ -203,6 +210,8 @@ export const setPagesOfPosition = () => {
     dispatch(setPagePosition());
   };
 };
+
+
 
 export const setPagePosition = () => {
   return {

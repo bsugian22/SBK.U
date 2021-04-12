@@ -10,6 +10,7 @@ const initialState = {
     amount: "",
     outcomes: "",
   },
+  selectedPosition: null,
   showModal: false,
   openModal: false,
   closeModal: false,
@@ -20,6 +21,11 @@ const initialState = {
 
 const positionReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.SELECT_POSITION:
+      return {
+        ...state,
+        selectedPosition: action.payload
+      };
     case types.FETCH_POSITIONS_REQUEST:
       return {
         ...state,
