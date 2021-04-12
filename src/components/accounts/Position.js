@@ -188,7 +188,7 @@ export default function Position() {
                       position?.positions?.data?.map((item, index) => {
                         // console.log(item)
                         return (
-                          <tr class={position.selectedPosition == null ? "rows" : position.selectedPosition.id == item.id ? "active rows" : "rows"} key={index} onClick={() => { dispatch(selectPostion(item)) }}>
+                          <tr key={item.id} class={position.selectedPosition == null ? "rows" : position.selectedPosition.id == item.id ? "active rows" : "rows"} key={index} onClick={() => { dispatch(selectPostion(item)) }}>
                             <td class="height-45 border-top">
                               <input
                                 type="checkbox"
@@ -421,7 +421,7 @@ export default function Position() {
                       position.selectedPosition.outcomes.map((outcome, indx)=> {
                         // console.log(match.isChecked)
                         return (
-                          <tr key={"match_outcomes_id" + indx}>
+                          <tr key={outcome.id}>
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
