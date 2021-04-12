@@ -482,17 +482,17 @@ export default function Position() {
               <div class="position-item-footer flex-inherit border-top border-bottom-rb padding-vertical-15 align-items-center background-transparent-b-10">
                 <div class="grow-2 padding-left-10">
                   <span class="color-grey padding-right-10">
-                    누적 배당 <strong class="color-red">{position.selectedPosition.odds}</strong>
+                    누적 배당 <strong class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.odds}</strong>
                   </span>
                   <span class="color-grey padding-right-10">
-                    배팅금액 <strong class="color-red">{position.selectedPosition.amount} 원</strong>
+                    배팅금액 <strong class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.amount} 원</strong>
                   </span>
                   <span class="color-grey padding-right-10">
-                    적중상금 <strong class="color-red">{position.selectedPosition.amount * position.selectedPosition.odds}</strong>
+                    적중상금 <strong class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.amount * position.selectedPosition.odds}</strong>
                   </span>
                 </div>
                 <div class="padding-right-25">
-                  <strong class="color-red">{position.selectedPosition.status}</strong>
+                  <strong class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.status}</strong>
                 </div>
               </div>
             </div>
