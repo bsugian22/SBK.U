@@ -177,7 +177,7 @@ export const fetchSportsdetails = (params) => {
           })
         })
         // console.log(sportsdetails.data)
-        dispatch(sportWebSocket(matches));
+        // dispatch(sportWebSocket(matches));
 
         var data = chain(sportsdetails.data)
           .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
@@ -185,14 +185,6 @@ export const fetchSportsdetails = (params) => {
           .orderBy("startAt")
           .value();
         sportsdetails.data = data
-        sportsdetails.detail = null
-        sportsdetails.detail_data = null
-        sportsdetails.bet = {
-          category: "SPORTS",
-          amount: 0,
-          outcomes: [],
-          total_odds: 0,
-        }
 
         dispatch(fetchSportsdetailsSuccess(sportsdetails))
 

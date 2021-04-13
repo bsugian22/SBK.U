@@ -230,27 +230,22 @@ const sportsdetailReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        data: {
-          data: [],
-          total: null,
-          count: null,
-          per_page: null,
-          page: 1,
-          last_page: null,
-          detail: null,
-          detail_data: null,
-          bet: {
-            category: "SPORTS",
-            amount: 0,
-            total_odds: 0,
-            outcomes: []
-          }
-        },
       };
     case types.FETCH_SPORTSDETAILS_SUCCESS:
+      console.log(action.payload)
+
+    // return {...state}
       return {
         loading: false,
-        data: action.payload,
+        data: {
+          ...state.data,
+          data :action.payload.data,
+          count :action.payload.count,
+          lastPage :action.payload.lastPage,
+          page :action.payload.page,
+          perPage :action.payload.perPage,
+          total :action.payload.total,
+        },
         error: "",
       };
     case types.FETCH_SPORTSDETAILS_FAILURE:
