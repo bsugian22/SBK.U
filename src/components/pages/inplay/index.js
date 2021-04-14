@@ -32,7 +32,7 @@ export default function Inplay() {
    useEffect(() => {
       isSubscribed = true;
       dispatch(refreshToken())
-      //  dispatch(fetchInplays())
+      dispatch(fetchInplays())
       return () => {
          isSubscribed = false;
       };
@@ -116,6 +116,7 @@ export default function Inplay() {
                         </div>
                      </div>
 
+
                      {inplay.data.data.length > 0
                         ? inplay.data.data.map((matches, index) => {
                            handicap_specifier = null
@@ -163,12 +164,12 @@ export default function Inplay() {
                                  <div class="widthp-50 flex-inherit background-transparent-b-20">
 
                                     <div class="odds flex-inherit flex-column align-items-center-inherit justify-content-center-inherit widthp-33">
-                                       {matches.market.map((market, market_index) => {
+                                       {matches.markets.map((market, market_index) => {
                                           // console.log(market.title)
-                                          matches.market.find(x => x.title.id == 1) ? sport_market_1_exist = 1 : 0
-                                          matches.market.find(x => x.title.id == 186) ? sport_market_186_exist = 1 : 0
-                                          matches.market.find(x => x.title.id == 219) ? sport_market_219_exist = 1 : 0
-                                          matches.market.find(x => x.title.id == 251) ? sport_market_251_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 1) ? sport_market_1_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 186) ? sport_market_186_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 219) ? sport_market_219_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 251) ? sport_market_251_exist = 1 : 0
 
                                           if (market.title.id == 1) {
                                              if (market.status == 1) {
@@ -184,7 +185,7 @@ export default function Inplay() {
                                                          data-home-team={matches.homeTeam.name["ko"]}
                                                          data-away-team={matches.awayTeam.name["ko"]}
                                                          data-match-id={matches.id}
-                                                         data-market-id={matches.market.id}
+                                                         data-market-id={matches.markets.id}
                                                          data-outcome-id={outcome.id}
                                                          data-odds={outcome.odds}
                                                       >
@@ -222,7 +223,7 @@ export default function Inplay() {
                                                          data-home-team={matches.homeTeam.name["ko"]}
                                                          data-away-team={matches.awayTeam.name["ko"]}
                                                          data-match-id={matches.id}
-                                                         data-market-id={matches.market.id}
+                                                         data-market-id={matches.markets.id}
                                                          data-outcome-id={outcome.id}
                                                          data-odds={outcome.odds}
                                                       >
@@ -260,7 +261,7 @@ export default function Inplay() {
                                                          data-home-team={matches.homeTeam.name["ko"]}
                                                          data-away-team={matches.awayTeam.name["ko"]}
                                                          data-match-id={matches.id}
-                                                         data-market-id={matches.market.id}
+                                                         data-market-id={matches.markets.id}
                                                          data-outcome-id={outcome.id}
                                                          data-odds={outcome.odds}
                                                       >
@@ -298,7 +299,7 @@ export default function Inplay() {
                                                          data-home-team={matches.homeTeam.name["ko"]}
                                                          data-away-team={matches.awayTeam.name["ko"]}
                                                          data-match-id={matches.id}
-                                                         data-market-id={matches.market.id}
+                                                         data-market-id={matches.markets.id}
                                                          data-outcome-id={outcome.id}
                                                          data-odds={outcome.odds}
                                                       >
@@ -331,12 +332,12 @@ export default function Inplay() {
                                     </div>
                                     {/* start handicap  */}
                                     <div class="handicap flex-inherit flex-column widthp-33">
-                                       {matches.market.map((market, market_index) => {
+                                       {matches.markets.map((market, market_index) => {
                                           // console.log(market)
-                                          matches.market.find(x => x.title.id == 16) ? sport_market_16_exist = 1 : 0
-                                          matches.market.find(x => x.title.id == 256) ? sport_market_256_exist = 1 : 0
-                                          matches.market.find(x => x.title.id == 187) ? sport_market_187_exist = 1 : 0
-                                          matches.market.find(x => x.title.id == 223) ? sport_market_223_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 16) ? sport_market_16_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 256) ? sport_market_256_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 187) ? sport_market_187_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 223) ? sport_market_223_exist = 1 : 0
 
 
                                           if (market.title.id == 16) {
@@ -358,7 +359,7 @@ export default function Inplay() {
                                                             data-home-team={matches.homeTeam.name["ko"]}
                                                             data-away-team={matches.awayTeam.name["ko"]}
                                                             data-match-id={matches.id}
-                                                            data-market-id={matches.market.id}
+                                                            data-market-id={matches.markets.id}
                                                             data-outcome-id={outcome.id}
                                                             data-odds={outcome.odds}
                                                          >
@@ -405,7 +406,7 @@ export default function Inplay() {
                                                             data-home-team={matches.homeTeam.name["ko"]}
                                                             data-away-team={matches.awayTeam.name["ko"]}
                                                             data-match-id={matches.id}
-                                                            data-market-id={matches.market.id}
+                                                            data-market-id={matches.markets.id}
                                                             data-outcome-id={outcome.id}
                                                             data-odds={outcome.odds}
                                                          >
@@ -451,7 +452,7 @@ export default function Inplay() {
                                                             data-home-team={matches.homeTeam.name["ko"]}
                                                             data-away-team={matches.awayTeam.name["ko"]}
                                                             data-match-id={matches.id}
-                                                            data-market-id={matches.market.id}
+                                                            data-market-id={matches.markets.id}
                                                             data-outcome-id={outcome.id}
                                                             data-odds={outcome.odds}
                                                          >
@@ -497,7 +498,7 @@ export default function Inplay() {
                                                             data-home-team={matches.homeTeam.name["ko"]}
                                                             data-away-team={matches.awayTeam.name["ko"]}
                                                             data-match-id={matches.id}
-                                                            data-market-id={matches.market.id}
+                                                            data-market-id={matches.markets.id}
                                                             data-outcome-id={outcome.id}
                                                             data-odds={outcome.odds}
                                                          >
@@ -533,15 +534,15 @@ export default function Inplay() {
                                     </div>
                                     {/* end handicap */}
 
-                                    {/* {console.log(matches.market.find(x => x.title.id == 18))} */}
+                                    {/* {console.log(matches.markets.find(x => x.title.id == 18))} */}
                                     {/* start  over and under */}
                                     <div class="overunder flex-inherit flex-column align-items-center-inherit justify-content-center-inherit widthp-33">
-                                       {matches.market.map((market, market_index) => {
+                                       {matches.markets.map((market, market_index) => {
                                           // console.log(market)
-                                          matches.market.find(x => x.title.id == 18) ? sport_market_18_exist = 1 : 0
-                                          matches.market.find(x => x.title.id == 258) ? sport_market_258_exist = 1 : 0
-                                          matches.market.find(x => x.title.id == 189) ? sport_market_189_exist = 1 : 0
-                                          matches.market.find(x => x.title.id == 225) ? sport_market_225_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 18) ? sport_market_18_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 258) ? sport_market_258_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 189) ? sport_market_189_exist = 1 : 0
+                                          matches.markets.find(x => x.title.id == 225) ? sport_market_225_exist = 1 : 0
 
                                           if (market.title.id == 18) {
                                              let specifier = market.specifier.total;
@@ -559,7 +560,7 @@ export default function Inplay() {
                                                             data-home-team={matches.homeTeam.name["ko"]}
                                                             data-away-team={matches.awayTeam.name["ko"]}
                                                             data-match-id={matches.id}
-                                                            data-market-id={matches.market.id}
+                                                            data-market-id={matches.markets.id}
                                                             data-outcome-id={outcome.id}
                                                             data-odds={outcome.odds}
                                                          >
@@ -572,8 +573,8 @@ export default function Inplay() {
 
                                                 }
 
-                                             }else {
-                                                
+                                             } else {
+
                                              }
                                           }
                                           sport_market_18_exist = 0;
@@ -582,27 +583,17 @@ export default function Inplay() {
                                           sport_market_225_exist = 0;
                                        })
                                        }
-
-                                       {/* <div class="odd align-items-center-inherit justify-content-center-inherit">
-                                          <div class="flex color-darkgrey widthp-50">O 2.5</div>
-                                          <div class="flex color-grey widthp-50">1.37</div>
-                                       </div>
-                                       <div class="odd align-items-center-inherit justify-content-center-inherit">
-                                          <div class="flex color-darkgrey widthp-50">U 1.5</div>
-                                          <div class="flex color-grey widthp-50">1.37</div>
-                                       </div> */}
                                     </div>
                                     {/* end over and under  */}
                                  </div>
                                  <div class="widthp-10 background-transparent-b-30">
-                                    <div class="flex detail widthp-100 justify-content-center align-items-center color-white">+{matches.markets}</div>
+                                    <div class="flex detail widthp-100 justify-content-center align-items-center color-white">+{matches.markets.length}</div>
                                  </div>
                               </div>
                            )
                         })
                         : <div class="flex justify-content-center heightp-100 align-items-center"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div>
                      }
-
 
                   </div>
                   <div class="bottom-wrap border-top flex padding-vertical-10 flex-inherit height-59 align-items-center-inherit0">

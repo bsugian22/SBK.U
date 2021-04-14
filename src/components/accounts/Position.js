@@ -452,6 +452,7 @@ export default function Position() {
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
                                   <span class="color-white"> 
+                                   [ {outcome?.markets?.marketName?.ko? outcome.markets.marketName.ko : ""} ]
                                   {outcome.markets.outcome.map((outcome_detail) => {
                                     if (outcome_detail.id == outcome.id) {
                                       return(outcome_detail.name.outcomeName.ko)

@@ -2,6 +2,7 @@ import * as types from "./sportsdetailTypes";
 
 const initialState = {
   loading: false,
+  loadingBet : false,
   data: {
     data: [],
     total: null,
@@ -236,6 +237,7 @@ const sportsdetailReducer = (state = initialState, action) => {
 
     // return {...state}
       return {
+        ...state,
         loading: false,
         data: {
           ...state.data,
@@ -342,6 +344,22 @@ const sportsdetailReducer = (state = initialState, action) => {
         loading: false,
         data: [],
         error: action.payload,
+      };
+
+      case types.BET_REQUEST:
+      return {
+        ...state,
+        loadingBet: true,
+      };
+    case types.BET_SUCCESS:
+      return {
+        ...state,
+        loadingBet: false,
+      };
+    case types.BET_FAILURE:
+      return {
+        ...state,
+        loadingBet: false,
       };
 
     default:

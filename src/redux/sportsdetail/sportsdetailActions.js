@@ -4,6 +4,7 @@ import { camelize, snakelize, socket } from "../../helpers/object";
 import { chain } from "lodash";
 import moment from "moment";
 import { connect, useDispatch, useSelector } from "react-redux";
+import sweetalert from "../../plugins/sweetalert";
 
 
 
@@ -146,6 +147,24 @@ export const deleteSportsdetailsFailure = (error) => {
   };
 };
 
+export const betRequest = () => {
+  return {
+    type: types.BET_REQUEST,
+  };
+};
+
+export const betSucess = () => {
+  return {
+    type: types.BET_SUCCESS,
+  };
+};
+
+export const betFailure = () => {
+  return {
+    type: types.BET_FAILURE,
+  };
+};
+
 
 // export const Sportsdetails = () => {
 //   return (dispatch) => {
@@ -163,7 +182,7 @@ export const fetchSportsdetails = (params) => {
       .then(response => {
         const sportsdetails = camelize(response.data);
         const matches = []
-        
+
         sportsdetails.data.map((data, index) => {
           matches.push(data.id)
           // console.log(data.market)
@@ -177,7 +196,7 @@ export const fetchSportsdetails = (params) => {
           })
         })
         // console.log(sportsdetails.data)
-        // dispatch(sportWebSocket(matches));
+        dispatch(sportWebSocket(matches));
 
         var data = chain(sportsdetails.data)
           .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
@@ -201,14 +220,14 @@ export const sportWebSocket = (matches) => {
 
   return (dispatch) => {
     // socket.onopen = function (e) {
-      matches.map((data, index) => {
-        console.log("sending:" + data)
-        const match_data = {
-          type: "book_match",
-          match_id: data
-        }
-        socket.send(JSON.stringify(match_data));
-      })
+    matches.map((data, index) => {
+      console.log("sending:" + data)
+      const match_data = {
+        type: "book_match",
+        match_id: data
+      }
+      socket.send(JSON.stringify(match_data));
+    })
     // };
     socket.onmessage = function (event) {
       event.data.text().then((data) => {
@@ -257,30 +276,38 @@ export const fetchSportsdetail = (matchId) => {
       })
   };
 };
-
+const swal = new sweetalert();
 export const bet = (data) => {
   let bet = data;
   let details = {
-    amount: 0 , 
-    outcomes : [],
+    amount: 0,
+    outcomes: [],
   }
   // delete bet.total_odds
   bet.outcomes.map((outcome, index) => {
-    details.outcomes.push({id:outcome.id})
+    details.outcomes.push({ id: outcome.id })
   })
   details.amount = bet.amount;
 
   console.log(bet);
   console.log(details);
 
-  // return (dispatch) => {
-  axios.post(`/api/positions`, details)
-    .then(response => {
-      console.log(response.data)
-    }).catch(error => {
-      const errorMsg = error.message;
-    })
-  // };
+  return (dispatch) => {
+    dispatch(betRequest())
+    axios.post(`/api/positions`, details)
+      .then(response => {
+        console.log(response.data)
+        swal.success("Success")
+        dispatch(resetOutcome());
+        dispatch(betSucess())
+
+
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(betFailure())
+        swal.error(errorMsg)
+      })
+  };
 };
 
 export const createSportsdetail = () => {

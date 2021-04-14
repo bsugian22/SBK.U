@@ -1,6 +1,6 @@
 import * as types from "./inplayTypes";
 import axios from "../../plugins/axios";
-import { camelize } from "../../helpers/object";
+import { camelize, socket } from "../../helpers/object";
 
 export const fetchInplaysRequest = () => {
   return {
@@ -108,12 +108,69 @@ export const fetchInplays = () => {
     axios.get(`/api/feed/inplays`)
       .then(response => {
         const inplays = response.data;
+        const matches = []
+
+        inplays.data.map((data, index) => {
+          matches.push(data.id)
+          // console.log(data.market)
+          data.markets.map((data, index) => {
+            // console.log(data)
+            // data.oldOdds = null;
+            data.outcomes.map((data, index) => {
+              // console.log(data)
+              data.oldOdds = null;
+            })
+          })
+        })
+        console.log(matches)
+        inplayWebSocket(matches)
+        // dispatch(inplayWebSocket(matches));
+
         dispatch(fetchInplaysSuccess(camelize(inplays) ))
       }).catch(error => {
         const errorMsg = error.message;
         dispatch(fetchInplaysFailure(errorMsg))
       })
   };
+};
+
+export const inplayWebSocket = (matches) => {
+
+  // return (dispatch) => {
+    // socket.onopen = function (e) {
+    matches.map((data, index) => {
+      console.log("sending:" + data)
+      const match_data = {
+        type: "book_match",
+        match_id: data
+      }
+      socket.send(JSON.stringify(match_data));
+    })
+    // };
+    socket.onmessage = function (event) {
+      event.data.text().then((data) => {
+        const market = JSON.parse(data)
+        // dispatch(getSportsDetails(market));
+        console.log(market)
+      });
+    };
+
+
+    socket.onclose = function (event) {
+      if (event.wasClean) {
+        console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+      } else {
+        // e.g. server process killed or network down
+        // event.code is usually 1006 in this case
+        console.log('[close] Connection died');
+      }
+    };
+
+    socket.onerror = function (error) {
+      console.log(`[error] ${error.message}`);
+    };
+
+  // }
 };
 
 export const fetchInplay = () => {
