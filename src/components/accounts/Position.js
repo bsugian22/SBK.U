@@ -227,7 +227,7 @@ export default function Position() {
                               </span>
                             </td>
                             <td class="height-45 border-top">
-                              <span class="color-grey">{item?.amount}원</span>
+                              <span class="color-grey">{(item?.amount).toLocaleString()}원</span>
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-grey">
@@ -418,8 +418,9 @@ export default function Position() {
                   </thead>
                   <tbody class="background-transparent-b-5">
                     {position.selectedPosition == null ? "" :
-                      position.selectedPosition.outcomes.map((outcome, indx)=> {
-                        // console.log(match.isChecked)
+                      position.selectedPosition.outcomes.map((outcome, indx) => {
+                        console.log(outcome.id)
+
                         return (
                           <tr key={outcome.id}>
                             <td class="height-60 border-top">
@@ -450,11 +451,14 @@ export default function Position() {
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  <span class="color-white">{outcome?.markets?.marketName?.ko ? outcome.markets.marketName.ko : ""}</span>
-                                  {/* {console.log(outcome.markets.specifier == {} ? "wala lmang"  : Object.values(outcome.markets.specifier))} */}
+                                  <span class="color-white"> 
+                                  {outcome.markets.outcome.map((outcome_detail) => {
+                                    if (outcome_detail.id == outcome.id) {
+                                      return(outcome_detail.name.outcomeName.ko)
+                                    }
+                                  })
+                                  } </span>
 
-                                  {/* {outcome.markets.specifier == {} ? "wala lmang"  : outcome.markets.specifier} */}
-                                  {Object.values(outcome.markets.specifier).map(specifier => <span class="color-grey">{specifier}</span>)}
                                 </div>
                               </div>
                             </td>
@@ -475,7 +479,7 @@ export default function Position() {
                           </tr>
                         )
                       })
-                      }
+                    }
                   </tbody>
                 </table>
               </div>
@@ -485,7 +489,7 @@ export default function Position() {
                     누적 배당 <strong class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.odds.toFixed(2)}</strong>
                   </span>
                   <span class="color-grey padding-right-10">
-                    배팅금액 <strong class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.amount} 원</strong>
+                    배팅금액 <strong class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.amount.toLocaleString()} 원</strong>
                   </span>
                   <span class="color-grey padding-right-10">
                     적중상금 <strong class="color-red">{position.selectedPosition == null ? "" : (position.selectedPosition.amount * position.selectedPosition.odds.toFixed(2)).toLocaleString()}</strong>
