@@ -185,6 +185,16 @@ const Sports = (props) => {
                   </button>
                 </div>
               </div>
+              <div class="prematch-view-select flex-inherit margin-bottom-10">
+                <div class="grow-2"></div>
+                <div class="flex height-40">
+                  <select name="view-select" id="view-select">
+                    <option>승무패</option>
+                    <option>핸디캡</option>
+                    <option>언더오버</option>
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="prematch-list border-bottom match-list grow-2 padding-left-10 padding-right-10 padding-bottom-10 scrollable-auto flex-column">
               {sports.data.data.length > 0
