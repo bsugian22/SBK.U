@@ -274,12 +274,12 @@ export const bet = (data) => {
   console.log(details);
 
   // return (dispatch) => {
-  // axios.post(`/api/positions`, bet)
-  //   .then(response => {
-  //     console.log(response.data)
-  //   }).catch(error => {
-  //     const errorMsg = error.message;
-  //   })
+  axios.post(`/api/positions`, details)
+    .then(response => {
+      console.log(response.data)
+    }).catch(error => {
+      const errorMsg = error.message;
+    })
   // };
 };
 
