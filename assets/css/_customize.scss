@@ -28,11 +28,11 @@ body {
    overflow: hidden;
 }
 .darkMode {
-   transition: 0.5s;
+   transition: transform 0.3s ease, background-color 0.3s ease;
    background: rgb(37, 38, 39);
 }
 .normalMode {
-   transition: 0.5s;
+   transition: transform 0.3s ease, background-color 0.3s ease;
    background: rgb(43, 50, 78);
 }
 
@@ -2427,9 +2427,11 @@ select {
       }
       .games-rows-odds {
          > div {
+            cursor: pointer;
             &:hover {
-               border: 1px solid #34ac53;
-               cursor: pointer;
+               background-color:rgba(0, 0, 0, 0.1);
+               box-shadow: inset 0 0 0px 1px #34ac53;
+               transition:0.2s ease;
             }
          }
       }

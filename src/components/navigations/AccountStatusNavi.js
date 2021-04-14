@@ -30,10 +30,7 @@ export default function AccountStatusNavi(props) {
           </span>
         </div>
         <div class="balance-status flex-inherit flex-column">
-          <div class="balance-status-header flex-inherit height-45 background-transparent-b-10 align-items-center-inherit border-bottom" onClick={() => {
-            showingUser = false;
-            alert(showingUser);
-          }}>
+          <div class="balance-status-header flex-inherit height-45 background-transparent-b-10 align-items-center-inherit border-bottom">
             <div class="grow-2 padding-left-15 border-top">
               <i class="fal fa-wallet color-grey margin-0 font-size-15"></i>
               <span class="color-white padding-left-5">잔고 현황</span>
@@ -89,11 +86,11 @@ export default function AccountStatusNavi(props) {
           </div>
         </div>
 
-        <div class="dw-status flex-inherit flex-column">
-          <div class="dw-status-header flex-inherit height-45 background-transparent-b-10 align-items-center-inherit">
+        <div class="deposit-status flex-inherit flex-column">
+          <div class="deposit-status-header flex-inherit height-45 background-transparent-b-10 align-items-center-inherit">
             <div class="grow-2 padding-left-15 border-top border-bottom">
               <i class="far fa-exchange color-grey margin-0 font-size-15"></i>
-              <span class="color-white padding-left-5">입/출금 처리현황</span>
+              <span class="color-white padding-left-5">최근 입금 처리현황</span>
             </div>
             <div class="border-top border-bottom">
               <button type="button" class="font-size-15">
@@ -101,15 +98,14 @@ export default function AccountStatusNavi(props) {
               </button>
             </div>
           </div>
-          <div class="dw-status-content flex-inherit flex-column ">
+          <div class="deposit-status-content flex-inherit flex-column ">
             <div class="widthp-100 border-top">
               <table>
                 <thead>
                   <tr class="background-transparent-b-10">
-                    <th class="color-grey height-40 border-bottom">구분</th>
                     <th class="color-grey height-40 border-bottom">신청일시</th>
                     <th class="color-grey height-40 border-bottom">신청금액</th>
-                    <th class="color-grey height-40 border-bottom"></th>
+                    <th class="color-grey height-40 border-bottom">상태</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -117,11 +113,6 @@ export default function AccountStatusNavi(props) {
                     ? summary.data.data.deposit.map((deposit, index) => {
                       return (
                         <tr key={"deposit-" + index}>
-                          <td>
-                            <div class="background-transparent-b-10 padding-5 margin-5">
-                              <span class="color-grey">입금</span>
-                            </div>
-                          </td>
                           <td>
                             <span class="color-grey">
                               {Moment(deposit.createdAt).format(
@@ -139,22 +130,58 @@ export default function AccountStatusNavi(props) {
                           </td>
                           <td>
                             <div class="background-transparent-b-10 padding-5 margin-5">
-                              <span class="color-grey">{deposit.status}</span>
+                              <span class="color-grey">
+                                {deposit.status == "PENDING" ? (
+                                  <span class="color-grey">대기</span>
+                                ) : deposit.status == "ACCEPTED" ? (
+                                  <span class="color-green">승인</span>
+                                ) : deposit.status == "REJECTED" ? (
+                                  <span class="color-red">취소</span>
+                                ) : deposit.status == "RECALLED" ? (
+                                  <span class="color-yellow">회수</span>
+                                ) : (
+                                  ""
+                                )}
+                              </span>
                             </div>
                           </td>
                         </tr>
                       );
                     })
                     : ""}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="withdraw-status flex-inherit flex-column">
+          <div class="withdraw-status-header flex-inherit height-45 background-transparent-b-10 align-items-center-inherit">
+            <div class="grow-2 padding-left-15 border-top border-bottom">
+              <i class="far fa-exchange color-grey margin-0 font-size-15"></i>
+              <span class="color-white padding-left-5">최근 출금 처리현황</span>
+            </div>
+            <div class="border-top border-bottom">
+              <button type="button" class="font-size-15">
+                <i class="fal fa-angle-down color-grey"></i>
+              </button>
+            </div>
+          </div>
+          <div class="withdraw-status-content flex-inherit flex-column ">
+            <div class="widthp-100 border-top">
+              <table>
+                <thead>
+                  <tr class="background-transparent-b-10">
+                    <th class="color-grey height-40 border-bottom">신청일시</th>
+                    <th class="color-grey height-40 border-bottom">신청금액</th>
+                    <th class="color-grey height-40 border-bottom">상태</th>
+                  </tr>
+                </thead>
+                <tbody>
                   {summary.data.data.withdrawal.length > 0
                     ? summary.data.data.withdrawal.map((withdrawal, index) => {
                       return (
                         <tr key={"withdraw-" + index}>
-                          <td>
-                            <div class="background-transparent-b-10 padding-5 margin-5">
-                              <span class="color-grey">Withdrawal</span>
-                            </div>
-                          </td>
                           <td>
                             <span class="color-grey">
                               {Moment(withdrawal.createdAt).format(
@@ -173,7 +200,15 @@ export default function AccountStatusNavi(props) {
                           <td>
                             <div class="background-transparent-b-10 padding-5 margin-5">
                               <span class="color-grey">
-                                {withdrawal.status}
+                                {withdrawal.status == "PENDING" ? (
+                                  <span class="color-grey">대기</span>
+                                ) : withdrawal.status == "ACCEPTED" ? (
+                                  <span class="color-green">승인</span>
+                                ) : withdrawal.status == "REJECTED" ? (
+                                  <span class="color-red">취소</span>
+                                ) : (
+                                  ""
+                                )}
                               </span>
                             </div>
                           </td>

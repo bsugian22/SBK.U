@@ -38,7 +38,7 @@ const Notice = () => {
   return (
     <Fragment>
       <div class="content account-continer flex flex-inherit grow-2 flex-column">
-        <div class="notice-wrap account notice-content-desktop border-top flex-inherit flex-row">
+        <div class="notice-wrap account notice-content-desktop flex-inherit flex-row">
           <div class="notice-left flex-inherit flex-column account-height padding-10 widthp-40 border-right scrollable-auto">
             <div class="notice flex-column flex-inherit">
               <div class="flex-inherit flex-column"><div class="red-shadow notice-header-title height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-white"><span class="color-white">공지사항 리스트</span></div></div>

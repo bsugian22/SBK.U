@@ -138,6 +138,44 @@ const Deposit = () => {
               </div>
               <div class="flex-column flex-inherit widthp-100">
                 <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit border-top">
+                  <span class="color-white">
+                    입금 계좌 확인
+                  </span>
+                </div>
+                <div class="deposit-payment-confirm-data flex-column flex-inherit">
+                  <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom-rb align-items-center-inherit background-transparent-b-10 border-top">
+                    <div class="widthp-33 border-right-rb">
+                      <span class="color-grey">은행명 </span>
+                    </div>
+                    <div class="widthp-33 border-right-rb border-left-rw">
+                      <span class="color-grey">예금주 </span>
+                    </div>
+                    <div class="widthp-33 border-left-rw">
+                      <span class="color-grey">결제 계좌</span>
+                    </div>
+                  </div>
+                  <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom-rb align-items-center-inherit background-transparent-b-5 border-top">
+                    <div class="widthp-33 border-right-rb">
+                      <span class="color-white">
+                        {user.member.account_bank}
+                      </span>
+                    </div>
+                    <div class="widthp-33 border-right-rb border-left-rw">
+                      <span class="color-white">
+                        {user.member.account_holder}
+                      </span>
+                    </div>
+                    <div class="widthp-33 border-left-rw">
+                      <span class="color-white">
+                        {" "}
+                        {user.member.account_number}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-column flex-inherit widthp-100">
+                <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit border-top">
                   <span class="color-white">입금자 및 입금액</span>
                 </div>
                 <div class="account-form-data flex-column flex-inherit">
@@ -244,42 +282,46 @@ const Deposit = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="flex-column flex-inherit widthp-100">
-                <div class="green-shadow deposit-payment-way height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit border-top">
-                  <span class="color-white">
-                    입금 계좌 확인
-                  </span>
-                </div>
-                <div class="deposit-payment-confirm-data flex-column flex-inherit">
-                  <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom-rb align-items-center-inherit background-transparent-b-10 border-top">
-                    <div class="widthp-33 border-right-rb">
-                      <span class="color-grey">은행명 </span>
+                  <div class="form-rows flex-inherit">
+                    <div class="widthp-33 border-right-rb form-title height-45 border-bottom-rb align-items-center justify-content-center background-transparent-b-10 border-top">
+                      {/* bonus */}
+                      <span class="color-grey">입금보너스 여부</span>
                     </div>
-                    <div class="widthp-33 border-right-rb border-left-rw">
-                      <span class="color-grey">예금주 </span>
-                    </div>
-                    <div class="widthp-33 border-left-rw">
-                      <span class="color-grey">결제 계좌</span>
+                    <div class="widthp-67 form-content height-45 border-bottom-rb border-left-rw align-items-center justify-content-end padding-horizontal-10 center background-transparent-b-5 border-top">
+                      <div class="bonus-select">
+                        <input type="radio" name="bonus" value="1" checked/>
+                        <label for="1" class="color-grey margin-right-15 margin-left-5">적용</label>
+                        <input type="radio" name="bonus" value="0" />
+                        <label for="0" class="color-grey margin-left-5">미적용</label>
+                      </div>
                     </div>
                   </div>
-                  <div class="confirm-rows height-45 justify-content-center-inherit flex-inherit border-bottom-rb align-items-center-inherit background-transparent-b-5 border-top">
-                    <div class="widthp-33 border-right-rb">
-                      <span class="color-white">
-                        {user.member.account_bank}
-                      </span>
+                  <div class="form-rows flex-inherit">
+                    <div class="widthp-33 border-right-rb form-title height-45 border-bottom-rb align-items-center justify-content-center background-transparent-b-10 border-top">
+                      {/* bonus */}
+                      <span class="color-grey">입금보너스</span>
                     </div>
-                    <div class="widthp-33 border-right-rb border-left-rw">
-                      <span class="color-white">
-                        {user.member.account_holder}
-                      </span>
+                    <div class="widthp-67 form-content height-45 border-bottom-rb border-left-rw align-items-center justify-content-end padding-horizontal-10 center background-transparent-b-5 border-top">
+                      <span class="color-green">15%</span>
                     </div>
-                    <div class="widthp-33 border-left-rw">
-                      <span class="color-white">
-                        {" "}
-                        {user.member.account_number}
-                      </span>
+                  </div>
+                  <div class="form-rows flex-inherit">
+                    <div class="widthp-33 border-right-rb form-title heightp-100 border-bottom-rb align-items-center justify-content-center padding-vertical-15 background-transparent-b-10 border-top">
+                      <span class="color-grey">롤링퍼센트</span>
+                    </div>
+                    <div class="widthp-67 border-left-rw border-bottom-rb flex-inherit flex-column background-transparent-b-5 border-top">
+                      <div class="flex-inherit border-bottom-rb background-transparent-b-5">
+                        <div class="grow-2 flex-inherit height-40 align-items-center justify-content-center-inherit">
+                          <div class="widthp-33 color-grey">스포츠</div>
+                          <div class="widthp-33 color-grey">미니게임</div>
+                          <div class="widthp-33 color-grey">카지노</div>
+                        </div>
+                      </div>
+                      <div class="flex-inherit height-40 align-items-center justify-content-center-inherit">
+                        <div class="widthp-33 color-grey">100%</div>
+                        <div class="widthp-33 color-red">200%</div>
+                        <div class="widthp-33 color-red">300%</div>
+                      </div>
                     </div>
                   </div>
                 </div>

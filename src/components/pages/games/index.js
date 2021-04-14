@@ -39,12 +39,8 @@ const dispatch = useDispatch();
                      </div>
                      <div class="games-event-content border-top scrollable-auto flex-column flex-inherit padding-vertical-15 padding-horizontal-15">
                         <div class="games-rows flex-column">
-                           <div class="games-rows-title widthp-100 flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-30">
+                           <div class="games-rows-title widthp-100 flex flex-inherit height-40 align-items-center padding-horizontal-15 background-transparent-b-30 border-bottom-white-strong">
                               <div class="datetime grow-2">
-                                 <div class="bar">
-                                    <span class="color-white num">3분42초 추첨</span>
-                                    <span class="percentage color-white background-red widthp-70"></span>
-                                 </div>
                                  <span class="color-white">3월28일 21회차</span>
                               </div>
                               <div class="btn-arrow">
@@ -53,19 +49,14 @@ const dispatch = useDispatch();
                                  </button>
                               </div>
                            </div>
-                           <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
+                           <div class="games-rows-linetext flex flex-inherit height-40 padding-horizontal-15 background-transparent-b-30 align-items-center-inherit border-bottom-white-strong">
                               <div class="line-name grow-2">
                                  <i class="fas fa-plus-square color-white padding-right-5"></i>
                                  <span class="color-white">홀/짝</span>
                               </div>
-                              <div class="favicon">
-                                 <button type="button">
-                                    <i class="fas fa-star color-yellow"></i>
-                                 </button>
-                              </div>
                            </div>
-                           <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
-                              <div class="widthp-50 border-right flex-inherit">
+                           <div class="games-rows-odds flex flex-inherit background-transparent-b-30 border-bottom-white-strong height-40 align-items-center-inherit ">
+                              <div class="widthp-50 flex-inherit background-transparent-w-5">
                                  <div class="grow-2 padding-left-15">
                                     <span class="color-grey">홀</span>
                                  </div>
@@ -73,7 +64,7 @@ const dispatch = useDispatch();
                                     <span class="color-grey">40%</span>
                                  </div>
                               </div>
-                              <div class="widthp-50 flex-inherit">
+                              <div class="widthp-50 border-left flex-inherit background-transparent-w-5">
                                  <div class="grow-2 padding-left-15">
                                     <span class="color-grey">짝</span>
                                  </div>
@@ -82,19 +73,14 @@ const dispatch = useDispatch();
                                  </div>
                               </div>
                            </div>
-                           <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
+                           <div class="games-rows-linetext flex flex-inherit height-40 padding-horizontal-15 background-transparent-b-30 align-items-center-inherit border-bottom-white-strong">
                               <div class="line-name grow-2">
                                  <i class="fas fa-plus-square color-white padding-right-5"></i>
                                  <span class="color-white">좌출발 / 우출발</span>
                               </div>
-                              <div class="favicon">
-                                 <button type="button">
-                                    <i class="fas fa-star color-grey"></i>
-                                 </button>
-                              </div>
                            </div>
-                           <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
-                              <div class="widthp-50 border-right flex-inherit">
+                           <div class="games-rows-odds flex flex-inherit background-transparent-b-30 border-bottom-white-strong height-40 align-items-center-inherit ">
+                              <div class="widthp-50 flex-inherit background-transparent-w-5">
                                  <div class="grow-2 padding-left-15">
                                     <span class="color-grey">좌</span>
                                  </div>
@@ -102,7 +88,7 @@ const dispatch = useDispatch();
                                     <span class="color-grey">1.95</span>
                                  </div>
                               </div>
-                              <div class="widthp-50 flex-inherit">
+                              <div class="widthp-50 border-left flex-inherit background-transparent-w-5">
                                  <div class="grow-2 padding-left-15">
                                     <span class="color-grey">우</span>
                                  </div>
@@ -111,19 +97,14 @@ const dispatch = useDispatch();
                                  </div>
                               </div>
                            </div>
-                           <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
+                           <div class="games-rows-linetext flex flex-inherit height-40 padding-horizontal-15 background-transparent-b-30 align-items-center-inherit border-bottom-white-strong">
                               <div class="line-name grow-2">
                                  <i class="fas fa-plus-square color-white padding-right-5"></i>
                                  <span class="color-white">3줄 / 4줄</span>
                               </div>
-                              <div class="favicon">
-                                 <button type="button">
-                                    <i class="fas fa-star color-grey"></i>
-                                 </button>
-                              </div>
                            </div>
-                           <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
-                              <div class="widthp-50 border-right flex-inherit">
+                           <div class="games-rows-odds flex flex-inherit background-transparent-b-30 border-bottom-white-strong height-40 align-items-center-inherit ">
+                              <div class="widthp-50 flex-inherit background-transparent-w-5">
                                  <div class="grow-2 padding-left-15">
                                     <span class="color-grey">3줄</span>
                                  </div>
@@ -131,7 +112,7 @@ const dispatch = useDispatch();
                                     <span class="color-grey">1.95</span>
                                  </div>
                               </div>
-                              <div class="widthp-50 flex-inherit">
+                              <div class="widthp-50 border-left flex-inherit background-transparent-w-5">
                                  <div class="grow-2 padding-left-15">
                                     <span class="color-grey">4줄</span>
                                  </div>
@@ -140,19 +121,14 @@ const dispatch = useDispatch();
                                  </div>
                               </div>
                            </div>
-                           <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
+                           <div class="games-rows-linetext flex flex-inherit height-40 padding-horizontal-15 background-transparent-b-30 align-items-center-inherit border-bottom-white-strong">
                               <div class="line-name grow-2">
                                  <i class="fas fa-plus-square color-white padding-right-5"></i>
                                  <span class="color-white">좌출발 3줄 / 좌출발 4줄</span>
                               </div>
-                              <div class="favicon">
-                                 <button type="button">
-                                    <i class="fas fa-star color-grey"></i>
-                                 </button>
-                              </div>
                            </div>
-                           <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
-                              <div class="widthp-50 border-right flex-inherit">
+                           <div class="games-rows-odds flex flex-inherit background-transparent-b-30 border-bottom-white-strong height-40 align-items-center-inherit ">
+                              <div class="widthp-50 flex-inherit background-transparent-w-5">
                                  <div class="grow-2 padding-left-15">
                                     <span class="color-grey">좌출발 3줄</span>
                                  </div>
@@ -160,7 +136,7 @@ const dispatch = useDispatch();
                                     <span class="color-grey">3.50</span>
                                  </div>
                               </div>
-                              <div class="widthp-50 flex-inherit">
+                              <div class="widthp-50 flex-inherit border-left background-transparent-w-5">
                                  <div class="grow-2 padding-left-15">
                                     <span class="color-grey">좌출발 4줄</span>
                                  </div>
@@ -169,19 +145,14 @@ const dispatch = useDispatch();
                                  </div>
                               </div>
                            </div>
-                           <div class="games-rows-linetext flex flex-inherit padding-vertical-15 padding-horizontal-15  background-transparent-b-15 align-items-center-inherit border-bottom">
+                           <div class="games-rows-linetext flex flex-inherit height-40 padding-horizontal-15 background-transparent-b-30 align-items-center-inherit border-bottom-white-strong">
                               <div class="line-name grow-2">
                                  <i class="fas fa-plus-square color-white padding-right-5"></i>
                                  <span class="color-white">우출발 3줄 / 우출발 4줄</span>
                               </div>
-                              <div class="favicon">
-                                 <button type="button">
-                                    <i class="fas fa-star color-grey"></i>
-                                 </button>
-                              </div>
                            </div>
-                           <div class="games-rows-odds flex flex-inherit background-transparent-b-5 border-bottom height-50 align-items-center-inherit ">
-                              <div class="widthp-50 border-right flex-inherit">
+                           <div class="games-rows-odds flex flex-inherit background-transparent-b-30 border-bottom-white-strong height-40 align-items-center-inherit ">
+                              <div class="widthp-50 flex-inherit background-transparent-w-5">
                                  <div class="grow-2 padding-left-15">
                                     <span class="color-grey">우출발 3줄</span>
                                  </div>
@@ -189,7 +160,7 @@ const dispatch = useDispatch();
                                     <span class="color-grey">3.50</span>
                                  </div>
                               </div>
-                              <div class="widthp-50 flex-inherit">
+                              <div class="widthp-50 border-left flex-inherit background-transparent-w-5">
                                  <div class="grow-2 padding-left-15">
                                     <span class="color-grey">우출발 4줄</span>
                                  </div>
