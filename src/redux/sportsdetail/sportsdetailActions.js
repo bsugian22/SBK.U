@@ -260,23 +260,26 @@ export const fetchSportsdetail = (matchId) => {
 
 export const bet = (data) => {
   let bet = data;
-  delete bet.total_odds
+  let details = {
+    amount: 0 , 
+    outcomes : [],
+  }
+  // delete bet.total_odds
   bet.outcomes.map((outcome, index) => {
-    delete outcome.outcome_name;
-    delete outcome.match_id;
-    delete outcome.market_name;
-    delete outcome.odds
-    delete outcome.home_team
-    delete outcome.away_team
+    details.outcomes.push({id:outcome.id})
   })
+  details.amount = bet.amount;
+
+  console.log(bet);
+  console.log(details);
 
   // return (dispatch) => {
-  axios.post(`/api/positions`, bet)
-    .then(response => {
-      console.log(response.data)
-    }).catch(error => {
-      const errorMsg = error.message;
-    })
+  // axios.post(`/api/positions`, bet)
+  //   .then(response => {
+  //     console.log(response.data)
+  //   }).catch(error => {
+  //     const errorMsg = error.message;
+  //   })
   // };
 };
 
