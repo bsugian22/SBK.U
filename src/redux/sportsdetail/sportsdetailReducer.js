@@ -122,41 +122,124 @@ const sportsdetailReducer = (state = initialState, action) => {
       const state_details_market = state.data.detail_data;
       const state_details_match_id = state.data.detail
 
-      for (var i = 0; i < state_data.length; i++) {
 
-        let market_data = state_data[i].matches.find(x => x.id == match_id); // find specific data 
-        if (market_data) {
-          // look for market_id to the websocket data 
-          let market_type = market_data.market.type
+      state_data.map((data, index) => {
+        
+        data.matches.map((data, index) => {
+          // console.log (data);
 
-          // update data from ws
-          let ws_data_market = market.markets.find(x => x.market_id == market_type)
-          let outcomes = market_data.market.outcomes;
-
-          //check if the markets ws has the same market type on sports page data
-          if (ws_data_market) {
-            let ws_data_market_status = ws_data_market.status;
-            market_data.market.status = ws_data_market_status
-            ws_data_market.outcomes.map((data, index) => {
-              let ws_outcome_id = data.outcome_id;
-              let ws_new_outcome_odds = data.odds;
-              let ws_active_status = data.active;
-              // look for the outcomes->name-> id to match with ws_outcome_id
-              outcomes.map((data, index) => {
-                if (ws_outcome_id == data.name.id) {
-                  let old_value = data.odds;
-                  data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
-                  data.oldOdds = old_value // changing value of the state of the outcomes old odds
-                  data.active = ws_active_status;
+          if (match_id == data.id) {
+            console.log(data.id);
+            console.log(market)
+            console.log(data.market)
+            market.markets.map((ws_data, index) => {
+  
+              let ws_data_market_outcomes = ws_data.outcomes; // list of outcomes comeing from the ws
+              let ws_specifier = JSON.stringify(ws_data.specifier)
+              let ws_market_type = ws_data.market_id;
+              let ws_status = ws_data.status
+  
+              data.market.map((data, index) => {
+                let details_specifier = JSON.stringify(data.specifier)
+                let details_outcomes = data.outcomes;
+                let market_type = data.type
+  
+                // check if the market is same with the ws data and details data
+                if (ws_market_type == market_type) {
+                  data.status = ws_status;
+  
+                  if (ws_specifier == "{}") { // check if the specifer is only one 
+  
+                    ws_data_market_outcomes.map((data, index) => {
+                      let ws_outcome_id = data.outcome_id;
+                      let ws_new_outcome_odds = data.odds;
+                      let ws_active_status = data.active;
+  
+                      details_outcomes.map((data, index) => {
+                        // check if the outcomes has the same id and name
+                        
+                        if (ws_outcome_id == data.name.id) {
+                          let old_value = data.odds;
+  
+                          data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
+                          data.oldOdds = old_value // changing value of the state of the outcomes old odds
+                          data.active = ws_active_status // changing of active stat
+                        }
+                      })
+                    })
+  
+                  } else {
+  
+                    if (ws_specifier === details_specifier) {
+  
+                      ws_data_market_outcomes.map((data, index) => {
+                        let ws_outcome_id = data.outcome_id;
+                        let ws_new_outcome_odds = data.odds;
+                        let ws_active_status = data.active;
+                        details_outcomes.map((data, index) => {
+                          // check if the outcomes has the same id and name
+  
+                          if (ws_outcome_id == data.name.id) {
+                            let old_value = data.odds;
+                            data.active = ws_active_status
+                            data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
+                            data.oldOdds = old_value // changing value of the state of the outcomes old odds
+                          }
+                        })
+  
+                      })
+                    }
+                  }
+  
                 }
               })
             })
-          } else {
-            break; // nothing to update here ( didnt fine any same (market_id != market type) )
           }
-          break; // stop loop if find the market on the list on the sports page
-        }
-      }
+
+        })
+       
+
+      })
+
+
+      // for (var i = 0; i < state_data.length; i++) {
+
+      //   let market_data = state_data[i].matches.find(x => x.id == match_id); // find specific data 
+      //   if (market_data) {
+      //     // look for market_id to the websocket data 
+      //     let market_type = market_data.market.type
+
+      //     // update data from ws
+      //     let ws_data_market = market.markets.find(x => x.market_id == market_type)
+      //     let outcomes = market_data.market.outcomes;
+
+      //     //check if the markets ws has the same market type on sports page data
+      //     if (ws_data_market) {
+      //       let ws_data_market_status = ws_data_market.status;
+      //       market_data.market.status = ws_data_market_status
+      //       ws_data_market.outcomes.map((data, index) => {
+      //         let ws_outcome_id = data.outcome_id;
+      //         let ws_new_outcome_odds = data.odds;
+      //         let ws_active_status = data.active;
+      //         // look for the outcomes->name-> id to match with ws_outcome_id
+      //         outcomes.map((data, index) => {
+      //           if (ws_outcome_id == data.name.id) {
+      //             let old_value = data.odds;
+      //             data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
+      //             data.oldOdds = old_value // changing value of the state of the outcomes old odds
+      //             data.active = ws_active_status;
+      //           }
+      //         })
+      //       })
+      //     } else {
+      //       break; // nothing to update here ( didnt fine any same (market_id != market type) )
+      //     }
+      //     break; // stop loop if find the market on the list on the sports page
+      //   }
+      // }
+
+
+
 
       if (state_details_match_id == match_id) {
         market.markets.map((data, index) => {

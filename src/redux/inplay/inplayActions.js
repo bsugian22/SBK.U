@@ -22,6 +22,13 @@ export const fetchInplaysFailure = (error) => {
   };
 };
 
+export const getInplayDetails = (details) => {
+  return {
+    type: types.GET_INPLAYDETAILS,
+    payload: details
+  };
+};
+
 export const fetchInplayRequest = () => {
   return {
     type: types.FETCH_INPLAY_REQUEST,
@@ -123,8 +130,8 @@ export const fetchInplays = () => {
           })
         })
         console.log(matches)
-        inplayWebSocket(matches)
-        // dispatch(inplayWebSocket(matches));
+        // inplayWebSocket(matches)
+        dispatch(inplayWebSocket(matches));
 
         dispatch(fetchInplaysSuccess(camelize(inplays) ))
       }).catch(error => {
@@ -136,7 +143,7 @@ export const fetchInplays = () => {
 
 export const inplayWebSocket = (matches) => {
 
-  // return (dispatch) => {
+  return (dispatch) => {
     // socket.onopen = function (e) {
     matches.map((data, index) => {
       console.log("sending:" + data)
@@ -146,31 +153,8 @@ export const inplayWebSocket = (matches) => {
       }
       socket.send(JSON.stringify(match_data));
     })
-    // };
-    socket.onmessage = function (event) {
-      event.data.text().then((data) => {
-        const market = JSON.parse(data)
-        // dispatch(getSportsDetails(market));
-        console.log(market)
-      });
-    };
 
-
-    socket.onclose = function (event) {
-      if (event.wasClean) {
-        console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-      } else {
-        // e.g. server process killed or network down
-        // event.code is usually 1006 in this case
-        console.log('[close] Connection died');
-      }
-    };
-
-    socket.onerror = function (error) {
-      console.log(`[error] ${error.message}`);
-    };
-
-  // }
+  }
 };
 
 export const fetchInplay = () => {

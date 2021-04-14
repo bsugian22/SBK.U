@@ -189,6 +189,12 @@ export default function Inplay() {
                                                          data-outcome-id={outcome.id}
                                                          data-odds={outcome.odds}
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          {outcome.odds}
                                                       </div>
                                                    )
@@ -201,6 +207,12 @@ export default function Inplay() {
                                                          key={"outcome_id-active-1x2-" + outcome.id}
                                                          class=" disabled odd color-grey"
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          {outcome.odds}
                                                       </div>
                                                    )
@@ -227,6 +239,12 @@ export default function Inplay() {
                                                          data-outcome-id={outcome.id}
                                                          data-odds={outcome.odds}
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          {outcome.odds}
                                                       </div>
                                                    )
@@ -239,6 +257,12 @@ export default function Inplay() {
                                                          key={"outcome_id-active-1x2-" + outcome.id}
                                                          class=" disabled odd color-grey"
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          {outcome.odds}
                                                       </div>
                                                    )
@@ -265,6 +289,12 @@ export default function Inplay() {
                                                          data-outcome-id={outcome.id}
                                                          data-odds={outcome.odds}
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          {outcome.odds}
                                                       </div>
                                                    )
@@ -277,6 +307,12 @@ export default function Inplay() {
                                                          key={"outcome_id-active-1x2-" + outcome.id}
                                                          class=" disabled odd color-grey"
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          {outcome.odds}
                                                       </div>
                                                    )
@@ -303,6 +339,12 @@ export default function Inplay() {
                                                          data-outcome-id={outcome.id}
                                                          data-odds={outcome.odds}
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          {outcome.odds}
                                                       </div>
                                                    )
@@ -315,6 +357,12 @@ export default function Inplay() {
                                                          key={"outcome_id-active-1x2-" + outcome.id}
                                                          class=" disabled odd color-grey"
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          {outcome.odds}
                                                       </div>
                                                    )
@@ -363,6 +411,12 @@ export default function Inplay() {
                                                             data-outcome-id={outcome.id}
                                                             data-odds={outcome.odds}
                                                          >
+                                                            {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                             <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                             <div class="flex color-grey widthp-50">{outcome.odds}</div>
                                                          </div>
@@ -379,6 +433,12 @@ export default function Inplay() {
                                                          key={"outcome_id-handicap-" + outcome.id}
                                                          class=" disabled odd align-items-center-inherit justify-content-center-inherit"
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                          <div class="flex color-grey widthp-50">{outcome.odds}</div>
                                                       </div>
@@ -410,6 +470,12 @@ export default function Inplay() {
                                                             data-outcome-id={outcome.id}
                                                             data-odds={outcome.odds}
                                                          >
+                                                            {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                             <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                             <div class="flex color-grey widthp-50">{outcome.odds}</div>
                                                          </div>
@@ -425,6 +491,12 @@ export default function Inplay() {
                                                          key={"outcome_id-handicap-" + outcome.id}
                                                          class=" disabled odd align-items-center-inherit justify-content-center-inherit"
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                          <div class="flex color-grey widthp-50">{outcome.odds}</div>
                                                       </div>
@@ -456,6 +528,12 @@ export default function Inplay() {
                                                             data-outcome-id={outcome.id}
                                                             data-odds={outcome.odds}
                                                          >
+                                                            {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                             <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                             <div class="flex color-grey widthp-50">{outcome.odds}</div>
                                                          </div>
@@ -471,6 +549,12 @@ export default function Inplay() {
                                                          key={"outcome_id-handicap-" + outcome.id}
                                                          class=" disabled odd align-items-center-inherit justify-content-center-inherit"
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                          <div class="flex color-grey widthp-50">{outcome.odds}</div>
                                                       </div>
@@ -502,6 +586,12 @@ export default function Inplay() {
                                                             data-outcome-id={outcome.id}
                                                             data-odds={outcome.odds}
                                                          >
+                                                            {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                             <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                             <div class="flex color-grey widthp-50">{outcome.odds}</div>
                                                          </div>
@@ -517,6 +607,12 @@ export default function Inplay() {
                                                          key={"outcome_id-handicap-" + outcome.id}
                                                          class=" disabled odd align-items-center-inherit justify-content-center-inherit"
                                                       >
+                                                         {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                          <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                          <div class="flex color-grey widthp-50">{outcome.odds}</div>
                                                       </div>
@@ -564,6 +660,12 @@ export default function Inplay() {
                                                             data-outcome-id={outcome.id}
                                                             data-odds={outcome.odds}
                                                          >
+                                                            {outcome.oldOdds == null ?
+                                                            "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
                                                             <div class="flex color-darkgrey widthp-50"> {outcome.name.id == 12 ? "O" : "U"} {specifier}</div>
                                                             <div class="flex color-grey widthp-50">{outcome.odds}</div>
                                                          </div>

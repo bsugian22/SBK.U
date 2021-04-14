@@ -586,9 +586,6 @@ const Sports = (props) => {
                         );
                         rows.push(
                           <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
-
-
-
                             {market?.outcomes?.length == 2 ?
 
                               market.outcomes.map((outcome, market_index) => {
@@ -645,8 +642,6 @@ const Sports = (props) => {
                         );
                         rows.push(
                           <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
-
-
 
                             {market?.outcomes?.length == 2 ?
 

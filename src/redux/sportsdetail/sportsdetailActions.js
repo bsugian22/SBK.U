@@ -5,6 +5,7 @@ import { chain } from "lodash";
 import moment from "moment";
 import { connect, useDispatch, useSelector } from "react-redux";
 import sweetalert from "../../plugins/sweetalert";
+import { getInplayDetails } from "../inplay/inplayActions";
 
 
 
@@ -232,6 +233,9 @@ export const sportWebSocket = (matches) => {
     socket.onmessage = function (event) {
       event.data.text().then((data) => {
         const market = JSON.parse(data)
+        
+        // console.log(market)
+        dispatch(getInplayDetails(market));
         dispatch(getSportsDetails(market));
       });
     };
