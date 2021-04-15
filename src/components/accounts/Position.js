@@ -486,18 +486,34 @@ export default function Position() {
               </div>
               <div class="position-item-footer flex-inherit border-top border-bottom-rb padding-vertical-15 align-items-center background-transparent-b-10">
                 <div class="grow-2 padding-left-10">
-                  <span class="color-grey padding-right-10">
-                    누적 배당 <strong class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.odds.toFixed(2)}</strong>
+                  <span class="color-grey padding-right-20">
+                    베팅시간
+                    <span class="color-white margin-left-5">2021-09-08</span>
                   </span>
-                  <span class="color-grey padding-right-10">
-                    배팅금액 <strong class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.amount.toLocaleString()} 원</strong>
+                  <span class="color-grey padding-right-20">
+                    베팅폴더 수
+                    <span class="color-white margin-left-5">2</span>
                   </span>
-                  <span class="color-grey padding-right-10">
-                    적중상금 <strong class="color-red">{position.selectedPosition == null ? "" : (position.selectedPosition.amount * position.selectedPosition.odds.toFixed(2)).toLocaleString()}</strong>
+                  <span class="color-grey">
+                    배팅금액
+                    <span class="color-green margin-left-5">{position.selectedPosition == null ? "" : position.selectedPosition.amount.toLocaleString()} 원</span>
                   </span>
                 </div>
-                <div class="padding-right-25">
-                  <strong class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.status}</strong>
+              </div>
+              <div class="position-item-footer flex-inherit border-top border-bottom-rb padding-vertical-15 align-items-center background-transparent-b-10">
+                <div class="grow-2 padding-left-10">
+                  <span class="color-grey padding-right-20">
+                    누적 배당
+                    <span class="color-red margin-left-5">{position.selectedPosition == null ? "" : position.selectedPosition.odds.toFixed(2)}</span>
+                    {/*만약 보너스가 적용됬다면*/}<span class="color-grey margin-left-5">[ Bonus <span class="color-white">x 1.03</span> ]</span>
+                  </span>
+                  <span class="color-grey">
+                    예상적중상금
+                    <span class="color-green margin-left-5">{position.selectedPosition == null ? "" : (position.selectedPosition.amount * position.selectedPosition.odds.toFixed(2)).toLocaleString()} 원</span>
+                  </span>
+                </div>
+                <div class="padding-right-20">
+                  <span class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.status}</span>
                 </div>
               </div>
             </div>
