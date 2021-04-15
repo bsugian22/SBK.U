@@ -19,7 +19,7 @@ const inplayReducer = (state = initialState, action) => {
 
     case types.GET_INPLAYDETAILS:
       const market = action.payload; // ws main data
-      console.log(market)
+      // console.log(market)
       const match_id = market.match_id
       // console.log("match_id:" + match_id)
       // console.log("kelvin")
@@ -29,9 +29,11 @@ const inplayReducer = (state = initialState, action) => {
       state_data.map((data, index) => {
 
         if (match_id == data.id) {
-          // console.log(data.id);
-          // console.log(market)
-          // console.log(data.markets)
+          console.log("inplay");
+          console.log(market)
+          console.log(data.status)
+          data.status = JSON.parse(market.match_status);
+          console.log(JSON.parse(market.match_status))
           market.markets.map((ws_data, index) => {
 
             let ws_data_market_outcomes = ws_data.outcomes; // list of outcomes comeing from the ws

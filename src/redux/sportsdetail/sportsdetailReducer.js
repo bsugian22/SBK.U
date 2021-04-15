@@ -129,9 +129,9 @@ const sportsdetailReducer = (state = initialState, action) => {
           // console.log (data);
 
           if (match_id == data.id) {
-            console.log(data.id);
-            console.log(market)
-            console.log(data.market)
+            // console.log(data.id);
+            // console.log(market)
+            // console.log(data.market)
             market.markets.map((ws_data, index) => {
   
               let ws_data_market_outcomes = ws_data.outcomes; // list of outcomes comeing from the ws
