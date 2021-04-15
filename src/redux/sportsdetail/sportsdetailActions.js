@@ -3,7 +3,6 @@ import axios from "../../plugins/axios";
 import { camelize, snakelize, socket } from "../../helpers/object";
 import { chain } from "lodash";
 import moment from "moment";
-import { connect, useDispatch, useSelector } from "react-redux";
 import sweetalert from "../../plugins/sweetalert";
 import { getInplayDetails } from "../inplay/inplayActions";
 
@@ -283,6 +282,37 @@ export const fetchSportsdetail = (matchId) => {
   };
 };
 
+
+export const validateBet = (data, isBetting) => {
+  return (dispatch) => {
+    let details = {
+      outcomes: [],
+    }
+    // delete bet.total_odds
+    data.outcomes.map((outcome, index) => {
+      details.outcomes.push({ id: outcome.id })
+    })
+
+    if (data.outcomes.length != 0) {
+
+      axios.post(`/api/betslip`, details)
+        .then(response => {
+          console.log(response.data)
+          if (isBetting) {
+            dispatch(bet(data))
+            // alert("betting")
+          }
+
+        }).catch(error => {
+          const errorMsg = error.message;
+          dispatch(resetOutcome());
+          swal.error(errorMsg)
+        })
+
+    }
+  };
+};
+
 export const bet = (data) => {
   let bet = data;
   let details = {
@@ -305,7 +335,6 @@ export const bet = (data) => {
         swal.success("Success")
         dispatch(resetOutcome());
         dispatch(betSucess())
-
 
       }).catch(error => {
         const errorMsg = error.message;

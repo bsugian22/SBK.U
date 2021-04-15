@@ -1,14 +1,16 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useEffect, useState, useContext } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
 import { splice_data } from "../../helpers/object";
-import { bet, resetOutcome, setBetAmount, spliceOutcome } from "../../redux/sportsdetail/sportsdetailActions";
+import { bet, resetOutcome, setBetAmount, spliceOutcome, validateBet } from "../../redux/sportsdetail/sportsdetailActions";
 import sweetalert from "../../plugins/sweetalert";
 
 export default function BetslipNavi(props) {
   const context = useContext(MenuContext);
   const swal = new sweetalert();
+  let isSubscribed = true;
+
 
   const OpenLayer = {
     display: "flex",
@@ -18,6 +20,19 @@ export default function BetslipNavi(props) {
   };
   const dispatch = useDispatch();
   let sports = useSelector((state) => state.sportsdetail);
+  let user = useSelector((state) => state.user.user);
+
+  useEffect(() => {
+    isSubscribed = true;
+
+    if (user.isAuth) {
+      dispatch(validateBet(sports.data.bet, false))
+    }
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
 
 
 
@@ -176,12 +191,12 @@ export default function BetslipNavi(props) {
                   onClick={() => {
                     let changeOdds = false;
                     sports.data.bet.outcomes.map((outcome, index) => {
-                      if(outcome.oldOdds !=null){
+                      if (outcome.oldOdds != null) {
                         changeOdds = true
                       }
                     })
 
-                    if(changeOdds){
+                    if (changeOdds) {
 
                       swal.fire({
                         title: 'are you sure to bet?',
@@ -198,7 +213,7 @@ export default function BetslipNavi(props) {
                           }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
-                              dispatch(bet(sports.data.bet))
+                              dispatch(validateBet(sports.data.bet, true))
                             } else if (result.isDenied) {
                               swal.fire('')
                             }
@@ -209,7 +224,7 @@ export default function BetslipNavi(props) {
                         }
                       })
 
-                    }else {
+                    } else {
 
                       swal.fire({
                         title: 'are you sure to bet?',
@@ -218,7 +233,7 @@ export default function BetslipNavi(props) {
                       }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                          dispatch(bet(sports.data.bet))
+                          dispatch(validateBet(sports.data.bet,true))
                         } else if (result.isDenied) {
                           swal.fire('')
                         }
@@ -227,7 +242,7 @@ export default function BetslipNavi(props) {
                     }
 
 
-                    
+
 
 
                   }
