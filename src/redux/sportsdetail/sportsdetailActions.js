@@ -7,6 +7,8 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import sweetalert from "../../plugins/sweetalert";
 import { getInplayDetails } from "../inplay/inplayActions";
 
+const swal = new sweetalert();
+
 
 
 export const fetchSportsdetailsRequest = () => {
@@ -233,7 +235,7 @@ export const sportWebSocket = (matches) => {
     socket.onmessage = function (event) {
       event.data.text().then((data) => {
         const market = JSON.parse(data)
-        
+
         // console.log(market)
         dispatch(getInplayDetails(market));
         dispatch(getSportsDetails(market));
@@ -280,7 +282,7 @@ export const fetchSportsdetail = (matchId) => {
       })
   };
 };
-const swal = new sweetalert();
+
 export const bet = (data) => {
   let bet = data;
   let details = {
@@ -295,7 +297,6 @@ export const bet = (data) => {
 
   console.log(bet);
   console.log(details);
-
   return (dispatch) => {
     dispatch(betRequest())
     axios.post(`/api/positions`, details)
@@ -312,6 +313,7 @@ export const bet = (data) => {
         swal.error(errorMsg)
       })
   };
+
 };
 
 export const createSportsdetail = () => {

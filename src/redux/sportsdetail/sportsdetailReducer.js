@@ -2,7 +2,7 @@ import * as types from "./sportsdetailTypes";
 
 const initialState = {
   loading: false,
-  loadingBet : false,
+  loadingBet: false,
   data: {
     data: [],
     total: null,
@@ -65,6 +65,10 @@ const sportsdetailReducer = (state = initialState, action) => {
       const set_market_name = action.payload.market_name;
       const set_outcome_name = action.payload.outcome_name;
 
+      const set_old_odds = action.payload.oldOdds;
+      const set_specifier = action.payload.specifier;
+      const set_market_type = action.payload.market_type;
+      const set_outcome_name_id = action.payload.outcome_name_id;
 
       let total_odds = 1;
       const existing_outcome = state.data.bet.outcomes.findIndex(x => x.id == set_outcome_id)
@@ -84,6 +88,10 @@ const sportsdetailReducer = (state = initialState, action) => {
             away_team: set_away,
             market_name: set_market_name,
             outcome_name: set_outcome_name,
+            oldOdds: set_old_odds,
+            specifier: set_specifier,
+            market_type: set_market_type,
+            outcome_name_id: set_outcome_name_id
           })
         } else {
           state.data.bet.outcomes.splice(existing_match, 1)
@@ -95,6 +103,10 @@ const sportsdetailReducer = (state = initialState, action) => {
             away_team: set_away,
             market_name: set_market_name,
             outcome_name: set_outcome_name,
+            oldOdds: set_old_odds,
+            specifier: set_specifier,
+            market_type: set_market_type,
+            outcome_name_id: set_outcome_name_id
           })
         }
 
@@ -119,12 +131,75 @@ const sportsdetailReducer = (state = initialState, action) => {
       console.log("match_id:" + match_id)
 
       const state_data = state.data.data;
+      const state_bet = state.data.bet.outcomes;
       const state_details_market = state.data.detail_data;
       const state_details_match_id = state.data.detail
 
+      state_bet.map((data, index) => {
+        // console.log(data.match_id);
+        let details_specifier = data.specifier
+        let market_type = data.market_type
+        let details_name_id = data.outcome_name_id
+
+        if (match_id == data.match_id) {
+          console.log("ws bet slip")
+          console.log(data);
+          console.log(market)
+          market.markets.map((ws_data, index) => {
+
+            let ws_data_market_outcomes = ws_data.outcomes; // list of outcomes comeing from the ws
+            let ws_specifier = JSON.stringify(ws_data.specifier)
+            let ws_market_type = ws_data.market_id;
+            let ws_status = ws_data.status
+
+            // check if the market is same with the ws data and details data
+            if (ws_market_type == market_type) {
+
+              if (ws_specifier == "{}") { // check if the specifer is only one 
+
+                ws_data_market_outcomes.map((ws_market_data, index) => {
+                  let ws_outcome_id = ws_market_data.outcome_id;
+                  let ws_new_outcome_odds = ws_market_data.odds;
+
+
+                  // check if the outcomes has the same id and name
+
+                  if (ws_outcome_id == details_name_id) {
+                    let old_value = data.odds;
+                    data.odds = ws_new_outcome_odds
+                    data.oldOdds = old_value
+                  }
+                })
+
+
+              } else {
+
+                if (ws_specifier === details_specifier) {
+
+                  ws_data_market_outcomes.map((ws_market_data, index) => {
+                    let ws_outcome_id = ws_market_data.outcome_id;
+                    let ws_new_outcome_odds = ws_market_data.odds;
+
+                    // check if the outcomes has the same id and name
+
+                    if (ws_outcome_id == details_name_id) {
+                      let old_value = data.odds;
+                      data.oldOdds = old_value
+                      data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
+                    }
+
+                  })
+                }
+              }
+
+            }
+
+          })
+        }
+      })
 
       state_data.map((data, index) => {
-        
+
         data.matches.map((data, index) => {
           // console.log (data);
 
@@ -133,52 +208,52 @@ const sportsdetailReducer = (state = initialState, action) => {
             // console.log(market)
             // console.log(data.market)
             market.markets.map((ws_data, index) => {
-  
+
               let ws_data_market_outcomes = ws_data.outcomes; // list of outcomes comeing from the ws
               let ws_specifier = JSON.stringify(ws_data.specifier)
               let ws_market_type = ws_data.market_id;
               let ws_status = ws_data.status
-  
+
               data.market.map((data, index) => {
                 let details_specifier = JSON.stringify(data.specifier)
                 let details_outcomes = data.outcomes;
                 let market_type = data.type
-  
+
                 // check if the market is same with the ws data and details data
                 if (ws_market_type == market_type) {
                   data.status = ws_status;
-  
+
                   if (ws_specifier == "{}") { // check if the specifer is only one 
-  
+
                     ws_data_market_outcomes.map((data, index) => {
                       let ws_outcome_id = data.outcome_id;
                       let ws_new_outcome_odds = data.odds;
                       let ws_active_status = data.active;
-  
+
                       details_outcomes.map((data, index) => {
                         // check if the outcomes has the same id and name
-                        
+
                         if (ws_outcome_id == data.name.id) {
                           let old_value = data.odds;
-  
+
                           data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
                           data.oldOdds = old_value // changing value of the state of the outcomes old odds
                           data.active = ws_active_status // changing of active stat
                         }
                       })
                     })
-  
+
                   } else {
-  
+
                     if (ws_specifier === details_specifier) {
-  
+
                       ws_data_market_outcomes.map((data, index) => {
                         let ws_outcome_id = data.outcome_id;
                         let ws_new_outcome_odds = data.odds;
                         let ws_active_status = data.active;
                         details_outcomes.map((data, index) => {
                           // check if the outcomes has the same id and name
-  
+
                           if (ws_outcome_id == data.name.id) {
                             let old_value = data.odds;
                             data.active = ws_active_status
@@ -186,18 +261,18 @@ const sportsdetailReducer = (state = initialState, action) => {
                             data.oldOdds = old_value // changing value of the state of the outcomes old odds
                           }
                         })
-  
+
                       })
                     }
                   }
-  
+
                 }
               })
             })
           }
 
         })
-       
+
 
       })
 
@@ -318,18 +393,18 @@ const sportsdetailReducer = (state = initialState, action) => {
     case types.FETCH_SPORTSDETAILS_SUCCESS:
       console.log(action.payload)
 
-    // return {...state}
+      // return {...state}
       return {
         ...state,
         loading: false,
         data: {
           ...state.data,
-          data :action.payload.data,
-          count :action.payload.count,
-          lastPage :action.payload.lastPage,
-          page :action.payload.page,
-          perPage :action.payload.perPage,
-          total :action.payload.total,
+          data: action.payload.data,
+          count: action.payload.count,
+          lastPage: action.payload.lastPage,
+          page: action.payload.page,
+          perPage: action.payload.perPage,
+          total: action.payload.total,
         },
         error: "",
       };
@@ -429,7 +504,7 @@ const sportsdetailReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
-      case types.BET_REQUEST:
+    case types.BET_REQUEST:
       return {
         ...state,
         loadingBet: true,

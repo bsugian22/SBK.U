@@ -174,19 +174,62 @@ export default function BetslipNavi(props) {
               <div class="flex-inherit align-items-center-inherit height-40 align-items-center-inherit border-top border-bottom">
                 <button class="bet widthp-100 height-40 align-items-center justify-content-center background-green"
                   onClick={() => {
-                    swal.fire({
-                      title: 'are you sure to bet?',
-                      showCancelButton: true,
-                      confirmButtonText: `BET`,
-                    }).then((result) => {
-                      /* Read more about isConfirmed, isDenied below */
-                      if (result.isConfirmed) {
-                        dispatch(bet(sports.data.bet))
-                      } else if (result.isDenied) {
-                        swal.fire('')
+                    let changeOdds = false;
+                    sports.data.bet.outcomes.map((outcome, index) => {
+                      if(outcome.oldOdds !=null){
+                        changeOdds = true
                       }
                     })
-                    // 
+
+                    if(changeOdds){
+
+                      swal.fire({
+                        title: 'are you sure to bet?',
+                        showCancelButton: true,
+                        confirmButtonText: `BET`,
+                      }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+
+                          swal.fire({
+                            title: 'Odds have been changed, do you still want to bet?',
+                            showCancelButton: true,
+                            confirmButtonText: `BET`,
+                          }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                              dispatch(bet(sports.data.bet))
+                            } else if (result.isDenied) {
+                              swal.fire('')
+                            }
+                          })
+
+                        } else if (result.isDenied) {
+                          swal.fire('')
+                        }
+                      })
+
+                    }else {
+
+                      swal.fire({
+                        title: 'are you sure to bet?',
+                        showCancelButton: true,
+                        confirmButtonText: `BET`,
+                      }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                          dispatch(bet(sports.data.bet))
+                        } else if (result.isDenied) {
+                          swal.fire('')
+                        }
+                      })
+
+                    }
+
+
+                    
+
+
                   }
 
                   }>

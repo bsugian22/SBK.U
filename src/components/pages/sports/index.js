@@ -73,8 +73,12 @@ const Sports = (props) => {
     let away_team = e.currentTarget.getAttribute("data-away-team");
     let market_name = e.currentTarget.getAttribute("data-market_name");
     let outcome_name = e.currentTarget.getAttribute("data-outcome_name");
+    let specifier = e.currentTarget.getAttribute("data-specifier");
+    let market_type = e.currentTarget.getAttribute("data-market-type");
+    let name_id = e.currentTarget.getAttribute("data-name-id");
 
     let data = {
+      oldOdds:null,
       outcome_id: outcome_id,
       match_id: match_id,
       market_id: market_id,
@@ -82,7 +86,10 @@ const Sports = (props) => {
       home_team: home_team,
       away_team: away_team,
       market_name: market_name,
-      outcome_name: outcome_name
+      outcome_name: outcome_name,
+      specifier: specifier,
+      market_type: market_type,
+      outcome_name_id : name_id
     }
     dispatch(setBetOutcome(data))
   };
@@ -275,16 +282,29 @@ const Sports = (props) => {
 
                                   {
                                     match.market.map((market, market_index) => {
-                                       match.market.find(x => x.title.id == 1) ? sport_market_1 = 1 : 0
-                                       match.market.find(x => x.title.id == 186) ? sport_market_186 = 1 : 0
-                                       match.market.find(x => x.title.id == 219) ? sport_market_219 = 1 : 0
-                                       match.market.find(x => x.title.id == 251) ? sport_market_251 = 1 : 0
+                                      match.market.find(x => x.title.id == 1) ? sport_market_1 = 1 : 0
+                                      match.market.find(x => x.title.id == 186) ? sport_market_186 = 1 : 0
+                                      match.market.find(x => x.title.id == 219) ? sport_market_219 = 1 : 0
+                                      match.market.find(x => x.title.id == 251) ? sport_market_251 = 1 : 0
 
                                       if (market.title.id == 1) {
                                         if (market.status == 1) {
                                           return (market.outcomes.map((outcome, outcomes_index) => {
                                             return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName.ko} data-market_name={market.title.marketName.ko} data-home-team={match.homeTeam.name["ko"]} data-away-team={match.awayTeam.name["ko"]} data-match-id={match.id} data-market-id={match.market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
+                                              <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                onClick={setBet}
+                                                data-outcome_name={outcome.name.outcomeName.ko}
+                                                data-market_name={market.title.marketName.ko}
+                                                data-home-team={match.homeTeam.name["ko"]}
+                                                data-away-team={match.awayTeam.name["ko"]}
+                                                data-match-id={match.id}
+                                                data-market-id={match.market.id}
+                                                data-outcome-id={outcome.id}
+                                                data-odds={outcome.odds}
+                                                data-specifier={JSON.stringify(market.specifier)}
+                                                data-market-type={market.type}
+                                                data-name-id={outcome.name.id}
+                                                class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
                                                 <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                   <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
                                                   <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -301,7 +321,7 @@ const Sports = (props) => {
                                             )
                                           })
                                           )
-                                        }else {
+                                        } else {
                                           return (market.outcomes.map((outcome, outcomes_index) => {
                                             return (
                                               <div key={"outcome_id-active-1x2-" + outcome.id} class="disabled widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
@@ -328,7 +348,20 @@ const Sports = (props) => {
                                         if (market.status == 1) {
                                           return (market.outcomes.map((outcome, outcomes_index) => {
                                             return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName.ko} data-market_name={market.title.marketName.ko} data-home-team={match.homeTeam.name["ko"]} data-away-team={match.awayTeam.name["ko"]} data-match-id={match.id} data-market-id={match.market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
+                                              <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                onClick={setBet}
+                                                data-outcome_name={outcome.name.outcomeName.ko}
+                                                data-market_name={market.title.marketName.ko}
+                                                data-home-team={match.homeTeam.name["ko"]}
+                                                data-away-team={match.awayTeam.name["ko"]}
+                                                data-match-id={match.id}
+                                                data-market-id={match.market.id}
+                                                data-outcome-id={outcome.id}
+                                                data-odds={outcome.odds}
+                                                data-specifier={JSON.stringify(market.specifier)}
+                                                data-market-type={market.type}
+                                                data-name-id={outcome.name.id}
+                                                class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
                                                 <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                   <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
                                                   <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -345,10 +378,10 @@ const Sports = (props) => {
                                             )
                                           })
                                           )
-                                        }else {
+                                        } else {
                                           return (market.outcomes.map((outcome, outcomes_index) => {
                                             return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id}  class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
+                                              <div key={"outcome_id-active-1x2-" + outcome.id} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
                                                 <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                   <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
                                                   <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -372,7 +405,20 @@ const Sports = (props) => {
                                         if (market.status == 1) {
                                           return (market.outcomes.map((outcome, outcomes_index) => {
                                             return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName.ko} data-market_name={market.title.marketName.ko} data-home-team={match.homeTeam.name["ko"]} data-away-team={match.awayTeam.name["ko"]} data-match-id={match.id} data-market-id={match.market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
+                                              <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                onClick={setBet}
+                                                data-outcome_name={outcome.name.outcomeName.ko}
+                                                data-market_name={market.title.marketName.ko}
+                                                data-home-team={match.homeTeam.name["ko"]}
+                                                data-away-team={match.awayTeam.name["ko"]}
+                                                data-match-id={match.id}
+                                                data-market-id={match.market.id}
+                                                data-outcome-id={outcome.id}
+                                                data-odds={outcome.odds}
+                                                data-specifier={JSON.stringify(market.specifier)}
+                                                data-market-type={market.type}
+                                                data-name-id={outcome.name.id}
+                                                class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
                                                 <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                   <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
                                                   <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -389,10 +435,10 @@ const Sports = (props) => {
                                             )
                                           })
                                           )
-                                        }else {
+                                        } else {
                                           return (market.outcomes.map((outcome, outcomes_index) => {
                                             return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id}  class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
+                                              <div key={"outcome_id-active-1x2-" + outcome.id} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
                                                 <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                   <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
                                                   <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -416,7 +462,20 @@ const Sports = (props) => {
                                         if (market.status == 1) {
                                           return (market.outcomes.map((outcome, outcomes_index) => {
                                             return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName.ko} data-market_name={market.title.marketName.ko} data-home-team={match.homeTeam.name["ko"]} data-away-team={match.awayTeam.name["ko"]} data-match-id={match.id} data-market-id={match.market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
+                                              <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                onClick={setBet}
+                                                data-outcome_name={outcome.name.outcomeName.ko}
+                                                data-market_name={market.title.marketName.ko}
+                                                data-home-team={match.homeTeam.name["ko"]}
+                                                data-away-team={match.awayTeam.name["ko"]}
+                                                data-match-id={match.id}
+                                                data-market-id={match.market.id}
+                                                data-outcome-id={outcome.id}
+                                                data-odds={outcome.odds}
+                                                data-specifier={JSON.stringify(market.specifier)}
+                                                data-market-type={market.type}
+                                                data-name-id={outcome.name.id}
+                                                class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
                                                 <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                   <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
                                                   <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -433,10 +492,10 @@ const Sports = (props) => {
                                             )
                                           })
                                           )
-                                        }else {
+                                        } else {
                                           return (market.outcomes.map((outcome, outcomes_index) => {
                                             return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id}  class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
+                                              <div key={"outcome_id-active-1x2-" + outcome.id} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
                                                 <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                   <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
                                                   <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -462,7 +521,7 @@ const Sports = (props) => {
                                       sport_market_251 = 0
                                     })
 
-                                    
+
                                   }
                                 </div>
                               </div>
@@ -590,7 +649,20 @@ const Sports = (props) => {
 
                               market.outcomes.map((outcome, market_index) => {
                                 return (
-                                  <div key={"details-outcome-id" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""} data-market_name={market.title.marketName.ko} data-home-team={sports.data.detail_data.homeTeam.name["ko"]} data-away-team={sports.data.detail_data.awayTeam.name["ko"]} data-match-id={sports.data.detail_data.id} data-market-id={market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}>
+                                  <div key={"details-outcome-id" + outcome.id}
+                                    onClick={setBet}
+                                    data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}
+                                    data-market_name={market.title.marketName.ko}
+                                    data-home-team={sports.data.detail_data.homeTeam.name["ko"]}
+                                    data-away-team={sports.data.detail_data.awayTeam.name["ko"]}
+                                    data-match-id={sports.data.detail_data.id}
+                                    data-market-id={market.id}
+                                    data-outcome-id={outcome.id}
+                                    data-odds={outcome.odds}
+                                    data-specifier={JSON.stringify(market.specifier)}
+                                    data-market-type={market.type}
+                                    data-name-id={outcome.name.id}
+                                    class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}>
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
                                       <span class="color-grey text-ellipsis">{outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}</span>
                                     </div>
@@ -608,7 +680,20 @@ const Sports = (props) => {
                               }) :
                               market.outcomes.map((outcome, market_index) => {
                                 return (
-                                  <div key={"details-outcome-id" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""} data-market_name={market.title.marketName.ko} data-home-team={sports.data.detail_data.homeTeam.name["ko"]} data-away-team={sports.data.detail_data.awayTeam.name["ko"]} data-match-id={sports.data.detail_data.id} data-market-id={market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}>
+                                  <div key={"details-outcome-id" + outcome.id}
+                                    onClick={setBet}
+                                    data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}
+                                    data-market_name={market.title.marketName.ko}
+                                    data-home-team={sports.data.detail_data.homeTeam.name["ko"]}
+                                    data-away-team={sports.data.detail_data.awayTeam.name["ko"]}
+                                    data-match-id={sports.data.detail_data.id}
+                                    data-market-id={market.id}
+                                    data-outcome-id={outcome.id}
+                                    data-odds={outcome.odds}
+                                    data-specifier={JSON.stringify(market.specifier)}
+                                    data-market-type={market.type}
+                                    data-name-id={outcome.name.id}
+                                    class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}>
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
                                       <span class="color-grey text-ellipsis">{outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}</span>
                                     </div>
