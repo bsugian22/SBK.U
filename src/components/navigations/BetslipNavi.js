@@ -26,7 +26,7 @@ export default function BetslipNavi(props) {
     isSubscribed = true;
 
     if (user.isAuth) {
-      dispatch(validateBet(sports.data.bet, false))
+      dispatch(validateBet(sports.data.bet))
     }
 
     return () => {

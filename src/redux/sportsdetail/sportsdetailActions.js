@@ -283,12 +283,11 @@ export const fetchSportsdetail = (matchId) => {
 };
 
 
-export const validateBet = (data, isBetting) => {
+export const validateBet = (data) => {
   return (dispatch) => {
     let details = {
       outcomes: [],
     }
-    // delete bet.total_odds
     data.outcomes.map((outcome, index) => {
       details.outcomes.push({ id: outcome.id })
     })
@@ -298,10 +297,10 @@ export const validateBet = (data, isBetting) => {
       axios.post(`/api/betslip`, details)
         .then(response => {
           console.log(response.data)
-          if (isBetting) {
-            dispatch(bet(data))
-            // alert("betting")
-          }
+          // if (isBetting) {
+          //   dispatch(bet(data))
+          //   // alert("betting")
+          // }
 
         }).catch(error => {
           const errorMsg = error.message;
