@@ -288,10 +288,10 @@ const Sports = (props) => {
 
                                   {
                                     match.market.map((market, market_index) => {
-                                      match.market.find(x => x.title.id == 1) ? sport_market_1 = 1 : 0
-                                      match.market.find(x => x.title.id == 186) ? sport_market_186 = 1 : 0
-                                      match.market.find(x => x.title.id == 219) ? sport_market_219 = 1 : 0
-                                      match.market.find(x => x.title.id == 251) ? sport_market_251 = 1 : 0
+                                      match.market.find(x => x.title.id == 1) ? sport_market_1 = 1 : sport_market_1 = 0
+                                      match.market.find(x => x.title.id == 186) ? sport_market_186 = 1 : sport_market_186 = 0
+                                      match.market.find(x => x.title.id == 219) ? sport_market_219 = 1 : sport_market_219 = 0
+                                      match.market.find(x => x.title.id == 251) ? sport_market_251 = 1 : sport_market_251 = 0
 
                                       if (market.title.id == 1) {
                                         if (market.status == 1) {
