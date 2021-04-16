@@ -48,19 +48,26 @@ export default function Inplay() {
       let away_team = e.currentTarget.getAttribute("data-away-team");
       let market_name = e.currentTarget.getAttribute("data-market_name");
       let outcome_name = e.currentTarget.getAttribute("data-outcome_name");
-
+      let specifier = e.currentTarget.getAttribute("data-specifier");
+      let market_type = e.currentTarget.getAttribute("data-market-type");
+      let name_id = e.currentTarget.getAttribute("data-name-id");
+  
       let data = {
-         outcome_id: outcome_id,
-         match_id: match_id,
-         market_id: market_id,
-         odds: odds,
-         home_team: home_team,
-         away_team: away_team,
-         market_name: market_name,
-         outcome_name: outcome_name
+        oldOdds:null,
+        outcome_id: outcome_id,
+        match_id: match_id,
+        market_id: market_id,
+        odds: odds,
+        home_team: home_team,
+        away_team: away_team,
+        market_name: market_name,
+        outcome_name: outcome_name,
+        specifier: specifier,
+        market_type: market_type,
+        outcome_name_id : name_id
       }
       dispatch(setBetOutcome(data))
-   };
+    };
 
    return (
       <Fragment>

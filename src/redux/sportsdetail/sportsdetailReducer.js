@@ -422,6 +422,7 @@ const sportsdetailReducer = (state = initialState, action) => {
       return {
         ...state,
         data: {
+          ...state.data,
           data: [],
           total: null,
           count: null,
@@ -430,12 +431,6 @@ const sportsdetailReducer = (state = initialState, action) => {
           last_page: null,
           detail: null,
           detail_data: null,
-          bet: {
-            category: "SPORTS",
-            amount: 0,
-            outcomes: [],
-            total_odds: 0,
-          },
         },
           loading: true,
         };
