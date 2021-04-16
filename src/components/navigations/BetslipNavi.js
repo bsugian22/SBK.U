@@ -233,7 +233,7 @@ export default function BetslipNavi(props) {
                       }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                          dispatch(validateBet(sports.data.bet,true))
+                          dispatch(bet(sports.data.bet))
                         } else if (result.isDenied) {
                           swal.fire('')
                         }
