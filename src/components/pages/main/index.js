@@ -8,10 +8,13 @@ export default function Main() {
 
   let isSubscribed = true;
 const dispatch = useDispatch();
+let user = useSelector((state) => state.user.user);
 
   useEffect(() => {
     isSubscribed = true;
-    dispatch(refreshToken())
+    if (user.isAuth) {
+      dispatch(refreshToken())
+    }
     return () => {
       isSubscribed = false;
     };

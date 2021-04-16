@@ -18,6 +18,7 @@ const Sports = (props) => {
   const model = new sportsModel();
   const context = useContext(MenuContext);
   let sports = useSelector((state) => state.sportsdetail);
+  let user = useSelector((state) => state.user.user);
   let sport_market_1 = 0;
   let sport_market_186 = 0;
   let sport_market_219 = 0;
@@ -26,7 +27,10 @@ const Sports = (props) => {
 
   useEffect(() => {
     isSubscribed = true;
-    dispatch(refreshToken())
+
+    if (user.isAuth) {
+      dispatch(refreshToken())
+    }
     dispatch(fetchSportsdetails())
     dispatch(validateBet(sports.data.bet))
 
@@ -80,7 +84,7 @@ const Sports = (props) => {
     let name_id = e.currentTarget.getAttribute("data-name-id");
 
     let data = {
-      oldOdds:null,
+      oldOdds: null,
       outcome_id: outcome_id,
       match_id: match_id,
       market_id: market_id,
@@ -91,7 +95,7 @@ const Sports = (props) => {
       outcome_name: outcome_name,
       specifier: specifier,
       market_type: market_type,
-      outcome_name_id : name_id
+      outcome_name_id: name_id
     }
     dispatch(setBetOutcome(data))
   };

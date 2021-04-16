@@ -13,6 +13,7 @@ export default function Inplay() {
    const dispatch = useDispatch();
    let inplay = useSelector((state) => state.inplay);
    let sports = useSelector((state) => state.sportsdetail);
+   let user = useSelector((state) => state.user.user);
 
    let sport_market_1_exist = 0;
    let sport_market_186_exist = 0;
@@ -33,7 +34,9 @@ export default function Inplay() {
    let over_under_specifier = null
    useEffect(() => {
       isSubscribed = true;
-      dispatch(refreshToken())
+      if(user.isAuth){
+         dispatch(refreshToken())
+      }
       dispatch(fetchInplays())
       // dispatch(setMarkets(0))
       dispatch(validateBet(sports.data.bet))

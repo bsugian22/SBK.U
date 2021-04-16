@@ -18,7 +18,9 @@ export default function Settings() {
 
   useEffect(() => {
     isSubscribed = true;
-    dispatch(refreshToken())
+    if (user.isAuth) {
+      dispatch(refreshToken())
+    }
     return () => {
       isSubscribed = false;
     };

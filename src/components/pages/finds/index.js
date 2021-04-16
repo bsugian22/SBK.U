@@ -8,11 +8,14 @@ import { Link, NavLink } from 'react-router-dom'
 export default function Find() {
 
    let isSubscribed = true;
+   let user = useSelector((state) => state.user.user);
 const dispatch = useDispatch();
 
   useEffect(() => {
     isSubscribed = true;
-    dispatch(refreshToken())
+    if (user.isAuth) {
+      dispatch(refreshToken())
+    }
     return () => {
       isSubscribed = false;
     };

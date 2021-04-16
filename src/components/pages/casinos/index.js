@@ -6,15 +6,18 @@ import { Link, NavLink } from 'react-router-dom'
 export default function Casino() {
 
    let isSubscribed = true;
-const dispatch = useDispatch();
+   const dispatch = useDispatch();
+   let user = useSelector((state) => state.user.user);
 
-  useEffect(() => {
-    isSubscribed = true;
-    dispatch(refreshToken())
-    return () => {
-      isSubscribed = false;
-    };
-  }, []);
+   useEffect(() => {
+      isSubscribed = true;
+      if (user.isAuth) {
+         dispatch(refreshToken())
+      }
+      return () => {
+         isSubscribed = false;
+      };
+   }, []);
 
    return (
       <Fragment>
