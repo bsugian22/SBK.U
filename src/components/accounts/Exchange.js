@@ -28,6 +28,7 @@ import {
   setPagesOfExchange,
 } from "../../redux/accounts/exchange/exchangeActions";
 import { nextPageWIthdrawal } from "../../redux/accounts/withdrawal/withdrawalAction";
+import { fetchSummary } from "../../redux/navigations/accountSummary/accountSummaryActions";
 
 const Exchange = () => {
   let exchange = useSelector((state) => state.exchange);

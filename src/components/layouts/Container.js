@@ -5,6 +5,7 @@ import preferencesModel from '../../models/preferencesModel'
 import { mapStateToProps, mapDispatchProps } from '../../redux/store'
 import echo from '../../plugins/echo'
 // import { connect } from "react-redux";
+import { fetchSummary } from "../../redux/navigations/accountSummary/accountSummaryActions";
 
 import { connect, useSelector, useDispatch } from "react-redux";
 
