@@ -241,8 +241,18 @@ const inplayReducer = (state = initialState, action) => {
       };
     case types.FETCH_INPLAY_FAILURE:
       return {
+        ...state,
         loading: false,
-        data: [],
+        data: {
+          "data": [],
+          "total": 0,
+          "count": 1,
+          "perPage": 15,
+          "page": 1,
+          "lastPage": 1,
+          detail: null,
+          detail_data: null,
+        },
         error: action.payload,
       };
 

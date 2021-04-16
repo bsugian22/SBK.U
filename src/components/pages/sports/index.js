@@ -299,7 +299,7 @@ const Sports = (props) => {
                                             return (
                                               <div key={"outcome_id-active-1x2-" + outcome.id}
                                                 onClick={setBet}
-                                                data-outcome_name={outcome.name.outcomeName.ko}
+                                                data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
                                                 data-market_name={market.title.marketName.ko}
                                                 data-home-team={match.homeTeam.name["ko"]}
                                                 data-away-team={match.awayTeam.name["ko"]}
@@ -356,7 +356,7 @@ const Sports = (props) => {
                                             return (
                                               <div key={"outcome_id-active-1x2-" + outcome.id}
                                                 onClick={setBet}
-                                                data-outcome_name={outcome.name.outcomeName.ko}
+                                                data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
                                                 data-market_name={market.title.marketName.ko}
                                                 data-home-team={match.homeTeam.name["ko"]}
                                                 data-away-team={match.awayTeam.name["ko"]}
@@ -413,7 +413,7 @@ const Sports = (props) => {
                                             return (
                                               <div key={"outcome_id-active-1x2-" + outcome.id}
                                                 onClick={setBet}
-                                                data-outcome_name={outcome.name.outcomeName.ko}
+                                                data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
                                                 data-market_name={market.title.marketName.ko}
                                                 data-home-team={match.homeTeam.name["ko"]}
                                                 data-away-team={match.awayTeam.name["ko"]}
@@ -470,7 +470,7 @@ const Sports = (props) => {
                                             return (
                                               <div key={"outcome_id-active-1x2-" + outcome.id}
                                                 onClick={setBet}
-                                                data-outcome_name={outcome.name.outcomeName.ko}
+                                                data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
                                                 data-market_name={market.title.marketName.ko}
                                                 data-home-team={match.homeTeam.name["ko"]}
                                                 data-away-team={match.awayTeam.name["ko"]}
@@ -656,7 +656,7 @@ const Sports = (props) => {
                                 return (
                                   <div key={"details-outcome-id" + outcome.id}
                                     onClick={setBet}
-                                    data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}
+                                    data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
                                     data-market_name={market.title.marketName.ko}
                                     data-home-team={sports.data.detail_data.homeTeam.name["ko"]}
                                     data-away-team={sports.data.detail_data.awayTeam.name["ko"]}
@@ -687,7 +687,7 @@ const Sports = (props) => {
                                 return (
                                   <div key={"details-outcome-id" + outcome.id}
                                     onClick={setBet}
-                                    data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}
+                                    data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
                                     data-market_name={market.title.marketName.ko}
                                     data-home-team={sports.data.detail_data.homeTeam.name["ko"]}
                                     data-away-team={sports.data.detail_data.awayTeam.name["ko"]}
@@ -739,7 +739,7 @@ const Sports = (props) => {
                                 return (
                                   <div key={"details-outcome-id-inactive-2-row" + outcome.id} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5">
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                      <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
+                                      <span class="color-grey text-ellipsis">{outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}</span>
                                     </div>
                                     <div class="shrink-0 padding-horizontal-2">
                                       {
@@ -757,7 +757,7 @@ const Sports = (props) => {
                                 return (
                                   <div key={"details-outcome-id-inactive" + outcome.id} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5">
                                     <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                      <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
+                                      <span class="color-grey text-ellipsis">{outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}</span>
                                     </div>
                                     <div class="shrink-0 padding-horizontal-2">
                                       {
