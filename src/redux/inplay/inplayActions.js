@@ -189,13 +189,21 @@ export const inplayWebSocket = (matches) => {
   }
 };
 
-export const fetchInplay = () => {
+export const fetchInplay = (matchId) => {
+
   return (dispatch) => {
     dispatch(fetchInplayRequest);
-    axios.get(`/api/`)
+    axios.get(`/api/feed/matches/${matchId}`)
       .then(response => {
-        const inplay = response.data;
-        dispatch(fetchInplaySuccess(inplay))
+        const sportsdetail = camelize(response.data);
+        // console.log(sportsdetail.data.markets)
+        sportsdetail.data.markets.map((data, index) => {
+          data.outcomes.map((data, index) => {
+            // console.log(data.id)
+            data.oldOdds = null;
+          })
+        })
+        dispatch(fetchInplaySuccess(sportsdetail))
       }).catch(error => {
         const errorMsg = error.message;
         dispatch(fetchInplayFailure(errorMsg))

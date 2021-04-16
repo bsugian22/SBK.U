@@ -22,6 +22,7 @@ import {
   checkPositionCertainItem,
   selectPostion,
 } from "../../redux/accounts/position/positionActions";
+import Logo from "../layouts/Logo";
 export default function Position() {
   let position = useSelector((state) => state.position);
   let createPosition = useSelector((state) => state.position.createPosition);
@@ -385,7 +386,7 @@ export default function Position() {
               </div>
             </div>
           </div>
-          <div class="position-right-content account-height widthp-50 padding-10 flex-inherit flex-column border-left scrollable-auto">
+          <div class="position-right-content account-height widthp-50 padding-10 flex-inherit flex-column border-left scrollable-auto" hidden={position.selectedPosition == null  ? true : false}>
             <div class="position-comfile flex-column flex-inherit">
               <div class="flex-column flex-inherit widthp-100">
                 <div class="red-shadow height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
@@ -517,6 +518,9 @@ export default function Position() {
                 </div>
               </div>
             </div>
+          </div>
+          <div class="align-items-center border-left" style={{ paddingLeft: "20%" }} hidden={position.selectedPosition == null  ? false : true}>
+            <Logo width="120" height="30" />
           </div>
         </div>
       </div>

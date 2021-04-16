@@ -10,6 +10,8 @@ const initialState = {
     "perPage": 15,
     "page": 1,
     "lastPage": 1,
+    detail: null,
+    detail_data: null,
   },
   error: "",
   active_index: null,
@@ -39,6 +41,8 @@ const inplayReducer = (state = initialState, action) => {
       // console.log("kelvin")
 
       const state_data = state.data.data;
+      const state_details_market = state.data.detail_data;
+      const state_details_match_id = state.data.detail
 
       state_data.map((data, index) => {
 
@@ -115,6 +119,73 @@ const inplayReducer = (state = initialState, action) => {
       })
 
 
+      if (state_details_match_id == match_id) {
+        market.markets.map((data, index) => {
+
+          let ws_data_market_outcomes = data.outcomes; // list of outcomes comeing from the ws
+          let ws_specifier = JSON.stringify(data.specifier)
+          let ws_market_type = data.market_id;
+          let ws_status = data.status
+
+          state_details_market.markets.map((data, index) => {
+            let details_specifier = JSON.stringify(data.specifier)
+            let details_outcomes = data.outcomes;
+            let market_type = data.type
+
+
+            // check if the market is same with the ws data and details data
+            if (ws_market_type == market_type) {
+              data.status = ws_status;
+
+              if (ws_specifier == "{}") { // check if the specifer is only one 
+
+                ws_data_market_outcomes.map((data, index) => {
+                  let ws_outcome_id = data.outcome_id;
+                  let ws_new_outcome_odds = data.odds;
+                  let ws_active_status = data.active;
+
+                  details_outcomes.map((data, index) => {
+                    // check if the outcomes has the same id and name
+
+                    if (ws_outcome_id == data.name.id) {
+                      let old_value = data.odds;
+
+                      data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
+                      data.oldOdds = old_value // changing value of the state of the outcomes old odds
+                      data.active = ws_active_status // changing of active stat
+                    }
+                  })
+                })
+
+              } else {
+
+                if (ws_specifier === details_specifier) {
+
+                  ws_data_market_outcomes.map((data, index) => {
+                    let ws_outcome_id = data.outcome_id;
+                    let ws_new_outcome_odds = data.odds;
+                    let ws_active_status = data.active;
+                    details_outcomes.map((data, index) => {
+                      // check if the outcomes has the same id and name
+
+                      if (ws_outcome_id == data.name.id) {
+                        let old_value = data.odds;
+                        data.active = ws_active_status
+                        data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
+                        data.oldOdds = old_value // changing value of the state of the outcomes old odds
+                      }
+                    })
+
+                  })
+                }
+              }
+
+            }
+          })
+        })
+      }
+
+
 
       return {
         ...state,
@@ -132,6 +203,8 @@ const inplayReducer = (state = initialState, action) => {
           "perPage": 15,
           "page": 1,
           "lastPage": 1,
+          detail: null,
+          detail_data: null,
         },
         error: "",
         active_index: null,
@@ -159,9 +232,12 @@ const inplayReducer = (state = initialState, action) => {
       };
     case types.FETCH_INPLAY_SUCCESS:
       return {
-        loading: false,
-        data: action.payload,
-        error: "",
+        ...state,
+        data: {
+          ...state.data,
+          detail_data: action.payload.data,
+          detail: action.payload.data.id,
+        },
       };
     case types.FETCH_INPLAY_FAILURE:
       return {

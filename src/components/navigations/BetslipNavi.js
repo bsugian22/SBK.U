@@ -25,9 +25,9 @@ export default function BetslipNavi(props) {
   useEffect(() => {
     isSubscribed = true;
 
-    if (user.isAuth) {
-      dispatch(validateBet(sports.data.bet))
-    }
+
+    
+
 
     return () => {
       isSubscribed = false;
@@ -240,10 +240,6 @@ export default function BetslipNavi(props) {
                       })
 
                     }
-
-
-
-
 
                   }
 

@@ -35,6 +35,7 @@ const positionReducer = (state = initialState, action) => {
           amount: "",
           outcomes: "",
         },
+        selectedPosition: null,
         showModal: false,
         openModal: false,
         closeModal: false,

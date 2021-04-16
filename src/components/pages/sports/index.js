@@ -8,7 +8,7 @@ import { mapStateToProps, mapDispatchProps } from "../../../redux/store";
 import sportsModel from "../../../models/sportsModel";
 import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
-import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome } from "../../../redux/sportsdetail/sportsdetailActions";
+import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet } from "../../../redux/sportsdetail/sportsdetailActions";
 import { iconsList } from "../../../helpers/object";
 
 
@@ -28,6 +28,7 @@ const Sports = (props) => {
     isSubscribed = true;
     dispatch(refreshToken())
     dispatch(fetchSportsdetails())
+    dispatch(validateBet(sports.data.bet))
 
     return () => {
       isSubscribed = false;
@@ -529,7 +530,6 @@ const Sports = (props) => {
 
                               <div class="flex justify-content-center-inherit align-items-center-inherit padding-vertical-2 padding-left-0 padding-right-0 market-count">
                                 <div
-                                  class=""
                                   className={
                                     match.id === sports.data.detail
                                       ? "flex market-detail widthp-100 margin-right-2 active"

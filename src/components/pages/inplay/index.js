@@ -3,8 +3,10 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "../../../redux/user/userActions";
 
 import { Link, NavLink } from 'react-router-dom'
-import { fetchInplays, setMarkets } from "../../../redux/inplay/inplayActions";
-import { setBetOutcome } from "../../../redux/sportsdetail/sportsdetailActions";
+import { fetchInplays, fetchInplay } from "../../../redux/inplay/inplayActions";
+import { setBetOutcome, validateBet } from "../../../redux/sportsdetail/sportsdetailActions";
+import Logo from "../../layouts/Logo";
+import moment from "moment";
 export default function Inplay() {
 
    let isSubscribed = true;
@@ -34,6 +36,7 @@ export default function Inplay() {
       dispatch(refreshToken())
       dispatch(fetchInplays())
       // dispatch(setMarkets(0))
+      dispatch(validateBet(sports.data.bet))
       return () => {
          isSubscribed = false;
       };
@@ -51,23 +54,23 @@ export default function Inplay() {
       let specifier = e.currentTarget.getAttribute("data-specifier");
       let market_type = e.currentTarget.getAttribute("data-market-type");
       let name_id = e.currentTarget.getAttribute("data-name-id");
-  
+
       let data = {
-        oldOdds:null,
-        outcome_id: outcome_id,
-        match_id: match_id,
-        market_id: market_id,
-        odds: odds,
-        home_team: home_team,
-        away_team: away_team,
-        market_name: market_name,
-        outcome_name: outcome_name,
-        specifier: specifier,
-        market_type: market_type,
-        outcome_name_id : name_id
+         oldOdds: null,
+         outcome_id: outcome_id,
+         match_id: match_id,
+         market_id: market_id,
+         odds: odds,
+         home_team: home_team,
+         away_team: away_team,
+         market_name: market_name,
+         outcome_name: outcome_name,
+         specifier: specifier,
+         market_type: market_type,
+         outcome_name_id: name_id
       }
       dispatch(setBetOutcome(data))
-    };
+   };
 
    return (
       <Fragment>
@@ -706,8 +709,8 @@ export default function Inplay() {
                                                       return (
                                                          <div
                                                             key={"outcome_id-over-and-under-" + outcome.id}
-                                                            class= "disabled odd align-items-center-inherit justify-content-center-inherit"
-                                                            
+                                                            class="disabled odd align-items-center-inherit justify-content-center-inherit"
+
                                                          >
                                                             {outcome.oldOdds == null ?
                                                                "" :
@@ -734,9 +737,12 @@ export default function Inplay() {
                                     {/* end over and under  */}
                                  </div>
                                  <div class="widthp-10 background-transparent-b-30">
-                                    <div class={index == inplay.active_index ? "active flex detail widthp-100 justify-content-center align-items-center color-white" : "flex detail widthp-100 justify-content-center align-items-center color-white"}
+                                    <div
+                                       class={matches.id === inplay.data.detail ? "active flex detail widthp-100 justify-content-center align-items-center color-white" : "flex detail widthp-100 justify-content-center align-items-center color-white"
+                                       }
                                        onClick={() => {
-                                          dispatch(setMarkets(index));
+                                          // dispatch(setMarkets(index));
+                                          dispatch(fetchInplay(matches.id));
                                        }}
                                     >
                                        +{matches?.markets?.length ? matches.markets.length : ""}
@@ -772,15 +778,15 @@ export default function Inplay() {
                      <div class="height-40 align-items-center background-transparent-b-20 padding-horizontal-10">
                         <i class="fas fa-tshirt color-grey font-size-11"></i>
                         <span class="color-grey">
-                           {inplay.active_index == null ? "" : inplay.data.data[inplay.active_index].homeTeam.name.ko}
+                           {inplay.data.detail_data?.homeTeam?.name?.ko? inplay.data.detail_data.homeTeam.name.ko : ""}
                            <span class="margin-horizontal-4 color-twhite">vs</span>
-                           {inplay.active_index == null ? "" : inplay.data.data[inplay.active_index].awayTeam.name.ko}
+                           {inplay.data.detail_data?.awayTeam?.name?.ko? inplay.data.detail_data.awayTeam.name.ko : ""}
                         </span>
                      </div>
                      <div class="height-40 background-transparent-b-10 padding-horizontal-10 margin-bottom-10">
                         <div class="flex grow-2 align-items-center">
                            <i class="far fa-stopwatch color-grey font-size-11"></i>
-                           <span class="color-grey">12 / 30 19:00</span>
+                           <span class="color-grey">{ inplay.data.detail_data?.awayTeam?.name?.ko? moment(inplay.data.detail_data.startAt).format( "MM / DD HH:mm") : ""}</span>
                         </div>
                         <div class="flex align-items-center">
                            <i class="fas fa-map-marker-alt color-grey font-size-11"></i>
@@ -789,8 +795,10 @@ export default function Inplay() {
                      </div>
                   </div>
                   <div class="market-list flex-inherit flex-column scrollable-auto">
-                     {inplay.active_index == null ? "" :
-                        inplay.data.data[inplay.active_index]?.markets?.map((market, market_index) => {
+                     {inplay.data.detail_data == null
+                        ? <div class="align-items-center border-left" style={{ paddingLeft: "45%" }}>
+                           <Logo width="120" height="30" />
+                        </div> : inplay.data.detail_data.markets.map((market, market_index) => {
                            var rows = [];
                            if (market.status == 1) {
                               rows.push(
@@ -804,7 +812,7 @@ export default function Inplay() {
                                  </div>
                               );
                               rows.push(
-                                 <div key={"market-details-outcome-id" + market.id} class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
+                                 <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
                                     {market?.outcomes?.length == 2 ?
 
                                        market.outcomes.map((outcome, market_index) => {
@@ -813,12 +821,15 @@ export default function Inplay() {
                                                 onClick={setBet}
                                                 data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}
                                                 data-market_name={market.title.marketName.ko}
-                                                data-home-team={inplay.data.data[inplay.active_index].homeTeam.name.ko}
-                                                data-away-team={inplay.data.data[inplay.active_index].awayTeam.name.ko}
-                                                data-match-id={inplay.data.data[inplay.active_index].id}
+                                                data-home-team={inplay.data.detail_data.homeTeam.name["ko"]}
+                                                data-away-team={inplay.data.detail_data.awayTeam.name["ko"]}
+                                                data-match-id={inplay.data.detail_data.id}
                                                 data-market-id={market.id}
                                                 data-outcome-id={outcome.id}
                                                 data-odds={outcome.odds}
+                                                data-specifier={JSON.stringify(market.specifier)}
+                                                data-market-type={market.type}
+                                                data-name-id={outcome.name.id}
                                                 class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}>
                                                 <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                    <span class="color-grey text-ellipsis">{outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}</span>
@@ -841,11 +852,15 @@ export default function Inplay() {
                                                 onClick={setBet}
                                                 data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}
                                                 data-market_name={market.title.marketName.ko}
-                                                data-home-team={inplay.data.data[inplay.active_index].homeTeam.name.ko}
-                                                data-away-team={inplay.data.data[inplay.active_index].awayTeam.name.ko}
-                                                data-match-id={inplay.data.data[inplay.active_index].id}
+                                                data-home-team={inplay.data.detail_data.homeTeam.name["ko"]}
+                                                data-away-team={inplay.data.detail_data.awayTeam.name["ko"]}
+                                                data-match-id={inplay.data.detail_data.id}
                                                 data-market-id={market.id}
-                                                data-outcome-id={outcome.id} data-odds={outcome.odds}
+                                                data-outcome-id={outcome.id}
+                                                data-odds={outcome.odds}
+                                                data-specifier={JSON.stringify(market.specifier)}
+                                                data-market-type={market.type}
+                                                data-name-id={outcome.name.id}
                                                 class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}>
                                                 <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                    <span class="color-grey text-ellipsis">{outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}</span>
