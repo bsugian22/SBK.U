@@ -2,6 +2,14 @@ import * as types from "./inplayTypes";
 import axios from "../../plugins/axios";
 import { camelize, socket } from "../../helpers/object";
 
+
+export const setMarkets = (index) => {
+  return {
+    type: types.SET_MARKETS,
+    payload: index
+  };
+};
+
 export const fetchInplaysRequest = () => {
   return {
     type: types.FETCH_INPLAYS_REQUEST,

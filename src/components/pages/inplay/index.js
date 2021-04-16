@@ -3,7 +3,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "../../../redux/user/userActions";
 
 import { Link, NavLink } from 'react-router-dom'
-import { fetchInplays } from "../../../redux/inplay/inplayActions";
+import { fetchInplays, setMarkets } from "../../../redux/inplay/inplayActions";
 import { setBetOutcome } from "../../../redux/sportsdetail/sportsdetailActions";
 export default function Inplay() {
 
@@ -33,6 +33,7 @@ export default function Inplay() {
       isSubscribed = true;
       dispatch(refreshToken())
       dispatch(fetchInplays())
+      // dispatch(setMarkets(0))
       return () => {
          isSubscribed = false;
       };
@@ -126,7 +127,7 @@ export default function Inplay() {
                               <div class="list flex-inherit border-bottom-white" data-type="" data-id="" data-market-hash="" data-home-competitor="" data-away-competitor="">
                                  <div class="widthp-40 flex-inherit background-transparent-b-30 padding-horizontal-10">
                                     <div class="info flex-inherit flex-column align-items-center-inherit justify-content-end-inherit width-45 margin-right-5">
-                                       <div class="time color-blue">{matches.eventClock?.eventTime? matches.eventClock.eventTime: "n/a"}</div>
+                                       <div class="time color-blue">{matches.eventClock?.eventTime ? matches.eventClock.eventTime : "n/a"}</div>
                                        <div class="status color-grey">
                                           <span class="text-ellipsis">{matches.status.ko}</span>
                                        </div>
@@ -412,10 +413,10 @@ export default function Inplay() {
                                                             data-odds={outcome.odds}
                                                          >
                                                             {outcome.oldOdds == null ?
-                                                            "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
                                                             <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                             <div class="flex color-grey widthp-50">{outcome.odds}</div>
@@ -427,24 +428,28 @@ export default function Inplay() {
                                                 }
 
                                              } else {
-                                                return (market.outcomes.map((outcome, outcomes_index) => {
-                                                   return (
-                                                      <div
-                                                         key={"outcome_id-handicap-" + outcome.id}
-                                                         class=" disabled odd align-items-center-inherit justify-content-center-inherit"
-                                                      >
-                                                         {outcome.oldOdds == null ?
-                                                            "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                if (handicap_specifier == null) {
+                                                   handicap_specifier = specifier
+                                                   return (market.outcomes.map((outcome, outcomes_index) => {
 
-                                                         <div class="flex color-darkgrey widthp-50">{specifier}</div>
-                                                         <div class="flex color-grey widthp-50">{outcome.odds}</div>
-                                                      </div>
+                                                      return (
+                                                         <div
+                                                            key={"outcome_id-handicap-" + outcome.id}
+                                                            class=" disabled odd align-items-center-inherit justify-content-center-inherit"
+                                                         >
+                                                            {outcome.oldOdds == null ?
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                            <div class="flex color-darkgrey widthp-50">{specifier}</div>
+                                                            <div class="flex color-grey widthp-50">{outcome.odds}</div>
+                                                         </div>
+                                                      )
+                                                   })
                                                    )
-                                                })
-                                                )
+                                                }
                                              }
                                           }
 
@@ -471,10 +476,10 @@ export default function Inplay() {
                                                             data-odds={outcome.odds}
                                                          >
                                                             {outcome.oldOdds == null ?
-                                                            "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
                                                             <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                             <div class="flex color-grey widthp-50">{outcome.odds}</div>
@@ -485,24 +490,28 @@ export default function Inplay() {
 
                                                 }
                                              } else {
-                                                return (market.outcomes.map((outcome, outcomes_index) => {
-                                                   return (
-                                                      <div
-                                                         key={"outcome_id-handicap-" + outcome.id}
-                                                         class=" disabled odd align-items-center-inherit justify-content-center-inherit"
-                                                      >
-                                                         {outcome.oldOdds == null ?
-                                                            "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                if (handicap_specifier == null) {
+                                                   handicap_specifier = specifier
+                                                   return (market.outcomes.map((outcome, outcomes_index) => {
 
-                                                         <div class="flex color-darkgrey widthp-50">{specifier}</div>
-                                                         <div class="flex color-grey widthp-50">{outcome.odds}</div>
-                                                      </div>
+                                                      return (
+                                                         <div
+                                                            key={"outcome_id-handicap-" + outcome.id}
+                                                            class=" disabled odd align-items-center-inherit justify-content-center-inherit"
+                                                         >
+                                                            {outcome.oldOdds == null ?
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                            <div class="flex color-darkgrey widthp-50">{specifier}</div>
+                                                            <div class="flex color-grey widthp-50">{outcome.odds}</div>
+                                                         </div>
+                                                      )
+                                                   })
                                                    )
-                                                })
-                                                )
+                                                }
                                              }
                                           }
 
@@ -529,10 +538,10 @@ export default function Inplay() {
                                                             data-odds={outcome.odds}
                                                          >
                                                             {outcome.oldOdds == null ?
-                                                            "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
                                                             <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                             <div class="flex color-grey widthp-50">{outcome.odds}</div>
@@ -543,24 +552,28 @@ export default function Inplay() {
 
                                                 }
                                              } else {
-                                                return (market.outcomes.map((outcome, outcomes_index) => {
-                                                   return (
-                                                      <div
-                                                         key={"outcome_id-handicap-" + outcome.id}
-                                                         class=" disabled odd align-items-center-inherit justify-content-center-inherit"
-                                                      >
-                                                         {outcome.oldOdds == null ?
-                                                            "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                if (handicap_specifier == null) {
+                                                   handicap_specifier = specifier
+                                                   return (market.outcomes.map((outcome, outcomes_index) => {
 
-                                                         <div class="flex color-darkgrey widthp-50">{specifier}</div>
-                                                         <div class="flex color-grey widthp-50">{outcome.odds}</div>
-                                                      </div>
+                                                      return (
+                                                         <div
+                                                            key={"outcome_id-handicap-" + outcome.id}
+                                                            class=" disabled odd align-items-center-inherit justify-content-center-inherit"
+                                                         >
+                                                            {outcome.oldOdds == null ?
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                            <div class="flex color-darkgrey widthp-50">{specifier}</div>
+                                                            <div class="flex color-grey widthp-50">{outcome.odds}</div>
+                                                         </div>
+                                                      )
+                                                   })
                                                    )
-                                                })
-                                                )
+                                                }
                                              }
                                           }
 
@@ -587,10 +600,10 @@ export default function Inplay() {
                                                             data-odds={outcome.odds}
                                                          >
                                                             {outcome.oldOdds == null ?
-                                                            "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
                                                             <div class="flex color-darkgrey widthp-50">{specifier}</div>
                                                             <div class="flex color-grey widthp-50">{outcome.odds}</div>
@@ -601,24 +614,28 @@ export default function Inplay() {
 
                                                 }
                                              } else {
-                                                return (market.outcomes.map((outcome, outcomes_index) => {
-                                                   return (
-                                                      <div
-                                                         key={"outcome_id-handicap-" + outcome.id}
-                                                         class=" disabled odd align-items-center-inherit justify-content-center-inherit"
-                                                      >
-                                                         {outcome.oldOdds == null ?
-                                                            "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                if (handicap_specifier == null) {
+                                                   handicap_specifier = specifier
+                                                   return (market.outcomes.map((outcome, outcomes_index) => {
 
-                                                         <div class="flex color-darkgrey widthp-50">{specifier}</div>
-                                                         <div class="flex color-grey widthp-50">{outcome.odds}</div>
-                                                      </div>
+                                                      return (
+                                                         <div
+                                                            key={"outcome_id-handicap-" + outcome.id}
+                                                            class=" disabled odd align-items-center-inherit justify-content-center-inherit"
+                                                         >
+                                                            {outcome.oldOdds == null ?
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                            <div class="flex color-darkgrey widthp-50">{specifier}</div>
+                                                            <div class="flex color-grey widthp-50">{outcome.odds}</div>
+                                                         </div>
+                                                      )
+                                                   })
                                                    )
-                                                })
-                                                )
+                                                }
                                              }
                                           }
                                           sport_market_16_exist = 0;
@@ -661,10 +678,10 @@ export default function Inplay() {
                                                             data-odds={outcome.odds}
                                                          >
                                                             {outcome.oldOdds == null ?
-                                                            "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
                                                             <div class="flex color-darkgrey widthp-50"> {outcome.name.id == 12 ? "O" : "U"} {specifier}</div>
                                                             <div class="flex color-grey widthp-50">{outcome.odds}</div>
@@ -676,7 +693,28 @@ export default function Inplay() {
                                                 }
 
                                              } else {
+                                                if (over_under_specifier == null) {
+                                                   over_under_specifier = specifier
+                                                   return (market.outcomes.map((outcome, outcomes_index) => {
+                                                      return (
+                                                         <div
+                                                            key={"outcome_id-over-and-under-" + outcome.id}
+                                                            class= "disabled odd align-items-center-inherit justify-content-center-inherit"
+                                                            
+                                                         >
+                                                            {outcome.oldOdds == null ?
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
+                                                            <div class="flex color-darkgrey widthp-50"> {outcome.name.id == 12 ? "O" : "U"} {specifier}</div>
+                                                            <div class="flex color-grey widthp-50">{outcome.odds}</div>
+                                                         </div>
+                                                      )
+                                                   })
+                                                   )
+                                                }
                                              }
                                           }
                                           sport_market_18_exist = 0;
@@ -689,7 +727,13 @@ export default function Inplay() {
                                     {/* end over and under  */}
                                  </div>
                                  <div class="widthp-10 background-transparent-b-30">
-                                    <div class="flex detail widthp-100 justify-content-center align-items-center color-white">+{matches?.markets?.length? matches.markets.length: ""}</div>
+                                    <div class={index == inplay.active_index ? "active flex detail widthp-100 justify-content-center align-items-center color-white" : "flex detail widthp-100 justify-content-center align-items-center color-white"}
+                                       onClick={() => {
+                                          dispatch(setMarkets(index));
+                                       }}
+                                    >
+                                       +{matches?.markets?.length ? matches.markets.length : ""}
+                                    </div>
                                  </div>
                               </div>
                            )
@@ -721,7 +765,9 @@ export default function Inplay() {
                      <div class="height-40 align-items-center background-transparent-b-20 padding-horizontal-10">
                         <i class="fas fa-tshirt color-grey font-size-11"></i>
                         <span class="color-grey">
-                           파크타코르 타슈켄트<span class="margin-horizontal-4 color-twhite">vs</span>나사프 카르시
+                           {inplay.active_index == null ? "" : inplay.data.data[inplay.active_index].homeTeam.name.ko}
+                           <span class="margin-horizontal-4 color-twhite">vs</span>
+                           {inplay.active_index == null ? "" : inplay.data.data[inplay.active_index].awayTeam.name.ko}
                         </span>
                      </div>
                      <div class="height-40 background-transparent-b-10 padding-horizontal-10 margin-bottom-10">
@@ -736,128 +782,148 @@ export default function Inplay() {
                      </div>
                   </div>
                   <div class="market-list flex-inherit flex-column scrollable-auto">
-                  {/* {sports.data.detail_data.markets.length > 0
-                    ? sports.data.detail_data.markets.map((market, market_index) => {
-                      var rows = [];
-                      if (market.status == 1) {
-                        rows.push(
-                          <div
-                            class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center shrink-0 border-bottom-white-strong"
-                            key={"details-market-id" + market.id}
-                          >
-                            <span class="color-grey">
-                              {market.title.marketName.ko}
-                            </span>
-                          </div>
-                        );
-                        rows.push(
-                          <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
-                            {market?.outcomes?.length == 2 ?
+                     {console.log(inplay.data.data[inplay.active_index])}
+                     {inplay.active_index == null ? "" :
+                        inplay.data.data[inplay.active_index]?.markets?.map((market, market_index) => {
+                           var rows = [];
+                           if (market.status == 1) {
+                              rows.push(
+                                 <div
+                                    class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center shrink-0 border-bottom-white-strong"
+                                    key={"details-market-id" + market.id}
+                                 >
+                                    <span class="color-grey">
+                                       {market.title.marketName.ko}
+                                    </span>
+                                 </div>
+                              );
+                              rows.push(
+                                 <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
+                                    {market?.outcomes?.length == 2 ?
 
-                              market.outcomes.map((outcome, market_index) => {
-                                return (
-                                  <div key={"details-outcome-id" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""} data-market_name={market.title.marketName.ko} data-home-team={sports.data.detail_data.homeTeam.name["ko"]} data-away-team={sports.data.detail_data.awayTeam.name["ko"]} data-match-id={sports.data.detail_data.id} data-market-id={market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}>
-                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                      <span class="color-grey text-ellipsis">{outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}</span>
-                                    </div>
-                                    <div class="shrink-0 padding-horizontal-2">
-                                      {
-                                        outcome.oldOdds == null ? "" :
-                                          outcome.oldOdds < outcome.odds ?
-                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                       market.outcomes.map((outcome, market_index) => {
+                                          return (
+                                             <div key={"details-outcome-id" + outcome.id}
+                                                onClick={setBet}
+                                                data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}
+                                                data-market_name={market.title.marketName.ko}
+                                                data-home-team={inplay.data.data[inplay.active_index].homeTeam.name.ko}
+                                                data-away-team={inplay.data.data[inplay.active_index].awayTeam.name.ko}
+                                                data-match-id={inplay.data.data[inplay.active_index].id}
+                                                data-market-id={market.id}
+                                                data-outcome-id={outcome.id}
+                                                data-odds={outcome.odds}
+                                                class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}>
+                                                <div class="grow-2 text-ellipsis padding-horizontal-2">
+                                                   <span class="color-grey text-ellipsis">{outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}</span>
+                                                </div>
+                                                <div class="shrink-0 padding-horizontal-2">
+                                                   {
+                                                      outcome.oldOdds == null ? "" :
+                                                         outcome.oldOdds < outcome.odds ?
+                                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
-                                      <span class="color-grey">{outcome.odds}</span>
-                                    </div>
-                                  </div>
-                                )
-                              }) :
-                              market.outcomes.map((outcome, market_index) => {
-                                return (
-                                  <div key={"details-outcome-id" + outcome.id} onClick={setBet} data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""} data-market_name={market.title.marketName.ko} data-home-team={sports.data.detail_data.homeTeam.name["ko"]} data-away-team={sports.data.detail_data.awayTeam.name["ko"]} data-match-id={sports.data.detail_data.id} data-market-id={market.id} data-outcome-id={outcome.id} data-odds={outcome.odds} class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}>
-                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                      <span class="color-grey text-ellipsis">{outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}</span>
-                                    </div>
-                                    <div class="shrink-0 padding-horizontal-2">
-                                      {
-                                        outcome.oldOdds == null ? "" :
-                                          outcome.oldOdds < outcome.odds ?
-                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                   <span class="color-grey">{outcome.odds}</span>
+                                                </div>
+                                             </div>
+                                          )
+                                       }) :
+                                       market.outcomes.map((outcome, market_index) => {
+                                          return (
+                                             <div key={"details-outcome-id" + outcome.id}
+                                                onClick={setBet}
+                                                data-outcome_name={outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}
+                                                data-market_name={market.title.marketName.ko}
+                                                data-home-team={inplay.data.data[inplay.active_index].homeTeam.name.ko}
+                                                data-away-team={inplay.data.data[inplay.active_index].awayTeam.name.ko}
+                                                data-match-id={inplay.data.data[inplay.active_index].id}
+                                                data-market-id={market.id}
+                                                data-outcome-id={outcome.id} data-odds={outcome.odds}
+                                                class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}>
+                                                <div class="grow-2 text-ellipsis padding-horizontal-2">
+                                                   <span class="color-grey text-ellipsis">{outcome.name.outcomeName?.ko ? outcome.name.outcomeName.ko : ""}</span>
+                                                </div>
+                                                <div class="shrink-0 padding-horizontal-2">
+                                                   {
+                                                      outcome.oldOdds == null ? "" :
+                                                         outcome.oldOdds < outcome.odds ?
+                                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
-                                      <span class="color-grey">{outcome.odds}</span>
-                                    </div>
-                                  </div>
-                                )
-                              })
+                                                   <span class="color-grey">{outcome.odds}</span>
+                                                </div>
+                                             </div>
+                                          )
+                                       })
 
-                            }
-                          </div>
-                        );
-                      } else {
+                                    }
+                                 </div>
+                              );
+                           } else {
 
-                        rows.push(
-                          <div
-                            class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center shrink-0 border-bottom-white-strong"
-                            key={"details_market_id" + market.id}
-                          >
-                            <span class="color-grey">
-                              {market.title.marketName.ko}
-                            </span>
-                          </div>
-                        );
-                        rows.push(
-                          <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
+                              rows.push(
+                                 <div
+                                    class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center shrink-0 border-bottom-white-strong"
+                                    key={"details_market_id" + market.id}
+                                 >
+                                    <span class="color-grey">
+                                       {market.title.marketName.ko}
+                                    </span>
+                                 </div>
+                              );
+                              rows.push(
+                                 <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
 
-                            {market?.outcomes?.length == 2 ?
+                                    {market?.outcomes?.length == 2 ?
 
-                              market.outcomes.map((outcome, market_index) => {
-                                return (
-                                  <div key={"details-outcome-id-inactive-2-row" + outcome.id} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5">
-                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                      <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
-                                    </div>
-                                    <div class="shrink-0 padding-horizontal-2">
-                                      {
-                                        outcome.oldOdds == null ? "" :
-                                          outcome.oldOdds < outcome.odds ?
-                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                       market.outcomes.map((outcome, market_index) => {
+                                          return (
+                                             <div key={"details-outcome-id-inactive-2-row" + outcome.id} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5">
+                                                <div class="grow-2 text-ellipsis padding-horizontal-2">
+                                                   <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
+                                                </div>
+                                                <div class="shrink-0 padding-horizontal-2">
+                                                   {
+                                                      outcome.oldOdds == null ? "" :
+                                                         outcome.oldOdds < outcome.odds ?
+                                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
-                                      <span class="color-grey">{outcome.odds}</span>
-                                    </div>
-                                  </div>
-                                )
-                              }) :
-                              market.outcomes.map((outcome, market_index) => {
-                                return (
-                                  <div key={"details-outcome-id-inactive" + outcome.id} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5">
-                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                      <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
-                                    </div>
-                                    <div class="shrink-0 padding-horizontal-2">
-                                      {
-                                        outcome.oldOdds == null ? "" :
-                                          outcome.oldOdds < outcome.odds ?
-                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                   <span class="color-grey">{outcome.odds}</span>
+                                                </div>
+                                             </div>
+                                          )
+                                       }) :
+                                       market.outcomes.map((outcome, market_index) => {
+                                          return (
+                                             <div key={"details-outcome-id-inactive" + outcome.id} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5">
+                                                <div class="grow-2 text-ellipsis padding-horizontal-2">
+                                                   <span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko}</span>
+                                                </div>
+                                                <div class="shrink-0 padding-horizontal-2">
+                                                   {
+                                                      outcome.oldOdds == null ? "" :
+                                                         outcome.oldOdds < outcome.odds ?
+                                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
-                                      <span class="color-grey">{outcome.odds}</span>
-                                    </div>
-                                  </div>
-                                )
-                              })
+                                                   <span class="color-grey">{outcome.odds}</span>
+                                                </div>
+                                             </div>
+                                          )
+                                       })
 
-                            }
-                          </div>
-                        );
+                                    }
+                                 </div>
+                              );
 
-                      }
+                           }
 
-                      return rows;
-                    })
-                    : "없음"} */}
-                </div>
+                           return rows;
+                        })
+                     }
+                  </div>
                </div>
             </div>
          </div>
