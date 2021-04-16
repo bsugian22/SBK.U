@@ -782,7 +782,6 @@ export default function Inplay() {
                      </div>
                   </div>
                   <div class="market-list flex-inherit flex-column scrollable-auto">
-                     {console.log(inplay.data.data[inplay.active_index])}
                      {inplay.active_index == null ? "" :
                         inplay.data.data[inplay.active_index]?.markets?.map((market, market_index) => {
                            var rows = [];

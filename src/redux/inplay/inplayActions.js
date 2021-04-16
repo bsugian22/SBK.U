@@ -1,6 +1,7 @@
 import * as types from "./inplayTypes";
 import axios from "../../plugins/axios";
 import { camelize, socket } from "../../helpers/object";
+import { getSportsDetails } from "../sportsdetail/sportsdetailActions";
 
 
 export const setMarkets = (index) => {
@@ -141,7 +142,7 @@ export const fetchInplays = () => {
         // inplayWebSocket(matches)
         dispatch(inplayWebSocket(matches));
 
-        dispatch(fetchInplaysSuccess(camelize(inplays) ))
+        dispatch(fetchInplaysSuccess(camelize(inplays)))
       }).catch(error => {
         const errorMsg = error.message;
         dispatch(fetchInplaysFailure(errorMsg))
@@ -161,7 +162,30 @@ export const inplayWebSocket = (matches) => {
       }
       socket.send(JSON.stringify(match_data));
     })
+    socket.onmessage = function (event) {
+      event.data.text().then((data) => {
+        const market = JSON.parse(data)
 
+        // console.log(market)
+        dispatch(getInplayDetails(market));
+        dispatch(getSportsDetails(market));
+      });
+    };
+
+
+    socket.onclose = function (event) {
+      if (event.wasClean) {
+        console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+      } else {
+        // e.g. server process killed or network down
+        // event.code is usually 1006 in this case
+        console.log('[close] Connection died');
+      }
+    };
+
+    socket.onerror = function (error) {
+      console.log(`[error] ${error.message}`);
+    };
   }
 };
 
