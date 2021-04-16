@@ -39,7 +39,7 @@ export const mapDispatchProps = (dispatch) => {
       dispatch(userActions.setLogout());
     },
     setSports: () => {
-      dispatch(fetchSportsdetails());
+      // dispatch(fetchSportsdetails());
     },
     setPreferences: (payload) => {
       dispatch(preferencesActions.setPreferences(payload));

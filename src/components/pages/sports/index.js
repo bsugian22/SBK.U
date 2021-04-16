@@ -27,6 +27,7 @@ const Sports = (props) => {
   useEffect(() => {
     isSubscribed = true;
     dispatch(refreshToken())
+    dispatch(fetchSportsdetails())
 
     return () => {
       isSubscribed = false;

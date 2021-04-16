@@ -23,6 +23,7 @@ import {
 } from "../../redux/accounts/withdrawal/withdrawalAction";
 import { Link, NavLink } from "react-router-dom";
 import echo from '../../plugins/echo'
+import { fetchSummary } from "../../redux/navigations/accountSummary/accountSummaryActions";
 
 const Withdrawal = () => {
   let isSubscribed = true;

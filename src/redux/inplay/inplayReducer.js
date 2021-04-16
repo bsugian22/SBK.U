@@ -12,14 +12,14 @@ const initialState = {
     "lastPage": 1,
   },
   error: "",
-  active_index : null,
+  active_index: null,
 };
 
 const inplayReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case types.SET_MARKETS:
-      
+
       let current_index = state.active_index;
       let set_index = action.payload;
 
@@ -125,6 +125,16 @@ const inplayReducer = (state = initialState, action) => {
     case types.FETCH_INPLAYS_REQUEST:
       return {
         ...state,
+        data: {
+          "data": [],
+          "total": 0,
+          "count": 1,
+          "perPage": 15,
+          "page": 1,
+          "lastPage": 1,
+        },
+        error: "",
+        active_index: null,
         loading: true,
       };
     case types.FETCH_INPLAYS_SUCCESS:

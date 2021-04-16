@@ -119,7 +119,7 @@ export const deleteInplaysFailure = (error) => {
 
 export const fetchInplays = () => {
   return (dispatch) => {
-    dispatch(fetchInplaysRequest);
+    dispatch(fetchInplaysRequest());
     axios.get(`/api/feed/inplays`)
       .then(response => {
         const inplays = response.data;

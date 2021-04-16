@@ -28,6 +28,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Logo from "../layouts/Logo";
 import moment from "moment";
+import { fetchSummary } from "../../redux/navigations/accountSummary/accountSummaryActions";
 
 const Inquiry = () => {
   const dispatch = useDispatch();

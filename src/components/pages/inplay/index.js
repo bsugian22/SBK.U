@@ -124,7 +124,7 @@ export default function Inplay() {
                            over_under_specifier = null
                            // console.log(matches)
                            return (
-                              <div class="list flex-inherit border-bottom-white" data-type="" data-id="" data-market-hash="" data-home-competitor="" data-away-competitor="">
+                              <div key={matches.id} class="list flex-inherit border-bottom-white" data-type="" data-id="" data-market-hash="" data-home-competitor="" data-away-competitor="">
                                  <div class="widthp-40 flex-inherit background-transparent-b-30 padding-horizontal-10">
                                     <div class="info flex-inherit flex-column align-items-center-inherit justify-content-end-inherit width-45 margin-right-5">
                                        <div class="time color-blue">{matches.eventClock?.eventTime ? matches.eventClock.eventTime : "n/a"}</div>
@@ -798,7 +798,7 @@ export default function Inplay() {
                                  </div>
                               );
                               rows.push(
-                                 <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
+                                 <div key={"market-details-outcome-id" + market.id} class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
                                     {market?.outcomes?.length == 2 ?
 
                                        market.outcomes.map((outcome, market_index) => {

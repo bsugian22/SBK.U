@@ -51,7 +51,7 @@ const sportsdetailReducer = (state = initialState, action) => {
       swal.fire({
         title: invalid_outcomes_message,
         icon: 'warning',
-        html:message,
+        html: message,
       })
 
       return {
@@ -421,141 +421,157 @@ const sportsdetailReducer = (state = initialState, action) => {
     case types.FETCH_SPORTSDETAILS_REQUEST:
       return {
         ...state,
-        loading: true,
-      };
-    case types.FETCH_SPORTSDETAILS_SUCCESS:
-      console.log(action.payload)
+        data: {
+          data: [],
+          total: null,
+          count: null,
+          per_page: null,
+          page: 1,
+          last_page: null,
+          detail: null,
+          detail_data: null,
+          bet: {
+            category: "SPORTS",
+            amount: 0,
+            outcomes: [],
+            total_odds: 0,
+          },
+        },
+          loading: true,
+        };
+        case types.FETCH_SPORTSDETAILS_SUCCESS:
+        console.log(action.payload)
 
       // return {...state}
       return {
-        ...state,
-        loading: false,
-        data: {
-          ...state.data,
-          data: action.payload.data,
-          count: action.payload.count,
-          lastPage: action.payload.lastPage,
-          page: action.payload.page,
-          perPage: action.payload.perPage,
-          total: action.payload.total,
-        },
-        error: "",
-      };
-    case types.FETCH_SPORTSDETAILS_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
+          ...state,
+          loading: false,
+          data: {
+            ...state.data,
+            data: action.payload.data,
+            count: action.payload.count,
+            lastPage: action.payload.lastPage,
+            page: action.payload.page,
+            perPage: action.payload.perPage,
+            total: action.payload.total,
+          },
+          error: "",
+        };
+        case types.FETCH_SPORTSDETAILS_FAILURE:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
 
-    case types.FETCH_SPORTSDETAIL_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case types.FETCH_SPORTSDETAIL_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        data: {
-          ...state.data,
-          detail_data: action.payload.data,
-          detail: action.payload.data.id,
-        },
-        error: "",
-      };
-    case types.FETCH_SPORTSDETAIL_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
+        case types.FETCH_SPORTSDETAIL_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+        case types.FETCH_SPORTSDETAIL_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          data: {
+            ...state.data,
+            detail_data: action.payload.data,
+            detail: action.payload.data.id,
+          },
+          error: "",
+        };
+        case types.FETCH_SPORTSDETAIL_FAILURE:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
 
-    case types.SPORTSDETAIL_RESET:
-      return {
-        ...state,
-        loading: false,
-        data: {
-          ...state.data,
-          detail_data: null,
-          detail: null,
-        },
-        error: "",
-      };
+        case types.SPORTSDETAIL_RESET:
+        return {
+          ...state,
+          loading: false,
+          data: {
+            ...state.data,
+            detail_data: null,
+            detail: null,
+          },
+          error: "",
+        };
 
-    case types.CREATE_SPORTSDETAIL_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case types.CREATE_SPORTSDETAIL_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: "",
-      };
-    case types.CREATE_SPORTSDETAIL_FAILURE:
-      return {
-        loading: false,
-        data: [],
-        error: action.payload,
-      };
+        case types.CREATE_SPORTSDETAIL_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+        case types.CREATE_SPORTSDETAIL_SUCCESS:
+        return {
+          loading: false,
+          data: action.payload,
+          error: "",
+        };
+        case types.CREATE_SPORTSDETAIL_FAILURE:
+        return {
+          loading: false,
+          data: [],
+          error: action.payload,
+        };
 
-    case types.UPDATE_SPORTSDETAIL_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case types.UPDATE_SPORTSDETAIL_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: "",
-      };
-    case types.UPDATE_SPORTSDETAIL_FAILURE:
-      return {
-        loading: false,
-        data: [],
-        error: action.payload,
-      };
+        case types.UPDATE_SPORTSDETAIL_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+        case types.UPDATE_SPORTSDETAIL_SUCCESS:
+        return {
+          loading: false,
+          data: action.payload,
+          error: "",
+        };
+        case types.UPDATE_SPORTSDETAIL_FAILURE:
+        return {
+          loading: false,
+          data: [],
+          error: action.payload,
+        };
 
-    case types.DELETE_SPORTSDETAILS_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case types.DELETE_SPORTSDETAILS_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: "",
-      };
-    case types.DELETE_SPORTSDETAILS_FAILURE:
-      return {
-        loading: false,
-        data: [],
-        error: action.payload,
-      };
+        case types.DELETE_SPORTSDETAILS_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+        case types.DELETE_SPORTSDETAILS_SUCCESS:
+        return {
+          loading: false,
+          data: action.payload,
+          error: "",
+        };
+        case types.DELETE_SPORTSDETAILS_FAILURE:
+        return {
+          loading: false,
+          data: [],
+          error: action.payload,
+        };
 
-    case types.BET_REQUEST:
-      return {
-        ...state,
-        loadingBet: true,
-      };
-    case types.BET_SUCCESS:
-      return {
-        ...state,
-        loadingBet: false,
-      };
-    case types.BET_FAILURE:
-      return {
-        ...state,
-        loadingBet: false,
-      };
+        case types.BET_REQUEST:
+        return {
+          ...state,
+          loadingBet: true,
+        };
+        case types.BET_SUCCESS:
+        return {
+          ...state,
+          loadingBet: false,
+        };
+        case types.BET_FAILURE:
+        return {
+          ...state,
+          loadingBet: false,
+        };
 
-    default:
+        default:
       return state;
-  }
-};
+      }
+  };
 
-export default sportsdetailReducer;
+  export default sportsdetailReducer;

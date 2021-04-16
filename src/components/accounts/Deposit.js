@@ -24,6 +24,7 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import Moment from "moment";
 import echo from '../../plugins/echo'
+import { fetchSummary } from "../../redux/navigations/accountSummary/accountSummaryActions";
 
 const Deposit = () => {
   let deposit = useSelector((state) => state.deposit);
