@@ -155,6 +155,13 @@ export const betRequest = () => {
   };
 };
 
+export const betCheck = (data) => {
+  return {
+    type: types.BET_CHECK,
+    payload: data
+  };
+};
+
 export const betSucess = () => {
   return {
     type: types.BET_SUCCESS,
@@ -296,11 +303,12 @@ export const validateBet = (data) => {
 
       axios.post(`/api/betslip`, details)
         .then(response => {
-          console.log(response.data)
-          // if (isBetting) {
-          //   dispatch(bet(data))
-          //   // alert("betting")
-          // }
+          const response_data = response.data
+          // console.log(response_data)
+          if(response_data.status == 0){
+            // console.log(response_data.data)
+            dispatch(betCheck(response_data))
+          }
 
         }).catch(error => {
           const errorMsg = error.message;

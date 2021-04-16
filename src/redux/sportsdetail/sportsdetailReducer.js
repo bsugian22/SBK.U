@@ -1,5 +1,7 @@
+import sweetalert from "../../plugins/sweetalert";
 import * as types from "./sportsdetailTypes";
 
+const swal = new sweetalert();
 const initialState = {
   loading: false,
   loadingBet: false,
@@ -24,6 +26,37 @@ const initialState = {
 
 const sportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case types.BET_CHECK:
+      let invalid_outcomes = action.payload.data
+      let invalid_outcomes_message = action.payload.message
+      // console.log(state.data.bet.outcomes)
+      // console.log(action.payload)
+      let message = "";
+
+      invalid_outcomes.map((outcome) => {
+        let data = state.data.bet.outcomes.find(x => x.id == outcome)
+        console.log(data)
+        message = message + data.home_team + " vs " + data.away_team + "<br>"
+
+        let index = state.data.bet.outcomes.findIndex(x => x.id == outcome)
+        state.data.bet.outcomes.splice(index, 1)
+        console.log(index)
+      })
+
+      // console.log(message);
+
+      // console.log(invalid_outcomes)
+
+      swal.fire({
+        title: invalid_outcomes_message,
+        icon: 'warning',
+        html:message,
+      })
+
+      return {
+        ...state,
+      };
     case types.RESET_OUTCOME:
       state.data.bet = {
         category: "SPORTS",

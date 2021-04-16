@@ -28,6 +28,7 @@ export const DELETE_SPORTSDETAILS_FAILURE = "DELETE_SPORTSDETAILS_FAILURE";
 
 
 
+export const BET_CHECK = "BET_CHECK";
 export const BET_REQUEST = "BET_REQUEST";
 export const BET_SUCCESS = "BET_SUCCESS";
 export const BET_FAILURE = "BET_FAILURE";
