@@ -213,7 +213,7 @@ const Sports = (props) => {
             <div class="prematch-list border-bottom match-list grow-2 padding-left-10 padding-right-10 padding-bottom-10 scrollable-auto flex-column">
               {sports.data.data.length > 0
                 ? sports.data.data.map((matches, index) => {
-                  sport_main_market_exists = false
+                  
                   var rows = [];
                   rows.push(
                     <div
@@ -251,6 +251,8 @@ const Sports = (props) => {
                   );
                   rows.push(
                     matches.matches.map((match, key) => {
+                      console.log(sport_main_market_exists)
+                  sport_main_market_exists = false
                       return (
                         <div
                           class="flex list background-transparent-b-30 height-40"
