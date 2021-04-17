@@ -173,20 +173,36 @@ const sportsdetailReducer = (state = initialState, action) => {
         let details_specifier = data.specifier
         let market_type = data.market_type
         let details_name_id = data.outcome_name_id
+        let message = data.home_team + " vs " + data.away_team
+
 
         if (match_id == data.match_id) {
-          console.log("ws bet slip")
-          console.log(data);
-          console.log(market)
+
           market.markets.map((ws_data, index) => {
 
             let ws_data_market_outcomes = ws_data.outcomes; // list of outcomes comeing from the ws
             let ws_specifier = JSON.stringify(ws_data.specifier)
             let ws_market_type = ws_data.market_id;
             let ws_status = ws_data.status
+            console.log(ws_status);
+            if (ws_status != 1 && state_bet.find(x => x.match_id == match_id)) {
+              console.log("status not active")
+              console.log(state_bet.find(x => x.match_id == match_id))
+              console.log(state_bet.findIndex(x => x.match_id == match_id))
+              state.data.bet.outcomes.splice( state_bet.findIndex(x => x.match_id == match_id),1)
+              swal.fire({
+                title: '이미 마감된 경기가 있습니다.',
+                icon: 'warning',
+                html: message,
+              })
+            }
 
-            // check if the market is same with the ws data and details data
+            // check if the market is same with the ws data and details data 
             if (ws_market_type == market_type) {
+              console.log("ws bet slip")
+              console.log(data);
+              console.log(ws_data)
+
 
               if (ws_specifier == "{}") { // check if the specifer is only one 
 
@@ -228,6 +244,7 @@ const sportsdetailReducer = (state = initialState, action) => {
             }
 
           })
+          console.log("ws bet slip end")
         }
       })
 
@@ -432,141 +449,141 @@ const sportsdetailReducer = (state = initialState, action) => {
           detail: null,
           detail_data: null,
         },
-          loading: true,
-        };
-        case types.FETCH_SPORTSDETAILS_SUCCESS:
-        console.log(action.payload)
+        loading: true,
+      };
+    case types.FETCH_SPORTSDETAILS_SUCCESS:
+      console.log(action.payload)
 
       // return {...state}
       return {
-          ...state,
-          loading: false,
-          data: {
-            ...state.data,
-            data: action.payload.data,
-            count: action.payload.count,
-            lastPage: action.payload.lastPage,
-            page: action.payload.page,
-            perPage: action.payload.perPage,
-            total: action.payload.total,
-          },
-          error: "",
-        };
-        case types.FETCH_SPORTSDETAILS_FAILURE:
-        return {
-          ...state,
-          loading: false,
-          error: action.payload,
-        };
+        ...state,
+        loading: false,
+        data: {
+          ...state.data,
+          data: action.payload.data,
+          count: action.payload.count,
+          lastPage: action.payload.lastPage,
+          page: action.payload.page,
+          perPage: action.payload.perPage,
+          total: action.payload.total,
+        },
+        error: "",
+      };
+    case types.FETCH_SPORTSDETAILS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
 
-        case types.FETCH_SPORTSDETAIL_REQUEST:
-        return {
-          ...state,
-          loading: true,
-        };
-        case types.FETCH_SPORTSDETAIL_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          data: {
-            ...state.data,
-            detail_data: action.payload.data,
-            detail: action.payload.data.id,
-          },
-          error: "",
-        };
-        case types.FETCH_SPORTSDETAIL_FAILURE:
-        return {
-          ...state,
-          loading: false,
-          error: action.payload,
-        };
+    case types.FETCH_SPORTSDETAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.FETCH_SPORTSDETAIL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: {
+          ...state.data,
+          detail_data: action.payload.data,
+          detail: action.payload.data.id,
+        },
+        error: "",
+      };
+    case types.FETCH_SPORTSDETAIL_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
 
-        case types.SPORTSDETAIL_RESET:
-        return {
-          ...state,
-          loading: false,
-          data: {
-            ...state.data,
-            detail_data: null,
-            detail: null,
-          },
-          error: "",
-        };
+    case types.SPORTSDETAIL_RESET:
+      return {
+        ...state,
+        loading: false,
+        data: {
+          ...state.data,
+          detail_data: null,
+          detail: null,
+        },
+        error: "",
+      };
 
-        case types.CREATE_SPORTSDETAIL_REQUEST:
-        return {
-          ...state,
-          loading: true,
-        };
-        case types.CREATE_SPORTSDETAIL_SUCCESS:
-        return {
-          loading: false,
-          data: action.payload,
-          error: "",
-        };
-        case types.CREATE_SPORTSDETAIL_FAILURE:
-        return {
-          loading: false,
-          data: [],
-          error: action.payload,
-        };
+    case types.CREATE_SPORTSDETAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.CREATE_SPORTSDETAIL_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case types.CREATE_SPORTSDETAIL_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
 
-        case types.UPDATE_SPORTSDETAIL_REQUEST:
-        return {
-          ...state,
-          loading: true,
-        };
-        case types.UPDATE_SPORTSDETAIL_SUCCESS:
-        return {
-          loading: false,
-          data: action.payload,
-          error: "",
-        };
-        case types.UPDATE_SPORTSDETAIL_FAILURE:
-        return {
-          loading: false,
-          data: [],
-          error: action.payload,
-        };
+    case types.UPDATE_SPORTSDETAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.UPDATE_SPORTSDETAIL_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case types.UPDATE_SPORTSDETAIL_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
 
-        case types.DELETE_SPORTSDETAILS_REQUEST:
-        return {
-          ...state,
-          loading: true,
-        };
-        case types.DELETE_SPORTSDETAILS_SUCCESS:
-        return {
-          loading: false,
-          data: action.payload,
-          error: "",
-        };
-        case types.DELETE_SPORTSDETAILS_FAILURE:
-        return {
-          loading: false,
-          data: [],
-          error: action.payload,
-        };
+    case types.DELETE_SPORTSDETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.DELETE_SPORTSDETAILS_SUCCESS:
+      return {
+        loading: false,
+        data: action.payload,
+        error: "",
+      };
+    case types.DELETE_SPORTSDETAILS_FAILURE:
+      return {
+        loading: false,
+        data: [],
+        error: action.payload,
+      };
 
-        case types.BET_REQUEST:
-        return {
-          ...state,
-          loadingBet: true,
-        };
-        case types.BET_SUCCESS:
-        return {
-          ...state,
-          loadingBet: false,
-        };
-        case types.BET_FAILURE:
-        return {
-          ...state,
-          loadingBet: false,
-        };
+    case types.BET_REQUEST:
+      return {
+        ...state,
+        loadingBet: true,
+      };
+    case types.BET_SUCCESS:
+      return {
+        ...state,
+        loadingBet: false,
+      };
+    case types.BET_FAILURE:
+      return {
+        ...state,
+        loadingBet: false,
+      };
 
-        default:
+    default:
       return state;
-      }
-  };
+  }
+};
 
-  export default sportsdetailReducer;
+export default sportsdetailReducer;
