@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 import * as userActions from "./user/userActions";
 import * as preferencesActions from "./preference/preferenceActions";
 import { fetchSportsdetail, fetchSportsdetails, fetchSportsdetailsRequest } from "./sportsdetail/sportsdetailActions";
+import { fetchSummary } from "./navigations/accountSummary/accountSummaryActions";
 
 const persistConfig = {
   key: "root",
@@ -29,6 +30,7 @@ export const mapDispatchProps = (dispatch) => {
   return {
     setUser: (payload) => {
       dispatch(userActions.setUser(payload));
+      dispatch(fetchSummary());
     },
     setAccessToken: (payload) => {
       localStorage.setItem("ACCESS_TOKEN", payload.access_token);

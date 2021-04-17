@@ -5,11 +5,13 @@ import MenuContext from "../../contexts/Menu.context";
 import { splice_data } from "../../helpers/object";
 import { bet, resetOutcome, setBetAmount, spliceOutcome, validateBet } from "../../redux/sportsdetail/sportsdetailActions";
 import sweetalert from "../../plugins/sweetalert";
+import Pusher from "pusher-js";
 
 export default function BetslipNavi(props) {
   const context = useContext(MenuContext);
   const swal = new sweetalert();
   let isSubscribed = true;
+  // const pusher = new Pusher();
 
 
   const OpenLayer = {
@@ -24,10 +26,6 @@ export default function BetslipNavi(props) {
 
   useEffect(() => {
     isSubscribed = true;
-
-
-    
-
 
     return () => {
       isSubscribed = false;

@@ -12,7 +12,7 @@ export default function AccountStatusNavi(props) {
 
   useEffect(() => {
     isSubscribed = true;
-    dispatch(fetchSummary());
+    // dispatch(fetchSummary());
 
     return () => {
       isSubscribed = false;
