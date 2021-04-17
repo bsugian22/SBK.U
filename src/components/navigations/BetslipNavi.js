@@ -6,13 +6,14 @@ import { splice_data } from "../../helpers/object";
 import { bet, resetOutcome, setBetAmount, spliceOutcome, validateBet } from "../../redux/sportsdetail/sportsdetailActions";
 import sweetalert from "../../plugins/sweetalert";
 import Pusher from "pusher-js";
+import echo from "../../plugins/echo";
 
 export default function BetslipNavi(props) {
   const context = useContext(MenuContext);
   const swal = new sweetalert();
   let isSubscribed = true;
-  // const pusher = new Pusher();
-
+  
+  // const pusher = new Pusher()
 
   const OpenLayer = {
     display: "flex",
@@ -26,12 +27,19 @@ export default function BetslipNavi(props) {
 
   useEffect(() => {
     isSubscribed = true;
-
+    pusher()
     return () => {
       isSubscribed = false;
     };
   }, []);
 
+  const pusher = () => {
+    if (user.isAuth) {
+    echo.private(`users.${user.member.id}`).listen('App\\Events\\MTS\\BetAccepted', (e) => {
+      console.log(e);
+    })
+    }
+  }
 
 
   const setBet = (value) => {
@@ -211,7 +219,7 @@ export default function BetslipNavi(props) {
                           }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
-                              dispatch(validateBet(sports.data.bet, true))
+                              dispatch(bet(sports.data.bet))
                             } else if (result.isDenied) {
                               swal.fire('')
                             }
@@ -248,10 +256,6 @@ export default function BetslipNavi(props) {
             </div>
           </div>
         }
-
-
-
-
 
         <div class="flex shrink-0 flex-inherit height-50 padding-10 align-items-center-inherit background-transparent-b-15 border-top border-bottom">
           <div class="grow-2 flex">

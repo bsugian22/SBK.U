@@ -7,6 +7,7 @@ import { fetchInplays, fetchInplay } from "../../../redux/inplay/inplayActions";
 import { setBetOutcome, validateBet } from "../../../redux/sportsdetail/sportsdetailActions";
 import Logo from "../../layouts/Logo";
 import moment from "moment";
+import Select from "react-select";
 export default function Inplay() {
 
    let isSubscribed = true;
@@ -34,7 +35,7 @@ export default function Inplay() {
    let over_under_specifier = null
    useEffect(() => {
       isSubscribed = true;
-      if(user.isAuth){
+      if (user.isAuth) {
          dispatch(refreshToken())
       }
       dispatch(fetchInplays())
@@ -44,6 +45,18 @@ export default function Inplay() {
          isSubscribed = false;
       };
    }, []);
+
+   const setPage = (e) => {
+      dispatch(fetchInplays({ page: e.value }));
+   };
+
+   const prev = () => {
+      dispatch(fetchInplays({ page: sports.data.page - 1 }));
+    };
+  
+    const next = () => {
+      dispatch(fetchInplays({ page: sports.data.page + 1 }));
+    };
 
    const setBet = (e) => {
       let match_id = e.currentTarget.getAttribute("data-match-id");
@@ -758,20 +771,38 @@ export default function Inplay() {
                      }
 
                   </div>
-                  <div class="bottom-wrap border-top flex padding-vertical-10 flex-inherit height-59 align-items-center-inherit0">
-                     <div class="count-list flex-inherit grow-2 heightp-100"></div>
-                     <div class="pagination flex-inherit heightp-100">
-                        <div class="flex margin-left-5 page">
-                           <Link to="/inplay?offset=0">
-                              <button class="page-left background-transparent-b-20 margin-right-5">
-                                 <i class="fas fa-chevron-left margin-0 color-grey"></i>
-                              </button>
-                           </Link>
-                           <Link to="/inplay?offset=0">
-                              <button class="page-right background-transparent-b-20">
-                                 <i class="fas fa-chevron-right margin-0 color-grey"></i>
-                              </button>
-                           </Link>
+                  <div class="bottom-wrap border-top flex flex-inherit height-60 padding-10 align-items-center-inherit0">
+                     <div class="pagination widthp-100 flex-inherit justify-content-end">
+                        <div class="flex selectBox">
+                           <Select
+                              className="select-container select-position"
+                              classNamePrefix="select-box"
+                              value={{ label: inplay.data.page, value: inplay.data.page }}
+                              onChange={setPage}
+                              options={((rows, i, len) => {
+                                 while (++i <= len) {
+                                    rows.push({ value: i, label: i });
+                                 }
+                                 return rows;
+                              })([], 0, inplay.data.lastPage)}
+                           />
+                        </div>
+                        <div class="grow-2"></div>
+                        <div class="flex page">
+                           <button
+                              class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
+                              onClick={prev}
+                              disabled={1 >= inplay.data.page}
+                           >
+                              <i class="fas fa-chevron-left margin-0 color-white"></i>
+                           </button>
+                           <button
+                              class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                              onClick={next}
+                              disabled={inplay.data.lastPage <= inplay.data.page}
+                           >
+                              <i class="fas fa-chevron-right margin-0 color-white"></i>
+                           </button>
                         </div>
                      </div>
                   </div>
@@ -781,15 +812,15 @@ export default function Inplay() {
                      <div class="height-40 align-items-center background-transparent-b-20 padding-horizontal-10">
                         <i class="fas fa-tshirt color-grey font-size-11"></i>
                         <span class="color-grey">
-                           {inplay.data.detail_data?.homeTeam?.name?.ko? inplay.data.detail_data.homeTeam.name.ko : ""}
+                           {inplay.data.detail_data?.homeTeam?.name?.ko ? inplay.data.detail_data.homeTeam.name.ko : ""}
                            <span class="margin-horizontal-4 color-twhite">vs</span>
-                           {inplay.data.detail_data?.awayTeam?.name?.ko? inplay.data.detail_data.awayTeam.name.ko : ""}
+                           {inplay.data.detail_data?.awayTeam?.name?.ko ? inplay.data.detail_data.awayTeam.name.ko : ""}
                         </span>
                      </div>
                      <div class="height-40 background-transparent-b-10 padding-horizontal-10 margin-bottom-10">
                         <div class="flex grow-2 align-items-center">
                            <i class="far fa-stopwatch color-grey font-size-11"></i>
-                           <span class="color-grey">{ inplay.data.detail_data?.awayTeam?.name?.ko? moment(inplay.data.detail_data.startAt).format( "MM / DD HH:mm") : ""}</span>
+                           <span class="color-grey">{inplay.data.detail_data?.awayTeam?.name?.ko ? moment(inplay.data.detail_data.startAt).format("MM / DD HH:mm") : ""}</span>
                         </div>
                         <div class="flex align-items-center">
                            <i class="fas fa-map-marker-alt color-grey font-size-11"></i>

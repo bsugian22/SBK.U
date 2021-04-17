@@ -1,6 +1,6 @@
 import * as types from "./inplayTypes";
 import axios from "../../plugins/axios";
-import { camelize, socket } from "../../helpers/object";
+import { camelize, snakelize, socket } from "../../helpers/object";
 import { getSportsDetails } from "../sportsdetail/sportsdetailActions";
 
 
@@ -118,10 +118,12 @@ export const deleteInplaysFailure = (error) => {
   };
 };
 
-export const fetchInplays = () => {
+export const fetchInplays = (params) => {
   return (dispatch) => {
     dispatch(fetchInplaysRequest());
-    axios.get(`/api/feed/inplays`)
+    axios.get(`/api/feed/inplays`, {
+      params: snakelize(params)
+    })
       .then(response => {
         const inplays = response.data;
         const matches = []

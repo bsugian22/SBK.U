@@ -213,7 +213,7 @@ const Sports = (props) => {
             <div class="prematch-list border-bottom match-list grow-2 padding-left-10 padding-right-10 padding-bottom-10 scrollable-auto flex-column">
               {sports.data.data.length > 0
                 ? sports.data.data.map((matches, index) => {
-                  
+
                   var rows = [];
                   rows.push(
                     <div
@@ -252,7 +252,7 @@ const Sports = (props) => {
                   rows.push(
                     matches.matches.map((match, key) => {
                       console.log(sport_main_market_exists)
-                  sport_main_market_exists = false
+                      sport_main_market_exists = false
                       return (
                         <div
                           class="flex list background-transparent-b-30 height-40"
@@ -525,7 +525,7 @@ const Sports = (props) => {
                                         }
                                       }
                                       if (sport_market_251 == 0 && sport_market_1 == 0 && sport_market_186 == 0 && sport_market_219 == 0) {
-                                        
+
                                         if (sport_main_market_exists == false) {
                                           console.log("no main market");
                                           sport_main_market_exists = true
@@ -544,7 +544,7 @@ const Sports = (props) => {
                                           )
                                         }
                                       }
-                                      
+
                                       sport_market_1 = 0
                                       sport_market_186 = 0
                                       sport_market_219 = 0
