@@ -826,13 +826,13 @@ export default function Inplay() {
                                                 data-market_name={market.title.marketName.ko}
                                                 data-home-team={inplay.data.detail_data.homeTeam.name["ko"]}
                                                 data-away-team={inplay.data.detail_data.awayTeam.name["ko"]}
-                                                // data-match-id={inplay.data.detail_data.id}
-                                                // data-market-id={market.id}
-                                                // data-outcome-id={outcome.id}
+                                                data-match-id={inplay.data.detail_data.id}
+                                                data-market-id={market.id}
+                                                data-outcome-id={outcome.id}
                                                 data-odds={outcome.odds}
                                                 data-specifier={JSON.stringify(market.specifier)}
                                                 data-market-type={market.type}
-                                                // data-name-id={outcome.name.id}
+                                                data-name-id={outcome.name.id}
                                                 class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}>
                                                 <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                    <span class="color-grey text-ellipsis">{outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}</span>
@@ -857,13 +857,13 @@ export default function Inplay() {
                                                 data-market_name={market.title.marketName.ko}
                                                 data-home-team={inplay.data.detail_data.homeTeam.name["ko"]}
                                                 data-away-team={inplay.data.detail_data.awayTeam.name["ko"]}
-                                                // data-match-id={inplay.data.detail_data.id}
-                                                // data-market-id={market.id}
-                                                // data-outcome-id={outcome.id}
+                                                data-match-id={inplay.data.detail_data.id}
+                                                data-market-id={market.id}
+                                                data-outcome-id={outcome.id}
                                                 data-odds={outcome.odds}
                                                 data-specifier={JSON.stringify(market.specifier)}
                                                 data-market-type={market.type}
-                                                // data-name-id={outcome.name.id}
+                                                data-name-id={outcome.name.id}
                                                 class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}>
                                                 <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                    <span class="color-grey text-ellipsis">{outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}</span>

@@ -23,6 +23,7 @@ const Sports = (props) => {
   let sport_market_186 = 0;
   let sport_market_219 = 0;
   let sport_market_251 = 0;
+  let sport_main_market_exists = false;
 
 
   useEffect(() => {
@@ -212,6 +213,7 @@ const Sports = (props) => {
             <div class="prematch-list border-bottom match-list grow-2 padding-left-10 padding-right-10 padding-bottom-10 scrollable-auto flex-column">
               {sports.data.data.length > 0
                 ? sports.data.data.map((matches, index) => {
+                  sport_main_market_exists = false
                   var rows = [];
                   rows.push(
                     <div
@@ -288,10 +290,10 @@ const Sports = (props) => {
 
                                   {
                                     match.market.map((market, market_index) => {
-                                      match.market.find(x => x.title.id == 1) ? sport_market_1 = 1 : sport_market_1 = 0
-                                      match.market.find(x => x.title.id == 186) ? sport_market_186 = 1 : sport_market_186 = 0
-                                      match.market.find(x => x.title.id == 219) ? sport_market_219 = 1 : sport_market_219 = 0
-                                      match.market.find(x => x.title.id == 251) ? sport_market_251 = 1 : sport_market_251 = 0
+                                      match.market.find(x => x.title.id == 1) ? sport_market_1 = 1 : sport_market_1 = 0;
+                                      match.market.find(x => x.title.id == 186) ? sport_market_186 = 1 : sport_market_186 = 0;
+                                      match.market.find(x => x.title.id == 219) ? sport_market_219 = 1 : sport_market_219 = 0;
+                                      match.market.find(x => x.title.id == 251) ? sport_market_251 = 1 : sport_market_251 = 0;
 
                                       if (market.title.id == 1) {
                                         if (market.status == 1) {
@@ -520,13 +522,32 @@ const Sports = (props) => {
                                           )
                                         }
                                       }
-
+                                      if (sport_market_251 == 0 && sport_market_1 == 0 && sport_market_186 == 0 && sport_market_219 == 0) {
+                                        
+                                        if (sport_main_market_exists == false) {
+                                          console.log("no main market");
+                                          sport_main_market_exists = true
+                                          return ([match.homeTeam.name["ko"], match.awayTeam.name["ko"]].map((outcome, outcomes_index) => {
+                                            return (
+                                              <div class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
+                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                  <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome}</span></div>
+                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                    <span class="color-grey text-ellipsis"></span>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            )
+                                          })
+                                          )
+                                        }
+                                      }
+                                      
                                       sport_market_1 = 0
                                       sport_market_186 = 0
                                       sport_market_219 = 0
                                       sport_market_251 = 0
                                     })
-
 
                                   }
                                 </div>
