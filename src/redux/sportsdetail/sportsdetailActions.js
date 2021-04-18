@@ -339,6 +339,10 @@ export const bet = (data) => {
     axios.post(`/api/positions`, details)
       .then(response => {
         console.log(response.data)
+        dispatch(resetOutcome());
+        setTimeout(()=>{
+          dispatch(betSucess())
+        }, 30000);
       }).catch(error => {
         const errorMsg = error.message;
         dispatch(betFailure())

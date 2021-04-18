@@ -28,6 +28,7 @@ export default function BetslipNavi(props) {
   useEffect(() => {
     isSubscribed = true;
     pusher()
+    console.log(sports)
     return () => {
       isSubscribed = false;
     };
@@ -39,8 +40,6 @@ export default function BetslipNavi(props) {
         console.log("bet accepted")
         console.log(e);
         swal.success("Bet Success")
-        dispatch(betSucess())
-        dispatch(resetOutcome());
       })
       echo.private(`users.${user.member.id}`).listen('MTS\\BetRejected', (e) => {
         console.log(e);
@@ -57,6 +56,9 @@ export default function BetslipNavi(props) {
 
   return (
     <Fragment>
+      <div class="loader" hidden={!sports.loadingBet}>
+        <div class="flex justify-content-center heightp-100 widthp-100 align-items-center loader_spiner"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div>
+      </div>
       <div class="flex betslip-content-desktop betslip content-height shrink-0 width-300 border-left border-left-shadow flex-column scrollable-auto">
         <div class="tab flex shrink-0 flex-inherit height-50 padding-10 title align-items-center-inherit background-transparent-b-15 border-bottom">
           <div class="grow-2">
@@ -115,7 +117,8 @@ export default function BetslipNavi(props) {
           </div>
         </div>
         {sports.loadingBet == true ?
-          <div class="flex justify-content-center heightp-100 align-items-center"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div>
+          // <div class="flex justify-content-center heightp-100 align-items-center"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div>
+          ""
           :
           <div class="stake flex flex-inherit shrink-0 border-top">
             <div class="flex-inherit flex-column widthp-100">
