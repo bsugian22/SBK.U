@@ -35,9 +35,12 @@ export default function BetslipNavi(props) {
 
   const pusher = () => {
     if (user.isAuth) {
-    echo.private(`users.${user.member.id}`).listen('App\\Events\\MTS\\BetAccepted', (e) => {
-      console.log(e);
-    })
+      echo.private(`users.${user.member.id}`).listen('MTS\\BetAccepted', (e) => {
+        console.log(e);
+      })
+      echo.private(`users.${user.member.id}`).listen('MTS\\BetRejected', (e) => {
+        console.log(e);
+      })
     }
   }
 
