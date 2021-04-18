@@ -339,10 +339,6 @@ export const bet = (data) => {
     axios.post(`/api/positions`, details)
       .then(response => {
         console.log(response.data)
-        swal.success("Success")
-        dispatch(resetOutcome());
-        dispatch(betSucess())
-
       }).catch(error => {
         const errorMsg = error.message;
         dispatch(betFailure())

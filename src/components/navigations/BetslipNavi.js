@@ -3,7 +3,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
 import { splice_data } from "../../helpers/object";
-import { bet, resetOutcome, setBetAmount, spliceOutcome, validateBet } from "../../redux/sportsdetail/sportsdetailActions";
+import { bet, betFailure, betSucess, resetOutcome, setBetAmount, spliceOutcome, validateBet } from "../../redux/sportsdetail/sportsdetailActions";
 import sweetalert from "../../plugins/sweetalert";
 import Pusher from "pusher-js";
 import echo from "../../plugins/echo";
@@ -36,10 +36,16 @@ export default function BetslipNavi(props) {
   const pusher = () => {
     if (user.isAuth) {
       echo.private(`users.${user.member.id}`).listen('MTS\\BetAccepted', (e) => {
+        console.log("bet accepted")
         console.log(e);
+        swal.success("Bet Success")
+        dispatch(betSucess())
+        dispatch(resetOutcome());
       })
       echo.private(`users.${user.member.id}`).listen('MTS\\BetRejected', (e) => {
         console.log(e);
+        dispatch(betFailure())
+        swal.error(e.message)
       })
     }
   }
