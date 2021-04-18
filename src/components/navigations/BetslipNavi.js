@@ -40,6 +40,7 @@ export default function BetslipNavi(props) {
         console.log("bet accepted")
         console.log(e);
         swal.success("Bet Success")
+        dispatch(betSucess())
       })
       echo.private(`users.${user.member.id}`).listen('MTS\\BetRejected', (e) => {
         console.log(e);
