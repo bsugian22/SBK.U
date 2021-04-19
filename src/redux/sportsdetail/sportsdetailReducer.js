@@ -189,7 +189,7 @@ const sportsdetailReducer = (state = initialState, action) => {
               console.log("status not active")
               console.log(state_bet.find(x => x.match_id == match_id))
               console.log(state_bet.findIndex(x => x.match_id == match_id))
-              state.data.bet.outcomes.splice( state_bet.findIndex(x => x.match_id == match_id),1)
+              state.data.bet.outcomes.splice(state_bet.findIndex(x => x.match_id == match_id), 1)
               swal.fire({
                 title: '이미 마감된 경기가 있습니다.',
                 icon: 'warning',
@@ -438,6 +438,7 @@ const sportsdetailReducer = (state = initialState, action) => {
     case types.FETCH_SPORTSDETAILS_REQUEST:
       return {
         ...state,
+        loadingBet: false,
         data: {
           ...state.data,
           data: [],
@@ -564,12 +565,12 @@ const sportsdetailReducer = (state = initialState, action) => {
         data: [],
         error: action.payload,
       };
-
     case types.BET_REQUEST:
       return {
         ...state,
         loadingBet: true,
       };
+
     case types.BET_SUCCESS:
       return {
         ...state,

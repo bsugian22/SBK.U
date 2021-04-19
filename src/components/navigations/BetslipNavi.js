@@ -3,7 +3,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
 import { splice_data } from "../../helpers/object";
-import { bet, betFailure, betSucess, resetOutcome, setBetAmount, spliceOutcome, validateBet } from "../../redux/sportsdetail/sportsdetailActions";
+import { bet, betFailure, betSucess, resetOutcome, setBetAmount, setIntervalId, spliceOutcome, validateBet } from "../../redux/sportsdetail/sportsdetailActions";
 import sweetalert from "../../plugins/sweetalert";
 import Pusher from "pusher-js";
 import echo from "../../plugins/echo";
@@ -12,7 +12,7 @@ export default function BetslipNavi(props) {
   const context = useContext(MenuContext);
   const swal = new sweetalert();
   let isSubscribed = true;
-  
+
   // const pusher = new Pusher()
 
   const OpenLayer = {
@@ -27,28 +27,11 @@ export default function BetslipNavi(props) {
 
   useEffect(() => {
     isSubscribed = true;
-    pusher()
-    console.log(sports)
     return () => {
       isSubscribed = false;
     };
   }, []);
 
-  const pusher = () => {
-    if (user.isAuth) {
-      echo.private(`users.${user.member.id}`).listen('MTS\\BetAccepted', (e) => {
-        console.log("bet accepted")
-        console.log(e);
-        swal.success("Bet Success")
-        dispatch(betSucess())
-      })
-      echo.private(`users.${user.member.id}`).listen('MTS\\BetRejected', (e) => {
-        console.log(e);
-        dispatch(betFailure())
-        swal.error(e.message)
-      })
-    }
-  }
 
 
   const setBet = (value) => {
@@ -63,7 +46,7 @@ export default function BetslipNavi(props) {
       <div class="flex betslip-content-desktop betslip content-height shrink-0 width-300 border-left border-left-shadow flex-column scrollable-auto">
         <div class="tab flex shrink-0 flex-inherit height-50 padding-10 title align-items-center-inherit background-transparent-b-15 border-bottom">
           <div class="grow-2">
-            <span class="color-green">BETTING SLIP</span>
+            <span class="color-green">BETTING SLIP {sports.intervalId} </span>
           </div>
           <div class="count">
             <span class="color-white">{sports.data.bet.outcomes.length}</span>
@@ -232,7 +215,7 @@ export default function BetslipNavi(props) {
                           }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
-                              dispatch(bet(sports.data.bet))
+                              dispatch(bet(sports.data.bet,user.member.id))
                             } else if (result.isDenied) {
                               swal.fire('')
                             }
@@ -252,7 +235,7 @@ export default function BetslipNavi(props) {
                       }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                          dispatch(bet(sports.data.bet))
+                          dispatch(bet(sports.data.bet,user.member.id))
                         } else if (result.isDenied) {
                           swal.fire('')
                         }

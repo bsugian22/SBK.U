@@ -5,6 +5,7 @@ import { chain } from "lodash";
 import moment from "moment";
 import sweetalert from "../../plugins/sweetalert";
 import { getInplayDetails } from "../inplay/inplayActions";
+import echo from "../../plugins/echo";
 
 const swal = new sweetalert();
 
@@ -22,6 +23,7 @@ export const getSportsDetails = (details) => {
     payload: details
   };
 };
+
 
 export const setBetOutcome = (data) => {
   return {
@@ -305,7 +307,7 @@ export const validateBet = (data) => {
         .then(response => {
           const response_data = response.data
           // console.log(response_data)
-          if(response_data.status == 0){
+          if (response_data.status == 0) {
             // console.log(response_data.data)
             dispatch(betCheck(response_data))
           }
@@ -320,7 +322,7 @@ export const validateBet = (data) => {
   };
 };
 
-export const bet = (data) => {
+export const bet = (data,user_id) => {
   let bet = data;
   let details = {
     amount: 0,
@@ -331,18 +333,31 @@ export const bet = (data) => {
     details.outcomes.push({ id: outcome.id })
   })
   details.amount = bet.amount;
-
-  console.log(bet);
-  console.log(details);
   return (dispatch) => {
     dispatch(betRequest())
     axios.post(`/api/positions`, details)
       .then(response => {
         console.log(response.data)
         dispatch(resetOutcome());
-        setTimeout(()=>{
+        const interval_id = setTimeout(() => {
           dispatch(betSucess())
         }, 30000);
+
+        echo.private(`users.${user_id}`).listen('MTS\\BetAccepted', (e) => {
+          // console.log("bet accepted")
+          // console.log(e);
+          swal.success("Bet Success")
+          dispatch(betSucess())
+          clearInterval(interval_id)
+        })
+
+        echo.private(`users.${user_id}`).listen('MTS\\BetRejected', (e) => {
+          // console.log(e);
+          dispatch(betFailure())
+          clearInterval(interval_id)
+          swal.error(e.message)
+        })
+
       }).catch(error => {
         const errorMsg = error.message;
         dispatch(betFailure())
