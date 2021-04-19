@@ -74,7 +74,21 @@ export default function BetslipNavi(props) {
                     <div class="flex-inherit flex-column slip-pick grow-2">
                       <div class="flex-inherit padding-left-10">
                         <div class="pick-info flex-column widthp-90">
-                          <div class="pick"><span class="color-white">{outcome.outcome_name}</span></div>
+                          <div class="pick">
+                            <span class="color-white">
+                              {outcome.outcome_name}
+                              {/* {
+                                outcome.outcome_name.includes('{$competitor1}') ? outcome.outcome_name.replaceAll('{$competitor1}', outcome.home_team)
+                                  : outcome.outcome_name.includes('{$competitor2}') ? outcome.outcome_name.replaceAll('{$competitor2}', outcome.away_team)
+                                    : outcome.outcome_name
+                              }
+                              {
+                                alert("asd")
+
+                              } */}
+
+                            </span>
+                          </div>
                           <div class="type"><span class="color-grey">{outcome.market_name}</span></div>
                         </div>
                         <div class="delete widthp-10 justify-content-center">
@@ -215,7 +229,7 @@ export default function BetslipNavi(props) {
                           }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
-                              dispatch(bet(sports.data.bet,user.member.id))
+                              dispatch(bet(sports.data.bet, user.member.id))
                             } else if (result.isDenied) {
                               swal.fire('')
                             }
@@ -235,7 +249,7 @@ export default function BetslipNavi(props) {
                       }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                          dispatch(bet(sports.data.bet,user.member.id))
+                          dispatch(bet(sports.data.bet, user.member.id))
                         } else if (result.isDenied) {
                           swal.fire('')
                         }
