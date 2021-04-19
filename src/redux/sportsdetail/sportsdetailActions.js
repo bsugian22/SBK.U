@@ -9,7 +9,12 @@ import echo from "../../plugins/echo";
 
 const swal = new sweetalert();
 
-
+export const setTypeId = (id) => {
+  return {
+    type: types.SET_TYPE,
+    payload: id
+  };
+};
 
 export const fetchSportsdetailsRequest = () => {
   return {

@@ -5,6 +5,7 @@ const swal = new sweetalert();
 const initialState = {
   loading: false,
   loadingBet: false,
+  type_id: null,
   data: {
     data: [],
     total: null,
@@ -26,6 +27,11 @@ const initialState = {
 
 const sportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.SET_TYPE:
+      return {
+        ...state,
+        type_id: action.payload,
+      };
 
     case types.BET_CHECK:
       let invalid_outcomes = action.payload.data

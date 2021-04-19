@@ -8,7 +8,7 @@ import { mapStateToProps, mapDispatchProps } from "../../../redux/store";
 import sportsModel from "../../../models/sportsModel";
 import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
-import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet } from "../../../redux/sportsdetail/sportsdetailActions";
+import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet, setTypeId } from "../../../redux/sportsdetail/sportsdetailActions";
 import { iconsList } from "../../../helpers/object";
 
 
@@ -34,23 +34,13 @@ const Sports = (props) => {
     }
     dispatch(fetchSportsdetails())
     dispatch(validateBet(sports.data.bet))
-
+    dispatch(setTypeId(null))
     return () => {
       isSubscribed = false;
     };
   }, []);
 
-  const prev = () => {
-    dispatch(fetchSportsdetails({ page: sports.data.page - 1 }));
-  };
 
-  const next = () => {
-    dispatch(fetchSportsdetails({ page: sports.data.page + 1 }));
-  };
-
-  const setPage = (e) => {
-    dispatch(fetchSportsdetails({ page: e.value }));
-  };
 
   const setDetail = async (item) => {
     if (sports.data.detail === item.id && context.state.detailMenu === true) {
@@ -133,7 +123,13 @@ const Sports = (props) => {
                   <div id="scrollmenu" class="heightp-100 flex align-items-center">
                     {console.log(iconsList)}
                     {iconsList.icons.map((icon, index) => {
-                      return <a href="#icon"> <span class={icon.icon}></span><span class="event-count">Count</span></a>
+                      return <a href="#icon" onClick={() => {
+                        dispatch(setTypeId(icon.id))
+                        dispatch(fetchSportsdetails({ page: 1, id: icon.id }));
+                      }}>
+                        <span class={icon.icon}></span>
+                        <span class="event-count">Count</span>
+                      </a>
                     }
                     )}
 
@@ -595,7 +591,14 @@ const Sports = (props) => {
                     className="select-container select-position"
                     classNamePrefix="select-box"
                     value={{ label: sports.data.page, value: sports.data.page }}
-                    onChange={setPage}
+                    onChange={(e)=>{
+                      alert(sports.type_id);
+                      if (sports.type_id == null) {
+                        dispatch(fetchSportsdetails({ page: e.value }));
+                      } else {
+                        dispatch(fetchSportsdetails({ page: e.value, id: sports.type_id }));
+                      }
+                    }}
                     options={((rows, i, len) => {
                       while (++i <= len) {
                         rows.push({ value: i, label: i });
@@ -608,14 +611,26 @@ const Sports = (props) => {
                 <div class="flex page">
                   <button
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
-                    onClick={prev}
+                    onClick={() => {
+                      if (sports.type_id == null) {
+                        dispatch(fetchSportsdetails({ page: sports.data.page - 1 }));
+                      } else {
+                        dispatch(fetchSportsdetails({ page: sports.data.page - 1, id: sports.type_id }));
+                      }
+                    }}
                     disabled={1 >= sports.data.page}
                   >
                     <i class="fas fa-chevron-left margin-0 color-white"></i>
                   </button>
                   <button
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
-                    onClick={next}
+                    onClick={() => {
+                      if (sports.type_id == null) {
+                        dispatch(fetchSportsdetails({ page: sports.data.page + 1 }));
+                      } else {
+                        dispatch(fetchSportsdetails({ page: sports.data.page + 1, id: sports.type_id }));
+                      }
+                    }}
                     disabled={sports.data.lastPage <= sports.data.page}
                   >
                     <i class="fas fa-chevron-right margin-0 color-white"></i>
