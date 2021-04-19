@@ -118,7 +118,6 @@ const sportsdetailReducer = (state = initialState, action) => {
       if (set_outcome_name.includes('{$competitor2}')) {
         set_outcome_name = set_outcome_name.replaceAll('{$competitor2}', set_away)
       }
-      alert(set_outcome_name);
 
       // check if the outcome exists
       if (existing_outcome == "-1") {

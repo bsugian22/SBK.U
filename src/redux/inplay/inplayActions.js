@@ -199,9 +199,32 @@ export const fetchInplay = (matchId) => {
       .then(response => {
         const sportsdetail = camelize(response.data);
         // console.log(sportsdetail.data.markets)
+
+        let home_team = sportsdetail.data.homeTeam.name.ko;
+        let away_team = sportsdetail.data.awayTeam.name.ko
+        console.log(home_team)
+        console.log(away_team)
+
         sportsdetail.data.markets.map((data, index) => {
+          
+            
+            if (data.title.marketName.ko.includes('{$competitor1}')) {
+              data.title.marketName.ko = data.title.marketName.ko.replaceAll('{$competitor1}', home_team)
+            }
+            if (data.title.marketName.ko.includes('{$competitor2}')) {
+              data.title.marketName.ko = data.title.marketName.ko.replaceAll('{$competitor2}', away_team)
+            }
+            // console.log(data.title.marketName.ko)
+         
+          // console.log(data);
           data.outcomes.map((data, index) => {
-            // console.log(data.id)
+            console.log(data)
+            if (data.name.outcomeName.ko.includes('{$competitor1}')) {
+              data.name.outcomeName.ko = data.name.outcomeName.ko.replaceAll('{$competitor1}', home_team)
+            }
+            if (data.name.outcomeName.ko.includes('{$competitor2}')) {
+              data.name.outcomeName.ko = data.name.outcomeName.ko.replaceAll('{$competitor2}', away_team)
+            }
             data.oldOdds = null;
           })
         })
