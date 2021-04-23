@@ -14,11 +14,16 @@ const initialState = {
   error: "",
   currentPage: 1,
   lastPage: null,
-  mainMarkets:[]
+  mainMarkets: []
 };
 
 const sportReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.FETCH_MATCHES_REQUEST:
+      return {
+        ...state,
+        mainMarkets: []
+      };
     case types.FETCH_MATCHES_SUCCESS:
       return {
         ...state,
@@ -94,22 +99,40 @@ const sportReducer = (state = initialState, action) => {
     case types.FETCH_MARKET_PER_MATCHES_SUCCESS:
       const mainMarkets = action.payload
       let mainMarketsToDisplay = [];
-      mainMarkets.data.map((market,index)=>{
+      mainMarkets.data.map((market, index) => {
         let data = state.matches.data.find(x => x.id == market.id)
-        mainMarketsToDisplay.push({...data,mainMarkets :market});
+
+        market['1X2'].map((market, index) => {
+          market.outcomes.map((outcome, outcome_index) => {
+            outcome.oldOdds = null;
+          })
+        })
+
+        market['hcp'].map((market, index) => {
+          market.outcomes.map((outcome, outcome_index) => {
+            outcome.oldOdds = null;
+          })
+        })
+
+        market['total'].map((market, index) => {
+          market.outcomes.map((outcome, outcome_index) => {
+            outcome.oldOdds = null;
+          })
+        })
+        mainMarketsToDisplay.push({ ...data, mainMarkets: market });
       })
 
       mainMarketsToDisplay = chain(mainMarketsToDisplay)
-          .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
-          .map((matches, startAt) => ({ startAt, matches }))
-          .orderBy("startAt")
-          .value();
+        .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
+        .map((matches, startAt) => ({ startAt, matches }))
+        .orderBy("startAt")
+        .value();
 
       console.log(mainMarketsToDisplay);
 
       return {
         ...state,
-        mainMarkets:mainMarketsToDisplay
+        mainMarkets: mainMarketsToDisplay
       };
 
     case types.FETCH_MARKET_PER_MATCHES_FAILURE:

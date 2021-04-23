@@ -21,11 +21,6 @@ const Sports = (props) => {
   // let sports = useSelector((state) => state.sportsdetail);
   let sports = useSelector((state) => state.sport);
   let user = useSelector((state) => state.user.user);
-  let sport_market_1 = 0;
-  let sport_market_186 = 0;
-  let sport_market_219 = 0;
-  let sport_market_251 = 0;
-  let sport_main_market_exists = false;
 
 
   useEffect(() => {
@@ -124,7 +119,7 @@ const Sports = (props) => {
                   </button>
                   <div id="scrollmenu" class="heightp-100 flex align-items-center">
                     {iconsList.icons.map((icon, index) => {
-                      return <a href="#icon" onClick={() => {
+                      return <a key={"icon-"+index} href="#icon" onClick={() => {
                         dispatch(setTypeId(icon.id))
                         dispatch(fetchSportsdetails({ page: 1, id: icon.id }));
                       }}>
@@ -208,15 +203,16 @@ const Sports = (props) => {
               </div>
             </div>
             <div class="prematch-list border-bottom match-list grow-2 padding-left-10 padding-right-10 padding-bottom-10 scrollable-auto flex-column">
-              {console.log(sports.mainMarkets)}
+              {/* {console.log(sports.mainMarkets)} */}
               {sports.mainMarkets.length > 0
                 ? sports.mainMarkets.map((matches, index) => {
+                  let sport_main_market_exists = false
                   // console.log(matches)
                   var rows = [];
                   rows.push(
                     <div
                       class="flex title background-transparent-b-30 height-40 align-items-center-inherit"
-                      key={index}
+                      key={matches.id}
                     >
                       <div class="flex padding-horizontal-10 widthp-45 heightp-100">
                         <span class="color-grey">
@@ -249,9 +245,10 @@ const Sports = (props) => {
                   );
                   rows.push(
                     matches.matches.map((match, key) => {
-                      console.log(match)
-                      // console.log(sport_main_market_exists)
-                      // sport_main_market_exists = false
+                      let homeTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.homeTeamId).competitor.name.ko : "";
+                      let awayTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.awayTeamId).competitor.name.ko : "";
+                      // console.log(match)
+
                       return (
                         <div
                           class="flex list background-transparent-b-30 height-40"
@@ -259,7 +256,7 @@ const Sports = (props) => {
                           data-id="0"
                           data-home-competitor="0"
                           data-away-competitor="0"
-                          // key={"match_id-" + match.id}
+                          key={"match_id-" + match.id}
                         >
                           <div class="flex flex-inherit widthp-45 align-items-center-inherit heightp-100">
                             <div class="date justify-content-center">
@@ -273,16 +270,16 @@ const Sports = (props) => {
                             <div class="league padding-horizontal-5">
                               <span class="color-grey text-ellipsis">
                                 {/* {match.tournament.title["ko"]} */}
-                                {sports.tournaments.data.find(x => x.id == match.tournamentId).tournament.name.ko}
-                                {match.tournamentId}
+                                {sports.tournaments.data ? sports.tournaments.data.find(x => x.id == match.tournamentId).tournament.name.ko : ""}
+                                {/* {match.tournamentId} */}
 
                               </span>
                             </div>
                             <div class="team padding-horizontal-5">
                               <span class="color-grey text-ellipsis">
-                                {/* {match.homeTeam.name["ko"]} */}
+                                {homeTeam}
                                 <span class="color-twhite margin-horizontal-5">vs</span>
-                                {/* {match.awayTeam.name["ko"]} */}
+                                {awayTeam}
                               </span>
                             </div>
                           </div>
@@ -291,268 +288,235 @@ const Sports = (props) => {
                               <div class="flex flex-inherit align-items-center-inherit padding-vertical-2">
                                 <div class="flex pick-wrap flex-inherit align-items-center-inherit justify-content-center-inherit widthp-100">
 
-                                  {/* {
-                                    match.market.map((market, market_index) => {
-                                      match.market.find(x => x.title.id == 1) ? sport_market_1 = 1 : sport_market_1 = 0;
-                                      match.market.find(x => x.title.id == 186) ? sport_market_186 = 1 : sport_market_186 = 0;
-                                      match.market.find(x => x.title.id == 219) ? sport_market_219 = 1 : sport_market_219 = 0;
-                                      match.market.find(x => x.title.id == 251) ? sport_market_251 = 1 : sport_market_251 = 0;
+                                  {match.mainMarkets['1X2'].length != 0 ?
+                                    match.mainMarkets['1X2'].map((market, market_index) => {
 
-                                      if (market.title.id == 1) {
-                                        if (market.status == 1) {
-                                          return (market.outcomes.map((outcome, outcomes_index) => {
-                                            return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id}
-                                                onClick={setBet}
-                                                data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
-                                                data-market_name={market.title.marketName.ko}
-                                                data-home-team={match.homeTeam.name["ko"]}
-                                                data-away-team={match.awayTeam.name["ko"]}
-                                                data-match-id={match.id}
-                                                data-market-id={match.market.id}
-                                                data-outcome-id={outcome.id}
-                                                data-odds={outcome.odds}
-                                                data-specifier={JSON.stringify(market.specifier)}
-                                                data-market-type={market.type}
-                                                data-name-id={outcome.name.id}
-                                                class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
-                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                  <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
-                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                    {outcome.oldOdds == null ?
-                                                      "" :
-                                                      outcome.oldOdds < outcome.odds ?
-                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                      if (market.status == 1) {
+                                        return (market.outcomes.map((outcome, outcomes_index) => {
+                                          let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                          // console.log(outcome)
+                                          return (
+                                            <div key={"outcome_id-active-1x2-" + outcome.id}
+                                              class=" widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2">
+                                              <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                <div class="team-1 widthp-70 text-ellipsis">
+                                                  <span class="color-grey text-ellipsis">
+                                                    {sports.outcomes != [] ?
+                                                      outcomeName == '{$competitor1}' ?
+                                                        homeTeam
+                                                        : outcomeName == '드로' ?
+                                                          '무승부' : outcomeName == '{$competitor2}' ?
+                                                            awayTeam : ""
+                                                      : ""}
+                                                  </span>
+                                                </div>
+                                                <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                  {outcome.oldOdds == null ?
+                                                    "" :
+                                                    outcome.oldOdds < outcome.odds ?
+                                                      <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                      <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
-                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                  </div>
+                                                  <span class="color-grey text-ellipsis">{outcome.odds} </span>
                                                 </div>
                                               </div>
-                                            )
-                                          })
+                                            </div>
                                           )
-                                        } else {
-                                          return (market.outcomes.map((outcome, outcomes_index) => {
-                                            return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id} class="disabled widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
-                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                  <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
-                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                    {outcome.oldOdds == null ?
-                                                      "" :
-                                                      outcome.oldOdds < outcome.odds ?
-                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                        })
+                                        )
+                                      } else {
+                                        return (market.outcomes.map((outcome, outcomes_index) => {
+                                          let outcomeName = sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko
+                                          // console.log(outcome)
+                                          return (
+                                            <div key={"outcome_id-active-1x2-" + outcome.id}
+                                              class=" disabled widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2">
+                                              <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                <div class="team-1 widthp-70 text-ellipsis">
+                                                  <span class="color-grey text-ellipsis">
+                                                    {sports.outcomes != [] ?
+                                                      outcomeName == '{$competitor1}' ?
+                                                        homeTeam
+                                                        : outcomeName == '드로' ?
+                                                          '무승부' : outcomeName == '{$competitor2}' ?
+                                                            awayTeam : ""
+                                                      : ""}
+                                                  </span>
+                                                </div>
+                                                <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                  {outcome.oldOdds == null ?
+                                                    "" :
+                                                    outcome.oldOdds < outcome.odds ?
+                                                      <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                      <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
-                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                  </div>
+                                                  <span class="color-grey text-ellipsis">{outcome.odds} </span>
                                                 </div>
                                               </div>
-                                            )
-                                          })
+                                            </div>
                                           )
-                                        }
+                                        })
+                                        )
+
                                       }
 
-                                      if (market.title.id == 186 && sport_market_1 == 0) {
-                                        if (market.status == 1) {
-                                          return (market.outcomes.map((outcome, outcomes_index) => {
-                                            return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id}
-                                                onClick={setBet}
-                                                data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
-                                                data-market_name={market.title.marketName.ko}
-                                                data-home-team={match.homeTeam.name["ko"]}
-                                                data-away-team={match.awayTeam.name["ko"]}
-                                                data-match-id={match.id}
-                                                data-market-id={match.market.id}
-                                                data-outcome-id={outcome.id}
-                                                data-odds={outcome.odds}
-                                                data-specifier={JSON.stringify(market.specifier)}
-                                                data-market-type={market.type}
-                                                data-name-id={outcome.name.id}
-                                                class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
-                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                  <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
-                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                    {outcome.oldOdds == null ?
-                                                      "" :
-                                                      outcome.oldOdds < outcome.odds ?
-                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            )
-                                          })
-                                          )
-                                        } else {
-                                          return (market.outcomes.map((outcome, outcomes_index) => {
-                                            return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
-                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                  <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
-                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                    {outcome.oldOdds == null ?
-                                                      "" :
-                                                      outcome.oldOdds < outcome.odds ?
-                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            )
-                                          })
-                                          )
-                                        }
-                                      }
-
-                                      if (market.title.id == 219 && sport_market_1 == 0 && sport_market_186 == 0) {
-                                        if (market.status == 1) {
-                                          return (market.outcomes.map((outcome, outcomes_index) => {
-                                            return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id}
-                                                onClick={setBet}
-                                                data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
-                                                data-market_name={market.title.marketName.ko}
-                                                data-home-team={match.homeTeam.name["ko"]}
-                                                data-away-team={match.awayTeam.name["ko"]}
-                                                data-match-id={match.id}
-                                                data-market-id={match.market.id}
-                                                data-outcome-id={outcome.id}
-                                                data-odds={outcome.odds}
-                                                data-specifier={JSON.stringify(market.specifier)}
-                                                data-market-type={market.type}
-                                                data-name-id={outcome.name.id}
-                                                class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
-                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                  <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
-                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                    {outcome.oldOdds == null ?
-                                                      "" :
-                                                      outcome.oldOdds < outcome.odds ?
-                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            )
-                                          })
-                                          )
-                                        } else {
-                                          return (market.outcomes.map((outcome, outcomes_index) => {
-                                            return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
-                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                  <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
-                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                    {outcome.oldOdds == null ?
-                                                      "" :
-                                                      outcome.oldOdds < outcome.odds ?
-                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            )
-                                          })
-                                          )
-                                        }
-                                      }
-
-                                      if (market.title.id == 251 && sport_market_1 == 0 && sport_market_186 == 0 && sport_market_219 == 0) {
-                                        if (market.status == 1) {
-                                          return (market.outcomes.map((outcome, outcomes_index) => {
-                                            return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id}
-                                                onClick={setBet}
-                                                data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
-                                                data-market_name={market.title.marketName.ko}
-                                                data-home-team={match.homeTeam.name["ko"]}
-                                                data-away-team={match.awayTeam.name["ko"]}
-                                                data-match-id={match.id}
-                                                data-market-id={match.market.id}
-                                                data-outcome-id={outcome.id}
-                                                data-odds={outcome.odds}
-                                                data-specifier={JSON.stringify(market.specifier)}
-                                                data-market-type={market.type}
-                                                data-name-id={outcome.name.id}
-                                                class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"} >
-                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                  <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
-                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                    {outcome.oldOdds == null ?
-                                                      "" :
-                                                      outcome.oldOdds < outcome.odds ?
-                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            )
-                                          })
-                                          )
-                                        } else {
-                                          return (market.outcomes.map((outcome, outcomes_index) => {
-                                            return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
-                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                  <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome.name.outcomeName.ko == '{$competitor1}' ? match.homeTeam.name["ko"] : outcome.name.outcomeName.ko == '드로' ? '무승부' : outcome.name.outcomeName.ko == '{$competitor2}' ? match.awayTeam.name["ko"] : ""}</span></div>
-                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                    {outcome.oldOdds == null ?
-                                                      "" :
-                                                      outcome.oldOdds < outcome.odds ?
-                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            )
-                                          })
-                                          )
-                                        }
-                                      }
-                                      if (sport_market_251 == 0 && sport_market_1 == 0 && sport_market_186 == 0 && sport_market_219 == 0) {
-
-                                        if (sport_main_market_exists == false) {
-                                          console.log("no main market");
-                                          sport_main_market_exists = true
-                                          return ([match.homeTeam.name["ko"], match.awayTeam.name["ko"]].map((outcome, outcomes_index) => {
-                                            return (
-                                              <div class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
-                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                  <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome}</span></div>
-                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                    <span class="color-grey text-ellipsis"></span>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            )
-                                          })
-                                          )
-                                        }
-                                      }
-
-                                      sport_market_1 = 0
-                                      sport_market_186 = 0
-                                      sport_market_219 = 0
-                                      sport_market_251 = 0
                                     })
 
-                                  } */}
+                                    : match.mainMarkets['hcp'].length != 0 ?
+                                      match.mainMarkets['hcp'].map((market, market_index) => {
+                                        if (sport_main_market_exists == false) {
+                                          sport_main_market_exists = true;
+                                          if (market.status == 1) {
+                                            return (market.outcomes.map((outcome, outcomes_index) => {
+                                              let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                              // console.log(outcome)
+                                              return (
+                                                <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                  class=" widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2">
+                                                  <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                    <div class="team-1 widthp-70 text-ellipsis">
+                                                      <span class="color-grey text-ellipsis">
+                                                        {outcomeName.includes('{$competitor1}') ?
+                                                          outcomeName.replaceAll('{$competitor1}', homeTeam)
+                                                          : outcomeName.includes('{$competitor2}') ? outcomeName.replaceAll('{$competitor2}', awayTeam)
+                                                            : ""}
+                                                      </span>
+                                                    </div>
+                                                    <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                      {outcome.oldOdds == null ?
+                                                        "" :
+                                                        outcome.oldOdds < outcome.odds ?
+                                                          <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                          <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                      <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              )
+                                            })
+                                            )
+                                          } else {
+                                            return (market.outcomes.map((outcome, outcomes_index) => {
+                                              let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                              // console.log(outcome)
+                                              return (
+                                                <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                  class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2">
+                                                  <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                    <div class="team-1 widthp-70 text-ellipsis">
+                                                      <span class="color-grey text-ellipsis">
+                                                        {outcomeName.includes('{$competitor1}') ?
+                                                          outcomeName.replaceAll('{$competitor1}', homeTeam)
+                                                          : outcomeName.includes('{$competitor2}') ? outcomeName.replaceAll('{$competitor2}', awayTeam)
+                                                            : ""}
+                                                      </span>
+                                                    </div>
+                                                    <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                      {outcome.oldOdds == null ?
+                                                        "" :
+                                                        outcome.oldOdds < outcome.odds ?
+                                                          <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                          <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                      <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              )
+                                            })
+                                            )
+                                          }
+
+                                        }
+
+                                      })
+                                      :
+                                      match.mainMarkets['total'].length != 0 ?
+                                        match.mainMarkets['total'].map((market, market_index) => {
+                                          if (sport_main_market_exists == false) {
+                                            sport_main_market_exists = true;
+                                            if (market.status == 1) {
+                                              return (market.outcomes.map((outcome, outcomes_index) => {
+                                                let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                                // console.log(outcome)
+                                                return (
+                                                  <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                    class=" widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2">
+                                                    <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                      <div class="team-1 widthp-70 text-ellipsis">
+                                                        <span class="color-grey text-ellipsis">
+                                                          {outcomeName.includes('{$competitor1}') ?
+                                                            outcomeName.replaceAll('{$competitor1}', homeTeam)
+                                                            : outcomeName.includes('{$competitor2}') ? outcomeName.replaceAll('{$competitor2}', awayTeam)
+                                                              : ""}
+                                                        </span>
+                                                      </div>
+                                                      <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                        {outcome.oldOdds == null ?
+                                                          "" :
+                                                          outcome.oldOdds < outcome.odds ?
+                                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                        <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                )
+                                              })
+                                              )
+                                            } else {
+                                              return (market.outcomes.map((outcome, outcomes_index) => {
+                                                let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                                // console.log(outcome)
+                                                return (
+                                                  <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                    class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2">
+                                                    <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                      <div class="team-1 widthp-70 text-ellipsis">
+                                                        <span class="color-grey text-ellipsis">
+                                                          {outcomeName.includes('{$competitor1}') ?
+                                                            outcomeName.replaceAll('{$competitor1}', homeTeam)
+                                                            : outcomeName.includes('{$competitor2}') ? outcomeName.replaceAll('{$competitor2}', awayTeam)
+                                                              : ""}
+                                                        </span>
+                                                      </div>
+                                                      <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                        {outcome.oldOdds == null ?
+                                                          "" :
+                                                          outcome.oldOdds < outcome.odds ?
+                                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                        <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                )
+                                              })
+                                              )
+                                            }
+
+                                          }
+
+                                        })
+                                        :
+                                        [homeTeam, awayTeam].map((outcome, outcomes_index) => {
+                                          return (
+                                            <div key={outcomes_index} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
+                                              <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome}</span></div>
+                                                <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                  <span class="color-grey text-ellipsis">0</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          )
+                                        })
+
+
+                                  }
                                 </div>
                               </div>
 
@@ -563,16 +527,17 @@ const Sports = (props) => {
                                   //     ? "flex market-detail widthp-100 margin-right-2 active"
                                   //     : "flex market-detail widthp-100 margin-right-2"
                                   // }
-                                  className = "flex market-detail widthp-100 margin-right-2"
+                                  className="flex market-detail widthp-100 margin-right-2"
                                   data-id="0"
-                                  // onClick={() => setDetail(match)}
+                                // onClick={() => setDetail(match)}
                                 >
                                   <button
-                                    // className={
-                                    //   match.id === sports.data.detail
-                                    //     ? "color-white"
-                                    //     : "color-grey"
-                                    // }
+                                    class='color-grey'
+                                  // className={
+                                  //   match.id === sports.data.detail
+                                  //     ? "color-white"
+                                  //     : "color-grey"
+                                  // }
                                   >
                                     {/* +{match.markets} */}
                                     +0000
@@ -618,27 +583,27 @@ const Sports = (props) => {
                 <div class="flex page">
                   <button
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
-                    // onClick={() => {
-                    //   if (sports.type_id == null) {
-                    //     dispatch(fetchSportsdetails({ page: sports.data.page - 1 }));
-                    //   } else {
-                    //     dispatch(fetchSportsdetails({ page: sports.data.page - 1, id: sports.type_id }));
-                    //   }
-                    // }}
-                    // disabled={1 >= sports.data.page}
+                  // onClick={() => {
+                  //   if (sports.type_id == null) {
+                  //     dispatch(fetchSportsdetails({ page: sports.data.page - 1 }));
+                  //   } else {
+                  //     dispatch(fetchSportsdetails({ page: sports.data.page - 1, id: sports.type_id }));
+                  //   }
+                  // }}
+                  // disabled={1 >= sports.data.page}
                   >
                     <i class="fas fa-chevron-left margin-0 color-white"></i>
                   </button>
                   <button
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
-                    // onClick={() => {
-                    //   if (sports.type_id == null) {
-                    //     dispatch(fetchSportsdetails({ page: sports.data.page + 1 }));
-                    //   } else {
-                    //     dispatch(fetchSportsdetails({ page: sports.data.page + 1, id: sports.type_id }));
-                    //   }
-                    // }}
-                    // disabled={sports.data.lastPage <= sports.data.page}
+                  // onClick={() => {
+                  //   if (sports.type_id == null) {
+                  //     dispatch(fetchSportsdetails({ page: sports.data.page + 1 }));
+                  //   } else {
+                  //     dispatch(fetchSportsdetails({ page: sports.data.page + 1, id: sports.type_id }));
+                  //   }
+                  // }}
+                  // disabled={sports.data.lastPage <= sports.data.page}
                   >
                     <i class="fas fa-chevron-right margin-0 color-white"></i>
                   </button>

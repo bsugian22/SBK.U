@@ -2,6 +2,11 @@ import * as types from "./sportTypes";
 import axios from "../../plugins/axios";
 import { camelize } from "../../helpers/object";
 
+export const fetchMatchesRequest = () => {
+  return {
+    type: types.FETCH_MATCHES_REQUEST,
+  };
+};
 
 export const fetchMatchesSuccess = (data) => {
   return {
@@ -104,6 +109,7 @@ export const fetchMarketPerMatchesFailure = (data) => {
 
 export const fetchMatches = () => {
   return (dispatch) => {
+    dispatch(fetchMatchesRequest())
      axios.get(`/api/feed/matches`)
       .then(response => {
         const matches = camelize(response.data) ;
@@ -154,7 +160,7 @@ export const fetchCompetitors = () => {
   return (dispatch) => {
     axios.get(`/api/feed/competitor/description`)
       .then(response => {
-        const sports = response.data;
+        const sports = camelize(response.data) ;
         dispatch(fetchCompetitorsSuccess(sports))
       }).catch(error => {
         const errorMsg = error.message;
@@ -167,7 +173,7 @@ export const fetchOutcomes = () => {
   return (dispatch) => {
      axios.get(`/api/feed/outcome/description`)
       .then(response => {
-        const sports = response.data;
+        const sports = camelize(response.data);
         dispatch(fetchOutcomesSuccess(sports))
       }).catch(error => {
         const errorMsg = error.message;
