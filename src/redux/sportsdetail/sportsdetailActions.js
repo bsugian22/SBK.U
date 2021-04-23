@@ -435,3 +435,34 @@ export const deleteSportsdetails = () => {
       })
   };
 };
+
+
+// // filter sports by type
+// export const createSportsdetail = () => {
+//   return (dispatch) => {
+//     dispatch(createSportsdetailRequest);
+//     axios.get(`/api/`)
+//       .then(response => {
+//         const sportsdetail = response.data;
+//         dispatch(createSportsdetailSuccess(sportsdetail))
+//       }).catch(error => {
+//         const errorMsg = error.message;
+//         dispatch(createSportsdetailFailure(errorMsg))
+//       })
+//   };
+// };
+
+// // filter sports by page
+// export const createSportsdetail = () => {
+//   return (dispatch) => {
+//     dispatch(createSportsdetailRequest);
+//     axios.get(`/api/`)
+//       .then(response => {
+//         const sportsdetail = response.data;
+//         dispatch(createSportsdetailSuccess(sportsdetail))
+//       }).catch(error => {
+//         const errorMsg = error.message;
+//         dispatch(createSportsdetailFailure(errorMsg))
+//       })
+//   };
+// };

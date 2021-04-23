@@ -467,6 +467,7 @@ const sportsdetailReducer = (state = initialState, action) => {
       };
     case types.FETCH_SPORTSDETAILS_SUCCESS:
       console.log(action.payload)
+      // add logic for pagination number and showing per table,
 
       // return {...state}
       return {

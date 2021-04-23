@@ -211,6 +211,7 @@ const inplayReducer = (state = initialState, action) => {
         loading: true,
       };
     case types.FETCH_INPLAYS_SUCCESS:
+      // add logic for pagination number and showing per table,
       return {
         ...state,
         loading: false,

@@ -1,173 +1,203 @@
 import * as types from "./sportTypes";
-import axios from "axios";
+import axios from "../../plugins/axios";
+import { camelize } from "../../helpers/object";
 
-export const fetchSportsRequest = () => {
+
+export const fetchMatchesSuccess = (data) => {
   return {
-    type: types.FETCH_SPORTS_REQUEST,
+    type: types.FETCH_MATCHES_SUCCESS,
+    payload: data,
   };
 };
 
-export const fetchSportsSuccess = (sports) => {
+export const fetchMatchesFailure = (data) => {
+  return {
+    type: types.FETCH_MATCHES_FAILURE,
+    payload: data,
+  };
+};
+
+export const fetchTournamentsSuccess = (data) => {
+  return {
+    type: types.FETCH_TOURNAMENTS_SUCCESS,
+    payload: data,
+  };
+};
+
+export const fetchTournamentsFailure = (data) => {
+  return {
+    type: types.FETCH_TOURNAMENTS_FAILURE,
+    payload: data,
+  };
+};
+
+export const fetchCompetitorsSuccess = (data) => {
+  return {
+    type: types.FETCH_COMPETITORS_SUCCESS,
+    payload: data,
+  };
+};
+
+export const fetchCompetitorsFailure = (data) => {
+  return {
+    type: types.FETCH_COMPETITORS_FAILURE,
+    payload: data,
+  };
+};
+
+export const fetchOutcomesSuccess = (data) => {
+  return {
+    type: types.FETCH_OUTCOMES_SUCCESS,
+    payload: data,
+  };
+};
+
+export const fetchOutcomesFailure = (data) => {
+  return {
+    type: types.FETCH_OUTCOMES_FAILURE,
+    payload: data,
+  };
+};
+
+export const fetchMarketsSuccess = (data) => {
+  return {
+    type: types.FETCH_MARKETS_SUCCESS,
+    payload: data,
+  };
+};
+
+export const fetchMarketsFailure = (data) => {
+  return {
+    type: types.FETCH_MARKETS_FAILURE,
+    payload: data,
+  };
+};
+
+export const fetchSportsSuccess = (data) => {
   return {
     type: types.FETCH_SPORTS_SUCCESS,
-    payload: sports,
+    payload: data,
   };
 };
 
-export const fetchSportsFailure = (error) => {
+export const fetchSportsFailure = (data) => {
   return {
     type: types.FETCH_SPORTS_FAILURE,
-    payload: error,
+    payload: data,
   };
 };
 
-export const fetchSportRequest = () => {
+export const fetchMarketPerMatchesSuccess = (data) => {
   return {
-    type: types.FETCH_SPORT_REQUEST,
+    type: types.FETCH_MARKET_PER_MATCHES_SUCCESS,
+    payload: data,
   };
 };
 
-export const fetchSportSuccess = (sport) => {
+export const fetchMarketPerMatchesFailure = (data) => {
   return {
-    type: types.FETCH_SPORT_SUCCESS,
-    payload: sport,
+    type: types.FETCH_MARKET_PER_MATCHES_FAILURE,
+    payload: data,
   };
 };
 
-export const fetchSportFailure = (error) => {
-  return {
-    type: types.FETCH_SPORT_FAILURE,
-    payload: error,
+
+export const fetchMatches = () => {
+  return (dispatch) => {
+     axios.get(`/api/feed/matches`)
+      .then(response => {
+        const matches = camelize(response.data) ;
+        const matchIds = [];
+        console.log(matches.data.length);
+
+        for (let i = 0; i < 15; i++) {
+          let id = matches.data[i].id
+          matchIds.push({id:id});
+        }
+        dispatch(fetchMatchesSuccess(matches))
+        dispatch(fetchMarketPerMatches(matchIds))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(fetchMatchesFailure(errorMsg))
+      })
   };
 };
 
-export const createSportRequest = () => {
-  return {
-    type: types.CREATE_SPORT_REQUEST,
+export const fetchMarketPerMatches = (ids) => {
+  return (dispatch) => {
+     axios.post(`/api/feed/market`,{matches:ids})
+      .then(response => {
+        const markets = camelize(response.data) ;
+        // console.log(markets)
+        dispatch(fetchMarketPerMatchesSuccess(markets))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(fetchMarketPerMatchesFailure(errorMsg))
+      })
   };
 };
 
-export const createSportSuccess = (sport) => {
-  return {
-    type: types.CREATE_SPORT_SUCCESS,
-    payload: sport,
+export const fetchTournaments = () => {
+  return (dispatch) => {
+     axios.get(`/api/feed/tournament/description`)
+      .then(response => {
+        const sports = camelize(response.data) ;
+        dispatch(fetchTournamentsSuccess(sports))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(fetchTournamentsFailure(errorMsg))
+      })
   };
 };
 
-export const createSportFailure = (error) => {
-  return {
-    type: types.CREATE_SPORT_FAILURE,
-    payload: error,
+export const fetchCompetitors = () => {
+  return (dispatch) => {
+    axios.get(`/api/feed/competitor/description`)
+      .then(response => {
+        const sports = response.data;
+        dispatch(fetchCompetitorsSuccess(sports))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(fetchCompetitorsFailure(errorMsg))
+      })
   };
 };
 
-export const updateSportRequest = () => {
-  return {
-    type: types.UPDATE_SPORT_REQUEST,
+export const fetchOutcomes = () => {
+  return (dispatch) => {
+     axios.get(`/api/feed/outcome/description`)
+      .then(response => {
+        const sports = response.data;
+        dispatch(fetchOutcomesSuccess(sports))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(fetchOutcomesFailure(errorMsg))
+      })
   };
 };
 
-export const updateSportSuccess = (sport) => {
-  return {
-    type: types.UPDATE_SPORT_SUCCESS,
-    payload: sport,
+export const fetchMarkets = () => {
+  return (dispatch) => {
+     axios.get(`/api/feed/market/description`)
+      .then(response => {
+        const sports = response.data;
+        dispatch(fetchMarketsSuccess(sports))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(fetchMarketsFailure(errorMsg))
+      })
   };
 };
-
-export const updateSportFailure = (error) => {
-  return {
-    type: types.UPDATE_SPORT_FAILURE,
-    payload: error,
-  };
-};
-
-export const deleteSportsRequest = () => {
-  return {
-    type: types.DELETE_SPORTS_REQUEST,
-  };
-};
-
-export const deleteSportsSuccess = (sports) => {
-  return {
-    type: types.DELETE_SPORTS_SUCCESS,
-    payload: sports,
-  };
-};
-
-export const deleteSportsFailure = (error) => {
-  return {
-    type: types.DELETE_SPORTS_FAILURE,
-    payload: error,
-  };
-};
-
 
 export const fetchSports = () => {
-    return (dispatch) => {
-      dispatch(fetchSportsRequest);
-      await axios.get(`/api/feed/sports`)
-                  .then(response => {
-                    const sports = response.data;
-                    dispatch(fetchSportsSuccess(sports))
-              }).catch(error => {
-                    const errorMsg = error.message;
-                    dispatch(fetchSportsFailure(errorMsg))
-              })
-      };
-};
-
-export const fetchSport = () => {
   return (dispatch) => {
-    dispatch(fetchSportRequest);
-    await axios.get(`/api/feed/sports`)
-                .then(response => {
-                  const sport = response.data;
-                  dispatch(fetchSportSuccess(sport))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(fetchSportFailure(errorMsg))
-            })
-    };
-};
-
-export const createSport = () => {
-  return (dispatch) => {
-    dispatch(createSportRequest);
-    await axios.get(`/api/feed/sports`)
-                .then(response => {
-                  const sport = response.data;
-                  dispatch(createSportSuccess(sport))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(createSportFailure(errorMsg))
-            })
-    };
-};
-
-export const updateSport = () => {
-  return (dispatch) => {
-    dispatch(updateSportRequest);
-    await axios.get(`/api/feed/sports`)
-                .then(response => {
-                  const sport = response.data;
-                  dispatch(updateSportSuccess(sport))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(updateSportFailure(errorMsg))
-            })
-    };
-};
-
-export const deleteSports = () => {
-  return (dispatch) => {
-    dispatch(deleteSportsRequest);
-    await axios.get(`/api/feed/sports`)
-                .then(response => {
-                  const sports = response.data;
-                  dispatch(deleteSportsSuccess(sports))
-            }).catch(error => {
-                  const errorMsg = error.message;
-                  dispatch(deleteSportsFailure(errorMsg))
-            })
-    };
+     axios.get(`/api/feed/sports/description`)
+      .then(response => {
+        const sports = response.data;
+        dispatch(fetchSportsSuccess(sports))
+      }).catch(error => {
+        const errorMsg = error.message;
+        dispatch(fetchSportsFailure(errorMsg))
+      })
+  };
 };

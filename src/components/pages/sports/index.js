@@ -10,6 +10,7 @@ import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
 import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet, setTypeId } from "../../../redux/sportsdetail/sportsdetailActions";
 import { iconsList } from "../../../helpers/object";
+import { fetchMatches } from "../../../redux/sport/sportActions";
 
 
 const Sports = (props) => {
@@ -17,7 +18,8 @@ const Sports = (props) => {
   const dispatch = useDispatch();
   const model = new sportsModel();
   const context = useContext(MenuContext);
-  let sports = useSelector((state) => state.sportsdetail);
+  // let sports = useSelector((state) => state.sportsdetail);
+  let sports = useSelector((state) => state.sport);
   let user = useSelector((state) => state.user.user);
   let sport_market_1 = 0;
   let sport_market_186 = 0;
@@ -32,8 +34,8 @@ const Sports = (props) => {
     if (user.isAuth) {
       dispatch(refreshToken())
     }
-    dispatch(fetchSportsdetails())
-    dispatch(validateBet(sports.data.bet))
+    dispatch(fetchMatches())
+    // dispatch(validateBet(sports.data.bet))
     dispatch(setTypeId(null))
     return () => {
       isSubscribed = false;
@@ -121,7 +123,6 @@ const Sports = (props) => {
                     <i class="fas fa-chevron-left margin-0 color-white"></i>
                   </button>
                   <div id="scrollmenu" class="heightp-100 flex align-items-center">
-                    {console.log(iconsList)}
                     {iconsList.icons.map((icon, index) => {
                       return <a href="#icon" onClick={() => {
                         dispatch(setTypeId(icon.id))
@@ -207,9 +208,10 @@ const Sports = (props) => {
               </div>
             </div>
             <div class="prematch-list border-bottom match-list grow-2 padding-left-10 padding-right-10 padding-bottom-10 scrollable-auto flex-column">
-              {sports.data.data.length > 0
-                ? sports.data.data.map((matches, index) => {
-
+              {console.log(sports.mainMarkets)}
+              {sports.mainMarkets.length > 0
+                ? sports.mainMarkets.map((matches, index) => {
+                  // console.log(matches)
                   var rows = [];
                   rows.push(
                     <div
@@ -247,8 +249,9 @@ const Sports = (props) => {
                   );
                   rows.push(
                     matches.matches.map((match, key) => {
-                      console.log(sport_main_market_exists)
-                      sport_main_market_exists = false
+                      console.log(match)
+                      // console.log(sport_main_market_exists)
+                      // sport_main_market_exists = false
                       return (
                         <div
                           class="flex list background-transparent-b-30 height-40"
@@ -256,7 +259,7 @@ const Sports = (props) => {
                           data-id="0"
                           data-home-competitor="0"
                           data-away-competitor="0"
-                          key={"match_id-" + match.id}
+                          // key={"match_id-" + match.id}
                         >
                           <div class="flex flex-inherit widthp-45 align-items-center-inherit heightp-100">
                             <div class="date justify-content-center">
@@ -269,15 +272,17 @@ const Sports = (props) => {
                             </div>
                             <div class="league padding-horizontal-5">
                               <span class="color-grey text-ellipsis">
-                                {match.tournament.title["ko"]}
+                                {/* {match.tournament.title["ko"]} */}
+                                {sports.tournaments.data.find(x => x.id == match.tournamentId).tournament.name.ko}
+                                {match.tournamentId}
 
                               </span>
                             </div>
                             <div class="team padding-horizontal-5">
                               <span class="color-grey text-ellipsis">
-                                {match.homeTeam.name["ko"]}
+                                {/* {match.homeTeam.name["ko"]} */}
                                 <span class="color-twhite margin-horizontal-5">vs</span>
-                                {match.awayTeam.name["ko"]}
+                                {/* {match.awayTeam.name["ko"]} */}
                               </span>
                             </div>
                           </div>
@@ -286,7 +291,7 @@ const Sports = (props) => {
                               <div class="flex flex-inherit align-items-center-inherit padding-vertical-2">
                                 <div class="flex pick-wrap flex-inherit align-items-center-inherit justify-content-center-inherit widthp-100">
 
-                                  {
+                                  {/* {
                                     match.market.map((market, market_index) => {
                                       match.market.find(x => x.title.id == 1) ? sport_market_1 = 1 : sport_market_1 = 0;
                                       match.market.find(x => x.title.id == 186) ? sport_market_186 = 1 : sport_market_186 = 0;
@@ -547,28 +552,30 @@ const Sports = (props) => {
                                       sport_market_251 = 0
                                     })
 
-                                  }
+                                  } */}
                                 </div>
                               </div>
 
                               <div class="flex justify-content-center-inherit align-items-center-inherit padding-vertical-2 padding-left-0 padding-right-0 market-count">
                                 <div
-                                  className={
-                                    match.id === sports.data.detail
-                                      ? "flex market-detail widthp-100 margin-right-2 active"
-                                      : "flex market-detail widthp-100 margin-right-2"
-                                  }
+                                  // className={
+                                  //   match.id === sports.data.detail
+                                  //     ? "flex market-detail widthp-100 margin-right-2 active"
+                                  //     : "flex market-detail widthp-100 margin-right-2"
+                                  // }
+                                  className = "flex market-detail widthp-100 margin-right-2"
                                   data-id="0"
-                                  onClick={() => setDetail(match)}
+                                  // onClick={() => setDetail(match)}
                                 >
                                   <button
-                                    className={
-                                      match.id === sports.data.detail
-                                        ? "color-white"
-                                        : "color-grey"
-                                    }
+                                    // className={
+                                    //   match.id === sports.data.detail
+                                    //     ? "color-white"
+                                    //     : "color-grey"
+                                    // }
                                   >
-                                    +{match.markets}
+                                    {/* +{match.markets} */}
+                                    +0000
                                   </button>
                                 </div>
                               </div>
@@ -587,7 +594,7 @@ const Sports = (props) => {
             <div class="bottom-wrap border-top flex flex-inherit height-60 padding-10 align-items-center-inherit0">
               <div class="pagination widthp-100 flex-inherit justify-content-end">
                 <div class="flex selectBox">
-                  <Select
+                  {/* <Select
                     className="select-container select-position"
                     classNamePrefix="select-box"
                     value={{ label: sports.data.page, value: sports.data.page }}
@@ -605,33 +612,33 @@ const Sports = (props) => {
                       }
                       return rows;
                     })([], 0, sports.data.lastPage)}
-                  />
+                  /> */}
                 </div>
                 <div class="grow-2"></div>
                 <div class="flex page">
                   <button
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
-                    onClick={() => {
-                      if (sports.type_id == null) {
-                        dispatch(fetchSportsdetails({ page: sports.data.page - 1 }));
-                      } else {
-                        dispatch(fetchSportsdetails({ page: sports.data.page - 1, id: sports.type_id }));
-                      }
-                    }}
-                    disabled={1 >= sports.data.page}
+                    // onClick={() => {
+                    //   if (sports.type_id == null) {
+                    //     dispatch(fetchSportsdetails({ page: sports.data.page - 1 }));
+                    //   } else {
+                    //     dispatch(fetchSportsdetails({ page: sports.data.page - 1, id: sports.type_id }));
+                    //   }
+                    // }}
+                    // disabled={1 >= sports.data.page}
                   >
                     <i class="fas fa-chevron-left margin-0 color-white"></i>
                   </button>
                   <button
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
-                    onClick={() => {
-                      if (sports.type_id == null) {
-                        dispatch(fetchSportsdetails({ page: sports.data.page + 1 }));
-                      } else {
-                        dispatch(fetchSportsdetails({ page: sports.data.page + 1, id: sports.type_id }));
-                      }
-                    }}
-                    disabled={sports.data.lastPage <= sports.data.page}
+                    // onClick={() => {
+                    //   if (sports.type_id == null) {
+                    //     dispatch(fetchSportsdetails({ page: sports.data.page + 1 }));
+                    //   } else {
+                    //     dispatch(fetchSportsdetails({ page: sports.data.page + 1, id: sports.type_id }));
+                    //   }
+                    // }}
+                    // disabled={sports.data.lastPage <= sports.data.page}
                   >
                     <i class="fas fa-chevron-right margin-0 color-white"></i>
                   </button>
@@ -640,7 +647,7 @@ const Sports = (props) => {
             </div>
           </div>
           <div class="prematch-detail flex-inherit flex-column padding-vertical-10 padding-left-5 padding-right-10 border-left">
-            {sports.data.detail_data ? (
+            {/* {sports.data.detail_data ? (
               <Fragment>
                 <div class="detail-header flex-inherit flex-column">
                   <div class="height-40 align-items-center background-transparent-b-40 padding-horizontal-10">
@@ -825,7 +832,7 @@ const Sports = (props) => {
               </Fragment>
             ) : (
               ""
-            )}
+            )} */}
           </div>
         </div>
       </div>

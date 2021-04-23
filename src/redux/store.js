@@ -10,6 +10,7 @@ import * as userActions from "./user/userActions";
 import * as preferencesActions from "./preference/preferenceActions";
 import { fetchSportsdetail, fetchSportsdetails, fetchSportsdetailsRequest } from "./sportsdetail/sportsdetailActions";
 import { fetchSummary } from "./navigations/accountSummary/accountSummaryActions";
+import { fetchCompetitors, fetchMarkets, fetchOutcomes, fetchSports, fetchTournaments } from "./sport/sportActions";
 
 const persistConfig = {
   key: "root",
@@ -42,6 +43,11 @@ export const mapDispatchProps = (dispatch) => {
     },
     setSports: () => {
       // dispatch(fetchSportsdetails());
+      dispatch(fetchTournaments());
+      dispatch(fetchCompetitors());
+      dispatch(fetchOutcomes());
+      dispatch(fetchMarkets());
+      dispatch(fetchSports());
     },
     setPreferences: (payload) => {
       dispatch(preferencesActions.setPreferences(payload));
