@@ -106,6 +106,20 @@ export const fetchMarketPerMatchesFailure = (data) => {
   };
 };
 
+export const fetchMarketPerMatchSuccess = (data) => {
+  return {
+    type: types.FETCH_MARKET_PER_MATCH_SUCCESS,
+    payload: data,
+  };
+};
+
+export const fetchMarketPerMatchFailure = (data) => {
+  return {
+    type: types.FETCH_MARKET_PER_MATCH_FAILURE,
+    payload: data,
+  };
+};
+
 
 export const fetchMatches = () => {
   return (dispatch) => {
@@ -148,11 +162,11 @@ export const fetchMarketPerMatch = (id) => {
      axios.get(`/api/feed/market/`+id)
       .then(response => {
         const markets = camelize(response.data) ;
-        console.log(markets)
-        // dispatch(fetchMarketPerMatchesSuccess(markets))
+        // console.log(markets)
+        dispatch(fetchMarketPerMatchSuccess(markets))
       }).catch(error => {
         const errorMsg = error.message;
-        // dispatch(fetchMarketPerMatchesFailure(errorMsg))
+        dispatch(fetchMarketPerMatchFailure(errorMsg))
       })
   };
 };
@@ -200,7 +214,7 @@ export const fetchMarkets = () => {
   return (dispatch) => {
      axios.get(`/api/feed/market/description`)
       .then(response => {
-        const sports = response.data;
+        const sports = camelize(response.data);
         dispatch(fetchMarketsSuccess(sports))
       }).catch(error => {
         const errorMsg = error.message;

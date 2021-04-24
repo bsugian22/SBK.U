@@ -22,7 +22,8 @@ const sportReducer = (state = initialState, action) => {
     case types.FETCH_MATCHES_REQUEST:
       return {
         ...state,
-        mainMarkets: []
+        mainMarkets: [],
+        sideMarket:[]
       };
     case types.FETCH_MATCHES_SUCCESS:
       return {
@@ -127,9 +128,6 @@ const sportReducer = (state = initialState, action) => {
         .map((matches, startAt) => ({ startAt, matches }))
         .orderBy("startAt")
         .value();
-
-      console.log(mainMarketsToDisplay);
-
       return {
         ...state,
         mainMarkets: mainMarketsToDisplay
@@ -138,6 +136,17 @@ const sportReducer = (state = initialState, action) => {
     case types.FETCH_MARKET_PER_MATCHES_FAILURE:
       return {
         ...state,
+      };
+    case types.FETCH_MARKET_PER_MATCH_SUCCESS:
+      console.log(action.payload.data[0])
+      return {
+        ...state,
+        sideMarket: action.payload.data[0]
+      };
+    case types.FETCH_MARKET_PER_MATCH_FAILURE:
+      return {
+        ...state,
+        sideMarket: []
       };
 
     default:
