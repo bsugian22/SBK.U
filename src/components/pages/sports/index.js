@@ -41,11 +41,11 @@ const Sports = (props) => {
 
   const setDetail = async (item) => {
     if (sports.data.detail === item.id && context.state.detailMenu === true) {
-      dispatch(sportDetailReset());
+      // dispatch(sportDetailReset());
       context.actions.setdetailMenu(false);
 
     } else {
-      dispatch(fetchSportsdetail(item.id));
+      // dispatch(fetchSportsdetail(item.id));
       context.actions.setdetailMenu(true);
     }
   };

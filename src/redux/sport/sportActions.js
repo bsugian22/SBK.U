@@ -143,6 +143,20 @@ export const fetchMarketPerMatches = (ids) => {
   };
 };
 
+export const fetchMarketPerMatch = (id) => {
+  return (dispatch) => {
+     axios.get(`/api/feed/market/`+id)
+      .then(response => {
+        const markets = camelize(response.data) ;
+        console.log(markets)
+        // dispatch(fetchMarketPerMatchesSuccess(markets))
+      }).catch(error => {
+        const errorMsg = error.message;
+        // dispatch(fetchMarketPerMatchesFailure(errorMsg))
+      })
+  };
+};
+
 export const fetchTournaments = () => {
   return (dispatch) => {
      axios.get(`/api/feed/tournament/description`)
