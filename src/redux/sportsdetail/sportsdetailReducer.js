@@ -105,19 +105,13 @@ const sportsdetailReducer = (state = initialState, action) => {
       let set_outcome_name = action.payload.outcome_name;
 
       const set_old_odds = action.payload.oldOdds;
-      const set_specifier = action.payload.specifier;
-      const set_market_type = action.payload.market_type;
-      const set_outcome_name_id = action.payload.outcome_name_id;
+      // const set_specifier = action.payload.specifier;
+      // const set_market_type = action.payload.market_type;
+      // const set_outcome_name_id = action.payload.outcome_name_id;
 
       let total_odds = 1;
       const existing_outcome = state.data.bet.outcomes.findIndex(x => x.id == set_outcome_id)
 
-      if (set_outcome_name.includes('{$competitor1}')) {
-        set_outcome_name = set_outcome_name.replaceAll('{$competitor1}', set_home)
-      }
-      if (set_outcome_name.includes('{$competitor2}')) {
-        set_outcome_name = set_outcome_name.replaceAll('{$competitor2}', set_away)
-      }
 
       // check if the outcome exists
       if (existing_outcome == "-1") {
@@ -135,9 +129,9 @@ const sportsdetailReducer = (state = initialState, action) => {
             market_name: set_market_name,
             outcome_name: set_outcome_name,
             oldOdds: set_old_odds,
-            specifier: set_specifier,
-            market_type: set_market_type,
-            outcome_name_id: set_outcome_name_id
+            // specifier: set_specifier,
+            // market_type: set_market_type,
+            // outcome_name_id: set_outcome_name_id
           })
         } else {
           state.data.bet.outcomes.splice(existing_match, 1)
@@ -150,9 +144,9 @@ const sportsdetailReducer = (state = initialState, action) => {
             market_name: set_market_name,
             outcome_name: set_outcome_name,
             oldOdds: set_old_odds,
-            specifier: set_specifier,
-            market_type: set_market_type,
-            outcome_name_id: set_outcome_name_id
+            // specifier: set_specifier,
+            // market_type: set_market_type,
+            // outcome_name_id: set_outcome_name_id
           })
         }
 

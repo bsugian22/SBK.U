@@ -2,6 +2,12 @@ import * as types from "./sportTypes";
 import axios from "../../plugins/axios";
 import { camelize } from "../../helpers/object";
 
+export const resetSideMarkets = () => {
+  return {
+    type: types.RESET_SIDE_MARKETS,
+  };
+};
+
 export const fetchMatchesRequest = () => {
   return {
     type: types.FETCH_MATCHES_REQUEST,
@@ -124,18 +130,14 @@ export const fetchMarketPerMatchFailure = (data) => {
 export const fetchMatches = () => {
   return (dispatch) => {
     dispatch(fetchMatchesRequest())
-     axios.get(`/api/feed/matches`)
+    axios.get(`/api/feed/matches`)
       .then(response => {
-        const matches = camelize(response.data) ;
+        const matches = camelize(response.data);
         const matchIds = [];
-        console.log(matches.data.length);
-
-        for (let i = 0; i < 15; i++) {
-          let id = matches.data[i].id
-          matchIds.push({id:id});
-        }
+        // console.log(matches.data.length);
+        dispatch(setMatchIds(matches,1))
         dispatch(fetchMatchesSuccess(matches))
-        dispatch(fetchMarketPerMatches(matchIds))
+        // dispatch(fetchMarketPerMatches(matchIds))
       }).catch(error => {
         const errorMsg = error.message;
         dispatch(fetchMatchesFailure(errorMsg))
@@ -143,12 +145,30 @@ export const fetchMatches = () => {
   };
 };
 
-export const fetchMarketPerMatches = (ids) => {
+
+
+export const setMatchIds = (matches,pageNumber) => {
   return (dispatch) => {
-     axios.post(`/api/feed/market`,{matches:ids})
+    let index = (pageNumber * 15) - 15
+    let perPage = pageNumber * 15;
+    const matchIds = [];
+    for (let i = index; i < perPage; i++) {
+      if (matches.data[i]?.id) {
+        let id = matches.data[i].id
+        matchIds.push({ id: id });
+      }
+    }
+    dispatch(fetchMarketPerMatches(matchIds,pageNumber))
+  };
+};
+
+export const fetchMarketPerMatches = (ids,pageNumber) => {
+  return (dispatch) => {
+    axios.post(`/api/feed/market`, { matches: ids })
       .then(response => {
-        const markets = camelize(response.data) ;
+        const markets = camelize(response.data);
         // console.log(markets)
+        markets.pageNumber = pageNumber
         dispatch(fetchMarketPerMatchesSuccess(markets))
       }).catch(error => {
         const errorMsg = error.message;
@@ -159,9 +179,9 @@ export const fetchMarketPerMatches = (ids) => {
 
 export const fetchMarketPerMatch = (id) => {
   return (dispatch) => {
-     axios.get(`/api/feed/market/`+id)
+    axios.get(`/api/feed/market/` + id)
       .then(response => {
-        const markets = camelize(response.data) ;
+        const markets = camelize(response.data);
         // console.log(markets)
         dispatch(fetchMarketPerMatchSuccess(markets))
       }).catch(error => {
@@ -173,9 +193,9 @@ export const fetchMarketPerMatch = (id) => {
 
 export const fetchTournaments = () => {
   return (dispatch) => {
-     axios.get(`/api/feed/tournament/description`)
+    axios.get(`/api/feed/tournament/description`)
       .then(response => {
-        const sports = camelize(response.data) ;
+        const sports = camelize(response.data);
         dispatch(fetchTournamentsSuccess(sports))
       }).catch(error => {
         const errorMsg = error.message;
@@ -188,7 +208,7 @@ export const fetchCompetitors = () => {
   return (dispatch) => {
     axios.get(`/api/feed/competitor/description`)
       .then(response => {
-        const sports = camelize(response.data) ;
+        const sports = camelize(response.data);
         dispatch(fetchCompetitorsSuccess(sports))
       }).catch(error => {
         const errorMsg = error.message;
@@ -199,7 +219,7 @@ export const fetchCompetitors = () => {
 
 export const fetchOutcomes = () => {
   return (dispatch) => {
-     axios.get(`/api/feed/outcome/description`)
+    axios.get(`/api/feed/outcome/description`)
       .then(response => {
         const sports = camelize(response.data);
         dispatch(fetchOutcomesSuccess(sports))
@@ -212,7 +232,7 @@ export const fetchOutcomes = () => {
 
 export const fetchMarkets = () => {
   return (dispatch) => {
-     axios.get(`/api/feed/market/description`)
+    axios.get(`/api/feed/market/description`)
       .then(response => {
         const sports = camelize(response.data);
         dispatch(fetchMarketsSuccess(sports))
@@ -225,7 +245,7 @@ export const fetchMarkets = () => {
 
 export const fetchSports = () => {
   return (dispatch) => {
-     axios.get(`/api/feed/sports/description`)
+    axios.get(`/api/feed/sports/description`)
       .then(response => {
         const sports = response.data;
         dispatch(fetchSportsSuccess(sports))

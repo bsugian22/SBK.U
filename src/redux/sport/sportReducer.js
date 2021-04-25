@@ -13,8 +13,9 @@ const initialState = {
   sports: [],
   error: "",
   currentPage: 1,
-  lastPage: null,
-  mainMarkets: []
+  lastPage: 1,
+  mainMarkets: [],
+  sideMarket: [],
 };
 
 const sportReducer = (state = initialState, action) => {
@@ -23,12 +24,16 @@ const sportReducer = (state = initialState, action) => {
       return {
         ...state,
         mainMarkets: [],
-        sideMarket:[]
+        sideMarket: []
       };
     case types.FETCH_MATCHES_SUCCESS:
+      let lastPage = Math.ceil(action.payload.data.length / 15)
+      // console.log(Math.ceil(0.1))
+      console.log(lastPage)
       return {
         ...state,
-        matches: action.payload
+        matches: action.payload,
+        lastPage: lastPage
       };
 
     case types.FETCH_MATCHES_FAILURE:
@@ -99,6 +104,7 @@ const sportReducer = (state = initialState, action) => {
 
     case types.FETCH_MARKET_PER_MATCHES_SUCCESS:
       const mainMarkets = action.payload
+      let currentPage = action.payload.pageNumber
       let mainMarketsToDisplay = [];
       mainMarkets.data.map((market, index) => {
         let data = state.matches.data.find(x => x.id == market.id)
@@ -130,7 +136,8 @@ const sportReducer = (state = initialState, action) => {
         .value();
       return {
         ...state,
-        mainMarkets: mainMarketsToDisplay
+        mainMarkets: mainMarketsToDisplay,
+        currentPage: currentPage
       };
 
     case types.FETCH_MARKET_PER_MATCHES_FAILURE:
@@ -138,10 +145,21 @@ const sportReducer = (state = initialState, action) => {
         ...state,
       };
     case types.FETCH_MARKET_PER_MATCH_SUCCESS:
-      console.log(action.payload.data[0])
+      let sideMarket = action.payload.data[0]
+      console.log(sideMarket)
+      sideMarket.markets.map((market,index)=>{
+        market.outcomes.map((outcome,outcome_index)=>{
+          outcome.oldOdds=null
+        })
+      })
       return {
         ...state,
-        sideMarket: action.payload.data[0]
+        sideMarket: sideMarket
+      };
+    case types.RESET_SIDE_MARKETS:
+      return {
+        ...state,
+        sideMarket: []
       };
     case types.FETCH_MARKET_PER_MATCH_FAILURE:
       return {
