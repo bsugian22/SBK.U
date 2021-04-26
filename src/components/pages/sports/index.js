@@ -127,17 +127,6 @@ const Sports = (props) => {
                     <i class="fas fa-chevron-left margin-0 color-white"></i>
                   </button>
                   <div id="scrollmenu" class="heightp-100 flex align-items-center">
-                    {/* {iconsList.icons.map((icon, index) => {
-                      return <a key={"icon-" + index} href="#icon" onClick={() => {
-                        dispatch(setTypeId(icon.id))
-                        dispatch(fetchSportsdetails({ page: 1, id: icon.id }));
-                      }}>
-                        <span class={icon.icon}></span>
-                        <span class="event-count">Count</span>
-                      </a>
-                    }
-                    )} */}
-                    {/* {console.log(sports.sports)} */}
                     {sports.sports.data.map((icon, index) => {
 
                       if (sports.matches?.data) {
@@ -149,13 +138,14 @@ const Sports = (props) => {
                         if (matches.length) {
                           // console.log(matches.length)
                           let sportMatches = {}
-                          return <a key={"icon-" + index} href="#icon" onClick={(e) => {
+                          return <a class={sports.sportsTypeId == icon.id? "active" : ""} key={"icon-" + index} href="#icon" onClick={(e) => {
+                            e.preventDefault();
                             sportMatches.data = matches
                             dispatch(setSportsType({ id: icon.id, matches: matches }))
                             dispatch(setMatchIds(sportMatches, 1))
                           }}>
                             <span class={"icon-" + icon.id}></span>
-                            <span class="event-count">Count {matches.length}</span>
+                            <span class="event-count">{matches.length.toLocaleString()} {}</span>
                           </a>
                         }
 
