@@ -592,7 +592,7 @@ const Sports = (props) => {
                                     }
                                   >
                                     {/* +{match.markets} */}
-                                    +
+                                    + {match.mainMarkets.count.toLocaleString()}
                                   </button>
                                 </div>
                               </div>
