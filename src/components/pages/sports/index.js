@@ -10,7 +10,7 @@ import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
 import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet, setTypeId } from "../../../redux/sportsdetail/sportsdetailActions";
 import { iconsList, setCompetitorName } from "../../../helpers/object";
-import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets } from "../../../redux/sport/sportActions";
+import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType } from "../../../redux/sport/sportActions";
 
 
 const Sports = (props) => {
@@ -127,7 +127,7 @@ const Sports = (props) => {
                     <i class="fas fa-chevron-left margin-0 color-white"></i>
                   </button>
                   <div id="scrollmenu" class="heightp-100 flex align-items-center">
-                    {iconsList.icons.map((icon, index) => {
+                    {/* {iconsList.icons.map((icon, index) => {
                       return <a key={"icon-" + index} href="#icon" onClick={() => {
                         dispatch(setTypeId(icon.id))
                         dispatch(fetchSportsdetails({ page: 1, id: icon.id }));
@@ -136,7 +136,35 @@ const Sports = (props) => {
                         <span class="event-count">Count</span>
                       </a>
                     }
+                    )} */}
+                    {/* {console.log(sports.sports)} */}
+                    {sports.sports.data.map((icon, index) => {
+
+                      if (sports.matches?.data) {
+                        var matches = sports.matches.data.filter((x) => {
+                          return x.type == icon.id;
+                        });
+
+
+                        if (matches.length) {
+                          // console.log(matches.length)
+                          let sportMatches = {}
+                          return <a key={"icon-" + index} href="#icon" onClick={(e) => {
+                            sportMatches.data = matches
+                            dispatch(setSportsType({ id: icon.id, matches: matches }))
+                            dispatch(setMatchIds(sportMatches, 1))
+                          }}>
+                            <span class={"icon-" + icon.id}></span>
+                            <span class="event-count">Count {matches.length}</span>
+                          </a>
+                        }
+
+                      }
+
+
+                    }
                     )}
+
 
                   </div>
                   <button
@@ -215,7 +243,7 @@ const Sports = (props) => {
               {/* {console.log(sports.mainMarkets)} */}
               {sports.mainMarkets.length > 0
                 ? sports.mainMarkets.map((matches, index) => {
-                  let sport_main_market_exists = false
+
                   // console.log(matches)
                   var rows = [];
                   rows.push(
@@ -254,6 +282,7 @@ const Sports = (props) => {
                   );
                   rows.push(
                     matches.matches.map((match, key) => {
+                      let sport_main_market_exists = false
                       let homeTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.homeTeamId).competitor.name.ko : "";
                       let awayTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.awayTeamId).competitor.name.ko : "";
                       // console.log(match)
@@ -279,7 +308,7 @@ const Sports = (props) => {
                             <div class="league padding-horizontal-5">
                               <span class="color-grey text-ellipsis">
                                 {/* {match.tournament.title["ko"]} */}
-                                {sports.tournaments.data ? sports.tournaments.data.find(x => x.id == match.tournamentId).tournament.name.ko : ""}
+                                {sports.tournaments.data ? sports.tournaments.data.find(x => x.id == match.tournamentId)?.tournament.name.ko : ""}
                                 {/* {match.tournamentId} */}
 
                               </span>
@@ -299,6 +328,17 @@ const Sports = (props) => {
 
                                   {match.mainMarkets['1X2'].length != 0 ?
                                     match.mainMarkets['1X2'].map((market, market_index) => {
+                                      console.log(market.outcomes.length)
+                                      let classNameActive = ""
+                                      let className = ""
+                                      if (market.outcomes.length == 2) {
+                                        classNameActive = "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                        className = " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                      }
+                                      if (market.outcomes.length >= 3) {
+                                        classNameActive = "active widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                        className = " widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                      }
                                       if (market.status == 1) {
                                         return (market.outcomes.map((outcome, outcomes_index) => {
                                           let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
@@ -314,7 +354,7 @@ const Sports = (props) => {
                                               data-market-id={market.marketId}
                                               data-outcome-id={outcome.id}
                                               data-odds={outcome.odds}
-                                              class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"}
+                                              class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? classNameActive: className}
                                             // class=" widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
                                             >
                                               <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
@@ -340,10 +380,16 @@ const Sports = (props) => {
                                       } else {
                                         return (market.outcomes.map((outcome, outcomes_index) => {
                                           let outcomeName = sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko
-
+                                          let className = ""
+                                          if (market.outcomes.length == 2) {
+                                            className = "disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                          }
+                                          if (market.outcomes.length >= 3) {
+                                            className = "disabled widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                          }
                                           return (
                                             <div key={"outcome_id-active-1x2-" + outcome.id}
-                                              class=" disabled widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2">
+                                              class={className}>
                                               <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                 <div class="team-1 widthp-70 text-ellipsis">
                                                   <span class="color-grey text-ellipsis">
@@ -446,6 +492,7 @@ const Sports = (props) => {
                                       :
                                       match.mainMarkets['total'].length != 0 ?
                                         match.mainMarkets['total'].map((market, market_index) => {
+                                          console.log(sport_main_market_exists)
                                           if (sport_main_market_exists == false) {
                                             sport_main_market_exists = true;
                                             if (market.status == 1) {
@@ -585,7 +632,11 @@ const Sports = (props) => {
                       // } else {
                       //   dispatch(fetchSportsdetails({ page: e.value, id: sports.type_id }));
                       // }
-                      dispatch(setMatchIds(sports.matches, e.value))
+                      if (sports.sportsMatches.data.length == 0) {
+                        dispatch(setMatchIds(sports.matches, e.value))
+                      } else {
+                        dispatch(setMatchIds(sports.sportsMatches, e.value))
+                      }
                     }}
                     options={((rows, i, len) => {
                       while (++i <= len) {
@@ -600,12 +651,11 @@ const Sports = (props) => {
                   <button
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
                     onClick={() => {
-                      // if (sports.type_id == null) {
-                      //   dispatch(fetchSportsdetails({ page: sports.data.page - 1 }));
-                      // } else {
-                      //   dispatch(fetchSportsdetails({ page: sports.data.page - 1, id: sports.type_id }));
-                      // }
-                      dispatch(setMatchIds(sports.matches, sports.currentPage - 1))
+                      if (sports.sportsMatches.data.length == 0) {
+                        dispatch(setMatchIds(sports.matches, sports.currentPage - 1))
+                      } else {
+                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage - 1))
+                      }
                     }}
                     disabled={1 >= sports.currentPage}
                   >
@@ -614,12 +664,12 @@ const Sports = (props) => {
                   <button
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
                     onClick={() => {
-                      // if (sports.type_id == null) {
-                      //   dispatch(fetchSportsdetails({ page: sports.data.page + 1 }));
-                      // } else {
-                      //   dispatch(fetchSportsdetails({ page: sports.data.page + 1, id: sports.type_id }));
-                      // }
-                      dispatch(setMatchIds(sports.matches, sports.currentPage + 1))
+                      if (sports.sportsMatches.data.length == 0) {
+                        dispatch(setMatchIds(sports.matches, sports.currentPage + 1))
+                      } else {
+                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage + 1))
+                      }
+
                     }}
                     disabled={sports.lastPage <= sports.currentPage}
                   >

@@ -2,6 +2,13 @@ import * as types from "./sportTypes";
 import axios from "../../plugins/axios";
 import { camelize } from "../../helpers/object";
 
+export const setSportsType = (id) => {
+  return {
+    type: types.SET_SPORTS_TYPE,
+    payload:id
+  };
+};
+
 export const resetSideMarkets = () => {
   return {
     type: types.RESET_SIDE_MARKETS,
@@ -144,7 +151,6 @@ export const fetchMatches = () => {
       })
   };
 };
-
 
 
 export const setMatchIds = (matches,pageNumber) => {

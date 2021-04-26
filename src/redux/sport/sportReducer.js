@@ -16,10 +16,22 @@ const initialState = {
   lastPage: 1,
   mainMarkets: [],
   sideMarket: [],
+  sportsTypeId: null,
+  sportsMatches: {data:[]}
 };
 
 const sportReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case types.SET_SPORTS_TYPE:
+      let lastPageType = Math.ceil(action.payload.matches.length / 15)
+      
+      return {
+        ...state,
+        lastPage: lastPageType,
+        sportsTypeId:action.payload.id,
+        sportsMatches:{data:action.payload.matches}
+      };
     case types.FETCH_MATCHES_REQUEST:
       return {
         ...state,
@@ -28,8 +40,6 @@ const sportReducer = (state = initialState, action) => {
       };
     case types.FETCH_MATCHES_SUCCESS:
       let lastPage = Math.ceil(action.payload.data.length / 15)
-      // console.log(Math.ceil(0.1))
-      console.log(lastPage)
       return {
         ...state,
         matches: action.payload,
@@ -91,9 +101,13 @@ const sportReducer = (state = initialState, action) => {
       };
 
     case types.FETCH_SPORTS_SUCCESS:
+      let sports = action.payload
+      sports.data.map((sport, index) => {
+        sport.count = 0
+      })
       return {
         ...state,
-        sports: action.payload
+        sports: sports
       };
 
     case types.FETCH_SPORTS_FAILURE:
@@ -147,9 +161,9 @@ const sportReducer = (state = initialState, action) => {
     case types.FETCH_MARKET_PER_MATCH_SUCCESS:
       let sideMarket = action.payload.data[0]
       console.log(sideMarket)
-      sideMarket.markets.map((market,index)=>{
-        market.outcomes.map((outcome,outcome_index)=>{
-          outcome.oldOdds=null
+      sideMarket.markets.map((market, index) => {
+        market.outcomes.map((outcome, outcome_index) => {
+          outcome.oldOdds = null
         })
       })
       return {
