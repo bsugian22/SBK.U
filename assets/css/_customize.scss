@@ -722,10 +722,13 @@ select {
 
 /* left-sidebar */
 .left-sidebar {
-   .active {
-      box-shadow: 0 -1px 0px #38b853 inset;
+   .tab {
+      .active {
+         box-shadow: 0 -1px 0px #38b853 inset;
+      }
    }
    button {
+      height: 50px;
       &:hover {
          box-shadow: 0 -1px 0px #38b853 inset;
          color: #38b853 !important;
@@ -744,39 +747,64 @@ select {
          }
       }
       .events-list {
-         .event {
-            > div {
+         .events {
+            .event {
                cursor: pointer;
                &:hover {
                   transition: 0.2s ease;
                   background-color: rgba(0, 0, 0, 0.1);
-               }
-               &:first-child {
-                  &:hover {
-                     box-shadow: 2px 0px #38b853 inset;
-                     color: #38b853 !important;
-                     transition: 0.2s ease;
-                     background-color: rgba(0, 0, 0, 0.2);
-                  }
+                  box-shadow: 2px 0px #38b853 inset;
+                  color: #38b853 !important;
                   span {
                      color: #ffffff;
                      transition: 0.2s ease;
                   }
                }
-               &:first-child.active {
+               &.active {
                   box-shadow: 2px 0px #38b853 inset;
                   color: #38b853 !important;
                   background-color: rgba(0, 0, 0, 0.1);
+                  span {
+                     color: #ffffff;
+                  }
                }
             }
          }
          .event-detail {
             background-color: rgba(0, 0, 0, 0) !important;
-            > div {
+            .region {
+               cursor: pointer;
                &:hover {
+                  background-color: rgba(0, 0, 0, 0.05);
                   span {
                      color: #ffffff;
                      transition: 0.2s ease;
+                  }
+               }
+               &.active {
+                  background-color: rgba(0, 0, 0, 0.05);
+                  span {
+                     color: #ffffff;
+                  }
+               }
+            }
+         }
+         .region-detail {
+            background-color: rgba(0, 0, 0, 0) !important;
+            .league {
+               padding-left: 20px;
+               cursor: pointer;
+               &:hover {
+                  background-color: rgba(0, 0, 0, 0.05);
+                  span {
+                     color: #ffffff;
+                     transition: 0.2s ease;
+                  }
+               }
+               &.active {
+                  background-color: rgba(0, 0, 0, 0.05);
+                  span {
+                     color: #ffffff;
                   }
                }
             }
@@ -1124,6 +1152,20 @@ select {
 /* prematch-detail */
 .prematch-detail {
    display: none !important;
+   .detail-header {
+      .bookmark {
+         span {
+            cursor:pointer;
+            &:hover {
+               color:#e8c414;
+               transition: 0.2s ease;
+            }
+         }
+         .bookmarked {
+            color:#e8c414;
+         }
+      }
+   }
    .market-list {
       .market-data {
          .data {
