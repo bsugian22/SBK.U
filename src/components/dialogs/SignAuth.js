@@ -6,6 +6,7 @@ import Signinfo from '../dialogs/Signinfo'
 import { connect, useDispatch, useSelector, Provider } from "react-redux";
 import { Link, NavLink } from 'react-router-dom'
 import store from "../../redux/store";
+import { registrationForm } from '../../redux/user/userActions'
 export default function SignAuth() {
    const swal = new sweetalert()
    const model = new userModel()

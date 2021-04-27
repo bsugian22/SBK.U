@@ -99,7 +99,7 @@ export default function Signup() {
                         <input type="password" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="비밀번호를 다시한번 입력하세요."
                            onChange={(e) => {
                               let data = {
-                                 target: "confirm_password",
+                                 target: "password_confirmation",
                                  value: e.target.value
                               }
 
@@ -178,15 +178,15 @@ export default function Signup() {
                               <div class="select-item-box select height-40 margin-top-10">
                                  <select name="country" onChange={(e) => {
                                     let data = {
-                                       target: "country",
+                                       target: "country_code",
                                        value: e.target.value
                                     }
 
                                     dispatch(registrationForm(data))
                                  }
                                  }>
-                                    <option value="0">한국</option>
-                                    <option value="1">미국</option>
+                                    <option value="ko">한국</option>
+                                    <option value="us">미국</option>
                                  </select>
                               </div>
                            </div>
@@ -201,8 +201,8 @@ export default function Signup() {
                                     dispatch(registrationForm(data))
                                  }
                                  }>
-                                    <option value="0">한국어</option>
-                                    <option value="1">미국어</option>
+                                    <option value="ko">한국어</option>
+                                    <option value="english">미국어</option>
                                  </select>
                               </div>
                            </div>

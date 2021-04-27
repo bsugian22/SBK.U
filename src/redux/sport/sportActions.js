@@ -1,11 +1,12 @@
 import * as types from "./sportTypes";
 import axios from "../../plugins/axios";
 import { camelize } from "../../helpers/object";
+import { fetchMarketPerMatchesSuccessInplay,fetchMarketPerMatchesFailureInplay } from "../inplay/inplayActions";
 
 export const setSportsType = (id) => {
   return {
     type: types.SET_SPORTS_TYPE,
-    payload:id
+    payload: id
   };
 };
 
@@ -141,10 +142,8 @@ export const fetchMatches = () => {
       .then(response => {
         const matches = camelize(response.data);
         const matchIds = [];
-        // console.log(matches.data.length);
-        dispatch(setMatchIds(matches,1))
+        dispatch(setMatchIds(matches, 1, 'prematch'))
         dispatch(fetchMatchesSuccess(matches))
-        // dispatch(fetchMarketPerMatches(matchIds))
       }).catch(error => {
         const errorMsg = error.message;
         dispatch(fetchMatchesFailure(errorMsg))
@@ -153,7 +152,7 @@ export const fetchMatches = () => {
 };
 
 
-export const setMatchIds = (matches,pageNumber) => {
+export const setMatchIds = (matches, pageNumber, type) => {
   return (dispatch) => {
     let index = (pageNumber * 15) - 15
     let perPage = pageNumber * 15;
@@ -164,21 +163,41 @@ export const setMatchIds = (matches,pageNumber) => {
         matchIds.push({ id: id });
       }
     }
-    dispatch(fetchMarketPerMatches(matchIds,pageNumber))
+
+    if (type == 'prematch') {
+      dispatch(fetchMarketPerMatches(matchIds, pageNumber, type))
+    }
+    if (type == 'live') {
+      dispatch(fetchMarketPerMatches(matchIds, pageNumber, type))
+    }
+
   };
 };
 
-export const fetchMarketPerMatches = (ids,pageNumber) => {
+export const fetchMarketPerMatches = (ids, pageNumber, type) => {
   return (dispatch) => {
     axios.post(`/api/feed/market`, { matches: ids })
       .then(response => {
         const markets = camelize(response.data);
         // console.log(markets)
         markets.pageNumber = pageNumber
-        dispatch(fetchMarketPerMatchesSuccess(markets))
+        // fetchMarketPerMatchesSuccessInplay
+        // fetchMarketPerMatchesFailureInplay
+        if (type == 'prematch') {
+          dispatch(fetchMarketPerMatchesSuccess(markets))
+        }
+        if (type == 'live') {
+          dispatch(fetchMarketPerMatchesSuccessInplay(markets))
+          // dipsatche for live
+        }
       }).catch(error => {
         const errorMsg = error.message;
-        dispatch(fetchMarketPerMatchesFailure(errorMsg))
+        if (type == 'prematch') {
+          dispatch(fetchMarketPerMatchesFailure(errorMsg))
+        }
+        if (type == 'live') {
+          dispatch(fetchMarketPerMatchesFailureInplay(errorMsg))
+        }
       })
   };
 };

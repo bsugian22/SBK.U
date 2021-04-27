@@ -142,7 +142,7 @@ const Sports = (props) => {
                             e.preventDefault();
                             sportMatches.data = matches
                             dispatch(setSportsType({ id: icon.id, matches: matches }))
-                            dispatch(setMatchIds(sportMatches, 1))
+                            dispatch(setMatchIds(sportMatches, 1,'prematch'))
                           }}>
                             <span class={"icon-" + icon.id}></span>
                             <span class="event-count">{matches.length.toLocaleString()} {}</span>
@@ -623,9 +623,9 @@ const Sports = (props) => {
                       //   dispatch(fetchSportsdetails({ page: e.value, id: sports.type_id }));
                       // }
                       if (sports.sportsMatches.data.length == 0) {
-                        dispatch(setMatchIds(sports.matches, e.value))
+                        dispatch(setMatchIds(sports.matches, e.value,'prematch'))
                       } else {
-                        dispatch(setMatchIds(sports.sportsMatches, e.value))
+                        dispatch(setMatchIds(sports.sportsMatches, e.value,'prematch'))
                       }
                     }}
                     options={((rows, i, len) => {
@@ -642,9 +642,9 @@ const Sports = (props) => {
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
                     onClick={() => {
                       if (sports.sportsMatches.data.length == 0) {
-                        dispatch(setMatchIds(sports.matches, sports.currentPage - 1))
+                        dispatch(setMatchIds(sports.matches, sports.currentPage - 1,'prematch'))
                       } else {
-                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage - 1))
+                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage - 1,'prematch'))
                       }
                     }}
                     disabled={1 >= sports.currentPage}
@@ -655,9 +655,9 @@ const Sports = (props) => {
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
                     onClick={() => {
                       if (sports.sportsMatches.data.length == 0) {
-                        dispatch(setMatchIds(sports.matches, sports.currentPage + 1))
+                        dispatch(setMatchIds(sports.matches, sports.currentPage + 1,'prematch'))
                       } else {
-                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage + 1))
+                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage + 1,'prematch'))
                       }
 
                     }}
@@ -671,8 +671,6 @@ const Sports = (props) => {
           </div>
           <div class="prematch-detail flex-inherit flex-column padding-vertical-10 padding-left-5 padding-right-10 border-left">
             {sports.sideMarket?.id ? (
-              // let homeTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.homeTeamId).competitor.name.ko : "";
-              // let awayTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.awayTeamId).competitor.name.ko : "";
 
               <Fragment>
                 <div class="detail-header flex-inherit flex-column">
@@ -680,20 +678,14 @@ const Sports = (props) => {
                     <div class="league-icon justify-content-center"><i class="far fa-flag color-yellow"></i></div>
                     <span class="color-grey">
                       {sports.tournaments.data ? sports.tournaments.data.find(x => x.id == sports.sideMarket.tournamentId).tournament.name.ko : ""}
-                      {/* {sports.data.detail_data.tournament.title.ko ||
-                        sports.data.detail_data.tournament.title.en} */}
                     </span>
                   </div>
                   <div class="height-40 background-transparent-b-30 padding-horizontal-10 margin-bottom-10">
                     <div class="flex grow-2 align-items-center">
                       <i class="fas fa-tshirt color-grey font-size-11"></i>
                       <span class="color-grey">
-                        {/* {sports.data.detail_data.homeTeam.name.ko ||
-                          sports.data.detail_data.homeTeam.name.en} */}
                         {sports.competitors.data ? sports.competitors.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor.name.ko : ""}
                         <span class="margin-horizontal-4 color-twhite">vs</span>
-                        {/* {sports.data.detail_data.awayTeam.name.ko ||
-                          sports.data.detail_data.awayTeam.name.en} */}
                         {sports.competitors.data ? sports.competitors.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor.name.ko : ""}
                       </span>
                     </div>

@@ -3,18 +3,13 @@ import * as types from "./inplayTypes";
 
 const initialState = {
   loading: false,
-  data: {
-    "data": [],
-    "total": 0,
-    "count": 1,
-    "perPage": 15,
-    "page": 1,
-    "lastPage": 1,
-    detail: null,
-    detail_data: null,
-  },
   error: "",
   active_index: null,
+  matches: [],
+  currentPage: 1,
+  lastPage: 1,
+  mainMarkets: [],
+  sideMarket: []
 };
 
 const inplayReducer = (state = initialState, action) => {
@@ -196,34 +191,20 @@ const inplayReducer = (state = initialState, action) => {
     case types.FETCH_INPLAYS_REQUEST:
       return {
         ...state,
-        data: {
-          "data": [],
-          "total": 0,
-          "count": 1,
-          "perPage": 15,
-          "page": 1,
-          "lastPage": 1,
-          detail: null,
-          detail_data: null,
-        },
-        error: "",
-        active_index: null,
-        loading: true,
+        mainMarkets: [],
+        sideMarket: []
       };
     case types.FETCH_INPLAYS_SUCCESS:
       // add logic for pagination number and showing per table,
+      let lastPage = Math.ceil(action.payload.data.length / 15)
       return {
         ...state,
-        loading: false,
-        data: action.payload,
-        error: "",
+        matches: action.payload,
+        lastPage: lastPage
       };
     case types.FETCH_INPLAYS_FAILURE:
       return {
         ...state,
-        loading: false,
-
-        error: action.payload,
       };
 
     case types.FETCH_INPLAY_REQUEST:
@@ -257,60 +238,43 @@ const inplayReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
-    case types.CREATE_INPLAY_REQUEST:
+    case types.FETCH_MARKET_PER_MATCHES_SUCCESS_INPLAY:
+      const mainMarkets = action.payload
+      let currentPage = action.payload.pageNumber
+      let mainMarketsToDisplay = [];
+      mainMarkets.data.map((market, index) => {
+        let data = state.matches.data.find(x => x.id == market.id)
+
+        market['1X2'].map((market, index) => {
+          market.outcomes.map((outcome, outcome_index) => {
+            outcome.oldOdds = null;
+          })
+        })
+
+        market['hcp'].map((market, index) => {
+          market.outcomes.map((outcome, outcome_index) => {
+            outcome.oldOdds = null;
+          })
+        })
+
+        market['total'].map((market, index) => {
+          market.outcomes.map((outcome, outcome_index) => {
+            outcome.oldOdds = null;
+          })
+        })
+        mainMarketsToDisplay.push({ ...data, mainMarkets: market });
+      })
+
       return {
         ...state,
-        loading: true,
-      };
-    case types.CREATE_INPLAY_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: "",
-      };
-    case types.CREATE_INPLAY_FAILURE:
-      return {
-        loading: false,
-        data: [],
-        error: action.payload,
+        mainMarkets: mainMarketsToDisplay,
+        currentPage: currentPage
       };
 
-    case types.UPDATE_INPLAY_REQUEST:
+    case types.FETCH_MARKET_PER_MATCHES_FAILURE_INPLAY:
       return {
         ...state,
-        loading: true,
       };
-    case types.UPDATE_INPLAY_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: "",
-      };
-    case types.UPDATE_INPLAY_FAILURE:
-      return {
-        loading: false,
-        data: [],
-        error: action.payload,
-      };
-
-    case types.DELETE_INPLAYS_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case types.DELETE_INPLAYS_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: "",
-      };
-    case types.DELETE_INPLAYS_FAILURE:
-      return {
-        loading: false,
-        data: [],
-        error: action.payload,
-      };
-
     default:
       return state;
   }
