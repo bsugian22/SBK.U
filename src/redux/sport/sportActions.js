@@ -1,7 +1,16 @@
 import * as types from "./sportTypes";
 import axios from "../../plugins/axios";
 import { camelize } from "../../helpers/object";
-import { fetchMarketPerMatchesSuccessInplay,fetchMarketPerMatchesFailureInplay } from "../inplay/inplayActions";
+import { fetchMarketPerMatchesSuccessInplay, fetchMarketPerMatchesFailureInplay } from "../inplay/inplayActions";
+import moment from "moment";
+
+
+export const sortByTime = (type) => {
+  return {
+    type: types.SORT_BY_TIME,
+    payload: type
+  };
+};
 
 export const setSportsType = (id) => {
   return {
@@ -131,6 +140,48 @@ export const fetchMarketPerMatchFailure = (data) => {
   return {
     type: types.FETCH_MARKET_PER_MATCH_FAILURE,
     payload: data,
+  };
+};
+
+
+export const sortMatchesByTime = (matches, type, sportsTypeId, sortBy) => {
+  return (dispatch) => {
+    console.log(matches)
+    // decs
+    if (sortBy == 'asc') {
+      dispatch(sortByTime("desc"))
+      matches.data.sort(function compare(a, b) {
+        var dateA = new Date(a.startAt);
+        var dateB = new Date(b.startAt);
+        return dateA - dateB;
+      });
+    } 
+
+    if(sortBy == 'desc') {
+      // asc
+      dispatch(sortByTime("asc"))
+      matches.data.sort(function compare(a, b) {
+        var dateA = new Date(a.startAt);
+        var dateB = new Date(b.startAt);
+        return dateB - dateA;
+      });
+    } 
+
+
+    if (type == 'prematch') {
+      // console.log(matches);
+      // matches.data.map((match, index) => {
+      //   console.log(moment(match.startAt).format("YY / MM / DD"))
+      // })
+
+      if (sportsTypeId == null) {
+        dispatch(setMatchIds(matches, 1, type))
+      } else {
+        dispatch(setSportsType({ id: sportsTypeId, matches: matches.data }))
+        dispatch(setMatchIds(matches, 1, type))
+      }
+
+    }
   };
 };
 

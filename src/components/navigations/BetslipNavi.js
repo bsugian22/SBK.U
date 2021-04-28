@@ -49,7 +49,7 @@ export default function BetslipNavi(props) {
             <span class="color-green">BETTING SLIP {sports.intervalId} </span>
           </div>
           <div class="count">
-            <span class="color-white">{sports.data.bet.outcomes.length}</span>
+            <span class="color-white">{sports.data?.bet?.outcomes?.length}</span>
           </div>
           <div class="delete padding-horizontal-10">
             <button class="color-grey"
@@ -66,7 +66,7 @@ export default function BetslipNavi(props) {
 
           {/* Pick이 있을 시  */}
           <div class="slip-content flex-inherit flex-column">
-            {sports.data.bet.outcomes.length > 0
+            {sports.data?.bet?.outcomes?.length > 0
               ? sports.data.bet.outcomes.map((outcome, index) => {
                 return (
                   <div key={index} class="slip-data flex-inherit widthp-100 background-transparent-b-5 padding-10 border-top border-bottom">
@@ -129,7 +129,7 @@ export default function BetslipNavi(props) {
                     name="skeyword"
                     placeholder="금액을 입력하세요"
                     required
-                    value={sports.data.bet.amount}
+                    value={sports.data?.bet?.amount}
                     onChange={(e) =>
                       dispatch(setBetAmount(e.target.value))
                     }
@@ -193,13 +193,13 @@ export default function BetslipNavi(props) {
               <div class="flex-inherit align-items-center-inherit padding-5 height-40 align-items-center-inherit border-top background-transparent-b-15 border-bottom">
                 <div class="grow-2 color-grey">배당률 합계</div>
                 <div class="color-green total-odds">
-                  <i class="fal fa-times fa-xs margin-right-5 margin-top-2"></i> {sports.data.bet.total_odds}
+                  <i class="fal fa-times fa-xs margin-right-5 margin-top-2"></i> {sports?.data?.bet?.total_odds}
                 </div>
               </div>
               <div class="flex-inherit align-items-center-inherit padding-5 height-40 align-items-center-inherit border-top background-transparent-b-15 border-bottom">
                 <div class="grow-2 color-grey">예상당첨금액</div>
                 <div class="color-green total-win-price">
-                  <i class="fas fa-won-sign fa-xs margin-right-5"></i>{sports.data.bet.total_odds * sports.data.bet.amount}
+                  <i class="fas fa-won-sign fa-xs margin-right-5"></i>{sports?.data?.bet?.total_odds * sports?.data?.bet?.amount}
                 </div>
               </div>
               <div class="flex-inherit align-items-center-inherit height-40 align-items-center-inherit border-top border-bottom">

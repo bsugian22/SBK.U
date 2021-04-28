@@ -10,7 +10,7 @@ import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
 import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet, setTypeId } from "../../../redux/sportsdetail/sportsdetailActions";
 import { iconsList, setCompetitorName } from "../../../helpers/object";
-import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType } from "../../../redux/sport/sportActions";
+import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, sortByTime, sortMatchesByTime } from "../../../redux/sport/sportActions";
 
 
 const Sports = (props) => {
@@ -22,7 +22,7 @@ const Sports = (props) => {
   let sports = useSelector((state) => state.sport);
   let sportDetails = useSelector((state) => state.sportsdetail);
   let user = useSelector((state) => state.user.user);
-
+  let orderBy = sports.sortBy;
 
   useEffect(() => {
     isSubscribed = true;
@@ -47,15 +47,6 @@ const Sports = (props) => {
     } else {
       dispatch(fetchMarketPerMatch(id))
     }
-
-    // if ( context.state.detailMenu === true) {
-    //   // dispatch(sportDetailReset());
-    //   context.actions.setdetailMenu(false);
-
-    // } else {
-    //   // dispatch(fetchSportsdetail(item.id));
-    //   context.actions.setdetailMenu(true);
-    // }
   };
 
   const scrollRight = () => {
@@ -127,7 +118,7 @@ const Sports = (props) => {
                     <i class="fas fa-chevron-left margin-0 color-white"></i>
                   </button>
                   <div id="scrollmenu" class="heightp-100 flex align-items-center">
-                    {sports.sports.data.map((icon, index) => {
+                    {sports?.sports?.data?.map((icon, index) => {
 
                       if (sports.matches?.data) {
                         var matches = sports.matches.data.filter((x) => {
@@ -138,22 +129,19 @@ const Sports = (props) => {
                         if (matches.length) {
                           // console.log(matches.length)
                           let sportMatches = {}
-                          return <a class={sports.sportsTypeId == icon.id? "active" : ""} key={"icon-" + index} href="#icon" onClick={(e) => {
+                          return <a class={sports.sportsTypeId == icon.id ? "active" : ""} key={"icon-" + index} href="#icon" onClick={(e) => {
                             e.preventDefault();
                             sportMatches.data = matches
                             dispatch(setSportsType({ id: icon.id, matches: matches }))
-                            dispatch(setMatchIds(sportMatches, 1))
+                            dispatch(setMatchIds(sportMatches, 1, 'prematch'))
                           }}>
                             <span class={"icon-" + icon.id}></span>
-                            <span class="event-count">{matches.length.toLocaleString()} {}</span>
+                            <span class="event-count">{icon.name.ko}</span>
                           </a>
                         }
-
                       }
 
-
-                    }
-                    )}
+                    })}
 
 
                   </div>
@@ -168,20 +156,24 @@ const Sports = (props) => {
                 <div class="flex height-40 padding-horizontal-10 align-items-center background-transparent-b-20 border-top">
                   <div class="flex">
                     <span class="color-grey">
-                      <i class="fas fa-calendar-check"></i>PREMATCH : ALL EVENTS
+                      <i class="fas fa-calendar-check"></i>PREMATCH : {sports.sportsTypeId == null ? ' ALL EVENTS' : sports.sports.data ? sports.sports.data.find(x => x.id == sports.sportsTypeId).name.ko : ""
+                      }
                     </span>
                   </div>
                   <div class="flex grow-2 justify-content-end">
-                    <span class="color-green">1168</span>
+                    <span class="color-green">{sports.sportsTypeId != null ? sports.sportsMatches.data.length : sports.matches?.data ? sports.matches.data.length : ""}</span>
                     <span class="color-grey">개의 경기가 진행 중 입니다</span>
                   </div>
                 </div>
               </div>
               <div class="settings padding-vertical-10 height-60 flex-inherit">
                 <div class="setting-btn grow-2">
-                  <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 active">
+                  <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 active"
+                    onClick={() => {
+                      dispatch(fetchMatches())
+                    }}>
                     <span>
-                      <i class="fas fa-check color-green"></i>
+                      {sports.sportsTypeId == null? <i class="fas fa-check color-green"></i> : ""}
                       <span class="text text-media">All Matches</span>
                     </span>
                   </button>
@@ -191,7 +183,20 @@ const Sports = (props) => {
                       <span class="text text-media">Bookmarked</span>
                     </span>
                   </button>
-                  <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 margin-left-5 active">
+                  <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 margin-left-5 active"
+                    onClick={() => {
+                      if(orderBy == 'asc'){
+                        orderBy = 'asc'
+                      }else {
+                        orderBy = 'desc'
+                      }
+                      // dispatch(fetchMatches())
+                      if(sports.sportsMatches.data.length == 0){
+                        dispatch(sortMatchesByTime(sports.matches,'prematch',null,orderBy))
+                      }else {
+                        dispatch(sortMatchesByTime(sports.sportsMatches,'prematch',sports.sportsTypeId,orderBy))
+                      }
+                    }}>
                     <span>
                       <i class="fad fa-stopwatch color-grey"></i>
                       <span class="text text-media">시간순 정렬</span>
@@ -232,7 +237,7 @@ const Sports = (props) => {
             </div>
             <div class="prematch-list border-bottom match-list grow-2 padding-left-10 padding-right-10 padding-bottom-10 scrollable-auto flex-column">
               {/* {console.log(sports.mainMarkets)} */}
-              {sports.mainMarkets.length > 0
+              {sports?.mainMarkets?.length > 0
                 ? sports.mainMarkets.map((matches, index) => {
 
                   // console.log(matches)
@@ -274,8 +279,8 @@ const Sports = (props) => {
                   rows.push(
                     matches.matches.map((match, key) => {
                       let sport_main_market_exists = false
-                      let homeTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.homeTeamId).competitor.name.ko : "";
-                      let awayTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.awayTeamId).competitor.name.ko : "";
+                      let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == match.homeTeamId).competitor.name.ko : "";
+                      let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == match.awayTeamId).competitor.name.ko : "";
                       // console.log(match)
 
                       return (
@@ -299,7 +304,7 @@ const Sports = (props) => {
                             <div class="league padding-horizontal-5">
                               <span class="color-grey text-ellipsis">
                                 {/* {match.tournament.title["ko"]} */}
-                                {sports.tournaments.data ? sports.tournaments.data.find(x => x.id == match.tournamentId)?.tournament.name.ko : ""}
+                                {sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == match.tournamentId)?.tournament.name.ko : ""}
                                 {/* {match.tournamentId} */}
 
                               </span>
@@ -345,7 +350,7 @@ const Sports = (props) => {
                                               data-market-id={market.marketId}
                                               data-outcome-id={outcome.id}
                                               data-odds={outcome.odds}
-                                              class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? classNameActive: className}
+                                              class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? classNameActive : className}
                                             // class=" widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
                                             >
                                               <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
@@ -593,7 +598,7 @@ const Sports = (props) => {
                                     }
                                   >
                                     {/* +{match.markets} */}
-                                    +
+                                    +{match.mainMarkets.count.toLocaleString()}
                                   </button>
                                 </div>
                               </div>
@@ -624,9 +629,9 @@ const Sports = (props) => {
                       //   dispatch(fetchSportsdetails({ page: e.value, id: sports.type_id }));
                       // }
                       if (sports.sportsMatches.data.length == 0) {
-                        dispatch(setMatchIds(sports.matches, e.value))
+                        dispatch(setMatchIds(sports.matches, e.value, 'prematch'))
                       } else {
-                        dispatch(setMatchIds(sports.sportsMatches, e.value))
+                        dispatch(setMatchIds(sports.sportsMatches, e.value, 'prematch'))
                       }
                     }}
                     options={((rows, i, len) => {
@@ -643,9 +648,9 @@ const Sports = (props) => {
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
                     onClick={() => {
                       if (sports.sportsMatches.data.length == 0) {
-                        dispatch(setMatchIds(sports.matches, sports.currentPage - 1))
+                        dispatch(setMatchIds(sports.matches, sports.currentPage - 1, 'prematch'))
                       } else {
-                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage - 1))
+                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage - 1, 'prematch'))
                       }
                     }}
                     disabled={1 >= sports.currentPage}
@@ -656,9 +661,9 @@ const Sports = (props) => {
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
                     onClick={() => {
                       if (sports.sportsMatches.data.length == 0) {
-                        dispatch(setMatchIds(sports.matches, sports.currentPage + 1))
+                        dispatch(setMatchIds(sports.matches, sports.currentPage + 1, 'prematch'))
                       } else {
-                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage + 1))
+                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage + 1, 'prematch'))
                       }
 
                     }}
@@ -680,7 +685,7 @@ const Sports = (props) => {
                   <div class="height-40 align-items-center background-transparent-b-40 padding-horizontal-10">
                     <div class="league-icon justify-content-center"><i class="far fa-flag color-yellow"></i></div>
                     <span class="color-grey flex grow-2">
-                      {sports.tournaments.data ? sports.tournaments.data.find(x => x.id == sports.sideMarket.tournamentId).tournament.name.ko : ""}
+                      {sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == sports.sideMarket.tournamentId).tournament.name.ko : ""}
                       {/* {sports.data.detail_data.tournament.title.ko ||
                         sports.data.detail_data.tournament.title.en} */}
                     </span>
@@ -694,11 +699,11 @@ const Sports = (props) => {
                       <span class="color-grey">
                         {/* {sports.data.detail_data.homeTeam.name.ko ||
                           sports.data.detail_data.homeTeam.name.en} */}
-                        {sports.competitors.data ? sports.competitors.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor.name.ko : ""}
+                        {sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor.name.ko : ""}
                         <span class="margin-horizontal-4 color-twhite">vs</span>
                         {/* {sports.data.detail_data.awayTeam.name.ko ||
                           sports.data.detail_data.awayTeam.name.en} */}
-                        {sports.competitors.data ? sports.competitors.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor.name.ko : ""}
+                        {sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor.name.ko : ""}
                       </span>
                     </div>
                     <div class="flex align-items-center">
@@ -715,9 +720,9 @@ const Sports = (props) => {
                   {sports.sideMarket.markets.length > 0
                     ? sports.sideMarket.markets.map((market, market_index) => {
                       // console.log(market)
-                      let homeTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor.name.ko : "";
-                      let awayTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor.name.ko : "";
-                      let marketName = sports.markets.data ? sports.markets.data.find(x => x.id == market.marketId).marketName.ko : ""
+                      let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor.name.ko : "";
+                      let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor.name.ko : "";
+                      let marketName = sports.markets?.data ? sports.markets.data.find(x => x.id == market.marketId).marketName.ko : ""
 
                       var rows = [];
 

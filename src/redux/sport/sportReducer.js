@@ -2,6 +2,7 @@ import * as types from "./sportTypes";
 import { chain } from "lodash";
 import moment from "moment";
 
+
 const initialState = {
   loading: false,
   data: [],
@@ -17,32 +18,46 @@ const initialState = {
   mainMarkets: [],
   sideMarket: [],
   sportsTypeId: null,
-  sportsMatches: {data:[]}
+  sportsMatches: { data: [] },
+  sortBy: "asc"
 };
 
 const sportReducer = (state = initialState, action) => {
   switch (action.type) {
 
+    case types.SORT_BY_TIME:
+      // let lastPageType = Math.ceil(action.payload.matches.length / 15)
+      // console.log(action.payload);
+
+      return {
+        ...state,
+        sortBy: action.payload
+      };
     case types.SET_SPORTS_TYPE:
       let lastPageType = Math.ceil(action.payload.matches.length / 15)
-      
+
       return {
         ...state,
         lastPage: lastPageType,
-        sportsTypeId:action.payload.id,
-        sportsMatches:{data:action.payload.matches}
+        sportsTypeId: action.payload.id,
+        sportsMatches: { data: action.payload.matches }
       };
     case types.FETCH_MATCHES_REQUEST:
       return {
         ...state,
         mainMarkets: [],
-        sideMarket: []
+        sideMarket: [],
+        sportsTypeId: null,
+        sportsMatches: { data: [] },
+        sortBy: "asc"
       };
     case types.FETCH_MATCHES_SUCCESS:
+      let matches = action.payload
       let lastPage = Math.ceil(action.payload.data.length / 15)
+      
       return {
         ...state,
-        matches: action.payload,
+        matches: matches,
         lastPage: lastPage
       };
 
@@ -102,9 +117,6 @@ const sportReducer = (state = initialState, action) => {
 
     case types.FETCH_SPORTS_SUCCESS:
       let sports = action.payload
-      sports.data.map((sport, index) => {
-        sport.count = 0
-      })
       return {
         ...state,
         sports: sports
@@ -143,11 +155,28 @@ const sportReducer = (state = initialState, action) => {
         mainMarketsToDisplay.push({ ...data, mainMarkets: market });
       })
 
+
       mainMarketsToDisplay = chain(mainMarketsToDisplay)
         .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
         .map((matches, startAt) => ({ startAt, matches }))
-        .orderBy("startAt")
         .value();
+
+
+
+      if (state.sortBy == 'asc') {
+        mainMarketsToDisplay.sort(function compare(a, b) {
+          var dateA = new Date(a.startAt);
+          var dateB = new Date(b.startAt);
+          return dateB - dateA;
+        });
+      } else {
+        mainMarketsToDisplay.sort(function compare(a, b) {
+          var dateA = new Date(a.startAt);
+          var dateB = new Date(b.startAt);
+          return dateA - dateB;
+        });
+      }
+
       return {
         ...state,
         mainMarkets: mainMarketsToDisplay,
