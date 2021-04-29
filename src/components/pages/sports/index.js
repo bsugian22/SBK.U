@@ -204,7 +204,6 @@ const Sports = (props) => {
                   </button>
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5"
                     onClick={() => {
-                      alert("league")
                       if (sports.sportsMatches.data.length == 0) {
                         dispatch(sortMatchesByLeague(sports.matches, 'prematch', null))
                       } else {

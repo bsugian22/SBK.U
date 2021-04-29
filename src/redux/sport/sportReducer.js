@@ -171,17 +171,24 @@ const sportReducer = (state = initialState, action) => {
         mainMarketsToDisplay.push({ ...data, mainMarkets: market });
       })
 
+      console.log(mainMarketsToDisplay)
+      mainMarketsToDisplay.sort(function (a, b) {
+        return a.timeAt.localeCompare(b.timeAt);
+      });
+      console.log(mainMarketsToDisplay)
 
       mainMarketsToDisplay = chain(mainMarketsToDisplay)
         .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
         .map((matches, startAt) => ({ startAt, matches }))
         .value();
-        
-      mainMarketsToDisplay.sort(function compare(a, b) {
-        var dateA = new Date(a.startAt);
-        var dateB = new Date(b.startAt);
-        return dateA - dateB;
-      });
+
+
+
+      // mainMarketsToDisplay.sort(function compare(a, b) {
+      //   var dateA = new Date(a.startAt);
+      //   var dateB = new Date(b.startAt);
+      //   return dateA - dateB;
+      // });
 
       // if (state.sortBy == 'asc') {
       //   mainMarketsToDisplay.sort(function compare(a, b) {
