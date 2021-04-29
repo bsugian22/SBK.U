@@ -205,16 +205,20 @@ export const searchMatches = (text, matches, competitors, tournaments, type) => 
     dispatch(setSearchOff())
     
     const searchMatches = {data:[]}
+
+
     console.log(text)
     console.log(tournaments)
     console.log(competitors)
-    let tournamentsData = tournaments.filter(x => x.tournament.name.ko.toLowerCase() == text.toLowerCase());
-    let competitorsData = competitors.filter(x => x.competitor?.name?.ko ? x.competitor.name.ko.toLowerCase() == text.toLowerCase() : "");
+    let tournamentsData = tournaments.filter(x => x.tournament.name.ko.toLowerCase().includes(text.toLowerCase()));
+    let competitorsData = competitors.filter(x => x.competitor?.name?.ko ? x.competitor.name.ko.toLowerCase().includes(text.toLowerCase()) : "");
 
 
     tournamentsData.map((tournament) => {
-      let matchesData = matches.filter(x => x.tournamentId == tournament.id);
-      searchMatches.data.push(...matchesData)
+      let tournamentMatchesData = matches.filter(x => x.tournamentId == tournament.id);
+      let simpleTournamentMatchesData = matches.filter(x => x.simpleTournamentId == tournament.id);
+      searchMatches.data.push(...tournamentMatchesData)
+      searchMatches.data.push(...simpleTournamentMatchesData)
     })
 
     competitorsData.map((competitor) => {
@@ -278,7 +282,7 @@ export const sortMatchesByLeague = (matches, type, sportsTypeId) => {
     dispatch(setSearchOff())
     // decs
     matches.data.sort(function (a, b) {
-      return a.tournamentId - b.tournamentId;
+      return a.tournamentId - b.tournamentId || a.simpleTournamentId - b.simpleTournamentId;
     });
 
     if (type == 'prematch') {

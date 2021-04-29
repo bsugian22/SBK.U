@@ -133,6 +133,7 @@ const sportReducer = (state = initialState, action) => {
     case types.FETCH_MATCHES_REQUEST:
       return {
         ...state,
+        loading:true,
         mainMarkets: [],
         sideMarket: [],
         sportsTypeId: null,
@@ -147,13 +148,15 @@ const sportReducer = (state = initialState, action) => {
       let lastPage = Math.ceil(action.payload.data.length / 15)
       return {
         ...state,
+        
         matches: matches,
-        lastPage: lastPage
+        lastPage: lastPage,
       };
 
     case types.FETCH_MATCHES_FAILURE:
       return {
         ...state,
+        loading:false,
         matches: []
       };
 
@@ -281,7 +284,8 @@ const sportReducer = (state = initialState, action) => {
       return {
         ...state,
         mainMarkets: mainMarketsToDisplay,
-        currentPage: currentPage
+        currentPage: currentPage,
+        loading:false,
       };
 
     case types.FETCH_MARKET_PER_MATCHES_FAILURE:
