@@ -208,8 +208,8 @@ export const searchMatches = (text, matches, competitors, tournaments, type) => 
     console.log(text)
     console.log(tournaments)
     console.log(competitors)
-    let tournamentsData = tournaments.filter(x => x.tournament.name.en.toLowerCase() == text.toLowerCase());
-    let competitorsData = competitors.filter(x => x.competitor?.name?.en ? x.competitor.name.en.toLowerCase() == text.toLowerCase() : "");
+    let tournamentsData = tournaments.filter(x => x.tournament.name.ko.toLowerCase() == text.toLowerCase());
+    let competitorsData = competitors.filter(x => x.competitor?.name?.ko ? x.competitor.name.ko.toLowerCase() == text.toLowerCase() : "");
 
 
     tournamentsData.map((tournament) => {
