@@ -6,6 +6,7 @@ import moment from "moment";
 const initialState = {
   loading: false,
   data: [],
+  originalMatches: [],
   matches: [],
   tournaments: [],
   competitors: [],
@@ -25,9 +26,24 @@ const initialState = {
 const sportReducer = (state = initialState, action) => {
   switch (action.type) {
 
+
+    case types.RESET_SETTINGS:
+
+      return {
+        ...state,
+        sportsTypeId: null,
+        sportsMatches: { data: [] },
+        sortBy: "asc"
+      };
+
+    case types.SET_ORIGINAL_MATCHES:
+      // console.log(action.payload)
+      return {
+        ...state,
+        originalMatches: action.payload,
+      };
+
     case types.SORT_BY_TIME:
-      // let lastPageType = Math.ceil(action.payload.matches.length / 15)
-      // console.log(action.payload);
 
       return {
         ...state,
@@ -49,12 +65,12 @@ const sportReducer = (state = initialState, action) => {
         sideMarket: [],
         sportsTypeId: null,
         sportsMatches: { data: [] },
-        sortBy: "asc"
+        sortBy: "asc",
+        originalMatches: [],
       };
     case types.FETCH_MATCHES_SUCCESS:
       let matches = action.payload
       let lastPage = Math.ceil(action.payload.data.length / 15)
-      
       return {
         ...state,
         matches: matches,
@@ -133,7 +149,7 @@ const sportReducer = (state = initialState, action) => {
       let currentPage = action.payload.pageNumber
       let mainMarketsToDisplay = [];
       mainMarkets.data.map((market, index) => {
-        let data = state.matches.data.find(x => x.id == market.id)
+        let data = state.matches?.data?.find(x => x.id == market.id)
 
         market['1X2'].map((market, index) => {
           market.outcomes.map((outcome, outcome_index) => {
@@ -160,22 +176,26 @@ const sportReducer = (state = initialState, action) => {
         .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
         .map((matches, startAt) => ({ startAt, matches }))
         .value();
+        
+      mainMarketsToDisplay.sort(function compare(a, b) {
+        var dateA = new Date(a.startAt);
+        var dateB = new Date(b.startAt);
+        return dateA - dateB;
+      });
 
-
-
-      if (state.sortBy == 'asc') {
-        mainMarketsToDisplay.sort(function compare(a, b) {
-          var dateA = new Date(a.startAt);
-          var dateB = new Date(b.startAt);
-          return dateB - dateA;
-        });
-      } else {
-        mainMarketsToDisplay.sort(function compare(a, b) {
-          var dateA = new Date(a.startAt);
-          var dateB = new Date(b.startAt);
-          return dateA - dateB;
-        });
-      }
+      // if (state.sortBy == 'asc') {
+      //   mainMarketsToDisplay.sort(function compare(a, b) {
+      //     var dateA = new Date(a.startAt);
+      //     var dateB = new Date(b.startAt);
+      //     return dateB - dateA;
+      //   });
+      // } else {
+      //   mainMarketsToDisplay.sort(function compare(a, b) {
+      //     var dateA = new Date(a.startAt);
+      //     var dateB = new Date(b.startAt);
+      //     return dateA - dateB;
+      //   });
+      // }
 
       return {
         ...state,
@@ -189,7 +209,7 @@ const sportReducer = (state = initialState, action) => {
       };
     case types.FETCH_MARKET_PER_MATCH_SUCCESS:
       let sideMarket = action.payload.data[0]
-      console.log(sideMarket)
+      // console.log(sideMarket)
       sideMarket.markets.map((market, index) => {
         market.outcomes.map((outcome, outcome_index) => {
           outcome.oldOdds = null

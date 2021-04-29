@@ -333,29 +333,29 @@ export default function Inplay() {
                            <Select
                               className="select-container select-position"
                               classNamePrefix="select-box"
-                              value={{ label: inplay.data.page, value: inplay.data.page }}
-                              onChange={setPage}
-                              options={((rows, i, len) => {
-                                 while (++i <= len) {
-                                    rows.push({ value: i, label: i });
-                                 }
-                                 return rows;
-                              })([], 0, inplay.data.lastPage)}
+                              // value={{ label: inplay.data.page, value: inplay.data.page }}
+                              // onChange={setPage}
+                              // options={((rows, i, len) => {
+                              //    while (++i <= len) {
+                              //       rows.push({ value: i, label: i });
+                              //    }
+                              //    return rows;
+                              // })([], 0, inplay.data.lastPage)}
                            />
                         </div>
                         <div class="grow-2"></div>
                         <div class="flex page">
                            <button
                               class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
-                              onClick={prev}
-                              disabled={1 >= inplay.data.page}
+                              // onClick={prev}
+                              // disabled={1 >= inplay.data.page}
                            >
                               <i class="fas fa-chevron-left margin-0 color-white"></i>
                            </button>
                            <button
                               class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
-                              onClick={next}
-                              disabled={inplay.data.lastPage <= inplay.data.page}
+                              // onClick={next}
+                              // disabled={inplay.data.lastPage <= inplay.data.page}
                            >
                               <i class="fas fa-chevron-right margin-0 color-white"></i>
                            </button>
@@ -368,15 +368,15 @@ export default function Inplay() {
                      <div class="height-40 align-items-center background-transparent-b-20 padding-horizontal-10">
                         <i class="fas fa-tshirt color-grey font-size-11"></i>
                         <span class="color-grey">
-                           {inplay.data.detail_data?.homeTeam?.name?.ko ? inplay.data.detail_data.homeTeam.name.ko : ""}
+                           {/* {inplay.data.detail_data?.homeTeam?.name?.ko ? inplay.data.detail_data.homeTeam.name.ko : ""} */}
                            <span class="margin-horizontal-4 color-twhite">vs</span>
-                           {inplay.data.detail_data?.awayTeam?.name?.ko ? inplay.data.detail_data.awayTeam.name.ko : ""}
+                           {/* {inplay.data.detail_data?.awayTeam?.name?.ko ? inplay.data.detail_data.awayTeam.name.ko : ""} */}
                         </span>
                      </div>
                      <div class="height-40 background-transparent-b-10 padding-horizontal-10 margin-bottom-10">
                         <div class="flex grow-2 align-items-center">
                            <i class="far fa-stopwatch color-grey font-size-11"></i>
-                           <span class="color-grey">{inplay.data.detail_data?.awayTeam?.name?.ko ? moment(inplay.data.detail_data.startAt).format("MM / DD HH:mm") : ""}</span>
+                           {/* <span class="color-grey">{inplay.data.detail_data?.awayTeam?.name?.ko ? moment(inplay.data.detail_data.startAt).format("MM / DD HH:mm") : ""}</span> */}
                         </div>
                         <div class="flex align-items-center">
                            <i class="fas fa-map-marker-alt color-grey font-size-11"></i>
@@ -385,7 +385,7 @@ export default function Inplay() {
                      </div>
                   </div>
                   <div class="market-list flex-inherit flex-column scrollable-auto">
-                     {inplay.data.detail_data == null
+                     {/* {inplay.data.detail_data == null
                         ? <div class="align-items-center border-left" style={{ paddingLeft: "45%" }}>
                            <Logo width="120" height="30" />
                         </div> : inplay.data.detail_data.markets.map((market, market_index) => {
@@ -534,7 +534,7 @@ export default function Inplay() {
                            }
                            return rows;
                         })
-                     }
+                     } */}
                   </div>
                </div>
             </div>

@@ -5,6 +5,19 @@ import { fetchMarketPerMatchesSuccessInplay, fetchMarketPerMatchesFailureInplay 
 import moment from "moment";
 
 
+export const originalMatches = (matches) => {
+  return {
+    type: types.SET_ORIGINAL_MATCHES,
+    payload: matches
+  };
+};
+
+export const resetAllData = () => {
+  return {
+    type: types.RESET_SETTINGS,
+  };
+};
+
 export const sortByTime = (type) => {
   return {
     type: types.SORT_BY_TIME,
@@ -148,31 +161,33 @@ export const sortMatchesByTime = (matches, type, sportsTypeId, sortBy) => {
   return (dispatch) => {
     console.log(matches)
     // decs
-    if (sortBy == 'asc') {
-      dispatch(sortByTime("desc"))
-      matches.data.sort(function compare(a, b) {
-        var dateA = new Date(a.startAt);
-        var dateB = new Date(b.startAt);
-        return dateA - dateB;
-      });
-    } 
+    // if (sortBy == 'asc') {
+    //   dispatch(sortByTime("desc"))
+    //   matches.data.sort(function compare(a, b) {
+    //     var dateA = new Date(a.startAt);
+    //     var dateB = new Date(b.startAt);
+    //     return dateA - dateB;
+    //   });
+    // }
 
-    if(sortBy == 'desc') {
-      // asc
-      dispatch(sortByTime("asc"))
-      matches.data.sort(function compare(a, b) {
-        var dateA = new Date(a.startAt);
-        var dateB = new Date(b.startAt);
-        return dateB - dateA;
-      });
-    } 
+    // if (sortBy == 'desc') {
+    //   // asc
+    //   dispatch(sortByTime("asc"))
+    //   matches.data.sort(function compare(a, b) {
+    //     var dateA = new Date(a.startAt);
+    //     var dateB = new Date(b.startAt);
+    //     return dateB - dateA;
+    //   });
+    // }
+
+    matches.data.sort(function compare(a, b) {
+      var dateA = new Date(a.startAt);
+      var dateB = new Date(b.startAt);
+      return dateA - dateB;
+    });
 
 
     if (type == 'prematch') {
-      // console.log(matches);
-      // matches.data.map((match, index) => {
-      //   console.log(moment(match.startAt).format("YY / MM / DD"))
-      // })
 
       if (sportsTypeId == null) {
         dispatch(setMatchIds(matches, 1, type))
@@ -185,6 +200,39 @@ export const sortMatchesByTime = (matches, type, sportsTypeId, sortBy) => {
   };
 };
 
+export const sortMatchesByLeague = (matches, type, sportsTypeId) => {
+  return (dispatch) => {
+    console.log(matches)
+    // decs
+    matches.data.sort(function (a, b) {
+      return a.tournamentId - b.tournamentId;
+    });
+
+    if (type == 'prematch') {
+
+      if (sportsTypeId == null) {
+        dispatch(setMatchIds(matches, 1, type))
+      } else {
+        dispatch(setSportsType({ id: sportsTypeId, matches: matches.data }))
+        dispatch(setMatchIds(matches, 1, type))
+      }
+
+    }
+  };
+};
+
+export const resetAll = (matches) => {
+  return (dispatch) => {
+    dispatch(resetAllData());
+      matches.data.sort(function compare(a, b) {
+        var dateA = new Date(a.startAt);
+        var dateB = new Date(b.startAt);
+        return dateA - dateB;
+      });
+    dispatch(setMatchIds(matches, 1, 'prematch'))
+  };
+};
+
 
 export const fetchMatches = () => {
   return (dispatch) => {
@@ -192,8 +240,9 @@ export const fetchMatches = () => {
     axios.get(`/api/feed/matches`)
       .then(response => {
         const matches = camelize(response.data);
-        const matchIds = [];
+        const originalMatchesData = camelize(response.data);
         dispatch(setMatchIds(matches, 1, 'prematch'))
+        dispatch(originalMatches(originalMatchesData))
         dispatch(fetchMatchesSuccess(matches))
       }).catch(error => {
         const errorMsg = error.message;

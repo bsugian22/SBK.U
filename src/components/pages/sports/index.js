@@ -10,7 +10,7 @@ import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
 import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet, setTypeId } from "../../../redux/sportsdetail/sportsdetailActions";
 import { iconsList, setCompetitorName } from "../../../helpers/object";
-import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, sortByTime, sortMatchesByTime } from "../../../redux/sport/sportActions";
+import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, sortByTime, sortMatchesByTime, sortMatchesByLeague, resetAll } from "../../../redux/sport/sportActions";
 
 
 const Sports = (props) => {
@@ -23,6 +23,7 @@ const Sports = (props) => {
   let sportDetails = useSelector((state) => state.sportsdetail);
   let user = useSelector((state) => state.user.user);
   let orderBy = sports.sortBy;
+  const originalMatches = sports.originalMatches;
 
   useEffect(() => {
     isSubscribed = true;
@@ -170,10 +171,10 @@ const Sports = (props) => {
                 <div class="setting-btn grow-2">
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 active"
                     onClick={() => {
-                      dispatch(fetchMatches())
+                      dispatch(resetAll(sports.matches))
                     }}>
                     <span>
-                      {sports.sportsTypeId == null? <i class="fas fa-check color-green"></i> : ""}
+                      {sports.sportsTypeId == null ? <i class="fas fa-check color-green"></i> : ""}
                       <span class="text text-media">All Matches</span>
                     </span>
                   </button>
@@ -185,16 +186,15 @@ const Sports = (props) => {
                   </button>
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 margin-left-5 active"
                     onClick={() => {
-                      if(orderBy == 'asc'){
+                      if (orderBy == 'asc') {
                         orderBy = 'asc'
-                      }else {
+                      } else {
                         orderBy = 'desc'
                       }
-                      // dispatch(fetchMatches())
-                      if(sports.sportsMatches.data.length == 0){
-                        dispatch(sortMatchesByTime(sports.matches,'prematch',null,orderBy))
-                      }else {
-                        dispatch(sortMatchesByTime(sports.sportsMatches,'prematch',sports.sportsTypeId,orderBy))
+                      if (sports.sportsMatches.data.length == 0) {
+                        dispatch(sortMatchesByTime(sports.matches, 'prematch', null, orderBy))
+                      } else {
+                        dispatch(sortMatchesByTime(sports.sportsMatches, 'prematch', sports.sportsTypeId, orderBy))
                       }
                     }}>
                     <span>
@@ -202,7 +202,15 @@ const Sports = (props) => {
                       <span class="text text-media">시간순 정렬</span>
                     </span>
                   </button>
-                  <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5">
+                  <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5"
+                    onClick={() => {
+                      alert("league")
+                      if (sports.sportsMatches.data.length == 0) {
+                        dispatch(sortMatchesByLeague(sports.matches, 'prematch', null))
+                      } else {
+                        dispatch(sortMatchesByLeague(sports.sportsMatches, 'prematch', sports.sportsTypeId))
+                      }
+                    }}>
                     <span>
                       <i class="fad fa-flag color-blue"></i>
                       <span class="text text-media">리그순 정렬</span>
@@ -690,7 +698,9 @@ const Sports = (props) => {
                         sports.data.detail_data.tournament.title.en} */}
                     </span>
                     <div class="bookmark">
-                      <span class="color-twhite bookmarked"><i class="fas fa-star margin-0"></i></span>
+                      <span class="color-twhite bookmarked" onClick={() => {
+                        alert("bokke")
+                      }}><i class="fas fa-star margin-0" ></i></span>
                     </div>
                   </div>
                   <div class="height-40 background-transparent-b-30 padding-horizontal-10 margin-bottom-10">
