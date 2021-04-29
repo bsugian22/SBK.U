@@ -12,12 +12,34 @@ export const originalMatches = (matches) => {
   };
 };
 
+export const setSearchOff = () => {
+  return {
+    type: types.SET_SEARCH_OFF,
+  };
+};
+
+export const setSearchMatches = (matches) => {
+  return {
+    type: types.SET_SEARCH_MATCHES,
+    payload: matches
+  };
+};
+
+export const setSearch = (id) => {
+  return {
+    type: types.SET_SEARCH,
+    payload: id
+  };
+};
+
+
 export const setBookmark = (id) => {
   return {
     type: types.SET_BOOKMARK,
     payload: id
   };
 };
+
 export const setBookmarkMatches = (matches) => {
   return {
     type: types.SET_BOOKMARK_MATCHES,
@@ -30,9 +52,10 @@ export const setBookmarkOff = () => {
   };
 };
 
-export const resetAllData = () => {
+export const resetAllData = (matches) => {
   return {
     type: types.RESET_SETTINGS,
+    payload:matches
   };
 };
 
@@ -175,9 +198,45 @@ export const fetchMarketPerMatchFailure = (data) => {
 };
 
 
+export const searchMatches = (text, matches, competitors, tournaments, type) => {
+  return (dispatch) => {
+    
+    dispatch(setBookmarkOff())
+    dispatch(setSearchOff())
+    
+    const searchMatches = {data:[]}
+    console.log(text)
+    console.log(tournaments)
+    console.log(competitors)
+    let tournamentsData = tournaments.filter(x => x.tournament.name.en.toLowerCase() == text.toLowerCase());
+    let competitorsData = competitors.filter(x => x.competitor?.name?.en ? x.competitor.name.en.toLowerCase() == text.toLowerCase() : "");
+
+
+    tournamentsData.map((tournament) => {
+      let matchesData = matches.filter(x => x.tournamentId == tournament.id);
+      searchMatches.data.push(...matchesData)
+    })
+
+    competitorsData.map((competitor) => {
+      let matchesDataHome = matches.filter(x => x.homeTeamId == competitor.id);
+      let matchesDataAway = matches.filter(x => x.awayTeamId == competitor.id);
+      searchMatches.data.push(...matchesDataHome)
+      searchMatches.data.push(...matchesDataAway)
+    })
+
+
+    if (type == 'prematch') {
+      dispatch(setMatchIds(searchMatches, 1, type))
+      dispatch(setSearchMatches(searchMatches))
+    }
+  };
+};
+
+
 export const sortMatchesByTime = (matches, type, sportsTypeId, page) => {
   return (dispatch) => {
     dispatch(setBookmarkOff())
+    dispatch(setSearchOff())
     console.log(matches)
 
     matches.data.sort(function compare(a, b) {
@@ -212,10 +271,11 @@ export const sortByBookmarked = (matches, type) => {
 
 
 export const sortMatchesByLeague = (matches, type, sportsTypeId) => {
-  
+
   return (dispatch) => {
     console.log(matches)
     dispatch(setBookmarkOff())
+    dispatch(setSearchOff())
     // decs
     matches.data.sort(function (a, b) {
       return a.tournamentId - b.tournamentId;
@@ -236,7 +296,7 @@ export const sortMatchesByLeague = (matches, type, sportsTypeId) => {
 
 export const resetAll = (matches) => {
   return (dispatch) => {
-    dispatch(resetAllData());
+    dispatch(resetAllData(matches));
     matches.data.sort(function compare(a, b) {
       var dateA = new Date(a.startAt);
       var dateB = new Date(b.startAt);

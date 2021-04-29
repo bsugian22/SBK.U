@@ -10,7 +10,7 @@ import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
 import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet, setTypeId } from "../../../redux/sportsdetail/sportsdetailActions";
 import { iconsList, setCompetitorName } from "../../../helpers/object";
-import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, sortByTime, sortMatchesByTime, sortMatchesByLeague, resetAll, setBookmark, sortByBookmarked } from "../../../redux/sport/sportActions";
+import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, setSearch, sortMatchesByTime, sortMatchesByLeague, resetAll, setBookmark, sortByBookmarked, searchMatches } from "../../../redux/sport/sportActions";
 
 
 const Sports = (props) => {
@@ -235,8 +235,16 @@ const Sports = (props) => {
                     name="skeyword"
                     placeholder="팀명 또는 리그명을 입력하세요"
                     required
+                    value={sports.search}
+                    onChange={(e) => {
+                      dispatch(setSearch(e.target.value))
+                    }}
                   />
-                  <button class="search-btn heightp-100 background-transparent-b-30">
+                  <button class="search-btn heightp-100 background-transparent-b-30"
+                    onClick={(e) => {
+
+                      dispatch(searchMatches(sports.search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch'))
+                    }}>
                     <span class="color-grey">
                       <i class="fas fa-search margin-0"></i>
                     </span>
@@ -641,22 +649,22 @@ const Sports = (props) => {
                     classNamePrefix="select-box"
                     value={{ label: sports.currentPage, value: sports.currentPage }}
                     onChange={(e) => {
-                      // alert(sports.type_id);
-                      // if (sports.type_id == null) {
-                      //   dispatch(fetchSportsdetails({ page: e.value }));
-                      // } else {
-                      //   dispatch(fetchSportsdetails({ page: e.value, id: sports.type_id }));
-                      // }
 
-                      if (sports.isBookmarkedCheck) {
-                        dispatch(setMatchIds(sports.bookmarkedMatches, e.value, 'prematch'))
+                      if (sports.isSearching) {
+                        dispatch(setMatchIds(sports.searchMatches, e.value, 'prematch'))
                       } else {
-                        if (sports.sportsMatches.data.length == 0) {
-                          dispatch(setMatchIds(sports.matches, e.value, 'prematch'))
+                        if (sports.isBookmarkedCheck) {
+                          dispatch(setMatchIds(sports.bookmarkedMatches, e.value, 'prematch'))
                         } else {
-                          dispatch(setMatchIds(sports.sportsMatches, e.value, 'prematch'))
+                          if (sports.sportsMatches.data.length == 0) {
+                            dispatch(setMatchIds(sports.matches, e.value, 'prematch'))
+                          } else {
+                            dispatch(setMatchIds(sports.sportsMatches, e.value, 'prematch'))
+                          }
                         }
                       }
+
+
                     }}
                     options={((rows, i, len) => {
                       while (++i <= len) {
@@ -671,15 +679,20 @@ const Sports = (props) => {
                   <button
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
                     onClick={() => {
-                      if (sports.isBookmarkedCheck) {
-                        dispatch(setMatchIds(sports.bookmarkedMatches, sports.currentPage - 1, 'prematch'))
+                      if (sports.isSearching) {
+                        dispatch(setMatchIds(sports.searchMatches, sports.currentPage - 1, 'prematch'))
                       } else {
-                        if (sports.sportsMatches.data.length == 0) {
-                          dispatch(setMatchIds(sports.matches, sports.currentPage - 1, 'prematch'))
+                        if (sports.isBookmarkedCheck) {
+                          dispatch(setMatchIds(sports.bookmarkedMatches, sports.currentPage - 1, 'prematch'))
                         } else {
-                          dispatch(setMatchIds(sports.sportsMatches, sports.currentPage - 1, 'prematch'))
+                          if (sports.sportsMatches.data.length == 0) {
+                            dispatch(setMatchIds(sports.matches, sports.currentPage - 1, 'prematch'))
+                          } else {
+                            dispatch(setMatchIds(sports.sportsMatches, sports.currentPage - 1, 'prematch'))
+                          }
                         }
                       }
+
                     }}
                     disabled={1 >= sports.currentPage}
                   >
@@ -688,15 +701,20 @@ const Sports = (props) => {
                   <button
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
                     onClick={() => {
-                      if (sports.isBookmarkedCheck) {
-                        dispatch(setMatchIds(sports.bookmarkedMatches, sports.currentPage + 1, 'prematch'))
+                      if (sports.isSearching) {
+                        dispatch(setMatchIds(sports.searchMatches, sports.currentPage + 1, 'prematch'))
                       } else {
-                        if (sports.sportsMatches.data.length == 0) {
-                          dispatch(setMatchIds(sports.matches, sports.currentPage + 1, 'prematch'))
+                        if (sports.isBookmarkedCheck) {
+                          dispatch(setMatchIds(sports.bookmarkedMatches, sports.currentPage + 1, 'prematch'))
                         } else {
-                          dispatch(setMatchIds(sports.sportsMatches, sports.currentPage + 1, 'prematch'))
+                          if (sports.sportsMatches.data.length == 0) {
+                            dispatch(setMatchIds(sports.matches, sports.currentPage + 1, 'prematch'))
+                          } else {
+                            dispatch(setMatchIds(sports.sportsMatches, sports.currentPage + 1, 'prematch'))
+                          }
                         }
                       }
+
 
                     }}
                     disabled={sports.lastPage <= sports.currentPage}

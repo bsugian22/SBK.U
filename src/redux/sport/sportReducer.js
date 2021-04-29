@@ -23,12 +23,34 @@ const initialState = {
   sortBy: "asc",
   bookmarked: [],
   bookmarkedMatches: { data: [] },
-  isBookmarkedCheck: false
+  isBookmarkedCheck: false,
+  search: "",
+  searchMatches: { data: [] },
+  isSearching: false
 };
 
 const sportReducer = (state = initialState, action) => {
   switch (action.type) {
 
+
+    case types.SET_SEARCH_MATCHES:
+      let lastPageSearch = Math.ceil(action.payload.data.length / 15)
+
+      return {
+        ...state,
+        lastPage: lastPageSearch,
+        searchMatches: action.payload,
+        isSearching: true
+      };
+
+    case types.SET_SEARCH:
+      return {
+        ...state,
+        search: action.payload,
+        isSearching: true,
+        sportsTypeId: null,
+        sportsMatches: { data: [] },
+      };
 
     case types.SET_BOOKMARK:
 
@@ -44,8 +66,13 @@ const sportReducer = (state = initialState, action) => {
 
       return {
         ...state,
-      }; 
+      };
 
+    case types.SET_SEARCH_OFF:
+      return {
+        ...state,
+        isSearching: false
+      };
     case types.SET_BOOKMARK_OFF:
       return {
         ...state,
@@ -64,13 +91,18 @@ const sportReducer = (state = initialState, action) => {
       };
 
     case types.RESET_SETTINGS:
+      let resetPage = Math.ceil(action.payload.data.length / 15)
 
       return {
         ...state,
         sportsTypeId: null,
         sportsMatches: { data: [] },
         sortBy: "asc",
-        isBookmarkedCheck: false
+        isBookmarkedCheck: false,
+        isSearching: false,
+        search: "",
+        searchMatches: { data: [] },
+        lastPage: resetPage
       };
 
     case types.SET_ORIGINAL_MATCHES:
@@ -96,7 +128,7 @@ const sportReducer = (state = initialState, action) => {
         lastPage: lastPageType,
         sportsTypeId: action.payload.id,
         sportsMatches: { data: action.payload.matches },
-        isBookmarkedCheck: false
+        isBookmarkedCheck: false,
       };
     case types.FETCH_MATCHES_REQUEST:
       return {
@@ -107,6 +139,8 @@ const sportReducer = (state = initialState, action) => {
         sportsMatches: { data: [] },
         sortBy: "asc",
         originalMatches: [],
+        isSearching: false,
+        search: "",
       };
     case types.FETCH_MATCHES_SUCCESS:
       let matches = action.payload
