@@ -12,6 +12,24 @@ export const originalMatches = (matches) => {
   };
 };
 
+export const setBookmark = (id) => {
+  return {
+    type: types.SET_BOOKMARK,
+    payload: id
+  };
+};
+export const setBookmarkMatches = (matches) => {
+  return {
+    type: types.SET_BOOKMARK_MATCHES,
+    payload: matches
+  };
+};
+export const setBookmarkOff = () => {
+  return {
+    type: types.SET_BOOKMARK_OFF,
+  };
+};
+
 export const resetAllData = () => {
   return {
     type: types.RESET_SETTINGS,
@@ -157,28 +175,10 @@ export const fetchMarketPerMatchFailure = (data) => {
 };
 
 
-export const sortMatchesByTime = (matches, type, sportsTypeId, sortBy) => {
+export const sortMatchesByTime = (matches, type, sportsTypeId, page) => {
   return (dispatch) => {
+    dispatch(setBookmarkOff())
     console.log(matches)
-    // decs
-    // if (sortBy == 'asc') {
-    //   dispatch(sortByTime("desc"))
-    //   matches.data.sort(function compare(a, b) {
-    //     var dateA = new Date(a.startAt);
-    //     var dateB = new Date(b.startAt);
-    //     return dateA - dateB;
-    //   });
-    // }
-
-    // if (sortBy == 'desc') {
-    //   // asc
-    //   dispatch(sortByTime("asc"))
-    //   matches.data.sort(function compare(a, b) {
-    //     var dateA = new Date(a.startAt);
-    //     var dateB = new Date(b.startAt);
-    //     return dateB - dateA;
-    //   });
-    // }
 
     matches.data.sort(function compare(a, b) {
       var dateA = new Date(a.startAt);
@@ -190,19 +190,32 @@ export const sortMatchesByTime = (matches, type, sportsTypeId, sortBy) => {
     if (type == 'prematch') {
 
       if (sportsTypeId == null) {
-        dispatch(setMatchIds(matches, 1, type))
+        dispatch(setMatchIds(matches, page, type))
       } else {
         dispatch(setSportsType({ id: sportsTypeId, matches: matches.data }))
-        dispatch(setMatchIds(matches, 1, type))
+        dispatch(setMatchIds(matches, page, type))
       }
 
     }
   };
 };
 
-export const sortMatchesByLeague = (matches, type, sportsTypeId) => {
+export const sortByBookmarked = (matches, type) => {
   return (dispatch) => {
     console.log(matches)
+    if (type == 'prematch') {
+      dispatch(setBookmarkMatches(matches))
+      dispatch(setMatchIds(matches, 1, type))
+    }
+  };
+};
+
+
+export const sortMatchesByLeague = (matches, type, sportsTypeId) => {
+  
+  return (dispatch) => {
+    console.log(matches)
+    dispatch(setBookmarkOff())
     // decs
     matches.data.sort(function (a, b) {
       return a.tournamentId - b.tournamentId;
@@ -224,11 +237,11 @@ export const sortMatchesByLeague = (matches, type, sportsTypeId) => {
 export const resetAll = (matches) => {
   return (dispatch) => {
     dispatch(resetAllData());
-      matches.data.sort(function compare(a, b) {
-        var dateA = new Date(a.startAt);
-        var dateB = new Date(b.startAt);
-        return dateA - dateB;
-      });
+    matches.data.sort(function compare(a, b) {
+      var dateA = new Date(a.startAt);
+      var dateB = new Date(b.startAt);
+      return dateA - dateB;
+    });
     dispatch(setMatchIds(matches, 1, 'prematch'))
   };
 };

@@ -20,12 +20,48 @@ const initialState = {
   sideMarket: [],
   sportsTypeId: null,
   sportsMatches: { data: [] },
-  sortBy: "asc"
+  sortBy: "asc",
+  bookmarked: [],
+  bookmarkedMatches: { data: [] },
+  isBookmarkedCheck: false
 };
 
 const sportReducer = (state = initialState, action) => {
   switch (action.type) {
 
+
+    case types.SET_BOOKMARK:
+
+      const bookmark_exists = state.bookmarked?.indexOf(action.payload)
+      // Check if a value exists in the fruits array
+
+      if (bookmark_exists !== -1) {
+        state.bookmarked.splice(bookmark_exists, 1)
+      } else {
+        state.bookmarked.push(action.payload)
+      }
+      console.log(state.bookmarked)
+
+      return {
+        ...state,
+      }; 
+
+    case types.SET_BOOKMARK_OFF:
+      return {
+        ...state,
+        isBookmarkedCheck: false
+      };
+
+
+    case types.SET_BOOKMARK_MATCHES:
+      let lastPageBookmarked = Math.ceil(action.payload.data.length / 15)
+
+      return {
+        ...state,
+        lastPage: lastPageBookmarked,
+        bookmarkedMatches: action.payload,
+        isBookmarkedCheck: true
+      };
 
     case types.RESET_SETTINGS:
 
@@ -33,7 +69,8 @@ const sportReducer = (state = initialState, action) => {
         ...state,
         sportsTypeId: null,
         sportsMatches: { data: [] },
-        sortBy: "asc"
+        sortBy: "asc",
+        isBookmarkedCheck: false
       };
 
     case types.SET_ORIGINAL_MATCHES:
@@ -49,6 +86,8 @@ const sportReducer = (state = initialState, action) => {
         ...state,
         sortBy: action.payload
       };
+
+
     case types.SET_SPORTS_TYPE:
       let lastPageType = Math.ceil(action.payload.matches.length / 15)
 
@@ -56,7 +95,8 @@ const sportReducer = (state = initialState, action) => {
         ...state,
         lastPage: lastPageType,
         sportsTypeId: action.payload.id,
-        sportsMatches: { data: action.payload.matches }
+        sportsMatches: { data: action.payload.matches },
+        isBookmarkedCheck: false
       };
     case types.FETCH_MATCHES_REQUEST:
       return {

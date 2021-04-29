@@ -10,7 +10,7 @@ import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
 import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet, setTypeId } from "../../../redux/sportsdetail/sportsdetailActions";
 import { iconsList, setCompetitorName } from "../../../helpers/object";
-import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, sortByTime, sortMatchesByTime, sortMatchesByLeague, resetAll } from "../../../redux/sport/sportActions";
+import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, sortByTime, sortMatchesByTime, sortMatchesByLeague, resetAll, setBookmark, sortByBookmarked } from "../../../redux/sport/sportActions";
 
 
 const Sports = (props) => {
@@ -126,7 +126,6 @@ const Sports = (props) => {
                           return x.type == icon.id;
                         });
 
-
                         if (matches.length) {
                           // console.log(matches.length)
                           let sportMatches = {}
@@ -178,7 +177,20 @@ const Sports = (props) => {
                       <span class="text text-media">All Matches</span>
                     </span>
                   </button>
-                  <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5">
+                  <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5"
+                    onClick={() => {
+                      console.log(sports.bookmarked);
+                      let sportsbookmark = [];
+                      sports.bookmarked.map((id) => {
+                        var matches = sports.matches.data.filter((x) => {
+                          return x.tournamentId == id;
+                        });
+                        sportsbookmark.push(...matches)
+                      })
+
+                      dispatch(sortByBookmarked({ data: sportsbookmark }, 'prematch'))
+                    }}
+                  >
                     <span>
                       <i class="fas fa-star color-yellow"></i>
                       <span class="text text-media">Bookmarked</span>
@@ -192,9 +204,9 @@ const Sports = (props) => {
                         orderBy = 'desc'
                       }
                       if (sports.sportsMatches.data.length == 0) {
-                        dispatch(sortMatchesByTime(sports.matches, 'prematch', null, orderBy))
+                        dispatch(sortMatchesByTime(sports.matches, 'prematch', null, sports.currentPage))
                       } else {
-                        dispatch(sortMatchesByTime(sports.sportsMatches, 'prematch', sports.sportsTypeId, orderBy))
+                        dispatch(sortMatchesByTime(sports.sportsMatches, 'prematch', sports.sportsTypeId, sports.currentPage))
                       }
                     }}>
                     <span>
@@ -331,7 +343,7 @@ const Sports = (props) => {
 
                                   {match.mainMarkets['1X2'].length != 0 ?
                                     match.mainMarkets['1X2'].map((market, market_index) => {
-                                      console.log(market.outcomes.length)
+                                      // console.log(market.outcomes.length)
                                       let classNameActive = ""
                                       let className = ""
                                       if (market.outcomes.length == 2) {
@@ -495,7 +507,7 @@ const Sports = (props) => {
                                       :
                                       match.mainMarkets['total'].length != 0 ?
                                         match.mainMarkets['total'].map((market, market_index) => {
-                                          console.log(sport_main_market_exists)
+                                          // console.log(sport_main_market_exists)
                                           if (sport_main_market_exists == false) {
                                             sport_main_market_exists = true;
                                             if (market.status == 1) {
@@ -635,10 +647,15 @@ const Sports = (props) => {
                       // } else {
                       //   dispatch(fetchSportsdetails({ page: e.value, id: sports.type_id }));
                       // }
-                      if (sports.sportsMatches.data.length == 0) {
-                        dispatch(setMatchIds(sports.matches, e.value, 'prematch'))
+
+                      if (sports.isBookmarkedCheck) {
+                        dispatch(setMatchIds(sports.bookmarkedMatches, e.value, 'prematch'))
                       } else {
-                        dispatch(setMatchIds(sports.sportsMatches, e.value, 'prematch'))
+                        if (sports.sportsMatches.data.length == 0) {
+                          dispatch(setMatchIds(sports.matches, e.value, 'prematch'))
+                        } else {
+                          dispatch(setMatchIds(sports.sportsMatches, e.value, 'prematch'))
+                        }
                       }
                     }}
                     options={((rows, i, len) => {
@@ -654,10 +671,14 @@ const Sports = (props) => {
                   <button
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
                     onClick={() => {
-                      if (sports.sportsMatches.data.length == 0) {
-                        dispatch(setMatchIds(sports.matches, sports.currentPage - 1, 'prematch'))
+                      if (sports.isBookmarkedCheck) {
+                        dispatch(setMatchIds(sports.bookmarkedMatches, sports.currentPage - 1, 'prematch'))
                       } else {
-                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage - 1, 'prematch'))
+                        if (sports.sportsMatches.data.length == 0) {
+                          dispatch(setMatchIds(sports.matches, sports.currentPage - 1, 'prematch'))
+                        } else {
+                          dispatch(setMatchIds(sports.sportsMatches, sports.currentPage - 1, 'prematch'))
+                        }
                       }
                     }}
                     disabled={1 >= sports.currentPage}
@@ -667,10 +688,14 @@ const Sports = (props) => {
                   <button
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
                     onClick={() => {
-                      if (sports.sportsMatches.data.length == 0) {
-                        dispatch(setMatchIds(sports.matches, sports.currentPage + 1, 'prematch'))
+                      if (sports.isBookmarkedCheck) {
+                        dispatch(setMatchIds(sports.bookmarkedMatches, sports.currentPage + 1, 'prematch'))
                       } else {
-                        dispatch(setMatchIds(sports.sportsMatches, sports.currentPage + 1, 'prematch'))
+                        if (sports.sportsMatches.data.length == 0) {
+                          dispatch(setMatchIds(sports.matches, sports.currentPage + 1, 'prematch'))
+                        } else {
+                          dispatch(setMatchIds(sports.sportsMatches, sports.currentPage + 1, 'prematch'))
+                        }
                       }
 
                     }}
@@ -698,7 +723,8 @@ const Sports = (props) => {
                     </span>
                     <div class="bookmark">
                       <span class="color-twhite bookmarked" onClick={() => {
-                        alert("bokke")
+                        dispatch(setBookmark(sports.sideMarket.tournamentId))
+
                       }}><i class="fas fa-star margin-0" ></i></span>
                     </div>
                   </div>
