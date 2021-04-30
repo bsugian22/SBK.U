@@ -198,6 +198,7 @@ export const fetchMarketPerMatchFailure = (data) => {
 };
 
 
+
 export const searchMatches = (text, matches, competitors, tournaments, type) => {
   return (dispatch) => {
 
@@ -348,13 +349,14 @@ export const setMatchIds = (matches, pageNumber, type) => {
       }
     }
 
-    if (type == 'prematch') {
-      dispatch(fetchMarketPerMatches(matchIds, pageNumber, type))
+    if(matchIds.length){
+      if (type == 'prematch') {
+        dispatch(fetchMarketPerMatches(matchIds, pageNumber, type))
+      }
+      if (type == 'live') {
+        dispatch(fetchMarketPerMatches(matchIds, pageNumber, type))
+      }
     }
-    if (type == 'live') {
-      dispatch(fetchMarketPerMatches(matchIds, pageNumber, type))
-    }
-
   };
 };
 
