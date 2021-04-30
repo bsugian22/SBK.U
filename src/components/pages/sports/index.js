@@ -199,12 +199,12 @@ const Sports = (props) => {
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 margin-left-5 active"
                     onClick={() => {
                       if (sports.isSearching) {
-                        dispatch(sortMatchesByTime(sports.searchMatches, 'prematch', null, sports.currentPage,true))
+                        dispatch(sortMatchesByTime(sports.searchMatches, 'prematch', null, sports.currentPage, true))
                       } else {
                         if (sports.sportsMatches.data.length == 0) {
-                          dispatch(sortMatchesByTime(sports.matches, 'prematch', null, sports.currentPage,false))
+                          dispatch(sortMatchesByTime(sports.matches, 'prematch', null, sports.currentPage, false))
                         } else {
-                          dispatch(sortMatchesByTime(sports.sportsMatches, 'prematch', sports.sportsTypeId, sports.currentPage,false))
+                          dispatch(sortMatchesByTime(sports.sportsMatches, 'prematch', sports.sportsTypeId, sports.currentPage, false))
                         }
                       }
 
@@ -218,12 +218,12 @@ const Sports = (props) => {
                     onClick={() => {
 
                       if (sports.isSearching) {
-                        dispatch(sortMatchesByLeague(sports.searchMatches, 'prematch', null,true))
+                        dispatch(sortMatchesByLeague(sports.searchMatches, 'prematch', null, true))
                       } else {
                         if (sports.sportsMatches.data.length == 0) {
-                          dispatch(sortMatchesByLeague(sports.matches, 'prematch', null,false))
+                          dispatch(sortMatchesByLeague(sports.matches, 'prematch', null, false))
                         } else {
-                          dispatch(sortMatchesByLeague(sports.sportsMatches, 'prematch', sports.sportsTypeId,false))
+                          dispatch(sortMatchesByLeague(sports.sportsMatches, 'prematch', sports.sportsTypeId, false))
                         }
                       }
 
@@ -361,7 +361,114 @@ const Sports = (props) => {
                               <div class="flex flex-inherit align-items-center-inherit padding-vertical-2">
                                 <div class="flex pick-wrap flex-inherit align-items-center-inherit justify-content-center-inherit widthp-100">
 
-                                  {match.mainMarkets['1X2'].length != 0 ?
+                                  {sports.marketType == '1x2' ?
+
+                                    match.mainMarkets['1X2'].length != 0 ?
+                                      match.mainMarkets['1X2'].map((market, market_index) => {
+                                        // console.log(market.outcomes.length)
+                                        let classNameActive = ""
+                                        let className = ""
+                                        if (market.outcomes.length == 2) {
+                                          classNameActive = "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                          className = " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                        }
+                                        if (market.outcomes.length >= 3) {
+                                          classNameActive = "active widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                          className = " widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                        }
+                                        if (market.status == 1) {
+                                          return (market.outcomes.map((outcome, outcomes_index) => {
+                                            let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+
+                                            return (
+                                              <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                onClick={setBet}
+                                                data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                data-market_name='1x2'
+                                                data-home-team={homeTeam}
+                                                data-away-team={awayTeam}
+                                                data-match-id={match.id}
+                                                data-market-id={market.marketId}
+                                                data-outcome-id={outcome.id}
+                                                data-odds={outcome.odds}
+                                                class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? classNameActive : className}
+                                              // class=" widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                              >
+                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                  <div class="team-1 widthp-70 text-ellipsis">
+                                                    <span class="color-grey text-ellipsis">
+                                                      {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                    </span>
+                                                  </div>
+                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                    {outcome.oldOdds == null ?
+                                                      "" :
+                                                      outcome.oldOdds < outcome.odds ?
+                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            )
+                                          })
+                                          )
+                                        } else {
+                                          return (market.outcomes.map((outcome, outcomes_index) => {
+                                            let outcomeName = sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko
+                                            let className = ""
+                                            if (market.outcomes.length == 2) {
+                                              className = "disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                            }
+                                            if (market.outcomes.length >= 3) {
+                                              className = "disabled widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                            }
+                                            return (
+                                              <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                class={className}>
+                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                  <div class="team-1 widthp-70 text-ellipsis">
+                                                    <span class="color-grey text-ellipsis">
+                                                      {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                    </span>
+                                                  </div>
+                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                    {outcome.oldOdds == null ?
+                                                      "" :
+                                                      outcome.oldOdds < outcome.odds ?
+                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            )
+                                          })
+                                          )
+
+                                        }
+
+                                      })
+
+                                      :
+                                      [homeTeam, awayTeam].map((outcome, outcomes_index) => {
+                                        return (
+                                          <div key={outcomes_index} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
+                                            <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                              <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome}</span></div>
+                                              <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                <span class="color-grey text-ellipsis">0</span>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        )
+                                      })
+
+                                    : ""}
+
+                                  {/* {match.mainMarkets['1X2'].length != 0 ?
                                     match.mainMarkets['1X2'].map((market, market_index) => {
                                       // console.log(market.outcomes.length)
                                       let classNameActive = ""
@@ -613,7 +720,7 @@ const Sports = (props) => {
                                             </div>
                                           )
                                         })
-                                  }
+                                  } */}
                                 </div>
                               </div>
 
