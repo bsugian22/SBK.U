@@ -199,13 +199,12 @@ const Sports = (props) => {
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 margin-left-5 active"
                     onClick={() => {
                       if (sports.isSearching) {
-                        alert("asearch")
-                        dispatch(sortMatchesByLeague(sports.searchMatches, 'prematch', null))
+                        dispatch(sortMatchesByTime(sports.searchMatches, 'prematch', null, sports.currentPage,true))
                       } else {
                         if (sports.sportsMatches.data.length == 0) {
-                          dispatch(sortMatchesByTime(sports.matches, 'prematch', null, sports.currentPage))
+                          dispatch(sortMatchesByTime(sports.matches, 'prematch', null, sports.currentPage,false))
                         } else {
-                          dispatch(sortMatchesByTime(sports.sportsMatches, 'prematch', sports.sportsTypeId, sports.currentPage))
+                          dispatch(sortMatchesByTime(sports.sportsMatches, 'prematch', sports.sportsTypeId, sports.currentPage,false))
                         }
                       }
 
@@ -219,13 +218,12 @@ const Sports = (props) => {
                     onClick={() => {
 
                       if (sports.isSearching) {
-                        alert("asearch")
-                        dispatch(sortMatchesByLeague(sports.searchMatches, 'prematch', null))
+                        dispatch(sortMatchesByLeague(sports.searchMatches, 'prematch', null,true))
                       } else {
                         if (sports.sportsMatches.data.length == 0) {
-                          dispatch(sortMatchesByLeague(sports.matches, 'prematch', null))
+                          dispatch(sortMatchesByLeague(sports.matches, 'prematch', null,false))
                         } else {
-                          dispatch(sortMatchesByLeague(sports.sportsMatches, 'prematch', sports.sportsTypeId))
+                          dispatch(sortMatchesByLeague(sports.sportsMatches, 'prematch', sports.sportsTypeId,false))
                         }
                       }
 

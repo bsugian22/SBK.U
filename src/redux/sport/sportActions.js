@@ -251,7 +251,7 @@ export const searchMatches = (text, matches, competitors, tournaments, type) => 
 };
 
 
-export const sortMatchesByTime = (matches, type, sportsTypeId, page) => {
+export const sortMatchesByTime = (matches, type, sportsTypeId, page,isSearching) => {
   return (dispatch) => {
     dispatch(setBookmarkOff())
     console.log(matches)
@@ -264,13 +264,18 @@ export const sortMatchesByTime = (matches, type, sportsTypeId, page) => {
 
 
     if (type == 'prematch') {
-
-      if (sportsTypeId == null) {
+      if(isSearching){
         dispatch(setMatchIds(matches, page, type))
-      } else {
-        dispatch(setSportsType({ id: sportsTypeId, matches: matches.data }))
-        dispatch(setMatchIds(matches, page, type))
+        dispatch(setSearchMatches(matches))
+      }else {
+        if (sportsTypeId == null) {
+          dispatch(setMatchIds(matches, page, type))
+        } else {
+          dispatch(setSportsType({ id: sportsTypeId, matches: matches.data }))
+          dispatch(setMatchIds(matches, page, type))
+        }
       }
+      
 
     }
   };
@@ -287,7 +292,7 @@ export const sortByBookmarked = (matches, type) => {
 };
 
 
-export const sortMatchesByLeague = (matches, type, sportsTypeId) => {
+export const sortMatchesByLeague = (matches, type, sportsTypeId, isSearching) => {
 
   return (dispatch) => {
     console.log(matches)
@@ -298,13 +303,18 @@ export const sortMatchesByLeague = (matches, type, sportsTypeId) => {
     });
 
     if (type == 'prematch') {
-
-      if (sportsTypeId == null) {
-        dispatch(setMatchIds(matches, 1, type))
-      } else {
-        dispatch(setSportsType({ id: sportsTypeId, matches: matches.data }))
-        dispatch(setMatchIds(matches, 1, type))
+      if(isSearching){
+        dispatch(setMatchIds(matches,1, type))
+        dispatch(setSearchMatches(matches))
+      }else {
+        if (sportsTypeId == null) {
+          dispatch(setMatchIds(matches, 1, type))
+        } else {
+          dispatch(setSportsType({ id: sportsTypeId, matches: matches.data }))
+          dispatch(setMatchIds(matches, 1, type))
+        }
       }
+     
 
     }
   };
