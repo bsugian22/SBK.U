@@ -26,13 +26,23 @@ const initialState = {
   isBookmarkedCheck: false,
   search: "",
   searchMatches: { data: [] },
-  isSearching: false
+  isSearching: false,
+  marketType: "1x2",
 };
 
 const sportReducer = (state = initialState, action) => {
   switch (action.type) {
 
-
+    case types.NO_MATCHES:
+      return {
+        ...state,
+        mainMarkets: [],
+      };
+    case types.SET_MARKET_TYPE:
+      return {
+        ...state,
+        marketType: action.payload,
+      };
     case types.SET_SEARCH_MATCHES:
       let lastPageSearch = Math.ceil(action.payload.data.length / 15)
 
@@ -87,7 +97,10 @@ const sportReducer = (state = initialState, action) => {
         ...state,
         lastPage: lastPageBookmarked,
         bookmarkedMatches: action.payload,
-        isBookmarkedCheck: true
+        isBookmarkedCheck: true,
+        search: "",
+        searchMatches: { data: [] },
+        isSearching: false,
       };
 
     case types.RESET_SETTINGS:
@@ -129,11 +142,14 @@ const sportReducer = (state = initialState, action) => {
         sportsTypeId: action.payload.id,
         sportsMatches: { data: action.payload.matches },
         isBookmarkedCheck: false,
+        search: "",
+        searchMatches: { data: [] },
+        isSearching: false,
       };
     case types.FETCH_MATCHES_REQUEST:
       return {
         ...state,
-        loading:true,
+        loading: true,
         mainMarkets: [],
         sideMarket: [],
         sportsTypeId: null,
@@ -155,7 +171,7 @@ const sportReducer = (state = initialState, action) => {
     case types.FETCH_MATCHES_FAILURE:
       return {
         ...state,
-        loading:false,
+        loading: false,
         matches: []
       };
 
@@ -284,7 +300,7 @@ const sportReducer = (state = initialState, action) => {
         ...state,
         mainMarkets: mainMarketsToDisplay,
         currentPage: currentPage,
-        loading:false,
+        loading: false,
       };
 
     case types.FETCH_MARKET_PER_MATCHES_FAILURE:

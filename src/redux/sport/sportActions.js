@@ -12,6 +12,13 @@ export const originalMatches = (matches) => {
   };
 };
 
+export const setMarketType = (type) => {
+  return {
+    type: types.SET_MARKET_TYPE,
+    payload: type
+  };
+};
+
 export const setSearchOff = () => {
   return {
     type: types.SET_SEARCH_OFF,
@@ -197,6 +204,12 @@ export const fetchMarketPerMatchFailure = (data) => {
   };
 };
 
+export const noMatches = () => {
+  return {
+    type: types.NO_MATCHES,
+  };
+};
+
 
 
 export const searchMatches = (text, matches, competitors, tournaments, type) => {
@@ -241,7 +254,6 @@ export const searchMatches = (text, matches, competitors, tournaments, type) => 
 export const sortMatchesByTime = (matches, type, sportsTypeId, page) => {
   return (dispatch) => {
     dispatch(setBookmarkOff())
-    dispatch(setSearchOff())
     console.log(matches)
 
     matches.data.sort(function compare(a, b) {
@@ -280,7 +292,6 @@ export const sortMatchesByLeague = (matches, type, sportsTypeId) => {
   return (dispatch) => {
     console.log(matches)
     dispatch(setBookmarkOff())
-    dispatch(setSearchOff())
     // decs
     matches.data.sort(function (a, b) {
       return a.tournamentId - b.tournamentId || a.simpleTournamentId - b.simpleTournamentId;
@@ -356,6 +367,8 @@ export const setMatchIds = (matches, pageNumber, type) => {
       if (type == 'live') {
         dispatch(fetchMarketPerMatches(matchIds, pageNumber, type))
       }
+    }else {
+      dispatch(noMatches())
     }
   };
 };

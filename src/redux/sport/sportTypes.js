@@ -34,6 +34,9 @@ export const SET_BOOKMARK_OFF = "SET_BOOKMARK_OFF";
 export const SET_SEARCH = "SET_SEARCH";
 export const SET_SEARCH_MATCHES = "SET_SEARCH_MATCHES";
 export const SET_SEARCH_OFF = "SET_SEARCH_OFF";
+export const SET_MARKET_TYPE = "SET_MARKET_TYPE";
+export const NO_MATCHES = "NO_MATCHES";
+
 
 
 

@@ -10,7 +10,7 @@ import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
 import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet, setTypeId } from "../../../redux/sportsdetail/sportsdetailActions";
 import { iconsList, setCompetitorName } from "../../../helpers/object";
-import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, setSearch, sortMatchesByTime, sortMatchesByLeague, resetAll, setBookmark, sortByBookmarked, searchMatches } from "../../../redux/sport/sportActions";
+import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, setSearch, sortMatchesByTime, sortMatchesByLeague, resetAll, setBookmark, sortByBookmarked, searchMatches, setMarketType } from "../../../redux/sport/sportActions";
 
 
 const Sports = (props) => {
@@ -198,16 +198,17 @@ const Sports = (props) => {
                   </button>
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 margin-left-5 active"
                     onClick={() => {
-                      if (orderBy == 'asc') {
-                        orderBy = 'asc'
+                      if (sports.isSearching) {
+                        alert("asearch")
+                        dispatch(sortMatchesByLeague(sports.searchMatches, 'prematch', null))
                       } else {
-                        orderBy = 'desc'
+                        if (sports.sportsMatches.data.length == 0) {
+                          dispatch(sortMatchesByTime(sports.matches, 'prematch', null, sports.currentPage))
+                        } else {
+                          dispatch(sortMatchesByTime(sports.sportsMatches, 'prematch', sports.sportsTypeId, sports.currentPage))
+                        }
                       }
-                      if (sports.sportsMatches.data.length == 0) {
-                        dispatch(sortMatchesByTime(sports.matches, 'prematch', null, sports.currentPage))
-                      } else {
-                        dispatch(sortMatchesByTime(sports.sportsMatches, 'prematch', sports.sportsTypeId, sports.currentPage))
-                      }
+
                     }}>
                     <span>
                       <i class="fad fa-stopwatch color-grey"></i>
@@ -216,11 +217,19 @@ const Sports = (props) => {
                   </button>
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5"
                     onClick={() => {
-                      if (sports.sportsMatches.data.length == 0) {
-                        dispatch(sortMatchesByLeague(sports.matches, 'prematch', null))
+
+                      if (sports.isSearching) {
+                        alert("asearch")
+                        dispatch(sortMatchesByLeague(sports.searchMatches, 'prematch', null))
                       } else {
-                        dispatch(sortMatchesByLeague(sports.sportsMatches, 'prematch', sports.sportsTypeId))
+                        if (sports.sportsMatches.data.length == 0) {
+                          dispatch(sortMatchesByLeague(sports.matches, 'prematch', null))
+                        } else {
+                          dispatch(sortMatchesByLeague(sports.sportsMatches, 'prematch', sports.sportsTypeId))
+                        }
                       }
+
+
                     }}>
                     <span>
                       <i class="fad fa-flag color-blue"></i>
@@ -255,10 +264,14 @@ const Sports = (props) => {
               <div class="prematch-view-select flex-inherit margin-bottom-10">
                 <div class="grow-2"></div>
                 <div class="flex height-40">
-                  <select name="view-select" id="view-select">
-                    <option>승무패</option>
-                    <option>핸디캡</option>
-                    <option>언더오버</option>
+                  <select name="view-select" id="view-select"
+                    value={sports.marketType}
+                    onChange={(e) => {
+                      dispatch(setMarketType(e.target.value))
+                    }}>
+                    <option value="1x2">승무패</option>
+                    <option value="hcp">핸디캡</option>
+                    <option value="total">언더오버</option>
                   </select>
                 </div>
               </div>
