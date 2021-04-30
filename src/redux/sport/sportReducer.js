@@ -145,12 +145,11 @@ const sportReducer = (state = initialState, action) => {
       };
     case types.FETCH_MATCHES_SUCCESS:
       let matches = action.payload
-      let lastPage = Math.ceil(action.payload.data.length / 15)
+      // let lastPage = Math.ceil(action.payload.data.length / 15)
       return {
         ...state,
-        
         matches: matches,
-        lastPage: lastPage,
+        // lastPage: lastPage,
       };
 
     case types.FETCH_MATCHES_FAILURE:

@@ -55,7 +55,7 @@ export const setBookmarkOff = () => {
 export const resetAllData = (matches) => {
   return {
     type: types.RESET_SETTINGS,
-    payload:matches
+    payload: matches
   };
 };
 
@@ -200,11 +200,11 @@ export const fetchMarketPerMatchFailure = (data) => {
 
 export const searchMatches = (text, matches, competitors, tournaments, type) => {
   return (dispatch) => {
-    
+
     dispatch(setBookmarkOff())
     dispatch(setSearchOff())
-    
-    const searchMatches = {data:[]}
+
+    const searchMatches = { data: [] }
 
 
     console.log(text)
@@ -317,10 +317,17 @@ export const fetchMatches = () => {
     axios.get(`/api/feed/matches`)
       .then(response => {
         const matches = camelize(response.data);
-        const originalMatchesData = camelize(response.data);
-        dispatch(setMatchIds(matches, 1, 'prematch'))
-        dispatch(originalMatches(originalMatchesData))
+        // console.log(matches)
+        // console.log("kelvin")
+        var defaultMatches = matches.data.filter((x) => {
+          return x.type == 1;
+        });
         dispatch(fetchMatchesSuccess(matches))
+        dispatch(setMatchIds({data:defaultMatches}, 1, 'prematch'))
+        dispatch(setSportsType({ id: 1, matches: defaultMatches }))
+
+
+
       }).catch(error => {
         const errorMsg = error.message;
         dispatch(fetchMatchesFailure(errorMsg))

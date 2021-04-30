@@ -173,7 +173,7 @@ const Sports = (props) => {
                       dispatch(resetAll(sports.matches))
                     }}>
                     <span>
-                      {sports.sportsTypeId == null ? <i class="fas fa-check color-green"></i> : ""}
+                      <i class="fas fa-check color-green"></i>
                       <span class="text text-media">All Matches</span>
                     </span>
                   </button>
@@ -332,7 +332,7 @@ const Sports = (props) => {
                             <div class="league padding-horizontal-5">
                               <span class="color-grey text-ellipsis">
                                 {/* {match.tournament.title["ko"]} */}
-                                { match.tournamentId == null?    sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == match.simpleTournamentId)?.tournament.name.ko : ""    : sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == match.tournamentId)?.tournament.name.ko : ""}
+                                {match.tournamentId == null ? sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == match.simpleTournamentId)?.tournament.name.ko : "" : sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == match.tournamentId)?.tournament.name.ko : ""}
                                 {/* {match.tournamentId} */}
 
                               </span>
@@ -639,7 +639,7 @@ const Sports = (props) => {
 
                   return rows;
                 })
-                : sports.loading? <div class="flex justify-content-center heightp-100 align-items-center"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div> : "No Data Found"}
+                : sports.loading ? <div class="flex justify-content-center heightp-100 align-items-center"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div> : "No Data Found"}
             </div>
 
             <div class="bottom-wrap border-top flex flex-inherit height-60 padding-10 align-items-center-inherit0">
