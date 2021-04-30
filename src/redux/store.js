@@ -15,6 +15,7 @@ import { fetchCompetitors, fetchMarkets, fetchOutcomes, fetchSports, fetchTourna
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ['preference', 'user']
 };
 
 const enhancedReducer = persistReducer(persistConfig, rootReducer);
