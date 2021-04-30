@@ -339,8 +339,8 @@ export const fetchMatches = () => {
 
 export const setMatchIds = (matches, pageNumber, type) => {
   return (dispatch) => {
-    let index = (pageNumber * 15) - 15
-    let perPage = pageNumber * 15;
+    let index = (pageNumber * 30) - 30
+    let perPage = pageNumber * 30;
     const matchIds = [];
     for (let i = index; i < perPage; i++) {
       if (matches.data[i]?.id) {
