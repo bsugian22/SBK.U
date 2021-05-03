@@ -1,8 +1,8 @@
 import * as types from "./sportTypes";
 import axios from "../../plugins/axios";
-import { camelize } from "../../helpers/object";
 import { fetchMarketPerMatchesSuccessInplay, fetchMarketPerMatchesFailureInplay } from "../inplay/inplayActions";
 import moment from "moment";
+import { camelize, snakelize, socket } from "../../helpers/object";
 
 
 
@@ -418,10 +418,12 @@ export const fetchMarketPerMatches = (ids, pageNumber, type) => {
     axios.post(`/api/feed/market`, { matches: ids })
       .then(response => {
         const markets = camelize(response.data);
-        // console.log(markets)
+        console.log(ids)
+        console.log("kelvin ids")
         markets.pageNumber = pageNumber
         // fetchMarketPerMatchesSuccessInplay
         // fetchMarketPerMatchesFailureInplay
+        dispatch(sportWebSocket(ids))
         if (type == 'prematch') {
           dispatch(fetchMarketPerMatchesSuccess(markets))
         }
@@ -518,4 +520,47 @@ export const fetchSports = () => {
         dispatch(fetchSportsFailure(errorMsg))
       })
   };
+};
+
+export const sportWebSocket = (matches) => {
+
+  return (dispatch) => {
+    // socket.onopen = function (e) {
+    matches.map((data, index) => {
+      console.log("sending:" + data.id)
+      const match_data = {
+        type: "book_match",
+        match_id: data.id
+      }
+      socket.send(JSON.stringify(match_data));
+    })
+    // };
+    socket.onmessage = function (event) {
+      alert("received")
+      console.log(event)
+      event.data.text().then((data) => {
+        const market = JSON.parse(data)
+
+        console.log(market)
+        // dispatch(getInplayDetails(market));
+        // dispatch(getSportsDetails(market));
+      });
+    };
+
+
+    socket.onclose = function (event) {
+      if (event.wasClean) {
+        console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+      } else {
+        // e.g. server process killed or network down
+        // event.code is usually 1006 in this case
+        console.log('[close] Connection died');
+      }
+    };
+
+    socket.onerror = function (error) {
+      console.log(`[error] ${error.message}`);
+    };
+
+  }
 };
