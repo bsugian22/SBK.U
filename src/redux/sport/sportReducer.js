@@ -21,17 +21,114 @@ const initialState = {
   sportsTypeId: null,
   sportsMatches: { data: [] },
   sortBy: "asc",
-  bookmarked: [],
+  bookmarked: [1095, 32227, 32225, 32215],
   bookmarkedMatches: { data: [] },
   isBookmarkedCheck: false,
   search: "",
   searchMatches: { data: [] },
   isSearching: false,
   marketType: "1x2",
+  activeSideBarSportsId: null,
+  activeSideBarSportsMatches: { data: [] },
+  activeSideBarCountryId: null,
+  activeSideBarCountryMatches: { data: [] },
+  activeSideBarLeagueId: null,
+  activeSideBarLeagueMatches: { data: [] },
+  sidebarBookmarked: true
 };
 
 const sportReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case types.SHOW_SIDEBAR_BOOKMARK:
+      let toggleBookmark = !state.sidebarBookmarked
+      return {
+        ...state,
+        activeSideBarLeagueId: null,
+        activeSideBarLeagueMatches: { data: [] },
+        sportsTypeId: null,
+        sportsMatches: { data: [] },
+        isBookmarkedCheck: false,
+        search: "",
+        searchMatches: { data: [] },
+        isSearching: false,
+        sidebarBookmarked: toggleBookmark
+      };
+    case types.SET_SIDEBAR_LEAGUE_ID:
+      let activeLeagueId = null;
+      let activeSidebarLeagueMatches = { data: [] };
+      let lastPageLeagueSidebar = null
+
+      if (action.payload.id != state.activeSideBarLeagueId) {
+        activeLeagueId = action.payload.id
+        activeSidebarLeagueMatches = { data: action.payload.matches }
+        lastPageLeagueSidebar = Math.ceil(action.payload.matches.length / 15)
+      }
+      return {
+        ...state,
+        activeSideBarLeagueId: activeLeagueId,
+        activeSideBarLeagueMatches: activeSidebarLeagueMatches,
+        lastPage: lastPageLeagueSidebar,
+        sportsTypeId: null,
+        sportsMatches: { data: [] },
+        isBookmarkedCheck: false,
+        search: "",
+        searchMatches: { data: [] },
+        isSearching: false,
+      };
+
+    case types.SET_SIDEBAR_COUNTRY_ID:
+      let activeCountryId = null;
+      let activeSidebarCountryMatches = { data: [] };
+      let lastPageCountrySidebar = null
+      console.log(action.payload)
+      if (action.payload.id != state.activeSideBarCountryId) {
+        activeCountryId = action.payload.id
+        activeSidebarCountryMatches = { data: action.payload.matches }
+        lastPageCountrySidebar = Math.ceil(action.payload.matches.length / 15)
+      }
+      return {
+        ...state,
+        activeSideBarCountryId: activeCountryId,
+        activeSideBarCountryMatches: activeSidebarCountryMatches,
+        lastPage: lastPageCountrySidebar,
+        activeSideBarLeagueId: null,
+        activeSideBarLeagueMatches: { data: [] },
+        sportsTypeId: null,
+        sportsMatches: { data: [] },
+        isBookmarkedCheck: false,
+        search: "",
+        searchMatches: { data: [] },
+        isSearching: false,
+      };
+
+    case types.SET_SIDEBAR_SPORTS_ID:
+      let activeId = null;
+      let activeSidebarSportsMatches = { data: [] };
+      let lastPageSportsSidebar = null
+
+
+      if (action.payload.id != state.activeSideBarSportsId) {
+        activeId = action.payload.id
+        activeSidebarSportsMatches = { data: action.payload.matches }
+        lastPageSportsSidebar = Math.ceil(action.payload.matches.length / 15)
+      }
+      return {
+        ...state,
+        activeSideBarSportsId: activeId,
+        activeSideBarSportsMatches: activeSidebarSportsMatches,
+        lastPage: lastPageSportsSidebar,
+        activeSideBarCountryId: null,
+        activeSideBarCountryMatches: { data: [] },
+        activeSideBarLeagueId: null,
+        activeSideBarLeagueMatches: { data: [] },
+        sportsTypeId: null,
+        sportsMatches: { data: [] },
+        isBookmarkedCheck: false,
+        search: "",
+        searchMatches: { data: [] },
+        isSearching: false,
+      };
 
     case types.NO_MATCHES:
       return {
@@ -50,7 +147,13 @@ const sportReducer = (state = initialState, action) => {
         ...state,
         lastPage: lastPageSearch,
         searchMatches: action.payload,
-        isSearching: true
+        isSearching: true,
+        activeSideBarSportsId: null,
+        activeSideBarSportsMatches: { data: [] },
+        activeSideBarCountryId: null,
+        activeSideBarCountryMatches: { data: [] },
+        activeSideBarLeagueId: null,
+        activeSideBarLeagueMatches: { data: [] },
       };
 
     case types.SET_SEARCH:
@@ -101,6 +204,12 @@ const sportReducer = (state = initialState, action) => {
         search: "",
         searchMatches: { data: [] },
         isSearching: false,
+        activeSideBarSportsId: null,
+        activeSideBarSportsMatches: { data: [] },
+        activeSideBarCountryId: null,
+        activeSideBarCountryMatches: { data: [] },
+        activeSideBarLeagueId: null,
+        activeSideBarLeagueMatches: { data: [] },
       };
 
     case types.RESET_SETTINGS:
@@ -115,7 +224,13 @@ const sportReducer = (state = initialState, action) => {
         isSearching: false,
         search: "",
         searchMatches: { data: [] },
-        lastPage: resetPage
+        lastPage: resetPage,
+        activeSideBarSportsId: null,
+        activeSideBarSportsMatches: { data: [] },
+        activeSideBarCountryId: null,
+        activeSideBarCountryMatches: { data: [] },
+        activeSideBarLeagueId: null,
+        activeSideBarLeagueMatches: { data: [] },
       };
 
     case types.SET_ORIGINAL_MATCHES:
@@ -145,6 +260,12 @@ const sportReducer = (state = initialState, action) => {
         search: "",
         searchMatches: { data: [] },
         isSearching: false,
+        activeSideBarSportsId: null,
+        activeSideBarSportsMatches: { data: [] },
+        activeSideBarCountryId: null,
+        activeSideBarCountryMatches: { data: [] },
+        activeSideBarLeagueId: null,
+        activeSideBarLeagueMatches: { data: [] },
       };
     case types.FETCH_MATCHES_REQUEST:
       return {
@@ -268,6 +389,7 @@ const sportReducer = (state = initialState, action) => {
         return a.timeAt.localeCompare(b.timeAt);
       });
       console.log(mainMarketsToDisplay)
+      console.log("kelvin")
 
       mainMarketsToDisplay = chain(mainMarketsToDisplay)
         .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))

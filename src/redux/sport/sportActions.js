@@ -5,6 +5,33 @@ import { fetchMarketPerMatchesSuccessInplay, fetchMarketPerMatchesFailureInplay 
 import moment from "moment";
 
 
+
+export const showSidebarBookmark = () => {
+  return {
+    type: types.SHOW_SIDEBAR_BOOKMARK,
+  };
+};
+export const setSideBarLeagueId = (data) => {
+  return {
+    type: types.SET_SIDEBAR_LEAGUE_ID,
+    payload: data
+  };
+};
+
+export const setSideBarCountryId = (data) => {
+  return {
+    type: types.SET_SIDEBAR_COUNTRY_ID,
+    payload: data
+  };
+};
+
+export const setSideBarSportsId = (data) => {
+  return {
+    type: types.SET_SIDEBAR_SPORTS_ID,
+    payload: data
+  };
+};
+
 export const originalMatches = (matches) => {
   return {
     type: types.SET_ORIGINAL_MATCHES,
@@ -220,10 +247,6 @@ export const searchMatches = (text, matches, competitors, tournaments, type) => 
 
     const searchMatches = { data: [] }
 
-
-    console.log(text)
-    console.log(tournaments)
-    console.log(competitors)
     let tournamentsData = tournaments.filter(x => x.tournament.name.ko.toLowerCase().includes(text.toLowerCase()));
     let competitorsData = competitors.filter(x => x.competitor?.name?.ko ? x.competitor.name.ko.toLowerCase().includes(text.toLowerCase()) : "");
 
@@ -251,7 +274,7 @@ export const searchMatches = (text, matches, competitors, tournaments, type) => 
 };
 
 
-export const sortMatchesByTime = (matches, type, sportsTypeId, page,isSearching) => {
+export const sortMatchesByTime = (matches, type, sportsTypeId, page, isSearching) => {
   return (dispatch) => {
     dispatch(setBookmarkOff())
     console.log(matches)
@@ -264,10 +287,10 @@ export const sortMatchesByTime = (matches, type, sportsTypeId, page,isSearching)
 
 
     if (type == 'prematch') {
-      if(isSearching){
+      if (isSearching) {
         dispatch(setMatchIds(matches, page, type))
         dispatch(setSearchMatches(matches))
-      }else {
+      } else {
         if (sportsTypeId == null) {
           dispatch(setMatchIds(matches, page, type))
         } else {
@@ -275,7 +298,7 @@ export const sortMatchesByTime = (matches, type, sportsTypeId, page,isSearching)
           dispatch(setMatchIds(matches, page, type))
         }
       }
-      
+
 
     }
   };
@@ -303,10 +326,10 @@ export const sortMatchesByLeague = (matches, type, sportsTypeId, isSearching) =>
     });
 
     if (type == 'prematch') {
-      if(isSearching){
-        dispatch(setMatchIds(matches,1, type))
+      if (isSearching) {
+        dispatch(setMatchIds(matches, 1, type))
         dispatch(setSearchMatches(matches))
-      }else {
+      } else {
         if (sportsTypeId == null) {
           dispatch(setMatchIds(matches, 1, type))
         } else {
@@ -314,7 +337,7 @@ export const sortMatchesByLeague = (matches, type, sportsTypeId, isSearching) =>
           dispatch(setMatchIds(matches, 1, type))
         }
       }
-     
+
 
     }
   };
@@ -345,7 +368,7 @@ export const fetchMatches = () => {
           return x.type == 1;
         });
         dispatch(fetchMatchesSuccess(matches))
-        dispatch(setMatchIds({data:defaultMatches}, 1, 'prematch'))
+        dispatch(setMatchIds({ data: defaultMatches }, 1, 'prematch'))
         dispatch(setSportsType({ id: 1, matches: defaultMatches }))
 
 
@@ -370,14 +393,14 @@ export const setMatchIds = (matches, pageNumber, type) => {
       }
     }
 
-    if(matchIds.length){
+    if (matchIds.length) {
       if (type == 'prematch') {
         dispatch(fetchMarketPerMatches(matchIds, pageNumber, type))
       }
       if (type == 'live') {
         dispatch(fetchMarketPerMatches(matchIds, pageNumber, type))
       }
-    }else {
+    } else {
       dispatch(noMatches())
     }
   };
