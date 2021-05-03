@@ -11,6 +11,13 @@ export const showSidebarBookmark = () => {
     type: types.SHOW_SIDEBAR_BOOKMARK,
   };
 };
+
+export const sortByLeague = () => {
+  return {
+    type: types.SORT_BY_LEAGUE,
+  };
+};
+
 export const setSideBarLeagueId = (data) => {
   return {
     type: types.SET_SIDEBAR_LEAGUE_ID,
@@ -93,10 +100,9 @@ export const resetAllData = (matches) => {
   };
 };
 
-export const sortByTime = (type) => {
+export const sortByTime = () => {
   return {
     type: types.SORT_BY_TIME,
-    payload: type
   };
 };
 
@@ -313,6 +319,7 @@ export const sortByBookmarked = (matches, type) => {
     }
   };
 };
+
 
 
 export const sortMatchesByLeague = (matches, type, sportsTypeId, isSearching) => {

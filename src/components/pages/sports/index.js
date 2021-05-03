@@ -10,7 +10,7 @@ import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
 import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet, setTypeId } from "../../../redux/sportsdetail/sportsdetailActions";
 import { iconsList, setCompetitorName } from "../../../helpers/object";
-import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, setSearch, sortMatchesByTime, sortMatchesByLeague, resetAll, setBookmark, sortByBookmarked, searchMatches, setMarketType } from "../../../redux/sport/sportActions";
+import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, setSearch, sortMatchesByTime, sortMatchesByLeague, resetAll, setBookmark, sortByBookmarked, searchMatches, setMarketType, sortByTime, sortByLeague } from "../../../redux/sport/sportActions";
 
 
 const Sports = (props) => {
@@ -198,6 +198,7 @@ const Sports = (props) => {
                   </button>
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 margin-left-5 active"
                     onClick={() => {
+                      dispatch(sortByTime())
                       if (sports.isSearching) {
                         dispatch(sortMatchesByTime(sports.searchMatches, 'prematch', null, sports.currentPage, true))
                       } else {
@@ -216,7 +217,7 @@ const Sports = (props) => {
                   </button>
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5"
                     onClick={() => {
-
+                      dispatch(sortByLeague())
                       if (sports.isSearching) {
                         dispatch(sortMatchesByLeague(sports.searchMatches, 'prematch', null, true))
                       } else {
@@ -284,12 +285,12 @@ const Sports = (props) => {
                   rows.push(
                     <div
                       class="flex title background-transparent-b-30 height-40 align-items-center-inherit"
-                      key={matches.id}
+                      key={index}
                     >
                       <div class="flex padding-horizontal-10 widthp-45 heightp-100">
                         <span class="color-grey">
                           <i class="far fa-calendar-week"></i>
-                          {moment(matches.startAt).format("YY / MM / DD")}
+                          {matches.startAt == null? "" : moment(matches.startAt).format("YY / MM / DD")}
                         </span>
                       </div>
                       <div class="flex widthp-55">

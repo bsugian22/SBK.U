@@ -37,8 +37,8 @@ export default function BookNavi(props) {
                     onClick={() => {
                         dispatch(showSidebarBookmark())
                         let sportsbookmark = [];
-                        sports.bookmarked.map((id) => {
-                            var matches = sports.matches.data.filter((x) => {
+                        sports.bookmarked?.map((id) => {
+                            var matches = sports?.matches?.data?.filter((x) => {
                                 return x.tournamentId == id;
                             });
                             sportsbookmark.push(...matches)
@@ -51,13 +51,13 @@ export default function BookNavi(props) {
                         <span class="color-grey">Bookmark</span>
                     </div>
                     <div class="flex height-40 padding-vertical-5 align-items-center">
-                        <span class="color-red padding-horizontal-20 background-transparent-b-5 heightp-100 align-items-center flex">{sports.bookmarked.length}</span>
+                        <span class="color-red padding-horizontal-20 background-transparent-b-5 heightp-100 align-items-center flex">{sports?.bookmarked?.length}</span>
                         <span class="arrow heightp-100 color-grey align-items-center justify-content-center flex background-transparent-b-5 border-left padding-horizontal-10">
                             <i class="far fa-chevron-down fa-xs margin-0"></i>
                         </span>
                     </div>
                 </div>
-                {sports.bookmarked.map((bookmark) => {
+                {sports.bookmarked?.map((bookmark) => {
                     let sportsbookmark = [];
 
                     if (sports.matches?.data) {
@@ -115,14 +115,14 @@ export default function BookNavi(props) {
                                     tournament.tour?.map((league) => {
                                         let count = 0;
                                         // console.log(league)
-                                        var league_count_tournament = sports.matches.data.filter((x) => {
+                                        var league_count_tournament = sports.matches?.data.filter((x) => {
                                             return x.tournamentId == league.id;
                                         });
 
                                         if (league_count_tournament.length != 0) {
                                             count = league_count_tournament.length
                                         } else {
-                                            var league_count_simple_tournament = sports.matches.data.filter((x) => {
+                                            var league_count_simple_tournament = sports.matches?.data.filter((x) => {
                                                 return x.simpleTournamentId == league.id;
                                             });
                                             count = league_count_simple_tournament.length
@@ -164,7 +164,7 @@ export default function BookNavi(props) {
                                             tournament.tour?.map((country) => {
                                                 let count = 0;
                                                 // console.log(league)
-                                                var league_count_tournament = sports.matches.data.filter((x) => {
+                                                var league_count_tournament = sports.matches?.data.filter((x) => {
                                                     return x.tournamentId == country.id;
                                                 });
                                                 // console.log(league_count_tournament)
@@ -172,7 +172,7 @@ export default function BookNavi(props) {
                                                 if (league_count_tournament.length != 0) {
                                                     count = league_count_tournament.length
                                                 } else {
-                                                    var league_count_simple_tournament = sports.matches.data.filter((x) => {
+                                                    var league_count_simple_tournament = sports.matches?.data.filter((x) => {
                                                         return x.simpleTournamentId == country.id;
                                                     });
                                                     count = league_count_simple_tournament.length
@@ -190,7 +190,7 @@ export default function BookNavi(props) {
                                                                 console.log(matches)
                                                                 tournament.tour.map((tour) => {
                                                                     console.log(tour.id)
-                                                                    var countryMatchesTournament = sports.matches.data.filter((x) => {
+                                                                    var countryMatchesTournament = sports.matches?.data.filter((x) => {
                                                                         return x.tournamentId == tour.id;
                                                                     });
 
@@ -198,7 +198,7 @@ export default function BookNavi(props) {
                                                                         countryMatches.push(...countryMatchesTournament)
                                                                         console.log(countryMatchesTournament)
                                                                     } else {
-                                                                        var countryMatchesSimpleTournament = sports.matches.data.filter((x) => {
+                                                                        var countryMatchesSimpleTournament = sports.matches?.data.filter((x) => {
                                                                             return x.simpleTournamentId == tour.id;
                                                                         });
                                                                         countryMatches.push(...countryMatchesSimpleTournament)
@@ -231,7 +231,7 @@ export default function BookNavi(props) {
                                                         {/* {console.log(tournament.tour)} */}
 
 
-                                                        {tournament.tour?.map((league) => {
+                                                        {/* {tournament.tour?.map((league) => {
                                                             let count = 0;
                                                             let leagueMatches = []
                                                             // console.log(league)
@@ -285,7 +285,7 @@ export default function BookNavi(props) {
                                                                 )
                                                             }
 
-                                                        })}
+                                                        })} */}
 
 
                                                     </div>

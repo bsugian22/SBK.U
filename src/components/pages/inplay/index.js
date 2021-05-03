@@ -5,6 +5,7 @@ import { refreshToken } from "../../../redux/user/userActions";
 import { Link, NavLink } from 'react-router-dom'
 import { fetchInplays, fetchInplay } from "../../../redux/inplay/inplayActions";
 import { setBetOutcome, validateBet } from "../../../redux/sportsdetail/sportsdetailActions";
+import { iconsList, setCompetitorName } from "../../../helpers/object";
 import Logo from "../../layouts/Logo";
 import moment from "moment";
 import Select from "react-select";
@@ -26,7 +27,7 @@ export default function Inplay() {
       }
       dispatch(fetchInplays())
       // dispatch(setMarkets(0))
-      // dispatch(validateBet(sports.data.bet))
+      // dispatch(validateBet(sportDetails.data.bet))
       return () => {
          isSubscribed = false;
       };
@@ -200,7 +201,7 @@ export default function Inplay() {
                                                          data-market-id={market.marketId}
                                                          data-outcome-id={outcome.id}
                                                          data-odds={outcome.odds}
-                                                         class={(outcome.enabled == 1 || outcome.enabled == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd color-grey" : " odd color-grey"}
+                                                         class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd color-grey" : " odd color-grey"}
                                                       >
                                                          {outcome.oldOdds == null ?
                                                             "" :
@@ -255,7 +256,7 @@ export default function Inplay() {
                                                          data-market-id={market.marketId}
                                                          data-outcome-id={outcome.id}
                                                          data-odds={outcome.odds}
-                                                         class={(outcome.enabled == 1 || outcome.enabled == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd align-items-center-inherit justify-content-center-inherit" : " odd align-items-center-inherit justify-content-center-inherit"}
+                                                         class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd align-items-center-inherit justify-content-center-inherit" : " odd align-items-center-inherit justify-content-center-inherit"}
                                                       >
                                                          {outcome.oldOdds == null ?
                                                             "" :
@@ -421,7 +422,7 @@ export default function Inplay() {
                                                    data-specifier={JSON.stringify(market.specifier)}
                                                    data-market-type={market.type}
                                                    data-name-id={outcome.name.id}
-                                                   class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}>
+                                                   class={(outcome.active == 1 || outcome.active == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}>
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">{outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}</span>
                                                    </div>
@@ -452,7 +453,7 @@ export default function Inplay() {
                                                    data-specifier={JSON.stringify(market.specifier)}
                                                    data-market-type={market.type}
                                                    data-name-id={outcome.name.id}
-                                                   class={(outcome.active == 1 || outcome.active == true) && sports.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}>
+                                                   class={(outcome.active == 1 || outcome.active == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}>
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">{outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}</span>
                                                    </div>

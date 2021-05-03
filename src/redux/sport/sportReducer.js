@@ -34,11 +34,18 @@ const initialState = {
   activeSideBarCountryMatches: { data: [] },
   activeSideBarLeagueId: null,
   activeSideBarLeagueMatches: { data: [] },
-  sidebarBookmarked: true
+  sidebarBookmarked: true,
+  sortByLeague: false,
 };
 
 const sportReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case types.SORT_BY_LEAGUE:
+      return {
+        ...state,
+        sortByLeague: true,
+      };
 
     case types.SHOW_SIDEBAR_BOOKMARK:
       let toggleBookmark = !state.sidebarBookmarked
@@ -217,8 +224,6 @@ const sportReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        sportsTypeId: null,
-        sportsMatches: { data: [] },
         sortBy: "asc",
         isBookmarkedCheck: false,
         isSearching: false,
@@ -244,7 +249,7 @@ const sportReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        sortBy: action.payload
+        sortByLeague: false,
       };
 
 
@@ -384,17 +389,21 @@ const sportReducer = (state = initialState, action) => {
         mainMarketsToDisplay.push({ ...data, mainMarkets: market });
       })
 
-      console.log(mainMarketsToDisplay)
       mainMarketsToDisplay.sort(function (a, b) {
         return a.timeAt.localeCompare(b.timeAt);
       });
-      console.log(mainMarketsToDisplay)
-      console.log("kelvin")
 
-      mainMarketsToDisplay = chain(mainMarketsToDisplay)
-        .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
-        .map((matches, startAt) => ({ startAt, matches }))
-        .value();
+
+      if (state.sortByLeague) {
+        mainMarketsToDisplay = [{ startAt: null, matches: mainMarketsToDisplay }]
+      } else {
+        mainMarketsToDisplay = chain(mainMarketsToDisplay)
+          .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
+          .map((matches, startAt) => ({ startAt, matches }))
+          .value();
+      }
+
+
 
 
 
