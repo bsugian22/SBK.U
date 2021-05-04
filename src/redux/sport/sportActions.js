@@ -315,7 +315,7 @@ export const sortByBookmarked = (matches, type) => {
     console.log(matches)
     if (type == 'prematch') {
       dispatch(setBookmarkMatches(matches))
-      dispatch(setMatchIds(matches, 1, type))
+      // dispatch(setMatchIds(matches, 1, type))
     }
   };
 };

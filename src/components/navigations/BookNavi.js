@@ -141,7 +141,7 @@ export default function BookNavi(props) {
                                             onClick={() => {
                                                 sportMatches.data = matches
                                                 dispatch(setSideBarSportsId({ id: icon.id, matches: matches }))
-                                                dispatch(setMatchIds(sportMatches, 1, 'prematch'))
+                                                // dispatch(setMatchIds(sportMatches, 1, 'prematch'))
                                             }}
                                         >
                                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
@@ -209,11 +209,11 @@ export default function BookNavi(props) {
                                                                 console.log("kelvin")
 
                                                                 dispatch(setSideBarCountryId({ id: tournament.id, matches: countryMatches }))
-                                                                if (sports.activeSideBarCountryId == tournament.id) {
-                                                                    dispatch(setMatchIds({ data: matches }, 1, 'prematch'))
-                                                                } else {
-                                                                    dispatch(setMatchIds({ data: countryMatches }, 1, 'prematch'))
-                                                                }
+                                                                // if (sports.activeSideBarCountryId == tournament.id) {
+                                                                //     dispatch(setMatchIds({ data: matches }, 1, 'prematch'))
+                                                                // } else {
+                                                                //     dispatch(setMatchIds({ data: countryMatches }, 1, 'prematch'))
+                                                                // }
 
                                                             }}> {/* active */}
                                                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
