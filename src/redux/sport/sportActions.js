@@ -523,59 +523,20 @@ export const fetchSports = () => {
 };
 
 export const sportWebSocket = (matches) => {
-
   return (dispatch) => {
-    let ids = []
-    matches.map((data, index) => {
-      const match_data = {
-        type: "book",
-        match_id: data.id
-      }
-      ids.push(data.id)
-    })
-    // socket.onopen = function (e) {
-    // matches.map((data, index) => {
-    //   console.log("sending:" + data.id)
-    //   const match_data = {
-    //     type: "book",
-    //     match_id: data.id
-    //   }
+    const ids = matches.map((match) => {
+      return match.id;
+    });
 
-    // 
-    console.log(ids)
     socket.emit('book', ids);
-    // };
-    socket.onmessage = function (event) {
+
+    socket.on('changed', (match) => {
       alert("received")
-      console.log(event)
-      event.data.text().then((data) => {
-        const market = JSON.parse(data)
+      const { markets } = match;
+      console.log(markets);
 
-        console.log(market)
-        // dispatch(getInplayDetails(market));
-        // dispatch(getSportsDetails(market));
-      });
-    };
-
-    // socket.on("message", data => {
-    //   alert("receved")
-    //   console.log(data);
-    // });
-
-
-    socket.onclose = function (event) {
-      if (event.wasClean) {
-        console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-      } else {
-        // e.g. server process killed or network down
-        // event.code is usually 1006 in this case
-        console.log('[close] Connection died');
-      }
-    };
-
-    socket.onerror = function (error) {
-      console.log(`[error] ${error.message}`);
-    };
-
+      // dispatch(getInplayDetails(match));
+      // dispatch(getSportsDetails(match));
+    });
   }
 };
