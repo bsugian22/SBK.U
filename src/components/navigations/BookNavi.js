@@ -231,7 +231,7 @@ export default function BookNavi(props) {
                                                         {/* {console.log(tournament.tour)} */}
 
 
-                                                        {/* {tournament.tour?.map((league) => {
+                                                         {tournament.tour?.map((league) => {
                                                             let count = 0;
                                                             let leagueMatches = []
                                                             // console.log(league)
@@ -285,7 +285,7 @@ export default function BookNavi(props) {
                                                                 )
                                                             }
 
-                                                        })} */}
+                                                        })}
 
 
                                                     </div>
