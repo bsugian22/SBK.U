@@ -32,7 +32,7 @@ const initialState = {
   activeSideBarSportsMatches: { data: [] },
   activeSideBarCountryId: null,
   activeSideBarCountryMatches: { data: [] },
-  activeSideBarLeagueId: null,
+  activeSideBarLeagueId: [],
   activeSideBarLeagueMatches: { data: [] },
   sidebarBookmarked: true,
   sortByLeague: false,
@@ -51,8 +51,6 @@ const sportReducer = (state = initialState, action) => {
       let toggleBookmark = !state.sidebarBookmarked
       return {
         ...state,
-        activeSideBarLeagueId: null,
-        activeSideBarLeagueMatches: { data: [] },
         sportsTypeId: null,
         sportsMatches: { data: [] },
         isBookmarkedCheck: false,
@@ -62,19 +60,19 @@ const sportReducer = (state = initialState, action) => {
         sidebarBookmarked: toggleBookmark
       };
     case types.SET_SIDEBAR_LEAGUE_ID:
-      let activeLeagueId = null;
-      let activeSidebarLeagueMatches = { data: [] };
-      let lastPageLeagueSidebar = null
+      let lastPageLeagueSidebar = Math.ceil(action.payload.matches.length / 15)
+      const league_exists = state.activeSideBarLeagueId?.indexOf(action.payload.id)
+      // Check if a value exists in the fruits array
 
-      if (action.payload.id != state.activeSideBarLeagueId) {
-        activeLeagueId = action.payload.id
-        activeSidebarLeagueMatches = { data: action.payload.matches }
-        lastPageLeagueSidebar = Math.ceil(action.payload.matches.length / 15)
+      if (league_exists !== -1) {
+        state.activeSideBarLeagueId.splice(league_exists, 1)
+      } else {
+        state.activeSideBarLeagueId.push(action.payload.id)
       }
+
       return {
         ...state,
-        activeSideBarLeagueId: activeLeagueId,
-        activeSideBarLeagueMatches: activeSidebarLeagueMatches,
+        activeSideBarLeagueMatches: { data: action.payload.matches },
         lastPage: lastPageLeagueSidebar,
         sportsTypeId: null,
         sportsMatches: { data: [] },
@@ -99,10 +97,6 @@ const sportReducer = (state = initialState, action) => {
         activeSideBarCountryId: activeCountryId,
         activeSideBarCountryMatches: activeSidebarCountryMatches,
         lastPage: lastPageCountrySidebar,
-        activeSideBarLeagueId: null,
-        activeSideBarLeagueMatches: { data: [] },
-        sportsTypeId: null,
-        sportsMatches: { data: [] },
         isBookmarkedCheck: false,
         search: "",
         searchMatches: { data: [] },
@@ -127,10 +121,6 @@ const sportReducer = (state = initialState, action) => {
         lastPage: lastPageSportsSidebar,
         activeSideBarCountryId: null,
         activeSideBarCountryMatches: { data: [] },
-        activeSideBarLeagueId: null,
-        activeSideBarLeagueMatches: { data: [] },
-        sportsTypeId: null,
-        sportsMatches: { data: [] },
         isBookmarkedCheck: false,
         search: "",
         searchMatches: { data: [] },
@@ -159,8 +149,6 @@ const sportReducer = (state = initialState, action) => {
         activeSideBarSportsMatches: { data: [] },
         activeSideBarCountryId: null,
         activeSideBarCountryMatches: { data: [] },
-        activeSideBarLeagueId: null,
-        activeSideBarLeagueMatches: { data: [] },
       };
 
     case types.SET_SEARCH:
@@ -215,8 +203,6 @@ const sportReducer = (state = initialState, action) => {
         activeSideBarSportsMatches: { data: [] },
         activeSideBarCountryId: null,
         activeSideBarCountryMatches: { data: [] },
-        activeSideBarLeagueId: null,
-        activeSideBarLeagueMatches: { data: [] },
       };
 
     case types.RESET_SETTINGS:
@@ -234,8 +220,6 @@ const sportReducer = (state = initialState, action) => {
         activeSideBarSportsMatches: { data: [] },
         activeSideBarCountryId: null,
         activeSideBarCountryMatches: { data: [] },
-        activeSideBarLeagueId: null,
-        activeSideBarLeagueMatches: { data: [] },
       };
 
     case types.SET_ORIGINAL_MATCHES:
@@ -265,12 +249,6 @@ const sportReducer = (state = initialState, action) => {
         search: "",
         searchMatches: { data: [] },
         isSearching: false,
-        activeSideBarSportsId: null,
-        activeSideBarSportsMatches: { data: [] },
-        activeSideBarCountryId: null,
-        activeSideBarCountryMatches: { data: [] },
-        activeSideBarLeagueId: null,
-        activeSideBarLeagueMatches: { data: [] },
       };
     case types.FETCH_MATCHES_REQUEST:
       return {

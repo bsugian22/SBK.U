@@ -231,7 +231,7 @@ export default function BookNavi(props) {
                                                         {/* {console.log(tournament.tour)} */}
 
 
-                                                         {tournament.tour?.map((league) => {
+                                                        {tournament.tour?.map((league) => {
                                                             let count = 0;
                                                             let leagueMatches = []
                                                             // console.log(league)
@@ -255,19 +255,26 @@ export default function BookNavi(props) {
                                                             if (count != 0) {
                                                                 return (
                                                                     <div class="region-detail" hidden={sports.activeSideBarCountryId == tournament.id ? false : true} >
-                                                                        <div class={sports.activeSideBarLeagueId == league.tournament.name.en ? "flex align-items-center-inherit league border-top border-bottom widthp-100 active" : "flex align-items-center-inherit league border-top border-bottom widthp-100"}
+                                                                        <div class={sports.activeSideBarLeagueId?.find(x => x == league.tournament.name.en) ? "flex align-items-center-inherit league border-top border-bottom widthp-100 active" : "flex align-items-center-inherit league border-top border-bottom widthp-100"}
                                                                             onClick={() => {
 
                                                                                 console.log(league.id)
                                                                                 console.log(leagueMatches)
-                                                                                console.log(countryMatches)
+                                                                                console.log(sports.activeSideBarLeagueMatches.data)
+                                                                                console.log(leagueMatches)
 
-                                                                                dispatch(setSideBarLeagueId({ id: league.tournament.name.en, matches: leagueMatches }))
-                                                                                if (sports.activeSideBarLeagueId == league.tournament.name.en) {
-                                                                                    // dispatch(setMatchIds({ data: matches }, 1, 'prematch'))
+                                                                                let currentActive = sports.activeSideBarLeagueMatches.data;
+                                                                                const league_exists = sports.activeSideBarLeagueId?.indexOf(league.tournament.name.en)
+                                                                                // Check if a value exists in the fruits array
+
+                                                                                if (league_exists !== -1) {
+                                                                                    currentActive = currentActive.filter(val => !leagueMatches.includes(val));
                                                                                 } else {
-                                                                                    dispatch(setMatchIds({ data: leagueMatches }, 1, 'prematch'))
+                                                                                    currentActive.push(...leagueMatches)
                                                                                 }
+
+                                                                                dispatch(setSideBarLeagueId({ id: league.tournament.name.en, matches: currentActive }))
+                                                                                dispatch(setMatchIds({ data: currentActive }, 1, 'prematch'))
 
                                                                             }}>
                                                                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">

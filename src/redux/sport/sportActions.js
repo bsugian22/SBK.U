@@ -418,12 +418,12 @@ export const fetchMarketPerMatches = (ids, pageNumber, type) => {
     axios.post(`/api/feed/market`, { matches: ids })
       .then(response => {
         const markets = camelize(response.data);
-        console.log(ids)
-        console.log("kelvin ids")
+        // console.log(ids)
+        // console.log("kelvin ids")
         markets.pageNumber = pageNumber
         // fetchMarketPerMatchesSuccessInplay
         // fetchMarketPerMatchesFailureInplay
-        dispatch(sportWebSocket(ids))
+        // dispatch(sportWebSocket(ids))
         if (type == 'prematch') {
           dispatch(fetchMarketPerMatchesSuccess(markets))
         }
