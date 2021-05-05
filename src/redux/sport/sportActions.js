@@ -423,7 +423,7 @@ export const fetchMarketPerMatches = (ids, pageNumber, type) => {
         markets.pageNumber = pageNumber
         // fetchMarketPerMatchesSuccessInplay
         // fetchMarketPerMatchesFailureInplay
-        // dispatch(sportWebSocket(ids))
+        dispatch(sportWebSocket(ids))
         if (type == 'prematch') {
           dispatch(fetchMarketPerMatchesSuccess(markets))
         }
@@ -525,15 +525,25 @@ export const fetchSports = () => {
 export const sportWebSocket = (matches) => {
 
   return (dispatch) => {
-    // socket.onopen = function (e) {
+    let ids = []
     matches.map((data, index) => {
-      console.log("sending:" + data.id)
       const match_data = {
-        type: "book_match",
+        type: "book",
         match_id: data.id
       }
-      socket.send(JSON.stringify(match_data));
+      ids.push(data.id)
     })
+    // socket.onopen = function (e) {
+    // matches.map((data, index) => {
+    //   console.log("sending:" + data.id)
+    //   const match_data = {
+    //     type: "book",
+    //     match_id: data.id
+    //   }
+
+    // 
+    console.log(ids)
+    socket.send('book', ids);
     // };
     socket.onmessage = function (event) {
       alert("received")
@@ -546,6 +556,11 @@ export const sportWebSocket = (matches) => {
         // dispatch(getSportsDetails(market));
       });
     };
+
+    // socket.on("message", data => {
+    //   alert("receved")
+    //   console.log(data);
+    // });
 
 
     socket.onclose = function (event) {
