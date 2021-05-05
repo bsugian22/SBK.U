@@ -543,7 +543,7 @@ export const sportWebSocket = (matches) => {
 
     // 
     console.log(ids)
-    socket.send('book', ids);
+    socket.emit('book', ids);
     // };
     socket.onmessage = function (event) {
       alert("received")
