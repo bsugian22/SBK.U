@@ -972,7 +972,6 @@ const Sports = (props) => {
                         }
                       }
 
-
                     }}
                     options={((rows, i, len) => {
                       while (++i <= len) {
@@ -1195,11 +1194,11 @@ const Sports = (props) => {
                                         </span>
                                       </div>
                                       <div class="shrink-0 padding-horizontal-2">
-                                        {/* {
+                                        {
                                           outcome.oldOdds == null ? "" :
                                             outcome.oldOdds < outcome.odds ?
                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                              <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>} */}
+                                              <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
                                         <span class="color-grey">{outcome.odds}</span>
                                       </div>
@@ -1219,11 +1218,11 @@ const Sports = (props) => {
                                         </span>
                                       </div>
                                       <div class="shrink-0 padding-horizontal-2">
-                                        {/* {
+                                        {
                                           outcome.oldOdds == null ? "" :
                                             outcome.oldOdds < outcome.odds ?
                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                              <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>} */}
+                                              <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
                                         <span class="color-grey">{outcome.odds}</span>
                                       </div>

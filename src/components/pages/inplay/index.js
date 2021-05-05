@@ -9,6 +9,7 @@ import { iconsList, setCompetitorName } from "../../../helpers/object";
 import Logo from "../../layouts/Logo";
 import moment from "moment";
 import Select from "react-select";
+import { fetchMarketPerMatch, resetSideMarkets, setMatchIds } from "../../../redux/sport/sportActions";
 export default function Inplay() {
 
    let isSubscribed = true;
@@ -25,6 +26,8 @@ export default function Inplay() {
       if (user.isAuth) {
          dispatch(refreshToken())
       }
+
+      dispatch(resetSideMarkets())
       dispatch(fetchInplays())
       // dispatch(setMarkets(0))
       // dispatch(validateBet(sportDetails.data.bet))
@@ -33,17 +36,6 @@ export default function Inplay() {
       };
    }, []);
 
-   const setPage = (e) => {
-      dispatch(fetchInplays({ page: e.value }));
-   };
-
-   const prev = () => {
-      dispatch(fetchInplays({ page: sports.data.page - 1 }));
-   };
-
-   const next = () => {
-      dispatch(fetchInplays({ page: sports.data.page + 1 }));
-   };
 
    const setBet = (e) => {
       let match_id = e.currentTarget.getAttribute("data-match-id");
@@ -106,7 +98,7 @@ export default function Inplay() {
                               </span>
                            </div>
                            <div class="flex grow-2 justify-content-end">
-                              <span class="color-red">1168</span>
+                              <span class="color-red">{inplay.matches?.data ? inplay.matches.data.length:""}</span>
                               <span class="color-grey">개의 경기가 진행 중 입니다</span>
                            </div>
                         </div>
@@ -135,7 +127,7 @@ export default function Inplay() {
                                  <div class="flex padding-horizontal-10 widthp-40 heightp-100">
                                     <span class="color-grey text-ellipsis">
                                        <i class="far fa-flag margin-right-5 color-yellow"></i>
-                                       {sports.tournaments.data ? sports.tournaments.data.find(x => x.id == match.tournamentId)?.tournament.name.ko : ""}
+                                       {match.tournamentId == null ? sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == match.simpleTournamentId)?.tournament.name.ko : "" : sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == match.tournamentId)?.tournament.name.ko : ""}
                                     </span>
                                  </div>
                                  <div class="flex padding-horizontal-10 widthp-50 heightp-100">
@@ -375,12 +367,9 @@ export default function Inplay() {
                                  <div class="widthp-10 background-transparent-b-30">
                                     <div
                                        className="flex detail widthp-100 justify-content-center align-items-center color-white"
-                                    // class={matches.id === inplay.data.detail ? "active flex detail widthp-100 justify-content-center align-items-center color-white" : "flex detail widthp-100 justify-content-center align-items-center color-white"
-                                    // }
-                                    // onClick={() => {
-                                    //    // dispatch(setMarkets(index));
-                                    //    dispatch(fetchInplay(matches.id));
-                                    // }}
+                                       class={match.id === sports.sideMarket.id ? "active flex detail widthp-100 justify-content-center align-items-center color-white" : "flex detail widthp-100 justify-content-center align-items-center color-white"
+                                       }
+                                       onClick={() => setDetail(match.id)}
                                     >
                                        + {match.mainMarkets.count}
                                     </div>
@@ -406,29 +395,49 @@ export default function Inplay() {
                            <Select
                               className="select-container select-position"
                               classNamePrefix="select-box"
-                           // value={{ label: inplay.data.page, value: inplay.data.page }}
-                           // onChange={setPage}
-                           // options={((rows, i, len) => {
-                           //    while (++i <= len) {
-                           //       rows.push({ value: i, label: i });
-                           //    }
-                           //    return rows;
-                           // })([], 0, inplay.data.lastPage)}
+                              value={{ label: inplay.currentPage, value: inplay.currentPage }}
+                              onChange={(e) => {
+                                 dispatch(setMatchIds(inplay.matches, e.value, 'live'))
+                                 // if (sports.isSearching) {
+                                 //    dispatch(setMatchIds(sports.searchMatches, e.value, 'prematch'))
+                                 // } else {
+                                 //    if (sports.isBookmarkedCheck) {
+                                 //       dispatch(setMatchIds(sports.bookmarkedMatches, e.value, 'prematch'))
+                                 //    } else {
+                                 //       if (sports.sportsMatches.data.length == 0) {
+                                 //          dispatch(setMatchIds(sports.matches, e.value, 'prematch'))
+                                 //       } else {
+                                 //          dispatch(setMatchIds(sports.sportsMatches, e.value, 'prematch'))
+                                 //       }
+                                 //    }
+                                 // }
+
+                              }}
+                              options={((rows, i, len) => {
+                                 while (++i <= len) {
+                                    rows.push({ value: i, label: i });
+                                 }
+                                 return rows;
+                              })([], 0, inplay.lastPage)}
                            />
                         </div>
                         <div class="grow-2"></div>
                         <div class="flex page">
                            <button
                               class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
-                           // onClick={prev}
-                           // disabled={1 >= inplay.data.page}
+                           onClick={()=>{
+                              dispatch(setMatchIds(inplay.matches, inplay.currentPage - 1, 'live'))
+                           }}
+                           disabled={1 >= inplay.currentPage}
                            >
                               <i class="fas fa-chevron-left margin-0 color-white"></i>
                            </button>
                            <button
                               class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
-                           // onClick={next}
-                           // disabled={inplay.data.lastPage <= inplay.data.page}
+                           onClick={()=>{
+                              dispatch(setMatchIds(inplay.matches, inplay.currentPage + 1, 'live'))
+                           }}
+                           disabled={inplay.lastPage <= inplay.currentPage}
                            >
                               <i class="fas fa-chevron-right margin-0 color-white"></i>
                            </button>
@@ -437,19 +446,22 @@ export default function Inplay() {
                   </div>
                </div>
                <div class="inplay-detail flex-inherit flex-column padding-vertical-10 padding-left-5 padding-right-10">
+
                   <div class="detail-header flex-inherit flex-column">
                      <div class="height-40 align-items-center background-transparent-b-20 padding-horizontal-10">
                         <i class="fas fa-tshirt color-grey font-size-11"></i>
                         <span class="color-grey">
-                           {/* {inplay.data.detail_data?.homeTeam?.name?.ko ? inplay.data.detail_data.homeTeam.name.ko : ""} */}
+
+                           {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor.name.ko : "" : ""}
                            <span class="margin-horizontal-4 color-twhite">vs</span>
-                           {/* {inplay.data.detail_data?.awayTeam?.name?.ko ? inplay.data.detail_data.awayTeam.name.ko : ""} */}
+                           {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor.name.ko : "" : ""}
                         </span>
                      </div>
                      <div class="height-40 background-transparent-b-10 padding-horizontal-10 margin-bottom-10">
                         <div class="flex grow-2 align-items-center">
                            <i class="far fa-stopwatch color-grey font-size-11"></i>
-                           {/* <span class="color-grey">{inplay.data.detail_data?.awayTeam?.name?.ko ? moment(inplay.data.detail_data.startAt).format("MM / DD HH:mm") : ""}</span> */}
+                           {sports.sideMarket?.id ? <span class="color-grey">{moment(sports.sideMarket.startAt).format("MM / DD HH:mm")}</span> : ""}
+                           {/* <span class="color-grey">{inplay.data.detail_data?.awayTeam?.name?.ko ? moment(startAt).format("MM / DD HH:mm") : ""}</span> */}
                         </div>
                         <div class="flex align-items-center">
                            <i class="fas fa-map-marker-alt color-grey font-size-11"></i>
@@ -479,7 +491,7 @@ export default function Inplay() {
                               </div>
                            );
 
-                           if (market.producerId == 3) {
+                           if (market.producerId == 1) {
                               if (market.status == 1) {
 
                                  rows.push(
@@ -575,11 +587,11 @@ export default function Inplay() {
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
-                                                      {/* {
-                                          outcome.oldOdds == null ? "" :
-                                            outcome.oldOdds < outcome.odds ?
-                                              <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                              <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>} */}
+                                                      {
+                                                         outcome.oldOdds == null ? "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
                                                       <span class="color-grey">{outcome.odds}</span>
                                                    </div>
@@ -599,11 +611,11 @@ export default function Inplay() {
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
-                                                      {/* {
-                                          outcome.oldOdds == null ? "" :
-                                            outcome.oldOdds < outcome.odds ?
-                                              <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                              <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>} */}
+                                                      {
+                                                         outcome.oldOdds == null ? "" :
+                                                            outcome.oldOdds < outcome.odds ?
+                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
                                                       <span class="color-grey">{outcome.odds}</span>
                                                    </div>

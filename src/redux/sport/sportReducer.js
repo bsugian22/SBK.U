@@ -304,7 +304,7 @@ const sportReducer = (state = initialState, action) => {
         sidebarBookmarked: toggleBookmark
       };
     case types.SET_SIDEBAR_LEAGUE_ID:
-      let lastPageLeagueSidebar = Math.ceil(action.payload.matches.length / 15)
+      let lastPageLeagueSidebar = Math.ceil(action.payload.matches.length / 30)
       const league_exists = state.activeSideBarLeagueId?.indexOf(action.payload.id)
 
       if (league_exists !== -1) {
@@ -333,7 +333,7 @@ const sportReducer = (state = initialState, action) => {
       if (action.payload.id != state.activeSideBarCountryId) {
         activeCountryId = action.payload.id
         activeSidebarCountryMatches = { data: action.payload.matches }
-        lastPageCountrySidebar = Math.ceil(action.payload.matches.length / 15)
+        lastPageCountrySidebar = Math.ceil(action.payload.matches.length / 30)
       }
       return {
         ...state,
@@ -355,7 +355,7 @@ const sportReducer = (state = initialState, action) => {
       if (action.payload.id != state.activeSideBarSportsId) {
         activeId = action.payload.id
         activeSidebarSportsMatches = { data: action.payload.matches }
-        lastPageSportsSidebar = Math.ceil(action.payload.matches.length / 15)
+        lastPageSportsSidebar = Math.ceil(action.payload.matches.length / 30)
       }
       return {
         ...state,
@@ -381,7 +381,7 @@ const sportReducer = (state = initialState, action) => {
         marketType: action.payload,
       };
     case types.SET_SEARCH_MATCHES:
-      let lastPageSearch = Math.ceil(action.payload.data.length / 15)
+      let lastPageSearch = Math.ceil(action.payload.data.length / 30)
 
       return {
         ...state,
@@ -432,7 +432,7 @@ const sportReducer = (state = initialState, action) => {
 
 
     case types.SET_BOOKMARK_MATCHES:
-      let lastPageBookmarked = Math.ceil(action.payload.data.length / 15)
+      let lastPageBookmarked = Math.ceil(action.payload.data.length / 30)
 
       return {
         ...state,
@@ -449,7 +449,7 @@ const sportReducer = (state = initialState, action) => {
       };
 
     case types.RESET_SETTINGS:
-      let resetPage = Math.ceil(action.payload.data.length / 15)
+      let resetPage = Math.ceil(action.payload.data.length / 30)
 
       return {
         ...state,
@@ -481,7 +481,7 @@ const sportReducer = (state = initialState, action) => {
 
 
     case types.SET_SPORTS_TYPE:
-      let lastPageType = Math.ceil(action.payload.matches.length / 15)
+      let lastPageType = Math.ceil(action.payload.matches.length / 30)
 
       return {
         ...state,

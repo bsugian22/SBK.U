@@ -196,7 +196,7 @@ const inplayReducer = (state = initialState, action) => {
       };
     case types.FETCH_INPLAYS_SUCCESS:
       // add logic for pagination number and showing per table,
-      let lastPage = Math.ceil(action.payload.data.length / 15)
+      let lastPage = Math.ceil(action.payload.data.length / 30)
       return {
         ...state,
         matches: action.payload,
