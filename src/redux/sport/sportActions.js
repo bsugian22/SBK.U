@@ -4,7 +4,12 @@ import { fetchMarketPerMatchesSuccessInplay, fetchMarketPerMatchesFailureInplay 
 import moment from "moment";
 import { camelize, snakelize, socket } from "../../helpers/object";
 
-
+export const setWSMarket = (market) => {
+  return {
+    type: types.SET_WS_MARKET,
+    payload:market
+  };
+};
 
 export const showSidebarBookmark = () => {
   return {
@@ -527,13 +532,13 @@ export const sportWebSocket = (matches) => {
     const ids = matches.map((match) => {
       return match.id;
     });
-
+    console.log(ids)
     socket.emit('book', ids);
 
     socket.on('changed', (match) => {
-      alert("received")
-      const { markets } = match;
-      console.log(markets);
+      // console.log(match)
+      // const { markets } = match;
+      dispatch(setWSMarket(camelize(match)))
 
       // dispatch(getInplayDetails(match));
       // dispatch(getSportsDetails(match));

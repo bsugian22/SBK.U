@@ -41,22 +41,4 @@ export const SET_SIDEBAR_COUNTRY_ID = "SET_SIDEBAR_COUNTRY_ID";
 export const SET_SIDEBAR_LEAGUE_ID = "SET_SIDEBAR_LEAGUE_ID";
 export const SHOW_SIDEBAR_BOOKMARK = "SHOW_SIDEBAR_BOOKMARK";
 export const SORT_BY_LEAGUE = "SORT_BY_LEAGUE";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export const SET_WS_MARKET = "SET_WS_MARKET";
