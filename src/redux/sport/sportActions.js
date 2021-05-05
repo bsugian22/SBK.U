@@ -454,6 +454,7 @@ export const fetchMarketPerMatch = (id) => {
       .then(response => {
         const markets = camelize(response.data);
         // console.log(markets)
+        
         dispatch(fetchMarketPerMatchSuccess(markets))
       }).catch(error => {
         const errorMsg = error.message;

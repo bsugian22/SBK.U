@@ -75,6 +75,15 @@ export default function Inplay() {
       dispatch(setBetOutcome(data))
    };
 
+   const setDetail = async (id) => {
+      // context.actions.setdetailMenu(true);
+      if (id == sports.sideMarket.id) {
+         dispatch(resetSideMarkets())
+      } else {
+         dispatch(fetchMarketPerMatch(id))
+      }
+   };
+
    return (
       <Fragment>
          <div class="content ie-continer flex flex-inherit grow-2 flex-column">
@@ -112,12 +121,14 @@ export default function Inplay() {
                   </div>
                   <div class="inplay-list flex-inherit border-bottom match-list grow-2 scrollable-auto flex-column">
 
-                     {console.log(inplay.matches)}
+                     {/* {console.log(inplay.matches)} */}
                      {inplay.mainMarkets.length > 0
                         ? inplay.mainMarkets.map((match, index) => {
+                           let sport_hcp_market_exists = false
+                           let sport_total_market_exists = false
                            let homeTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.homeTeamId).competitor.name.ko : "";
                            let awayTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.awayTeamId).competitor.name.ko : "";
-                           console.log(match)
+                           // console.log(match)
                            var row = [];
                            row.push(
                               <div class="title background-transparent-b-30 height-40 align-items-center-inherit">
@@ -220,7 +231,7 @@ export default function Inplay() {
                                                    return (
                                                       <div
                                                          key={"outcome_id-inactive-1x2-" + outcome.id}
-                                                         class="odd color-grey"
+                                                         class="odd color-grey disabled"
                                                       >
                                                          {outcome.oldOdds == null ?
                                                             "" :
@@ -242,60 +253,121 @@ export default function Inplay() {
                                     <div class="handicap flex-inherit flex-column widthp-33">
                                        {
                                           match.mainMarkets['hcp'].map((market, market_index) => {
-                                             if (market.status == 1) {
-                                                return (market.outcomes.map((outcome, outcomes_index) => {
-                                                   let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
-                                                   return (
-                                                      <div key={"outcome_id-active-hcp-" + outcome.id}
-                                                         onClick={setBet}
-                                                         data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                         data-market_name='hcp'
-                                                         data-home-team={homeTeam}
-                                                         data-away-team={awayTeam}
-                                                         data-match-id={match.id}
-                                                         data-market-id={market.marketId}
-                                                         data-outcome-id={outcome.id}
-                                                         data-odds={outcome.odds}
-                                                         class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd align-items-center-inherit justify-content-center-inherit" : " odd align-items-center-inherit justify-content-center-inherit"}
-                                                      >
-                                                         {outcome.oldOdds == null ?
-                                                            "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                             if (sport_hcp_market_exists == false) {
+                                                sport_hcp_market_exists = true;
+                                                if (market.status == 1) {
+                                                   return (market.outcomes.map((outcome, outcomes_index) => {
+                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                                      return (
+                                                         <div key={"outcome_id-active-hcp-" + outcome.id}
+                                                            onClick={setBet}
+                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                            data-market_name='hcp'
+                                                            data-home-team={homeTeam}
+                                                            data-away-team={awayTeam}
+                                                            data-match-id={match.id}
+                                                            data-market-id={market.marketId}
+                                                            data-outcome-id={outcome.id}
+                                                            data-odds={outcome.odds}
+                                                            class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd align-items-center-inherit justify-content-center-inherit" : " odd align-items-center-inherit justify-content-center-inherit"}
+                                                         >
+                                                            {outcome.oldOdds == null ?
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
-                                                         <div class="flex color-darkgrey widthp-50">{outcomeName}</div>
-                                                         <div class="flex color-grey widthp-50">{outcome.odds}</div>
-                                                      </div>
+                                                            <div class="flex color-darkgrey widthp-50">{market.market.specifier.hcp}</div>
+                                                            <div class="flex color-grey widthp-50">{outcome.odds}</div>
+                                                         </div>
+                                                      )
+                                                   })
                                                    )
-                                                })
-                                                )
-                                             } else {
-                                                return (market.outcomes.map((outcome, outcomes_index) => {
-                                                   let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
-                                                   return (
-                                                      <div key={"outcome_id-inactive-hcp-" + outcome.id}
-                                                         class=" odd align-items-center-inherit justify-content-center-inherit"
-                                                      >
-                                                         {outcome.oldOdds == null ?
-                                                            "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                } else {
+                                                   return (market.outcomes.map((outcome, outcomes_index) => {
+                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                                      return (
+                                                         <div key={"outcome_id-inactive-hcp-" + outcome.id}
+                                                            class="disabled odd align-items-center-inherit justify-content-center-inherit"
+                                                         >
+                                                            {outcome.oldOdds == null ?
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
 
-                                                         <div class="flex color-darkgrey widthp-50">{outcomeName}</div>
-                                                         <div class="flex color-grey widthp-50">{outcome.odds}</div>
-                                                      </div>
+                                                            <div class="flex color-darkgrey widthp-50">{market.market.specifier.hcp}</div>
+                                                            <div class="flex color-grey widthp-50">{outcome.odds}</div>
+                                                         </div>
+                                                      )
+                                                   })
                                                    )
-                                                })
-                                                )
+                                                }
                                              }
+
                                           })
                                        }
                                     </div>
 
                                     <div class="overunder flex-inherit flex-column align-items-center-inherit justify-content-center-inherit widthp-33">
                                        {/* inplay ready naiwan nalang is over and under  */}
+                                       {
+                                          match.mainMarkets['total'].map((market, market_index) => {
+                                             if (sport_total_market_exists == false) {
+                                                sport_total_market_exists = true;
+                                                console.log(market.market.specifier.total)
+                                                if (market.status == 1) {
+                                                   return (market.outcomes.map((outcome, outcomes_index) => {
+                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                                      return (
+                                                         <div key={"outcome_id-active-hcp-" + outcome.id}
+                                                            onClick={setBet}
+                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                            data-market_name='hcp'
+                                                            data-home-team={homeTeam}
+                                                            data-away-team={awayTeam}
+                                                            data-match-id={match.id}
+                                                            data-market-id={market.marketId}
+                                                            data-outcome-id={outcome.id}
+                                                            data-odds={outcome.odds}
+                                                            class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd align-items-center-inherit justify-content-center-inherit" : " odd align-items-center-inherit justify-content-center-inherit"}
+                                                         >
+                                                            {outcome.oldOdds == null ?
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                            <div class="flex color-darkgrey widthp-50">{outcomeName.includes("오버") ? "O" : "U"}{market.market.specifier.total}</div>
+                                                            <div class="flex color-grey widthp-50">{outcome.odds}</div>
+                                                         </div>
+                                                      )
+                                                   })
+                                                   )
+                                                } else {
+                                                   return (market.outcomes.map((outcome, outcomes_index) => {
+                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                                      return (
+                                                         <div key={"outcome_id-inactive-hcp-" + outcome.id}
+                                                            class=" odd align-items-center-inherit justify-content-center-inherit disabled"
+                                                         >
+                                                            {outcome.oldOdds == null ?
+                                                               "" :
+                                                               outcome.oldOdds < outcome.odds ?
+                                                                  <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                                  <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                            <div class="flex color-darkgrey widthp-50">{outcomeName.includes("오버") ? "O" : "U"}{market.market.specifier.total}</div>
+                                                            <div class="flex color-grey widthp-50">{outcome.odds}</div>
+                                                         </div>
+                                                      )
+                                                   })
+                                                   )
+                                                }
+                                             }
+
+                                          })
+                                       }
                                     </div>
 
                                  </div>
@@ -334,29 +406,29 @@ export default function Inplay() {
                            <Select
                               className="select-container select-position"
                               classNamePrefix="select-box"
-                              // value={{ label: inplay.data.page, value: inplay.data.page }}
-                              // onChange={setPage}
-                              // options={((rows, i, len) => {
-                              //    while (++i <= len) {
-                              //       rows.push({ value: i, label: i });
-                              //    }
-                              //    return rows;
-                              // })([], 0, inplay.data.lastPage)}
+                           // value={{ label: inplay.data.page, value: inplay.data.page }}
+                           // onChange={setPage}
+                           // options={((rows, i, len) => {
+                           //    while (++i <= len) {
+                           //       rows.push({ value: i, label: i });
+                           //    }
+                           //    return rows;
+                           // })([], 0, inplay.data.lastPage)}
                            />
                         </div>
                         <div class="grow-2"></div>
                         <div class="flex page">
                            <button
                               class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
-                              // onClick={prev}
-                              // disabled={1 >= inplay.data.page}
+                           // onClick={prev}
+                           // disabled={1 >= inplay.data.page}
                            >
                               <i class="fas fa-chevron-left margin-0 color-white"></i>
                            </button>
                            <button
                               class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
-                              // onClick={next}
-                              // disabled={inplay.data.lastPage <= inplay.data.page}
+                           // onClick={next}
+                           // disabled={inplay.data.lastPage <= inplay.data.page}
                            >
                               <i class="fas fa-chevron-right margin-0 color-white"></i>
                            </button>
@@ -386,45 +458,54 @@ export default function Inplay() {
                      </div>
                   </div>
                   <div class="market-list flex-inherit flex-column scrollable-auto">
-                     {/* {inplay.data.detail_data == null
-                        ? <div class="align-items-center border-left" style={{ paddingLeft: "45%" }}>
-                           <Logo width="120" height="30" />
-                        </div> : inplay.data.detail_data.markets.map((market, market_index) => {
+                     {sports.sideMarket?.markets?.length > 0
+                        ? sports.sideMarket.markets.map((market, market_index) => {
+                           // console.log(market)
+                           let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor.name.ko : "";
+                           let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor.name.ko : "";
+                           let marketName = sports.markets?.data ? sports.markets.data.find(x => x.id == market.marketId).marketName.ko : ""
+
                            var rows = [];
-                           if (market.producerId == 1) {
+
+                           rows.push(
+                              <div
+                                 class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center shrink-0 border-bottom-white-strong"
+                                 key={"details-market-id" + market.id}
+                              >
+                                 <span class="color-grey">
+                                    {/* {market.marketId} */}
+                                    {setCompetitorName(marketName, homeTeam, awayTeam)}
+                                 </span>
+                              </div>
+                           );
+
+                           if (market.producerId == 3) {
                               if (market.status == 1) {
-                                 rows.push(
-                                    <div
-                                       class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center shrink-0 border-bottom-white-strong"
-                                       key={"details-market-id" + market.id}
-                                    >
-                                       <span class="color-grey">
-                                          {market.title.marketName.ko}
-                                       </span>
-                                    </div>
-                                 );
+
                                  rows.push(
                                     <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
                                        {market?.outcomes?.length == 2 ?
-
                                           market.outcomes.map((outcome, market_index) => {
+                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
                                                    onClick={setBet}
-                                                   data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
-                                                   data-market_name={market.title.marketName.ko}
-                                                   data-home-team={inplay.data.detail_data.homeTeam.name["ko"]}
-                                                   data-away-team={inplay.data.detail_data.awayTeam.name["ko"]}
-                                                   data-match-id={inplay.data.detail_data.id}
-                                                   data-market-id={market.id}
+                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam)}
+                                                   data-home-team={homeTeam}
+                                                   data-away-team={awayTeam}
+                                                   data-match-id={sports.sideMarket.id}
+                                                   data-market-id={market.marketId}
                                                    data-outcome-id={outcome.id}
                                                    data-odds={outcome.odds}
-                                                   data-specifier={JSON.stringify(market.specifier)}
-                                                   data-market-type={market.type}
-                                                   data-name-id={outcome.name.id}
-                                                   class={(outcome.active == 1 || outcome.active == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}>
+                                                   class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}
+                                                // class=" height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"
+                                                >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                                      <span class="color-grey text-ellipsis">{outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}</span>
+                                                      <span class="color-grey text-ellipsis">
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                      </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
                                                       {
@@ -439,23 +520,26 @@ export default function Inplay() {
                                              )
                                           }) :
                                           market.outcomes.map((outcome, market_index) => {
+                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
                                                    onClick={setBet}
-                                                   data-outcome_name={outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}
-                                                   data-market_name={market.title.marketName.ko}
-                                                   data-home-team={inplay.data.detail_data.homeTeam.name["ko"]}
-                                                   data-away-team={inplay.data.detail_data.awayTeam.name["ko"]}
-                                                   data-match-id={inplay.data.detail_data.id}
-                                                   data-market-id={market.id}
+                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam)}
+                                                   data-home-team={homeTeam}
+                                                   data-away-team={awayTeam}
+                                                   data-match-id={sports.sideMarket.id}
+                                                   data-market-id={market.marketId}
                                                    data-outcome-id={outcome.id}
                                                    data-odds={outcome.odds}
-                                                   data-specifier={JSON.stringify(market.specifier)}
-                                                   data-market-type={market.type}
-                                                   data-name-id={outcome.name.id}
-                                                   class={(outcome.active == 1 || outcome.active == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}>
+                                                   class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}
+                                                // class=" height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"
+                                                >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                                      <span class="color-grey text-ellipsis">{outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}</span>
+                                                      <span class="color-grey text-ellipsis">
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                      </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
                                                       {
@@ -476,32 +560,26 @@ export default function Inplay() {
                               } else {
 
                                  rows.push(
-                                    <div
-                                       class="market-header height-40 background-transparent-b-30 padding-horizontal-10 align-items-center shrink-0 border-bottom-white-strong"
-                                       key={"details_market_id" + market.id}
-                                    >
-                                       <span class="color-grey">
-                                          {market.title.marketName.ko}
-                                       </span>
-                                    </div>
-                                 );
-                                 rows.push(
                                     <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
-
                                        {market?.outcomes?.length == 2 ?
-
                                           market.outcomes.map((outcome, market_index) => {
+                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+
                                              return (
-                                                <div key={"details-outcome-id-inactive-2-row" + outcome.id} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5">
+                                                <div key={"details-outcome-id" + outcome.id}
+                                                   class="disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"
+                                                >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                                      <span class="color-grey text-ellipsis">{outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}</span>
+                                                      <span class="color-grey text-ellipsis">
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                      </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
-                                                      {
-                                                         outcome.oldOdds == null ? "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                      {/* {
+                                          outcome.oldOdds == null ? "" :
+                                            outcome.oldOdds < outcome.odds ?
+                                              <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                              <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>} */}
 
                                                       <span class="color-grey">{outcome.odds}</span>
                                                    </div>
@@ -509,17 +587,23 @@ export default function Inplay() {
                                              )
                                           }) :
                                           market.outcomes.map((outcome, market_index) => {
+                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+
                                              return (
-                                                <div key={"details-outcome-id-inactive" + outcome.id} class=" disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5">
+                                                <div key={"details-outcome-id" + outcome.id}
+                                                   class="disabled height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"
+                                                >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
-                                                      <span class="color-grey text-ellipsis">{outcome.name?.outcomeName != null ? outcome.name.outcomeName.ko : ""}</span>
+                                                      <span class="color-grey text-ellipsis">
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                      </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
-                                                      {
-                                                         outcome.oldOdds == null ? "" :
-                                                            outcome.oldOdds < outcome.odds ?
-                                                               <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                               <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+                                                      {/* {
+                                          outcome.oldOdds == null ? "" :
+                                            outcome.oldOdds < outcome.odds ?
+                                              <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                              <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>} */}
 
                                                       <span class="color-grey">{outcome.odds}</span>
                                                    </div>
@@ -533,9 +617,12 @@ export default function Inplay() {
 
                               }
                            }
+
                            return rows;
                         })
-                     } */}
+                        : <div class="align-items-center border-left" style={{ paddingLeft: "45%" }}>
+                           <Logo width="120" height="30" />
+                        </div>}
                   </div>
                </div>
             </div>

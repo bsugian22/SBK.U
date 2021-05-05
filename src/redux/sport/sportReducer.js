@@ -45,8 +45,8 @@ const sportReducer = (state = initialState, action) => {
     case types.SET_WS_MARKET:
       const wsData = action.payload
       const wsMatchId = wsData.matchId
-      console.log(wsData);
-      console.log(wsMatchId);
+      // console.log(wsData);
+      // console.log(wsMatchId);
 
       // main markets
       state.mainMarkets.map((main) => {
@@ -220,7 +220,6 @@ const sportReducer = (state = initialState, action) => {
       // sidemarkets
 
       if (state.sideMarket?.id == wsMatchId) {
-        alert("sidemarket")
         wsData.markets.map((wsMarket) => {
 
           let wsOutcomes = wsMarket.outcomes; // list of outcomes comeing from the ws
@@ -330,7 +329,7 @@ const sportReducer = (state = initialState, action) => {
       let activeCountryId = null;
       let activeSidebarCountryMatches = { data: [] };
       let lastPageCountrySidebar = null
-      console.log(action.payload)
+      // console.log(action.payload)
       if (action.payload.id != state.activeSideBarCountryId) {
         activeCountryId = action.payload.id
         activeSidebarCountryMatches = { data: action.payload.matches }
@@ -414,7 +413,7 @@ const sportReducer = (state = initialState, action) => {
       } else {
         state.bookmarked.push(action.payload)
       }
-      console.log(state.bookmarked)
+      // console.log(state.bookmarked)
 
       return {
         ...state,
