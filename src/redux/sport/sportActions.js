@@ -1,6 +1,6 @@
 import * as types from "./sportTypes";
 import axios from "../../plugins/axios";
-import { fetchMarketPerMatchesSuccessInplay, fetchMarketPerMatchesFailureInplay } from "../inplay/inplayActions";
+import { fetchMarketPerMatchesSuccessInplay, fetchMarketPerMatchesFailureInplay, setWSMarketInplay } from "../inplay/inplayActions";
 import moment from "moment";
 import { camelize, snakelize, socket } from "../../helpers/object";
 
@@ -540,6 +540,7 @@ export const sportWebSocket = (matches) => {
       // console.log(match)
       // const { markets } = match;
       dispatch(setWSMarket(camelize(match)))
+      dispatch(setWSMarketInplay(camelize(match)))
 
       // dispatch(getInplayDetails(match));
       // dispatch(getSportsDetails(match));

@@ -5,6 +5,13 @@ import { getSportsDetails } from "../sportsdetail/sportsdetailActions";
 import { setMatchIds } from "../sport/sportActions";
 
 
+export const setWSMarketInplay = (market) => {
+  return {
+    type: types.SET_WS_MARKETS_INPLAY,
+    payload: market
+  };
+};
+
 export const setMarkets = (index) => {
   return {
     type: types.SET_MARKETS,
@@ -78,17 +85,17 @@ export const fetchInplays = () => {
   return (dispatch) => {
     dispatch(fetchInplaysRequest());
     axios.get(`/api/feed/matches`, {
-      params: snakelize({event_status:'Live'})
+      params: snakelize({ event_status: 'Live' })
     })
       .then(response => {
-        const inplays = camelize(response.data) ;
+        const inplays = camelize(response.data);
         // const matches = []
         console.log(inplays)
 
         // console.log(matches)
         // inplayWebSocket(matches)
         // dispatch(inplayWebSocket(matches));
-        dispatch(setMatchIds(inplays,1,'live'))
+        dispatch(setMatchIds(inplays, 1, 'live'))
         // dispatch(setMatchIds(inplays,1))
         dispatch(fetchInplaysSuccess(inplays))
       }).catch(error => {
@@ -152,16 +159,16 @@ export const fetchInplay = (matchId) => {
         console.log(away_team)
 
         sportsdetail.data.markets.map((data, index) => {
-          
-            
-            if (data.title.marketName.ko.includes('{$competitor1}')) {
-              data.title.marketName.ko = data.title.marketName.ko.replaceAll('{$competitor1}', home_team)
-            }
-            if (data.title.marketName.ko.includes('{$competitor2}')) {
-              data.title.marketName.ko = data.title.marketName.ko.replaceAll('{$competitor2}', away_team)
-            }
-            // console.log(data.title.marketName.ko)
-         
+
+
+          if (data.title.marketName.ko.includes('{$competitor1}')) {
+            data.title.marketName.ko = data.title.marketName.ko.replaceAll('{$competitor1}', home_team)
+          }
+          if (data.title.marketName.ko.includes('{$competitor2}')) {
+            data.title.marketName.ko = data.title.marketName.ko.replaceAll('{$competitor2}', away_team)
+          }
+          // console.log(data.title.marketName.ko)
+
           // console.log(data);
           data.outcomes.map((data, index) => {
             console.log(data)
