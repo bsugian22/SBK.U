@@ -62,7 +62,6 @@ const sportReducer = (state = initialState, action) => {
     case types.SET_SIDEBAR_LEAGUE_ID:
       let lastPageLeagueSidebar = Math.ceil(action.payload.matches.length / 15)
       const league_exists = state.activeSideBarLeagueId?.indexOf(action.payload.id)
-      // Check if a value exists in the fruits array
 
       if (league_exists !== -1) {
         state.activeSideBarLeagueId.splice(league_exists, 1)

@@ -265,7 +265,6 @@ export default function BookNavi(props) {
 
                                                                                 let currentActive = sports.activeSideBarLeagueMatches.data;
                                                                                 const league_exists = sports.activeSideBarLeagueId?.indexOf(league.tournament.name.en)
-                                                                                // Check if a value exists in the fruits array
 
                                                                                 if (league_exists !== -1) {
                                                                                     currentActive = currentActive.filter(val => !leagueMatches.includes(val));
