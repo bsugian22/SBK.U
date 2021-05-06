@@ -485,7 +485,12 @@ export default function Inplay() {
                            <button
                               class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
                               onClick={() => {
-                                 dispatch(setMatchIds(inplay.matches, inplay.currentPage - 1, 'live'))
+                                 
+                                 if (inplay.sportsMatches.data.length == 0) {
+                                    ddispatch(setMatchIds(inplay.matches, inplay.currentPage - 1, 'live'))
+                                 } else {
+                                    dispatch(setMatchIds(inplay.sportsMatches, inplay.currentPage - 1, 'live'))
+                                 }
                               }}
                               disabled={1 >= inplay.currentPage}
                            >
@@ -494,7 +499,11 @@ export default function Inplay() {
                            <button
                               class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
                               onClick={() => {
-                                 dispatch(setMatchIds(inplay.matches, inplay.currentPage + 1, 'live'))
+                                 if (inplay.sportsMatches.data.length == 0) {
+                                    ddispatch(setMatchIds(inplay.matches, inplay.currentPage + 1, 'live'))
+                                 } else {
+                                    dispatch(setMatchIds(inplay.sportsMatches, inplay.currentPage + 1, 'live'))
+                                 }
                               }}
                               disabled={inplay.lastPage <= inplay.currentPage}
                            >
