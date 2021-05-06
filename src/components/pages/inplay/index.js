@@ -487,7 +487,7 @@ export default function Inplay() {
                               onClick={() => {
                                  
                                  if (inplay.sportsMatches.data.length == 0) {
-                                    ddispatch(setMatchIds(inplay.matches, inplay.currentPage - 1, 'live'))
+                                    dispatch(setMatchIds(inplay.matches, inplay.currentPage - 1, 'live'))
                                  } else {
                                     dispatch(setMatchIds(inplay.sportsMatches, inplay.currentPage - 1, 'live'))
                                  }
@@ -500,7 +500,7 @@ export default function Inplay() {
                               class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
                               onClick={() => {
                                  if (inplay.sportsMatches.data.length == 0) {
-                                    ddispatch(setMatchIds(inplay.matches, inplay.currentPage + 1, 'live'))
+                                    dispatch(setMatchIds(inplay.matches, inplay.currentPage + 1, 'live'))
                                  } else {
                                     dispatch(setMatchIds(inplay.sportsMatches, inplay.currentPage + 1, 'live'))
                                  }
