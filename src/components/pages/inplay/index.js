@@ -192,7 +192,7 @@ export default function Inplay() {
                                           match.mainMarkets['1X2'].map((market, market_index) => {
                                              if (market.status == 1) {
                                                 return (market.outcomes.map((outcome, outcomes_index) => {
-                                                   let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                                   let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
                                                    return (
                                                       <div key={"outcome_id-active-1x2-" + outcome.id}
                                                          onClick={setBet}
@@ -249,7 +249,7 @@ export default function Inplay() {
                                                 sport_hcp_market_exists = true;
                                                 if (market.status == 1) {
                                                    return (market.outcomes.map((outcome, outcomes_index) => {
-                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
                                                       return (
                                                          <div key={"outcome_id-active-hcp-" + outcome.id}
                                                             onClick={setBet}
@@ -277,7 +277,7 @@ export default function Inplay() {
                                                    )
                                                 } else {
                                                    return (market.outcomes.map((outcome, outcomes_index) => {
-                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
                                                       return (
                                                          <div key={"outcome_id-inactive-hcp-" + outcome.id}
                                                             class="disabled odd align-items-center-inherit justify-content-center-inherit"
@@ -302,15 +302,13 @@ export default function Inplay() {
                                     </div>
 
                                     <div class="overunder flex-inherit flex-column align-items-center-inherit justify-content-center-inherit widthp-33">
-                                       {/* inplay ready naiwan nalang is over and under  */}
                                        {
                                           match.mainMarkets['total'].map((market, market_index) => {
                                              if (sport_total_market_exists == false) {
                                                 sport_total_market_exists = true;
-                                                console.log(market.market.specifier.total)
                                                 if (market.status == 1) {
                                                    return (market.outcomes.map((outcome, outcomes_index) => {
-                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
                                                       return (
                                                          <div key={"outcome_id-active-hcp-" + outcome.id}
                                                             onClick={setBet}
@@ -338,7 +336,7 @@ export default function Inplay() {
                                                    )
                                                 } else {
                                                    return (market.outcomes.map((outcome, outcomes_index) => {
-                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                                      let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
                                                       return (
                                                          <div key={"outcome_id-inactive-hcp-" + outcome.id}
                                                             class=" odd align-items-center-inherit justify-content-center-inherit disabled"
@@ -498,7 +496,7 @@ export default function Inplay() {
                                     <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
                                        {market?.outcomes?.length == 2 ?
                                           market.outcomes.map((outcome, market_index) => {
-                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
 
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
@@ -532,7 +530,7 @@ export default function Inplay() {
                                              )
                                           }) :
                                           market.outcomes.map((outcome, market_index) => {
-                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
 
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
@@ -575,7 +573,7 @@ export default function Inplay() {
                                     <div class="market-data flex-inherit flex-wrap flex-row background-transparent-b-30 shrink-0">
                                        {market?.outcomes?.length == 2 ?
                                           market.outcomes.map((outcome, market_index) => {
-                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
 
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
@@ -599,7 +597,7 @@ export default function Inplay() {
                                              )
                                           }) :
                                           market.outcomes.map((outcome, market_index) => {
-                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName.ko : ""
+                                             let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
 
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
