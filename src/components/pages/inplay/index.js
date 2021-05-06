@@ -154,7 +154,11 @@ export default function Inplay() {
                         </div>
                         <div class="flex height-40 border-top padding-horizontal-10 align-items-center justify-content-center background-transparent-b-20">
                            <div class="flex">
-                              <button class="all btn-0 color-grey background-transparent active">All Events</button>
+                              <button class="all btn-0 color-grey background-transparent active"
+                                 onClick={() => {
+                                    dispatch(setSportsTypeInplay({ id: null, matches: [] }))
+                                    dispatch(setMatchIds(inplay.matches, 1, 'live'))
+                                 }}>All Events</button>
                               <button class="live btn-0 color-grey background-transparent">Live Streaming</button>
                               <button class="schedule btn-0 color-grey background-transparent">Schedule</button>
                            </div>
@@ -445,7 +449,7 @@ export default function Inplay() {
                               classNamePrefix="select-box"
                               value={{ label: inplay.currentPage, value: inplay.currentPage }}
                               onChange={(e) => {
-                                 
+
 
                                  if (sports.sportsMatches.data.length == 0) {
                                     dispatch(setMatchIds(inplay.matches, e.value, 'live'))
