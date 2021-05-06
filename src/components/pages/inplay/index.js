@@ -3,13 +3,13 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "../../../redux/user/userActions";
 
 import { Link, NavLink } from 'react-router-dom'
-import { fetchInplays, fetchInplay } from "../../../redux/inplay/inplayActions";
+import { fetchInplays, fetchInplay, setSportsTypeInplay } from "../../../redux/inplay/inplayActions";
 import { setBetOutcome, validateBet } from "../../../redux/sportsdetail/sportsdetailActions";
 import { iconsList, setCompetitorName } from "../../../helpers/object";
 import Logo from "../../layouts/Logo";
 import moment from "moment";
 import Select from "react-select";
-import { fetchMarketPerMatch, resetSideMarkets, setMatchIds } from "../../../redux/sport/sportActions";
+import { fetchMarketPerMatch, resetSideMarkets, setMatchIds, setSportsType } from "../../../redux/sport/sportActions";
 export default function Inplay() {
 
    let isSubscribed = true;
@@ -26,7 +26,7 @@ export default function Inplay() {
       if (user.isAuth) {
          dispatch(refreshToken())
       }
-
+      dispatch(setSportsTypeInplay({ id: null, matches: [] }))
       dispatch(resetSideMarkets())
       dispatch(fetchInplays())
       // dispatch(setMarkets(0))
@@ -76,6 +76,13 @@ export default function Inplay() {
       }
    };
 
+   const scrollRight = () => {
+      document.getElementById('scrollmenu').scrollLeft += 250;
+   };
+   const scrollLeft = () => {
+      document.getElementById('scrollmenu').scrollLeft -= 250;
+   };
+
    return (
       <Fragment>
          <div class="content ie-continer flex flex-inherit grow-2 flex-column">
@@ -88,17 +95,60 @@ export default function Inplay() {
                <div class="inplay-content padding-10 flex-column">
                   <div class="inplay-header flex-inherit flex-column">
                      <div class="event-slider flex-column widthp-100">
-                        <div class="flex event-list height-60 align-items-center padding-horizontal-10 background-transparent-b-30">
+                        {/* <div class="flex event-list height-60 align-items-center padding-horizontal-10 background-transparent-b-30">
                            <span class="color-grey">slider</span>
+                        </div> */}
+                        <div class="flex event-list height-80 align-items-center background-transparent-b-30 border-bottom">
+                           <button
+                              class="page-left btn-0 heightp-100 padding-vertical-40 padding-horizontal-25 background-transparent-b-20 flex align-items-center justify-content-center"
+                              onClick={() => { scrollLeft() }}
+                           >
+                              <i class="fas fa-chevron-left margin-0 color-white"></i>
+                           </button>
+                           <div id="scrollmenu" class="heightp-100 flex align-items-center">
+                              {sports?.sports?.data?.map((icon, index) => {
+
+                                 if (inplay.matches?.data) {
+                                    var matches = inplay.matches.data.filter((x) => {
+                                       return x.type == icon.id;
+                                    });
+
+                                    if (matches.length) {
+                                       // console.log(matches.length)
+                                       let sportMatches = {}
+                                       return <a class={inplay.sportsTypeId == icon.id ? "active" : ""} key={"icon-" + index} href="#icon" onClick={(e) => {
+                                          e.preventDefault();
+                                          sportMatches.data = matches
+                                          dispatch(setSportsTypeInplay({ id: icon.id, matches: matches }))
+                                          dispatch(setMatchIds(sportMatches, 1, 'live'))
+                                       }}>
+                                          <span class={"icon-" + icon.id}></span>
+                                          <span class="event-count">{icon.name.ko}</span>
+                                       </a>
+                                    }
+                                 }
+
+                              })}
+
+
+                           </div>
+                           <div class="grow-2"></div>
+                           <button
+                              class="page-right btn-0 heightp-100 padding-vertical-40 padding-horizontal-25 background-transparent-b-20 flex align-items-center justify-content-center"
+                              onClick={() => { scrollRight() }}
+                           >
+                              <i class="fas fa-chevron-right margin-0 color-white"></i>
+                           </button>
                         </div>
                         <div class="flex height-40 border-bottom padding-horizontal-10 align-items-center background-transparent-b-20">
                            <div class="flex">
                               <span class="color-grey">
-                                 <i class="fas fa-calendar-check"></i>INPLAY : ALL EVENTS
+                                 <i class="fas fa-calendar-check"></i>INPLAY : {inplay.sportsTypeId == null ? ' ALL EVENTS' : sports.sports.data ? sports.sports.data.find(x => x.id == inplay.sportsTypeId).name.ko : ""
+                                 }
                               </span>
                            </div>
                            <div class="flex grow-2 justify-content-end">
-                              <span class="color-red">{inplay.matches?.data ? inplay.matches.data.length:""}</span>
+                              <span class="color-red">{inplay.sportsTypeId != null ? inplay.sportsMatches.data.length : inplay.matches?.data ? inplay.matches.data.length : ""}</span>
                               <span class="color-grey">개의 경기가 진행 중 입니다</span>
                            </div>
                         </div>
@@ -395,7 +445,13 @@ export default function Inplay() {
                               classNamePrefix="select-box"
                               value={{ label: inplay.currentPage, value: inplay.currentPage }}
                               onChange={(e) => {
-                                 dispatch(setMatchIds(inplay.matches, e.value, 'live'))
+                                 
+
+                                 if (sports.sportsMatches.data.length == 0) {
+                                    dispatch(setMatchIds(inplay.matches, e.value, 'live'))
+                                 } else {
+                                    dispatch(setMatchIds(inplay.sportsMatches, e.value, 'live'))
+                                 }
                                  // if (sports.isSearching) {
                                  //    dispatch(setMatchIds(sports.searchMatches, e.value, 'prematch'))
                                  // } else {
@@ -410,7 +466,8 @@ export default function Inplay() {
                                  //    }
                                  // }
 
-                              }}
+                              }
+                              }
                               options={((rows, i, len) => {
                                  while (++i <= len) {
                                     rows.push({ value: i, label: i });
@@ -423,19 +480,19 @@ export default function Inplay() {
                         <div class="flex page">
                            <button
                               class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
-                           onClick={()=>{
-                              dispatch(setMatchIds(inplay.matches, inplay.currentPage - 1, 'live'))
-                           }}
-                           disabled={1 >= inplay.currentPage}
+                              onClick={() => {
+                                 dispatch(setMatchIds(inplay.matches, inplay.currentPage - 1, 'live'))
+                              }}
+                              disabled={1 >= inplay.currentPage}
                            >
                               <i class="fas fa-chevron-left margin-0 color-white"></i>
                            </button>
                            <button
                               class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
-                           onClick={()=>{
-                              dispatch(setMatchIds(inplay.matches, inplay.currentPage + 1, 'live'))
-                           }}
-                           disabled={inplay.lastPage <= inplay.currentPage}
+                              onClick={() => {
+                                 dispatch(setMatchIds(inplay.matches, inplay.currentPage + 1, 'live'))
+                              }}
+                              disabled={inplay.lastPage <= inplay.currentPage}
                            >
                               <i class="fas fa-chevron-right margin-0 color-white"></i>
                            </button>

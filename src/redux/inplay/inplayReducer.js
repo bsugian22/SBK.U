@@ -9,11 +9,24 @@ const initialState = {
   currentPage: 1,
   lastPage: 1,
   mainMarkets: [],
-  sideMarket: []
+  sideMarket: [],
+  sportsTypeId: null,
+  sportsMatches: { data: [] },
 };
 
 const inplayReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case types.SET_SPORTS_TYPE_INPLAY:
+      let lastPageType = Math.ceil(action.payload.matches.length / 30)
+
+      return {
+        ...state,
+        lastPage: lastPageType,
+        sportsTypeId: action.payload.id,
+        sportsMatches: { data: action.payload.matches },
+      };
+
     case types.SET_WS_MARKETS_INPLAY:
       const wsData = action.payload
       const wsMatchId = wsData.matchId

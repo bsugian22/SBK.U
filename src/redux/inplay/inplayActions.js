@@ -80,6 +80,13 @@ export const fetchMarketPerMatchesFailureInplay = (data) => {
   };
 };
 
+export const setSportsTypeInplay = (data) => {
+  return {
+    type: types.SET_SPORTS_TYPE_INPLAY,
+    payload: data
+  };
+};
+
 
 export const fetchInplays = () => {
   return (dispatch) => {
