@@ -48,8 +48,8 @@ let user = useSelector((state) => state.user.user);
                         </div>
                         <div class="flex height-40 border-top padding-horizontal-10 align-items-center justify-content-center background-transparent-b-20">
                            <div class="flex">
-                              <button class="all btn-0 color-grey background-transparent active">All Events</button>
-                              <button class="live btn-0 color-grey background-transparent">Live Streaming</button>
+                              <button class="all btn-0 color-grey background-transparent active">Prematch</button>
+                              <button class="live btn-0 color-grey background-transparent">Live</button>
                               <button class="schedule btn-0 color-grey background-transparent">Schedule</button>
                            </div>
                         </div>
