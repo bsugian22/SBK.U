@@ -434,7 +434,9 @@ export const fetchMarketPerMatches = (ids, pageNumber, type) => {
         }
         if (type == 'live') {
           dispatch(fetchMarketPerMatchesSuccessInplay(markets))
-          // dipsatche for live
+        }
+        if (type == 'esports') {
+          dispatch(fetchMarketPerMatchesSuccessEsports(markets))
         }
       }).catch(error => {
         const errorMsg = error.message;
@@ -443,6 +445,9 @@ export const fetchMarketPerMatches = (ids, pageNumber, type) => {
         }
         if (type == 'live') {
           dispatch(fetchMarketPerMatchesFailureInplay(errorMsg))
+        }
+        if (type == 'esports') {
+          dispatch(fetchMarketPerMatchesFailureEsports(errorMsg))
         }
       })
   };

@@ -177,7 +177,7 @@ export default function Inplay() {
                            // console.log(match)
                            var row = [];
                            row.push(
-                              <div class="title background-transparent-b-30 height-40 align-items-center-inherit">
+                              <div key={match.id} class="title background-transparent-b-30 height-40 align-items-center-inherit">
                                  <div class="flex padding-horizontal-10 widthp-40 heightp-100">
                                     <span class="color-grey text-ellipsis">
                                        <i class="far fa-flag margin-right-5 color-yellow"></i>
