@@ -1,35 +1,138 @@
 import React, { Fragment } from 'react'
-import Logo from '../layouts/Logo'
-import { Link, NavLink } from 'react-router-dom'
-import { connect, useDispatch, useSelector,Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "../../redux/store";
-
 import SignAuth from '../dialogs/SignAuth'
 import userModel from '../../models/userModel'
 import sweetalert from '../../plugins/sweetalert'
-import { registrationForm } from '../../redux/user/userActions'
+import { verifyUsername,   setRegisterForm } from "../../redux/register/registerActions"
+import { showModal } from '../../redux/modal/modalActions';
 export default function Signup() {
    const swal = new sweetalert()
    const model = new userModel()
+   let register = useSelector((state) => state.register.register);
    const dispatch = useDispatch();
 
    const SignAuthDialog = () => {
       swal.fire({
-         html: (
-            <Provider store={store}>
-              <SignAuth
-              //  pass={pass}
-              //  changeUsername={onChangeUsername}
-              //  dispatch={dispatch}
-              />
-            </Provider>
-          ),
+         html: <Provider store={store}>
+                  <SignAuth />
+               </Provider>,
          width: 1100,
          padding: 0,
          showCloseButton: true,
          showCancelButton: false,
          showConfirmButton: false,
       })
+   }
+
+   const checkUsername = () => {
+      var regExp = /^[a-z]+[a-z0-9]{3,9}$/g;
+      if (register.username && !regExp.test(register.username)) {
+         dispatch(showModal({
+            text: "아이디는 4~10자 이내의 영문자와 숫자의 조합으로만 사용할 수 있습니다."
+         }));
+         return false;
+      }
+      return true;
+   }
+   
+   const checkEmail = (email) => {
+      var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+      return regExp.test(email);
+   }
+   
+   const submitUsername = () => {
+      if (checkUsername()) {
+         dispatch(verifyUsername({
+            username: register.username,
+            nickname : register.username
+         }));
+      }
+   }
+
+   const submit = () => {
+      if (!checkUsername()) {
+         return;
+      }
+
+      if (!register.username) {
+         dispatch(showModal({
+            text: "아이디를 입력해주세요."
+         }));
+         return;
+      }
+
+      if (!register.username_confirmation) {
+         dispatch(showModal({
+            text: "아이디 중복확인을 해주세요."
+         }));
+         return;
+      }
+
+      if (!register.password) {
+         dispatch(showModal({
+            text: "비밀번호를 입력해주세요."
+         }));
+         return;
+      }
+
+      if (!register.password_confirmation) {
+         dispatch(showModal({
+            text: "비밀번호 확인을 입력해주세요."
+         }));
+         return;
+      }
+
+      if (register.password.length < 4 || register.password_confirmation.length < 4) {
+         dispatch(showModal({
+            text: "비밀번호는 4글자 보다 짧을 수 없습니다."
+         }));
+         return;
+      }
+
+      if (register.password != register.password_confirmation) {
+         dispatch(showModal({
+            text: "입력하신 비밀번호가 일치하지 않습니다."
+         }));
+         return;
+      }
+
+      if (!register.realname) {
+         dispatch(showModal({
+            text: "이름을 입력해주세요."
+         }));
+         return;
+      }
+
+      if (register.realname.length < 3) {
+         dispatch(showModal({
+            text: "이름은 3 글자 보다 짧을 수 없습니다."
+         }));
+         return;
+      }
+
+      if (register.email && !checkEmail(register.email)) {
+         dispatch(showModal({
+            text: "이메일 형식을 다시 확인해주세요.",
+         }));
+         return;
+      }
+
+      if (!register.country_code) {
+         dispatch(showModal({
+            text: "사용 국가를 선택해주세요."
+         }));
+         return;
+      }
+
+      if (!register.language) {
+         dispatch(showModal({
+            text: "선호 언어를 선택해주세요."
+         }));
+         return;
+      }
+
+      SignAuthDialog();
    }
 
    return (
@@ -65,18 +168,19 @@ export default function Signup() {
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="memid" class="padding-horizontal-10 background-transparent-b-30" placeholder="아이디를 입력하세요."
-                           onChange={(e) => {
-                              let data = {
-                                 target: "username",
-                                 value: e.target.value
-                              }
-
-                              dispatch(registrationForm(data))
-                           }
-                           }
+                        <input 
+                           type="text" 
+                           name="memid" 
+                           class="padding-horizontal-10 background-transparent-b-30" 
+                           placeholder="아이디를 입력하세요."  
+                           defaultValue=""
+                           onChange={(e)=>{ 
+                              let username = e.target.value;
+                              dispatch(setRegisterForm({ target : 'username', value : username}));
+                              dispatch(setRegisterForm({ target : 'nickname', value : username}));
+                           }}
                         />
-                        <button type="button" class="background-green padding-horizontal-10 btn-submit">
+                        <button type="button" class="background-green padding-horizontal-10 btn-submit" onClick={submitUsername}>
                            중복확인
                         </button>
                      </div>
@@ -85,27 +189,30 @@ export default function Signup() {
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="password" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="비밀번호를 입력해주세요" onChange={(e) => {
-                           let data = {
-                              target: "password",
-                              value: e.target.value
-                           }
-
-                           dispatch(registrationForm(data))
-                        }
-                        } />
+                        <input 
+                           class="padding-horizontal-10 background-transparent-b-30" 
+                           type="password"
+                           name="password" 
+                           autoComplete="off" 
+                           placeholder="비밀번호를 입력해주세요"
+                           onChange={(e)=>{
+                              let password = e.target.value;
+                              dispatch(setRegisterForm({ target : 'password', value : password}));
+                           }}
+                        />
                      </div>
                      <div class="padding-top-5">
-                        <input type="password" name="passwrd" class="padding-horizontal-10 background-transparent-b-30" placeholder="비밀번호를 다시한번 입력하세요."
-                           onChange={(e) => {
-                              let data = {
-                                 target: "password_confirmation",
-                                 value: e.target.value
-                              }
-
-                              dispatch(registrationForm(data))
-                           }
-                           } />
+                        <input 
+                           class="padding-horizontal-10 background-transparent-b-30" 
+                           type="password" 
+                           name="password" 
+                           autoComplete="new-password" 
+                           placeholder="비밀번호를 다시한번 입력하세요." 
+                           onChange={(e)=>{
+                              let passwordConfirm = e.target.value;
+                              dispatch(setRegisterForm({ target : 'password_confirmation', value : passwordConfirm}));
+                           }}
+                        />
                      </div>
                   </div>
                   <div class="widthp-50 flex-inherit padding-left-30 sign-item-inner flex-column">
@@ -114,49 +221,49 @@ export default function Signup() {
                         <strong class="color-red padding-left-5">*</strong>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="username" class="padding-horizontal-10 background-transparent-b-30" placeholder="이름을 입력하세요"
-                           onChange={(e) => {
-                              let data = {
-                                 target: "nickname",
-                                 value: e.target.value
-                              }
-
-                              dispatch(registrationForm(data))
-                           }
-                           } />
+                        <input 
+                           type="text" 
+                           name="realname" 
+                           class="padding-horizontal-10 background-transparent-b-30" 
+                           placeholder="이름을 입력하세요" 
+                           autoComplete="none"
+                           onChange={(e)=>{
+                              let realname = e.target.value;
+                              dispatch(setRegisterForm({ target : 'realname', value : realname}));
+                           }}
+                        />
                      </div>
 
                      <div class="padding-top-10">
                         <span class="color-grey">생년월일</span>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="yyyy" class="padding-horizontal-10 background-transparent-b-30" placeholder="YYYY-MM-DD" 
-                        onChange={(e) => {
-                           let data = {
-                              target: "birth_date",
-                              value: e.target.value
-                           }
-
-                           dispatch(registrationForm(data))
-                        }
-                        }/>
-                        
+                        <input 
+                           type="text" 
+                           name="yyyy" 
+                           class="padding-horizontal-10 background-transparent-b-30" 
+                           placeholder="YYYY-MM-DD" 
+                           onChange={(e)=>{
+                              let bornAt = e.target.value;
+                              dispatch(setRegisterForm({ target : 'born_at', value : bornAt}));
+                           }}
+                        />
                      </div>
 
                      <div class="padding-top-10">
                         <span class="color-grey">이메일</span>
                      </div>
                      <div class="padding-top-10">
-                        <input type="text" name="email" class="padding-horizontal-10 background-transparent-b-30" placeholder="aaa@bbb.ccc"
-                           onChange={(e) => {
-                              let data = {
-                                 target: "email",
-                                 value: e.target.value
-                              }
-
-                              dispatch(registrationForm(data))
-                           }
-                           } />
+                        <input 
+                           class="padding-horizontal-10 background-transparent-b-30" 
+                           type="text" 
+                           name="email" 
+                           placeholder="aaa@bbb.ccc" 
+                           onChange={(e)=>{
+                              let email = e.target.value;
+                              dispatch(setRegisterForm({ target : 'email', value : email}));
+                           }}
+                        />
                      </div>
 
                      <div class="flex-column flex-inherit">
@@ -176,33 +283,29 @@ export default function Signup() {
                         <div class="flex text-align-left">
                            <div class="widthp-50 margin-top-6">
                               <div class="select-item-box select height-40 margin-top-10">
-                                 <select name="country" onChange={(e) => {
-                                    let data = {
-                                       target: "country_code",
-                                       value: e.target.value
-                                    }
-
-                                    dispatch(registrationForm(data))
-                                 }
-                                 }>
-                                    <option value="ko">한국</option>
-                                    <option value="us">미국</option>
+                                 <select 
+                                    name="country"
+                                    onChange={(e)=>{
+                                       let countryCode = e.target.value;
+                                       dispatch(setRegisterForm({ target : 'country_code', value : countryCode}));
+                                    }}>
+                                    <option value="">접속국가</option>
+                                    <option value="PHL">한국</option>
+                                    <option value="PHL">미국</option>
                                  </select>
                               </div>
                            </div>
                            <div class="widthp-50 margin-top-6">
                               <div class="select-item-box padding-left-10 select height-40 margin-top-10">
-                                 <select name="country" onChange={(e) => {
-                                    let data = {
-                                       target: "language",
-                                       value: e.target.value
-                                    }
-
-                                    dispatch(registrationForm(data))
-                                 }
-                                 }>
+                                 <select 
+                                    name="language"
+                                    onChange={(e)=>{
+                                       let language = e.target.value;
+                                       dispatch(setRegisterForm({ target : 'language', value : language}));
+                                    }}>
+                                    <option value="">선호언어</option>
                                     <option value="ko">한국어</option>
-                                    <option value="english">미국어</option>
+                                    <option value="ko">미국어</option>
                                  </select>
                               </div>
                            </div>
@@ -216,7 +319,7 @@ export default function Signup() {
                   </div>
                </div>
                <div class="widthp-100 sign-content-bottom  height-150 align-items-center justify-content-end padding-right-25">
-                  <button type="button" class="next-sign-auth background-green color-white padding-vertical-15 padding-horizontal-45" onClick={SignAuthDialog}>
+                  <button type="button" class="next-sign-auth background-green color-white padding-vertical-15 padding-horizontal-45" onClick={submit}>
                      다음
                   </button>
                </div>

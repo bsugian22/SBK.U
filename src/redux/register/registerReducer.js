@@ -2,49 +2,50 @@ import * as types from "./registerTypes";
 
 const initialState = {
   loading: false,
-  data: [],
+  register: {
+    username: "",
+    nickname: "",
+    username_confirmation : false,
+    password: "",
+    password_confirmation: "",
+    realname: "",
+    born_at : "",
+    email : "",
+    country_code: "",
+    language: "",
+    tel_number: "",
+    tel_verification_sent : false,
+    tel_verification_number : "",
+    account_bank: "",
+    account_number: "",
+    account_holder: "",
+    withdrawal_password: "",
+    withdrawal_password_confirm: "",
+    referrer_username: "",
+    branch_code: "",
+    terms_policy : false,
+    terms_promotion : false,
+  },
   error: "",
 };
 
 const registerReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.RESET_REGISTER_FORM:
+      return initialState
+    case types.SET_REGISTER_FORM:
+      let target = action.payload.target
+      state.register[target] = action.payload.value;
 
-    case types.FETCH_REGISTERS_REQUEST:
+      switch(target) {
+        case "username":
+          state.register['username_confirmation'] = false;
+        break;
+      }
+      
       return {
-        ...state,
-        loading: true,
+        ...state
       };
-    case types.FETCH_REGISTERS_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: "",
-      };
-    case types.FETCH_REGISTERS_FAILURE:
-      return {
-        loading: false,
-        data: [],
-        error: action.payload,
-      };
-
-    case types.FETCH_REGISTER_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case types.FETCH_REGISTER_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: "",
-      };
-    case types.FETCH_REGISTER_FAILURE:
-      return {
-        loading: false,
-        data: [],
-        error: action.payload,
-      };
-
     case types.CREATE_REGISTER_REQUEST:
       return {
         ...state,
@@ -55,53 +56,80 @@ const registerReducer = (state = initialState, action) => {
         loading: false,
         data: action.payload,
         error: "",
+        register : {
+          ...state.register
+        }
       };
     case types.CREATE_REGISTER_FAILURE:
       return {
         loading: false,
-        data: [],
         error: action.payload,
+        register : {
+          ...state.register
+        }
       };
-
-    case types.UPDATE_REGISTER_REQUEST:
+    case types.VERIFY_USERNAME_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case types.UPDATE_REGISTER_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: "",
-      };
-    case types.UPDATE_REGISTER_FAILURE:
-      return {
-        loading: false,
-        data: [],
-        error: action.payload,
-      };
-      
-    case types.DELETE_REGISTERS_REQUEST:
+    case types.VERIFY_USERNAME_SUCCESS:
       return {
         ...state,
-        loading: true,
-      };
-    case types.DELETE_REGISTERS_SUCCESS:
-      return {
         loading: false,
-        data: action.payload,
-        error: "",
+        register: {
+          ...state.register,
+          username_confirmation: true
+        },
+        error: null,
       };
-    case types.DELETE_REGISTERS_FAILURE:
+    case types.VERIFY_USERNAME_FAILURE:
       return {
+        ...state,
         loading: false,
-        data: [],
+        register: {
+          ...state.register,
+          username_confirmation: false
+        },
         error: action.payload,
       };
-
-
+    case types.SEND_TEL_VERIFICATION_REQUEST:
+      return state
+    case types.SEND_TEL_VERIFICATION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        register: {
+          ...state.register,
+          tel_verification_sent: true
+        }
+      };
+    case types.SEND_TEL_VERIFICATION_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        register: {
+          ...state.register,
+          tel_verification_sent: false,
+        }
+      };
+    case types.VERIFY_TEL_NUMBER_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case types.VERIFY_TEL_NUMBER_SUCCESS:
+      return {
+        ...state,
+        loading: false
+      };
+    case types.VERIFY_TEL_NUMBER_FAILURE:
+      return {
+        ...state,
+        loading: false
+      };
     default:
-      return state;
+    return state;
   }
 };
 

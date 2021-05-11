@@ -4,6 +4,7 @@ import Header from "./components/layouts/Header";
 import Container from "./components/layouts/Container";
 import Footer from "./components/layouts/Footer";
 import MenuContext from "./contexts/Menu.context";
+import Modal from "./components/layouts/Modal";
 
 const App = () => {
   const [menu, setMenu] = useState(false);
@@ -39,6 +40,7 @@ const App = () => {
         <Header />
         <Container />
         <Footer />
+        <Modal />
       </Fragment>
     </MenuContext.Provider>
   );

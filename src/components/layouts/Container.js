@@ -9,7 +9,6 @@ import { fetchSummary } from "../../redux/navigations/accountSummary/accountSumm
 
 import { connect, useSelector, useDispatch } from "react-redux";
 
-
 const Container = (props) => {
    let isSubscribed = true
    const { preferences, setPreferences, setUser, setSports } = props

@@ -26,6 +26,7 @@ import messageReducer from "../redux/accounts/message/messageReducer";
 import positionReducer from "../redux/accounts/position/positionReducer";
 import noticeReducer from "../redux/accounts/notice/noticeReducer";
 import accountSummaryReducer from "../redux/navigations/accountSummary/accountSummaryReducer";
+import modalReducer from "../redux/modal/modalReducer";
 
 const rootReducer = combineReducers({
   casino: casinoReducer,
@@ -55,6 +56,7 @@ const rootReducer = combineReducers({
   position: positionReducer,
   notice: noticeReducer,
   accountSummary: accountSummaryReducer,
+  modal : modalReducer,
 });
 
 export default rootReducer;

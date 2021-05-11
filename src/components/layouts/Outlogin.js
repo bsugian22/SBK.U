@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect, useSelector,Provider } from "react-redux";
+import store from "../../redux/store";
 import userModel from "../../models/userModel";
 import Signin from "../dialogs/Signin";
 import Signup from "../dialogs/Signup";
 import sweetalert from "../../plugins/sweetalert";
 import { mapStateToProps, mapDispatchProps } from "../../redux/store";
 import echo from "../../plugins/echo";
-import store from "../../redux/store";
 
 const Outlogin = (props) => {
   const {
@@ -15,6 +15,7 @@ const Outlogin = (props) => {
     setUser,
     setAccessToken,
     setLogout,
+    resetRegisterForm,
     forgotPassword,
     handleUsernameOnChange,
     handlePassword,
@@ -107,15 +108,12 @@ const Outlogin = (props) => {
   };
 
   const SignUpDialog = () => {
+    resetRegisterForm();
+
     swal.fire({
-      html:
-      (
+      html: (
         <Provider store={store}>
-          <Signup
-          //  pass={pass}
-          //  changeUsername={onChangeUsername}
-          //  dispatch={dispatch}
-          />
+          <Signup dispatch={dispatch} />
         </Provider>
       ),
       width: 1100,

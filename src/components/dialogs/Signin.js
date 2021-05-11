@@ -6,14 +6,22 @@ import Signup from "../dialogs/Signup";
 import Signfind from "../dialogs/SignfindContainer";
 import store from "../../redux/store";
 import { Provider, ReactReduxContext } from "react-redux";
+import { resetRegisterForm } from "../../redux/register/registerActions";
+
 export default function Signin(props) {
-  const { onLogin, forgotPassword, onChangeUsername, dispatch } = props;
+  const { onLogin, forgotPassword, onChangeUsername, } = props;
   let pass = forgotPassword;
   const swal = new sweetalert();
   const model = new userModel();
-  const SignupDialog = () => {
+
+  const SignupDialog = () => {  
+    resetRegisterForm();
     swal.fire({
-      html: <Signup />,
+      html: (
+        <Provider store={store}>
+          <Signup />
+        </Provider>
+      ),
       width: 1100,
       padding: 0,
       showCloseButton: true,
