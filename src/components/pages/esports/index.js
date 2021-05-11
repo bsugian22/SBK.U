@@ -3,6 +3,8 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "../../../redux/user/userActions";
 import { Link, NavLink } from 'react-router-dom'
 import { setCompetitorName } from "../../../helpers/object";
+import { fetchMatches } from "../../../redux/sport/sportActions";
+import { fetchInplays } from "../../../redux/inplay/inplayActions";
 
 export default function Esports() {
 
@@ -19,6 +21,9 @@ export default function Esports() {
       if (user.isAuth) {
          dispatch(refreshToken())
       }
+      dispatch(fetchMatches(true))
+      dispatch(fetchInplays(true))
+
       return () => {
          isSubscribed = false;
       };
@@ -91,7 +96,7 @@ export default function Esports() {
                      </div>
                   </div>
                   <div class="esports-list flex-inherit border-bottom match-list grow-2 scrollable-auto flex-column">
-                     {esports.mainMarkets.length > 0
+                     {/* {esports.mainMarkets.length > 0
                         ? esports.mainMarkets.map((match, index) => {
                            let sport_hcp_market_exists = false
                            let sport_total_market_exists = false
@@ -360,7 +365,7 @@ export default function Esports() {
                            // })
                            return row
                         }) : <div class="flex justify-content-center heightp-100 align-items-center"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div>
-                     }
+                     } */}
                   </div>
                   <div class="bottom-wrap border-top flex padding-vertical-10 flex-inherit height-59 align-items-center-inherit0">
                      <div class="count-list flex-inherit grow-2 heightp-100"></div>

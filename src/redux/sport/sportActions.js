@@ -3,11 +3,12 @@ import axios from "../../plugins/axios";
 import { fetchMarketPerMatchesSuccessInplay, fetchMarketPerMatchesFailureInplay, setWSMarketInplay } from "../inplay/inplayActions";
 import moment from "moment";
 import { camelize, snakelize, socket } from "../../helpers/object";
+import { fetchPrematches } from "../esport/esportActions";
 
 export const setWSMarket = (market) => {
   return {
     type: types.SET_WS_MARKET,
-    payload:market
+    payload: market
   };
 };
 
@@ -368,7 +369,7 @@ export const resetAll = (matches) => {
 };
 
 
-export const fetchMatches = () => {
+export const fetchMatches = (esports) => {
   return (dispatch) => {
     dispatch(fetchMatchesRequest())
     axios.get(`/api/feed/matches`)
@@ -379,11 +380,16 @@ export const fetchMatches = () => {
         var defaultMatches = matches.data.filter((x) => {
           return x.type == 1;
         });
-        dispatch(fetchMatchesSuccess(matches))
-        dispatch(setMatchIds({ data: defaultMatches }, 1, 'prematch'))
-        dispatch(setSportsType({ id: 1, matches: defaultMatches }))
 
 
+        if (esports) {
+          //dispatch espoirts
+          dispatch(fetchPrematches(matches))
+        } else {
+          dispatch(fetchMatchesSuccess(matches))
+          dispatch(setMatchIds({ data: defaultMatches }, 1, 'prematch'))
+          dispatch(setSportsType({ id: 1, matches: defaultMatches }))
+        }
 
       }).catch(error => {
         const errorMsg = error.message;
@@ -459,7 +465,7 @@ export const fetchMarketPerMatch = (id) => {
       .then(response => {
         const markets = camelize(response.data);
         // console.log(markets)
-        
+
         dispatch(fetchMarketPerMatchSuccess(markets))
       }).catch(error => {
         const errorMsg = error.message;

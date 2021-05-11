@@ -3,6 +3,7 @@ import axios from "../../plugins/axios";
 import { camelize, snakelize, socket } from "../../helpers/object";
 import { getSportsDetails } from "../sportsdetail/sportsdetailActions";
 import { setMatchIds } from "../sport/sportActions";
+import { fetchInplaysMatches } from "../esport/esportActions";
 
 
 export const setWSMarketInplay = (market) => {
@@ -88,7 +89,7 @@ export const setSportsTypeInplay = (data) => {
 };
 
 
-export const fetchInplays = () => {
+export const fetchInplays = (esports) => {
   return (dispatch) => {
     dispatch(fetchInplaysRequest());
     axios.get(`/api/feed/matches`, {
@@ -97,14 +98,14 @@ export const fetchInplays = () => {
       .then(response => {
         const inplays = camelize(response.data);
         // const matches = []
-        console.log(inplays)
 
-        // console.log(matches)
-        // inplayWebSocket(matches)
-        // dispatch(inplayWebSocket(matches));
-        dispatch(setMatchIds(inplays, 1, 'live'))
-        // dispatch(setMatchIds(inplays,1))
-        dispatch(fetchInplaysSuccess(inplays))
+        if (esports) {
+          //dispatch espoirts
+          dispatch(fetchInplaysMatches(inplays))
+        } else {
+          dispatch(setMatchIds(inplays, 1, 'live'))
+          dispatch(fetchInplaysSuccess(inplays))
+        }
       }).catch(error => {
         const errorMsg = error.message;
         dispatch(fetchInplaysFailure(errorMsg))

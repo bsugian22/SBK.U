@@ -7,43 +7,57 @@ export const fetchEsportsRequest = () => {
   };
 };
 
+export const fetchInplaysMatches = (data) => {
+  return {
+    type: types.FETCH_INPLAY,
+    payload: data
+  };
+}; 
 
-
-export const fetchEsports = () => {
-  return (dispatch) => {
-    dispatch(fetchEsportsRequest());
-    axios.get(`/api/feed/matches`, {
-      params: snakelize({ event_status: 'Esports' })
-    })
-      .then(response => {
-        const inplays = camelize(response.data);
-        // const matches = []
-        console.log(inplays)
-
-        // console.log(matches)
-        // inplayWebSocket(matches)
-        // dispatch(inplayWebSocket(matches));
-        dispatch(setMatchIds(inplays, 1, 'live'))
-        // dispatch(setMatchIds(inplays,1))
-        dispatch(fetchInplaysSuccess(inplays))
-      }).catch(error => {
-        const errorMsg = error.message;
-        dispatch(fetchInplaysFailure(errorMsg))
-      })
+export const fetchPrematches = (data) => {
+  return {
+    type: types.FETCH_PREMATCH,
+    payload: data
   };
 };
 
 
-export const fetchEsport = () => {
-  return (dispatch) => {
-    dispatch(fetchEsportRequest);
-    await axios.get(`/api/`)
-      .then(response => {
-        const branches = response.data;
-        dispatch(fetchEsportSuccess(branches))
-      }).catch(error => {
-        const errorMsg = error.message;
-        dispatch(fetchEsportFailure(errorMsg))
-      })
-  };
-};
+
+// export const fetchEsports = () => {
+//   return (dispatch) => {
+//     dispatch(fetchEsportsRequest());
+//     axios.get(`/api/feed/matches`, {
+//       params: snakelize({ event_status: 'Esports' })
+//     })
+//       .then(response => {
+//         const inplays = camelize(response.data);
+//         // const matches = []
+//         console.log(inplays)
+
+//         // console.log(matches)
+//         // inplayWebSocket(matches)
+//         // dispatch(inplayWebSocket(matches));
+//         dispatch(setMatchIds(inplays, 1, 'live'))
+//         // dispatch(setMatchIds(inplays,1))
+//         dispatch(fetchInplaysSuccess(inplays))
+//       }).catch(error => {
+//         const errorMsg = error.message;
+//         dispatch(fetchInplaysFailure(errorMsg))
+//       })
+//   };
+// };
+
+
+// export const fetchEsport = () => {
+//   return (dispatch) => {
+//     dispatch(fetchEsportRequest);
+//     await axios.get(`/api/`)
+//       .then(response => {
+//         const branches = response.data;
+//         dispatch(fetchEsportSuccess(branches))
+//       }).catch(error => {
+//         const errorMsg = error.message;
+//         dispatch(fetchEsportFailure(errorMsg))
+//       })
+//   };
+// };
