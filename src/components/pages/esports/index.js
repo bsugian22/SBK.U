@@ -21,8 +21,8 @@ export default function Esports() {
       if (user.isAuth) {
          dispatch(refreshToken())
       }
-      // dispatch(fetchMatches(true))
-      // dispatch(fetchInplays(true))
+      dispatch(fetchMatches(true))
+      dispatch(fetchInplays(true))
 
       return () => {
          isSubscribed = false;

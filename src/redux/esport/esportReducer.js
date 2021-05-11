@@ -9,62 +9,10 @@ const initialState = {
   sideMarket: [],
   sportsTypeId: null,
   sportsMatches: { data: [] },
-  prematchMatches: {data:[
-    {
-      "id": 20521201,
-      "type": "esportst", // dummy for prematch,
-      "homeTeamId": 4717,
-      "awayTeamId": 4694,
-      "tournamentId": "esports", // dummy for prematch
-      "simpleTournamentId": null,
-      "homeScore": null,
-      "awayScore": null,
-      "matchStatus": null,
-      "properties": null,
-      "eventClock": null,
-      "eventResults": "NotAvailable",
-      "reportingStatus": null,
-      "winnerCompetitor": null,
-      "eventStatus": "Not_Started",
-      "dateAt": "2021-06-13",
-      "timeAt": "04:00:00",
-      "startAt": "2021-06-12T19:00:00.000000Z",
-      "createdAt": "2021-05-07 19:42:29",
-      "updatedAt": "2021-05-07T10:42:30.000000Z",
-      "readAt": null
-  }
-  ]},
-  inplayMatches: {
-    data: [
-      {
-        "id": 26292358,
-        "type": 'esports',// dummy data for inplay
-        "homeTeamId": 271173,
-        "awayTeamId": 271165,
-        "tournamentId": 'esports', // dummy data for inplay
-        "simpleTournamentId": null,
-        "homeScore": "31",
-        "awayScore": "47",
-        "matchStatus": {
-          "en": "3rd quarter",
-          "ko": "3쿼터",
-          "zh": "第三节"
-        },
-        "properties": "{\"Period\":\"3\",\"WinnerId\":\"null\",\"WinningReason\":\"null\",\"AggregateWinnerId\":\"null\",\"AwayScore\":\"47.0\",\"HomeScore\":\"31.0\",\"Status\":\"1\",\"MatchStatus\":\"15\"}",
-        "eventClock": {},
-        "eventResults": "[]",
-        "reportingStatus": null,
-        "winnerCompetitor": null,
-        "eventStatus": "Live",
-        "dateAt": "2021-05-09",
-        "timeAt": "20:00:00",
-        "startAt": "2021-05-09T11:00:00.000000Z",
-        "createdAt": "2021-05-09 21:02:27",
-        "updatedAt": "2021-05-09T12:05:15.000000Z",
-        "readAt": null
-      }
-    ]
-  },
+  prematchMatches: [],
+  inplayMatches: { data: [] },
+  sportTypeIds: [1, 2, 3],
+  tournamentIds: [1, 210, 921],
 };
 
 const esportReducer = (state = initialState, action) => {
@@ -75,14 +23,54 @@ const esportReducer = (state = initialState, action) => {
         loading: true,
       }
     case types.FETCH_PREMATCH:
+      let prematchDatas = [];
+      let prematch = action.payload.data
+
+      state.sportTypeIds.map((id) => {
+        console.log(id);
+        let data = prematch.filter((x) => {
+          return x.type == id;
+        });
+        prematchDatas.push(...data)
+      })
+
+      state.tournamentIds.map((id) => {
+        console.log(id);
+        let data = prematch.filter((x) => {
+          return x.tournamentId == id;
+        });
+        prematchDatas.push(...data)
+      })
+
+
       return {
         ...state,
-        prematchMatches: action.payload,
+        prematchMatches: prematchDatas,
       }
     case types.FETCH_INPLAY:
+
+      let inplayDatas = [];
+      let inplay = action.payload.data
+
+      state.sportTypeIds.map((id) => {
+        console.log(id);
+        let data = inplay.filter((x) => {
+          return x.type == id;
+        });
+        inplayDatas.push(...data)
+      })
+
+      state.tournamentIds.map((id) => {
+        console.log(id);
+        let data = inplay.filter((x) => {
+          return x.tournamentId == id;
+        });
+        inplayDatas.push(...data)
+      })
+
       return {
         ...state,
-        inplayMatches: action.payload,
+        inplayMatches: inplayDatas,
       }
     default:
       return state;
