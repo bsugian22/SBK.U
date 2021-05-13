@@ -12,6 +12,8 @@ const initialState = {
   sideMarket: [],
   sportsTypeId: null,
   sportsMatches: { data: [] },
+  sportTypeIds: [ 137],
+  tournamentIds: [210, 921],
 };
 
 const inplayReducer = (state = initialState, action) => {
@@ -380,9 +382,55 @@ const inplayReducer = (state = initialState, action) => {
     case types.FETCH_INPLAYS_SUCCESS:
       // add logic for pagination number and showing per table,
       let lastPage = Math.ceil(action.payload.data.length / 30)
+
+      let matches = action.payload.data
+      let inplayDatas = [];
+      let inplay = action.payload.data
+
+
+
+      state.sportTypeIds.map((id) => {
+        console.log(id);
+        let data = inplay.filter((x) => {
+          return x.type == id;
+        });
+        inplayDatas.push(...data)
+      })
+
+      state.tournamentIds.map((id) => {
+        console.log(id);
+        let data = inplay.filter((x) => {
+          return x.tournamentId == id;
+        });
+        inplayDatas.push(...data)
+      })
+
+      console.log(matches)
+      console.log(inplayDatas)
+
+      matches = matches.reduce(function (prev, value) {
+
+        var isDuplicate = false;
+        for (var i = 0; i < inplayDatas.length; i++) {
+          if (value == inplayDatas[i]) {
+            isDuplicate = true;
+            break;
+          }
+        }
+
+        if (!isDuplicate) {
+          prev.push(value);
+        }
+
+        return prev;
+
+      }, []);
+
+      console.log(matches)
+
       return {
         ...state,
-        matches: action.payload,
+        matches: { data: matches },
         lastPage: lastPage
       };
     case types.FETCH_INPLAYS_FAILURE:

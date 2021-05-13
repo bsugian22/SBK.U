@@ -172,8 +172,8 @@ export default function Inplay() {
                         ? inplay.mainMarkets.map((match, index) => {
                            let sport_hcp_market_exists = false
                            let sport_total_market_exists = false
-                           let homeTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.homeTeamId).competitor.name.ko : "";
-                           let awayTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.awayTeamId).competitor.name.ko : "";
+                           let homeTeam = sports?.competitors?.data ? sports?.competitors?.data.find(x => x.id == match.homeTeamId).competitor?.name?.ko  : "";
+                           let awayTeam = sports?.competitors?.data ? sports?.competitors?.data.find(x => x.id == match.awayTeamId).competitor?.name?.ko  : "";
                            // console.log(match)
                            var row = [];
                            row.push(
@@ -204,7 +204,7 @@ export default function Inplay() {
                                     <div class="info flex-inherit flex-column align-items-center-inherit justify-content-end-inherit width-45 margin-right-5">
                                        <div class="time color-blue">{match.eventClock?.eventTime ? match.eventClock.eventTime : "n/a"}</div>
                                        <div class="status color-grey">
-                                          <span class="text-ellipsis">{match.matchStatus.ko}</span>
+                                          <span class="text-ellipsis">{match?.matchStatus?.ko}</span>
                                        </div>
                                        <div class="bookmark color-grey grow-1">
                                           <i class="fas fa-star"></i>
@@ -520,9 +520,9 @@ export default function Inplay() {
                         <i class="fas fa-tshirt color-grey font-size-11"></i>
                         <span class="color-grey">
 
-                           {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor.name.ko : "" : ""}
+                           {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko  : "" : ""}
                            <span class="margin-horizontal-4 color-twhite">vs</span>
-                           {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor.name.ko : "" : ""}
+                           {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko  : "" : ""}
                         </span>
                      </div>
                      <div class="height-40 background-transparent-b-10 padding-horizontal-10 margin-bottom-10">
@@ -541,8 +541,8 @@ export default function Inplay() {
                      {sports.sideMarket?.markets?.length > 0
                         ? sports.sideMarket.markets.map((market, market_index) => {
                            // console.log(market)
-                           let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor.name.ko : "";
-                           let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor.name.ko : "";
+                           let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko  : "";
+                           let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko  : "";
                            let marketName = sports.markets?.data ? sports.markets.data.find(x => x.id == market.marketId).marketName.ko : ""
 
                            var rows = [];

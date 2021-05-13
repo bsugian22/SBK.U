@@ -11,8 +11,7 @@ const initialState = {
   sportsMatches: { data: [] },
   prematchMatches: [],
   inplayMatches: { data: [] },
-  sportTypeIds: [1, 2, 3],
-  tournamentIds: [1, 210, 921],
+  
 };
 
 const esportReducer = (state = initialState, action) => {

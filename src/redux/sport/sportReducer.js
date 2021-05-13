@@ -36,6 +36,8 @@ const initialState = {
   activeSideBarLeagueMatches: { data: [] },
   sidebarBookmarked: true,
   sortByLeague: false,
+  sportTypeIds: [ 24, 3],
+  tournamentIds: [210, 921],
 };
 
 const sportReducer = (state = initialState, action) => {
@@ -507,11 +509,57 @@ const sportReducer = (state = initialState, action) => {
         search: "",
       };
     case types.FETCH_MATCHES_SUCCESS:
-      let matches = action.payload
+      let matches = action.payload.data
       // let lastPage = Math.ceil(action.payload.data.length / 15)
+
+      let prematchDatas = [];
+      let prematch = action.payload.data
+
+
+
+      state.sportTypeIds.map((id) => {
+        console.log(id);
+        let data = prematch.filter((x) => {
+          return x.type == id;
+        });
+        prematchDatas.push(...data)
+      })
+
+      state.tournamentIds.map((id) => {
+        console.log(id);
+        let data = prematch.filter((x) => {
+          return x.tournamentId == id;
+        });
+        prematchDatas.push(...data)
+      })
+
+      console.log(matches)
+      console.log(prematchDatas)
+
+      matches = matches.reduce(function (prev, value) {
+
+        var isDuplicate = false;
+        for (var i = 0; i < prematchDatas.length; i++) {
+          if (value == prematchDatas[i]) {
+            isDuplicate = true;
+            break;
+          }
+        }
+
+        if (!isDuplicate) {
+          prev.push(value);
+        }
+
+        return prev;
+
+      }, []);
+
+      console.log(matches)
+
+
       return {
         ...state,
-        matches: matches,
+        matches: { data: matches },
         // lastPage: lastPage,
       };
 
@@ -610,9 +658,9 @@ const sportReducer = (state = initialState, action) => {
         mainMarketsToDisplay.push({ ...data, mainMarkets: market });
       })
 
-      mainMarketsToDisplay.sort(function (a, b) {
-        return a.timeAt.localeCompare(b.timeAt);
-      });
+      // mainMarketsToDisplay.sort(function (a, b) {
+      //   return a.timeAt.localeCompare(b.timeAt);
+      // });
 
 
       if (state.sortByLeague) {
@@ -623,9 +671,6 @@ const sportReducer = (state = initialState, action) => {
           .map((matches, startAt) => ({ startAt, matches }))
           .value();
       }
-
-
-
 
 
       // mainMarketsToDisplay.sort(function compare(a, b) {
