@@ -8,6 +8,7 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 import * as userActions from "./user/userActions";
 import * as preferencesActions from "./preference/preferenceActions";
+import * as registerActions from "./register/registerActions";
 import { fetchSportsdetail, fetchSportsdetails, fetchSportsdetailsRequest } from "./sportsdetail/sportsdetailActions";
 import { fetchSummary } from "./navigations/accountSummary/accountSummaryActions";
 import { fetchCompetitors, fetchMarkets, fetchOutcomes, fetchSports, fetchTournaments } from "./sport/sportActions";
@@ -25,6 +26,8 @@ export const mapStateToProps = (state) => {
     preferences: state.preference.preferences,
     forgotPassword: state.preference.forgotPassword,
     user: state.user.user,
+    register : state.register, 
+    modal : state.modal,
   };
 };
 
@@ -61,6 +64,10 @@ export const mapDispatchProps = (dispatch) => {
     },
     handleUserPhoneNumber: (payload) => {
       dispatch(preferencesActions.handleUserPhoneNumber(payload));
+    },
+
+    resetRegisterForm : () => {
+      dispatch(registerActions.resetRegisterForm());
     },
 
     setDarkmode: (toggle) => {

@@ -29,7 +29,7 @@ export { fetchPromos, fetchPromo, createPromo, updatePromo, deletePromos } from 
 export { fetchPromoposts, fetchPromopost, createPromopost, updatePromopost, deletePromoposts } from "./promopost/promopostActions"
 
 // register
-export { fetchRegisters, fetchRegister, createRegister, updateRegister, deleteRegisters } from "./register/registerActions"
+export { createRegister, verifyUsername, verifyTelNumber } from "./register/registerActions"
 
 // sport
 export { fetchSports, fetchSport, createSport, updateSport, deleteSports } from "./sport/sportActions"

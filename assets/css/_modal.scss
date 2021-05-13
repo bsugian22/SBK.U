@@ -1,0 +1,192 @@
+/**
+	
+*/
+
+.modal-backgroud {
+   z-index: 1060;
+   position: absolute;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   top: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(0, 0, 0, 0.3);
+   // background-color: rgba(0, 0, 0, 1);
+}
+
+.modal-show {
+   animation: fadein 0.3s;
+   -moz-animation: fadein 0.3s;
+   /* Firefox */
+   -webkit-animation: fadein 0.3s;
+   /* Safari and Chrome */
+   -o-animation: fadein 0.3s;
+   /* Opera */
+}
+
+.modal-hide {
+   animation: fadeout 0.3s;
+   -moz-animation: fadeout 0.3s;
+   /* Firefox */
+   -webkit-animation: fadeout 0.3s;
+   /* Safari and Chrome */
+   -o-animation: fadeout 0.3s;
+   /* Opera */
+}
+
+.modal-window {
+   z-index: 1061;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   vertical-align: middle;
+   flex-direction: column;
+
+   animation-delay: 0;
+   animation-duration: 0.3s;
+   background-color: rgb(43,50,78);
+   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.17) !important; 
+
+   padding: 20px;
+
+   font-size: 16px;
+}
+
+.modal-title { 
+   color: white;
+   margin-top: 19.92px;
+   margin-bottom: 19.92px;
+   font-size: 24px;
+   font-weight: 700;
+   min-height: 36px;
+}
+
+.modal-content {
+   min-width: 500px;
+   min-height: 150px;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   flex-direction: column;
+}
+
+.modal-body {
+   color: white;
+}
+
+.modal-action-confirm-btn {
+   align-items: flex-start;
+   padding-left: 26px;
+   padding-right: 26px;
+   padding-top: 8.125px;
+   padding-bottom: 8.125px;
+
+   line-height: 14.95px;
+   text-align: center;
+   text-indent: 0px;
+   word-spacing: 0px;
+   
+   background-color: rgb(39,120,196);
+   color: white;
+
+   cursor: pointer;
+}
+
+.modal-action-confirm-btn:hover {
+   background-color: rgb(35, 108, 176);
+}
+
+@keyframes fadein {
+   from {
+      opacity: 0;
+   }
+
+   to {
+      opacity: 1;
+   }
+}
+
+@-moz-keyframes fadein {
+
+   /* Firefox */
+   from {
+      opacity: 0;
+   }
+
+   to {
+      opacity: 1;
+   }
+}
+
+@-webkit-keyframes fadein {
+
+   /* Safari and Chrome */
+   from {
+      opacity: 0;
+   }
+
+   to {
+      opacity: 1;
+   }
+}
+
+@-o-keyframes fadein {
+
+   /* Opera */
+   from {
+      opacity: 0;
+   }
+
+   to {
+      opacity: 1;
+   }
+}
+
+@keyframes fadeout {
+   from {
+      opacity: 1;
+   }
+
+   to {
+      opacity: 0;
+   }
+}
+
+@-moz-keyframes fadeout {
+
+   /* Firefox */
+   from {
+      opacity: 1;
+   }
+
+   to {
+      opacity: 0;
+   }
+}
+
+@-webkit-keyframes fadeout {
+
+   /* Safari and Chrome */
+   from {
+      opacity: 1;
+   }
+
+   to {
+      opacity: 0;
+   }
+}
+
+@-o-keyframes fadeout {
+
+   /* Opera */
+   from {
+      opacity: 1;
+   }
+
+   to {
+      opacity: 0;
+   }
+}
