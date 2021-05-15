@@ -388,7 +388,6 @@ const inplayReducer = (state = initialState, action) => {
       let inplay = action.payload.data
 
 
-
       state.sportTypeIds.map((id) => {
         console.log(id);
         let data = inplay.filter((x) => {

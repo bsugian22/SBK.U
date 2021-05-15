@@ -658,9 +658,9 @@ const sportReducer = (state = initialState, action) => {
         mainMarketsToDisplay.push({ ...data, mainMarkets: market });
       })
 
-      // mainMarketsToDisplay.sort(function (a, b) {
-      //   return a.timeAt.localeCompare(b.timeAt);
-      // });
+      mainMarketsToDisplay.sort(function (a, b) {
+        return a.timeAt.localeCompare(b.timeAt);
+      });
 
 
       if (state.sortByLeague) {

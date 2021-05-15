@@ -3,7 +3,7 @@ import axios from "../../plugins/axios";
 import { fetchMarketPerMatchesSuccessInplay, fetchMarketPerMatchesFailureInplay, setWSMarketInplay } from "../inplay/inplayActions";
 import moment from "moment";
 import { camelize, snakelize, socket } from "../../helpers/object";
-import { fetchPrematches } from "../esport/esportActions";
+import { fetchMarketPerMatchesSuccesEsports, fetchPrematches } from "../esport/esportActions";
 
 export const setWSMarket = (market) => {
   return {
@@ -385,6 +385,7 @@ export const fetchMatches = (esports) => {
         if (esports) {
           //dispatch espoirts
           dispatch(fetchPrematches(matches))
+          dispatch(setMatchIds(matches, 1, 'esports'))
         } else {
           dispatch(fetchMatchesSuccess(matches))
           dispatch(setMatchIds({ data: defaultMatches }, 1, 'prematch'))
@@ -418,6 +419,9 @@ export const setMatchIds = (matches, pageNumber, type) => {
       if (type == 'live') {
         dispatch(fetchMarketPerMatches(matchIds, pageNumber, type))
       }
+      if (type == 'esports') {
+        dispatch(fetchMarketPerMatches(matchIds, pageNumber, type))
+      }
     } else {
       dispatch(noMatches())
     }
@@ -442,7 +446,7 @@ export const fetchMarketPerMatches = (ids, pageNumber, type) => {
           dispatch(fetchMarketPerMatchesSuccessInplay(markets))
         }
         if (type == 'esports') {
-          dispatch(fetchMarketPerMatchesSuccessEsports(markets))
+          dispatch(fetchMarketPerMatchesSuccesEsports(markets))
         }
       }).catch(error => {
         const errorMsg = error.message;
