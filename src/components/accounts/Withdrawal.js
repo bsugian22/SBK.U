@@ -402,7 +402,7 @@ const Withdrawal = () => {
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-grey">
-                                {item.amount}
+                                {Number(item.amount).toLocaleString()}
                                 {item.method == "CASH" ||
                                 item.method == "PAYPAL"
                                   ? "원"
@@ -451,7 +451,8 @@ const Withdrawal = () => {
                     누적 출금 금액
                     <strong class="color-green padding-left-5">
                       {/* total amount */}
-                      {withdraw?.withdrawals?.amount}원
+
+                      {Number(withdraw?.withdrawals?.amount).toLocaleString()}원
                     </strong>
                   </span>
                 </div>

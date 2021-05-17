@@ -677,6 +677,7 @@ const sportReducer = (state = initialState, action) => {
         mainMarketsToDisplay = chain(mainMarketsToDisplay)
           .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
           .map((matches, startAt) => ({ startAt, matches }))
+          .orderBy("startAt")
           .value();
       }
 

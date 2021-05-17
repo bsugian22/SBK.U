@@ -193,13 +193,13 @@ export default function BetslipNavi(props) {
               <div class="flex-inherit align-items-center-inherit padding-5 height-40 align-items-center-inherit border-top background-transparent-b-15 border-bottom">
                 <div class="grow-2 color-grey">배당률 합계</div>
                 <div class="color-green total-odds">
-                  <i class="fal fa-times fa-xs margin-right-5 margin-top-2"></i> {sports?.data?.bet?.total_odds}
+                  <i class="fal fa-times fa-xs margin-right-5 margin-top-2"></i> {Number(sports?.data?.bet?.total_odds).toLocaleString()}
                 </div>
               </div>
               <div class="flex-inherit align-items-center-inherit padding-5 height-40 align-items-center-inherit border-top background-transparent-b-15 border-bottom">
                 <div class="grow-2 color-grey">예상당첨금액</div>
                 <div class="color-green total-win-price">
-                  <i class="fas fa-won-sign fa-xs margin-right-5"></i>{sports?.data?.bet?.total_odds * sports?.data?.bet?.amount}
+                  <i class="fas fa-won-sign fa-xs margin-right-5"></i>{Number(sports?.data?.bet?.total_odds * sports?.data?.bet?.amount).toLocaleString()}
                 </div>
               </div>
               <div class="flex-inherit align-items-center-inherit height-40 align-items-center-inherit border-top border-bottom">

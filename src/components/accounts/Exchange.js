@@ -88,7 +88,7 @@ const Exchange = () => {
                       <span class="color-green">
                         {/* CASH */}
                         <i class="far fa-won-sign"></i>
-                        {user.member.cash}원
+                        {Number(user.member.cash).toLocaleString()}원
                       </span>
                     </div>
                   </div>
@@ -100,7 +100,7 @@ const Exchange = () => {
                     <div class="widthp-67 form-content height-45 background-transparent-b-5 border-bottom-rb border-top align-items-center padding-right-15 justify-content-end border-left-rw">
                       <span class="color-green">
                         <i class="far fa-won-sign"></i>
-                        {user.member.casino_cash}원
+                        {Number(user.member.casino_cash).toLocaleString()}원
                       </span>
                     </div>
                   </div>
@@ -348,7 +348,7 @@ const Exchange = () => {
                             </td>
                             <td class="height-45 border-top">
                               <span class="color-grey">
-                                {item.amount}
+                                {Number(item.amount).toLocaleString()}
                                 {item.from == "cash" ? "원" : "BTC"}
                               </span>
                             </td>
