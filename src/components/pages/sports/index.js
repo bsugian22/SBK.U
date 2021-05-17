@@ -280,6 +280,7 @@ const Sports = (props) => {
               {sports?.mainMarkets?.length > 0
                 ? sports.mainMarkets.map((matches, index) => {
 
+
                   // console.log(matches)
                   var rows = [];
                   rows.push(
@@ -290,7 +291,7 @@ const Sports = (props) => {
                       <div class="flex padding-horizontal-10 widthp-45 heightp-100">
                         <span class="color-grey">
                           <i class="far fa-calendar-week"></i>
-                          {matches.startAt == null? "" : moment(matches.startAt).format("YY / MM / DD")}
+                          {matches.startAt == null ? "" : moment(matches.startAt).format("YY / MM / DD")}
                         </span>
                       </div>
                       <div class="flex widthp-55">
@@ -319,375 +320,378 @@ const Sports = (props) => {
                   rows.push(
                     matches.matches.map((match, key) => {
                       let sport_main_market_exists = false
-                      let homeTeam = sports.competitors?.data ? sports.competitors?.data?.find(x => x.id == match.homeTeamId).competitor?.name?.ko : "";
-                      let awayTeam = sports.competitors?.data ? sports.competitors?.data?.find(x => x.id == match.awayTeamId).competitor?.name?.ko : "";
+                      let homeTeam = sports.competitors?.data ? sports.competitors?.data?.find(x => x.id == match?.homeTeamId).competitor?.name?.ko : "";
+                      let awayTeam = sports.competitors?.data ? sports.competitors?.data?.find(x => x.id == match?.awayTeamId).competitor?.name?.ko : "";
                       // console.log(match)
 
-                      return (
-                        <div
-                          class="flex list background-transparent-b-30 height-40"
-                          data-type="0"
-                          data-id="0"
-                          data-home-competitor="0"
-                          data-away-competitor="0"
-                          key={"match_id-" + match.id}
-                        >
-                          <div class="flex flex-inherit widthp-45 align-items-center-inherit heightp-100">
-                            <div class="date justify-content-center">
-                              <span class="color-grey">
-                                {moment(match.startAt).format("HH:mm")}
-                              </span>
-                            </div>
-                            <div class="league-icon justify-content-center">
-                              <i class="far fa-flag margin-0 color-yellow"></i>
-                            </div>
-                            <div class="league padding-horizontal-5">
-                              <span class="color-grey text-ellipsis">
-                                {/* {match.tournament.title["ko"]} */}
-                                {match.tournamentId == null ? sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == match.simpleTournamentId)?.tournament?.name.ko : "" : sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == match.tournamentId)?.tournament?.name.ko : ""}
-                                {/* {match.tournamentId} */}
+                      
 
-                              </span>
-                            </div>
-                            <div class="team padding-horizontal-5">
-                              <span class="color-grey text-ellipsis">
-                                {homeTeam}
-                                <span class="color-twhite margin-horizontal-5">vs</span>
-                                {awayTeam}
-                              </span>
-                            </div>
-                          </div>
-                          <div class="flex widthp-55">
-                            <div class="flex widthp-100 market-default">
-                              <div class="flex flex-inherit align-items-center-inherit padding-vertical-2">
-                                <div class="flex pick-wrap flex-inherit align-items-center-inherit justify-content-center-inherit widthp-100">
-
-                                  {sports.marketType == '1x2' ?
-
-                                    match.mainMarkets['1X2'].length != 0 ?
-                                      match.mainMarkets['1X2'].map((market, market_index) => {
-                                        // console.log(market.outcomes.length)
-                                        let classNameActive = ""
-                                        let className = ""
-                                        if (market.outcomes.length == 2) {
-                                          classNameActive = "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
-                                          className = " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
-                                        }
-                                        if (market.outcomes.length >= 3) {
-                                          classNameActive = "active widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
-                                          className = " widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
-                                        }
-                                        if (market.status == 1) {
-                                          return (market.outcomes.map((outcome, outcomes_index) => {
-                                            let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
-
-                                            return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id}
-                                                onClick={setBet}
-                                                data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                data-market_name='1x2'
-                                                data-home-team={homeTeam}
-                                                data-away-team={awayTeam}
-                                                data-match-id={match.id}
-                                                data-market-id={market.marketId}
-                                                data-outcome-id={outcome.id}
-                                                data-odds={outcome.odds}
-                                                class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? classNameActive : className}
-                                              // class=" widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
-                                              >
-                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                  <div class="team-1 widthp-70 text-ellipsis">
-                                                    <span class="color-grey text-ellipsis">
-                                                      {setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                    </span>
-                                                  </div>
-                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                    {outcome.oldOdds == null ?
-                                                      "" :
-                                                      outcome.oldOdds < outcome.odds ?
-                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            )
-                                          })
-                                          )
-                                        } else {
-                                          return (market.outcomes.map((outcome, outcomes_index) => {
-                                            let outcomeName = sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko
-                                            let className = ""
-                                            if (market.outcomes.length == 2) {
-                                              className = "disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
-                                            }
-                                            if (market.outcomes.length >= 3) {
-                                              className = "disabled widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
-                                            }
-                                            return (
-                                              <div key={"outcome_id-active-1x2-" + outcome.id}
-                                                class={className}>
-                                                <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                  <div class="team-1 widthp-70 text-ellipsis">
-                                                    <span class="color-grey text-ellipsis">
-                                                      {setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                    </span>
-                                                  </div>
-                                                  <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                    {outcome.oldOdds == null ?
-                                                      "" :
-                                                      outcome.oldOdds < outcome.odds ?
-                                                        <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                        <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                    <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            )
-                                          })
-                                          )
-
-                                        }
-
-                                      })
-
-                                      :
-                                      [homeTeam, awayTeam].map((outcome, outcomes_index) => {
-                                        return (
-                                          <div key={outcomes_index} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
-                                            <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                              <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome}</span></div>
-                                              <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                <span class="color-grey text-ellipsis">0</span>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        )
-                                      })
-
-                                    : ""}
-
-
-
-
-                                  {sports.marketType == 'hcp' ?
-
-                                    match.mainMarkets['hcp'].length != 0 ?
-                                      match.mainMarkets['hcp'].map((market, market_index) => {
-                                        if (sport_main_market_exists == false) {
-                                          sport_main_market_exists = true;
-                                          if (market.status == 1) {
-                                            return (market.outcomes.map((outcome, outcomes_index) => {
-                                              let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
-
-                                              return (
-                                                <div key={"outcome_id-active-1x2-" + outcome.id}
-                                                  onClick={setBet}
-                                                  data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                  data-market_name='hcp'
-                                                  data-home-team={homeTeam}
-                                                  data-away-team={awayTeam}
-                                                  data-match-id={match.id}
-                                                  data-market-id={market.marketId}
-                                                  data-outcome-id={outcome.id}
-                                                  data-odds={outcome.odds}
-                                                  class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"}
-                                                // class=" widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
-                                                >
-                                                  <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                    <div class="team-1 widthp-70 text-ellipsis">
-                                                      <span class="color-grey text-ellipsis">
-                                                        {setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                      </span>
-                                                    </div>
-                                                    <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                      {outcome.oldOdds == null ?
-                                                        "" :
-                                                        outcome.oldOdds < outcome.odds ?
-                                                          <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                          <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                      <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              )
-                                            })
-                                            )
-                                          } else {
-                                            return (market.outcomes.map((outcome, outcomes_index) => {
-                                              let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
-
-                                              return (
-                                                <div key={"outcome_id-active-1x2-" + outcome.id}
-                                                  class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2">
-                                                  <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                    <div class="team-1 widthp-70 text-ellipsis">
-                                                      <span class="color-grey text-ellipsis">
-                                                        {setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                      </span>
-                                                    </div>
-                                                    <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                      {outcome.oldOdds == null ?
-                                                        "" :
-                                                        outcome.oldOdds < outcome.odds ?
-                                                          <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                          <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                      <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              )
-                                            })
-                                            )
-                                          }
-
-                                        }
-
-                                      })
-                                      :
-                                      [homeTeam, awayTeam].map((outcome, outcomes_index) => {
-                                        return (
-                                          <div key={outcomes_index} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
-                                            <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                              <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome}</span></div>
-                                              <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                <span class="color-grey text-ellipsis">0</span>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        )
-                                      })
-
-                                    : ""}
-
-                                  {sports.marketType == 'total' ?
-
-                                    match.mainMarkets['total'].length != 0 ?
-                                      match.mainMarkets['total'].map((market, market_index) => {
-                                        // console.log(sport_main_market_exists)
-                                        if (sport_main_market_exists == false) {
-                                          sport_main_market_exists = true;
-                                          if (market.status == 1) {
-                                            return (market.outcomes.map((outcome, outcomes_index) => {
-                                              let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
-
-                                              return (
-                                                <div key={"outcome_id-active-1x2-" + outcome.id}
-                                                  onClick={setBet}
-                                                  data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                  data-market_name='hcp'
-                                                  data-home-team={homeTeam}
-                                                  data-away-team={awayTeam}
-                                                  data-match-id={match.id}
-                                                  data-market-id={market.marketId}
-                                                  data-outcome-id={outcome.id}
-                                                  data-odds={outcome.odds}
-                                                  class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"}
-                                                // class=" widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
-                                                >
-                                                  <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                    <div class="team-1 widthp-70 text-ellipsis">
-                                                      <span class="color-grey text-ellipsis">
-                                                        {setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                      </span>
-                                                    </div>
-                                                    <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                      {outcome.oldOdds == null ?
-                                                        "" :
-                                                        outcome.oldOdds < outcome.odds ?
-                                                          <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                          <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                      <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              )
-                                            })
-                                            )
-                                          } else {
-                                            return (market.outcomes.map((outcome, outcomes_index) => {
-                                              let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
-
-                                              return (
-                                                <div key={"outcome_id-active-1x2-" + outcome.id}
-                                                  class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2">
-                                                  <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                                    <div class="team-1 widthp-70 text-ellipsis">
-                                                      <span class="color-grey text-ellipsis">
-                                                        {setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                      </span>
-                                                    </div>
-                                                    <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                      {outcome.oldOdds == null ?
-                                                        "" :
-                                                        outcome.oldOdds < outcome.odds ?
-                                                          <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
-                                                          <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
-
-                                                      <span class="color-grey text-ellipsis">{outcome.odds} </span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              )
-                                            })
-                                            )
-                                          }
-
-                                        }
-
-                                      })
-                                      :
-                                      [homeTeam, awayTeam].map((outcome, outcomes_index) => {
-                                        return (
-                                          <div key={outcomes_index} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
-                                            <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
-                                              <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome}</span></div>
-                                              <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
-                                                <span class="color-grey text-ellipsis">0</span>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        )
-                                      })
-
-                                    : ""}
-
-                                </div>
+                        return (
+                          <div
+                            class="flex list background-transparent-b-30 height-40"
+                            data-type="0"
+                            data-id="0"
+                            data-home-competitor="0"
+                            data-away-competitor="0"
+                            key={"match_id-" + match.id}
+                          >
+                            <div class="flex flex-inherit widthp-45 align-items-center-inherit heightp-100">
+                              <div class="date justify-content-center">
+                                <span class="color-grey">
+                                  {moment(match.startAt).format("HH:mm")}
+                                </span>
                               </div>
+                              <div class="league-icon justify-content-center">
+                                <i class="far fa-flag margin-0 color-yellow"></i>
+                              </div>
+                              <div class="league padding-horizontal-5">
+                                <span class="color-grey text-ellipsis">
+                                  {/* {match.tournament.title["ko"]} */}
+                                  {match.tournamentId == null ? sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == match.simpleTournamentId)?.tournament?.name.ko : "" : sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == match.tournamentId)?.tournament?.name.ko : ""}
+                                  {/* {match.tournamentId} */}
 
-                              <div class="flex justify-content-center-inherit align-items-center-inherit padding-vertical-2 padding-left-0 padding-right-0 market-count">
-                                <div
-                                  className={
-                                    match.id === sports.sideMarket.id
-                                      ? "flex market-detail widthp-100 margin-right-2 active"
-                                      : "flex market-detail widthp-100 margin-right-2"
-                                  }
-                                  // className="flex market-detail widthp-100 margin-right-2"
-                                  data-id="0"
-                                  onClick={() => setDetail(match.id)}
-                                >
-                                  <button
-                                    class='color-grey'
+                                </span>
+                              </div>
+                              <div class="team padding-horizontal-5">
+                                <span class="color-grey text-ellipsis">
+                                  {homeTeam}
+                                  <span class="color-twhite margin-horizontal-5">vs</span>
+                                  {awayTeam}
+                                </span>
+                              </div>
+                            </div>
+                            <div class="flex widthp-55">
+                              <div class="flex widthp-100 market-default">
+                                <div class="flex flex-inherit align-items-center-inherit padding-vertical-2">
+                                  <div class="flex pick-wrap flex-inherit align-items-center-inherit justify-content-center-inherit widthp-100">
+
+                                    {sports.marketType == '1x2' ?
+
+                                      match.mainMarkets['1X2'].length != 0 ?
+                                        match.mainMarkets['1X2'].map((market, market_index) => {
+                                          // console.log(market.outcomes.length)
+                                          let classNameActive = ""
+                                          let className = ""
+                                          if (market.outcomes.length == 2) {
+                                            classNameActive = "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                            className = " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                          }
+                                          if (market.outcomes.length >= 3) {
+                                            classNameActive = "active widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                            className = " widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                          }
+                                          if (market.status == 1) {
+                                            return (market.outcomes.map((outcome, outcomes_index) => {
+                                              let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
+
+                                              return (
+                                                <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                  onClick={setBet}
+                                                  data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                  data-market_name='1x2'
+                                                  data-home-team={homeTeam}
+                                                  data-away-team={awayTeam}
+                                                  data-match-id={match.id}
+                                                  data-market-id={market.marketId}
+                                                  data-outcome-id={outcome.id}
+                                                  data-odds={outcome.odds}
+                                                  class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? classNameActive : className}
+                                                // class=" widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                                >
+                                                  <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                    <div class="team-1 widthp-70 text-ellipsis">
+                                                      <span class="color-grey text-ellipsis">
+                                                        {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                      </span>
+                                                    </div>
+                                                    <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                      {outcome.oldOdds == null ?
+                                                        "" :
+                                                        outcome.oldOdds < outcome.odds ?
+                                                          <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                          <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                      <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              )
+                                            })
+                                            )
+                                          } else {
+                                            return (market.outcomes.map((outcome, outcomes_index) => {
+                                              let outcomeName = sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko
+                                              let className = ""
+                                              if (market.outcomes.length == 2) {
+                                                className = "disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                              }
+                                              if (market.outcomes.length >= 3) {
+                                                className = "disabled widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                              }
+                                              return (
+                                                <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                  class={className}>
+                                                  <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                    <div class="team-1 widthp-70 text-ellipsis">
+                                                      <span class="color-grey text-ellipsis">
+                                                        {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                      </span>
+                                                    </div>
+                                                    <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                      {outcome.oldOdds == null ?
+                                                        "" :
+                                                        outcome.oldOdds < outcome.odds ?
+                                                          <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                          <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                      <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              )
+                                            })
+                                            )
+
+                                          }
+
+                                        })
+
+                                        :
+                                        [homeTeam, awayTeam].map((outcome, outcomes_index) => {
+                                          return (
+                                            <div key={outcomes_index} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
+                                              <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome}</span></div>
+                                                <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                  <span class="color-grey text-ellipsis">0</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          )
+                                        })
+
+                                      : ""}
+
+
+
+
+                                    {sports.marketType == 'hcp' ?
+
+                                      match.mainMarkets['hcp'].length != 0 ?
+                                        match.mainMarkets['hcp'].map((market, market_index) => {
+                                          if (sport_main_market_exists == false) {
+                                            sport_main_market_exists = true;
+                                            if (market.status == 1) {
+                                              return (market.outcomes.map((outcome, outcomes_index) => {
+                                                let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
+
+                                                return (
+                                                  <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                    onClick={setBet}
+                                                    data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                    data-market_name='hcp'
+                                                    data-home-team={homeTeam}
+                                                    data-away-team={awayTeam}
+                                                    data-match-id={match.id}
+                                                    data-market-id={market.marketId}
+                                                    data-outcome-id={outcome.id}
+                                                    data-odds={outcome.odds}
+                                                    class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"}
+                                                  // class=" widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                                  >
+                                                    <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                      <div class="team-1 widthp-70 text-ellipsis">
+                                                        <span class="color-grey text-ellipsis">
+                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                        </span>
+                                                      </div>
+                                                      <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                        {outcome.oldOdds == null ?
+                                                          "" :
+                                                          outcome.oldOdds < outcome.odds ?
+                                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                        <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                )
+                                              })
+                                              )
+                                            } else {
+                                              return (market.outcomes.map((outcome, outcomes_index) => {
+                                                let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
+
+                                                return (
+                                                  <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                    class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2">
+                                                    <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                      <div class="team-1 widthp-70 text-ellipsis">
+                                                        <span class="color-grey text-ellipsis">
+                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                        </span>
+                                                      </div>
+                                                      <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                        {outcome.oldOdds == null ?
+                                                          "" :
+                                                          outcome.oldOdds < outcome.odds ?
+                                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                        <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                )
+                                              })
+                                              )
+                                            }
+
+                                          }
+
+                                        })
+                                        :
+                                        [homeTeam, awayTeam].map((outcome, outcomes_index) => {
+                                          return (
+                                            <div key={outcomes_index} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
+                                              <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome}</span></div>
+                                                <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                  <span class="color-grey text-ellipsis">0</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          )
+                                        })
+
+                                      : ""}
+
+                                    {sports.marketType == 'total' ?
+
+                                      match.mainMarkets['total'].length != 0 ?
+                                        match.mainMarkets['total'].map((market, market_index) => {
+                                          // console.log(sport_main_market_exists)
+                                          if (sport_main_market_exists == false) {
+                                            sport_main_market_exists = true;
+                                            if (market.status == 1) {
+                                              return (market.outcomes.map((outcome, outcomes_index) => {
+                                                let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
+
+                                                return (
+                                                  <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                    onClick={setBet}
+                                                    data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                    data-market_name='hcp'
+                                                    data-home-team={homeTeam}
+                                                    data-away-team={awayTeam}
+                                                    data-match-id={match.id}
+                                                    data-market-id={market.marketId}
+                                                    data-outcome-id={outcome.id}
+                                                    data-odds={outcome.odds}
+                                                    class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"}
+                                                  // class=" widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
+                                                  >
+                                                    <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                      <div class="team-1 widthp-70 text-ellipsis">
+                                                        <span class="color-grey text-ellipsis">
+                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                        </span>
+                                                      </div>
+                                                      <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                        {outcome.oldOdds == null ?
+                                                          "" :
+                                                          outcome.oldOdds < outcome.odds ?
+                                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                        <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                )
+                                              })
+                                              )
+                                            } else {
+                                              return (market.outcomes.map((outcome, outcomes_index) => {
+                                                let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
+
+                                                return (
+                                                  <div key={"outcome_id-active-1x2-" + outcome.id}
+                                                    class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2">
+                                                    <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                      <div class="team-1 widthp-70 text-ellipsis">
+                                                        <span class="color-grey text-ellipsis">
+                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                        </span>
+                                                      </div>
+                                                      <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                        {outcome.oldOdds == null ?
+                                                          "" :
+                                                          outcome.oldOdds < outcome.odds ?
+                                                            <span class="odds-change flash odds-up"><i class="fas fa-long-arrow-up color-green"></i></span> :
+                                                            <span class="odds-change flash odds-down"><i class="fas fa-long-arrow-down color-red"></i></span>}
+
+                                                        <span class="color-grey text-ellipsis">{outcome.odds} </span>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                )
+                                              })
+                                              )
+                                            }
+
+                                          }
+
+                                        })
+                                        :
+                                        [homeTeam, awayTeam].map((outcome, outcomes_index) => {
+                                          return (
+                                            <div key={outcomes_index} class="disabled widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"  >
+                                              <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
+                                                <div class="team-1 widthp-70 text-ellipsis"><span class="color-grey text-ellipsis">{outcome}</span></div>
+                                                <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
+                                                  <span class="color-grey text-ellipsis">0</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          )
+                                        })
+
+                                      : ""}
+
+                                  </div>
+                                </div>
+
+                                <div class="flex justify-content-center-inherit align-items-center-inherit padding-vertical-2 padding-left-0 padding-right-0 market-count">
+                                  <div
                                     className={
                                       match.id === sports.sideMarket.id
-                                        ? "color-white"
-                                        : "color-grey"
+                                        ? "flex market-detail widthp-100 margin-right-2 active"
+                                        : "flex market-detail widthp-100 margin-right-2"
                                     }
+                                    // className="flex market-detail widthp-100 margin-right-2"
+                                    data-id="0"
+                                    onClick={() => setDetail(match.id)}
                                   >
-                                    {/* +{match.markets} */}
+                                    <button
+                                      class='color-grey'
+                                      className={
+                                        match.id === sports.sideMarket.id
+                                          ? "color-white"
+                                          : "color-grey"
+                                      }
+                                    >
+                                      {/* +{match.markets} */}
                                     +{match.mainMarkets.count.toLocaleString()}
-                                  </button>
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      );
+                        );
+                      
                     })
                   );
 
