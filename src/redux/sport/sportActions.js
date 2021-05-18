@@ -375,11 +375,16 @@ export const fetchMatches = (esports) => {
     axios.get(`/api/feed/matches`)
       .then(response => {
         const matches = camelize(response.data);
-        // console.log(matches)
-        // console.log("kelvin")
+        
+        matches.data.sort(function(a,b){
+          return new Date(a.dateAt) - new Date(b.dateAt);
+        });
+
+
         var defaultMatches = matches.data.filter((x) => {
           return x.type == 1;
         });
+       
 
 
         if (esports) {

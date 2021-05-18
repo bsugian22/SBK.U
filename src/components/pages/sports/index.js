@@ -18,7 +18,6 @@ const Sports = (props) => {
   const dispatch = useDispatch();
   const model = new sportsModel();
   const context = useContext(MenuContext);
-  // let sports = useSelector((state) => state.sportsdetail);
   let sports = useSelector((state) => state.sport);
   let sportDetails = useSelector((state) => state.sportsdetail);
   let user = useSelector((state) => state.user.user);
@@ -318,7 +317,7 @@ const Sports = (props) => {
                     </div>
                   );
                   rows.push(
-                    matches.matches.map((match, key) => {
+                    matches?.matches?.map((match, key) => {
                       let sport_main_market_exists = false
                       let homeTeam = sports.competitors?.data ? sports.competitors?.data?.find(x => x.id == match?.homeTeamId).competitor?.name?.ko : "";
                       let awayTeam = sports.competitors?.data ? sports.competitors?.data?.find(x => x.id == match?.awayTeamId).competitor?.name?.ko : "";
@@ -876,7 +875,6 @@ const Sports = (props) => {
                                       data-outcome-id={outcome.id}
                                       data-odds={outcome.odds}
                                       class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}
-                                    // class=" height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"
                                     >
                                       <div class="grow-2 text-ellipsis padding-horizontal-2">
                                         <span class="color-grey text-ellipsis">

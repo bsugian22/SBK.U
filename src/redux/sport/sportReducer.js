@@ -639,28 +639,31 @@ const sportReducer = (state = initialState, action) => {
 
 
 
-        if (market.count != 0 || market['1X2'].length != 0
-          || market['total'].length != 0 || market['hcp'].length != 0) {
-          let data = state.matches?.data?.find(x => x.id == market.id)
-          market['1X2'].map((market, index) => {
-            market.outcomes.map((outcome, outcome_index) => {
-              outcome.oldOdds = null;
-            })
-          })
-
-          market['hcp'].map((market, index) => {
-            market.outcomes.map((outcome, outcome_index) => {
-              outcome.oldOdds = null;
-            })
-          })
-
-          market['total'].map((market, index) => {
-            market.outcomes.map((outcome, outcome_index) => {
-              outcome.oldOdds = null;
-            })
-          })
-          mainMarketsToDisplay.push({ ...data, mainMarkets: market });
+        // if (market.count != 0 || market['1X2'].length != 0
+        //   || market['total'].length != 0 || market['hcp'].length != 0) {
+        let data = state.matches?.data?.find(x => x.id == market.id)
+        if(!data){
+          data = state.sportsMatches?.data?.find(x => x.id == market.id)
         }
+        market['1X2'].map((market, index) => {
+          market.outcomes.map((outcome, outcome_index) => {
+            outcome.oldOdds = null;
+          })
+        })
+
+        market['hcp'].map((market, index) => {
+          market.outcomes.map((outcome, outcome_index) => {
+            outcome.oldOdds = null;
+          })
+        })
+
+        market['total'].map((market, index) => {
+          market.outcomes.map((outcome, outcome_index) => {
+            outcome.oldOdds = null;
+          })
+        })
+        mainMarketsToDisplay.push({ ...data, mainMarkets: market });
+        // }
 
 
       })
