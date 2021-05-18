@@ -41,13 +41,33 @@ for (let index = 1; index <= 198; index++) {
     index == 44 ? iconsList.icons.push({ id: index, icon: "icon-svg" }) : iconsList.icons.push({ id: index, icon: "icon-" + index })
 }
 
-export const setCompetitorName = (name, homeTeam, awayTeam) => {
+export const setCompetitorName = (name, homeTeam, awayTeam, specifierData = {}) => {
     if (name.includes('{$competitor1}')) {
         name = name.replaceAll('{$competitor1}', homeTeam)
     }
     if (name.includes('{$competitor2}')) {
         name = name.replaceAll('{$competitor2}', awayTeam)
     }
+
+    if (Object.keys(specifierData).length != 0) {
+        // console.log(specifier)
+        let specifierNames = Object.keys(specifierData);
+
+        specifierNames.map((specifier)=>{
+            let specifierName = specifier
+
+            if (name.includes(specifierName)) {
+                name = name.replaceAll(specifierName, specifierData[specifier])
+                name = name.replaceAll("{", "")
+                name = name.replaceAll("}", "")
+                // console.log(specifierData[specifier])
+                // console.log(specifierName)
+            }
+        })
+
+        
+    }
+
     return name
 }
 

@@ -241,13 +241,14 @@ export default function Esports() {
 
                                        {
                                           match.mainMarkets['1X2'].map((market, market_index) => {
+                                             let specifer = market.market.specifier
                                              if (market.status == 1) {
                                                 return (market.outcomes.map((outcome, outcomes_index) => {
                                                    let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome.outcomeId).outcomeName?.ko : ""
                                                    return (
                                                       <div key={"outcome_id-active-1x2-" + outcome.id}
                                                          onClick={setBet}
-                                                         data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                         data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                          data-market_name='1x2'
                                                          data-home-team={homeTeam}
                                                          data-away-team={awayTeam}
@@ -296,6 +297,7 @@ export default function Esports() {
                                     <div class="handicap flex-inherit flex-column widthp-33">
                                        {
                                           match.mainMarkets['hcp'].map((market, market_index) => {
+                                             let specifer = market.market.specifier
                                              if (sport_hcp_market_exists == false) {
                                                 sport_hcp_market_exists = true;
                                                 if (market.status == 1) {
@@ -304,7 +306,7 @@ export default function Esports() {
                                                       return (
                                                          <div key={"outcome_id-active-hcp-" + outcome.id}
                                                             onClick={setBet}
-                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                             data-market_name='hcp'
                                                             data-home-team={homeTeam}
                                                             data-away-team={awayTeam}
@@ -355,6 +357,7 @@ export default function Esports() {
                                     <div class="overunder flex-inherit flex-column align-items-center-inherit justify-content-center-inherit widthp-33">
                                        {
                                           match.mainMarkets['total'].map((market, market_index) => {
+                                             let specifer = market.market.specifier
                                              if (sport_total_market_exists == false) {
                                                 sport_total_market_exists = true;
                                                 if (market.status == 1) {
@@ -363,7 +366,7 @@ export default function Esports() {
                                                       return (
                                                          <div key={"outcome_id-active-hcp-" + outcome.id}
                                                             onClick={setBet}
-                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                             data-market_name='hcp'
                                                             data-home-team={homeTeam}
                                                             data-away-team={awayTeam}
@@ -496,6 +499,8 @@ export default function Esports() {
                      {sports.sideMarket?.markets?.length > 0
                         ? sports.sideMarket.markets.map((market, market_index) => {
                            // console.log(market)
+                           let specifer = market.market.specifier
+
                            let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko : "";
                            let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko : "";
                            let marketName = sports.markets?.data ? sports.markets.data.find(x => x.id == market.marketId).marketName.ko : ""
@@ -509,7 +514,7 @@ export default function Esports() {
                               >
                                  <span class="color-grey">
                                     {/* {market.marketId} */}
-                                    {setCompetitorName(marketName, homeTeam, awayTeam)}
+                                    {setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
                                  </span>
                               </div>
                            );
@@ -526,8 +531,8 @@ export default function Esports() {
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
                                                    onClick={setBet}
-                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam)}
+                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
                                                    data-home-team={homeTeam}
                                                    data-away-team={awayTeam}
                                                    data-match-id={sports.sideMarket.id}
@@ -539,7 +544,7 @@ export default function Esports() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
@@ -560,8 +565,8 @@ export default function Esports() {
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
                                                    onClick={setBet}
-                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam)}
+                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
                                                    data-home-team={homeTeam}
                                                    data-away-team={awayTeam}
                                                    data-match-id={sports.sideMarket.id}
@@ -573,7 +578,7 @@ export default function Esports() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
@@ -606,7 +611,7 @@ export default function Esports() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
@@ -630,7 +635,7 @@ export default function Esports() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">

@@ -322,8 +322,6 @@ const Sports = (props) => {
                       let sport_main_market_exists = false
                       let homeTeam = sports.competitors?.data ? sports.competitors?.data?.find(x => x.id == match?.homeTeamId).competitor?.name?.ko : "";
                       let awayTeam = sports.competitors?.data ? sports.competitors?.data?.find(x => x.id == match?.awayTeamId).competitor?.name?.ko : "";
-                      // console.log(match)
-
                       
 
                         return (
@@ -369,6 +367,8 @@ const Sports = (props) => {
 
                                       match.mainMarkets['1X2'].length != 0 ?
                                         match.mainMarkets['1X2'].map((market, market_index) => {
+                                          
+                                          let specifer = market.market.specifier
                                           // console.log(market.outcomes.length)
                                           let classNameActive = ""
                                           let className = ""
@@ -387,7 +387,7 @@ const Sports = (props) => {
                                               return (
                                                 <div key={"outcome_id-active-1x2-" + outcome.id}
                                                   onClick={setBet}
-                                                  data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                  data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                   data-market_name='1x2'
                                                   data-home-team={homeTeam}
                                                   data-away-team={awayTeam}
@@ -401,7 +401,7 @@ const Sports = (props) => {
                                                   <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                     <div class="team-1 widthp-70 text-ellipsis">
                                                       <span class="color-grey text-ellipsis">
-                                                        {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                        {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                       </span>
                                                     </div>
                                                     <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -434,7 +434,7 @@ const Sports = (props) => {
                                                   <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                     <div class="team-1 widthp-70 text-ellipsis">
                                                       <span class="color-grey text-ellipsis">
-                                                        {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                        {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                       </span>
                                                     </div>
                                                     <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -479,6 +479,7 @@ const Sports = (props) => {
 
                                       match.mainMarkets['hcp'].length != 0 ?
                                         match.mainMarkets['hcp'].map((market, market_index) => {
+                                          let specifer = market.market.specifier
                                           if (sport_main_market_exists == false) {
                                             sport_main_market_exists = true;
                                             if (market.status == 1) {
@@ -488,7 +489,7 @@ const Sports = (props) => {
                                                 return (
                                                   <div key={"outcome_id-active-1x2-" + outcome.id}
                                                     onClick={setBet}
-                                                    data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                    data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                     data-market_name='hcp'
                                                     data-home-team={homeTeam}
                                                     data-away-team={awayTeam}
@@ -502,7 +503,7 @@ const Sports = (props) => {
                                                     <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                       <div class="team-1 widthp-70 text-ellipsis">
                                                         <span class="color-grey text-ellipsis">
-                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                         </span>
                                                       </div>
                                                       <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -529,7 +530,7 @@ const Sports = (props) => {
                                                     <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                       <div class="team-1 widthp-70 text-ellipsis">
                                                         <span class="color-grey text-ellipsis">
-                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                         </span>
                                                       </div>
                                                       <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -571,6 +572,7 @@ const Sports = (props) => {
 
                                       match.mainMarkets['total'].length != 0 ?
                                         match.mainMarkets['total'].map((market, market_index) => {
+                                          let specifer = market.market.specifier
                                           // console.log(sport_main_market_exists)
                                           if (sport_main_market_exists == false) {
                                             sport_main_market_exists = true;
@@ -581,7 +583,7 @@ const Sports = (props) => {
                                                 return (
                                                   <div key={"outcome_id-active-1x2-" + outcome.id}
                                                     onClick={setBet}
-                                                    data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                    data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                     data-market_name='hcp'
                                                     data-home-team={homeTeam}
                                                     data-away-team={awayTeam}
@@ -595,7 +597,7 @@ const Sports = (props) => {
                                                     <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                       <div class="team-1 widthp-70 text-ellipsis">
                                                         <span class="color-grey text-ellipsis">
-                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                         </span>
                                                       </div>
                                                       <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -622,7 +624,7 @@ const Sports = (props) => {
                                                     <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                       <div class="team-1 widthp-70 text-ellipsis">
                                                         <span class="color-grey text-ellipsis">
-                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                                         </span>
                                                       </div>
                                                       <div class="team-odds widthp-30 text-ellipsis justify-content-end padding-horizontal-2">
@@ -832,6 +834,9 @@ const Sports = (props) => {
                   {sports.sideMarket.markets.length > 0
                     ? sports.sideMarket.markets.map((market, market_index) => {
                       // console.log(market)
+                      // console.log(market.market.specifier)
+                      // console.log(Object.keys(market.market.specifier));
+                      let specifer = market.market.specifier
                       let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko : "";
                       let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko : "";
                       let marketName = sports.markets?.data ? sports.markets.data.find(x => x.id == market.marketId).marketName.ko : ""
@@ -845,7 +850,7 @@ const Sports = (props) => {
                         >
                           <span class="color-grey">
                             {/* {market.marketId} */}
-                            {setCompetitorName(marketName, homeTeam, awayTeam)}
+                            {setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
                           </span>
                         </div>
                       );
@@ -862,8 +867,8 @@ const Sports = (props) => {
                                   return (
                                     <div key={"details-outcome-id" + outcome.id}
                                       onClick={setBet}
-                                      data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                      data-market_name={setCompetitorName(marketName, homeTeam, awayTeam)}
+                                      data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                      data-market_name={setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
                                       data-home-team={homeTeam}
                                       data-away-team={awayTeam}
                                       data-match-id={sports.sideMarket.id}
@@ -875,7 +880,7 @@ const Sports = (props) => {
                                     >
                                       <div class="grow-2 text-ellipsis padding-horizontal-2">
                                         <span class="color-grey text-ellipsis">
-                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                          {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                         </span>
                                       </div>
                                       <div class="shrink-0 padding-horizontal-2">
@@ -896,8 +901,8 @@ const Sports = (props) => {
                                   return (
                                     <div key={"details-outcome-id" + outcome.id}
                                       onClick={setBet}
-                                      data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam)}
-                                      data-market_name={setCompetitorName(marketName, homeTeam, awayTeam)}
+                                      data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                      data-market_name={setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
                                       data-home-team={homeTeam}
                                       data-away-team={awayTeam}
                                       data-match-id={sports.sideMarket.id}
@@ -909,7 +914,7 @@ const Sports = (props) => {
                                     >
                                       <div class="grow-2 text-ellipsis padding-horizontal-2">
                                         <span class="color-grey text-ellipsis">
-                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                          {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)} 
                                         </span>
                                       </div>
                                       <div class="shrink-0 padding-horizontal-2">
@@ -942,7 +947,7 @@ const Sports = (props) => {
                                     >
                                       <div class="grow-2 text-ellipsis padding-horizontal-2">
                                         <span class="color-grey text-ellipsis">
-                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                          {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                         </span>
                                       </div>
                                       <div class="shrink-0 padding-horizontal-2">
@@ -966,7 +971,7 @@ const Sports = (props) => {
                                     >
                                       <div class="grow-2 text-ellipsis padding-horizontal-2">
                                         <span class="color-grey text-ellipsis">
-                                          {setCompetitorName(outcomeName, homeTeam, awayTeam)}
+                                          {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
                                         </span>
                                       </div>
                                       <div class="shrink-0 padding-horizontal-2">

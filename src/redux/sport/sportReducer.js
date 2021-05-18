@@ -641,7 +641,6 @@ const sportReducer = (state = initialState, action) => {
 
         if (market.count != 0 || market['1X2'].length != 0
           || market['total'].length != 0 || market['hcp'].length != 0) {
-          console.log(market)
           let data = state.matches?.data?.find(x => x.id == market.id)
           market['1X2'].map((market, index) => {
             market.outcomes.map((outcome, outcome_index) => {
