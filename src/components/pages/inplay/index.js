@@ -172,8 +172,8 @@ export default function Inplay() {
                         ? inplay.mainMarkets.map((match, index) => {
                            let sport_hcp_market_exists = false
                            let sport_total_market_exists = false
-                           let homeTeam = sports?.competitors?.data ? sports?.competitors?.data.find(x => x.id == match.homeTeamId).competitor?.name?.ko  : "";
-                           let awayTeam = sports?.competitors?.data ? sports?.competitors?.data.find(x => x.id == match.awayTeamId).competitor?.name?.ko  : "";
+                           let homeTeam = sports?.competitors?.data ? sports?.competitors?.data.find(x => x.id == match.homeTeamId).competitor?.name?.ko : "";
+                           let awayTeam = sports?.competitors?.data ? sports?.competitors?.data.find(x => x.id == match.awayTeamId).competitor?.name?.ko : "";
                            // console.log(match)
                            var row = [];
                            row.push(
@@ -251,7 +251,7 @@ export default function Inplay() {
                                                    return (
                                                       <div key={"outcome_id-active-1x2-" + outcome.id}
                                                          onClick={setBet}
-                                                         data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                         data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                          data-market_name='1x2'
                                                          data-home-team={homeTeam}
                                                          data-away-team={awayTeam}
@@ -309,7 +309,7 @@ export default function Inplay() {
                                                       return (
                                                          <div key={"outcome_id-active-hcp-" + outcome.id}
                                                             onClick={setBet}
-                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                             data-market_name='hcp'
                                                             data-home-team={homeTeam}
                                                             data-away-team={awayTeam}
@@ -369,7 +369,7 @@ export default function Inplay() {
                                                       return (
                                                          <div key={"outcome_id-active-hcp-" + outcome.id}
                                                             onClick={setBet}
-                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                             data-market_name='hcp'
                                                             data-home-team={homeTeam}
                                                             data-away-team={awayTeam}
@@ -488,7 +488,7 @@ export default function Inplay() {
                            <button
                               class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
                               onClick={() => {
-                                 
+
                                  if (inplay.sportsMatches.data.length == 0) {
                                     dispatch(setMatchIds(inplay.matches, inplay.currentPage - 1, 'live'))
                                  } else {
@@ -517,36 +517,37 @@ export default function Inplay() {
                   </div>
                </div>
                <div class="inplay-detail flex-inherit flex-column padding-vertical-10 padding-left-5 padding-right-10">
+                  {sports.sideMarket?.markets?.length > 0 ?
+                     <div class="detail-header flex-inherit flex-column">
+                        <div class="height-40 align-items-center background-transparent-b-20 padding-horizontal-10">
+                           <i class="fas fa-tshirt color-grey font-size-11"></i>
+                           <span class="color-grey">
 
-                  <div class="detail-header flex-inherit flex-column">
-                     <div class="height-40 align-items-center background-transparent-b-20 padding-horizontal-10">
-                        <i class="fas fa-tshirt color-grey font-size-11"></i>
-                        <span class="color-grey">
-
-                           {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko  : "" : ""}
-                           <span class="margin-horizontal-4 color-twhite">vs</span>
-                           {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko  : "" : ""}
-                        </span>
-                     </div>
-                     <div class="height-40 background-transparent-b-10 padding-horizontal-10 margin-bottom-10">
-                        <div class="flex grow-2 align-items-center">
-                           <i class="far fa-stopwatch color-grey font-size-11"></i>
-                           {sports.sideMarket?.id ? <span class="color-grey">{moment(sports.sideMarket.startAt).format("MM / DD HH:mm")}</span> : ""}
-                           {/* <span class="color-grey">{inplay.data.detail_data?.awayTeam?.name?.ko ? moment(startAt).format("MM / DD HH:mm") : ""}</span> */}
+                              {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko : "" : ""}
+                              <span class="margin-horizontal-4 color-twhite">vs</span>
+                              {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko : "" : ""}
+                           </span>
                         </div>
-                        <div class="flex align-items-center">
-                           <i class="fas fa-map-marker-alt color-grey font-size-11"></i>
-                           <span class="color-grey">Etihad Stadium</span>
+                        <div class="height-40 background-transparent-b-10 padding-horizontal-10 margin-bottom-10">
+                           <div class="flex grow-2 align-items-center">
+                              <i class="far fa-stopwatch color-grey font-size-11"></i>
+                              {sports.sideMarket?.id ? <span class="color-grey">{moment(sports.sideMarket.startAt).format("MM / DD HH:mm")}</span> : ""}
+                              {/* <span class="color-grey">{inplay.data.detail_data?.awayTeam?.name?.ko ? moment(startAt).format("MM / DD HH:mm") : ""}</span> */}
+                           </div>
+                           <div class="flex align-items-center">
+                              <i class="fas fa-map-marker-alt color-grey font-size-11"></i>
+                              <span class="color-grey">Etihad Stadium</span>
+                           </div>
                         </div>
-                     </div>
-                  </div>
+                     </div> : ""
+                  }
                   <div class="market-list flex-inherit flex-column scrollable-auto">
                      {sports.sideMarket?.markets?.length > 0
                         ? sports.sideMarket.markets.map((market, market_index) => {
                            // console.log(market)
                            let specifer = market.market.specifier
-                           let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko  : "";
-                           let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko  : "";
+                           let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko : "";
+                           let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko : "";
                            let marketName = sports.markets?.data ? sports.markets.data.find(x => x.id == market.marketId).marketName.ko : ""
 
                            var rows = [];
@@ -558,7 +559,7 @@ export default function Inplay() {
                               >
                                  <span class="color-grey">
                                     {/* {market.marketId} */}
-                                    {setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
+                                    {setCompetitorName(marketName, homeTeam, awayTeam, specifer)}
                                  </span>
                               </div>
                            );
@@ -575,8 +576,8 @@ export default function Inplay() {
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
                                                    onClick={setBet}
-                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
-                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
+                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
+                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam, specifer)}
                                                    data-home-team={homeTeam}
                                                    data-away-team={awayTeam}
                                                    data-match-id={sports.sideMarket.id}
@@ -588,7 +589,7 @@ export default function Inplay() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
@@ -609,8 +610,8 @@ export default function Inplay() {
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
                                                    onClick={setBet}
-                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
-                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
+                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
+                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam, specifer)}
                                                    data-home-team={homeTeam}
                                                    data-away-team={awayTeam}
                                                    data-match-id={sports.sideMarket.id}
@@ -622,7 +623,7 @@ export default function Inplay() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
@@ -655,7 +656,7 @@ export default function Inplay() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
@@ -679,7 +680,7 @@ export default function Inplay() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">

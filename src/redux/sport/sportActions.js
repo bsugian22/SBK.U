@@ -321,7 +321,7 @@ export const sortByBookmarked = (matches, type) => {
     console.log(matches)
     if (type == 'prematch') {
       dispatch(setBookmarkMatches(matches))
-      // dispatch(setMatchIds(matches, 1, type))
+      dispatch(setMatchIds(matches, 1, type)) //uncomment
     }
   };
 };
@@ -332,27 +332,35 @@ export const sortMatchesByLeague = (matches, type, sportsTypeId, isSearching) =>
 
   return (dispatch) => {
     console.log(matches)
+    // matches.data.map((a)=>{
+    //   console.log(a.tournamentId)
+    // })
     dispatch(setBookmarkOff())
     // decs
-    matches.data.sort(function (a, b) {
-      return a.tournamentId - b.tournamentId || a.simpleTournamentId - b.simpleTournamentId;
+    let sortedMatches = matches.data.sort(function (a, b) {
+      return a.tournamentId - b.tournamentId 
     });
+
+    console.log(sortedMatches)
+
+    sortedMatches.map((a)=>{
+      console.log(a.tournamentId)
+    })
 
     if (type == 'prematch') {
       if (isSearching) {
-        dispatch(setMatchIds(matches, 1, type))
+        dispatch(setMatchIds({ data: sortedMatches }, 1, type))
         dispatch(setSearchMatches(matches))
       } else {
         if (sportsTypeId == null) {
-          dispatch(setMatchIds(matches, 1, type))
+          dispatch(setMatchIds({ data: sortedMatches }, 1, type))
         } else {
-          dispatch(setSportsType({ id: sportsTypeId, matches: matches.data }))
-          dispatch(setMatchIds(matches, 1, type))
+          dispatch(setMatchIds({ data: sortedMatches }, 1, type))
+          dispatch(setSportsType({ id: sportsTypeId, matches: sortedMatches }))
         }
       }
-
-
     }
+
   };
 };
 
@@ -384,11 +392,8 @@ export const fetchMatches = (esports) => {
         var defaultMatches = matches.data.filter((x) => {
           return x.type == 1;
         });
-       
-
 
         if (esports) {
-          //dispatch espoirts
           dispatch(fetchPrematches(matches))
           dispatch(setMatchIds(matches, 1, 'esports'))
         } else {
@@ -407,12 +412,15 @@ export const fetchMatches = (esports) => {
 
 export const setMatchIds = (matches, pageNumber, type) => {
   return (dispatch) => {
+    console.log(matches)
+    console.log("matches")
     let index = (pageNumber * 30) - 30
     let perPage = pageNumber * 30;
     const matchIds = [];
     for (let i = index; i < perPage; i++) {
       if (matches.data[i]?.id) {
         let id = matches.data[i].id
+        console.log(matches.data[i].tournamentId)
         matchIds.push({ id: id });
       }
     }

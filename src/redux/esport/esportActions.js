@@ -43,6 +43,11 @@ export const fetchMarketPerMatchesSuccesEsports = (data) => {
   };
 };
 
+export const noMatchesEsports = () => {
+  return {
+    type: types.NO_MATCHES,
+  };
+};
 
 // export const fetchEsports = () => {
 //   return (dispatch) => {

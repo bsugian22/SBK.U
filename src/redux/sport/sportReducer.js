@@ -21,7 +21,6 @@ const initialState = {
   sportsTypeId: null,
   sportsMatches: { data: [] },
   sortBy: "asc",
-  bookmarked: [1095, 32227, 32225, 32215],
   bookmarkedMatches: { data: [] },
   isBookmarkedCheck: false,
   search: "",
@@ -407,15 +406,21 @@ const sportReducer = (state = initialState, action) => {
 
     case types.SET_BOOKMARK:
 
-      const bookmark_exists = state.bookmarked?.indexOf(action.payload)
-      // Check if a value exists in the fruits array
 
-      if (bookmark_exists !== -1) {
-        state.bookmarked.splice(bookmark_exists, 1)
+      let currentBookmarks = JSON.parse(localStorage.getItem("bookmarks"))
+
+      if (currentBookmarks == null) {
+        localStorage.setItem("bookmarks", JSON.stringify([action.payload]))
       } else {
-        state.bookmarked.push(action.payload)
+        const bookmark_exists = currentBookmarks.indexOf(action.payload)
+        console.log(currentBookmarks)
+        if (bookmark_exists !== -1) {
+          currentBookmarks.splice(bookmark_exists, 1)
+        } else {
+          currentBookmarks.push(action.payload)
+        }
+        localStorage.setItem("bookmarks",JSON.stringify(currentBookmarks))
       }
-      // console.log(state.bookmarked)
 
       return {
         ...state,
@@ -465,6 +470,7 @@ const sportReducer = (state = initialState, action) => {
         activeSideBarSportsMatches: { data: [] },
         activeSideBarCountryId: null,
         activeSideBarCountryMatches: { data: [] },
+        sortByLeague: false,
       };
 
     case types.SET_ORIGINAL_MATCHES:
@@ -514,8 +520,6 @@ const sportReducer = (state = initialState, action) => {
 
       let prematchDatas = [];
       let prematch = action.payload.data
-
-
 
       state.sportTypeIds.map((id) => {
         console.log(id);
@@ -642,7 +646,7 @@ const sportReducer = (state = initialState, action) => {
         // if (market.count != 0 || market['1X2'].length != 0
         //   || market['total'].length != 0 || market['hcp'].length != 0) {
         let data = state.matches?.data?.find(x => x.id == market.id)
-        if(!data){
+        if (!data) {
           data = state.sportsMatches?.data?.find(x => x.id == market.id)
         }
         market['1X2'].map((market, index) => {
@@ -668,14 +672,16 @@ const sportReducer = (state = initialState, action) => {
 
       })
 
-      mainMarketsToDisplay.sort(function (a, b) {
-        return a.timeAt?.localeCompare(b.timeAt);
-      });
-
 
       if (state.sortByLeague) {
+         mainMarketsToDisplay.sort(function (a, b) {
+          return a.tournamentId - b.tournamentId 
+        });
         mainMarketsToDisplay = [{ startAt: null, matches: mainMarketsToDisplay }]
       } else {
+        mainMarketsToDisplay.sort(function (a, b) {
+          return a.timeAt?.localeCompare(b.timeAt);
+        });
         mainMarketsToDisplay = chain(mainMarketsToDisplay)
           .groupBy((match) => moment(match.startAt).format("YYYY-MM-DD"))
           .map((matches, startAt) => ({ startAt, matches }))

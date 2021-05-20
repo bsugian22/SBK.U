@@ -36,28 +36,28 @@ export default function BookNavi(props) {
                 <div class={sports.sidebarBookmarked ? " bookmark background-transparent-b-5 align-items-center-inherit border-bottom border-top" : "bookmark background-transparent-b-5 align-items-center-inherit border-bottom border-top active"}
                     onClick={() => {
                         dispatch(showSidebarBookmark())
-                        let sportsbookmark = [];
-                        sports.bookmarked?.map((id) => {
-                            var matches = sports?.matches?.data?.filter((x) => {
-                                return x.tournamentId == id;
-                            });
-                            sportsbookmark.push(...matches)
-                        })
+                        // let sportsbookmark = [];
+                        // sports.bookmarked?.map((id) => {
+                        //     var matches = sports?.matches?.data?.filter((x) => {
+                        //         return x.tournamentId == id;
+                        //     });
+                        //     sportsbookmark.push(...matches)
+                        // })
 
-                        dispatch(sortByBookmarked({ data: sportsbookmark }, 'prematch'))
+                        // dispatch(sortByBookmarked({ data: sportsbookmark }, 'prematch'))
                     }}>
                     <div class="flex height-40 padding-10 grow-2">
                         <i class="fas fa-star color-yellow"></i>
                         <span class="color-grey">Bookmark</span>
                     </div>
                     <div class="flex height-40 padding-vertical-5 align-items-center">
-                        <span class="color-red padding-horizontal-20 background-transparent-b-5 heightp-100 align-items-center flex">{sports?.bookmarked?.length}</span>
+                        <span class="color-red padding-horizontal-20 background-transparent-b-5 heightp-100 align-items-center flex">{JSON.parse(localStorage.getItem("bookmarks"))?.length? JSON.parse(localStorage.getItem("bookmarks"))?.length  :"0"}</span>
                         <span class="arrow heightp-100 color-grey align-items-center justify-content-center flex background-transparent-b-5 border-left padding-horizontal-10">
                             <i class="far fa-chevron-down fa-xs margin-0"></i>
                         </span>
                     </div>
                 </div>
-                {sports.bookmarked?.map((bookmark) => {
+                {JSON.parse(localStorage.getItem("bookmarks"))?.map((bookmark) => {
                     let sportsbookmark = [];
 
                     if (sports.matches?.data) {

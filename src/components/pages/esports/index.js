@@ -3,9 +3,9 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "../../../redux/user/userActions";
 import { Link, NavLink } from 'react-router-dom'
 import { setCompetitorName } from "../../../helpers/object";
-import { fetchMatches, setMatchIds, fetchMarketPerMatch } from "../../../redux/sport/sportActions";
+import { fetchMatches, setMatchIds, fetchMarketPerMatch, resetSideMarkets } from "../../../redux/sport/sportActions";
 import { fetchInplays } from "../../../redux/inplay/inplayActions";
-import { fetchEsportsRequest, setActiveMatches, setSportsTypeEsports } from "../../../redux/esport/esportActions";
+import { fetchEsportsRequest, noMatchesEsports, setActiveMatches, setSportsTypeEsports } from "../../../redux/esport/esportActions";
 import Logo from "../../layouts/Logo";
 import moment from "moment";
 import { setBetOutcome } from "../../../redux/sportsdetail/sportsdetailActions";
@@ -141,7 +141,7 @@ export default function Esports() {
                               </span>
                            </div>
                            <div class="flex grow-2 justify-content-end">
-                              <span class="color-red">1168</span>
+                              <span class="color-red">{esports.activeMatches == "prematch" ? esports.prematchMatches.length : esports.inplayMatches.length}</span>
                               <span class="color-grey">개의 경기가 진행 중 입니다</span>
                            </div>
                         </div>
@@ -150,13 +150,23 @@ export default function Esports() {
                               <button class={esports.activeMatches == "prematch" ? "all btn-0 color-grey background-transparent active" : "all btn-0 color-grey background-transparent"}
                                  onClick={() => {
                                     dispatch(setActiveMatches('prematch'))
-                                    dispatch(setMatchIds({ data: esports.prematchMatches }, 1, 'esports'))
+
+                                    if (esports.prematchMatches.length == 0) {
+                                       dispatch(noMatchesEsports())
+                                    } else {
+                                       dispatch(setMatchIds({ data: esports.prematchMatches }, 1, 'esports'))
+                                    }
                                  }}>Prematch</button>
 
                               <button class={esports.activeMatches == "live" ? "live btn-0 color-grey background-transparent active" : "live btn-0 color-grey background-transparent"}
                                  onClick={() => {
                                     dispatch(setActiveMatches('live'))
-                                    dispatch(setMatchIds({ data: esports.inplayMatches }, 1, 'esports'))
+                                    if (esports.inplayMatches.length == 0) {
+                                       dispatch(noMatchesEsports())
+                                    } else {
+                                       dispatch(setMatchIds({ data: esports.inplayMatches }, 1, 'esports'))
+                                    }
+
                                  }}
                               >Live</button>
                               <button class="schedule btn-0 color-grey background-transparent">Schedule</button>
@@ -248,7 +258,7 @@ export default function Esports() {
                                                    return (
                                                       <div key={"outcome_id-active-1x2-" + outcome.id}
                                                          onClick={setBet}
-                                                         data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                         data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                          data-market_name='1x2'
                                                          data-home-team={homeTeam}
                                                          data-away-team={awayTeam}
@@ -306,7 +316,7 @@ export default function Esports() {
                                                       return (
                                                          <div key={"outcome_id-active-hcp-" + outcome.id}
                                                             onClick={setBet}
-                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                             data-market_name='hcp'
                                                             data-home-team={homeTeam}
                                                             data-away-team={awayTeam}
@@ -366,7 +376,7 @@ export default function Esports() {
                                                       return (
                                                          <div key={"outcome_id-active-hcp-" + outcome.id}
                                                             onClick={setBet}
-                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                            data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                             data-market_name='hcp'
                                                             data-home-team={homeTeam}
                                                             data-away-team={awayTeam}
@@ -436,8 +446,8 @@ export default function Esports() {
                            //    console.log(market)
                            // })
                            return row
-                        }) : <div class="flex justify-content-center heightp-100 align-items-center"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div>
-                     }
+                        }) : esports.noMatches ? "No Data Found" : <div class="flex justify-content-center heightp-100 align-items-center"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div>}
+
                   </div>
                   <div class="bottom-wrap border-top flex padding-vertical-10 flex-inherit height-59 align-items-center-inherit0">
                      <div class="count-list flex-inherit grow-2 heightp-100"></div>
@@ -453,7 +463,7 @@ export default function Esports() {
                                  // }
                               }}
                               disabled={1 >= esports.currentPage}>
-                                 
+
                               <i class="fas fa-chevron-left margin-0 color-grey"></i>
                            </button>
                            <button class="page-right background-transparent-b-20"
@@ -473,28 +483,30 @@ export default function Esports() {
                   </div>
                </div>
                <div class="esports-detail flex-inherit flex-column padding-vertical-10 padding-left-5 padding-right-10">
-                  <div class="detail-header flex-inherit flex-column">
-                     <div class="height-40 align-items-center background-transparent-b-20 padding-horizontal-10">
-                        <i class="fas fa-tshirt color-grey font-size-11"></i>
-                        <span class="color-grey">
+                  {sports.sideMarket?.markets?.length > 0 ?
+                     <div class="detail-header flex-inherit flex-column">
+                        <div class="height-40 align-items-center background-transparent-b-20 padding-horizontal-10">
+                           <i class="fas fa-tshirt color-grey font-size-11"></i>
+                           <span class="color-grey">
 
-                           {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko : "" : ""}
-                           <span class="margin-horizontal-4 color-twhite">vs</span>
-                           {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko : "" : ""}
-                        </span>
-                     </div>
-                     <div class="height-40 background-transparent-b-10 padding-horizontal-10 margin-bottom-10">
-                        <div class="flex grow-2 align-items-center">
-                           <i class="far fa-stopwatch color-grey font-size-11"></i>
-                           {sports.sideMarket?.id ? <span class="color-grey">{moment(sports.sideMarket.startAt).format("MM / DD HH:mm")}</span> : ""}
-                           {/* <span class="color-grey">{inplay.data.detail_data?.awayTeam?.name?.ko ? moment(startAt).format("MM / DD HH:mm") : ""}</span> */}
+                              {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko : "" : ""}
+                              <span class="margin-horizontal-4 color-twhite">vs</span>
+                              {sports.sideMarket?.id ? sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko : "" : ""}
+                           </span>
                         </div>
-                        <div class="flex align-items-center">
-                           <i class="fas fa-map-marker-alt color-grey font-size-11"></i>
-                           <span class="color-grey">Etihad Stadium</span>
+                        <div class="height-40 background-transparent-b-10 padding-horizontal-10 margin-bottom-10">
+                           <div class="flex grow-2 align-items-center">
+                              <i class="far fa-stopwatch color-grey font-size-11"></i>
+                              {sports.sideMarket?.id ? <span class="color-grey">{moment(sports.sideMarket.startAt).format("MM / DD HH:mm")}</span> : ""}
+                              {/* <span class="color-grey">{inplay.data.detail_data?.awayTeam?.name?.ko ? moment(startAt).format("MM / DD HH:mm") : ""}</span> */}
+                           </div>
+                           <div class="flex align-items-center">
+                              <i class="fas fa-map-marker-alt color-grey font-size-11"></i>
+                              <span class="color-grey">Etihad Stadium</span>
+                           </div>
                         </div>
-                     </div>
-                  </div>
+                     </div> : ""
+                  }
                   <div class="market-list flex-inherit flex-column scrollable-auto">
                      {sports.sideMarket?.markets?.length > 0
                         ? sports.sideMarket.markets.map((market, market_index) => {
@@ -514,7 +526,7 @@ export default function Esports() {
                               >
                                  <span class="color-grey">
                                     {/* {market.marketId} */}
-                                    {setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
+                                    {setCompetitorName(marketName, homeTeam, awayTeam, specifer)}
                                  </span>
                               </div>
                            );
@@ -531,8 +543,8 @@ export default function Esports() {
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
                                                    onClick={setBet}
-                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
-                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
+                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
+                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam, specifer)}
                                                    data-home-team={homeTeam}
                                                    data-away-team={awayTeam}
                                                    data-match-id={sports.sideMarket.id}
@@ -544,7 +556,7 @@ export default function Esports() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
@@ -565,8 +577,8 @@ export default function Esports() {
                                              return (
                                                 <div key={"details-outcome-id" + outcome.id}
                                                    onClick={setBet}
-                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
-                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam,specifer)}
+                                                   data-outcome_name={setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
+                                                   data-market_name={setCompetitorName(marketName, homeTeam, awayTeam, specifer)}
                                                    data-home-team={homeTeam}
                                                    data-away-team={awayTeam}
                                                    data-match-id={sports.sideMarket.id}
@@ -578,7 +590,7 @@ export default function Esports() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
@@ -611,7 +623,7 @@ export default function Esports() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">
@@ -635,7 +647,7 @@ export default function Esports() {
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
-                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam,specifer)}
+                                                         {setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
                                                       </span>
                                                    </div>
                                                    <div class="shrink-0 padding-horizontal-2">

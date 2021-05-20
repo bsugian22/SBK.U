@@ -14,11 +14,19 @@ const initialState = {
   inplayMatches: { data: [] },
   sportTypeIds: [1, 2, 3],
   tournamentIds: [1],
-  activeMatches: "prematch"
+  activeMatches: "prematch",
+  noMatches : false
 };
 
 const esportReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case types.NO_MATCHES:
+      return {
+        ...state,
+        mainMarkets: [],
+        noMatches :true
+      };
 
     case types.SET_SPORTS_TYPE_ESPORTS:
       let lastPageType = Math.ceil(action.payload.matches.length / 30)
@@ -63,7 +71,7 @@ const esportReducer = (state = initialState, action) => {
       return {
         ...state,
         prematchMatches: prematchDatas,
-        lastPage:lastPagePrematch
+        lastPage: lastPagePrematch
       }
     case types.FETCH_INPLAY:
 
@@ -88,7 +96,7 @@ const esportReducer = (state = initialState, action) => {
       return {
         ...state,
         inplayMatches: inplayDatas,
-        lastPage:lastPageInplay
+        lastPage: lastPageInplay
       }
 
 
@@ -99,25 +107,27 @@ const esportReducer = (state = initialState, action) => {
       let mainMarketsToDisplay = [];
       mainMarkets.data.map((market, index) => {
         let data = state.matches.data.find(x => x.id == market.id)
+        if (data) {
 
-        market['1X2'].map((market, index) => {
-          market.outcomes.map((outcome, outcome_index) => {
-            outcome.oldOdds = null;
+          market['1X2'].map((market, index) => {
+            market.outcomes.map((outcome, outcome_index) => {
+              outcome.oldOdds = null;
+            })
           })
-        })
 
-        market['hcp'].map((market, index) => {
-          market.outcomes.map((outcome, outcome_index) => {
-            outcome.oldOdds = null;
+          market['hcp'].map((market, index) => {
+            market.outcomes.map((outcome, outcome_index) => {
+              outcome.oldOdds = null;
+            })
           })
-        })
 
-        market['total'].map((market, index) => {
-          market.outcomes.map((outcome, outcome_index) => {
-            outcome.oldOdds = null;
+          market['total'].map((market, index) => {
+            market.outcomes.map((outcome, outcome_index) => {
+              outcome.oldOdds = null;
+            })
           })
-        })
-        mainMarketsToDisplay.push({ ...data, mainMarkets: market });
+          mainMarketsToDisplay.push({ ...data, mainMarkets: market });
+        }
       })
 
       return {

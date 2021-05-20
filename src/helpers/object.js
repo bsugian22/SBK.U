@@ -53,19 +53,38 @@ export const setCompetitorName = (name, homeTeam, awayTeam, specifierData = {}) 
         // console.log(specifier)
         let specifierNames = Object.keys(specifierData);
 
-        specifierNames.map((specifier)=>{
+
+        specifierNames.map((specifier) => {
             let specifierName = specifier
 
             if (name.includes(specifierName)) {
-                name = name.replaceAll(specifierName, specifierData[specifier])
-                name = name.replaceAll("{", "")
-                name = name.replaceAll("}", "")
-                // console.log(specifierData[specifier])
-                // console.log(specifierName)
+
+                if (specifierData[specifier] <= -0.1) {
+                    // console.log(name)
+                    name = name.replaceAll(specifierName, specifierData[specifier])
+                    name = name.replaceAll("{", "")
+                    name = name.replaceAll("}", "")
+                    // console.log(name)
+                    if(name.includes('--')){
+                        name = name.replaceAll("--", "+")
+                    }
+
+                    if(name.includes('+-')){
+                        name = name.replaceAll("+-", "-")
+                    }
+
+                    // console.log(specifierData[specifier])
+                    // console.log(specifierName)
+                } else {
+                    name = name.replaceAll(specifierName, specifierData[specifier])
+                    name = name.replaceAll("{", "")
+                    name = name.replaceAll("}", "")
+                }
+
             }
         })
 
-        
+
     }
 
     return name
