@@ -36,23 +36,16 @@ const sportsdetailReducer = (state = initialState, action) => {
     case types.BET_CHECK:
       let invalid_outcomes = action.payload.data
       let invalid_outcomes_message = action.payload.message
-      // console.log(state.data.bet.outcomes)
-      // console.log(action.payload)
       let message = "";
 
       invalid_outcomes.map((outcome) => {
         let data = state.data.bet.outcomes.find(x => x.id == outcome)
-        console.log(data)
         message = message + data.home_team + " vs " + data.away_team + "<br>"
 
         let index = state.data.bet.outcomes.findIndex(x => x.id == outcome)
         state.data.bet.outcomes.splice(index, 1)
-        console.log(index)
       })
 
-      // console.log(message);
-
-      // console.log(invalid_outcomes)
 
       swal.fire({
         title: invalid_outcomes_message,
@@ -95,7 +88,6 @@ const sportsdetailReducer = (state = initialState, action) => {
       };
 
     case types.SET_BET_OUTCOMES:
-      console.log(action.payload)
       const set_outcome_id = action.payload.outcome_id;
       const set_match_id = action.payload.match_id;
       const set_odds = action.payload.odds;
@@ -166,9 +158,7 @@ const sportsdetailReducer = (state = initialState, action) => {
 
     case types.GET_SPORTSDETAILS:
       const market = action.payload; // ws main data
-      console.log(market)
       const match_id = market.match_id
-      console.log("match_id:" + match_id)
 
       const state_data = state.data.data;
       const state_bet = state.data.bet.outcomes;
@@ -176,7 +166,6 @@ const sportsdetailReducer = (state = initialState, action) => {
       const state_details_match_id = state.data.detail
 
       state_bet.map((data, index) => {
-        // console.log(data.match_id);
         let details_specifier = data.specifier
         let market_type = data.market_type
         let details_name_id = data.outcome_name_id
@@ -191,11 +180,7 @@ const sportsdetailReducer = (state = initialState, action) => {
             let ws_specifier = JSON.stringify(ws_data.specifier)
             let ws_market_type = ws_data.market_id;
             let ws_status = ws_data.status
-            console.log(ws_status);
             if (ws_status != 1 && state_bet.find(x => x.match_id == match_id)) {
-              console.log("status not active")
-              console.log(state_bet.find(x => x.match_id == match_id))
-              console.log(state_bet.findIndex(x => x.match_id == match_id))
               state.data.bet.outcomes.splice(state_bet.findIndex(x => x.match_id == match_id), 1)
               swal.fire({
                 title: '이미 마감된 경기가 있습니다.',
@@ -206,9 +191,6 @@ const sportsdetailReducer = (state = initialState, action) => {
 
             // check if the market is same with the ws data and details data 
             if (ws_market_type == market_type) {
-              console.log("ws bet slip")
-              console.log(data);
-              console.log(ws_data)
 
 
               if (ws_specifier == "{}") { // check if the specifer is only one 
@@ -251,19 +233,14 @@ const sportsdetailReducer = (state = initialState, action) => {
             }
 
           })
-          console.log("ws bet slip end")
         }
       })
 
       state_data.map((data, index) => {
 
         data.matches.map((data, index) => {
-          // console.log (data);
 
           if (match_id == data.id) {
-            // console.log(data.id);
-            // console.log(market)
-            // console.log(data.market)
             market.markets.map((ws_data, index) => {
 
               let ws_data_market_outcomes = ws_data.outcomes; // list of outcomes comeing from the ws

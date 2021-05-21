@@ -116,7 +116,7 @@ export const fetchInplays = (esports) => {
 export const inplayWebSocket = (matches) => {
 
   return (dispatch) => {
-    // socket.onopen = function (e) {
+    
     matches.map((data, index) => {
       console.log("sending:" + data)
       const match_data = {
@@ -129,7 +129,7 @@ export const inplayWebSocket = (matches) => {
       event.data.text().then((data) => {
         const market = JSON.parse(data)
 
-        // console.log(market)
+       
         dispatch(getInplayDetails(market));
         dispatch(getSportsDetails(market));
       });
@@ -152,49 +152,6 @@ export const inplayWebSocket = (matches) => {
   }
 };
 
-// export const fetchInplay = (matchId) => {
 
-//   return (dispatch) => {
-//     dispatch(fetchInplayRequest);
-//     axios.get(`/api/feed/matches/${matchId}`)
-//       .then(response => {
-//         const sportsdetail = camelize(response.data);
-//         // console.log(sportsdetail.data.markets)
-
-//         let home_team = sportsdetail.data.homeTeam.name.ko;
-//         let away_team = sportsdetail.data.awayTeam.name.ko
-//         console.log(home_team)
-//         console.log(away_team)
-
-//         sportsdetail.data.markets.map((data, index) => {
-
-
-//           if (data.title.marketName.ko.includes('{$competitor1}')) {
-//             data.title.marketName.ko = data.title.marketName.ko.replaceAll('{$competitor1}', home_team)
-//           }
-//           if (data.title.marketName.ko.includes('{$competitor2}')) {
-//             data.title.marketName.ko = data.title.marketName.ko.replaceAll('{$competitor2}', away_team)
-//           }
-//           // console.log(data.title.marketName.ko)
-
-//           // console.log(data);
-//           data.outcomes.map((data, index) => {
-//             console.log(data)
-//             if (data.name.outcomeName.ko.includes('{$competitor1}')) {
-//               data.name.outcomeName.ko = data.name.outcomeName.ko.replaceAll('{$competitor1}', home_team)
-//             }
-//             if (data.name.outcomeName.ko.includes('{$competitor2}')) {
-//               data.name.outcomeName.ko = data.name.outcomeName.ko.replaceAll('{$competitor2}', away_team)
-//             }
-//             data.oldOdds = null;
-//           })
-//         })
-//         dispatch(fetchInplaySuccess(sportsdetail))
-//       }).catch(error => {
-//         const errorMsg = error.message;
-//         dispatch(fetchInplayFailure(errorMsg))
-//       })
-//   };
-// };
 
 

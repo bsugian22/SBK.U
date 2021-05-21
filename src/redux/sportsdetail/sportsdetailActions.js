@@ -182,11 +182,6 @@ export const betFailure = () => {
 };
 
 
-// export const Sportsdetails = () => {
-//   return (dispatch) => {
-//     console.log( dispatch(getSportsdetails()) );
-//   };
-// };
 
 export const fetchSportsdetails = (params) => {
 
@@ -201,17 +196,12 @@ export const fetchSportsdetails = (params) => {
 
         sportsdetails.data.map((data, index) => {
           matches.push(data.id)
-          // console.log(data.market)
           data.market.map((data, index) => {
-            // console.log(data)
-            // data.oldOdds = null;
             data.outcomes.map((data, index) => {
-              // console.log(data)
               data.oldOdds = null;
             })
           })
         })
-        // console.log(sportsdetails.data)
         dispatch(sportWebSocket(matches));
 
         var data = chain(sportsdetails.data)
@@ -241,11 +231,8 @@ export const fetchSportsdetail = (matchId) => {
     axios.get(`/api/feed/matches/${matchId}`)
       .then(response => {
         const sportsdetail = camelize(response.data);
-        console.log(sportsdetail.data)
         let home_team = sportsdetail.data.homeTeam.name.ko;
         let away_team = sportsdetail.data.awayTeam.name.ko
-        console.log(home_team)
-        console.log(away_team)
 
         sportsdetail.data.markets.map((data, index) => {
           
@@ -256,11 +243,7 @@ export const fetchSportsdetail = (matchId) => {
             if (data.title.marketName.ko.includes('{$competitor2}')) {
               data.title.marketName.ko = data.title.marketName.ko.replaceAll('{$competitor2}', away_team)
             }
-            // console.log(data.title.marketName.ko)
-         
-          // console.log(data);
           data.outcomes.map((data, index) => {
-            console.log(data)
             if (data.name.outcomeName.ko.includes('{$competitor1}')) {
               data.name.outcomeName.ko = data.name.outcomeName.ko.replaceAll('{$competitor1}', home_team)
             }
@@ -294,9 +277,7 @@ export const validateBet = (data) => {
       axios.post(`/api/betslip`, details)
         .then(response => {
           const response_data = response.data
-          // console.log(response_data)
           if (response_data.status == 0) {
-            // console.log(response_data.data)
             dispatch(betCheck(response_data))
           }
 
@@ -325,22 +306,18 @@ export const bet = (data,user_id) => {
     dispatch(betRequest())
     axios.post(`/api/positions`, details)
       .then(response => {
-        console.log(response.data)
         dispatch(resetOutcome());
         const interval_id = setTimeout(() => {
           dispatch(betSucess())
         }, 30000);
 
         echo.private(`users.${user_id}`).listen('MTS\\BetAccepted', (e) => {
-          // console.log("bet accepted")
-          // console.log(e);
           swal.success("Bet Success")
           dispatch(betSucess())
           clearInterval(interval_id)
         })
 
         echo.private(`users.${user_id}`).listen('MTS\\BetRejected', (e) => {
-          // console.log(e);
           dispatch(betFailure())
           clearInterval(interval_id)
           swal.error(e.message)

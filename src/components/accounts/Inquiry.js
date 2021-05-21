@@ -324,7 +324,6 @@ const Inquiry = () => {
                   onChange={(event, editor) => {
                     const content = editor.getData();
                     dispatch(changeInquiryContent(content));
-                    console.log({ event, editor, content });
                   }}
                 />
               </div>

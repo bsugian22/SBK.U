@@ -189,7 +189,6 @@ export default function Position() {
                       </tr>
                     ) : (
                       position?.positions?.data?.map((item, index) => {
-                        // console.log(item)
                         return (
                           <tr key={item.id} class={position.selectedPosition == null ? "rows" : position.selectedPosition.id == item.id ? "active rows" : "rows"} key={index} onClick={() => { dispatch(selectPostion(item)) }}>
                             <td class="height-45 border-top">
@@ -422,7 +421,6 @@ export default function Position() {
                   <tbody class="background-transparent-b-5">
                     {position.selectedPosition == null ? "" :
                       position.selectedPosition.outcomes.map((outcome, indx) => {
-                        console.log(outcome.id)
                         let specifer = outcome.markets.specifier
                         let homeTeam = outcome?.matches?.homeTeam.name.ko
                         let awayTeam = outcome?.matches?.awayTeam.name.ko;

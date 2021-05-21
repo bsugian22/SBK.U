@@ -289,7 +289,6 @@ export const searchMatches = (text, matches, competitors, tournaments, type) => 
 export const sortMatchesByTime = (matches, type, sportsTypeId, page, isSearching) => {
   return (dispatch) => {
     dispatch(setBookmarkOff())
-    console.log(matches)
 
     matches.data.sort(function compare(a, b) {
       var dateA = new Date(a.startAt);
@@ -318,7 +317,6 @@ export const sortMatchesByTime = (matches, type, sportsTypeId, page, isSearching
 
 export const sortByBookmarked = (matches, type) => {
   return (dispatch) => {
-    console.log(matches)
     if (type == 'prematch') {
       dispatch(setBookmarkMatches(matches))
       dispatch(setMatchIds(matches, 1, type)) //uncomment
@@ -331,21 +329,11 @@ export const sortByBookmarked = (matches, type) => {
 export const sortMatchesByLeague = (matches, type, sportsTypeId, isSearching) => {
 
   return (dispatch) => {
-    console.log(matches)
-    // matches.data.map((a)=>{
-    //   console.log(a.tournamentId)
-    // })
     dispatch(setBookmarkOff())
-    // decs
     let sortedMatches = matches.data.sort(function (a, b) {
       return a.tournamentId - b.tournamentId 
     });
 
-    console.log(sortedMatches)
-
-    sortedMatches.map((a)=>{
-      console.log(a.tournamentId)
-    })
 
     if (type == 'prematch') {
       if (isSearching) {
@@ -412,15 +400,12 @@ export const fetchMatches = (esports) => {
 
 export const setMatchIds = (matches, pageNumber, type) => {
   return (dispatch) => {
-    console.log(matches)
-    console.log("matches")
     let index = (pageNumber * 30) - 30
     let perPage = pageNumber * 30;
     const matchIds = [];
     for (let i = index; i < perPage; i++) {
       if (matches.data[i]?.id) {
         let id = matches.data[i].id
-        console.log(matches.data[i].tournamentId)
         matchIds.push({ id: id });
       }
     }
@@ -446,11 +431,7 @@ export const fetchMarketPerMatches = (ids, pageNumber, type) => {
     axios.post(`/api/feed/market`, { matches: ids })
       .then(response => {
         const markets = camelize(response.data);
-        // console.log(ids)
-        // console.log("kelvin ids")
         markets.pageNumber = pageNumber
-        // fetchMarketPerMatchesSuccessInplay
-        // fetchMarketPerMatchesFailureInplay
         dispatch(sportWebSocket(ids))
         if (type == 'prematch') {
           dispatch(fetchMarketPerMatchesSuccess(markets))
@@ -481,7 +462,6 @@ export const fetchMarketPerMatch = (id) => {
     axios.get(`/api/feed/market/` + id)
       .then(response => {
         const markets = camelize(response.data);
-        // console.log(markets)
 
         dispatch(fetchMarketPerMatchSuccess(markets))
       }).catch(error => {
@@ -561,11 +541,9 @@ export const sportWebSocket = (matches) => {
     const ids = matches.map((match) => {
       return match.id;
     });
-    console.log(ids)
     socket.emit('book', ids);
 
     socket.on('changed', (match) => {
-      // console.log(match)
       // const { markets } = match;
       dispatch(setWSMarket(camelize(match)))
       dispatch(setWSMarketInplay(camelize(match)))

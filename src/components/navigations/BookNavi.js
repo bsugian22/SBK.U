@@ -43,7 +43,6 @@ export default function BookNavi(props) {
                             });
                             sportsbookmark.push(...matches)
                         })
-                        console.log(sportsbookmark)
                         dispatch(sortByBookmarked({ data: sportsbookmark }, 'prematch'))
                     }}>
                     <div class="flex height-40 padding-10 grow-2">
@@ -66,15 +65,12 @@ export default function BookNavi(props) {
                     //             return x.id == bookmark;
                     //         });
                     //         sportsbookmark.push(...bookmarkmatches)
-                    //         console.log(sportsbookmark)
-                    //         console.log("sportsbookmark")
 
                     //     }
                     //     return (
                     //         <div class="region-detail" hidden={sports.sidebarBookmarked}>
                     //             <div class="flex align-items-center-inherit league border-top border-bottom widthp-100 active"
                     //                 onClick={() => {
-                    //                     console.log(sportsbookmark)
                     //                     dispatch(setMatchIds({ data: sportsbookmark }, 1, 'prematch'))
                     //                 }}>
                     //                 <div class="flex height-40 padding-10 grow-2 text-ellipsis">
@@ -107,7 +103,6 @@ export default function BookNavi(props) {
 
 
                             if (matches.length) {
-                                // console.log(matches.length)
                                 let sportMatches = {}
                                 var tournaments = sports?.tournaments?.data?.filter((x) => {
                                     return x.tournament.sportId == icon.id;
@@ -119,10 +114,8 @@ export default function BookNavi(props) {
                                     .value();
                                 let total_country = 0;
                                 tournaments?.map((tournament, tour_index) => {
-                                    // console.log(tournament.tour)
                                     tournament.tour?.map((league) => {
                                         let count = 0;
-                                        // console.log(league)
                                         var league_count_tournament = sports.matches?.data.filter((x) => {
                                             return x.tournamentId == league.id;
                                         });
@@ -166,16 +159,13 @@ export default function BookNavi(props) {
                                         </div>
 
                                         {tournaments?.map((tournament, tour_index) => {
-                                            // console.log(tournament.tour)
                                             let totalTour = 0;
                                             let countryMatches = []
                                             tournament.tour?.map((country) => {
                                                 let count = 0;
-                                                // console.log(league)
                                                 var league_count_tournament = sports.matches?.data.filter((x) => {
                                                     return x.tournamentId == country.id;
                                                 });
-                                                // console.log(league_count_tournament)
 
                                                 if (league_count_tournament.length != 0) {
                                                     count = league_count_tournament.length
@@ -195,26 +185,20 @@ export default function BookNavi(props) {
                                                         <div class={sports.activeSideBarCountryId == tournament.id ? "flex align-items-center-inherit region border-top border-bottom widthp-100 active" : "flex align-items-center-inherit region border-top border-bottom widthp-100"}
                                                             onClick={(e) => {
                                                                 countryMatches = []
-                                                                console.log(matches)
                                                                 tournament.tour.map((tour) => {
-                                                                    console.log(tour.id)
                                                                     var countryMatchesTournament = sports.matches?.data.filter((x) => {
                                                                         return x.tournamentId == tour.id;
                                                                     });
 
                                                                     if (countryMatchesTournament.length != 0) {
                                                                         countryMatches.push(...countryMatchesTournament)
-                                                                        console.log(countryMatchesTournament)
                                                                     } else {
                                                                         var countryMatchesSimpleTournament = sports.matches?.data.filter((x) => {
                                                                             return x.simpleTournamentId == tour.id;
                                                                         });
                                                                         countryMatches.push(...countryMatchesSimpleTournament)
-                                                                        console.log(countryMatchesSimpleTournament)
                                                                     }
                                                                 })
-                                                                console.log(countryMatches)
-                                                                console.log("kelvin")
 
                                                                 dispatch(setSideBarCountryId({ id: tournament.id, matches: countryMatches }))
                                                                 // if (sports.activeSideBarCountryId == tournament.id) {
@@ -236,13 +220,11 @@ export default function BookNavi(props) {
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                        {/* {console.log(tournament.tour)} */}
 
 
                                                         {tournament.tour?.map((league) => {
                                                             let count = 0;
                                                             let leagueMatches = []
-                                                            // console.log(league)
                                                             var league_count_tournament = sports.matches.data.filter((x) => {
                                                                 return x.tournamentId == league.id;
                                                             });
@@ -259,17 +241,12 @@ export default function BookNavi(props) {
 
                                                             }
 
-                                                            // console.log(league_count)
                                                             if (count != 0) {
                                                                 return (
                                                                     <div class="region-detail" hidden={sports.activeSideBarCountryId == tournament.id ? false : true} >
                                                                         <div class={sports.activeSideBarLeagueId?.find(x => x == league.tournament.name.en) ? "flex align-items-center-inherit league border-top border-bottom widthp-100 active" : "flex align-items-center-inherit league border-top border-bottom widthp-100"}
                                                                             onClick={() => {
 
-                                                                                console.log(league.id)
-                                                                                console.log(leagueMatches)
-                                                                                console.log(sports.activeSideBarLeagueMatches.data)
-                                                                                console.log(leagueMatches)
 
                                                                                 let currentActive = sports.activeSideBarLeagueMatches.data;
                                                                                 const league_exists = sports.activeSideBarLeagueId?.indexOf(league.tournament.name.en)

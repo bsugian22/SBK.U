@@ -215,10 +215,9 @@ const inplayReducer = (state = initialState, action) => {
 
     case types.GET_INPLAYDETAILS:
       const market = action.payload; // ws main data
-      // console.log(market)
+      
       const match_id = market.match_id
-      // console.log("match_id:" + match_id)
-      // console.log("kelvin")
+      
 
       const state_data = state.data.data;
       const state_details_market = state.data.detail_data;
@@ -227,11 +226,7 @@ const inplayReducer = (state = initialState, action) => {
       state_data.map((data, index) => {
 
         if (match_id == data.id) {
-          console.log("inplay");
-          console.log(market)
-          console.log(data.status)
           data.status = JSON.parse(market.match_status);
-          console.log(JSON.parse(market.match_status))
           market.markets.map((ws_data, index) => {
 
             let ws_data_market_outcomes = ws_data.outcomes; // list of outcomes comeing from the ws
@@ -389,7 +384,6 @@ const inplayReducer = (state = initialState, action) => {
 
 
       state.sportTypeIds.map((id) => {
-        console.log(id);
         let data = inplay.filter((x) => {
           return x.type == id;
         });
@@ -397,15 +391,12 @@ const inplayReducer = (state = initialState, action) => {
       })
 
       state.tournamentIds.map((id) => {
-        console.log(id);
         let data = inplay.filter((x) => {
           return x.tournamentId == id;
         });
         inplayDatas.push(...data)
       })
 
-      console.log(matches)
-      console.log(inplayDatas)
 
       matches = matches.reduce(function (prev, value) {
 
@@ -425,7 +416,6 @@ const inplayReducer = (state = initialState, action) => {
 
       }, []);
 
-      console.log(matches)
 
       return {
         ...state,

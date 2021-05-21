@@ -87,11 +87,6 @@ const Sports = (props) => {
     dispatch(setBetOutcome(data))
   };
 
-  const sportsData = (markets) => {
-    console.log(markets)
-  }
-
-
 
   return (
     <Fragment>
@@ -126,7 +121,6 @@ const Sports = (props) => {
                         });
 
                         if (matches.length) {
-                          // console.log(matches.length)
                           let sportMatches = {}
                           return <a class={sports.sportsTypeId == icon.id ? "active" : ""} key={"icon-" + index} href="#icon" onClick={(e) => {
                             e.preventDefault();
@@ -188,7 +182,6 @@ const Sports = (props) => {
                   <button
                     class={sports.isBookmarkedCheck ? "btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 active" : "btn-0 widthp-18 background-transparent-b-30 color-grey padding-5"}
                     onClick={() => {
-                      console.log(JSON.parse(localStorage.getItem("bookmarks")));
                       let sportsbookmark = [];
                       JSON.parse(localStorage.getItem("bookmarks"))?.map((id) => {
                         var matches = sports.matches.data.filter((x) => {
@@ -196,7 +189,6 @@ const Sports = (props) => {
                         });
                         sportsbookmark.push(...matches)
                       })
-                      console.log(sportsbookmark)
                       dispatch(sortByBookmarked({ data: sportsbookmark }, 'prematch'))
                     }}
                   >
@@ -288,12 +280,12 @@ const Sports = (props) => {
               </div>
             </div>
             <div class="prematch-list border-bottom match-list grow-2 padding-left-10 padding-right-10 padding-bottom-10 scrollable-auto flex-column">
-              {/* {console.log(sports.mainMarkets)} */}
+              
               {sports?.mainMarkets?.length > 0
                 ? sports.mainMarkets.map((matches, index) => {
 
 
-                  // console.log(matches)
+                
                   var rows = [];
                   rows.push(
                     <div
@@ -381,7 +373,7 @@ const Sports = (props) => {
                                       match.mainMarkets['1X2'].map((market, market_index) => {
 
                                         let specifer = market.market.specifier
-                                        // console.log(market.outcomes.length)
+                                       
                                         let classNameActive = ""
                                         let className = ""
                                         if (market.outcomes.length == 2) {
@@ -585,7 +577,7 @@ const Sports = (props) => {
                                     match.mainMarkets['total'].length != 0 ?
                                       match.mainMarkets['total'].map((market, market_index) => {
                                         let specifer = market.market.specifier
-                                        // console.log(sport_main_market_exists)
+                                        
                                         if (sport_main_market_exists == false) {
                                           sport_main_market_exists = true;
                                           if (market.status == 1) {
@@ -845,9 +837,8 @@ const Sports = (props) => {
                 <div class="market-list flex-inherit flex-column scrollable-auto">
                   {sports.sideMarket.markets.length > 0
                     ? sports.sideMarket.markets.map((market, market_index) => {
-                      // console.log(market)
-                      // console.log(market.market.specifier)
-                      // console.log(Object.keys(market.market.specifier));
+                      
+                      
                       let specifer = market.market.specifier
                       let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko : "";
                       let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko : "";

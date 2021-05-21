@@ -46,8 +46,6 @@ const sportReducer = (state = initialState, action) => {
     case types.SET_WS_MARKET:
       const wsData = action.payload
       const wsMatchId = wsData.matchId
-      // console.log(wsData);
-      // console.log(wsMatchId);
 
       // main markets
       state.mainMarkets.map((main) => {
@@ -330,7 +328,6 @@ const sportReducer = (state = initialState, action) => {
       let activeCountryId = null;
       let activeSidebarCountryMatches = { data: [] };
       let lastPageCountrySidebar = null
-      // console.log(action.payload)
       if (action.payload.id != state.activeSideBarCountryId) {
         activeCountryId = action.payload.id
         activeSidebarCountryMatches = { data: action.payload.matches }
@@ -413,7 +410,6 @@ const sportReducer = (state = initialState, action) => {
         localStorage.setItem("bookmarks", JSON.stringify([action.payload]))
       } else {
         const bookmark_exists = currentBookmarks.indexOf(action.payload)
-        console.log(currentBookmarks)
         if (bookmark_exists !== -1) {
           currentBookmarks.splice(bookmark_exists, 1)
         } else {
@@ -474,7 +470,6 @@ const sportReducer = (state = initialState, action) => {
       };
 
     case types.SET_ORIGINAL_MATCHES:
-      // console.log(action.payload)
       return {
         ...state,
         originalMatches: action.payload,
@@ -522,7 +517,6 @@ const sportReducer = (state = initialState, action) => {
       let prematch = action.payload.data
 
       state.sportTypeIds.map((id) => {
-        console.log(id);
         let data = prematch.filter((x) => {
           return x.type == id;
         });
@@ -530,15 +524,12 @@ const sportReducer = (state = initialState, action) => {
       })
 
       state.tournamentIds.map((id) => {
-        console.log(id);
         let data = prematch.filter((x) => {
           return x.tournamentId == id;
         });
         prematchDatas.push(...data)
       })
 
-      console.log(matches)
-      console.log(prematchDatas)
 
       matches = matches.reduce(function (prev, value) {
 
@@ -558,7 +549,6 @@ const sportReducer = (state = initialState, action) => {
 
       }, []);
 
-      console.log(matches)
 
 
       return {
@@ -723,7 +713,6 @@ const sportReducer = (state = initialState, action) => {
       };
     case types.FETCH_MARKET_PER_MATCH_SUCCESS:
       let sideMarket = action.payload.data[0]
-      // console.log(sideMarket)
       sideMarket.markets.map((market, index) => {
         market.outcomes.map((outcome, outcome_index) => {
           outcome.oldOdds = null

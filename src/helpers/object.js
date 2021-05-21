@@ -50,7 +50,7 @@ export const setCompetitorName = (name, homeTeam, awayTeam, specifierData = {}) 
     }
 
     if (Object.keys(specifierData).length != 0) {
-        // console.log(specifier)
+        
         let specifierNames = Object.keys(specifierData);
 
 
@@ -60,11 +60,11 @@ export const setCompetitorName = (name, homeTeam, awayTeam, specifierData = {}) 
             if (name.includes(specifierName)) {
 
                 if (specifierData[specifier] <= -0.1) {
-                    // console.log(name)
+                   
                     name = name.replaceAll(specifierName, specifierData[specifier])
                     name = name.replaceAll("{", "")
                     name = name.replaceAll("}", "")
-                    // console.log(name)
+                    
                     if(name.includes('--')){
                         name = name.replaceAll("--", "+")
                     }
@@ -73,8 +73,6 @@ export const setCompetitorName = (name, homeTeam, awayTeam, specifierData = {}) 
                         name = name.replaceAll("+-", "-")
                     }
 
-                    // console.log(specifierData[specifier])
-                    // console.log(specifierName)
                 } else {
                     name = name.replaceAll(specifierName, specifierData[specifier])
                     name = name.replaceAll("{", "")

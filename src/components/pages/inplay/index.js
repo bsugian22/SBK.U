@@ -114,7 +114,6 @@ export default function Inplay() {
                                     });
 
                                     if (matches.length) {
-                                       // console.log(matches.length)
                                        let sportMatches = {}
                                        return <a class={inplay.sportsTypeId == icon.id ? "active" : ""} key={"icon-" + index} href="#icon" onClick={(e) => {
                                           e.preventDefault();
@@ -167,14 +166,13 @@ export default function Inplay() {
                   </div>
                   <div class="inplay-list flex-inherit border-bottom match-list grow-2 scrollable-auto flex-column">
 
-                     {/* {console.log(inplay.matches)} */}
                      {inplay.mainMarkets.length > 0
                         ? inplay.mainMarkets.map((match, index) => {
                            let sport_hcp_market_exists = false
                            let sport_total_market_exists = false
                            let homeTeam = sports?.competitors?.data ? sports?.competitors?.data.find(x => x.id == match.homeTeamId).competitor?.name?.ko : "";
                            let awayTeam = sports?.competitors?.data ? sports?.competitors?.data.find(x => x.id == match.awayTeamId).competitor?.name?.ko : "";
-                           // console.log(match)
+                           
                            var row = [];
                            row.push(
                               <div key={match.id} class="title background-transparent-b-30 height-40 align-items-center-inherit">
@@ -431,13 +429,7 @@ export default function Inplay() {
                                  </div>
                               </div>)
 
-                           // match.mainMarkets.map((market,market_index)=>{
-                           //    console.log(market)
-                           // })
-                           // console.log(match.mainMarkets);
-                           // match.mainMarkets['1X2'].map((market, market_index) => {
-                           //    console.log(market)
-                           // })
+                          
                            return row
                         }) : <div class="flex justify-content-center heightp-100 align-items-center"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div>
                      }
@@ -544,7 +536,7 @@ export default function Inplay() {
                   <div class="market-list flex-inherit flex-column scrollable-auto">
                      {sports.sideMarket?.markets?.length > 0
                         ? sports.sideMarket.markets.map((market, market_index) => {
-                           // console.log(market)
+                          
                            let specifer = market.market.specifier
                            let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko : "";
                            let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko : "";
