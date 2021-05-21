@@ -386,7 +386,7 @@ export default function Position() {
               </div>
             </div>
           </div>
-          <div class="position-right-content account-height widthp-50 padding-10 flex-inherit flex-column border-left scrollable-auto" hidden={position.selectedPosition == null  ? true : false}>
+          <div class="position-right-content account-height widthp-50 padding-10 flex-inherit flex-column border-left scrollable-auto" hidden={position.selectedPosition == null ? true : false}>
             <div class="position-comfile flex-column flex-inherit">
               <div class="flex-column flex-inherit widthp-100">
                 <div class="red-shadow height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
@@ -427,39 +427,40 @@ export default function Position() {
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  <span class="color-grey"> {outcome?.matches.startAt
+                                  {/* <span class="color-grey"> {outcome?.matches.startAt
                                     ? Moment(outcome.matches.startAt).format(
                                       "YY-MM-DD HH:mm "
                                     )
-                                    : " "}</span>
+                                    : " "}</span> */}
                                 </div>
                               </div>
                             </td>
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  <span class="color-grey">{outcome?.matches?.homeTeam.name.ko} vs {outcome?.matches?.awayTeam.name.ko}</span>
+                                  {/* <span class="color-grey">{outcome?.matches?.homeTeam.name.ko} vs {outcome?.matches?.awayTeam.name.ko}</span> */}
                                 </div>
                               </div>
                             </td>
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  <span class="color-red">{outcome?.matches?.homeScore} : {outcome?.matches?.awayScore}</span>
+                                  {/* <span class="color-red">{outcome?.matches?.homeScore} : {outcome?.matches?.awayScore}</span> */}
                                 </div>
                               </div>
                             </td>
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  <span class="color-white"> 
-                                   [ {outcome?.markets?.marketName?.ko? outcome.markets.marketName.ko : ""} ]
-                                  {outcome.markets.outcome.map((outcome_detail) => {
+                                  <span class="color-white">
+                                    [ {outcome?.markets?.marketName?.ko ? outcome.markets.marketName.ko : ""} ]
+                                  {/* {outcome.markets.outcome.map((outcome_detail) => {
                                     if (outcome_detail.id == outcome.id) {
-                                      return(outcome_detail.name.outcomeName.ko)
+                                      return (outcome_detail.name.outcomeName.ko)
                                     }
                                   })
-                                  } </span>
+                                    } */}
+                                  </span>
 
                                 </div>
                               </div>
@@ -497,7 +498,7 @@ export default function Position() {
                   </span>
                   <span class="color-grey">
                     배팅금액
-                    <span class="color-green margin-left-5">{position.selectedPosition == null ? "" : position.selectedPosition.amount.toLocaleString()} 원</span>
+                    {/* <span class="color-green margin-left-5">{position.selectedPosition == null ? "" : position.selectedPosition.amount.toLocaleString()} 원</span> */}
                   </span>
                 </div>
               </div>
@@ -505,21 +506,21 @@ export default function Position() {
                 <div class="grow-2 padding-left-10">
                   <span class="color-grey padding-right-20">
                     누적 배당
-                    <span class="color-red margin-left-5">{position.selectedPosition == null ? "" : position.selectedPosition.odds.toFixed(2)}</span>
+                    {/* <span class="color-red margin-left-5">{position.selectedPosition == null ? "" : position.selectedPosition.odds.toFixed(2)}</span> */}
                     {/*만약 보너스가 적용됬다면*/}<span class="color-grey margin-left-5">[ Bonus <span class="color-white">x 1.03</span> ]</span>
                   </span>
                   <span class="color-grey">
                     예상적중상금
-                    <span class="color-green margin-left-5">{position.selectedPosition == null ? "" : (position.selectedPosition.amount * position.selectedPosition.odds.toFixed(2)).toLocaleString()} 원</span>
+                    {/* <span class="color-green margin-left-5">{position.selectedPosition == null ? "" : (position.selectedPosition.amount * position.selectedPosition.odds.toFixed(2)).toLocaleString()} 원</span> */}
                   </span>
                 </div>
                 <div class="padding-right-20">
-                  <span class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.status}</span>
+                  {/* <span class="color-red">{position.selectedPosition == null ? "" : position.selectedPosition.status}</span> */}
                 </div>
               </div>
             </div>
           </div>
-          <div class="align-items-center border-left" style={{ paddingLeft: "20%" }} hidden={position.selectedPosition == null  ? false : true}>
+          <div class="align-items-center border-left" style={{ paddingLeft: "20%" }} hidden={position.selectedPosition == null ? false : true}>
             <Logo width="120" height="30" />
           </div>
         </div>

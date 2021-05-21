@@ -192,7 +192,7 @@ const Sports = (props) => {
                       let sportsbookmark = [];
                       JSON.parse(localStorage.getItem("bookmarks"))?.map((id) => {
                         var matches = sports.matches.data.filter((x) => {
-                          return x.tournamentId == id;
+                          return x.id == id;
                         });
                         sportsbookmark.push(...matches)
                       })
@@ -814,7 +814,7 @@ const Sports = (props) => {
                     </span>
                     <div class="bookmark">
                       <span class="color-twhite bookmarked" onClick={() => {
-                        dispatch(setBookmark(sports.sideMarket.tournamentId))
+                        dispatch(setBookmark(sports.sideMarket.id))
 
                       }}><i class="fas fa-star margin-0" ></i></span>
                     </div>

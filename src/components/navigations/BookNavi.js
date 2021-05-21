@@ -51,7 +51,7 @@ export default function BookNavi(props) {
                         <span class="color-grey">Bookmark</span>
                     </div>
                     <div class="flex height-40 padding-vertical-5 align-items-center">
-                        <span class="color-red padding-horizontal-20 background-transparent-b-5 heightp-100 align-items-center flex">{JSON.parse(localStorage.getItem("bookmarks"))?.length? JSON.parse(localStorage.getItem("bookmarks"))?.length  :"0"}</span>
+                        <span class="color-red padding-horizontal-20 background-transparent-b-5 heightp-100 align-items-center flex">{JSON.parse(localStorage.getItem("bookmarks"))?.length ? JSON.parse(localStorage.getItem("bookmarks"))?.length : "0"}</span>
                         <span class="arrow heightp-100 color-grey align-items-center justify-content-center flex background-transparent-b-5 border-left padding-horizontal-10">
                             <i class="far fa-chevron-down fa-xs margin-0"></i>
                         </span>
@@ -62,9 +62,12 @@ export default function BookNavi(props) {
 
                     if (sports.matches?.data) {
                         var bookmarkmatches = sports?.matches?.data?.filter((x) => {
-                            return x.tournamentId == bookmark;
+                            return x.id == bookmark;
                         });
                         sportsbookmark.push(...bookmarkmatches)
+                        console.log(sportsbookmark)
+                        console.log("sportsbookmark")
+
                     }
                     return (
                         <div class="region-detail" hidden={sports.sidebarBookmarked}>
@@ -75,10 +78,13 @@ export default function BookNavi(props) {
                                 }}>
                                 <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                     <i class="far fa-flag color-yellow"></i>
-                                    <span class="color-grey text-ellipsis">{sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == bookmark)?.tournament.name.ko : ""}</span>
+                                    <span class="color-grey text-ellipsis">
+                                        {sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sportsbookmark[0].homeTeamId).competitor?.name?.ko : ""} vs
+                                        {sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sportsbookmark[0].awayTeamId).competitor?.name?.ko : ""}
+                                    </span>
                                 </div>
                                 <div class="flex height-40 padding-vertical-5 align-items-center">
-                                    <span class="color-red padding-horizontal-20 background-transparent-b-5 heightp-100 align-items-center flex">{sportsbookmark.length}</span>
+                                    {/* <span class="color-red padding-horizontal-20 background-transparent-b-5 heightp-100 align-items-center flex">{sportsbookmark.length}</span> */}
                                     <span class="arrow heightp-100 color-grey align-items-center justify-content-center flex background-transparent-b-5 border-left padding-horizontal-10">
                                         <i class="far fa-chevron-right fa-xs margin-0"></i>
                                     </span>
