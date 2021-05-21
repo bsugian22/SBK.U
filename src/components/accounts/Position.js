@@ -23,6 +23,7 @@ import {
   selectPostion,
 } from "../../redux/accounts/position/positionActions";
 import Logo from "../layouts/Logo";
+import { setCompetitorName } from "../../helpers/object";
 export default function Position() {
   let position = useSelector((state) => state.position);
   let createPosition = useSelector((state) => state.position.createPosition);
@@ -33,6 +34,7 @@ export default function Position() {
   let lastPage = useSelector((state) => state.position.positions.lastPage);
   let per_page = useSelector((state) => state.position.positions.per_page);
   let list_pages = useSelector((state) => state.position.positions.list_pages);
+  let sports = useSelector((state) => state.sport);
   let dispatch = useDispatch();
 
   useEffect(() => {
@@ -421,31 +423,34 @@ export default function Position() {
                     {position.selectedPosition == null ? "" :
                       position.selectedPosition.outcomes.map((outcome, indx) => {
                         console.log(outcome.id)
+                        let specifer = outcome.markets.specifier
+                        let homeTeam = outcome?.matches?.homeTeam.name.ko
+                        let awayTeam = outcome?.matches?.awayTeam.name.ko;
 
                         return (
                           <tr key={outcome.id}>
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  {/* <span class="color-grey"> {outcome?.matches.startAt
+                                  <span class="color-grey"> {outcome?.matches.startAt
                                     ? Moment(outcome.matches.startAt).format(
                                       "YY-MM-DD HH:mm "
                                     )
-                                    : " "}</span> */}
+                                    : " "}</span>
                                 </div>
                               </div>
                             </td>
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  {/* <span class="color-grey">{outcome?.matches?.homeTeam.name.ko} vs {outcome?.matches?.awayTeam.name.ko}</span> */}
+                                  <span class="color-grey">{homeTeam} vs {awayTeam}</span>
                                 </div>
                               </div>
                             </td>
                             <td class="height-60 border-top">
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
-                                  {/* <span class="color-red">{outcome?.matches?.homeScore} : {outcome?.matches?.awayScore}</span> */}
+                                  <span class="color-red">{outcome?.matches?.homeScore} : {outcome?.matches?.awayScore}</span>
                                 </div>
                               </div>
                             </td>
@@ -453,13 +458,16 @@ export default function Position() {
                               <div class="list-td flex flex-column flex-inherit padding-10">
                                 <div class="flex-column">
                                   <span class="color-white">
-                                    [ {outcome?.markets?.marketName?.ko ? outcome.markets.marketName.ko : ""} ]
-                                  {/* {outcome.markets.outcome.map((outcome_detail) => {
-                                    if (outcome_detail.id == outcome.id) {
-                                      return (outcome_detail.name.outcomeName.ko)
+                                    [ {outcome?.markets?.marketName?.ko ? setCompetitorName(outcome.markets.marketName.ko, homeTeam, awayTeam, specifer) : ""} ]
+                                    {
+                                      outcome.markets.outcome.map((outcome_detail) => {
+                                        if (outcome_detail.id == outcome.id) {
+
+                                          let outcomeName = sports.outcomes.data ? sports.outcomes.data.find(x => x.id == outcome_detail.outcomeId).outcomeName?.ko : ""
+                                          return (setCompetitorName(outcomeName, homeTeam, awayTeam, specifer))
+                                        }
+                                      })
                                     }
-                                  })
-                                    } */}
                                   </span>
 
                                 </div>
