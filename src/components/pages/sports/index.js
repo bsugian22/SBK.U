@@ -129,11 +129,9 @@ const Sports = (props) => {
                             if (sports.sortByLeague) {
                               dispatch(sortByLeague())
                               dispatch(sortMatchesByLeague(sportMatches, 'prematch', icon.id, false))
-                              alert("asdasd")
                             } else {
                               dispatch(setSportsType({ id: icon.id, matches: matches }))
                               dispatch(setMatchIds(sportMatches, 1, 'prematch'))
-                              alert("xzczxczx")
                             }
 
                           }}>

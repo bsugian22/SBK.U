@@ -83,7 +83,6 @@ export default function BetslipNavi(props) {
                                     : outcome.outcome_name
                               }
                               {
-                                alert("asd")
 
                               } */}
 
