@@ -283,9 +283,7 @@ const Sports = (props) => {
               
               {sports?.mainMarkets?.length > 0
                 ? sports.mainMarkets.map((matches, index) => {
-
-
-                
+                  
                   var rows = [];
                   rows.push(
                     <div
