@@ -451,19 +451,6 @@ export default function Inplay() {
                                  } else {
                                     dispatch(setMatchIds(inplay.sportsMatches, e.value, 'live'))
                                  }
-                                 // if (sports.isSearching) {
-                                 //    dispatch(setMatchIds(sports.searchMatches, e.value, 'prematch'))
-                                 // } else {
-                                 //    if (sports.isBookmarkedCheck) {
-                                 //       dispatch(setMatchIds(sports.bookmarkedMatches, e.value, 'prematch'))
-                                 //    } else {
-                                 //       if (sports.sportsMatches.data.length == 0) {
-                                 //          dispatch(setMatchIds(sports.matches, e.value, 'prematch'))
-                                 //       } else {
-                                 //          dispatch(setMatchIds(sports.sportsMatches, e.value, 'prematch'))
-                                 //       }
-                                 //    }
-                                 // }
 
                               }
                               }

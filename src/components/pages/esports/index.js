@@ -9,6 +9,7 @@ import { fetchEsportsRequest, noMatchesEsports, setActiveMatches, setSportsTypeE
 import Logo from "../../layouts/Logo";
 import moment from "moment";
 import { setBetOutcome } from "../../../redux/sportsdetail/sportsdetailActions";
+import Select from "react-select";
 
 export default function Esports() {
 
@@ -180,7 +181,7 @@ export default function Esports() {
                            let sport_total_market_exists = false
                            let homeTeam = sports?.competitors?.data ? sports?.competitors?.data?.find(x => x.id == match.homeTeamId).competitor?.name?.ko : "";
                            let awayTeam = sports?.competitors?.data ? sports?.competitors?.data?.find(x => x.id == match.awayTeamId).competitor?.name?.ko : "";
-                           
+
                            var row = [];
                            row.push(
                               <div key={match.id} class="title background-transparent-b-30 height-40 align-items-center-inherit">
@@ -441,18 +442,13 @@ export default function Esports() {
                         }) : esports.noMatches ? "No Data Found" : <div class="flex justify-content-center heightp-100 align-items-center"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div>}
 
                   </div>
-                  <div class="bottom-wrap border-top flex padding-vertical-10 flex-inherit height-59 align-items-center-inherit0">
+                  {/* <div class="bottom-wrap border-top flex flex-inherit height-60 padding-10 align-items-center-inherit0">
                      <div class="count-list flex-inherit grow-2 heightp-100"></div>
                      <div class="pagination flex-inherit heightp-100">
                         <div class="flex margin-left-5 page">
                            <button class="page-left background-transparent-b-20 margin-right-5"
                               onClick={() => {
                                  dispatch(setMatchIds(esports.matches, esports.currentPage - 1, 'esports'))
-                                 // if (esports.sportsMatches.data.length == 0) {
-                                 //    dispatch(setMatchIds(inplay.matches, inplay.currentPage - 1, 'live'))
-                                 // } else {
-                                 //    dispatch(setMatchIds(inplay.sportsMatches, inplay.currentPage - 1, 'live'))
-                                 // }
                               }}
                               disabled={1 >= esports.currentPage}>
 
@@ -461,14 +457,68 @@ export default function Esports() {
                            <button class="page-right background-transparent-b-20"
                               onClick={() => {
                                  dispatch(setMatchIds(esports.matches, esports.currentPage + 1, 'esports'))
-                                 // if (esports.sportsMatches.data.length == 0) {
+                              }}
+                              disabled={esports.lastPage <= esports.currentPage}>
+                              <i class="fas fa-chevron-right margin-0 color-grey"></i>
+                           </button>
+                        </div>
+                     </div>
+                  </div> */}
+
+                  <div class="bottom-wrap border-top flex flex-inherit height-60 padding-10 align-items-center-inherit0">
+                     <div class="pagination widthp-100 flex-inherit justify-content-end">
+                        <div class="flex selectBox " style={{visibility: "hidden"}} >
+                           <Select
+                              className="select-container select-position"
+                              classNamePrefix="select-box"
+                              // value={{ label: esports.currentPage, value: esports.currentPage }}
+                              // onChange={(e) => {
+
+
+                              //    if (esports.sportsMatches.data.length == 0) {
+                              //       dispatch(setMatchIds(esports.matches, e.value, 'live'))
+                              //    } else {
+                              //       dispatch(setMatchIds(esports.sportsMatches, e.value, 'live'))
+                              //    }
+
+                              // }
+                              // }
+                              // options={((rows, i, len) => {
+                              //    while (++i <= len) {
+                              //       rows.push({ value: i, label: i });
+                              //    }
+                              //    return rows;
+                              // })([], 0, esports.lastPage)}
+                           />
+                        </div>
+                        <div class="grow-2"></div>
+                        <div class="flex page">
+                           <button
+                              class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
+                              onClick={() => {
+
+                                 // if (inplay.sportsMatches.data.length == 0) {
                                  //    dispatch(setMatchIds(inplay.matches, inplay.currentPage - 1, 'live'))
                                  // } else {
                                  //    dispatch(setMatchIds(inplay.sportsMatches, inplay.currentPage - 1, 'live'))
                                  // }
                               }}
-                              disabled={esports.lastPage <= esports.currentPage}>
-                              <i class="fas fa-chevron-right margin-0 color-grey"></i>
+                              disabled={1 >= inplay.currentPage}
+                           >
+                              <i class="fas fa-chevron-left margin-0 color-white"></i>
+                           </button>
+                           <button
+                              class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                              onClick={() => {
+                                 // if (inplay.sportsMatches.data.length == 0) {
+                                 //    dispatch(setMatchIds(inplay.matches, inplay.currentPage + 1, 'live'))
+                                 // } else {
+                                 //    dispatch(setMatchIds(inplay.sportsMatches, inplay.currentPage + 1, 'live'))
+                                 // }
+                              }}
+                              disabled={inplay.lastPage <= inplay.currentPage}
+                           >
+                              <i class="fas fa-chevron-right margin-0 color-white"></i>
                            </button>
                         </div>
                      </div>
