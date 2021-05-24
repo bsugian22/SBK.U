@@ -111,45 +111,6 @@ export const fetchInplays = (esports) => {
   };
 };
 
-export const inplayWebSocket = (matches) => {
-
-  return (dispatch) => {
-    
-    matches.map((data, index) => {
-      console.log("sending:" + data)
-      const match_data = {
-        type: "book_match",
-        match_id: data
-      }
-      socket.send(JSON.stringify(match_data));
-    })
-    socket.onmessage = function (event) {
-      event.data.text().then((data) => {
-        const market = JSON.parse(data)
-
-       
-        dispatch(getInplayDetails(market));
-        dispatch(getSportsDetails(market));
-      });
-    };
-
-
-    socket.onclose = function (event) {
-      if (event.wasClean) {
-        console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-      } else {
-        // e.g. server process killed or network down
-        // event.code is usually 1006 in this case
-        console.log('[close] Connection died');
-      }
-    };
-
-    socket.onerror = function (error) {
-      console.log(`[error] ${error.message}`);
-    };
-  }
-};
-
 
 
 

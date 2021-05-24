@@ -2,8 +2,11 @@ import * as types from "./sportTypes";
 import axios from "../../plugins/axios";
 import { fetchMarketPerMatchesSuccessInplay, fetchMarketPerMatchesFailureInplay, setWSMarketInplay } from "../inplay/inplayActions";
 import moment from "moment";
-import { camelize, snakelize, socket } from "../../helpers/object";
+import { camelize, snakelize } from "../../helpers/object";
 import { fetchMarketPerMatchesSuccesEsports, fetchPrematches } from "../esport/esportActions";
+import socketIOClient from "socket.io-client";
+
+export const socket = socketIOClient("wss://io.vosa.dev");
 
 export const setWSMarket = (market) => {
   return {

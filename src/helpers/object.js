@@ -1,7 +1,5 @@
 import { camelCase, snakeCase } from 'lodash'
-import socketIOClient from "socket.io-client";
 
-export const socket = socketIOClient("wss://io.vosa.dev");
 export const camelize = (data) => {
     if (Array.isArray(data)) {
         return data.map(camelize)
@@ -50,7 +48,7 @@ export const setCompetitorName = (name, homeTeam, awayTeam, specifierData = {}) 
     }
 
     if (Object.keys(specifierData).length != 0) {
-        
+
         let specifierNames = Object.keys(specifierData);
 
 
@@ -60,17 +58,13 @@ export const setCompetitorName = (name, homeTeam, awayTeam, specifierData = {}) 
             if (name.includes(specifierName)) {
 
                 if (specifierData[specifier] <= -0.1) {
-                   
-                    name = name.replaceAll(specifierName, specifierData[specifier])
-                    name = name.replaceAll("{", "")
-                    name = name.replaceAll("}", "")
-                    
-                    if(name.includes('--')){
-                        name = name.replaceAll("--", "+")
-                    }
 
-                    if(name.includes('+-')){
-                        name = name.replaceAll("+-", "-")
+                    if (name.includes("({+" + specifier + "})")) {
+                        name = name.replaceAll("({+" + specifier + "})", "("+specifierData[specifier]+")")
+                    } else {
+                        if (name.includes("({-" + specifier + "})")) {
+                            name = name.replaceAll("({-" + specifier + "})", "(+"+Number(specifierData[specifier])*-1 +")")
+                        }
                     }
 
                 } else {
