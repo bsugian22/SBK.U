@@ -9,7 +9,6 @@ import thunk from "redux-thunk";
 import * as userActions from "./user/userActions";
 import * as preferencesActions from "./preference/preferenceActions";
 import * as registerActions from "./register/registerActions";
-import { fetchSportsdetail, fetchSportsdetails, fetchSportsdetailsRequest } from "./sportsdetail/sportsdetailActions";
 import { fetchSummary } from "./navigations/accountSummary/accountSummaryActions";
 import { fetchCompetitors, fetchMarkets, fetchOutcomes, fetchSports, fetchTournaments } from "./sport/sportActions";
 

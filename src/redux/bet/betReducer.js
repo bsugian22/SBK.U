@@ -1,20 +1,10 @@
 import sweetalert from "../../plugins/sweetalert";
-import * as types from "./sportsdetailTypes";
+import * as types from "./betTypes";
 
 const swal = new sweetalert();
 const initialState = {
-  loading: false,
   loadingBet: false,
-  type_id: null,
   data: {
-    data: [],
-    total: null,
-    count: null,
-    per_page: null,
-    page: 1,
-    last_page: null,
-    detail: null,
-    detail_data: null,
     bet: {
       category: "SPORTS",
       amount: 0,
@@ -22,7 +12,6 @@ const initialState = {
       total_odds: 0,
     }
   },
-  error: "",
 };
 
 const sportsdetailReducer = (state = initialState, action) => {

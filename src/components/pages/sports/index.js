@@ -8,7 +8,7 @@ import { mapStateToProps, mapDispatchProps } from "../../../redux/store";
 import sportsModel from "../../../models/sportsModel";
 import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
-import { fetchSportsdetail, fetchSportsdetails, sportDetailReset, setBetDetails, setBetOutcome, validateBet, setTypeId } from "../../../redux/sportsdetail/sportsdetailActions";
+import { setBetOutcome } from "../../../redux/bet/betActions";
 import { iconsList, setCompetitorName } from "../../../helpers/object";
 import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, setSearch, sortMatchesByTime, sortMatchesByLeague, resetAll, setBookmark, sortByBookmarked, searchMatches, setMarketType, sortByTime, sortByLeague } from "../../../redux/sport/sportActions";
 
@@ -32,7 +32,6 @@ const Sports = (props) => {
     }
     dispatch(fetchMatches())
     // dispatch(validateBet(sports.data.bet))
-    dispatch(setTypeId(null))
     return () => {
       isSubscribed = false;
     };

@@ -8,7 +8,7 @@ import { fetchInplays } from "../../../redux/inplay/inplayActions";
 import { fetchEsportsRequest, noMatchesEsports, setActiveMatches, setSportsTypeEsports } from "../../../redux/esport/esportActions";
 import Logo from "../../layouts/Logo";
 import moment from "moment";
-import { setBetOutcome } from "../../../redux/sportsdetail/sportsdetailActions";
+import { setBetOutcome } from "../../../redux/bet/betActions";
 import Select from "react-select";
 
 export default function Esports() {

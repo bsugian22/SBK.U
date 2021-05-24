@@ -4,17 +4,10 @@ export { fetchCasinos, fetchCasino, createCasino, updateCasino, deleteCasinos } 
 // esport
 export { fetchEsports, fetchEsport, createEsport, updateEsport, deleteEsports } from "./esport/esportActions"
 
-// esportsdetail
-export { fetchEsportsdetails, fetchEsportsdetail, createEsportsdetail, updateEsportsdetail, deleteEsportsdetails } from "./esportsdetail/esportsdetailActions"
-
-// esportslive
-export { fetchEsportslives, fetchEsportslive, createEsportslive, updateEsportslive, deleteEsportslives } from "./esportslive/esportsliveActions"
 
 // inplay
 export { fetchInplays, fetchInplay, createInplay, updateInplay, deleteInplays } from "./inplay/inplayActions"
 
-// inplaydetail
-export { fetchInplaydetails, fetchInplaydetail, createInplaydetail, updateInplaydetail, deleteInplaydetails } from "./inplaydetail/inplaydetailActions"
 
 // login
 export { loginUser, fetchUsers, fetchUser, createUser, updateUser, deleteUsers } from "./login/loginActions"
@@ -35,7 +28,7 @@ export { createRegister, verifyUsername, verifyTelNumber } from "./register/regi
 export { fetchSports, fetchSport, createSport, updateSport, deleteSports } from "./sport/sportActions"
 
 // sportsdetail
-export { fetchSportsdetails, fetchSportsdetail, createSportsdetail, updateSportsdetail, deleteSportsdetails } from "./sportsdetail/sportsdetailActions"
+export { fetchSportsdetails, fetchSportsdetail, createSportsdetail, updateSportsdetail, deleteSportsdetails } from "./bet/betActions"
 
 // swipermain
 export { fetchSwipermains, fetchSwipermain, createSwipermain, updateSwipermain, deleteSwipermains } from "./swipermain/swipermainActions"

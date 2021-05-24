@@ -4,7 +4,7 @@ import { refreshToken } from "../../../redux/user/userActions";
 
 import { Link, NavLink } from 'react-router-dom'
 import { fetchInplays, fetchInplay, setSportsTypeInplay } from "../../../redux/inplay/inplayActions";
-import { setBetOutcome, validateBet } from "../../../redux/sportsdetail/sportsdetailActions";
+import { setBetOutcome, validateBet } from "../../../redux/bet/betActions";
 import { iconsList, setCompetitorName } from "../../../helpers/object";
 import Logo from "../../layouts/Logo";
 import moment from "moment";
