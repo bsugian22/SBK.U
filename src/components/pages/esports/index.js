@@ -72,7 +72,6 @@ export default function Esports() {
       document.getElementById('scrollmenu').scrollLeft -= 250;
    };
    const setDetail = async (id) => {
-      // context.actions.setdetailMenu(true);
       if (id == sports.sideMarket.id) {
          dispatch(resetSideMarkets())
       } else {
@@ -471,24 +470,6 @@ export default function Esports() {
                            <Select
                               className="select-container select-position"
                               classNamePrefix="select-box"
-                              // value={{ label: esports.currentPage, value: esports.currentPage }}
-                              // onChange={(e) => {
-
-
-                              //    if (esports.sportsMatches.data.length == 0) {
-                              //       dispatch(setMatchIds(esports.matches, e.value, 'live'))
-                              //    } else {
-                              //       dispatch(setMatchIds(esports.sportsMatches, e.value, 'live'))
-                              //    }
-
-                              // }
-                              // }
-                              // options={((rows, i, len) => {
-                              //    while (++i <= len) {
-                              //       rows.push({ value: i, label: i });
-                              //    }
-                              //    return rows;
-                              // })([], 0, esports.lastPage)}
                            />
                         </div>
                         <div class="grow-2"></div>
@@ -496,27 +477,18 @@ export default function Esports() {
                            <button
                               class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
                               onClick={() => {
-
-                                 // if (inplay.sportsMatches.data.length == 0) {
-                                 //    dispatch(setMatchIds(inplay.matches, inplay.currentPage - 1, 'live'))
-                                 // } else {
-                                 //    dispatch(setMatchIds(inplay.sportsMatches, inplay.currentPage - 1, 'live'))
-                                 // }
+                                 dispatch(setMatchIds(esports.matches, esports.currentPage - 1, 'esports'))
                               }}
-                              disabled={1 >= inplay.currentPage}
+                              disabled={1 >= esports.currentPage}
                            >
                               <i class="fas fa-chevron-left margin-0 color-white"></i>
                            </button>
                            <button
                               class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
                               onClick={() => {
-                                 // if (inplay.sportsMatches.data.length == 0) {
-                                 //    dispatch(setMatchIds(inplay.matches, inplay.currentPage + 1, 'live'))
-                                 // } else {
-                                 //    dispatch(setMatchIds(inplay.sportsMatches, inplay.currentPage + 1, 'live'))
-                                 // }
+                                 dispatch(setMatchIds(esports.matches, esports.currentPage + 1, 'esports'))
                               }}
-                              disabled={inplay.lastPage <= inplay.currentPage}
+                              disabled={esports.lastPage <= esports.currentPage}
                            >
                               <i class="fas fa-chevron-right margin-0 color-white"></i>
                            </button>
@@ -593,7 +565,6 @@ export default function Esports() {
                                                    data-outcome-id={outcome.id}
                                                    data-odds={outcome.odds}
                                                    class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}
-                                                // class=" height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
@@ -627,7 +598,6 @@ export default function Esports() {
                                                    data-outcome-id={outcome.id}
                                                    data-odds={outcome.odds}
                                                    class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}
-                                                // class=" height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">

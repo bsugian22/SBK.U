@@ -220,7 +220,6 @@ export const nextPageDeposit = (data) => {
     return (dispatch) => {
       let page = page_number + 1;
       dispatch(nextDeptPage(page));
-      // dispatch(setDeposits({ page: page, per_page: data.per_page }));
     };
   }
 };

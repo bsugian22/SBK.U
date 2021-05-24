@@ -524,8 +524,6 @@ const Exchange = () => {
               type="button"
               class="active"
               id="tab-1"
-              //   class={context.state.interMenu === "inter-tab-1" ? "active" : ""}
-              //   onClick={() => context.actions.setinterMenu("inter-tab-1")}
             >
               전환신청
             </button>
@@ -534,8 +532,6 @@ const Exchange = () => {
             <button
               type="button"
               id="tab-2"
-              //   class={context.state.interMenu === "inter-tab-2" ? "active" : ""}
-              //   onClick={() => context.actions.setinterMenu("inter-tab-2")}
             >
               전환내역
             </button>
@@ -543,15 +539,9 @@ const Exchange = () => {
         </div>
 
         <div
-        //   class={
-        //     context.state.interMenu === "inter-tab-1"
-        //       ? "interload-content flex-column active"
-        //       : "interload-content flex-column"
-        //   }
         >
           <form
             class="flex"
-            //   onSubmit={submit}
           >
             <div class="widthp-100 flex-column flex-inherit padding-horizontal-15">
               <div class="flex-column flex-inherit">
@@ -581,8 +571,6 @@ const Exchange = () => {
                       type="text"
                       name="amount"
                       placeholder="0"
-                      //   value={exchange.form.amount.toLocaleString()}
-                      //   onChange={amountChange}
                       required
                     />
                   </div>
@@ -593,7 +581,6 @@ const Exchange = () => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="5000"
-                      //   onClick={QuickInput}
                     >
                       5,000
                     </button>
@@ -601,7 +588,6 @@ const Exchange = () => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="10000"
-                      //   onClick={QuickInput}
                     >
                       10,000
                     </button>
@@ -609,7 +595,6 @@ const Exchange = () => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="50000"
-                      //   onClick={QuickInput}
                     >
                       50,000
                     </button>
@@ -617,7 +602,6 @@ const Exchange = () => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="100000"
-                      //   onClick={QuickInput}
                     >
                       100,000
                     </button>
@@ -625,7 +609,6 @@ const Exchange = () => {
                       type="button"
                       class="widthp-20 amount-tab"
                       data-amount="500000"
-                      //   onClick={QuickInput}
                     >
                       500,000
                     </button>
@@ -648,11 +631,6 @@ const Exchange = () => {
         </div>
 
         <div
-        //   class={
-        //     context.state.interMenu === "inter-tab-2"
-        //       ? "interload-content flex-column active"
-        //       : "interload-content flex-column"
-        //   }
         >
           <div class="widthp-100 flex-column flex border-bottom-rb padding-vertical-10 padding-right-15 align-items-right">
             <div class="select height-40">

@@ -46,7 +46,6 @@ export const mapDispatchProps = (dispatch) => {
       dispatch(userActions.setLogout());
     },
     setSports: () => {
-      // dispatch(fetchSportsdetails());
       dispatch(fetchTournaments());
       dispatch(fetchCompetitors());
       dispatch(fetchOutcomes());

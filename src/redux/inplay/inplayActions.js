@@ -97,10 +97,8 @@ export const fetchInplays = (esports) => {
     })
       .then(response => {
         const inplays = camelize(response.data);
-        // const matches = []
 
         if (esports) {
-          //dispatch espoirts
           dispatch(fetchInplaysMatches(inplays))
         } else {
           dispatch(setMatchIds(inplays, 1, 'live'))

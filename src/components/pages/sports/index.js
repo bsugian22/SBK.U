@@ -41,7 +41,6 @@ const Sports = (props) => {
 
 
   const setDetail = async (id) => {
-    // context.actions.setdetailMenu(true);
     if (id == sports.sideMarket.id) {
       dispatch(resetSideMarkets())
     } else {
@@ -248,8 +247,7 @@ const Sports = (props) => {
                     onKeyPress={(e) => { (e.key === 'Enter' ? dispatch(searchMatches(sports.search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch')) : null) }}
                     onChange={(e) => {
                       dispatch(setSearch(e.target.value))
-                      // dispatch(searchMatches(e.target.value, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch'))
-                    }}
+                     }}
                   />
                   <button class="search-btn heightp-100 background-transparent-b-30"
                     onClick={(e) => {
@@ -396,7 +394,6 @@ const Sports = (props) => {
                                                 data-outcome-id={outcome.id}
                                                 data-odds={outcome.odds}
                                                 class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? classNameActive : className}
-                                              // class=" widthp-33 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
                                               >
                                                 <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                   <div class="team-1 widthp-70 text-ellipsis">
@@ -498,8 +495,7 @@ const Sports = (props) => {
                                                   data-outcome-id={outcome.id}
                                                   data-odds={outcome.odds}
                                                   class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"}
-                                                // class=" widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
-                                                >
+                                                 >
                                                   <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                     <div class="team-1 widthp-70 text-ellipsis">
                                                       <span class="color-grey text-ellipsis">
@@ -592,7 +588,6 @@ const Sports = (props) => {
                                                   data-outcome-id={outcome.id}
                                                   data-odds={outcome.odds}
                                                   class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"}
-                                                // class=" widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"
                                                 >
                                                   <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                     <div class="team-1 widthp-70 text-ellipsis">
@@ -672,7 +667,6 @@ const Sports = (props) => {
                                       ? "flex market-detail widthp-100 margin-right-2 active"
                                       : "flex market-detail widthp-100 margin-right-2"
                                   }
-                                  // className="flex market-detail widthp-100 margin-right-2"
                                   data-id="0"
                                   onClick={() => setDetail(match.id)}
                                 >
@@ -787,9 +781,7 @@ const Sports = (props) => {
           </div>
           <div class="prematch-detail flex-inherit flex-column padding-vertical-10 padding-left-5 padding-right-10 border-left">
             {sports.sideMarket?.id ? (
-              // let homeTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.homeTeamId).competitor?.name?.ko : "";
-              // let awayTeam = sports.competitors.data ? sports.competitors.data.find(x => x.id == match.awayTeamId).competitor?.name?.ko : "";
-
+              
               <Fragment>
                 <div class="detail-header flex-inherit flex-column">
                   <div class="height-40 align-items-center background-transparent-b-40 padding-horizontal-10">
@@ -908,7 +900,6 @@ const Sports = (props) => {
                                       data-outcome-id={outcome.id}
                                       data-odds={outcome.odds}
                                       class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}
-                                    // class=" height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"
                                     >
                                       <div class="grow-2 text-ellipsis padding-horizontal-2">
                                         <span class="color-grey text-ellipsis">

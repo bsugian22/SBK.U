@@ -68,7 +68,6 @@ export default function Inplay() {
    };
 
    const setDetail = async (id) => {
-      // context.actions.setdetailMenu(true);
       if (id == sports.sideMarket.id) {
          dispatch(resetSideMarkets())
       } else {
@@ -564,7 +563,6 @@ export default function Inplay() {
                                                    data-outcome-id={outcome.id}
                                                    data-odds={outcome.odds}
                                                    class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}
-                                                // class=" height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
@@ -598,8 +596,7 @@ export default function Inplay() {
                                                    data-outcome-id={outcome.id}
                                                    data-odds={outcome.odds}
                                                    class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}
-                                                // class=" height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"
-                                                >
+                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}

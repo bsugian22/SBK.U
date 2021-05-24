@@ -133,7 +133,6 @@ export default function Promo() {
                       document.getElementById(item.id).classList.add("active");
 
                     }}
-                  //  key={index}
                   >
                     <div id={item.id} class="flex-column flex-inherit widthp-100 notice-list padding-10 background-transparent-b-10 color-grey border-bottom-white "> {/* active */}
                       <div class="heightp-100 flex-inherit flex-column">

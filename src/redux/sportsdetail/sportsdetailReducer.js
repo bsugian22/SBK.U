@@ -311,43 +311,6 @@ const sportsdetailReducer = (state = initialState, action) => {
       })
 
 
-      // for (var i = 0; i < state_data.length; i++) {
-
-      //   let market_data = state_data[i].matches.find(x => x.id == match_id); // find specific data 
-      //   if (market_data) {
-      //     // look for market_id to the websocket data 
-      //     let market_type = market_data.market.type
-
-      //     // update data from ws
-      //     let ws_data_market = market.markets.find(x => x.market_id == market_type)
-      //     let outcomes = market_data.market.outcomes;
-
-      //     //check if the markets ws has the same market type on sports page data
-      //     if (ws_data_market) {
-      //       let ws_data_market_status = ws_data_market.status;
-      //       market_data.market.status = ws_data_market_status
-      //       ws_data_market.outcomes.map((data, index) => {
-      //         let ws_outcome_id = data.outcome_id;
-      //         let ws_new_outcome_odds = data.odds;
-      //         let ws_active_status = data.active;
-      //         // look for the outcomes->name-> id to match with ws_outcome_id
-      //         outcomes.map((data, index) => {
-      //           if (ws_outcome_id == data.name.id) {
-      //             let old_value = data.odds;
-      //             data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
-      //             data.oldOdds = old_value // changing value of the state of the outcomes old odds
-      //             data.active = ws_active_status;
-      //           }
-      //         })
-      //       })
-      //     } else {
-      //       break; // nothing to update here ( didnt fine any same (market_id != market type) )
-      //     }
-      //     break; // stop loop if find the market on the list on the sports page
-      //   }
-      // }
-
-
 
 
       if (state_details_match_id == match_id) {
@@ -437,10 +400,6 @@ const sportsdetailReducer = (state = initialState, action) => {
         loading: true,
       };
     case types.FETCH_SPORTSDETAILS_SUCCESS:
-      console.log(action.payload)
-      // add logic for pagination number and showing per table,
-
-      // return {...state}
       return {
         ...state,
         loading: false,

@@ -260,7 +260,6 @@ export const fetchNotice = (id) => {
       .get(`/api/notices/`+id)
       .then((response) => {
         const notice = camelize( response.data);
-        // dispatch(setNoticesuccess(notice));
         dispatch(viewNotice(notice.data));
       })
       .catch((error) => {

@@ -204,10 +204,6 @@ const inplayReducer = (state = initialState, action) => {
 
       let current_index = state.active_index;
       let set_index = action.payload;
-
-      // if (current_index == set_index){
-      //   set_index = null;
-      // }
       return {
         ...state,
         active_index: set_index,
@@ -375,7 +371,6 @@ const inplayReducer = (state = initialState, action) => {
         sideMarket: []
       };
     case types.FETCH_INPLAYS_SUCCESS:
-      // add logic for pagination number and showing per table,
       let lastPage = Math.ceil(action.payload.data.length / 30)
 
       let matches = action.payload.data

@@ -167,7 +167,6 @@ export const changePassWord = (pass) => {
     axios
       .patch(`/api/users/password`, pass)
       .then((response) => {
-        // const users = camelize(response.data);
         dispatch(changePassSuccess(response.data.message));
       })
       .catch((error) => {
@@ -190,7 +189,6 @@ export const changePassWord = (pass) => {
           icon: "error",
           confirmButtonText: "확인",
         };
-        // const errorMsg = error.message;
         dispatch(changePassFailure(changePassErrorMessage));
       });
   };

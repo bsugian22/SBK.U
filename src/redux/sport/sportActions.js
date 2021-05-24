@@ -319,7 +319,7 @@ export const sortByBookmarked = (matches, type) => {
   return (dispatch) => {
     if (type == 'prematch') {
       dispatch(setBookmarkMatches(matches))
-      dispatch(setMatchIds(matches, 1, type)) //uncomment
+      dispatch(setMatchIds(matches, 1, type)) 
     }
   };
 };
@@ -544,12 +544,10 @@ export const sportWebSocket = (matches) => {
     socket.emit('book', ids);
 
     socket.on('changed', (match) => {
-      // const { markets } = match;
       dispatch(setWSMarket(camelize(match)))
       dispatch(setWSMarketInplay(camelize(match)))
 
-      // dispatch(getInplayDetails(match));
-      // dispatch(getSportsDetails(match));
+     
     });
   }
 };

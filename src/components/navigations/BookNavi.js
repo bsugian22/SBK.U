@@ -35,7 +35,6 @@ export default function BookNavi(props) {
             <div class="list flex-column flex-inherit">
                 <div class={sports.sidebarBookmarked ? " bookmark background-transparent-b-5 align-items-center-inherit border-bottom border-top" : "bookmark background-transparent-b-5 align-items-center-inherit border-bottom border-top active"}
                     onClick={() => {
-                        // dispatch(showSidebarBookmark())
                         let sportsbookmark = [];
                         JSON.parse(localStorage.getItem("bookmarks"))?.map((id) => {
                             var matches = sports.matches.data.filter((x) => {
@@ -56,41 +55,7 @@ export default function BookNavi(props) {
                         </span>
                     </div>
                 </div>
-                {
-                    // JSON.parse(localStorage.getItem("bookmarks"))?.map((bookmark) => {
-                    //     let sportsbookmark = [];
-
-                    //     if (sports.matches?.data) {
-                    //         var bookmarkmatches = sports?.matches?.data?.filter((x) => {
-                    //             return x.id == bookmark;
-                    //         });
-                    //         sportsbookmark.push(...bookmarkmatches)
-
-                    //     }
-                    //     return (
-                    //         <div class="region-detail" hidden={sports.sidebarBookmarked}>
-                    //             <div class="flex align-items-center-inherit league border-top border-bottom widthp-100 active"
-                    //                 onClick={() => {
-                    //                     dispatch(setMatchIds({ data: sportsbookmark }, 1, 'prematch'))
-                    //                 }}>
-                    //                 <div class="flex height-40 padding-10 grow-2 text-ellipsis">
-                    //                     <i class="far fa-flag color-yellow"></i>
-                    //                     <span class="color-grey text-ellipsis">
-                    //                         {sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sportsbookmark[0].homeTeamId).competitor?.name?.ko : ""} vs
-                    //                     {sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sportsbookmark[0].awayTeamId).competitor?.name?.ko : ""}
-                    //                     </span>
-                    //                 </div>
-                    //                 <div class="flex height-40 padding-vertical-5 align-items-center">
-                    //                     {/* <span class="color-red padding-horizontal-20 background-transparent-b-5 heightp-100 align-items-center flex">{sportsbookmark.length}</span> */}
-                    //                     <span class="arrow heightp-100 color-grey align-items-center justify-content-center flex background-transparent-b-5 border-left padding-horizontal-10">
-                    //                         <i class="far fa-chevron-right fa-xs margin-0"></i>
-                    //                     </span>
-                    //                 </div>
-                    //             </div>
-                    //         </div>
-                    //     )
-                    // })
-                }
+               
 
                 <div class="events-list flex-column">
 
@@ -142,7 +107,6 @@ export default function BookNavi(props) {
                                             onClick={() => {
                                                 sportMatches.data = matches
                                                 dispatch(setSideBarSportsId({ id: icon.id, matches: matches }))
-                                                // dispatch(setMatchIds(sportMatches, 1, 'prematch'))
                                             }}
                                         >
                                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
@@ -201,13 +165,8 @@ export default function BookNavi(props) {
                                                                 })
 
                                                                 dispatch(setSideBarCountryId({ id: tournament.id, matches: countryMatches }))
-                                                                // if (sports.activeSideBarCountryId == tournament.id) {
-                                                                //     dispatch(setMatchIds({ data: matches }, 1, 'prematch'))
-                                                                // } else {
-                                                                //     dispatch(setMatchIds({ data: countryMatches }, 1, 'prematch'))
-                                                                // }
 
-                                                            }}> {/* active */}
+                                                            }}> 
                                                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                                                 <i class="far fa-flag color-yellow"></i>
                                                                 <span class="color-grey text-ellipsis">{tournament.id}</span>

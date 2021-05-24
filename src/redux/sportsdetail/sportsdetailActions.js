@@ -297,7 +297,6 @@ export const bet = (data,user_id) => {
     amount: 0,
     outcomes: [],
   }
-  // delete bet.total_odds
   bet.outcomes.map((outcome, index) => {
     details.outcomes.push({ id: outcome.id })
   })
@@ -373,34 +372,3 @@ export const deleteSportsdetails = () => {
       })
   };
 };
-
-
-// // filter sports by type
-// export const createSportsdetail = () => {
-//   return (dispatch) => {
-//     dispatch(createSportsdetailRequest);
-//     axios.get(`/api/`)
-//       .then(response => {
-//         const sportsdetail = response.data;
-//         dispatch(createSportsdetailSuccess(sportsdetail))
-//       }).catch(error => {
-//         const errorMsg = error.message;
-//         dispatch(createSportsdetailFailure(errorMsg))
-//       })
-//   };
-// };
-
-// // filter sports by page
-// export const createSportsdetail = () => {
-//   return (dispatch) => {
-//     dispatch(createSportsdetailRequest);
-//     axios.get(`/api/`)
-//       .then(response => {
-//         const sportsdetail = response.data;
-//         dispatch(createSportsdetailSuccess(sportsdetail))
-//       }).catch(error => {
-//         const errorMsg = error.message;
-//         dispatch(createSportsdetailFailure(errorMsg))
-//       })
-//   };
-// };
