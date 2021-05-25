@@ -1,7 +1,6 @@
 import * as types from "./inplayTypes";
 import axios from "../../plugins/axios";
 import { camelize, snakelize, socket } from "../../helpers/object";
-import { getSportsDetails } from "../bet/betActions";
 import { setMatchIds } from "../sport/sportActions";
 import { fetchInplaysMatches } from "../esport/esportActions";
 

@@ -3,7 +3,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
 import { splice_data } from "../../helpers/object";
-import { bet, betFailure, betSucess, resetOutcome, setBetAmount, setIntervalId, spliceOutcome, validateBet } from "../../redux/bet/betActions";
+import { bet, betFailure, betSucess, resetOutcome, setBetAmount, spliceOutcome, validateBet } from "../../redux/bet/betActions";
 import sweetalert from "../../plugins/sweetalert";
 import Pusher from "pusher-js";
 import echo from "../../plugins/echo";

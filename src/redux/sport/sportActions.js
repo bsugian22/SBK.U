@@ -260,25 +260,55 @@ export const searchMatches = (text, matches, competitors, tournaments, type) => 
     dispatch(setBookmarkOff())
     dispatch(setSearchOff())
 
+    let tournamentsData = [];
+    let competitorsData = [];;
     const searchMatches = { data: [] }
+    
 
-    let tournamentsData = tournaments.filter(x => x.tournament.name.ko.toLowerCase().includes(text.toLowerCase()));
-    let competitorsData = competitors.filter(x => x.competitor?.name?.ko ? x.competitor.name.ko.toLowerCase().includes(text.toLowerCase()) : "");
+    for (let tourIndex = 0; tourIndex < tournaments.length; tourIndex++) {
+      let tour = tournaments[tourIndex]
+      if(tour.tournament.name.ko.toLowerCase().includes(text.toLowerCase())){
+        tournamentsData.push(tour)
+      }
+    }
+
+    for (let compIndex = 0; compIndex < competitors.length; compIndex++) {
+      let comp = competitors[compIndex]
+      if(comp.competitor?.name?.ko?.toLowerCase().includes(text.toLowerCase())){
+        competitorsData.push(comp)
+      }
+    }
 
 
-    tournamentsData.map((tournament) => {
-      let tournamentMatchesData = matches.filter(x => x.tournamentId == tournament.id);
-      let simpleTournamentMatchesData = matches.filter(x => x.simpleTournamentId == tournament.id);
-      searchMatches.data.push(...tournamentMatchesData)
-      searchMatches.data.push(...simpleTournamentMatchesData)
-    })
+    for (let tourDataIndex = 0; tourDataIndex < tournamentsData.length; tourDataIndex++) {
+      let tournament = tournamentsData[tourDataIndex];
 
-    competitorsData.map((competitor) => {
-      let matchesDataHome = matches.filter(x => x.homeTeamId == competitor.id);
-      let matchesDataAway = matches.filter(x => x.awayTeamId == competitor.id);
-      searchMatches.data.push(...matchesDataHome)
-      searchMatches.data.push(...matchesDataAway)
-    })
+      for (let matchIndex = 0; matchIndex < matches.length; matchIndex++) {
+        let match = matches[matchIndex];
+        if(match.tournamentId == tournament.id){
+          searchMatches.data.push(match)
+        }
+
+        if(match.simpleTournamentId == tournament.id){
+          searchMatches.data.push(match)
+        }
+      }
+    }
+
+    for (let compDataIndex = 0; compDataIndex < competitorsData.length; compDataIndex++) {
+      let competitor = competitorsData[compDataIndex];
+
+      for (let matchIndex = 0; matchIndex < matches.length; matchIndex++) {
+        let match = matches[matchIndex];
+        if(match.homeTeamId == competitor.id){
+          searchMatches.data.push(match)
+        }
+
+        if(match.awayTeamId == competitor.id){
+          searchMatches.data.push(match)
+        }
+      }
+    }
 
 
     if (type == 'prematch') {

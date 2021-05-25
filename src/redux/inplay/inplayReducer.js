@@ -12,7 +12,7 @@ const initialState = {
   sideMarket: [],
   sportsTypeId: null,
   sportsMatches: { data: [] },
-  sportTypeIds: [ 137],
+  sportTypeIds: [137],
   tournamentIds: [210, 921],
 };
 
@@ -32,17 +32,21 @@ const inplayReducer = (state = initialState, action) => {
     case types.SET_WS_MARKETS_INPLAY:
       const wsData = action.payload
       const wsMatchId = wsData.matchId
-      state.mainMarkets.map((match, index) => {
+      for (let mainIndex = 0; mainIndex < state.mainMarkets.length; mainIndex++) {
+        let match = state.mainMarkets[mainIndex];
+
         if (match.id == wsMatchId) {
 
-          wsData.markets.map((wsMarket) => {
-
+          for (let marketIndex = 0; marketIndex < wsData.markets.length; marketIndex++) {
+            let wsMarket = wsData.markets[marketIndex]
             let wsOutcomes = wsMarket.outcomes; // list of outcomes comeing from the ws
             let wsSpecifier = JSON.stringify(wsMarket.specifier)
             let wsMarketId = wsMarket.marketId;
             let wsStatus = wsMarket.status
 
-            match.mainMarkets['1X2'].map((wwl) => {
+
+            for (let wwlIndex = 0; wwlIndex < match.mainMarkets['1X2'].length; wwlIndex++) {
+              let wwl = match.mainMarkets['1X2'][wwlIndex]
               let marketId = wwl.marketId
               let detailsSpecifier = JSON.stringify(wwl.market.specifier)
               let detailsOutcomes = wwl.outcomes;
@@ -51,12 +55,14 @@ const inplayReducer = (state = initialState, action) => {
 
                 if (wsSpecifier == "{}") { // check if the specifer is only one 
 
-                  wsOutcomes.map((data, index) => {
+                  for (let wsOutcomeIndex = 0; wsOutcomeIndex < wsOutcomes.length; wsOutcomeIndex++) {
+                    let data = wsOutcomes[wsOutcomeIndex]
                     let ws_outcome_id = data.outcomeId;
                     let ws_new_outcome_odds = data.odds;
                     let ws_active_status = data.active;
 
-                    detailsOutcomes.map((data, index) => {
+                    for (let detailOutcomeIndex = 0; detailOutcomeIndex < detailsOutcomes.length; detailOutcomeIndex++) {
+                      let data = detailsOutcomes[detailOutcomeIndex];
                       // check if the outcomes has the same id and name
 
                       if (ws_outcome_id == data.outcomeId) {
@@ -65,17 +71,19 @@ const inplayReducer = (state = initialState, action) => {
                         data.oldOdds = old_value // changing value of the state of the outcomes old odds
                         data.active = ws_active_status // changing of active stat
                       }
-                    })
-                  })
+                    }
+                  }
 
                 } else {
                   if (wsSpecifier === detailsSpecifier) {
-
-                    wsOutcomes.map((data, index) => {
+                    for (let wsOutcomeIndex = 0; wsOutcomeIndex < wsOutcomes.length; wsOutcomeIndex++) {
+                      let data = wsOutcomes[wsOutcomeIndex]
                       let ws_outcome_id = data.outcomeId;
                       let ws_new_outcome_odds = data.odds;
                       let ws_active_status = data.active;
-                      detailsOutcomes.map((data, index) => {
+
+                      for (let detailOutcomeIndex = 0; detailOutcomeIndex < detailsOutcomes.length; detailOutcomeIndex++) {
+                        let data = detailsOutcomes[detailOutcomeIndex];
                         // check if the outcomes has the same id and name
 
                         if (ws_outcome_id == data.outcomeId) {
@@ -84,15 +92,18 @@ const inplayReducer = (state = initialState, action) => {
                           data.oldOdds = old_value // changing value of the state of the outcomes old odds
                           data.active = ws_active_status
                         }
-                      })
+                      }
 
-                    })
+                    }
                   }
                 }
 
               }
-            })
-            match.mainMarkets['hcp'].map((hcp) => {
+            }
+
+
+            for (let hcpIndex = 0; hcpIndex < match.mainMarkets['hcp'].length; hcpIndex++) {
+              let hcp = match.mainMarkets['hcp'][hcpIndex]
               let marketId = hcp.marketId
               let detailsSpecifier = JSON.stringify(hcp.market.specifier)
               let detailsOutcomes = hcp.outcomes;
@@ -101,12 +112,14 @@ const inplayReducer = (state = initialState, action) => {
 
                 if (wsSpecifier == "{}") { // check if the specifer is only one 
 
-                  wsOutcomes.map((data, index) => {
+                  for (let wsOutcomeIndex = 0; wsOutcomeIndex < wsOutcomes.length; wsOutcomeIndex++) {
+                    let data = wsOutcomes[wsOutcomeIndex]
                     let ws_outcome_id = data.outcomeId;
                     let ws_new_outcome_odds = data.odds;
                     let ws_active_status = data.active;
 
-                    detailsOutcomes.map((data, index) => {
+                    for (let detailOutcomeIndex = 0; detailOutcomeIndex < detailsOutcomes.length; detailOutcomeIndex++) {
+                      let data = detailsOutcomes[detailOutcomeIndex];
                       // check if the outcomes has the same id and name
 
                       if (ws_outcome_id == data.outcomeId) {
@@ -115,17 +128,19 @@ const inplayReducer = (state = initialState, action) => {
                         data.oldOdds = old_value // changing value of the state of the outcomes old odds
                         data.active = ws_active_status // changing of active stat
                       }
-                    })
-                  })
+                    }
+                  }
 
                 } else {
                   if (wsSpecifier === detailsSpecifier) {
-
-                    wsOutcomes.map((data, index) => {
+                    for (let wsOutcomeIndex = 0; wsOutcomeIndex < wsOutcomes.length; wsOutcomeIndex++) {
+                      let data = wsOutcomes[wsOutcomeIndex]
                       let ws_outcome_id = data.outcomeId;
                       let ws_new_outcome_odds = data.odds;
                       let ws_active_status = data.active;
-                      detailsOutcomes.map((data, index) => {
+
+                      for (let detailOutcomeIndex = 0; detailOutcomeIndex < detailsOutcomes.length; detailOutcomeIndex++) {
+                        let data = detailsOutcomes[detailOutcomeIndex];
                         // check if the outcomes has the same id and name
 
                         if (ws_outcome_id == data.outcomeId) {
@@ -134,16 +149,17 @@ const inplayReducer = (state = initialState, action) => {
                           data.oldOdds = old_value // changing value of the state of the outcomes old odds
                           data.active = ws_active_status
                         }
-                      })
+                      }
 
-                    })
+                    }
                   }
                 }
 
               }
-            })
+            }
 
-            match.mainMarkets['total'].map((total) => {
+            for (let totalIndex = 0; totalIndex < match.mainMarkets['total'].length; totalIndex++) {
+              let total = match.mainMarkets['total'][totalIndex]
               let marketId = total.marketId
               let detailsSpecifier = JSON.stringify(total.market.specifier)
               let detailsOutcomes = total.outcomes;
@@ -152,12 +168,14 @@ const inplayReducer = (state = initialState, action) => {
 
                 if (wsSpecifier == "{}") { // check if the specifer is only one 
 
-                  wsOutcomes.map((data, index) => {
+                  for (let wsOutcomeIndex = 0; wsOutcomeIndex < wsOutcomes.length; wsOutcomeIndex++) {
+                    let data = wsOutcomes[wsOutcomeIndex]
                     let ws_outcome_id = data.outcomeId;
                     let ws_new_outcome_odds = data.odds;
                     let ws_active_status = data.active;
 
-                    detailsOutcomes.map((data, index) => {
+                    for (let detailOutcomeIndex = 0; detailOutcomeIndex < detailsOutcomes.length; detailOutcomeIndex++) {
+                      let data = detailsOutcomes[detailOutcomeIndex];
                       // check if the outcomes has the same id and name
 
                       if (ws_outcome_id == data.outcomeId) {
@@ -166,17 +184,19 @@ const inplayReducer = (state = initialState, action) => {
                         data.oldOdds = old_value // changing value of the state of the outcomes old odds
                         data.active = ws_active_status // changing of active stat
                       }
-                    })
-                  })
+                    }
+                  }
 
                 } else {
                   if (wsSpecifier === detailsSpecifier) {
-
-                    wsOutcomes.map((data, index) => {
+                    for (let wsOutcomeIndex = 0; wsOutcomeIndex < wsOutcomes.length; wsOutcomeIndex++) {
+                      let data = wsOutcomes[wsOutcomeIndex]
                       let ws_outcome_id = data.outcomeId;
                       let ws_new_outcome_odds = data.odds;
                       let ws_active_status = data.active;
-                      detailsOutcomes.map((data, index) => {
+
+                      for (let detailOutcomeIndex = 0; detailOutcomeIndex < detailsOutcomes.length; detailOutcomeIndex++) {
+                        let data = detailsOutcomes[detailOutcomeIndex];
                         // check if the outcomes has the same id and name
 
                         if (ws_outcome_id == data.outcomeId) {
@@ -185,21 +205,24 @@ const inplayReducer = (state = initialState, action) => {
                           data.oldOdds = old_value // changing value of the state of the outcomes old odds
                           data.active = ws_active_status
                         }
-                      })
+                      }
 
-                    })
+                    }
                   }
                 }
               }
-            })
 
-          })
+            }
+          }
+
+
         }
-      })
+      }
 
       return {
         ...state
       }
+
     case types.SET_MARKETS:
 
       let current_index = state.active_index;
@@ -208,160 +231,6 @@ const inplayReducer = (state = initialState, action) => {
         ...state,
         active_index: set_index,
       };
-
-    case types.GET_INPLAYDETAILS:
-      const market = action.payload; // ws main data
-      
-      const match_id = market.match_id
-      
-
-      const state_data = state.data.data;
-      const state_details_market = state.data.detail_data;
-      const state_details_match_id = state.data.detail
-
-      state_data.map((data, index) => {
-
-        if (match_id == data.id) {
-          data.status = JSON.parse(market.match_status);
-          market.markets.map((ws_data, index) => {
-
-            let ws_data_market_outcomes = ws_data.outcomes; // list of outcomes comeing from the ws
-            let ws_specifier = JSON.stringify(ws_data.specifier)
-            let ws_market_type = ws_data.market_id;
-            let ws_status = ws_data.status
-
-            data.markets.map((data, index) => {
-              let details_specifier = JSON.stringify(data.specifier)
-              let details_outcomes = data.outcomes;
-              let market_type = data.type
-
-              // check if the market is same with the ws data and details data
-              if (ws_market_type == market_type) {
-                data.status = ws_status;
-
-                if (ws_specifier == "{}") { // check if the specifer is only one 
-
-                  ws_data_market_outcomes.map((data, index) => {
-                    let ws_outcome_id = data.outcome_id;
-                    let ws_new_outcome_odds = data.odds;
-                    let ws_active_status = data.active;
-
-                    details_outcomes.map((data, index) => {
-                      // check if the outcomes has the same id and name
-
-                      if (ws_outcome_id == data.name.id) {
-                        let old_value = data.odds;
-
-                        data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
-                        data.oldOdds = old_value // changing value of the state of the outcomes old odds
-                        data.active = ws_active_status // changing of active stat
-                      }
-                    })
-                  })
-
-                } else {
-
-                  if (ws_specifier === details_specifier) {
-
-                    ws_data_market_outcomes.map((data, index) => {
-                      let ws_outcome_id = data.outcome_id;
-                      let ws_new_outcome_odds = data.odds;
-                      let ws_active_status = data.active;
-                      details_outcomes.map((data, index) => {
-                        // check if the outcomes has the same id and name
-
-                        if (ws_outcome_id == data.name.id) {
-                          let old_value = data.odds;
-                          data.active = ws_active_status
-                          data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
-                          data.oldOdds = old_value // changing value of the state of the outcomes old odds
-                        }
-                      })
-
-                    })
-                  }
-                }
-
-              }
-            })
-          })
-        }
-
-      })
-
-
-      if (state_details_match_id == match_id) {
-        market.markets.map((data, index) => {
-
-          let ws_data_market_outcomes = data.outcomes; // list of outcomes comeing from the ws
-          let ws_specifier = JSON.stringify(data.specifier)
-          let ws_market_type = data.market_id;
-          let ws_status = data.status
-
-          state_details_market.markets.map((data, index) => {
-            let details_specifier = JSON.stringify(data.specifier)
-            let details_outcomes = data.outcomes;
-            let market_type = data.type
-
-
-            // check if the market is same with the ws data and details data
-            if (ws_market_type == market_type) {
-              data.status = ws_status;
-
-              if (ws_specifier == "{}") { // check if the specifer is only one 
-
-                ws_data_market_outcomes.map((data, index) => {
-                  let ws_outcome_id = data.outcome_id;
-                  let ws_new_outcome_odds = data.odds;
-                  let ws_active_status = data.active;
-
-                  details_outcomes.map((data, index) => {
-                    // check if the outcomes has the same id and name
-
-                    if (ws_outcome_id == data.name.id) {
-                      let old_value = data.odds;
-
-                      data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
-                      data.oldOdds = old_value // changing value of the state of the outcomes old odds
-                      data.active = ws_active_status // changing of active stat
-                    }
-                  })
-                })
-
-              } else {
-
-                if (ws_specifier === details_specifier) {
-
-                  ws_data_market_outcomes.map((data, index) => {
-                    let ws_outcome_id = data.outcome_id;
-                    let ws_new_outcome_odds = data.odds;
-                    let ws_active_status = data.active;
-                    details_outcomes.map((data, index) => {
-                      // check if the outcomes has the same id and name
-
-                      if (ws_outcome_id == data.name.id) {
-                        let old_value = data.odds;
-                        data.active = ws_active_status
-                        data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
-                        data.oldOdds = old_value // changing value of the state of the outcomes old odds
-                      }
-                    })
-
-                  })
-                }
-              }
-
-            }
-          })
-        })
-      }
-
-
-
-      return {
-        ...state,
-      };
-
 
 
     case types.FETCH_INPLAYS_REQUEST:
@@ -378,19 +247,29 @@ const inplayReducer = (state = initialState, action) => {
       let inplay = action.payload.data
 
 
-      state.sportTypeIds.map((id) => {
-        let data = inplay.filter((x) => {
-          return x.type == id;
-        });
-        inplayDatas.push(...data)
-      })
+      for (let i = 0; i < state.sportTypeIds.length; i++) {
+        let id = state.sportTypeIds[i]
 
-      state.tournamentIds.map((id) => {
-        let data = inplay.filter((x) => {
-          return x.tournamentId == id;
-        });
-        inplayDatas.push(...data)
-      })
+        for (let ii = 0; ii < inplay.length; ii++) {
+          let inplayType = inplay[ii].type
+          if (inplayType == id) {
+            inplayDatas.push(inplay[ii])
+          }
+        }
+
+      }
+
+      for (let i = 0; i < state.tournamentIds.length; i++) {
+        let id = state.tournamentIds[i]
+
+        for (let ii = 0; ii < inplay.length; ii++) {
+          let tournamentId = inplay[ii].tournamentId
+          if (tournamentId == id) {
+            inplayDatas.push(inplay[ii])
+          }
+        }
+
+      }
 
 
       matches = matches.reduce(function (prev, value) {
@@ -457,28 +336,34 @@ const inplayReducer = (state = initialState, action) => {
       const mainMarkets = action.payload
       let currentPage = action.payload.pageNumber
       let mainMarketsToDisplay = [];
-      mainMarkets.data.map((market, index) => {
-        let data = state.matches.data.find(x => x.id == market.id)
+      for (let mainIndex = 0; mainIndex < mainMarkets.data.length; mainIndex++) {
+        let market = mainMarkets.data[mainIndex]
 
-        market['1X2'].map((market, index) => {
-          market.outcomes.map((outcome, outcome_index) => {
-            outcome.oldOdds = null;
-          })
-        })
+        let data = state.matches?.data?.find(x => x.id == market.id)
+        if (!data) {
+          data = state.sportsMatches?.data?.find(x => x.id == market.id)
+        }
 
-        market['hcp'].map((market, index) => {
-          market.outcomes.map((outcome, outcome_index) => {
-            outcome.oldOdds = null;
-          })
-        })
+        for (let i = 0; i < market['1X2'].length; i++) {
+          for (let ii = 0; ii < market['1X2'][i].outcomes.length; ii++) {
+            market['1X2'][i].outcomes[ii].oldOdds = null;
+          }
+        }
 
-        market['total'].map((market, index) => {
-          market.outcomes.map((outcome, outcome_index) => {
-            outcome.oldOdds = null;
-          })
-        })
+        for (let i = 0; i < market['hcp'].length; i++) {
+          for (let ii = 0; ii < market['hcp'][i].outcomes.length; ii++) {
+            market['hcp'][i].outcomes[ii].oldOdds = null;
+          }
+        }
+
+        for (let i = 0; i < market['total'].length; i++) {
+          for (let ii = 0; ii < market['total'][i].outcomes.length; ii++) {
+            market['total'][i].outcomes[ii].oldOdds = null;
+          }
+        }
         mainMarketsToDisplay.push({ ...data, mainMarkets: market });
-      })
+
+      }
 
       return {
         ...state,
