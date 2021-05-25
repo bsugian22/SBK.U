@@ -23,6 +23,7 @@ const Sports = (props) => {
   let user = useSelector((state) => state.user.user);
   let orderBy = sports.sortBy;
   const originalMatches = sports.originalMatches;
+  let search = "";
 
   useEffect(() => {
     isSubscribed = true;
@@ -242,16 +243,16 @@ const Sports = (props) => {
                     name="skeyword"
                     placeholder="팀명 또는 리그명을 입력하세요"
                     required
-                    value={sports.search}
-                    onKeyPress={(e) => { (e.key === 'Enter' ? dispatch(searchMatches(sports.search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch')) : null) }}
+                    onKeyPress={(e) => { (e.key === 'Enter' ? dispatch(searchMatches(search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch')) : null) }}
                     onChange={(e) => {
-                      dispatch(setSearch(e.target.value))
+                      // dispatch(setSearch(e.target.value))
+                      search = e.target.value
                      }}
                   />
                   <button class="search-btn heightp-100 background-transparent-b-30"
                     onClick={(e) => {
 
-                      dispatch(searchMatches(sports.search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch'))
+                      dispatch(searchMatches(search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch'))
                     }}>
                     <span class="color-grey">
                       <i class="fas fa-search margin-0"></i>
