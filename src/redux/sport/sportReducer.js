@@ -340,18 +340,16 @@ const sportReducer = (state = initialState, action) => {
         sidebarBookmarked: toggleBookmark
       };
     case types.SET_SIDEBAR_LEAGUE_ID:
-      let lastPageLeagueSidebar = Math.ceil(action.payload.matches.length / 30)
-      const league_exists = state.activeSideBarLeagueId?.indexOf(action.payload.id)
+      console.log(action.payload);
+      console.log("action.payload");
 
-      if (league_exists !== -1) {
-        state.activeSideBarLeagueId.splice(league_exists, 1)
-      } else {
-        state.activeSideBarLeagueId.push(action.payload.id)
-      }
+      let lastPageLeagueSidebar = Math.ceil(action.payload.matches.length / 30)
+     
 
       return {
         ...state,
         activeSideBarLeagueMatches: { data: action.payload.matches },
+        activeSideBarLeagueId : [action.payload.id],
         lastPage: lastPageLeagueSidebar,
         sportsTypeId: null,
         sportsMatches: { data: [] },

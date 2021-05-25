@@ -411,7 +411,7 @@ export const fetchMatches = (esports) => {
 
 
         var defaultMatches = matches.data.filter((x) => {
-          return x.type == 1;
+          return x.type == 2;
         });
 
         if (esports) {
@@ -419,8 +419,8 @@ export const fetchMatches = (esports) => {
           dispatch(setMatchIds(matches, 1, 'esports'))
         } else {
           dispatch(fetchMatchesSuccess(matches))
-          dispatch(setMatchIds({ data: defaultMatches }, 1, 'prematch'))
-          dispatch(setSportsType({ id: 1, matches: defaultMatches }))
+          dispatch(setMatchIds({ data: defaultMatches }, 2, 'prematch'))
+          dispatch(setSportsType({ id: 2, matches: defaultMatches }))
         }
 
       }).catch(error => {

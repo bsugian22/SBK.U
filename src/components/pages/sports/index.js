@@ -169,7 +169,8 @@ const Sports = (props) => {
                 <div class="setting-btn grow-2">
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 active"
                     onClick={() => {
-                      dispatch(resetAll(sports.matches))
+                      // dispatch(resetAll(sports.matches))
+                      dispatch(setMatchIds(sports.sportsMatches, 1, 'prematch'))
                     }}>
                     <span>
                       <i class="fas fa-check color-green"></i>
@@ -318,8 +319,8 @@ const Sports = (props) => {
                   rows.push(
                     matches?.matches?.map((match, key) => {
                       let sport_main_market_exists = false
-                      let homeTeam = sports.competitors?.data ? sports.competitors?.data?.find(x => x.id == match?.homeTeamId).competitor?.name?.ko : "";
-                      let awayTeam = sports.competitors?.data ? sports.competitors?.data?.find(x => x.id == match?.awayTeamId).competitor?.name?.ko : "";
+                      let homeTeam = sports?.competitors?.data ? sports?.competitors?.data?.find(x => x.id == match?.homeTeamId).competitor?.name?.ko : "";
+                      let awayTeam = sports?.competitors?.data ? sports?.competitors?.data?.find(x => x.id == match?.awayTeamId).competitor?.name?.ko : "";
 
 
                       return (

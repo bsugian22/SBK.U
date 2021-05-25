@@ -55,7 +55,7 @@ export default function BookNavi(props) {
                         </span>
                     </div>
                 </div>
-               
+
 
                 <div class="events-list flex-column">
 
@@ -166,7 +166,7 @@ export default function BookNavi(props) {
 
                                                                 dispatch(setSideBarCountryId({ id: tournament.id, matches: countryMatches }))
 
-                                                            }}> 
+                                                            }}>
                                                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
                                                                 <i class="far fa-flag color-yellow"></i>
                                                                 <span class="color-grey text-ellipsis">{tournament.id}</span>
@@ -207,17 +207,17 @@ export default function BookNavi(props) {
                                                                             onClick={() => {
 
 
-                                                                                let currentActive = sports.activeSideBarLeagueMatches.data;
-                                                                                const league_exists = sports.activeSideBarLeagueId?.indexOf(league.tournament.name.en)
+                                                                                // let currentActive = sports.activeSideBarLeagueMatches.data;
+                                                                                // const league_exists = sports.activeSideBarLeagueId?.indexOf(league.tournament.name.en)
 
-                                                                                if (league_exists !== -1) {
-                                                                                    currentActive = currentActive.filter(val => !leagueMatches.includes(val));
-                                                                                } else {
-                                                                                    currentActive.push(...leagueMatches)
-                                                                                }
+                                                                                // if (league_exists !== -1) {
+                                                                                //     currentActive = currentActive.filter(val => !leagueMatches.includes(val));
+                                                                                // } else {
+                                                                                //     currentActive.push(...leagueMatches)
+                                                                                // }
 
-                                                                                dispatch(setSideBarLeagueId({ id: league.tournament.name.en, matches: currentActive }))
-                                                                                dispatch(setMatchIds({ data: currentActive }, 1, 'prematch'))
+                                                                                dispatch(setSideBarLeagueId({ id: league.tournament.name.en, matches: leagueMatches }))
+                                                                                dispatch(setMatchIds({ data: leagueMatches }, 1, 'prematch'))
 
                                                                             }}>
                                                                             <div class="flex height-40 padding-10 grow-2 text-ellipsis">
