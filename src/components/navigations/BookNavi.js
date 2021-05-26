@@ -216,7 +216,7 @@ export default function BookNavi(props) {
                                                                                 //     currentActive.push(...leagueMatches)
                                                                                 // }
 
-                                                                                dispatch(setSideBarLeagueId({ id: league.tournament.name.en, matches: leagueMatches }))
+                                                                                dispatch(setSideBarLeagueId({ id: league.tournament.name.en, matches: leagueMatches,sportsId: icon.id }))
                                                                                 dispatch(setMatchIds({ data: leagueMatches }, 1, 'prematch'))
 
                                                                             }}>

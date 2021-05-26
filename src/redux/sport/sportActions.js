@@ -419,8 +419,8 @@ export const fetchMatches = (esports) => {
           dispatch(setMatchIds(matches, 1, 'esports'))
         } else {
           dispatch(fetchMatchesSuccess(matches))
-          dispatch(setMatchIds({ data: defaultMatches }, 2, 'prematch'))
-          dispatch(setSportsType({ id: 2, matches: defaultMatches }))
+          dispatch(setMatchIds({ data: defaultMatches }, 1, 'prematch'))
+          dispatch(setSportsType({ id: 1, matches: defaultMatches }))
         }
 
       }).catch(error => {

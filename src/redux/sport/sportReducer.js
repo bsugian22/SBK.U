@@ -344,15 +344,17 @@ const sportReducer = (state = initialState, action) => {
       console.log("action.payload");
 
       let lastPageLeagueSidebar = Math.ceil(action.payload.matches.length / 30)
-     
+      if(action.payload.sportsId == state.sportsTypeId){
+      }else {
+        state.sportsTypeId = action.payload.sportsId,
+        state.sportsMatches = { data: [] }
+      }
 
       return {
         ...state,
         activeSideBarLeagueMatches: { data: action.payload.matches },
-        activeSideBarLeagueId : [action.payload.id],
+        activeSideBarLeagueId: [action.payload.id],
         lastPage: lastPageLeagueSidebar,
-        sportsTypeId: null,
-        sportsMatches: { data: [] },
         isBookmarkedCheck: false,
         search: "",
         searchMatches: { data: [] },
@@ -389,6 +391,9 @@ const sportReducer = (state = initialState, action) => {
         activeId = action.payload.id
         activeSidebarSportsMatches = { data: action.payload.matches }
         lastPageSportsSidebar = Math.ceil(action.payload.matches.length / 30)
+      } else {
+        state.activeSideBarLeagueId = []
+        state.activeSideBarLeagueMatches = { data: [] }
       }
       return {
         ...state,

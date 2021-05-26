@@ -170,7 +170,20 @@ const Sports = (props) => {
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 active"
                     onClick={() => {
                       // dispatch(resetAll(sports.matches))
-                      dispatch(setMatchIds(sports.sportsMatches, 1, 'prematch'))
+                      var matches = sports.matches.data.filter((x) => {
+                        return x.type == sports.sportsTypeId;
+                      });
+
+                      let sportMatches = {}
+                      sportMatches.data = matches
+                      dispatch(setSportsType({ id: sports.sportsTypeId, matches: matches }))
+                      if (sports.sortByLeague) {
+                        dispatch(sortByLeague())
+                        dispatch(sortMatchesByLeague(sportMatches, 'prematch', sports.sportsTypeId, false))
+                      } else {
+                        dispatch(setMatchIds(sportMatches, 1, 'prematch'))
+                      }
+
                     }}>
                     <span>
                       <i class="fas fa-check color-green"></i>
@@ -248,7 +261,7 @@ const Sports = (props) => {
                     onChange={(e) => {
                       // dispatch(setSearch(e.target.value))
                       search = e.target.value
-                     }}
+                    }}
                   />
                   <button class="search-btn heightp-100 background-transparent-b-30"
                     onClick={(e) => {
@@ -277,10 +290,10 @@ const Sports = (props) => {
               </div>
             </div>
             <div class="prematch-list border-bottom match-list grow-2 padding-left-10 padding-right-10 padding-bottom-10 scrollable-auto flex-column">
-              
+
               {sports?.mainMarkets?.length > 0
                 ? sports.mainMarkets.map((matches, index) => {
-                  
+
                   var rows = [];
                   rows.push(
                     <div
@@ -368,7 +381,7 @@ const Sports = (props) => {
                                       match.mainMarkets['1X2'].map((market, market_index) => {
 
                                         let specifer = market.market.specifier
-                                       
+
                                         let classNameActive = ""
                                         let className = ""
                                         if (market.outcomes.length == 2) {
@@ -496,7 +509,7 @@ const Sports = (props) => {
                                                   data-outcome-id={outcome.id}
                                                   data-odds={outcome.odds}
                                                   class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"}
-                                                 >
+                                                >
                                                   <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
                                                     <div class="team-1 widthp-70 text-ellipsis">
                                                       <span class="color-grey text-ellipsis">
@@ -570,7 +583,7 @@ const Sports = (props) => {
                                     match.mainMarkets['total'].length != 0 ?
                                       match.mainMarkets['total'].map((market, market_index) => {
                                         let specifer = market.market.specifier
-                                        
+
                                         if (sport_main_market_exists == false) {
                                           sport_main_market_exists = true;
                                           if (market.status == 1) {
@@ -782,7 +795,7 @@ const Sports = (props) => {
           </div>
           <div class="prematch-detail flex-inherit flex-column padding-vertical-10 padding-left-5 padding-right-10 border-left">
             {sports.sideMarket?.id ? (
-              
+
               <Fragment>
                 <div class="detail-header flex-inherit flex-column">
                   <div class="height-40 align-items-center background-transparent-b-40 padding-horizontal-10">
@@ -826,8 +839,8 @@ const Sports = (props) => {
                 <div class="market-list flex-inherit flex-column scrollable-auto">
                   {sports.sideMarket.markets.length > 0
                     ? sports.sideMarket.markets.map((market, market_index) => {
-                      
-                      
+
+
                       let specifer = market.market.specifier
                       let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko : "";
                       let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko : "";
