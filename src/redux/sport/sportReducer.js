@@ -344,10 +344,10 @@ const sportReducer = (state = initialState, action) => {
       console.log("action.payload");
 
       let lastPageLeagueSidebar = Math.ceil(action.payload.matches.length / 30)
-      if(action.payload.sportsId == state.sportsTypeId){
-      }else {
+      if (action.payload.sportsId == state.sportsTypeId) {
+      } else {
         state.sportsTypeId = action.payload.sportsId,
-        state.sportsMatches = { data: [] }
+          state.sportsMatches = { data: [] }
       }
 
       return {
@@ -452,6 +452,20 @@ const sportReducer = (state = initialState, action) => {
         const bookmark_exists = currentBookmarks.indexOf(action.payload)
         if (bookmark_exists !== -1) {
           currentBookmarks.splice(bookmark_exists, 1)
+          for (let matchesIndex = 0; matchesIndex < state.mainMarkets.length; matchesIndex++) {
+            let match = state.mainMarkets[matchesIndex];
+
+            for (let marketIndex = 0; marketIndex < match.matches.length; marketIndex++) {
+              let bookmarked = match.matches[marketIndex];
+              if (bookmarked.id == action.payload) {
+                match.matches.splice(marketIndex, 1)
+                if(match.matches.length == 0){
+                  state.mainMarkets.splice(matchesIndex, 1)
+                }
+              }
+            }
+          }
+
         } else {
           currentBookmarks.push(action.payload)
         }
