@@ -416,20 +416,15 @@ export const fetchMatches = (esports) => {
         });
 
         if (esports) {
-          alert("asd")
           matches.data.sort(function compare(a, b) {
             return a.type - b.type;
           });
 
           if (matches.data[0]?.type) {
-            console.log(matches.data[0].type)
             typeId = matches.data[0].type
-            alert(typeId)
             var defaultMatchesEsports = matches.data.filter((x) => {
               return x.type == typeId;
             });
-            console.log(defaultMatchesEsports)
-            console.log("defaultMatchesEsports")
           }
 
           if (typeId != "") {
