@@ -136,7 +136,8 @@ export default function Esports() {
                         <div class="flex height-40 border-bottom padding-horizontal-10 align-items-center background-transparent-b-20">
                            <div class="flex">
                               <span class="color-grey">
-                                 <i class="fas fa-calendar-check"></i>ESPORTS: ALL EVENTS
+                                 <i class="fas fa-calendar-check"></i>ESPORTS: {esports.sportsTypeId == null ? ' ALL EVENTS' : sports.sports.data ? sports.sports.data.find(x => x.id == esports.sportsTypeId).name.ko : ""
+                                 }
                               </span>
                            </div>
                            <div class="flex grow-2 justify-content-end">
@@ -466,7 +467,7 @@ export default function Esports() {
 
                   <div class="bottom-wrap border-top flex flex-inherit height-60 padding-10 align-items-center-inherit0">
                      <div class="pagination widthp-100 flex-inherit justify-content-end">
-                        <div class="flex selectBox " style={{visibility: "hidden"}} >
+                        <div class="flex selectBox " style={{ visibility: "hidden" }} >
                            <Select
                               className="select-container select-position"
                               classNamePrefix="select-box"
@@ -478,6 +479,13 @@ export default function Esports() {
                               class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
                               onClick={() => {
                                  dispatch(setMatchIds(esports.matches, esports.currentPage - 1, 'esports'))
+
+                                 if (esports.sportsMatches.data.length == 0) {
+                                    dispatch(setMatchIds(esports.matches, esports.currentPage - 1, 'esports'))
+                                 } else {
+                                    dispatch(setMatchIds(esports.sportsMatches, esports.currentPage - 1, 'esports'))
+                                 }
+
                               }}
                               disabled={1 >= esports.currentPage}
                            >
@@ -486,7 +494,11 @@ export default function Esports() {
                            <button
                               class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
                               onClick={() => {
-                                 dispatch(setMatchIds(esports.matches, esports.currentPage + 1, 'esports'))
+                                 if (esports.sportsMatches.data.length == 0) {
+                                    dispatch(setMatchIds(esports.matches, esports.currentPage + 1, 'esports'))
+                                 } else {
+                                    dispatch(setMatchIds(esports.sportsMatches, esports.currentPage + 1, 'esports'))
+                                 }
                               }}
                               disabled={esports.lastPage <= esports.currentPage}
                            >

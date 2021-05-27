@@ -96,12 +96,31 @@ export const fetchInplays = (esports) => {
     })
       .then(response => {
         const inplays = camelize(response.data);
+        let typeId = "";
+        inplays.data.sort(function compare(a, b) {
+          return a.type - b.type;
+        });
+
+        if (inplays.data[0]?.type) {
+          console.log(inplays.data[0].type)
+          typeId = inplays.data[0].type
+
+          var defaultMatches = inplays.data.filter((x) => {
+            return x.type == typeId;
+          });
+        }
 
         if (esports) {
           dispatch(fetchInplaysMatches(inplays))
         } else {
-          dispatch(setMatchIds(inplays, 1, 'live'))
+          
           dispatch(fetchInplaysSuccess(inplays))
+          if (typeId != "") {
+            dispatch(setSportsTypeInplay({ id: typeId, matches: defaultMatches }))
+            dispatch(setMatchIds({ data: defaultMatches }, 1, 'live'))
+          }else {
+            dispatch(setMatchIds(inplays, 1, 'live'))
+          }
         }
       }).catch(error => {
         const errorMsg = error.message;

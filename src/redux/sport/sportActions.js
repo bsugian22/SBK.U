@@ -3,7 +3,7 @@ import axios from "../../plugins/axios";
 import { fetchMarketPerMatchesSuccessInplay, fetchMarketPerMatchesFailureInplay, setWSMarketInplay } from "../inplay/inplayActions";
 import moment from "moment";
 import { camelize, snakelize } from "../../helpers/object";
-import { fetchMarketPerMatchesSuccesEsports, fetchPrematches } from "../esport/esportActions";
+import { fetchMarketPerMatchesSuccesEsports, fetchPrematches, setSportsTypeEsports } from "../esport/esportActions";
 import socketIOClient from "socket.io-client";
 
 export const socket = socketIOClient("wss://io.vosa.dev");
@@ -263,18 +263,18 @@ export const searchMatches = (text, matches, competitors, tournaments, type) => 
     let tournamentsData = [];
     let competitorsData = [];;
     const searchMatches = { data: [] }
-    
+
 
     for (let tourIndex = 0; tourIndex < tournaments.length; tourIndex++) {
       let tour = tournaments[tourIndex]
-      if(tour.tournament.name.ko.toLowerCase().includes(text.toLowerCase())){
+      if (tour.tournament.name.ko.toLowerCase().includes(text.toLowerCase())) {
         tournamentsData.push(tour)
       }
     }
 
     for (let compIndex = 0; compIndex < competitors.length; compIndex++) {
       let comp = competitors[compIndex]
-      if(comp.competitor?.name?.ko?.toLowerCase().includes(text.toLowerCase())){
+      if (comp.competitor?.name?.ko?.toLowerCase().includes(text.toLowerCase())) {
         competitorsData.push(comp)
       }
     }
@@ -285,11 +285,11 @@ export const searchMatches = (text, matches, competitors, tournaments, type) => 
 
       for (let matchIndex = 0; matchIndex < matches.length; matchIndex++) {
         let match = matches[matchIndex];
-        if(match.tournamentId == tournament.id){
+        if (match.tournamentId == tournament.id) {
           searchMatches.data.push(match)
         }
 
-        if(match.simpleTournamentId == tournament.id){
+        if (match.simpleTournamentId == tournament.id) {
           searchMatches.data.push(match)
         }
       }
@@ -300,11 +300,11 @@ export const searchMatches = (text, matches, competitors, tournaments, type) => 
 
       for (let matchIndex = 0; matchIndex < matches.length; matchIndex++) {
         let match = matches[matchIndex];
-        if(match.homeTeamId == competitor.id){
+        if (match.homeTeamId == competitor.id) {
           searchMatches.data.push(match)
         }
 
-        if(match.awayTeamId == competitor.id){
+        if (match.awayTeamId == competitor.id) {
           searchMatches.data.push(match)
         }
       }
@@ -352,7 +352,7 @@ export const sortByBookmarked = (matches, type) => {
   return (dispatch) => {
     if (type == 'prematch') {
       dispatch(setBookmarkMatches(matches))
-      dispatch(setMatchIds(matches, 1, type)) 
+      dispatch(setMatchIds(matches, 1, type))
     }
   };
 };
@@ -364,7 +364,7 @@ export const sortMatchesByLeague = (matches, type, sportsTypeId, isSearching) =>
   return (dispatch) => {
     dispatch(setBookmarkOff())
     let sortedMatches = matches.data.sort(function (a, b) {
-      return a.tournamentId - b.tournamentId 
+      return a.tournamentId - b.tournamentId
     });
 
 
@@ -405,8 +405,8 @@ export const fetchMatches = (esports) => {
     axios.get(`/api/feed/matches`)
       .then(response => {
         const matches = camelize(response.data);
-        
-        matches.data.sort(function(a,b){
+        let typeId = "";
+        matches.data.sort(function (a, b) {
           return new Date(a.dateAt) - new Date(b.dateAt);
         });
 
@@ -416,8 +416,30 @@ export const fetchMatches = (esports) => {
         });
 
         if (esports) {
-          dispatch(fetchPrematches(matches))
-          dispatch(setMatchIds(matches, 1, 'esports'))
+          alert("asd")
+          matches.data.sort(function compare(a, b) {
+            return a.type - b.type;
+          });
+
+          if (matches.data[0]?.type) {
+            console.log(matches.data[0].type)
+            typeId = matches.data[0].type
+            alert(typeId)
+            var defaultMatchesEsports = matches.data.filter((x) => {
+              return x.type == typeId;
+            });
+            console.log(defaultMatchesEsports)
+            console.log("defaultMatchesEsports")
+          }
+
+          if (typeId != "") {
+            dispatch(fetchPrematches(matches))
+            dispatch(setSportsTypeEsports({ id: typeId, matches: defaultMatchesEsports }))
+            dispatch(setMatchIds({ data: defaultMatchesEsports }, 1, 'esports'))
+          } else {
+            dispatch(setMatchIds(defaultMatches, 1, 'esports'))
+          }
+
         } else {
           dispatch(fetchMatchesSuccess(matches))
           dispatch(setMatchIds({ data: defaultMatches }, 1, 'prematch'))
@@ -581,7 +603,7 @@ export const sportWebSocket = (matches) => {
       dispatch(setWSMarket(camelize(match)))
       dispatch(setWSMarketInplay(camelize(match)))
 
-     
+
     });
   }
 };
