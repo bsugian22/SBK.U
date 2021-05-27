@@ -820,23 +820,21 @@ const Sports = (props) => {
                     </span>
                     <div class="bookmark">
                       <span
-                        class={JSON.parse(localStorage.getItem("bookmarks")).indexOf(sports.sideMarket.id) == -1 ? "color-twhite" : "color-twhite bookmarked"}
+                        class={JSON.parse(localStorage.getItem("bookmarks")) !== null ? JSON.parse(localStorage.getItem("bookmarks")).indexOf(sports.sideMarket.id) == -1 ? "color-twhite" : "color-twhite bookmarked" : "color-twhite" }
                         onClick={() => {
                           dispatch(setBookmark(sports.sideMarket.id))
-                          if (sports.isBookmarkedCheck) {
-                            alert("check")
-                            if (JSON.parse(localStorage.getItem("bookmarks")).indexOf(sports.sideMarket.id) !== -1) {
-                              alert("wala")
-                              let sportsbookmark = [];
-                              JSON.parse(localStorage.getItem("bookmarks"))?.map((id) => {
-                                var matches = sports.matches.data.filter((x) => {
-                                  return x.id == id;
-                                });
-                                sportsbookmark.push(...matches)
-                              })
-                              dispatch(sortByBookmarked({ data: sportsbookmark }, 'prematch'))
-                            }
-                          }
+                          // if (sports.isBookmarkedCheck) {
+                          //   if (JSON.parse(localStorage.getItem("bookmarks")).indexOf(sports.sideMarket.id) !== -1) {
+                          //     let sportsbookmark = [];
+                          //     JSON.parse(localStorage.getItem("bookmarks"))?.map((id) => {
+                          //       var matches = sports.matches.data.filter((x) => {
+                          //         return x.id == id;
+                          //       });
+                          //       sportsbookmark.push(...matches)
+                          //     })
+                          //     dispatch(sortByBookmarked({ data: sportsbookmark }, 'prematch'))
+                          //   }
+                          // }
                         }}><i class="fas fa-star margin-0" ></i></span>
                     </div>
                   </div>

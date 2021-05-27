@@ -449,19 +449,25 @@ const sportReducer = (state = initialState, action) => {
         const bookmark_exists = currentBookmarks.indexOf(action.payload)
         if (bookmark_exists !== -1) {
           currentBookmarks.splice(bookmark_exists, 1)
-          for (let matchesIndex = 0; matchesIndex < state.mainMarkets.length; matchesIndex++) {
-            let match = state.mainMarkets[matchesIndex];
 
-            for (let marketIndex = 0; marketIndex < match.matches.length; marketIndex++) {
-              let bookmarked = match.matches[marketIndex];
-              if (bookmarked.id == action.payload) {
-                match.matches.splice(marketIndex, 1)
-                if (match.matches.length == 0) {
-                  state.mainMarkets.splice(matchesIndex, 1)
+          if (state.isBookmarkedCheck) {
+            for (let matchesIndex = 0; matchesIndex < state.mainMarkets.length; matchesIndex++) {
+              let match = state.mainMarkets[matchesIndex];
+
+              for (let marketIndex = 0; marketIndex < match.matches.length; marketIndex++) {
+                let bookmarked = match.matches[marketIndex];
+                if (bookmarked.id == action.payload) {
+                  match.matches.splice(marketIndex, 1)
+                  state.sideMarket = [];
+                  if (match.matches.length == 0) {
+                    state.mainMarkets.splice(matchesIndex, 1)
+                  }
                 }
               }
             }
+
           }
+
 
         } else {
           currentBookmarks.push(action.payload)
