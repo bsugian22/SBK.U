@@ -368,6 +368,7 @@ export const sortMatchesByLeague = (matches, type, sportsTypeId, isSearching) =>
     });
 
 
+
     if (type == 'prematch') {
       if (isSearching) {
         dispatch(setMatchIds({ data: sortedMatches }, 1, type))
@@ -411,7 +412,7 @@ export const fetchMatches = (esports) => {
 
 
         var defaultMatches = matches.data.filter((x) => {
-          return x.type == 2;
+          return x.type == 1;
         });
 
         if (esports) {

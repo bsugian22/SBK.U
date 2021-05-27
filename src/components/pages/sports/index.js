@@ -257,7 +257,9 @@ const Sports = (props) => {
                     name="skeyword"
                     placeholder="팀명 또는 리그명을 입력하세요"
                     required
-                    onKeyPress={(e) => { (e.key === 'Enter' ? dispatch(searchMatches(search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch')) : null) }}
+                    onKeyPress={(e) => { 
+                      (e.key === 'Enter' ? search != ""? dispatch(searchMatches(search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch')) : null : null) 
+                    }}
                     onChange={(e) => {
                       // dispatch(setSearch(e.target.value))
                       search = e.target.value
@@ -265,8 +267,9 @@ const Sports = (props) => {
                   />
                   <button class="search-btn heightp-100 background-transparent-b-30"
                     onClick={(e) => {
-
-                      dispatch(searchMatches(search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch'))
+                      if(search != ""){
+                        dispatch(searchMatches(search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch'))
+                      }
                     }}>
                     <span class="color-grey">
                       <i class="fas fa-search margin-0"></i>
@@ -303,7 +306,7 @@ const Sports = (props) => {
                       <div class="flex padding-horizontal-10 widthp-45 heightp-100">
                         <span class="color-grey">
                           <i class="far fa-calendar-week"></i>
-                          {matches.startAt == null ? "" : moment(matches.startAt).format("YY / MM / DD")}
+                          {matches.startAt == null ? matches.tournamentId == null ? sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == matches.simpleTournamentId)?.tournament?.name.ko : "" : sports.tournaments?.data ? sports.tournaments?.data.find(x => x.id == matches.tournamentId)?.tournament?.name.ko : "" : moment(matches.startAt).format("YY / MM / DD")}
                         </span>
                       </div>
                       <div class="flex widthp-55">

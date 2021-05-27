@@ -340,9 +340,6 @@ const sportReducer = (state = initialState, action) => {
         sidebarBookmarked: toggleBookmark
       };
     case types.SET_SIDEBAR_LEAGUE_ID:
-      console.log(action.payload);
-      console.log("action.payload");
-
       let lastPageLeagueSidebar = Math.ceil(action.payload.matches.length / 30)
       if (action.payload.sportsId == state.sportsTypeId) {
       } else {
@@ -459,7 +456,7 @@ const sportReducer = (state = initialState, action) => {
               let bookmarked = match.matches[marketIndex];
               if (bookmarked.id == action.payload) {
                 match.matches.splice(marketIndex, 1)
-                if(match.matches.length == 0){
+                if (match.matches.length == 0) {
                   state.mainMarkets.splice(matchesIndex, 1)
                 }
               }
@@ -721,10 +718,29 @@ const sportReducer = (state = initialState, action) => {
 
 
       if (state.sortByLeague) {
+
         mainMarketsToDisplay.sort(function (a, b) {
-          return a.tournamentId - b.tournamentId
+          return a.timeAt?.localeCompare(b.timeAt);
         });
-        mainMarketsToDisplay = [{ startAt: null, matches: mainMarketsToDisplay }]
+        mainMarketsToDisplay = chain(mainMarketsToDisplay)
+          .groupBy((match) => match.tournamentId)
+          .map((matches, tournamentId) => ({ tournamentId, matches }))
+          .orderBy("tournamentId")
+          .value();
+        for (let i = 0; i < mainMarketsToDisplay.length; i++) {
+          let toDisplay = mainMarketsToDisplay[i];
+          if (toDisplay.tournamentId == "null") {
+            toDisplay = chain(toDisplay.matches)
+              .groupBy((match) => match.simpleTournamentId)
+              .map((matches, simpleTournamentId) => ({ simpleTournamentId, matches }))
+              .orderBy("simpleTournamentId")
+              .value();
+            mainMarketsToDisplay.splice(i, 1)
+            mainMarketsToDisplay.push(...toDisplay)
+          }
+        }
+
+
       } else {
         mainMarketsToDisplay.sort(function (a, b) {
           return a.timeAt?.localeCompare(b.timeAt);
