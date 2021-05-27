@@ -87,6 +87,23 @@ const Sports = (props) => {
   };
 
 
+  const allMatches = () => {
+    var matches = sports.matches.data.filter((x) => {
+      return x.type == sports.sportsTypeId;
+    });
+
+    let sportMatches = {}
+    sportMatches.data = matches
+    dispatch(setSportsType({ id: sports.sportsTypeId, matches: matches }))
+    if (sports.sortByLeague) {
+      dispatch(sortByLeague())
+      dispatch(sortMatchesByLeague(sportMatches, 'prematch', sports.sportsTypeId, false))
+    } else {
+      dispatch(setMatchIds(sportMatches, 1, 'prematch'))
+    }
+  };
+
+
   return (
     <Fragment>
       <div class="content games-book-continer flex flex-inherit grow-2 flex-column">
@@ -168,23 +185,7 @@ const Sports = (props) => {
               <div class="settings padding-vertical-10 height-60 flex-inherit">
                 <div class="setting-btn grow-2">
                   <button class="btn-0 widthp-18 background-transparent-b-30 color-grey padding-5 active"
-                    onClick={() => {
-                      // dispatch(resetAll(sports.matches))
-                      var matches = sports.matches.data.filter((x) => {
-                        return x.type == sports.sportsTypeId;
-                      });
-
-                      let sportMatches = {}
-                      sportMatches.data = matches
-                      dispatch(setSportsType({ id: sports.sportsTypeId, matches: matches }))
-                      if (sports.sortByLeague) {
-                        dispatch(sortByLeague())
-                        dispatch(sortMatchesByLeague(sportMatches, 'prematch', sports.sportsTypeId, false))
-                      } else {
-                        dispatch(setMatchIds(sportMatches, 1, 'prematch'))
-                      }
-
-                    }}>
+                    onClick={allMatches}>
                     <span>
                       <i class="fas fa-check color-green"></i>
                       <span class="text text-media">All Matches</span>
@@ -257,8 +258,14 @@ const Sports = (props) => {
                     name="skeyword"
                     placeholder="팀명 또는 리그명을 입력하세요"
                     required
-                    onKeyPress={(e) => { 
-                      (e.key === 'Enter' ? search != ""? dispatch(searchMatches(search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch')) : null : null) 
+                    onKeyPress={(e) => {
+                      if(e.key === 'Enter' ){
+                        if(search != ""){
+                          dispatch(searchMatches(search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch'))
+                        }else {
+                          allMatches();
+                        }
+                      }
                     }}
                     onChange={(e) => {
                       // dispatch(setSearch(e.target.value))
@@ -267,8 +274,10 @@ const Sports = (props) => {
                   />
                   <button class="search-btn heightp-100 background-transparent-b-30"
                     onClick={(e) => {
-                      if(search != ""){
+                      if (search != "") {
                         dispatch(searchMatches(search, sports.matches.data, sports.competitors.data, sports.tournaments.data, 'prematch'))
+                      }else {
+                        allMatches();
                       }
                     }}>
                     <span class="color-grey">
