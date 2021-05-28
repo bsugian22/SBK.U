@@ -141,7 +141,7 @@ export default function Esports() {
                               </span>
                            </div>
                            <div class="flex grow-2 justify-content-end">
-                              <span class="color-red">{esports.activeMatches == "prematch" ? esports.prematchMatches.length : esports.inplayMatches.length}</span>
+                              <span class="color-red">{ esports.sportsMatches.data.length}</span>
                               <span class="color-grey">개의 경기가 진행 중 입니다</span>
                            </div>
                         </div>

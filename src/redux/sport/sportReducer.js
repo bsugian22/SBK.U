@@ -325,6 +325,7 @@ const sportReducer = (state = initialState, action) => {
       return {
         ...state,
         sortByLeague: true,
+        isBookmarkedCheck: false
       };
 
     case types.SHOW_SIDEBAR_BOOKMARK:
@@ -728,11 +729,13 @@ const sportReducer = (state = initialState, action) => {
         mainMarketsToDisplay.sort(function (a, b) {
           return a.timeAt?.localeCompare(b.timeAt);
         });
+
         mainMarketsToDisplay = chain(mainMarketsToDisplay)
           .groupBy((match) => match.tournamentId)
           .map((matches, tournamentId) => ({ tournamentId, matches }))
           .orderBy("tournamentId")
           .value();
+
         for (let i = 0; i < mainMarketsToDisplay.length; i++) {
           let toDisplay = mainMarketsToDisplay[i];
           if (toDisplay.tournamentId == "null") {

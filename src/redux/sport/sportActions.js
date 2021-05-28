@@ -362,11 +362,10 @@ export const sortByBookmarked = (matches, type) => {
 export const sortMatchesByLeague = (matches, type, sportsTypeId, isSearching) => {
 
   return (dispatch) => {
-    dispatch(setBookmarkOff())
+
     let sortedMatches = matches.data.sort(function (a, b) {
       return a.tournamentId - b.tournamentId
     });
-
 
 
     if (type == 'prematch') {
