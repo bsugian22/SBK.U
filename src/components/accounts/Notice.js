@@ -2,11 +2,11 @@ import React, { useEffect, useState, Fragment } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import Select from "react-select";
 import parse from "html-react-parser";
 import { mapStateToProps, mapDispatchProps } from "../../redux/store";
 import noticeModel from "../../models/noticeModel";
 import sweetalert from "../../plugins/sweetalert";
+import Select from "react-select";
 import {
   fetchNotice,
   nextPageNotice,
@@ -22,6 +22,7 @@ const Notice = () => {
   const swal = new sweetalert();
   let isSubscribed = true;
   let notice = useSelector((state) => state.notice);
+  let notices = useSelector((state) => state.notice.notices);
   let view = useSelector((state) => state.notice.viewNotice);
   let page = useSelector((state) => state.notice.notices.page);
   let lastPage = useSelector((state) => state.notice.notices.lastPage);
@@ -168,72 +169,63 @@ const Notice = () => {
               )}
             </div>
             <div class="flex-inherit notice-page-bottom height-60 padding-10 color-grey">
-              <div class="pagination flex-inherit widthp-100 justify-content-end">
-                <div class="flex select selectBox">
-                  <select
-                    name="slct"
-                    id="slct"
-                    value={page}
+            <div class="pagination widthp-100 flex-inherit justify-content-end">
+              <div class="flex selectBox">
+                  <Select
+                    className="select-container select-position"
+                    classNamePrefix="select-box"
+                    value={{ label : notices.page , value : notices.page }}
                     onChange={(e) => {
-                      let val = e.target.value;
-                      if (val.toString() == page.toString()) {
-                        swal.warning(" 페이지에 반응");
-                      } else {
-                        dispatch(
-                          onClickPageNotice({
-                            page: val,
-                            per_page: per_page,
-                          })
-                        );
-                      }
+                      dispatch(
+                        onClickPageNotice({
+                          page: e.value,
+                          per_page: per_page,
+                        })
+                      );
                     }}
-                  >
-                    {list_pages?.map((item, index) => {
-                      return <option key={index}>{item}</option>;
-                    })}
-                  </select>
-                </div>
-                <div class="grow-2"></div>
-                <div class="flex page">
+                    options={((rows, i, len) => {
+                      while (++i <= len) {
+                        rows.push({ value: i, label: i });
+                      }
+                      return rows;
+                    })([], 0, notices.lastPage)}
+                  />
+              </div>
+              <div class="grow-2"></div>
+              <div class="flex page">
                   <button
                     class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
-                    disabled={page == 1}
-                    onClick={() => {
+                    onClick={(e) => {
                       let prevData = {
                         page: page,
                         list_pages: list_pages,
                         per_page: per_page,
                       };
-                      if (page == 1) {
-                        swal.warning(" 페이지에 반응");
-                      } else {
-                        dispatch(prevPageNotice(prevData));
-                      }
+
+                      dispatch(prevPageNotice(prevData));
                     }}
+                    disabled={1 >= notices.page}
                   >
                     <i class="fas fa-chevron-left margin-0 color-white"></i>
                   </button>
                   <button
                     class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
-                    disabled={page == lastPage}
-                    onClick={() => {
+                    onClick={(e) => {
                       let nextData = {
                         page: page,
                         list_pages: list_pages,
                         per_page: per_page,
                       };
-                      if (page == lastPage) {
-                        swal.warning(" 페이지에 반응");
-                      } else {
-                        dispatch(nextPageNotice(nextData));
-                      }
+
+                      dispatch(nextPageNotice(nextData));
                     }}
+                    disabled={notices.lastPage <= notices.page}
                   >
                     <i class="fas fa-chevron-right margin-0 color-white"></i>
                   </button>
-                </div>
               </div>
             </div>
+          </div>
           </div>
           <div class="notice-read border-left flex-inherit flex-column account-height widthp-60 padding-10 scrollable-auto" hidden={view.id ? false : true}>
             <div class="notice-read-header red-shadow height-45 background-transparent-b-10 align-items-center-inherit padding-left-15 border-bottom-rb flex-inherit">

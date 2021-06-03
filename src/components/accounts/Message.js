@@ -17,12 +17,13 @@ import {
   readMessageReceived,
   selectAllMessage,
 } from "../../redux/accounts/message/messageActions";
-
+import Select from "react-select";
 import sweetalert from "../../plugins/sweetalert";
 import Logo from "../layouts/Logo";
 import moment from "moment";
 export default function Message() {
   let message = useSelector((state) => state.message);
+  let messages = useSelector((state) => state.message.messages);
   let viewMessage = useSelector((state) => state.message.message);
   let isSubscribed = true;
   let page = useSelector((state) => state.message.messages.page);
@@ -170,79 +171,63 @@ export default function Message() {
                 </div>
               </div>
               <div class="padding-vertical-10 flex-inherit height-60 color-grey">
-                <div class="pagination flex-inherit widthp-100 heightp-100">
-                  <div class="select">
-                    {/* {list_pages.map((o) => {
-                    let newItem = { label: o.toString(), value: o };
-                    selectList.push(newItem);
-                  })} */}
-                    <select
-                      name="slct"
-                      id="slct"
-                      value={page == null || page == "" ? 1 : page}
-                      onChange={(e) => {
-                        let val = e.target.value;
-                        if (val.toString() == page.toString()) {
-                          swal.warning(" 페이지에 반응");
-                        } else {
-                          dispatch(
-                            onClickPageMessage({
-                              page: val,
-                              per_page: per_page,
-                            })
-                          );
-                        }
-                      }}
-                    >
-                      {list_pages?.map((item, index) => {
-                        return <option key={index}>{item}</option>;
-                      })}
-                    </select>
-                  </div>
-                  <div class="flex margin-left-5 page grow-2 justify-content-end">
-                    <Link to="#">
-                      <button
-                        class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled={page == 1}
-                        onClick={() => {
-                          let prevData = {
-                            page: page,
-                            list_pages: list_pages,
-                            per_page: per_page,
-                          };
-                          if (page == 1) {
-                            swal.warning(" 페이지에 반응");
-                          } else {
-                            dispatch(prevPageMessage(prevData));
-                          }
-                        }}
-                      >
-                        <i class="fas fa-chevron-left margin-0 color-grey"></i>
-                      </button>
-                    </Link>
-                    <Link to="#">
-                      <button
-                        class="page-right width-40 heightp-100 background-transparent-b-20"
-                        disabled={page == lastPage}
-                        onClick={() => {
-                          let nextData = {
-                            page: page,
-                            list_pages: list_pages,
-                            per_page: per_page,
-                          };
-                          if (page == lastPage) {
-                            swal.warning(" 페이지에 반응");
-                          } else {
-                            dispatch(nextPageMessage(nextData));
-                          }
-                        }}
-                      >
-                        <i class="fas fa-chevron-right margin-0 color-grey"></i>
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+              <div class="pagination widthp-100 flex-inherit justify-content-end">
+              <div class="flex selectBox">
+                  <Select
+                    className="select-container select-position"
+                    classNamePrefix="select-box"
+                    value={{ label : messages.page , value : messages.page }}
+                    onChange={(e) => {
+                      dispatch(
+                        onClickPageMessage({
+                          page: e.value,
+                          per_page: per_page,
+                        })
+                      );
+                    }}
+                    options={((rows, i, len) => {
+                      while (++i <= len) {
+                        rows.push({ value: i, label: i });
+                      }
+                      return rows;
+                    })([], 0, messages.lastPage)}
+                  />
               </div>
+              <div class="grow-2"></div>
+              <div class="flex page">
+                  <button
+                    class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
+                    onClick={(e) => {
+                      let prevData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+
+                      dispatch(prevPageMessage(prevData));
+                    }}
+                    disabled={1 >= messages.page}
+                  >
+                    <i class="fas fa-chevron-left margin-0 color-white"></i>
+                  </button>
+                  <button
+                    class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                    onClick={(e) => {
+                      let nextData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+
+                      dispatch(nextPageMessage(nextData));
+                    }}
+                    disabled={messages.lastPage <= messages.page}
+                  >
+                    <i class="fas fa-chevron-right margin-0 color-white"></i>
+                  </button>
+              </div>
+            </div>
+          </div>
             </div>
           </div>
           <div class="message-right-content account-height widthp-50 padding-10 flex-inherit flex-column padding-left-5 border-left scrollable-auto" hidden={viewMessage.id == 0 ? true : false}>

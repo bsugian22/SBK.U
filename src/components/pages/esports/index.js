@@ -89,7 +89,7 @@ export default function Esports() {
                </span>
             </div>
             <div class="esports-wrap esports-content-desktop border-top flex-row flex-inherit">
-               <div class="esports-content padding-10 flex-column">
+               <div class="esports-content padding-10 flex-column border-right">
                   <div class="esports-header flex-inherit flex-column">
                      <div class="event-slider flex-column widthp-100">
                         <div class="flex event-list height-80 align-items-center background-transparent-b-30 border-bottom">
@@ -508,7 +508,7 @@ export default function Esports() {
                      </div>
                   </div>
                </div>
-               <div class="esports-detail flex-inherit flex-column padding-vertical-10 padding-left-5 padding-right-10">
+               <div class="esports-detail flex-inherit flex-column padding-vertical-10 padding-left-5 padding-right-10 border-left">
                   {sports.sideMarket?.markets?.length > 0 ?
                      <div class="detail-header flex-inherit flex-column">
                         <div class="height-40 align-items-center background-transparent-b-20 padding-horizontal-10">
@@ -695,7 +695,7 @@ export default function Esports() {
 
                            return rows;
                         })
-                        : <div class="align-items-center border-left" style={{ paddingLeft: "45%" }}>
+                        : <div class="align-items-center" class="justify-content-center">
                            <Logo width="120" height="30" />
                         </div>}
                   </div>

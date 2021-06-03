@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MessagePost from "./messagePost";
 import Moment from "moment";
 import sweetalert from "../../plugins/sweetalert";
+import Select from "react-select";
 import {
   allPositions,
   filteredProceedingPosition,
@@ -26,6 +27,7 @@ import Logo from "../layouts/Logo";
 import { setCompetitorName } from "../../helpers/object";
 export default function Position() {
   let position = useSelector((state) => state.position);
+  let positions = useSelector((state) => state.position.positions);
   let createPosition = useSelector((state) => state.position.createPosition);
   let list = useSelector((state) => state.position.list);
   let isSubscribed = true;
@@ -308,83 +310,63 @@ export default function Position() {
                 </button>
               </div> */}
               <div class="padding-vertical-10 flex-inherit  height-60 color-grey">
-                <div class="pagination flex-inherit widthp-100 heightp-100">
-                  <div class="select">
-                    {/* {list_pages.map((o) => {
-                    let newItem = { label: o.toString(), value: o };
-                    selectList.push(newItem);
-                  })} */}
-                    <select
-                      name="slct"
-                      id="slct"
-                      value={
-                        page == null || page == "" || page == undefined
-                          ? ""
-                          : page
+              <div class="pagination widthp-100 flex-inherit justify-content-end">
+              <div class="flex selectBox">
+                  <Select
+                    className="select-container select-position"
+                    classNamePrefix="select-box"
+                    value={{ label : positions.page , value : positions.page }}
+                    onChange={(e) => {
+                      dispatch(
+                        onClickPagePosition({
+                          page: e.value,
+                          per_page: per_page,
+                        })
+                      );
+                    }}
+                    options={((rows, i, len) => {
+                      while (++i <= len) {
+                        rows.push({ value: i, label: i });
                       }
-                      onChange={(e) => {
-                        let val = e.target.value;
-                        if (val.toString() == page.toString()) {
-                          swal.warning(" 페이지에 반응");
-                        } else {
-                          dispatch(
-                            onClickPagePosition({
-                              page: val,
-                              per_page: per_page,
-                            })
-                          );
-                        }
-                      }}
-                    >
-                      {list_pages?.map((item, index) => {
-                        return <option key={index}>{item}</option>;
-                      })}
-                    </select>
-                  </div>
-                  <div class="flex margin-left-5 page grow-2 justify-content-end">
-                    <Link to="#">
-                      <button
-                        class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled={page == 1}
-                        onClick={() => {
-                          let prevData = {
-                            page: page,
-                            list_pages: list_pages,
-                            per_page: per_page,
-                          };
-                          if (page == 1) {
-                            swal.warning(" 페이지에 반응");
-                          } else {
-                            dispatch(prevPagePosition(prevData));
-                          }
-                        }}
-                      >
-                        <i class="fas fa-chevron-left margin-0 color-grey"></i>
-                      </button>
-                    </Link>
-                    <Link to="#">
-                      <button
-                        class="page-right width-40 heightp-100 background-transparent-b-20"
-                        disabled={page == lastPage}
-                        onClick={() => {
-                          let nextData = {
-                            page: page,
-                            list_pages: list_pages,
-                            per_page: per_page,
-                          };
-                          if (page == lastPage) {
-                            swal.warning(" 페이지에 반응");
-                          } else {
-                            dispatch(nextPagePosition(nextData));
-                          }
-                        }}
-                      >
-                        <i class="fas fa-chevron-right margin-0 color-grey"></i>
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+                      return rows;
+                    })([], 0, positions.lastPage)}
+                  />
               </div>
+              <div class="grow-2"></div>
+              <div class="flex page">
+                  <button
+                    class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
+                    onClick={(e) => {
+                      let prevData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+
+                      dispatch(prevPagePosition(prevData));
+                    }}
+                    disabled={1 >= positions.page}
+                  >
+                    <i class="fas fa-chevron-left margin-0 color-white"></i>
+                  </button>
+                  <button
+                    class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                    onClick={(e) => {
+                      let nextData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+
+                      dispatch(nextPagePosition(nextData));
+                    }}
+                    disabled={positions.lastPage <= positions.page}
+                  >
+                    <i class="fas fa-chevron-right margin-0 color-white"></i>
+                  </button>
+              </div>
+            </div>
+          </div>
             </div>
           </div>
           <div class="position-right-content account-height widthp-50 padding-10 flex-inherit flex-column border-left scrollable-auto" hidden={position.selectedPosition == null ? true : false}>

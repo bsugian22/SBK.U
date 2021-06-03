@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Moment from "moment";
 import sweetalert from "../../plugins/sweetalert";
+import Select from "react-select";
 import { method } from "lodash";
 import { Link, NavLink } from "react-router-dom";
 import MenuContext from "../../contexts/Menu.context";
@@ -35,6 +36,7 @@ const Inquiry = () => {
   const swal = new sweetalert();
   let isSubscribed = true;
   let inquiry = useSelector((state) => state.inquiry);
+  let inquiries = useSelector((state) => state.inquiry.inquiries);
   let createInquiry = useSelector((state) => state.inquiry.createInquiry);
   let page = useSelector((state) => state.inquiry.inquiries.page);
   let lastPage = useSelector((state) => state.inquiry.inquiries.lastPage);
@@ -200,87 +202,63 @@ const Inquiry = () => {
                 </div>
               </div>
               <div class="padding-vertical-10 flex-inherit height-60 color-grey">
-                <div class="pagination flex-inherit widthp-100 heightp-100">
-                  <div class="select">
-                    {/* {list_pages.map((o) => {
-                    let newItem = { label: o.toString(), value: o };
-                    selectList.push(newItem);
-                  })} */}
-                    <select
-                      name="slct"
-                      id="slct"
-                      value={page}
-                      onChange={(e) => {
-                        let val = e.target.value;
-                        if (val.toString() == page.toString()) {
-                          swal.warning(" 페이지에 반응");
-                        } else {
-                          dispatch(
-                            onClickPageInquiry({
-                              page: val,
-                              per_page: per_page,
-                            })
-                          );
-                        }
-                      }}
-                    >
-                      {list_pages?.map((item, index) => {
-                        return <option key={index}>{item}</option>;
-                      })}
-                    </select>
-                  </div>
-                  <div class="flex margin-left-5 page grow-2 justify-content-end">
-                    <Link to="#">
-                      <button
-                        class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled={page == 1}
-                        onClick={() => {
-                          let prevData = {
-                            page: page,
-                            list_pages: list_pages,
-                            per_page: per_page,
-                          };
-                          if (page == 1) {
-                            swal.warning(" 페이지에 반응");
-                          } else {
-                            dispatch(prevPageInquiry(prevData));
-                          }
-                        }}
-                      >
-                        <i class="fas fa-chevron-left margin-0 color-grey"></i>
-                      </button>
-                    </Link>
-                    <Link to="#">
-                      <button
-                        class="page-right width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled={page == lastPage}
-                        onClick={() => {
-                          let nextData = {
-                            page: page,
-                            list_pages: list_pages,
-                            per_page: per_page,
-                          };
-                          if (page == lastPage) {
-                            swal.warning(" 페이지에 반응");
-                          } else {
-                            dispatch(nextPageInquiry(nextData));
-                          }
-                        }}
-                      >
-                        <i class="fas fa-chevron-right margin-0 color-grey"></i>
-                      </button>
-                    </Link>
-                    <Link to="#">
-                      <button class="write page-right width-40 heightp-100 background-transparent-b-20"
-                        onClick={() => {
-                          dispatch(resetCreateInquiry());
-                        }}>
-                        <i class="fal fa-pencil-alt color-grey"></i><span class="color-grey">글 작성</span>
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+              <div class="pagination widthp-100 flex-inherit justify-content-end">
+              <div class="flex selectBox">
+                  <Select
+                    className="select-container select-position"
+                    classNamePrefix="select-box"
+                    value={{ label : inquiries.page , value : inquiries.page }}
+                    onChange={(e) => {
+                      dispatch(
+                        onClickPageInquiry({
+                          page: e.value,
+                          per_page: per_page,
+                        })
+                      );
+                    }}
+                    options={((rows, i, len) => {
+                      while (++i <= len) {
+                        rows.push({ value: i, label: i });
+                      }
+                      return rows;
+                    })([], 0, inquiries.lastPage)}
+                  />
               </div>
+              <div class="grow-2"></div>
+              <div class="flex page">
+                  <button
+                    class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
+                    onClick={(e) => {
+                      let prevData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+
+                      dispatch(prevPageInquiry(prevData));
+                    }}
+                    disabled={1 >= inquiries.page}
+                  >
+                    <i class="fas fa-chevron-left margin-0 color-white"></i>
+                  </button>
+                  <button
+                    class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                    onClick={(e) => {
+                      let nextData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+
+                      dispatch(nextPageInquiry(nextData));
+                    }}
+                    disabled={inquiries.lastPage <= inquiries.page}
+                  >
+                    <i class="fas fa-chevron-right margin-0 color-white"></i>
+                  </button>
+              </div>
+            </div>
+          </div>
             </div>
           </div>
           <div class="inquiry-right-content account-height widthp-50 padding-10 flex-inherit flex-column padding-left-5 border-left scrollable-auto" hidden={inquiry.viewingId == null ? true : false}>

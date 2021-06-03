@@ -22,6 +22,7 @@ import {
   nextPageWIthdrawal,
 } from "../../redux/accounts/withdrawal/withdrawalAction";
 import { Link, NavLink } from "react-router-dom";
+import Select from "react-select";
 import echo from '../../plugins/echo'
 import { fetchSummary } from "../../redux/navigations/accountSummary/accountSummaryActions";
 
@@ -30,6 +31,7 @@ const Withdrawal = () => {
   const swal = new sweetalert();
   const dispatch = useDispatch();
   let withdraw = useSelector((state) => state.withdraw);
+  let withdraws = useSelector((state) => state.withdraw.withdrawals);
   let user = useSelector((state) => state.user.user);
   let page = useSelector((state) => state.withdraw.withdrawals.page);
   let lastPage = useSelector((state) => state.withdraw.withdrawals.lastPage);
@@ -455,79 +457,63 @@ const Withdrawal = () => {
                 </div>
               </div>
               <div class="padding-vertical-10 flex-inherit height-60 color-grey">
-                <div class="pagination flex-inherit widthp-100 heightp-100">
-                  <div class="select">
-                    {/* {list_pages.map((o) => {
-                    let newItem = { label: o.toString(), value: o };
-                    selectList.push(newItem);
-                  })} */}
-                    <select
-                      name="slct"
-                      id="slct"
-                      value={page}
-                      onChange={(e) => {
-                        let val = e.target.value;
-                        if (val.toString() == page.toString()) {
-                          swal.warning(" 페이지에 반응");
-                        } else {
-                          dispatch(
-                            onClickPageWIthdrawal({
-                              page: val,
-                              per_page: per_page,
-                            })
-                          );
-                        }
-                      }}
-                    >
-                      {list_pages?.map((item, index) => {
-                        return <option key={index}>{item}</option>;
-                      })}
-                    </select>
-                  </div>
-                  <div class="flex margin-left-5 page grow-2 justify-content-end">
-                    <Link to="#">
-                      <button
-                        class="page-left width-40 heightp-100 background-transparent-b-20 margin-right-5"
-                        disabled = {page == 1 }
-                        onClick={() => {
-                          let prevData = {
-                            page: page,
-                            list_pages: list_pages,
-                            per_page: per_page,
-                          };
-                          if (page == 1) {
-                            swal.warning(" 페이지에 반응");
-                          } else {
-                            dispatch(prevPageWIthdrawal(prevData));
-                          }
-                        }}
-                      >
-                        <i class="fas fa-chevron-left margin-0 color-grey"></i>
-                      </button>
-                    </Link>
-                    <Link to="#">
-                      <button
-                        class="page-right width-40 heightp-100 background-transparent-b-20"
-                        disabled = {page == lastPage }
-                        onClick={() => {
-                          let nextData = {
-                            page: page,
-                            list_pages: list_pages,
-                            per_page: per_page,
-                          };
-                          if (page == lastPage) {
-                            swal.warning(" 페이지에 반응");
-                          } else {
-                            dispatch(nextPageWIthdrawal(nextData));
-                          }
-                        }}
-                      >
-                        <i class="fas fa-chevron-right margin-0 color-grey"></i>
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+              <div class="pagination widthp-100 flex-inherit justify-content-end">
+              <div class="flex selectBox">
+                  <Select
+                    className="select-container select-position"
+                    classNamePrefix="select-box"
+                    value={{ label : withdraws.page , value : withdraws.page }}
+                    onChange={(e) => {
+                      dispatch(
+                        onClickPageWIthdrawal({
+                          page: e.value,
+                          per_page: per_page,
+                        })
+                      );
+                    }}
+                    options={((rows, i, len) => {
+                      while (++i <= len) {
+                        rows.push({ value: i, label: i });
+                      }
+                      return rows;
+                    })([], 0, withdraws.lastPage)}
+                  />
               </div>
+              <div class="grow-2"></div>
+              <div class="flex page">
+                  <button
+                    class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
+                    onClick={(e) => {
+                      let prevData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+
+                      dispatch(prevPageWIthdrawal(prevData));
+                    }}
+                    disabled={1 >= withdraws.page}
+                  >
+                    <i class="fas fa-chevron-left margin-0 color-white"></i>
+                  </button>
+                  <button
+                    class="page-right btn-0 background-transparent-b-20 flex align-items-center justify-content-center"
+                    onClick={(e) => {
+                      let nextData = {
+                        page: page,
+                        list_pages: list_pages,
+                        per_page: per_page,
+                      };
+
+                      dispatch(nextPageWIthdrawal(nextData));
+                    }}
+                    disabled={withdraws.lastPage <= withdraws.page}
+                  >
+                    <i class="fas fa-chevron-right margin-0 color-white"></i>
+                  </button>
+              </div>
+            </div>
+          </div>
             </div>
           </div>
         </div>

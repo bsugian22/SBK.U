@@ -91,7 +91,7 @@ export default function Inplay() {
                </span>
             </div>
             <div class="inplay-wrap inplay-content-desktop border-top flex-row flex-inherit">
-               <div class="inplay-content padding-10 flex-column">
+               <div class="inplay-content padding-10 flex-column border-right">
                   <div class="inplay-header flex-inherit flex-column">
                      <div class="event-slider flex-column widthp-100">
                         {/* <div class="flex event-list height-60 align-items-center padding-horizontal-10 background-transparent-b-30">
@@ -435,7 +435,7 @@ export default function Inplay() {
 
 
                   </div>
-                  <div class="bottom-wrap border-top flex flex-inherit height-60 padding-10 align-items-center-inherit0">
+                  <div class="bottom-wrap border-top flex flex-inherit height-60 padding-horizontal-10 padding-top-10 align-items-center-inherit padding-bottom-0">
                      <div class="pagination widthp-100 flex-inherit justify-content-end">
                         <div class="flex selectBox">
                            <Select
@@ -462,7 +462,7 @@ export default function Inplay() {
                            />
                         </div>
                         <div class="grow-2"></div>
-                        <div class="flex page">
+                        <div class="flex page heightp-100">
                            <button
                               class="page-left btn-0 background-transparent-b-20 flex align-items-center justify-content-center margin-right-5"
                               onClick={() => {
@@ -494,7 +494,7 @@ export default function Inplay() {
                      </div>
                   </div>
                </div>
-               <div class="inplay-detail flex-inherit flex-column padding-vertical-10 padding-left-5 padding-right-10">
+               <div class="inplay-detail flex-inherit flex-column padding-vertical-10 padding-left-5 padding-right-10 border-left">
                   {sports.sideMarket?.markets?.length > 0 ?
                      <div class="detail-header flex-inherit flex-column">
                         <div class="height-40 align-items-center background-transparent-b-20 padding-horizontal-10">
@@ -681,9 +681,10 @@ export default function Inplay() {
 
                            return rows;
                         })
-                        : <div class="align-items-center border-left" style={{ paddingLeft: "45%" }}>
+                        : <div class="align-items-center" class="justify-content-center">
                            <Logo width="120" height="30" />
-                        </div>}
+                        </div>
+                        }
                   </div>
                </div>
             </div>

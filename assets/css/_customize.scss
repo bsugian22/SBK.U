@@ -899,7 +899,9 @@ select {
          &.select-position {
             .select-box__menu {
                position: absolute;
-               top: -35px;
+               bottom: 100%;
+               top: auto;
+               margin-top: 1px;
             }
          }
          .select-box__control {
@@ -939,7 +941,7 @@ select {
                   padding: 12px 12px;
 
                   &:hover {
-                     background-color: rgba(0, 0, 0, 0.2);
+                     background-color: rgba(32, 35, 52, 1.000);
                      transition: 0.2s ease;
                   }
                }
@@ -1017,7 +1019,7 @@ select {
 
 /* Esports-wrap */
 .esports-wrap {
-   height: calc(100% - 35px);
+   height: calc(100% - 50px);
    .esports-content {
       width: 50%;
       padding-right: 5px !important;
