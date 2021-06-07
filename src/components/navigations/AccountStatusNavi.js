@@ -24,7 +24,7 @@ export default function AccountStatusNavi(props) {
   return (
     <Fragment>
       <div class="right-account-sidebar content-height width-300 flex-inherit flex-column scrollable-auto border-left border-left-shadow">
-        <div class="summary-title height-45 background-transparent-b-10 align-items-center-inherit flex-inherit padding-left-15 border-bottom">
+        <div class="summary-title height-45 shrink-0 background-transparent-b-10 align-items-center-inherit flex-inherit padding-left-15 border-bottom">
           <span class="color-green">
             SUMMARY
           </span>
