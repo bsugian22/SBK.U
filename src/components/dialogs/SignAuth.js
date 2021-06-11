@@ -47,14 +47,14 @@ export default function SignAuth() {
          return;
       }
 
-      dispatch(verifyTelNumber({
-         tel_number: register.tel_number,
-         token: register.tel_verification_number,
-         onSuccess : ()=>{
-            SigninfoDialog();
-         }
-      }));
-
+      // dispatch(verifyTelNumber({
+      //    tel_number: register.tel_number,
+      //    token: register.tel_verification_number,
+      //    onSuccess : ()=>{
+      //       SigninfoDialog();
+      //    }
+      // }));
+      SigninfoDialog();
       return;
    }
 

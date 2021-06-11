@@ -25,7 +25,7 @@ export default function Signinfo() {
     });
   };
 
-   const submit = () => {
+   const submitRegistration = () => {
       if (!register.account_bank) {
          dispatch(showModal({
             text: "은행명을 입력해주세요."
@@ -47,7 +47,6 @@ export default function Signinfo() {
          }));
          return false;
       }
-
       if (register.account_number.length < 10) {
          dispatch(showModal({
             text: "계좌번호는 10 글자 보다 작을 수 없습니다."
@@ -106,7 +105,6 @@ export default function Signinfo() {
 
       dispatch(createRegister(register, () => {
          swal.close();
-
       }));
    }
 
@@ -284,7 +282,7 @@ export default function Signinfo() {
                   <button 
                      type="button" 
                      class="next-sign-auth background-green color-white padding-vertical-15 padding-horizontal-45"
-                     onClick={submit}
+                     onClick={submitRegistration}
                   >
                      회원가입
                   </button>

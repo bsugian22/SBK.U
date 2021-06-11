@@ -14,7 +14,7 @@ const initialState = {
     country_code: "",
     language: "",
     tel_number: "",
-    tel_verification_sent : false,
+    tel_verification_sent : true,
     tel_verification_number : "",
     account_bank: "",
     account_number: "",

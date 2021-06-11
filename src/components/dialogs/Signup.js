@@ -27,7 +27,7 @@ export default function Signup() {
 
    const checkUsername = () => {
       var regExp = /^[a-z]+[a-z0-9]{3,9}$/g;
-      if (register.username && !regExp.test(register.username)) {
+      if (!regExp.test(register.username)) {
          dispatch(showModal({
             text: "아이디는 4~10자 이내의 영문자와 숫자의 조합으로만 사용할 수 있습니다."
          }));
@@ -54,7 +54,6 @@ export default function Signup() {
       if (!checkUsername()) {
          return;
       }
-
       if (!register.username) {
          dispatch(showModal({
             text: "아이디를 입력해주세요."

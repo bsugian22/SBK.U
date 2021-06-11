@@ -223,7 +223,6 @@ export const createRegister = (register, callback) => {
       .then(response => {
         const registration = camelize(response.data);
         dispatch(createRegisterSuccess(registration));
-        
         dispatch(showModal({
           text: registration.message,
           confirm : ()=>{
