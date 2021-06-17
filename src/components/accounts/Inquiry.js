@@ -173,7 +173,7 @@ const Inquiry = () => {
                 </table>
               </div>
               <div class="inquiry-item-footer flex-inherit border-top border-bottom-rb padding-vertical-10 align-items-center background-transparent-b-10">
-                <div class="grow-2 padding-left-10">
+                <div class="grow-2 padding-horizontal-10">
                   {/* Delete Inquiries */}
                   <button
                     type="button"
@@ -198,6 +198,13 @@ const Inquiry = () => {
                   >
                     <i class="fal fa-trash-alt"></i>
                     선택삭제
+                  </button>
+                  <div class="grow-2"></div>
+                  <button class="write page-right width-80 background-transparent-b-10"
+                    onClick={() => {
+                      dispatch(resetCreateInquiry());
+                    }}>
+                    <i class="fal fa-pencil-alt color-grey"></i><span class="color-grey">글 작성</span>
                   </button>
                 </div>
               </div>
