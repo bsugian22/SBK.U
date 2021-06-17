@@ -19,7 +19,7 @@ const persistConfig = {
 };
 
 const enhancedReducer = persistReducer(persistConfig, rootReducer);
-const middleWare = applyMiddleware(logger, thunk);
+const middleWare = applyMiddleware( thunk);
 export const mapStateToProps = (state) => {
   return {
     preferences: state.preference.preferences,
