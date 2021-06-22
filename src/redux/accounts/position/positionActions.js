@@ -197,7 +197,25 @@ export const setPositions = (params) => {
       })
       .catch((error) => {
 
-        dispatch(fetchPositionsFailure(error.message));
+        dispatch(fetchPositionsFailure(error.response.data.message));
+        if (error.response.status == 401) {
+          dispatch(setLogout());
+        }
+      });
+  };
+};
+
+export const setCancel = (position) => {
+  return (dispatch) => {
+    dispatch(fetchPositionsRequest());
+    axios
+      .get(`/api/positions/cancel/` + position)
+      .then((response) => {
+        //TODO. fill code
+        location.reload();
+      })
+      .catch((error) => {
+        dispatch(fetchPositionsFailure(error.response.data.message));
         if (error.response.status == 401) {
           dispatch(setLogout());
         }
@@ -222,6 +240,12 @@ export const setPagePosition = () => {
 export const onClickPagePosition = (data) => {
   return (dispatch) => {
     dispatch(setPositions(data));
+  };
+};
+
+export const onClickCancelPosition = (data) => {
+  return (dispatch) => {
+    dispatch(setCancel(data));
   };
 };
 

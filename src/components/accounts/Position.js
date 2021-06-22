@@ -16,6 +16,7 @@ import {
   changePositionIds,
   createPositionAction,
   onClickPagePosition,
+  onClickCancelPosition,
   prevPagePosition,
   nextPagePosition,
   selectAllPosition,
@@ -55,7 +56,7 @@ export default function Position() {
             <div class="position-comfile flex-column flex-inherit">
               <div class="flex-column flex-inherit widthp-100">
                 <div class="red-shadow height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
-                  <span class="color-white grow-2">배팅내역 </span>
+                  <span class="color-white grow-2">베팅내역 </span>
                 </div>
                 <div class="position-tab height-45 border-bottom-rb border-top flex-inherit align-items-center-inherit background-transparent-b-5">
                   <div
@@ -154,7 +155,7 @@ export default function Position() {
                         <span class="color-grey">전체선택</span>
                       </th>
                       <th class="height-45">
-                        <span class="color-grey">배팅시간</span>
+                        <span class="color-grey">베팅시간</span>
                       </th>
                       <th class="height-45">
                         <span class="color-grey">타입</span>
@@ -163,7 +164,7 @@ export default function Position() {
                         <span class="color-grey">배당</span>
                       </th>
                       <th class="height-45">
-                        <span class="color-grey">배팅금액</span>
+                        <span class="color-grey">베팅금액</span>
                       </th>
                       <th class="height-45">
                         <span class="color-grey">예상 당첨금</span>
@@ -372,8 +373,12 @@ export default function Position() {
           <div class="position-right-content account-height widthp-50 padding-10 flex-inherit flex-column border-left scrollable-auto" hidden={position.selectedPosition == null ? true : false}>
             <div class="position-comfile flex-column flex-inherit">
               <div class="flex-column flex-inherit widthp-100">
-                <div class="red-shadow height-45 background-transparent-b-10 align-items-center padding-left-15 border-bottom-rb flex-inherit">
-                  <span class="color-white">배팅 상세 내역</span>
+                <div class="red-shadow height-45 background-transparent-b-10 align-items-center padding-horizontal-15 border-bottom-rb flex-inherit">
+                  <span class="color-white">베팅 상세 내역</span>
+                  <div class="grow-1"></div>
+                  <span class="color-red bet-cancel background-transparent-b-10 padding-horizontal-10 padding-vertical-5" onClick={() => {
+                    dispatch(onClickCancelPosition(position.selectedPosition.id));
+                  }}>베팅취소</span>
                 </div>
               </div>
               <div class="position-content flex-column">
@@ -390,7 +395,7 @@ export default function Position() {
                         <span class="color-grey">스코어</span>
                       </th>
                       <th class="height-45">
-                        <span class="color-grey">배팅</span>
+                        <span class="color-grey">베팅</span>
                       </th>
                       <th class="height-45">
                         <span class="color-grey">배당</span>
@@ -485,7 +490,7 @@ export default function Position() {
                     <span class="color-white margin-left-5">2</span>
                   </span>
                   <span class="color-grey">
-                    배팅금액
+                    베팅금액
                     {/* <span class="color-green margin-left-5">{position.selectedPosition == null ? "" : position.selectedPosition.amount.toLocaleString()} 원</span> */}
                   </span>
                 </div>
@@ -561,12 +566,12 @@ export default function Position() {
         <div class="interload-tab height-50 border-bottom-rb">
           <div class="flex widthp-50">
             <button type="button" class="active">
-              <Link to="/betting/list">배팅목록</Link>
+              <Link to="/betting/list">베팅목록</Link>
             </button>
           </div>
           <div class="flex widthp-50">
             <button type="button">
-              <Link to="/betting/listdetail">배팅상세</Link>
+              <Link to="/betting/listdetail">베팅상세</Link>
             </button>
           </div>
         </div>
