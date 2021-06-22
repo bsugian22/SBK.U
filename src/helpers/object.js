@@ -40,6 +40,8 @@ for (let index = 1; index <= 198; index++) {
 }
 
 export const setCompetitorName = (name, homeTeam, awayTeam, specifierData = {}) => {
+
+    
     if (name.includes('{$competitor1}')) {
         name = name.replaceAll('{$competitor1}', homeTeam)
     }
@@ -78,6 +80,7 @@ export const setCompetitorName = (name, homeTeam, awayTeam, specifierData = {}) 
 
 
     }
+    name = name.replaceAll("undefined", "")
 
     return name
 }
