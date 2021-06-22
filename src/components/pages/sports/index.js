@@ -344,8 +344,8 @@ const Sports = (props) => {
                   rows.push(
                     matches?.matches?.map((match, key) => {
                       let sport_main_market_exists = false
-                      let homeTeam = sports?.competitors?.data ? sports?.competitors?.data?.find(x => x.id == match?.homeTeamId).competitor?.name?.ko : "";
-                      let awayTeam = sports?.competitors?.data ? sports?.competitors?.data?.find(x => x.id == match?.awayTeamId).competitor?.name?.ko : "";
+                      let homeTeam = sports?.competitors?.data ? sports?.competitors?.data?.find(x => x.id == match?.homeTeamId)?.competitor?.name?.ko : "";
+                      let awayTeam = sports?.competitors?.data ? sports?.competitors?.data?.find(x => x.id == match?.awayTeamId)?.competitor?.name?.ko : "";
 
 
                       return (
@@ -844,11 +844,11 @@ const Sports = (props) => {
                       <span class="color-grey">
                         {/* {sports.data.detail_data.homeTeam.name.ko ||
                           sports.data.detail_data.homeTeam.name.en} */}
-                        {sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko : ""}
+                        {sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId)?.competitor?.name?.ko : ""}
                         <span class="margin-horizontal-4 color-twhite">vs</span>
                         {/* {sports.data.detail_data.awayTeam.name.ko ||
                           sports.data.detail_data.awayTeam.name.en} */}
-                        {sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko : ""}
+                        {sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId)?.competitor?.name?.ko : ""}
                       </span>
                     </div>
                     <div class="flex align-items-center">
@@ -867,8 +867,8 @@ const Sports = (props) => {
 
 
                       let specifer = market.market.specifier
-                      let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId).competitor?.name?.ko : "";
-                      let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId).competitor?.name?.ko : "";
+                      let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId)?.competitor?.name?.ko : "";
+                      let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId)?.competitor?.name?.ko : "";
                       let marketName = sports.markets?.data ? sports.markets.data.find(x => x.id == market.marketId).marketName.ko : ""
 
                       var rows = [];
