@@ -115,10 +115,12 @@ const sportsdetailReducer = (state = initialState, action) => {
               }
             }
 
-
-
-
-
+            let total_odds = 1;
+            state.data.bet.outcomes.forEach(e => {
+              total_odds *= e.odds;
+            });
+      
+            state.data.bet.total_odds = total_odds
 
           })
         }
