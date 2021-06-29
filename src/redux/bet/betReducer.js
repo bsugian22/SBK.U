@@ -42,15 +42,15 @@ const sportsdetailReducer = (state = initialState, action) => {
             let wsMarketId = ws_data.marketId;
             let wsStatus = ws_data.status
             // console.log(wsStatus)
-            // if (wsStatus != 1 && state_bet.find(x => x.match_id == wsMatchId)) {
-            //   console.log(wsStatus)
-            //   state.data.bet.outcomes.splice(state_bet.findIndex(x => x.match_id == wsMatchId), 1)
-            //   swal.fire({
-            //     title: '이미 마감된 경기가 있습니다.',
-            //     icon: 'warning',
-            //     html: message,
-            //   })
-            // }
+            if (wsStatus != 1 && state_bet.find(x => x.match_id == wsMatchId)) {
+              console.log(wsStatus)
+              state.data.bet.outcomes.splice(state_bet.findIndex(x => x.match_id == wsMatchId), 1)
+              swal.fire({
+                title: '이미 마감된 경기가 있습니다.',
+                icon: 'warning',
+                html: message,
+              })
+            }
             // check if the market is same with the ws data and details data 
             if (marketId == wsMarketId) {
 
