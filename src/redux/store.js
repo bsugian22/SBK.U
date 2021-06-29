@@ -15,11 +15,11 @@ import { fetchCompetitors, fetchMarkets, fetchOutcomes, fetchSports, fetchTourna
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ['preference', 'user']
+  whitelist: ['preference', 'user','sportsdetail']
 };
 
 const enhancedReducer = persistReducer(persistConfig, rootReducer);
-const middleWare = applyMiddleware(thunk);
+const middleWare = applyMiddleware(logger,thunk);
 export const mapStateToProps = (state) => {
   return {
     preferences: state.preference.preferences,

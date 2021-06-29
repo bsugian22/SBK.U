@@ -32,7 +32,12 @@ export const setBetAmount = (amount) => {
   };
 };
 
-
+export const setWSBetslip = (market) => {
+  return {
+    type: types.SET_WS_BETSLIP,
+    payload: market
+  };
+};
 
 export const betRequest = () => {
   return {

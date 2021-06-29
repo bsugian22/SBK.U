@@ -8,7 +8,7 @@ import { mapStateToProps, mapDispatchProps } from "../../../redux/store";
 import sportsModel from "../../../models/sportsModel";
 import MenuContext from "../../../contexts/Menu.context";
 import { refreshToken } from "../../../redux/user/userActions";
-import { setBetOutcome } from "../../../redux/bet/betActions";
+import { setBetOutcome, validateBet } from "../../../redux/bet/betActions";
 import { iconsList, setCompetitorName } from "../../../helpers/object";
 import { fetchMarketPerMatch, fetchMatches, setMatchIds, resetSideMarkets, setSportsType, setSearch, sortMatchesByTime, sortMatchesByLeague, resetAll, setBookmark, sortByBookmarked, searchMatches, setMarketType, sortByTime, sortByLeague } from "../../../redux/sport/sportActions";
 
@@ -32,7 +32,7 @@ const Sports = (props) => {
       dispatch(refreshToken())
     }
     dispatch(fetchMatches())
-    // dispatch(validateBet(sports.data.bet))
+    dispatch(validateBet(sportDetails?.data?.bet))
     return () => {
       isSubscribed = false;
     };
@@ -59,13 +59,14 @@ const Sports = (props) => {
   const setBet = (e) => {
     let match_id = e.currentTarget.getAttribute("data-match-id");
     let market_id = e.currentTarget.getAttribute("data-market-id");
-    let outcome_id = e.currentTarget.getAttribute("data-outcome-id");
+    let outcome_id_outcome= e.currentTarget.getAttribute("data-outcome-id-outcome");
+let outcome_id= e.currentTarget.getAttribute("data-outcome-id");
     let odds = e.currentTarget.getAttribute("data-odds");
     let home_team = e.currentTarget.getAttribute("data-home-team");
     let away_team = e.currentTarget.getAttribute("data-away-team");
     let market_name = e.currentTarget.getAttribute("data-market_name");
     let outcome_name = e.currentTarget.getAttribute("data-outcome_name");
-    // let specifier = e.currentTarget.getAttribute("data-specifier");
+    let specifier = e.currentTarget.getAttribute("data-specifier");
     // let market_type = e.currentTarget.getAttribute("data-market-type");
     // let name_id = e.currentTarget.getAttribute("data-name-id");
 
@@ -79,7 +80,8 @@ const Sports = (props) => {
       away_team: away_team,
       market_name: market_name,
       outcome_name: outcome_name,
-      // specifier: specifier,
+      specifier: specifier,
+      outcome_id_outcome: outcome_id_outcome
       // market_type: market_type,
       // outcome_name_id: name_id
     }
@@ -418,7 +420,9 @@ const Sports = (props) => {
                                                 data-match-id={match.id}
                                                 data-market-id={market.marketId}
                                                 data-outcome-id={outcome.id}
+data-outcome-id-outcome={outcome.outcomeId}
                                                 data-odds={outcome.odds}
+                                                data-specifier={JSON.stringify(specifer)}
                                                 class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? classNameActive : className}
                                               >
                                                 <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
@@ -519,7 +523,9 @@ const Sports = (props) => {
                                                   data-match-id={match.id}
                                                   data-market-id={market.marketId}
                                                   data-outcome-id={outcome.id}
+data-outcome-id-outcome={outcome.outcomeId}
                                                   data-odds={outcome.odds}
+                                                  data-specifier={JSON.stringify(specifer)}
                                                   class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"}
                                                 >
                                                   <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
@@ -612,7 +618,9 @@ const Sports = (props) => {
                                                   data-match-id={match.id}
                                                   data-market-id={market.marketId}
                                                   data-outcome-id={outcome.id}
+data-outcome-id-outcome={outcome.outcomeId}
                                                   data-odds={outcome.odds}
+                                                  data-specifier={JSON.stringify(specifer)}
                                                   class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2" : " widthp-50 pick padding-horizontal-5 heightp-100 background-transparent-w-5 margin-right-2"}
                                                 >
                                                   <div class="flex flex-inherit flex-row widthp-100 heightp-100 align-items-center">
@@ -904,7 +912,9 @@ const Sports = (props) => {
                                       data-match-id={sports.sideMarket.id}
                                       data-market-id={market.marketId}
                                       data-outcome-id={outcome.id}
+data-outcome-id-outcome={outcome.outcomeId}
                                       data-odds={outcome.odds}
+                                      data-specifier={JSON.stringify(specifer)}
                                       class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}
                                     >
                                       <div class="grow-2 text-ellipsis padding-horizontal-2">
@@ -937,7 +947,9 @@ const Sports = (props) => {
                                       data-match-id={sports.sideMarket.id}
                                       data-market-id={market.marketId}
                                       data-outcome-id={outcome.id}
+data-outcome-id-outcome={outcome.outcomeId}
                                       data-odds={outcome.odds}
+                                      data-specifier={JSON.stringify(specifer)}
                                       class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}
                                     >
                                       <div class="grow-2 text-ellipsis padding-horizontal-2">

@@ -38,7 +38,8 @@ export default function Esports() {
    const setBet = (e) => {
       let match_id = e.currentTarget.getAttribute("data-match-id");
       let market_id = e.currentTarget.getAttribute("data-market-id");
-      let outcome_id = e.currentTarget.getAttribute("data-outcome-id");
+      let outcome_id_outcome= e.currentTarget.getAttribute("data-outcome-id-outcome");
+let outcome_id= e.currentTarget.getAttribute("data-outcome-id");
       let odds = e.currentTarget.getAttribute("data-odds");
       let home_team = e.currentTarget.getAttribute("data-home-team");
       let away_team = e.currentTarget.getAttribute("data-away-team");
@@ -60,7 +61,8 @@ export default function Esports() {
          outcome_name: outcome_name,
          specifier: specifier,
          market_type: market_type,
-         outcome_name_id: name_id
+         outcome_name_id: name_id,
+         outcome_id_outcome: outcome_id_outcome
       }
       dispatch(setBetOutcome(data))
    };
@@ -265,7 +267,9 @@ export default function Esports() {
                                                          data-match-id={match.id}
                                                          data-market-id={market.marketId}
                                                          data-outcome-id={outcome.id}
+data-outcome-id-outcome={outcome.outcomeId}
                                                          data-odds={outcome.odds}
+                                                         data-specifier={JSON.stringify(specifer)}
                                                          class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd color-grey" : " odd color-grey"}
                                                       >
                                                          {outcome.oldOdds == null ?
@@ -323,7 +327,9 @@ export default function Esports() {
                                                             data-match-id={match.id}
                                                             data-market-id={market.marketId}
                                                             data-outcome-id={outcome.id}
+data-outcome-id-outcome={outcome.outcomeId}
                                                             data-odds={outcome.odds}
+                                                            data-specifier={JSON.stringify(specifer)}
                                                             class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd align-items-center-inherit justify-content-center-inherit" : " odd align-items-center-inherit justify-content-center-inherit"}
                                                          >
                                                             {outcome.oldOdds == null ?
@@ -383,7 +389,9 @@ export default function Esports() {
                                                             data-match-id={match.id}
                                                             data-market-id={market.marketId}
                                                             data-outcome-id={outcome.id}
+data-outcome-id-outcome={outcome.outcomeId}
                                                             data-odds={outcome.odds}
+                                                            data-specifier={JSON.stringify(specifer)}
                                                             class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd align-items-center-inherit justify-content-center-inherit" : " odd align-items-center-inherit justify-content-center-inherit"}
                                                          >
                                                             {outcome.oldOdds == null ?
@@ -575,7 +583,9 @@ export default function Esports() {
                                                    data-match-id={sports.sideMarket.id}
                                                    data-market-id={market.marketId}
                                                    data-outcome-id={outcome.id}
+data-outcome-id-outcome={outcome.outcomeId}
                                                    data-odds={outcome.odds}
+                                                   data-specifier={JSON.stringify(specifer)}
                                                    class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
@@ -608,7 +618,9 @@ export default function Esports() {
                                                    data-match-id={sports.sideMarket.id}
                                                    data-market-id={market.marketId}
                                                    data-outcome-id={outcome.id}
+data-outcome-id-outcome={outcome.outcomeId}
                                                    data-odds={outcome.odds}
+                                                   data-specifier={JSON.stringify(specifer)}
                                                    class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">

@@ -5,6 +5,7 @@ import moment from "moment";
 import { camelize, snakelize } from "../../helpers/object";
 import { fetchMarketPerMatchesSuccesEsports, fetchPrematches, setSportsTypeEsports } from "../esport/esportActions";
 import socketIOClient from "socket.io-client";
+import { setWSBetslip } from "../bet/betActions";
 
 export const socket = socketIOClient("wss://io.vosa.dev");
 
@@ -596,7 +597,7 @@ export const sportWebSocket = (matches) => {
     socket.on('changed', (match) => {
       dispatch(setWSMarket(camelize(match)))
       dispatch(setWSMarketInplay(camelize(match)))
-
+      dispatch(setWSBetslip(camelize(match)))
 
     });
   }

@@ -40,6 +40,7 @@ export default function Inplay() {
    const setBet = (e) => {
       let match_id = e.currentTarget.getAttribute("data-match-id");
       let market_id = e.currentTarget.getAttribute("data-market-id");
+      let outcome_id_outcome = e.currentTarget.getAttribute("data-outcome-id-outcome");
       let outcome_id = e.currentTarget.getAttribute("data-outcome-id");
       let odds = e.currentTarget.getAttribute("data-odds");
       let home_team = e.currentTarget.getAttribute("data-home-team");
@@ -62,7 +63,8 @@ export default function Inplay() {
          outcome_name: outcome_name,
          specifier: specifier,
          market_type: market_type,
-         outcome_name_id: name_id
+         outcome_name_id: name_id,
+         outcome_id_outcome: outcome_id_outcome
       }
       dispatch(setBetOutcome(data))
    };
@@ -171,7 +173,7 @@ export default function Inplay() {
                            let sport_total_market_exists = false
                            let homeTeam = sports?.competitors?.data ? sports?.competitors?.data.find(x => x.id == match.homeTeamId)?.competitor?.name?.ko : "";
                            let awayTeam = sports?.competitors?.data ? sports?.competitors?.data.find(x => x.id == match.awayTeamId)?.competitor?.name?.ko : "";
-                           
+
                            var row = [];
                            row.push(
                               <div key={match.id} class="title background-transparent-b-30 height-40 align-items-center-inherit">
@@ -255,7 +257,9 @@ export default function Inplay() {
                                                          data-match-id={match.id}
                                                          data-market-id={market.marketId}
                                                          data-outcome-id={outcome.id}
+                                                         data-outcome-id-outcome={outcome.outcomeId}
                                                          data-odds={outcome.odds}
+                                                         data-specifier={JSON.stringify(specifer)}
                                                          class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd color-grey" : " odd color-grey"}
                                                       >
                                                          {outcome.oldOdds == null ?
@@ -313,7 +317,9 @@ export default function Inplay() {
                                                             data-match-id={match.id}
                                                             data-market-id={market.marketId}
                                                             data-outcome-id={outcome.id}
+                                                            data-outcome-id-outcome={outcome.outcomeId}
                                                             data-odds={outcome.odds}
+                                                            data-specifier={JSON.stringify(specifer)}
                                                             class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd align-items-center-inherit justify-content-center-inherit" : " odd align-items-center-inherit justify-content-center-inherit"}
                                                          >
                                                             {outcome.oldOdds == null ?
@@ -373,7 +379,9 @@ export default function Inplay() {
                                                             data-match-id={match.id}
                                                             data-market-id={market.marketId}
                                                             data-outcome-id={outcome.id}
+                                                            data-outcome-id-outcome={outcome.outcomeId}
                                                             data-odds={outcome.odds}
+                                                            data-specifier={JSON.stringify(specifer)}
                                                             class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active odd align-items-center-inherit justify-content-center-inherit" : " odd align-items-center-inherit justify-content-center-inherit"}
                                                          >
                                                             {outcome.oldOdds == null ?
@@ -428,7 +436,7 @@ export default function Inplay() {
                                  </div>
                               </div>)
 
-                          
+
                            return row
                         }) : <div class="flex justify-content-center heightp-100 align-items-center"><i class="fa fa-spinner fa-spin fa-4x fa-fw color-grey"></i></div>
                      }
@@ -522,7 +530,7 @@ export default function Inplay() {
                   <div class="market-list flex-inherit flex-column scrollable-auto">
                      {sports.sideMarket?.markets?.length > 0
                         ? sports.sideMarket.markets.map((market, market_index) => {
-                          
+
                            let specifer = market.market.specifier
                            let homeTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.homeTeamId)?.competitor?.name?.ko : "";
                            let awayTeam = sports.competitors?.data ? sports.competitors?.data.find(x => x.id == sports.sideMarket.awayTeamId)?.competitor?.name?.ko : "";
@@ -561,7 +569,9 @@ export default function Inplay() {
                                                    data-match-id={sports.sideMarket.id}
                                                    data-market-id={market.marketId}
                                                    data-outcome-id={outcome.id}
+                                                   data-outcome-id-outcome={outcome.outcomeId}
                                                    data-odds={outcome.odds}
+                                                   data-specifier={JSON.stringify(specifer)}
                                                    class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-50 padding-horizontal-5"}
                                                 >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
@@ -594,9 +604,11 @@ export default function Inplay() {
                                                    data-match-id={sports.sideMarket.id}
                                                    data-market-id={market.marketId}
                                                    data-outcome-id={outcome.id}
+                                                   data-outcome-id-outcome={outcome.outcomeId}
                                                    data-odds={outcome.odds}
+                                                   data-specifier={JSON.stringify(specifer)}
                                                    class={(outcome.enabled == 1 || outcome.enabled == true) && sportDetails.data.bet.outcomes.find(x => x.id == outcome.id) ? "active height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5" : " height-40 data flex-inherit align-items-center background-transparent-w-5 widthp-33 padding-horizontal-5"}
-                                                 >
+                                                >
                                                    <div class="grow-2 text-ellipsis padding-horizontal-2">
                                                       <span class="color-grey text-ellipsis">
                                                          {setCompetitorName(outcomeName, homeTeam, awayTeam, specifer)}
@@ -684,7 +696,7 @@ export default function Inplay() {
                         : <div class="align-items-center" class="justify-content-center">
                            <Logo width="120" height="30" />
                         </div>
-                        }
+                     }
                   </div>
                </div>
             </div>
