@@ -17,7 +17,13 @@ const initialState = {
 const sportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
 
+    case types.RESET_LOADING_BET:
+      
 
+      return {
+        ...state,
+        loadingBet:false
+      };
 
     case types.SET_WS_BETSLIP:
 

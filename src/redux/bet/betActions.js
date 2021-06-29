@@ -5,6 +5,12 @@ import echo from "../../plugins/echo";
 
 const swal = new sweetalert();
 
+export const resetLoadingBet = (data) => {
+  return {
+    type: types.RESET_LOADING_BET,
+  };
+};
+
 export const setBetOutcome = (data) => {
   return {
     type: types.SET_BET_OUTCOMES,

@@ -11,6 +11,7 @@ import * as preferencesActions from "./preference/preferenceActions";
 import * as registerActions from "./register/registerActions";
 import { fetchSummary } from "./navigations/accountSummary/accountSummaryActions";
 import { fetchCompetitors, fetchMarkets, fetchOutcomes, fetchSports, fetchTournaments } from "./sport/sportActions";
+import { resetLoadingBet } from "./bet/betActions";
 
 const persistConfig = {
   key: "root",
@@ -50,6 +51,7 @@ export const mapDispatchProps = (dispatch) => {
       dispatch(fetchOutcomes());
       dispatch(fetchMarkets());
       dispatch(fetchSports());
+      dispatch(resetLoadingBet())
     },
     setPreferences: (payload) => {
       dispatch(preferencesActions.setPreferences(payload));

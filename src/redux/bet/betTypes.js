@@ -9,3 +9,4 @@ export const BET_REQUEST = "BET_REQUEST";
 export const BET_SUCCESS = "BET_SUCCESS";
 export const BET_FAILURE = "BET_FAILURE";
 export const SET_WS_BETSLIP = "SET_WS_BETSLIP";
+export const RESET_LOADING_BET = "RESET_LOADING_BET";
