@@ -189,6 +189,16 @@
   overflow-x: hidden;
   transition: background-color 0.1s;
   -webkit-overflow-scrolling: touch;
+
+  overflow-y: auto;
+  position: absolute !important;
+  width: 100%;
+  z-index: 99999999999999999 !important;
+  height: 500px;
+  bottom: 50% !important;
+  top: 50% !important;
+
+
 }
 
 .swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
