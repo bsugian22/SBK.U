@@ -18,11 +18,11 @@ const sportsdetailReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case types.RESET_LOADING_BET:
-      
+
 
       return {
         ...state,
-        loadingBet:false
+        loadingBet: false
       };
 
     case types.SET_WS_BETSLIP:
@@ -48,32 +48,13 @@ const sportsdetailReducer = (state = initialState, action) => {
             let wsMarketId = ws_data.marketId;
             let wsStatus = ws_data.status
             // console.log(wsStatus)
-            if (wsStatus != 1 && state_bet.find(x => x.match_id == wsMatchId)) {
-              state.data.bet.outcomes.splice(state_bet.findIndex(x => x.match_id == wsMatchId), 1)
-              swal.fire({
-                title: '이미 마감된 경기가 있습니다.',
-                icon: 'warning',
-                html: message,
-              })
-            }
+
             // check if the market is same with the ws data and details data 
             if (marketId == wsMarketId) {
 
 
               if (wsSpecifier == "{}") { // check if the specifer is only one 
-                // ws_data_market_outcomes.map((ws_market_data, index) => {
-                //   let ws_outcome_id = ws_market_data.outcome_id;
-                //   let ws_new_outcome_odds = ws_market_data.odds;
 
-
-                //   // check if the outcomes has the same id and name
-
-                //   if (ws_outcome_id == details_name_id) {
-                //     let old_value = data.odds;
-                //     data.odds = ws_new_outcome_odds
-                //     data.oldOdds = old_value
-                //   }
-                // })
 
                 ws_data_market_outcomes.map((wsOutcome) => {
 
@@ -84,6 +65,15 @@ const sportsdetailReducer = (state = initialState, action) => {
                   }
 
                 })
+
+                if (wsStatus != 1 && state_bet.find(x => x.market_id == wsMarketId)) {
+                  state.data.bet.outcomes.splice(state_bet.findIndex(x => x.market_id == wsMarketId), 1)
+                  swal.fire({
+                    title: '이미 마감된 경기가 있습니다.',
+                    icon: 'warning',
+                    html: message,
+                  })
+                }
 
 
               } else {
@@ -100,19 +90,16 @@ const sportsdetailReducer = (state = initialState, action) => {
 
                   })
 
-                  // ws_data_market_outcomes.map((ws_market_data, index) => {
-                  //   let ws_outcome_id = ws_market_data.outcome_id;
-                  //   let ws_new_outcome_odds = ws_market_data.odds;
+                  if (wsStatus != 1 && state_bet.find(x => x.market_id == wsMarketId)) {
+                    state.data.bet.outcomes.splice(state_bet.findIndex(x => x.market_id == wsMarketId), 1)
+                    swal.fire({
+                      title: '이미 마감된 경기가 있습니다.',
+                      icon: 'warning',
+                      html: message,
+                    })
+                  }
 
-                  //   // check if the outcomes has the same id and name
 
-                  //   if (ws_outcome_id == details_name_id) {
-                  //     let old_value = data.odds;
-                  //     data.oldOdds = old_value
-                  //     data.odds = ws_new_outcome_odds // changing value of the state of the outcomes odds
-                  //   }
-
-                  // })
                 }
               }
             }
@@ -121,7 +108,7 @@ const sportsdetailReducer = (state = initialState, action) => {
             state.data.bet.outcomes.forEach(e => {
               total_odds *= e.odds;
             });
-      
+
             state.data.bet.total_odds = total_odds
 
           })
