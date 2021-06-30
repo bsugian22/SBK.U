@@ -111,7 +111,7 @@ export default function BetslipNavi(props) {
                         </div>
                       </div>
                       <div class="flex-inherit team-info padding-left-10 text-ellipsis">
-                        <span class="color-grey text-ellipsis">{outcome.home_team.length < 8 ? outcome.home_team : outcome.home_team.substring(0, 8) + "..."}<span class="color-white padding-horizontal-5">vs</span>{outcome.away_team.length < 8 ? outcome.away_team : outcome.away_team.substring(0, 8) + "..."}</span>
+                        <span class="color-grey text-ellipsis">{outcome?.home_team? outcome.home_team : ""}<span class="color-white padding-horizontal-5">vs</span>{outcome?.away_team? outcome.away_team : ""}</span>
                       </div>
                     </div>
                   </div>

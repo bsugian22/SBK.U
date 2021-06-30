@@ -51,8 +51,12 @@ const sportsdetailReducer = (state = initialState, action) => {
 
             // check if the market is same with the ws data and details data 
             if (marketId == wsMarketId) {
-
-
+              
+              console.log(wsMarketId)
+              console.log(marketId)
+              console.log(data)
+              console.log(ws_data)
+              
               if (wsSpecifier == "{}") { // check if the specifer is only one 
 
 
