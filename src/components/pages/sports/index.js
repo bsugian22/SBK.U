@@ -32,7 +32,7 @@ const Sports = (props) => {
       dispatch(refreshToken())
     }
     dispatch(fetchMatches())
-    dispatch(validateBet(sportDetails?.data?.bet))
+    // dispatch(validateBet(sportDetails?.data?.bet))
     return () => {
       isSubscribed = false;
     };

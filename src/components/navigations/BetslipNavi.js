@@ -33,6 +33,16 @@ export default function BetslipNavi(props) {
   }, []);
 
 
+  const formatInput = (e) => {
+    let checkIfNum;
+    if (e.key !== undefined) {
+      checkIfNum = e.key === "e" || e.key === "." || e.key === "+" || e.key === "-" ;
+    }
+    else if (e.keyCode !== undefined) {
+      checkIfNum = e.keyCode === 69 || e.keyCode === 190 || e.keyCode === 187 || e.keyCode === 189;
+    }
+    return checkIfNum && e.preventDefault();
+  }
 
   const setBet = (value) => {
     dispatch(setBetAmount(value));
@@ -123,7 +133,7 @@ export default function BetslipNavi(props) {
                 <div class="grow-2 color-grey">베팅금액</div>
                 <div class="">
                   <input
-                    type="text"
+                    type="number"
                     class="input-form width-150 stake-input padding-vertical-5 padding-horizontal-10 text-align-right heightp-100 background-transparent-b-10 color-white"
                     name="skeyword"
                     placeholder="금액을 입력하세요"
@@ -132,6 +142,7 @@ export default function BetslipNavi(props) {
                     onChange={(e) =>
                       dispatch(setBetAmount(e.target.value))
                     }
+                    onKeyDown={ formatInput } 
                   />
                 </div>
               </div>

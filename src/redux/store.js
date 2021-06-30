@@ -10,25 +10,35 @@ import * as userActions from "./user/userActions";
 import * as preferencesActions from "./preference/preferenceActions";
 import * as registerActions from "./register/registerActions";
 import { fetchSummary } from "./navigations/accountSummary/accountSummaryActions";
-import { fetchCompetitors, fetchMarkets, fetchOutcomes, fetchSports, fetchTournaments } from "./sport/sportActions";
-import { resetLoadingBet } from "./bet/betActions";
+import { fetchCompetitors, fetchMarkets, fetchOutcomes, fetchSports, fetchTournaments, sportWebSocket } from "./sport/sportActions";
+import { resetLoadingBet, validateBet } from "./bet/betActions";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ['preference', 'user','sportsdetail']
+  whitelist: ['preference', 'user', 'sportsdetail']
 };
 
+let sports = {};
+let betslipMatches = []
+
+
+
 const enhancedReducer = persistReducer(persistConfig, rootReducer);
-const middleWare = applyMiddleware(logger,thunk);
+const middleWare = applyMiddleware(logger, thunk);
+
 export const mapStateToProps = (state) => {
+  sports = state.sportsdetail;
+  let result = sports.data.bet.outcomes.map( data => ({id:parseInt(data.match_id)}))
+  betslipMatches = result
   return {
     preferences: state.preference.preferences,
     forgotPassword: state.preference.forgotPassword,
     user: state.user.user,
-    register : state.register, 
-    modal : state.modal,
+    register: state.register,
+    modal: state.modal,
   };
+
 };
 
 export const mapDispatchProps = (dispatch) => {
@@ -52,6 +62,8 @@ export const mapDispatchProps = (dispatch) => {
       dispatch(fetchMarkets());
       dispatch(fetchSports());
       dispatch(resetLoadingBet())
+      dispatch(validateBet(sports?.data?.bet))
+      dispatch(sportWebSocket(betslipMatches))
     },
     setPreferences: (payload) => {
       dispatch(preferencesActions.setPreferences(payload));
@@ -66,7 +78,7 @@ export const mapDispatchProps = (dispatch) => {
       dispatch(preferencesActions.handleUserPhoneNumber(payload));
     },
 
-    resetRegisterForm : () => {
+    resetRegisterForm: () => {
       dispatch(registerActions.resetRegisterForm());
     },
 
