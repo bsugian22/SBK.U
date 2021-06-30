@@ -130,6 +130,7 @@ $baseFontSize: 16;
 	PC영역에 있는 엘리먼트 모바일에서 Display None 처리 영역
 */
 
+/*
 @include mq($max-width: 1024px) {
   .header-utility {
     &-naviguide {
@@ -193,13 +194,18 @@ $baseFontSize: 16;
   .games-main-category {
     display: none !important;
   }
-}
+//}
+*/
+
+
 
 /**
 	모바일영역에 있는 엘리먼트 PC에서 Display None 처리 영역
 */
 
-@include mq($min-width: 1025px) {
+// 아래 주석된 코드 모바일 활성화시 풀어주세요.
+
+//@include mq($min-width: 1025px) {
   .mobile-header-quick {
     display: none !important;
   }
@@ -233,11 +239,16 @@ $baseFontSize: 16;
   .footer {
     display: none !important;
   }
-}
+//}
+
+
 
 /**
 	아래코드가 모바일 시작지점
 */
+
+/*
+
 @include mq($max-width: 1024px) {
   html,
   body {
@@ -259,9 +270,8 @@ $baseFontSize: 16;
     display: none !important;
   }
 
-  /**
-		Pick Moobile List
-	*/
+
+	
   .pick-mobile-list {
     min-height: 90px;
     .away-name {
@@ -275,16 +285,12 @@ $baseFontSize: 16;
     }
   }
 
-  /**
-		swal2
-	*/
+
   .swal2-backdrop-show {
     min-width: 100% !important;
     z-index: 999999999 !important;
   }
-  /**
-		Pi Title
-	*/
+
   .pi-title {
     box-shadow: 2px 0px 0px 0px #0068b7 inset;
     &.green {
@@ -348,7 +354,7 @@ $baseFontSize: 16;
   }
 
   .mobile-header-quick {
-    display: flex !important;
+    display: none !important; // 모바일 미 사용으로 none
     overflow: hidden;
     ul {
       white-space: nowrap;
@@ -384,9 +390,7 @@ $baseFontSize: 16;
       background-color: transparent;
     }
 
-    /**
-			pi-header-mobile
-		*/
+
     .pi-header-mobile {
       > div {
         width: 16.66%;
@@ -421,9 +425,6 @@ $baseFontSize: 16;
       }
     }
 
-    /*
-			PremMatch 
-    */
     .prematch-content-mobile {
       &.view-detail-off {
         display: none !important;
@@ -485,9 +486,7 @@ $baseFontSize: 16;
       }
     }
 
-    /**
-			oddsDetail
-		*/
+
     .odds-detail-wrap {
       display: none !important;
       .odds-detail-tab {
@@ -584,9 +583,7 @@ $baseFontSize: 16;
       }
     }
 
-    /** 
-			Mobile Inplay
-		*/
+
 
     .inplay-list {
       .list {
@@ -601,9 +598,6 @@ $baseFontSize: 16;
       }
     }
 
-    /**
-			Mobile Esports
-		*/
 
     .esports-list {
       .several-lines {
@@ -614,9 +608,7 @@ $baseFontSize: 16;
       }
     }
 
-    /**
-			Mobile Games
-		*/
+
 
     .games-odds {
       span {
@@ -624,9 +616,7 @@ $baseFontSize: 16;
       }
     }
 
-    /**
-			Mobile Casino
-		*/
+
 
     .casino-content-mobile {
       .casino-list {
@@ -647,9 +637,7 @@ $baseFontSize: 16;
     }
   }
 
-  /**
-		Mobile Login
-	*/
+
 
   .login-panel-mobile {
     .login-items {
@@ -677,9 +665,7 @@ $baseFontSize: 16;
       }
     }
   }
-  /**
-		InterLoad
-	*/
+
   .interload-panel-mobile {
     .inter-team-score {
       .score {
@@ -792,9 +778,7 @@ $baseFontSize: 16;
     }
   }
 
-  /**
-		inter-slidemenu
-	*/
+
 
   .inter-slidemenu {
     &.right {
@@ -1006,9 +990,6 @@ $baseFontSize: 16;
     }
   }
 
-  /**
-		Mobile Only Footer
-	*/
 
   .footer {
     font-family: Tahoma !important;
@@ -1099,6 +1080,8 @@ $baseFontSize: 16;
     top: 0 !important;
   }
 }
+
+
 .notice-loading {
     > div {
     height: 12px;
@@ -1360,13 +1343,59 @@ div#scrollmenu a:hover {
   border: solid;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+*/
+
+#scrollmenu {
+  overflow-x: scroll;
+  white-space: nowrap;
+  text-align: center;
+  scroll-behavior: smooth;
 }
 
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+#scrollmenu a {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  color: #b7b7b7;
+  text-align: center;
+  height:100%;
+  padding: 0px 30px 0px 30px;
+  text-decoration: none;
+  span {
+    display:flex;
+    flex-grow:2;
+    align-items: flex-end;
+    font-size:2em;
+  }
+  .event-count {
+    padding-top:5px;
+    font-size:12px !important;
+    align-items: flex-start !important;
+  }
+}
+
+#scrollmenu>.active{
+  color:#ffffff;
+  background-color: rgba(0, 0, 0, 0.10);
+}
+
+div#scrollmenu a:hover {
+  color:#ffffff;
+  background-color: rgba(0, 0, 0, 0.10);
+  transition: 0.2s ease;
+}
+
+
+.loader{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(122, 122, 122, 0.1)  
+}
+
+.loader_spiner {
+  opacity: 1;
 }
