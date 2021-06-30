@@ -49,7 +49,6 @@ const sportsdetailReducer = (state = initialState, action) => {
             let wsStatus = ws_data.status
             // console.log(wsStatus)
             if (wsStatus != 1 && state_bet.find(x => x.match_id == wsMatchId)) {
-              console.log(wsStatus)
               state.data.bet.outcomes.splice(state_bet.findIndex(x => x.match_id == wsMatchId), 1)
               swal.fire({
                 title: '이미 마감된 경기가 있습니다.',
@@ -62,7 +61,6 @@ const sportsdetailReducer = (state = initialState, action) => {
 
 
               if (wsSpecifier == "{}") { // check if the specifer is only one 
-                console.log(wsSpecifier)
                 // ws_data_market_outcomes.map((ws_market_data, index) => {
                 //   let ws_outcome_id = ws_market_data.outcome_id;
                 //   let ws_new_outcome_odds = ws_market_data.odds;
@@ -91,8 +89,6 @@ const sportsdetailReducer = (state = initialState, action) => {
               } else {
 
                 if (wsSpecifier === details_specifier) {
-                  console.log(wsSpecifier)
-
 
                   ws_data_market_outcomes.map((wsOutcome) => {
 

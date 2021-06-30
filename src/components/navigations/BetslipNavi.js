@@ -80,7 +80,7 @@ export default function BetslipNavi(props) {
               ? sports.data.bet.outcomes.map((outcome, index) => {
                 return (
                   <div key={index} class="slip-data flex-inherit widthp-100 background-transparent-b-5 padding-10 border-top border-bottom">
-                    <div class="flex-inherit slip-odds background-transparent-b-10 padding-15 align-items-center"><span class="color-red">{outcome.odds}</span></div>
+                    <div class="flex-inherit slip-odds background-transparent-b-10 padding-15 align-items-center"><span class="color-red">{outcome.odds.toLocaleString()}</span></div>
                     <div class="flex-inherit flex-column slip-pick grow-2">
                       <div class="flex-inherit padding-left-10">
                         <div class="pick-info flex-column widthp-90">
